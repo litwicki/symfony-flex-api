@@ -11,8 +11,8 @@ This is the core application for tavro.io
 
 ### Ansible Extras
 
-    $ ansible-galaxy install rvm_io.rvm1-ruby
     $ vagrant plugin install ansible
+    $ vagrant plugin install landrush
 
 ### Your Hosts File
 
