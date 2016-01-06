@@ -1,0 +1,194 @@
+{% set currentPath = '' %}
+{% set route = app.request.attributes.get('_route') %}
+{% if app.request.attributes.get('_route') != '' %}
+  {% set currentPath = path(app.request.attributes.get('_route'),app.request.attributes.get('_route_params')) %}
+{% endif %}
+
+{% if node_type is defined %}
+  {% if node_type == 'guide' %}
+    {% set title_class = 'ra-crossed-swords' %}
+  {% elseif node_type == 'article' %}
+    {% set title_class = 'ra-book' %}
+  {% elseif node_type == 'guide' %}
+  {% else %}
+    {% set title_class = 'ra-gem' %}
+  {% endif %}
+{% endif %}
+
+<!doctype html>
+<!--[if lt IE 7]>
+<html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
+<!--[if IE 7]>
+<html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
+<!--[if IE 8]>
+<html class="no-js lt-ie9" lang=""> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js" lang=""> <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Tavro{% if app.environment != 'prod' %} ({{ app.environment }}) {% endif %} - {% block title %}The Tavro Unchained UI Mod resource!{% endblock %}</title>
+
+  <link rel="apple-touch-icon" sizes="57x57" href="/apple-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/apple-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/apple-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/apple-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/apple-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/apple-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/apple-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192"  href="/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/manifest.json">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
+  <meta name="theme-color" content="#ffffff">
+
+  <!--BEGIN CSS-->
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+
+  <link rel="stylesheet" href="{{ amazon_s3_url }}/{{ asset_bucket }}/assets/css/tavro.css" />
+
+</head>
+<body ng-app="tavro" class="{% block body_classes %}{% endblock %}">
+<div id="tavro" ng-controller="CoreController as coreCtrl" ng-init="initializeData()">
+
+  <section id="page">
+
+    <!-- Static navbar -->
+    <nav class="navbar navbar-inverse">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/"><i class="ra ra-fw ra-helmet text-danger"></i> Tavro.io</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul id="tavro-menu" class="nav navbar-nav">
+            <li><a href="#"><i class="ra ra-fw ra-crossed-swords"></i> Link</a></li>
+          </ul>
+
+          <ul class="nav navbar-nav navbar-right">
+            {% if app.user %}
+            <li class="dropdown">
+              <a href="#" data-toggle="dropdown" ng-model="user.username"><i class="fa fa-fw fa-user"></i> {[user.username]} <i class="fa fa-fw fa-caret-down"></i></a>
+              <ul class="dropdown-menu" role="menu">
+                <li><a href="#"><i class="fa fa-fw fa-sign-out"></i> Sign Out</a></li>
+              </ul>
+            </li>
+            {#<li><a href="{{ path('premium') }}"><span class="btn btn-xs btn-success"><i class="fa fa-fw fa-dollar"></i> Premium</span></a></li>#}
+            {% else %}
+            <li><a href="#"><i class="fa fa-fw fa-sign-in"></i> Login</a></li>
+            <li><a href="#"><span class="btn btn-xs btn-success"><i class="fa fa-fw fa-plus"></i> Signup</span></a></li>
+            {% endif %}
+          </ul>
+
+        </div><!--/.nav-collapse -->
+      </div><!--/.container-fluid -->
+    </nav>
+
+    {% block jumbotron %}{% endblock %}
+
+    <!-- begin body -->
+    <section id="page-body">
+      {% if route != 'index' %}
+      <div id="app-header">
+        <!-- "That the powerful play goes on, and you may contribute a verse." -->
+      </div>
+      {% endif %}
+      <div class="container">
+        {% if route != 'index' %}
+          <header id="page-header">{% block header %}{% endblock %}</header>
+        {% endif %}
+      </div>
+      <div class="container">
+
+        {% for label, flashes in app.session.flashbag.all %}
+
+          {% if flashes|length > 0 %}
+
+            {% for flash in flashes %}
+              <div class="alert alert-{{ label }} alert-dismissable">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                {% spaceless %}{{ flash | raw }}{% endspaceless %}
+              </div>
+            {% endfor %}
+
+          {% endif %}
+
+        {% endfor %}
+
+        {% block body %}{% endblock %}
+      </div>
+    </section>
+    <!-- end body -->
+
+  </section><!-- end page -->
+
+  <!-- begin footer -->
+  <section id="footer">
+    <div class="container">
+      <footer>
+
+      </footer>
+    </div>
+  </section>
+  <!-- end footer -->
+
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/js/bootstrap.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js"></script>
+
+  <!-- begin angular -->
+  <script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.2/angular.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.2/angular-cookies.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.2/angular-animate.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.2/angular-sanitize.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.2/angular-route.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/angular-ui/0.4.0/angular-ui.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/textAngular/1.4.1/dist/textAngular.min.js"></script>
+  <!-- end angular -->
+
+  <script type="text/javascript" src="{{ amazon_s3_url }}/{{ asset_bucket }}/assets/js/tavro.js"></script>
+
+  <script type="text/javascript">
+    // Make sure the tavro object is available.
+    if (typeof tavro === 'undefined') {
+      tavro = {};
+    }
+    tavro.current_path = "{{ app.request.attributes.get('_route') }}";
+    tavro.current_user = "{% if app.user.id is defined %}{{ app.user.id }}{% else %}0{% endif %}";
+    tavro.api_hostname = "{{ api_hostname }}";
+    tavro.asset_path = "{{ amazon_s3_url }}/{{ asset_bucket }}/assets/img";
+  </script>
+
+  {% block js %}{% endblock %}
+
+{% if app.environment == 'prod' %}
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-########-#', 'auto');
+    ga('send', 'pageview');
+
+  </script>
+{% endif %}
+
+</div><!-- /#tavro -->
+
+</body>
+</html>

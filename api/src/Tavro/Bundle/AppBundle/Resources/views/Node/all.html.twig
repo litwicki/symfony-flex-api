@@ -1,0 +1,26 @@
+{% extends 'TavroAppBundle:Layouts:app.html.twig' %}
+
+{% block header %}
+<div class="page-header">
+  <h1>Tavro Content</h1>
+  <p class="lead"><i class="fa fa-fw fa-book"></i> Library of all available Tavro content. Guides, articles, and everything else.</p>
+</div>
+{% endblock %}
+
+{% block content -%}
+
+  <div ng-controller="NodeController as nCtrl">
+    <section ng-init="loadNodes()">
+
+    <div class="alert alert-warning" ng-show="!nodes.length && !nodesLoading"><i class="fa fa-fw fa-warning"></i> There are no nodes.</div>
+
+    {% include 'TavroAppBundle:Node:table.html.twig' %}
+
+    </section>
+  </div>
+
+{% endblock %}
+
+{% block sidebar %}
+  {% include 'TavroAppBundle:Node:sidebar.html.twig' %}
+{% endblock %}

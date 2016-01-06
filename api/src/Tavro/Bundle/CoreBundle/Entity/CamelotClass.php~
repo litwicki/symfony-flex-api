@@ -1,0 +1,192 @@
+<?php
+
+namespace CamelotMods\Bundle\CoreBundle\Entity;
+
+
+use Doctrine\ORM\Mapping AS ORM;
+
+use JMS\Serializer\Annotation\Accessor;
+use JMS\Serializer\Annotation\ExclusionPolicy;
+use JMS\Serializer\Annotation\Expose;
+use JMS\Serializer\Annotation\Type;
+use JMS\Serializer\Annotation\VirtualProperty;
+use Doctrine\ORM\Mapping\Table;
+
+use CamelotMods\Bundle\CoreBundle\Model\Entity;
+use CamelotMods\Bundle\CoreBundle\Model\EntityInterface;
+
+/**
+ * @ORM\Entity
+ * @ORM\HasLifecycleCallbacks
+ * @Table(name="camelot_class")
+ *
+ * @ExclusionPolicy("all")
+ */
+class CamelotClass extends Entity implements EntityInterface
+{
+
+    /**
+     * @ORM\Column(type="string", length=500, nullable=true)
+     * @Expose
+     */
+    protected $title;
+
+    /**
+     * @ORM\Column(type="string", length=8000, nullable=true)
+     * @Expose
+     */
+    protected $body;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="CamelotMods\Bundle\CoreBundle\Entity\Realm", inversedBy="classes")
+     * @ORM\JoinColumn(name="realm_id", referencedColumnName="id")
+     * @Expose
+     */
+    protected $realm;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="CamelotMods\Bundle\CoreBundle\Entity\Race", inversedBy="class")
+     * @ORM\JoinColumn(name="race_id", referencedColumnName="id")
+     * @Expose
+     */
+    protected $race;
+
+    /**
+     * @ORM\OneToOne(targetEntity="CamelotMods\Bundle\CoreBundle\Entity\Archetype", inversedBy="classes")
+     * @ORM\JoinColumn(name="archetype_id", referencedColumnName="id")
+     * @Expose
+     */
+    protected $archetype;
+
+    /**
+     * @ORM\OneToMany(targetEntity="CamelotMods\Bundle\CoreBundle\Entity\ClassBane", mappedBy="class", cascade={"remove"})
+     */
+    protected $class_banes;
+
+    /**
+     * @ORM\OneToMany(targetEntity="CamelotMods\Bundle\CoreBundle\Entity\ClassBoon", mappedBy="class", cascade={"remove"})
+     */
+    protected $class_boons;
+
+    /**
+     * @ORM\OneToMany(targetEntity="CamelotMods\Bundle\CoreBundle\Entity\Ability", mappedBy="class")
+     * @ORM\OrderBy({"id" = "DESC"})
+     */
+    protected $abilities;
+
+
+    /**
+     * Set title
+     *
+     * @param string $title
+     * @return CamelotClass
+     */
+    public function setTitle($title)
+    {
+        $this->title = $title;
+
+        return $this;
+    }
+
+    /**
+     * Get title
+     *
+     * @return string 
+     */
+    public function getTitle()
+    {
+        return $this->title;
+    }
+
+    /**
+     * Set body
+     *
+     * @param string $body
+     * @return CamelotClass
+     */
+    public function setBody($body)
+    {
+        $this->body = $body;
+
+        return $this;
+    }
+
+    /**
+     * Get body
+     *
+     * @return string 
+     */
+    public function getBody()
+    {
+        return $this->body;
+    }
+
+    /**
+     * Set realm
+     *
+     * @param \CamelotMods\Bundle\CoreBundle\Entity\Realm $realm
+     * @return CamelotClass
+     */
+    public function setRealm(\CamelotMods\Bundle\CoreBundle\Entity\Realm $realm = null)
+    {
+        $this->realm = $realm;
+
+        return $this;
+    }
+
+    /**
+     * Get realm
+     *
+     * @return \CamelotMods\Bundle\CoreBundle\Entity\Realm 
+     */
+    public function getRealm()
+    {
+        return $this->realm;
+    }
+
+    /**
+     * Set race
+     *
+     * @param \CamelotMods\Bundle\CoreBundle\Entity\Race $race
+     * @return CamelotClass
+     */
+    public function setRace(\CamelotMods\Bundle\CoreBundle\Entity\Race $race = null)
+    {
+        $this->race = $race;
+
+        return $this;
+    }
+
+    /**
+     * Get race
+     *
+     * @return \CamelotMods\Bundle\CoreBundle\Entity\Race 
+     */
+    public function getRace()
+    {
+        return $this->race;
+    }
+
+    /**
+     * Set archetype
+     *
+     * @param \CamelotMods\Bundle\CoreBundle\Entity\Archetype $archetype
+     * @return CamelotClass
+     */
+    public function setArchetype(\CamelotMods\Bundle\CoreBundle\Entity\Archetype $archetype)
+    {
+        $this->archetype = $archetype;
+
+        return $this;
+    }
+
+    /**
+     * Get archetype
+     *
+     * @return \CamelotMods\Bundle\CoreBundle\Entity\Archetype
+     */
+    public function getArchetype()
+    {
+        return $this->archetype;
+    }
+}

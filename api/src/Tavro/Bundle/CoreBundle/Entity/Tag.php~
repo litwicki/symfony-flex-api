@@ -1,0 +1,40 @@
+<?php
+namespace Camelot\Bundle\CoreBundle\Entity;
+
+use Camelot\Bundle\CoreBundle\Model\ApiEntityInterface;
+use Doctrine\ORM\Mapping AS ORM;
+
+use JMS\Serializer\Annotation\Accessor;
+use JMS\Serializer\Annotation\ExclusionPolicy;
+use JMS\Serializer\Annotation\Expose;
+use JMS\Serializer\Annotation\Type;
+use JMS\Serializer\Annotation\VirtualProperty;
+use JMS\Serializer\Annotation\Groups;
+use JMS\Serializer\Annotation\MaxDepth;
+use JMS\Serializer\Annotation\SerializedName;
+use Doctrine\ORM\Mapping\Table;
+use Symfony\Component\Validator\Constraints as Assert;
+
+use Camelot\Bundle\CoreBundle\Model\ApiEntity;
+use Camelot\Bundle\CoreBundle\Model\EntityInterface;
+
+/**
+ * @ORM\Entity
+ * @ORM\HasLifecycleCallbacks
+ * @ORM\Table(name="camelot_tag")
+ *
+ */
+class Tag extends ApiEntity
+{
+    /**
+     * @ORM\Column(type="string", length=500, nullable=false)
+     * @Groups({"api", "camelot", "summary"})
+     */
+    protected $title;
+
+    /**
+     * @ORM\Column(type="string", length=500, nullable=false)
+     * @Groups({"api", "camelot", "summary"})
+     */
+    protected $body;
+}

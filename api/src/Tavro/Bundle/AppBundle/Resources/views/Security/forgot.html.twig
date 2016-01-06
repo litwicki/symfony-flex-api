@@ -1,0 +1,36 @@
+{# src/tavromods/UserBundle/Resources/views/Security/login.html.twig #}
+
+{% extends '::base.html.twig' %}
+
+{% block body_classes %}forgot{% endblock %}
+{% block title %}Forgot{% endblock %}
+{% block body %}
+
+  <div class="page-header">
+    <h1><i class="fa fa-fw fa-user-secret"></i> Forgot Your Password?</h1>
+    <p class="lead text-warning">Please enter your email address, and we will send an email with a link to verify and reset your password.</p>
+  </div>
+
+  <div id="password-forgot clearfix">
+
+    <div class="col-lg-6">
+      {{ form_start(form, {'attr': {'class': 'password-forgot-form'}}) }}
+      {{ form_errors(form) }}
+
+      <div class="col-lg-10">
+        <div class="input-group">
+          <div class="input-group-addon"><i class="fa fa-fw fa-envelope-o"></i> Email</div>
+          {{ form_widget(form.email) }}
+        </div>
+      </div>
+
+      <div class="col-lg-2">
+        {{ form_widget(form.submit) }}
+      </div>
+
+      {{ form_end(form) }}
+    </div>
+
+  </div>
+
+{% endblock %}

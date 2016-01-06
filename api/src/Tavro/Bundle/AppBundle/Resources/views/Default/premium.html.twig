@@ -1,0 +1,89 @@
+{% extends 'TavroAppBundle:Layouts:app.html.twig' %}
+
+{% block body_classes %}premium-page{% endblock %}
+{% block header %}<h1>Tavro Premium</h1>{% endblock %}
+{% block content %}
+
+  <blockquote class="highlight-quote" cite="http://www.brainyquote.com/quotes/authors/e/elon_musk_2.html">
+    <div class="row">
+      <div class="col-lg-2 visible-lg"><i class="fa fa-fw fa-quote-left fa-4x"></i></div>
+      <div class="col-lg-8">To make an embarrassing admission, I like video games.
+        That's what got me into software engineering when I was a kid.
+        I wanted to make money so I could buy a better computer to play better video games - nothing like saving the world.</div>
+      <div class="col-lg-2 visible-lg"><i class="fa fa-fw fa-quote-right fa-4x"></i></div>
+    </div>
+    <div class="byline"><a href="https://en.wikipedia.org/wiki/Elon_Musk" target="_blank"><i class="fa fa-long-arrow-right"></i> Elon Musk</a></div>
+
+  </blockquote>
+
+  <hr />
+
+  <div class="clearfix">
+    <div class="col-lg-4">
+
+      <p>The expected costs to operate Tavro are approximately $1,000 USD per month.</p>
+      <p>This includes a variety of services within <a href="http://aws.amazon.com/pricing/services/">Amazon Web Services</a>, including (not exclusively):</p>
+
+      <hr />
+
+      <ul class="list-group">
+        <li class="list-group-item">EC2</li>
+        <li class="list-group-item">CloudFront</li>
+        <li class="list-group-item">CloudFormation</li>
+        <li class="list-group-item">S3</li>
+        <li class="list-group-item">Glacier</li>
+        <li class="list-group-item">Lambda</li>
+        <li class="list-group-item">... and more</li>
+      </ul>
+
+    </div>
+    <div class="col-lg-8">
+
+      <div style="margin-left: 2em; padding-left: 2em; border-left: 1px dotted #ccc;">
+        <h3>Why should I?</h3>
+        <p>Tavro Premium gives you access to the following features and enhancements, in addition to contributing to a sincere fansite for an amazing company/game.</p>
+
+        <ol>
+          <li>Removal of all advertisements.</li>
+          <li>Premium API Access
+            <ol>
+              <li>Unlimited requests</li>
+              <li>Access to Mod API</li>
+              <li>Ability to seamlessly integrate <em>your</em> website.</li>
+              <li></li>
+            </ol>
+          </li>
+          <li>Cover the operating costs, as I cannot personally afford to maintain the escalating costs as the website grows.</li>
+        </ol>
+
+        <hr />
+
+        {#<div class="panel panel-success">#}
+          {#<div class="panel-heading">#}
+            {#<i class="fa fa-fw fa-dollar"></i> Pricing#}
+          {#</div>#}
+          {#<div class="list-group">#}
+            {#<a class="list-group-item" href="#">#}
+              {#Monthly $3.00 USD ($36 Annual)#}
+            {#</a>#}
+            {#<a class="list-group-item" href="#">#}
+              {#<strong>Annually $27.00 USD</strong>#}
+            {#</a>#}
+          {#</div>#}
+          {#<div class="panel-footer">#}
+            {#<small class="text-primary"><i class="fa fa-fw fa-info-circle"></i> All methods of payment are accepted.</small>#}
+          {#</div>#}
+        {#</div>#}
+
+        <div class="alert alert-info">
+          <p><strong>More information coming soon!</strong></p>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+
+{% endblock %}
+

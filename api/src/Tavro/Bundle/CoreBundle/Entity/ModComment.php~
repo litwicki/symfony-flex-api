@@ -1,0 +1,81 @@
+<?php
+
+namespace CamelotMods\Bundle\CoreBundle\Entity;
+
+use Doctrine\ORM\Mapping AS ORM;
+
+use JMS\Serializer\Annotation\Accessor;
+use JMS\Serializer\Annotation\ExclusionPolicy;
+use JMS\Serializer\Annotation\Expose;
+use JMS\Serializer\Annotation\Type;
+use JMS\Serializer\Annotation\VirtualProperty;
+use Doctrine\ORM\Mapping\Table;
+
+use CamelotMods\Bundle\CoreBundle\Model\Entity;
+use CamelotMods\Bundle\CoreBundle\Model\EntityInterface;
+
+/**
+ * @ORM\Entity
+ * @ORM\Table(name="camelot_mod_comment", indexes={@ORM\Index(name="MOD_COMMENT", columns={"comment_id","mod_id"})})
+ */
+class ModComment extends Entity implements EntityInterface
+{
+    /**
+     * @ORM\ManyToOne(targetEntity="CamelotMods\Bundle\CoreBundle\Entity\Comment", inversedBy="mod_comments")
+     * @ORM\JoinColumn(name="comment_id", referencedColumnName="id", nullable=false)
+     */
+    private $comment;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="CamelotMods\Bundle\CoreBundle\Entity\mod", inversedBy="mod_comments")
+     * @ORM\JoinColumn(name="mod_id", referencedColumnName="id", nullable=false)
+     */
+    private $mod;
+
+    /**
+     * Set comment
+     *
+     * @param \CamelotMods\Bundle\CoreBundle\Entity\Comment $comment
+     * @return modComment
+     */
+    public function setComment(\CamelotMods\Bundle\CoreBundle\Entity\Comment $comment)
+    {
+        $this->comment = $comment;
+
+        return $this;
+    }
+
+    /**
+     * Get comment
+     *
+     * @return \CamelotMods\Bundle\CoreBundle\Entity\Comment
+     */
+    public function getComment()
+    {
+        return $this->comment;
+    }
+
+    /**
+     * Set mod
+     *
+     * @param \CamelotMods\Bundle\CoreBundle\Entity\Mod $mod
+     * @return modComment
+     */
+    public function setMod(\CamelotMods\Bundle\CoreBundle\Entity\Mod $mod)
+    {
+        $this->mod = $mod;
+
+        return $this;
+    }
+
+    /**
+     * Get mod
+     *
+     * @return \CamelotMods\Bundle\CoreBundle\Entity\Mod
+     */
+    public function getMod()
+    {
+        return $this->mod;
+    }
+
+}

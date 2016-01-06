@@ -1,0 +1,275 @@
+<?php
+
+namespace Camelot\Bundle\CoreBundle\Entity;
+
+use Doctrine\ORM\Mapping AS ORM;
+
+use JMS\Serializer\Annotation\Accessor;
+use JMS\Serializer\Annotation\ExclusionPolicy;
+use JMS\Serializer\Annotation\Expose;
+use JMS\Serializer\Annotation\Type;
+use JMS\Serializer\Annotation\VirtualProperty;
+use Doctrine\ORM\Mapping\Table;
+
+use Camelot\Bundle\CoreBundle\Model\Entity;
+use Camelot\Bundle\CoreBundle\Model\EntityInterface;
+
+/**
+ * @ORM\Entity
+ * @ORM\HasLifecycleCallbacks
+ * @Table(name="camelot_file")
+ *
+ * @ExclusionPolicy("all")
+ */
+class File extends Entity implements EntityInterface
+{
+
+    /**
+     * @ORM\Column(type="string", length=500, nullable=false)
+     * @Expose
+     */
+    protected $path;
+
+    /**
+     * @ORM\Column(type="string", length=500, nullable=false)
+     * @Expose
+     */
+    protected $bucket;
+
+    /**
+     * @ORM\Column(type="string", length=500, nullable=false)
+     * @Expose
+     */
+    protected $key;
+
+    /**
+     * @ORM\Column(type="string", length=500, nullable=false)
+     * @Expose
+     */
+    protected $original_filename;
+
+    /**
+     * @ORM\Column(type="string", length=500, nullable=false)
+     * @Expose
+     */
+    protected $mime_type;
+
+    /**
+     * @ORM\Column(type="integer", nullable=false)
+     * @Expose
+     */
+    protected $filesize;
+
+    /**
+     * @ORM\Column(type="integer", nullable=false)
+     * @Expose
+     */
+    protected $version;
+
+    /**
+     * @ORM\Column(type="integer", nullable=false)
+     * @Expose
+     */
+    protected $downloads;
+
+    /**
+     * @ORM\OneToOne(targetEntity="Camelot\Bundle\CoreBundle\Entity\Mod", inversedBy="file")
+     * @ORM\JoinColumn(name="mod_id", referencedColumnName="id")
+     */
+    private $mod;
+
+    /**
+     * Set path
+     *
+     * @param string $path
+     * @return File
+     */
+    public function setPath($path)
+    {
+        $this->path = $path;
+
+        return $this;
+    }
+
+    /**
+     * Get path
+     *
+     * @return string 
+     */
+    public function getPath()
+    {
+        return $this->path;
+    }
+
+    /**
+     * Set original_filename
+     *
+     * @param string $originalFilename
+     * @return File
+     */
+    public function setOriginalFilename($originalFilename)
+    {
+        $this->original_filename = $originalFilename;
+
+        return $this;
+    }
+
+    /**
+     * Get original_filename
+     *
+     * @return string 
+     */
+    public function getOriginalFilename()
+    {
+        return $this->original_filename;
+    }
+
+    /**
+     * Set mime_type
+     *
+     * @param string $mimeType
+     * @return File
+     */
+    public function setMimeType($mimeType)
+    {
+        $this->mime_type = $mimeType;
+
+        return $this;
+    }
+
+    /**
+     * Get mime_type
+     *
+     * @return string 
+     */
+    public function getMimeType()
+    {
+        return $this->mime_type;
+    }
+
+    /**
+     * Set filesize
+     *
+     * @param integer $filesize
+     * @return File
+     */
+    public function setFilesize($filesize)
+    {
+        $this->filesize = $filesize;
+
+        return $this;
+    }
+
+    /**
+     * Get filesize
+     *
+     * @return integer 
+     */
+    public function getFilesize()
+    {
+        return $this->filesize;
+    }
+
+    /**
+     * Set version
+     *
+     * @param integer $version
+     * @return File
+     */
+    public function setVersion($version)
+    {
+        $this->version = $version;
+
+        return $this;
+    }
+
+    /**
+     * Get version
+     *
+     * @return integer 
+     */
+    public function getVersion()
+    {
+        return $this->version;
+    }
+
+    /**
+     * Set downloads
+     *
+     * @param integer $downloads
+     * @return File
+     */
+    public function setDownloads($downloads)
+    {
+        $this->downloads = $downloads;
+
+        return $this;
+    }
+
+    /**
+     * Get downloads
+     *
+     * @return integer 
+     */
+    public function getDownloads()
+    {
+        return $this->downloads;
+    }
+
+    /**
+     * Get mod
+     *
+     * @return \Camelot\Bundle\CoreBundle\Entity\Mod
+     */
+    public function getMod()
+    {
+        return $this->mod;
+    }
+
+    /**
+     * Set bucket
+     *
+     * @param string $bucket
+     * @return File
+     */
+    public function setBucket($bucket)
+    {
+        $this->bucket = $bucket;
+
+        return $this;
+    }
+
+    /**
+     * Get bucket
+     *
+     * @return string 
+     */
+    public function getBucket()
+    {
+        return $this->bucket;
+    }
+
+    /**
+     * Set key
+     *
+     * @param string $key
+     * @return File
+     */
+    public function setKey($key)
+    {
+        $this->key = $key;
+
+        return $this;
+    }
+
+    /**
+     * Get key
+     *
+     * @return string 
+     */
+    public function getKey()
+    {
+        return $this->key;
+    }
+
+}

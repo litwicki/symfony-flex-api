@@ -1,0 +1,11 @@
+---
+- hosts: all
+  sudo: true
+  vars_files:
+    - vars/all.yml
+  roles:
+    - role: server
+    - role: vagrant_local
+    - role: mysql
+    - role: nginx
+    - role: app

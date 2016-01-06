@@ -1,0 +1,11 @@
+---
+# application tasks to be customized and to run after the main provision
+- name: remove apache2
+  shell: sudo apt-get -y remove apache2
+- shell: sudo apt-get -y autoremove
+
+- name: purge PHP5
+  shell: sudo apt-get autoremove --purge php5-*
+
+- name: Install Composer
+  shell: sudo curl -sS https://getcomposer.org/installer | sudo php -- --install-dir=/usr/local/bin --filename=composer

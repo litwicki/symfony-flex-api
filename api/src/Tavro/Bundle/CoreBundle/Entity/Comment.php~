@@ -1,0 +1,211 @@
+<?php
+
+namespace Camelot\Bundle\CoreBundle\Entity;
+use Camelot\Bundle\CoreBundle\Model\ApiEntityInterface;
+use Doctrine\ORM\Mapping AS ORM;
+
+use JMS\Serializer\Annotation\Accessor;
+use JMS\Serializer\Annotation\ExclusionPolicy;
+use JMS\Serializer\Annotation\Expose;
+use JMS\Serializer\Annotation\Type;
+use JMS\Serializer\Annotation\VirtualProperty;
+use JMS\Serializer\Annotation\Groups;
+use Doctrine\ORM\Mapping\Table;
+
+use Camelot\Bundle\CoreBundle\Model\ApiEntity;
+use Camelot\Bundle\CoreBundle\Model\EntityInterface;
+
+/**
+ * @ORM\Entity
+ * @ORM\HasLifecycleCallbacks
+ * @Table(name="camelot_comment")
+ */
+class Comment extends ApiEntity
+{
+    /**
+     * @ORM\Column(type="string", length=500, nullable=true)
+     * @Groups({"api", "app", "summary"})
+     */
+    protected $title;
+
+    /**
+     * @ORM\Column(type="string", length=8000, nullable=true)
+     * @Groups({"api", "app", "summary"})
+     */
+    protected $body;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Camelot\Bundle\CoreBundle\Entity\NodeComment", mappedBy="comment", cascade={"remove"})
+     */
+    protected $node_comments;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Camelot\Bundle\CoreBundle\Entity\ModComment", mappedBy="comment", cascade={"remove"})
+     */
+    protected $mod_comments;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Camelot\Bundle\CoreBundle\Entity\User", inversedBy="comments")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     * @Groups({"api", "app", "summary"})
+     */
+    protected $user;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Camelot\Bundle\CoreBundle\Entity\User")
+     * @ORM\JoinColumn(name="removed_by_user_id", referencedColumnName="id")
+     * @Groups({"api", "app"})
+     */
+    protected $removed_by;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->node_comments = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->status = 1;
+        $this->create_date = new \DateTime();
+    }
+
+    public function __toString()
+    {
+        return $this->title;
+    }
+
+    /**
+     * Set title
+     *
+     * @param string $title
+     * @return Comment
+     */
+    public function setTitle($title)
+    {
+        $this->title = $title;
+
+        return $this;
+    }
+
+    /**
+     * Get title
+     *
+     * @return string 
+     */
+    public function getTitle()
+    {
+        return $this->title;
+    }
+
+    /**
+     * Set body
+     *
+     * @param string $body
+     * @return Comment
+     */
+    public function setBody($body)
+    {
+        $this->body = $body;
+
+        return $this;
+    }
+
+    /**
+     * Get body
+     *
+     * @return string 
+     */
+    public function getBody()
+    {
+        return $this->body;
+    }
+
+    /**
+     * Add node_comments
+     *
+     * @param \Camelot\Bundle\CoreBundle\Entity\NodeComment $nodeComments
+     * @return Comment
+     */
+    public function addNodeComment(\Camelot\Bundle\CoreBundle\Entity\NodeComment $nodeComments)
+    {
+        $this->node_comments[] = $nodeComments;
+
+        return $this;
+    }
+
+    /**
+     * Remove node_comments
+     *
+     * @param \Camelot\Bundle\CoreBundle\Entity\NodeComment $nodeComments
+     */
+    public function removeNodeComment(\Camelot\Bundle\CoreBundle\Entity\NodeComment $nodeComments)
+    {
+        $this->node_comments->removeElement($nodeComments);
+    }
+
+    /**
+     * Get node_comments
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getNodeComments()
+    {
+        return $this->node_comments;
+    }
+
+    /**
+     * Set user
+     *
+     * @param \Camelot\Bundle\CoreBundle\Entity\User $user
+     * @return Comment
+     */
+    public function setUser(\Camelot\Bundle\CoreBundle\Entity\User $user = null)
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return \Camelot\Bundle\CoreBundle\Entity\User
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
+
+    /**
+     * Add mod_comments
+     *
+     * @param \Camelot\Bundle\CoreBundle\Entity\ModComment $modComments
+     * @return Comment
+     */
+    public function addModComment(\Camelot\Bundle\CoreBundle\Entity\ModComment $modComments)
+    {
+        $this->mod_comments[] = $modComments;
+
+        return $this;
+    }
+
+    /**
+     * Remove mod_comments
+     *
+     * @param \Camelot\Bundle\CoreBundle\Entity\ModComment $modComments
+     */
+    public function removeModComment(\Camelot\Bundle\CoreBundle\Entity\ModComment $modComments)
+    {
+        $this->mod_comments->removeElement($modComments);
+    }
+
+    /**
+     * Get mod_comments
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getModComments()
+    {
+        return $this->mod_comments;
+    }
+
+}

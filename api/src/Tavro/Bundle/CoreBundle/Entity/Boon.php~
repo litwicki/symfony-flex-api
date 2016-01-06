@@ -1,0 +1,215 @@
+<?php
+
+namespace CamelotMods\Bundle\CoreBundle\Entity;
+
+
+use Doctrine\ORM\Mapping AS ORM;
+
+use JMS\Serializer\Annotation\Accessor;
+use JMS\Serializer\Annotation\ExclusionPolicy;
+use JMS\Serializer\Annotation\Expose;
+use JMS\Serializer\Annotation\Type;
+use JMS\Serializer\Annotation\VirtualProperty;
+use Doctrine\ORM\Mapping\Table;
+
+use CamelotMods\Bundle\CoreBundle\Model\Entity;
+use CamelotMods\Bundle\CoreBundle\Model\EntityInterface;
+
+/**
+ * @ORM\Entity
+ * @ORM\HasLifecycleCallbacks
+ * @Table(name="camelot_boon")
+ *
+ * @ExclusionPolicy("all")
+ */
+class Boon extends Entity implements EntityInterface
+{
+
+    /**
+     * @ORM\Column(type="string", length=500, nullable=true)
+     * @Expose
+     */
+    protected $title;
+
+    /**
+     * @ORM\Column(type="string", length=8000, nullable=true)
+     * @Expose
+     */
+    protected $body;
+
+    /**
+     * @ORM\OneToMany(targetEntity="CamelotMods\Bundle\CoreBundle\Entity\RealmBoon", mappedBy="boon", cascade={"remove"})
+     */
+    protected $realm_boons;
+
+    /**
+     * @ORM\OneToMany(targetEntity="CamelotMods\Bundle\CoreBundle\Entity\RaceBoon", mappedBy="boon", cascade={"remove"})
+     */
+    protected $race_boons;
+
+    /**
+     * @ORM\OneToMany(targetEntity="CamelotMods\Bundle\CoreBundle\Entity\ClassBoon", mappedBy="boon", cascade={"remove"})
+     */
+    protected $class_boons;
+
+    /**
+     * @ORM\OneToMany(targetEntity="CamelotMods\Bundle\CoreBundle\Entity\ArchetypeBoon", mappedBy="boon", cascade={"remove"})
+     */
+    protected $archetype_boons;
+
+    public function __construct()
+    {
+        $this->realm_boons = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->race_boons = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->class_boons = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->archetype_boons = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->create_date = new \DateTime();
+        $this->update_date = new \DateTime();
+    }
+
+    /**
+     * Set title
+     *
+     * @param string $title
+     * @return Boon
+     */
+    public function setTitle($title)
+    {
+        $this->title = $title;
+
+        return $this;
+    }
+
+    /**
+     * Get title
+     *
+     * @return string 
+     */
+    public function getTitle()
+    {
+        return $this->title;
+    }
+
+    /**
+     * Set body
+     *
+     * @param string $body
+     * @return Boon
+     */
+    public function setBody($body)
+    {
+        $this->body = $body;
+
+        return $this;
+    }
+
+    /**
+     * Get body
+     *
+     * @return string 
+     */
+    public function getBody()
+    {
+        return $this->body;
+    }
+
+    /**
+     * Add realm_boons
+     *
+     * @param \CamelotMods\Bundle\CoreBundle\Entity\RealmBoon $realmBoons
+     * @return Boon
+     */
+    public function addRealmBoon(\CamelotMods\Bundle\CoreBundle\Entity\RealmBoon $realmBoons)
+    {
+        $this->realm_boons[] = $realmBoons;
+
+        return $this;
+    }
+
+    /**
+     * Remove realm_boons
+     *
+     * @param \CamelotMods\Bundle\CoreBundle\Entity\RealmBoon $realmBoons
+     */
+    public function removeRealmBoon(\CamelotMods\Bundle\CoreBundle\Entity\RealmBoon $realmBoons)
+    {
+        $this->realm_boons->removeElement($realmBoons);
+    }
+
+    /**
+     * Get realm_boons
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getRealmBoons()
+    {
+        return $this->realm_boons;
+    }
+
+    /**
+     * Add race_boons
+     *
+     * @param \CamelotMods\Bundle\CoreBundle\Entity\RaceBoon $raceBoons
+     * @return Boon
+     */
+    public function addRaceBoon(\CamelotMods\Bundle\CoreBundle\Entity\RaceBoon $raceBoons)
+    {
+        $this->race_boons[] = $raceBoons;
+
+        return $this;
+    }
+
+    /**
+     * Remove race_boons
+     *
+     * @param \CamelotMods\Bundle\CoreBundle\Entity\RaceBoon $raceBoons
+     */
+    public function removeRaceBoon(\CamelotMods\Bundle\CoreBundle\Entity\RaceBoon $raceBoons)
+    {
+        $this->race_boons->removeElement($raceBoons);
+    }
+
+    /**
+     * Get race_boons
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getRaceBoons()
+    {
+        return $this->race_boons;
+    }
+
+    /**
+     * Add class_boons
+     *
+     * @param \CamelotMods\Bundle\CoreBundle\Entity\ClassBoon $classBoons
+     * @return Boon
+     */
+    public function addClassBoon(\CamelotMods\Bundle\CoreBundle\Entity\ClassBoon $classBoons)
+    {
+        $this->class_boons[] = $classBoons;
+
+        return $this;
+    }
+
+    /**
+     * Remove class_boons
+     *
+     * @param \CamelotMods\Bundle\CoreBundle\Entity\ClassBoon $classBoons
+     */
+    public function removeClassBoon(\CamelotMods\Bundle\CoreBundle\Entity\ClassBoon $classBoons)
+    {
+        $this->class_boons->removeElement($classBoons);
+    }
+
+    /**
+     * Get class_boons
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getClassBoons()
+    {
+        return $this->class_boons;
+    }
+
+}

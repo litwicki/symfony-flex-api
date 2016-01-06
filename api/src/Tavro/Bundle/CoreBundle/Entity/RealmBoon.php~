@@ -1,0 +1,80 @@
+<?php
+
+namespace CamelotMods\Bundle\CoreBundle\Entity;
+
+use Doctrine\ORM\Mapping AS ORM;
+
+use JMS\Serializer\Annotation\Accessor;
+use JMS\Serializer\Annotation\ExclusionPolicy;
+use JMS\Serializer\Annotation\Expose;
+use JMS\Serializer\Annotation\Type;
+use JMS\Serializer\Annotation\VirtualProperty;
+use Doctrine\ORM\Mapping\Table;
+
+use CamelotMods\Bundle\CoreBundle\Model\Entity;
+use CamelotMods\Bundle\CoreBundle\Model\EntityInterface;
+
+/**
+ * @ORM\Entity
+ * @ORM\Table(name="camelot_realm_boon", indexes={@ORM\Index(name="REALM_BOON", columns={"realm_id","boon_id"})})
+ */
+class RealmBoon extends Entity implements EntityInterface
+{
+    /**
+     * @ORM\ManyToOne(targetEntity="CamelotMods\Bundle\CoreBundle\Entity\Realm", inversedBy="realm_boons")
+     * @ORM\JoinColumn(name="realm_id", referencedColumnName="id", nullable=false)
+     */
+    private $realm;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="CamelotMods\Bundle\CoreBundle\Entity\Boon", inversedBy="realm_boons")
+     * @ORM\JoinColumn(name="boon_id", referencedColumnName="id", nullable=false)
+     */
+    private $boon;
+
+    /**
+     * Set realm
+     *
+     * @param \CamelotMods\Bundle\CoreBundle\Entity\Realm $realm
+     * @return RealmBoon
+     */
+    public function setRealm(\CamelotMods\Bundle\CoreBundle\Entity\Realm $realm)
+    {
+        $this->realm = $realm;
+
+        return $this;
+    }
+
+    /**
+     * Get realm
+     *
+     * @return \CamelotMods\Bundle\CoreBundle\Entity\Realm 
+     */
+    public function getRealm()
+    {
+        return $this->realm;
+    }
+
+    /**
+     * Set boon
+     *
+     * @param \CamelotMods\Bundle\CoreBundle\Entity\Boon $boon
+     * @return RealmBoon
+     */
+    public function setBoon(\CamelotMods\Bundle\CoreBundle\Entity\Boon $boon)
+    {
+        $this->boon = $boon;
+
+        return $this;
+    }
+
+    /**
+     * Get boon
+     *
+     * @return \CamelotMods\Bundle\CoreBundle\Entity\Boon 
+     */
+    public function getBoon()
+    {
+        return $this->boon;
+    }
+}

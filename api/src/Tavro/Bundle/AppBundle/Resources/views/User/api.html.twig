@@ -1,0 +1,114 @@
+{% extends 'TavroAppBundle:Layouts:app.html.twig' %}
+
+{% block content -%}
+
+  <div ng-controller="UserController as uCtrl">
+    <section ng-init="initializeData()">
+
+      <div class="page-header clearfix">
+        <h1><i class="fa fa-fw fa-code"></i> My Developer Profile</h1>
+      </div>
+
+      <div class="row">
+
+        <div class="col-lg-6">
+
+          <h3>Standard</h3>
+          <p>Standard API supports <em>most</em> <code>GET</code> operations.</p>
+
+          <div class="form-group">
+            <div class="input-group">
+              <span class="input-group-addon" id="user-api-key"><i class="fa fa-fw fa-key"></i> Key</span>
+              <input type="text" class="form-control" placeholder="Api Key" ng-model="user.api_key" readonly="readonly">
+            </div>
+          </div>
+
+          <form id="user-api-key-form" novalidate ng-submit="uCtrl.resetApiKey(user)">
+            <div class="form-group">
+              <button type="submit" name="reset-api-key" class="btn btn-default">
+                <i class="fa fa-fw fa-refresh"></i> Regenerate Api Key
+              </button>
+            </div>
+          </form>
+
+          <hr />
+
+          <ul>
+            <li>Limited requests per day</li>
+            <li><code>GET</code> requests only
+              <ul>
+                <li>Servers</li>
+                <li>Realms</li>
+                <li>Races</li>
+                <li>Classes</li>
+                <li>Banes/Boons</li>
+                <li>Mods</li>
+              </ul>
+            </li>
+          </ul>
+
+        </div>
+
+        <div class="col-lg-5 col-lg-offset-1">
+
+          <h3>Premium API</h3>
+          <p>In addition to <a href="{{ path('premium') }}">all the other benefits</a>, if you upgrade to a <strong>premium</strong> account you gain access to a fully authenticated API.</p>
+
+          <div class="form-group">
+            <div class="input-group">
+              <span class="input-group-addon" id="user-api-password"><i class="fa fa-fw fa-lock"></i> Password</span>
+              <input type="text" class="form-control" placeholder="Api Password" ng-model="user.api_password" readonly="readonly">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="input-group">
+              <span class="input-group-addon" id="user-guid"><i class="fa fa-fw fa-user-secret"></i> Secret</span>
+              <input type="text" class="form-control" placeholder="Api Secret (guid)" ng-model="user.guid" readonly="readonly">
+            </div>
+          </div>
+
+          <form id="user-api-key-form" novalidate ng-submit="uCtrl.resetApiPassword(user)" ng-if="user.api_enabled">
+            <div class="form-group">
+              <button type="submit" name="reset-api-key" class="btn btn-default">
+                <i class="fa fa-fw fa-refresh"></i> Regenerate Api Password
+              </button>
+            </div>
+          </form>
+
+          <hr />
+
+          <h3>Additional</h3>
+
+          <ol>
+            <li>Unlimited Api Requests</li>
+            <li>Additional <code>GET</code> access (profiles, news)</li>
+            <li>Ability to add/update UI Mods</li>
+            <li>Integrate directly with <a href="http://github.com">Github</a> or <a href="http://bitbucket.org">Bitbucket</a></li>
+          </ol>
+
+          <p class="alert alert-warning">
+            <i class="fa fa-fw fa-warning"></i> This feature is not yet implemented.
+          </p>
+
+          {#<hr />#}
+
+          {#<div class="form-group">#}
+            {#<button type="submit" name="reset-api-key" class="btn btn-xs btn-success">#}
+              {#Coming Soon!#}
+            {#</button>#}
+          {#</div>#}
+
+        </div>
+
+      </div>
+
+    </section>
+  </div>
+{% endblock %}
+
+{% block js %}
+<script>
+  tavro.profile_user = {% if user.id %}{{ user.id }}{% else %}0{% endif %};
+</script>
+{% endblock %}

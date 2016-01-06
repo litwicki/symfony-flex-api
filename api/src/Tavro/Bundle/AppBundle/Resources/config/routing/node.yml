@@ -1,0 +1,71 @@
+node_view:
+    path: /nodes/{id}
+    defaults: { _controller: TavroAppBundle:Node:view }
+    methods: [GET]
+    requirements:
+        id: \d+
+
+node_edit:
+    path: /nodes/{id}/edit
+    defaults: { _controller: TavroAppBundle:Node:edit }
+    methods: [GET]
+    requirements:
+        id: \d+
+
+node_new:
+    path: /node/new
+    defaults: { _controller: TavroAppBundle:Node:new }
+    methods: [GET]
+
+node_create:
+    path: /node/create
+    defaults: { _controller: TavroAppBundle:Node:create }
+    methods: [POST|PUT]
+
+content:
+    path: /content
+    defaults: { _controller: TavroAppBundle:Node:all }
+    methods: [GET]
+
+nodes:
+    path: /nodes
+    defaults: { _controller: TavroAppBundle:Node:all }
+    methods: [GET]
+
+articles:
+    path: /articles
+    defaults: { _controller: TavroAppBundle:Node:index, type: article }
+    methods: [GET]
+
+article_view:
+    path: /articles/{slug}
+    defaults: { _controller: TavroAppBundle:Node:article }
+    methods: [GET]
+    requirements:
+        slug: "[a-z-0-9]+"
+
+article_view_id:
+    path: /articles/{node}
+    defaults: { _controller: TavroAppBundle:Node:articleId }
+    methods: [GET]
+    requirements:
+        slug: \d+
+
+guides:
+    path: /guides
+    defaults: { _controller: TavroAppBundle:Node:index, type: guide }
+    methods: [GET]
+
+guide_view:
+    path: /guides/{slug}
+    defaults: { _controller: TavroAppBundle:Node:guide }
+    methods: [GET]
+    requirements:
+        slug: "[a-z-0-9]+"
+
+guide_view_id:
+    path: /guides/{node}
+    defaults: { _controller: TavroAppBundle:Node:guideId }
+    methods: [GET]
+    requirements:
+        slug: \d+

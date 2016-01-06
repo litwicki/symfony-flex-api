@@ -1,0 +1,13 @@
+{{ user.username }},<br /><br />
+
+Welcome to the The Bathroom Sink community!<br /><br />
+
+Your account has been activated. This is the one and only time we will email your password; please save this email safely.<br /><br />
+
+Email: {{ user.email }}<br />
+Username: {{ user.username }}<br />
+Password: {{ plainPassword }}<br /><br />
+
+Login to The Bathroom Sink website: {{ url('login') }}<br />
+
+{% include 'TavroCoreBundle:Email:signature.html.twig' %}

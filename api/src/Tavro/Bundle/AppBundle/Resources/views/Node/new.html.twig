@@ -1,0 +1,19 @@
+{% extends 'TavroAppBundle:Layouts:app.html.twig' %}
+
+{% block body -%}
+
+  <div ng-controller="NodeController as nCtrl">
+    <section ng-init="">
+
+      <h2 class="page-header">New Node</h2>
+
+      <div class="panel panel-default">
+        <div class="panel-body">
+          {% include 'TavroAppBundle:Node:form.html.twig' %}
+        </div>
+      </div>
+
+    </section>
+  </div>
+
+{% endblock %}

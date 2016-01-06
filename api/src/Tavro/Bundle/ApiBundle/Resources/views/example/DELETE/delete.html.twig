@@ -1,0 +1,55 @@
+{% extends 'TavroFrontendBundle:Layouts:app.html.twig' %}
+
+{% block body_classes %}api{% endblock %}
+
+{% block content %}
+
+  <div class="page-header">
+    <h1>API::delete</h1>
+    <p class="lead"><i class="fa fa-fw fa-remove text-danger"></i> Remove an Entity.</p>
+  </div>
+
+  <div class="clearfix">
+    <div class="col-lg-4">
+      {{ form_start(form, { 'attr': {'id': 'api-form'} }) }}
+      {{ form_end(form) }}
+      <hr />
+      <button id="api-submit" type="submit" class="btn btn-sm btn-danger">
+        <i class="fa fa-fw fa-remove"></i> DELETE
+      </button>
+    </div>
+    <div class="col-lg-1"></div>
+    <div class="col-lg-7">
+
+      <table class="table table-responsive table-striped">
+        <tr>
+          <th>Host</th>
+          <td><code>{{ app_hostname }}</code></td>
+        </tr>
+        <tr>
+          <th>Path</th>
+          <td><code>/api/v1/{entity}.{format}</code></td>
+        </tr>
+        <tr>
+          <th>Method(s)</th>
+          <td><code>DELETE</code></td>
+        </tr>
+        <tr>
+          <th>Format</th>
+          <td><strong>JSON</strong></td>
+        </tr>
+      </table>
+
+    </div>
+  </div>
+
+  <div class="page-header">
+    <span class="pull-right">
+      <a class="btn btn-sm btn-default" href="javascript:;" id="clear-data"><i class="fa fa-fw fa-eraser"></i> Clear</a>
+    </span>
+    <h2>Response</h2>
+  </div>
+
+  <pre><code id="api-data" class="json">{}</code></pre>
+
+{% endblock %}

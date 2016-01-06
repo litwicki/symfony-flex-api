@@ -1,0 +1,9 @@
+<?php
+
+namespace Tavro\Bundle\ApiBundle;
+
+use Symfony\Component\HttpKernel\Bundle\Bundle;
+
+class TavroApiBundle extends Bundle
+{
+}

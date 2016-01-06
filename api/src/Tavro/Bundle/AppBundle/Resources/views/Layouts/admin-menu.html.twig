@@ -1,0 +1,7 @@
+<ul class="dropdown-menu">
+  <li class="{% if route == 'admin' %}active{% endif %}"><a href="{{ path('admin') }}"><i class="fa fa-fw fa-home"></i> Admin Home</a></li>
+  <li class="divider" role="divider"></li>
+  <li class="{% if route == 'admin_mods' %}active{% endif %}"><a href="{{ path('admin_mods') }}"><i class="fa fa-fw fa-cubes"></i> Mods</a></li>
+  <li class="{% if route == 'admin_users' %}active{% endif %}"><a href="{{ path('admin_users') }}"><i class="fa fa-fw fa-users"></i> Users</a></li>
+  <li class="{% if route == 'admin_nodes' %}active{% endif %}"><a href="{{ path('admin_nodes') }}"><i class="fa fa-fw fa-folder-open"></i> Nodes</a></li>
+</ul>

@@ -1,0 +1,101 @@
+services:
+
+# ================
+# SECURITY & AUTH
+# ================
+    tavro.angular_api_authenticator:
+        class:     Tavro\Bundle\ApiBundle\Security\AngularApiAuthenticator
+        arguments: ["@tavro.user_provider"]
+
+    tavro.api_authenticator:
+        class:     Tavro\Bundle\ApiBundle\Security\ApiAuthenticator
+        arguments: ["@tavro.user_provider"]
+
+# =========
+# HANDLERS
+# =========
+    tavromods.api_exception_handler:
+        class: Tavro\Bundle\ApiBundle\EventListener\ApiExceptionListener
+        arguments: ["%kernel.environment%"]
+        tags:
+            - { name: kernel.event_listener, event: kernel.exception, method: onKernelException, priority: 0 }
+
+    tavro.handler.roles:
+        class: Tavro\Bundle\ApiBundle\Handler\RoleHandler
+        arguments: ["@service_container", "@doctrine.orm.main_entity_manager", Tavro\Bundle\CoreBundle\Entity\Role]
+
+    tavro.handler.users:
+        class: Tavro\Bundle\ApiBundle\Handler\UserHandler
+        arguments: ["@service_container", "@doctrine.orm.main_entity_manager", Tavro\Bundle\CoreBundle\Entity\User]
+
+    tavro.handler.abilities:
+        class: Tavro\Bundle\ApiBundle\Handler\AbilityHandler
+        arguments: ["@service_container", "@doctrine.orm.main_entity_manager", Tavro\Bundle\CoreBundle\Entity\Ability]
+
+    tavro.handler.banes:
+        class: Tavro\Bundle\ApiBundle\Handler\BaneHandler
+        arguments: ["@service_container", "@doctrine.orm.main_entity_manager", Tavro\Bundle\CoreBundle\Entity\Bane]
+
+    tavro.handler.boons:
+        class: Tavro\Bundle\ApiBundle\Handler\BoonHandler
+        arguments: ["@service_container", "@doctrine.orm.main_entity_manager", Tavro\Bundle\CoreBundle\Entity\Boon]
+
+    tavro.handler.classes:
+        class: Tavro\Bundle\ApiBundle\Handler\ClassHandler
+        arguments: ["@service_container", "@doctrine.orm.main_entity_manager", Tavro\Bundle\CoreBundle\Entity\TavroClass]
+
+    tavro.handler.comments:
+        class: Tavro\Bundle\ApiBundle\Handler\CommentHandler
+        arguments: ["@service_container", "@doctrine.orm.main_entity_manager", Tavro\Bundle\CoreBundle\Entity\Comment]
+
+    tavro.handler.files:
+        class: Tavro\Bundle\ApiBundle\Handler\FileHandler
+        arguments: ["@service_container", "@doctrine.orm.main_entity_manager", Tavro\Bundle\CoreBundle\Entity\File]
+
+    tavro.handler.images:
+        class: Tavro\Bundle\ApiBundle\Handler\ImageHandler
+        arguments: ["@service_container", "@doctrine.orm.main_entity_manager", Tavro\Bundle\CoreBundle\Entity\Image]
+
+    tavro.handler.items:
+        class: Tavro\Bundle\ApiBundle\Handler\ItemHandler
+        arguments: ["@service_container", "@doctrine.orm.main_entity_manager", Tavro\Bundle\CoreBundle\Entity\Item]
+
+    tavro.handler.mod_categories:
+        class: Tavro\Bundle\ApiBundle\Handler\ModCategoryHandler
+        arguments: ["@service_container", "@doctrine.orm.main_entity_manager", Tavro\Bundle\CoreBundle\Entity\ModCategory]
+
+    tavro.handler.mods:
+        class: Tavro\Bundle\ApiBundle\Handler\ModHandler
+        arguments: ["@service_container", "@doctrine.orm.main_entity_manager", Tavro\Bundle\CoreBundle\Entity\Mod]
+
+    tavro.handler.nodes:
+        class: Tavro\Bundle\ApiBundle\Handler\NodeHandler
+        arguments: ["@service_container", "@doctrine.orm.main_entity_manager", Tavro\Bundle\CoreBundle\Entity\Node]
+
+    tavro.handler.races:
+        class: Tavro\Bundle\ApiBundle\Handler\RaceHandler
+        arguments: ["@service_container", "@doctrine.orm.main_entity_manager", Tavro\Bundle\CoreBundle\Entity\Race]
+
+    tavro.handler.realms:
+        class: Tavro\Bundle\ApiBundle\Handler\RealmHandler
+        arguments: ["@service_container", "@doctrine.orm.main_entity_manager", Tavro\Bundle\CoreBundle\Entity\Realm]
+
+    tavro.handler.variables:
+        class: Tavro\Bundle\ApiBundle\Handler\RoleHandler
+        arguments: ["@service_container", "@doctrine.orm.main_entity_manager", Tavro\Bundle\CoreBundle\Entity\Variable]
+
+    tavro.handler.archetypes:
+        class: Tavro\Bundle\ApiBundle\Handler\ArchetypeHandler
+        arguments: ["@service_container", "@doctrine.orm.main_entity_manager", Tavro\Bundle\CoreBundle\Entity\Archetype]
+
+    tavro.handler.tags:
+        class: Tavro\Bundle\ApiBundle\Handler\TagHandler
+        arguments: ["@service_container", "@doctrine.orm.main_entity_manager", Tavro\Bundle\CoreBundle\Entity\Tag]
+
+    tavro.handler.node_tags:
+        class: Tavro\Bundle\ApiBundle\Handler\NodeTagHandler
+        arguments: ["@service_container", "@doctrine.orm.main_entity_manager", Tavro\Bundle\CoreBundle\Entity\NodeTag]
+
+    tavro.handler.mod_users:
+        class: Tavro\Bundle\ApiBundle\Handler\ModUserHandler
+        arguments: ["@service_container", "@doctrine.orm.main_entity_manager", Tavro\Bundle\CoreBundle\Entity\ModUser]

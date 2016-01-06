@@ -1,0 +1,176 @@
+{% extends 'TavroAppBundle:Layouts:app.html.twig' %}
+{% block body_classes %}user user-profile{% endblock %}
+{% block header %}{% endblock %}
+{% block content -%}
+
+  <div id="user-profile" ng-controller="UserController as uCtrl">
+    <section ng-init="initProfile()">
+
+      <div class="row">
+        <img id="user-avatar" alt="{[user.username]}"
+           ng-src="{[ profile_user.avatar && '/media/cache/resolve/avatar/' + user.avatar.aws_key || '/bundles/tavrocore/img/avatars/default.gif' ]}"
+           class="img-responsive user-avatar user-avatar-{[user.id]} img-thumbnail" />
+
+        <h1>{[ profile_user.username ]}</h1>
+        <ul class="list-inline small">
+          <li class="">Joined <span class="text-primary">{[ profile_user.create_date | timeago ]}</span></li>
+          <li class="">Last Updated <span class="text-primary">{[ profile_user.update_date | date:'short' ]}</span></li>
+          <li class="">Last Online <span class="text-primary">{[user.last_online_date | timeago ]}</span></li>
+        </ul>
+      </div>
+
+      <div id="user-profile-tabs" class="clearfix">
+
+        <!-- Nav tabs -->
+        <ul class="nav nav-tabs" role="tablist">
+          <li role="presentation" class="active"><a class="active" href="#profile" aria-controls="profile" role="tab" data-toggle="tab"><i class="fa fa-fw fa-user"></i> {[profile_user.username]}</a></li>
+          <li role="presentation"><a href="#mods" aria-controls="mods" role="tab" data-toggle="tab"><i class="fa fa-fw fa-cubes"></i> Mods <span class="badge">{[ profile_user.mods.length ]}</span></a></li>
+          <li role="presentation"><a href="#nodes" aria-controls="nodes" role="tab" data-toggle="tab"><i class="fa fa-fw fa-book"></i> Content <span class="badge">{[ profile_user.nodes.length ]}</span></a></li>
+          <li role="presentation"><a href="#password" aria-controls="password" role="tab" data-toggle="tab"><i class="fa fa-fw fa-key"></i> Password Reset</a></li>
+        </ul>
+
+        <!-- Tab panes -->
+        <div class="tab-content">
+          <div role="tabpanel" class="tab-pane active" id="profile">
+
+            <p class="lead"><i class="fa fa-fw fa-user"></i> Profile</p>
+            <hr />
+
+            <div class="row">
+              <div class="col-lg-6">
+
+                <form id="user-profile-form" novalidate ng-submit="uCtrl.updateProfile(profile_user)">
+
+                  <div class="form-group">
+                    <label class="hidden-xs" for="user-username">Username</label>
+                    <div class="input-group">
+                      <div class="input-group-addon"><i class="fa fa-fw fa-user-secret"></i></div>
+                      <input type="text" class="form-control" id="user-username" placeholder="username" ng-model="profile_user.username">
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label class="hidden-xs" for="user-email">Email Address</label>
+                    <div class="input-group">
+                      <div class="input-group-addon"><i class="fa fa-fw fa-envelope-square"></i></div>
+                      <input type="text" class="form-control" id="user-email" placeholder="you@example.com" ng-model="profile_user.email">
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label class="hidden-xs" for="user-gender">Gender</label>
+                    <select class="form-control" id="user-gender" ng-model="profile_user.gender">
+                      <option value="" data-icon="fa fa-fw fa-user-secret">N/A</option>
+                      <option value="male" data-icon="fa fa-fw fa-male text-primary">Male</option>
+                      <option value="female" data-icon="fa fa-fw fa-female text-danger">Female</option>
+                      <option value="other" data-icon="fa fa-fw fa-transgender">Other</option>
+                    </select>
+                  </div>
+
+                  <div id="user-preferences" class="panel panel-default">
+
+                    <div class="panel-body">
+                      <p class="lead"><i class="fa fa-fw fa-envelope-o"></i> Notifications</p>
+                      <div class="checkbox checkbox-primary">
+                        <input type="checkbox" id="checkbox-digest" name="enable_daily_digest" ng-checked="profile_user.enable_daily_digest" ng-true-value="1" ng-false-value="0">
+                        <label for="checkbox-digest">Enable <a href="#">daily digest</a>.</label>
+                      </div>
+
+                      <div class="checkbox checkbox-primary">
+                        <input type="checkbox" id="checkbox-pms" name="enable_private_messages" ng-checked="profile_user.enable_private_messages" ng-true-value="1" ng-false-value="0">
+                        <label for="checkbox-pms">Enable private messages.</label>
+                      </div>
+
+                      <div class="checkbox checkbox-primary">
+                        <input type="checkbox" id="checkbox-mods" name="enable_notifications" ng-checked="profile_user.enable_notifications" ng-true-value="1" ng-false-value="0">
+                        <label for="checkbox-mods">Enable notifications.</label>
+                      </div>
+                    </div>
+
+                  </div>
+
+                  <div class="panel panel-default">
+                    <div class="panel-body">
+                      <p class="lead"><i class="fa fa-fw fa-users"></i> Roles</p>
+                      <div class="checkbox checkbox-primary" ng-repeat="role in roles track by role.id">
+                        <input type="checkbox" id="role-{[role.id]}" data-checklist-model="user_roles[role.id]" data-checklist-value="role.id" ng-checked="userHasRole(role)">
+                        <label for="role-{[role.id]}">{[role.name]}</label>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <hr />
+                    <button class="btn btn-default" type="submit" name="submit" ng-click="submit()">
+                      <i class="fa fa-check-circle"></i> Save Profile
+                    </button>
+                  </div>
+
+                </form>
+
+              </div>
+              <div class="col-lg-6">
+
+                <div class="col-lg-10 col-lg-offset-1">
+
+                  <div class="panel panel-default">
+                    <div class="panel-body">
+                      <div class="alert alert-warning small" ng-if="!profile_profile_user.avatar"><i class="fa fa-fw fa-warning"></i> You currently have no Avatar.</div>
+
+                      {{ form_start(avatar_form, {'attr': {'id':'user-avatar-form' }}) }}
+
+                        <div class="form-group">
+                          <label for="avatar">Upload a new Avatar</label>
+                          <div class="input-group">
+                            <div class="input-group-addon"><i class="fa fa-fw fa-file-zip-o"></i></div>
+                            {{ form_widget(avatar_form.avatar, {'attr': {'class':'form-control'}}) }}
+                          </div>
+                        </div>
+
+                        {{ form_widget(avatar_form.submit) }}
+
+                      {{ form_end(avatar_form) }}
+                    </div>
+                  </div>
+
+                </div>
+
+              </div>
+            </div>
+
+          </div>
+          <div role="tabpanel" class="tab-pane" id="mods">
+
+            <p class="lead"><i class="fa fa-fw fa-cubes"></i> UI Mods</p>
+            {% include 'TavroAppBundle:User:mods.html.twig' %}
+
+          </div>
+          <div role="tabpanel" class="tab-pane" id="nodes">
+
+            <p class="lead"><i class="fa fa-fw fa-book"></i> Content</p>
+            {% include 'TavroAppBundle:User:nodes.html.twig' %}
+
+          </div>
+          <div role="tabpanel" class="tab-pane" id="password">
+
+            <p class="lead"><i class="fa fa-fw fa-refresh"></i> Password Reset</p>
+            <p>You must enter your current password, and then your new password (twice) to reset your password.</p>
+            <hr />
+
+            {% include 'TavroAppBundle:User:password.html.twig' %}
+
+          </div>
+        </div>
+
+      </div>
+
+    </section>
+  </div>
+
+{% endblock %}
+
+{% block js %}
+<script>
+  tavro.profile_user = {% if user.id %}{{ user.id }}{% else %}0{% endif %};
+</script>
+{% endblock %}

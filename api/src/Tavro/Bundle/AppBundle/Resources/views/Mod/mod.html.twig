@@ -1,0 +1,50 @@
+<div class="clearfix mod mod-view">
+
+  <div class="page-header">
+    <h1>{[mod.title]}</h1>
+    <ul class="list-inline small">
+      <li><i class="fa fa-fw fa-cube"></i> Created <span class="text-muted">{[mod.create_date | date:'short']}</span> by <a href="/users/{[mod.user.username]}">{[mod.user.username]}</a></li>
+      <li><i class="fa fa-fw fa-refresh"></i> Updated <span class="text-muted">{[mod.update_date | timeago]}</span></li>
+      <li><i class="fa fa-fw fa-search"></i> {[ mod.views ]} VIEWS</li>
+      <li><i class="fa fa-fw fa-download"></i> {[ mod.downloads ]} DOWNLOAD<span ng-if="mod.downloads != 1">S</span></li>
+    </ul>
+  </div>
+
+  <div class="col-lg-4">
+
+    <div class="mod-details">
+
+      <div class="form-group" ng-if="mod.mod_images.length">
+        <p dir-paginate="image in mod.mod_images | itemsPerPage: 1" pagination-id="modimg">
+          <a href="{[image.aws_url]}" data-lightbox="mod-{[mod.id]}-images"><img class="img-thumbnail img-{[image.id]} img-responsive"
+             src="/media/cache/resolve/mod_thumbnail/{[image.aws_key]}" alt="{[image.original_filename]}"></a>
+        </p>
+        <div class="small form-group">
+          <dir-pagination-controls boundary-links="false" max-size="1" pagination-id="modimg"></dir-pagination-controls>
+        </div>
+      </div>
+
+      <p ng-if="!mod.mod_images.length" class="alert alert-info alert-no-images">There are no images associated with <strong>{[mod.title]}</strong>.</p>
+
+      <div class="form-group">
+        <a ng-click="incrementDownloads()" ng-if="mod.github_repo" class="btn btn-info btn-block" href="https://github.com/{[mod.github_repo]}/archive/master.zip"><i class="fa fa-fw fa-download"></i> Download</a>
+        <a ng-click="incrementDownloads()" ng-if="!mod.github_repo && mod.file" class="btn btn-info btn-block" href="{[mod.file.aws_url]}"><i class="fa fa-fw fa-download"></i> Download</a>
+      </div>
+
+      <div class="alert alert-danger" ng-if="!mod.file && !mod.github_repo">
+        <p class="small"><i class="fa fa-fw fa-warning"></i> Error loading mod files to download. Please <a href="/user/{[mod.user.username]}/messages">contact the creator</a>.</p>
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="col-lg-8">
+
+    <div ng-bind-html="mod.body">
+      {[ mod.body ]}
+    </div>
+
+  </div>
+
+</div>

@@ -1,0 +1,80 @@
+<?php
+
+namespace CamelotMods\Bundle\CoreBundle\Entity;
+
+use Doctrine\ORM\Mapping AS ORM;
+
+use JMS\Serializer\Annotation\Accessor;
+use JMS\Serializer\Annotation\ExclusionPolicy;
+use JMS\Serializer\Annotation\Expose;
+use JMS\Serializer\Annotation\Type;
+use JMS\Serializer\Annotation\VirtualProperty;
+use Doctrine\ORM\Mapping\Table;
+
+use CamelotMods\Bundle\CoreBundle\Model\Entity;
+use CamelotMods\Bundle\CoreBundle\Model\EntityInterface;
+
+/**
+ * @ORM\Entity
+ * @ORM\Table(name="camelot_race_bane", indexes={@ORM\Index(name="RACE_BOON", columns={"race_id","bane_id"})})
+ */
+class RaceBane extends Entity implements EntityInterface
+{
+    /**
+     * @ORM\ManyToOne(targetEntity="CamelotMods\Bundle\CoreBundle\Entity\Race", inversedBy="race_banes")
+     * @ORM\JoinColumn(name="race_id", referencedColumnName="id", nullable=false)
+     */
+    private $race;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="CamelotMods\Bundle\CoreBundle\Entity\Bane", inversedBy="race_banes")
+     * @ORM\JoinColumn(name="bane_id", referencedColumnName="id", nullable=false)
+     */
+    private $bane;
+
+    /**
+     * Set race
+     *
+     * @param \CamelotMods\Bundle\CoreBundle\Entity\CamelotRace $race
+     * @return RaceBane
+     */
+    public function setRace(\CamelotMods\Bundle\CoreBundle\Entity\Race $race)
+    {
+        $this->race = $race;
+
+        return $this;
+    }
+
+    /**
+     * Get race
+     *
+     * @return \CamelotMods\Bundle\CoreBundle\Entity\CamelotRace 
+     */
+    public function getRace()
+    {
+        return $this->race;
+    }
+
+    /**
+     * Set bane
+     *
+     * @param \CamelotMods\Bundle\CoreBundle\Entity\Bane $bane
+     * @return RaceBane
+     */
+    public function setBane(\CamelotMods\Bundle\CoreBundle\Entity\Bane $bane)
+    {
+        $this->bane = $bane;
+
+        return $this;
+    }
+
+    /**
+     * Get bane
+     *
+     * @return \CamelotMods\Bundle\CoreBundle\Entity\Bane 
+     */
+    public function getBane()
+    {
+        return $this->bane;
+    }
+}

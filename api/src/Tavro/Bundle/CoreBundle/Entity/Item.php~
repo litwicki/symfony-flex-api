@@ -1,0 +1,111 @@
+<?php
+
+namespace CamelotMods\Bundle\CoreBundle\Entity;
+
+use Doctrine\ORM\Mapping AS ORM;
+
+use JMS\Serializer\Annotation\Accessor;
+use JMS\Serializer\Annotation\ExclusionPolicy;
+use JMS\Serializer\Annotation\Expose;
+use JMS\Serializer\Annotation\Type;
+use JMS\Serializer\Annotation\VirtualProperty;
+use Doctrine\ORM\Mapping\Table;
+
+use CamelotMods\Bundle\CoreBundle\Model\Entity;
+use CamelotMods\Bundle\CoreBundle\Model\EntityInterface;
+
+/**
+ * @ORM\Entity
+ * @ORM\HasLifecycleCallbacks
+ * @Table(name="camelot_item")
+ *
+ * @ExclusionPolicy("all")
+ */
+class Item extends Entity implements EntityInterface
+{
+
+    /**
+     * @ORM\Column(type="string", length=500, nullable=false)
+     */
+    private $title;
+
+    /**
+     * @ORM\Column(type="string", length=8000, nullable=true)
+     */
+    private $body;
+
+    /**
+     * @ORM\Column(type="string", length=8000, nullable=true)
+     */
+    private $stats;
+
+    /**
+     * Set title
+     *
+     * @param string $title
+     * @return Item
+     */
+    public function setTitle($title)
+    {
+        $this->title = $title;
+
+        return $this;
+    }
+
+    /**
+     * Get title
+     *
+     * @return string 
+     */
+    public function getTitle()
+    {
+        return $this->title;
+    }
+
+    /**
+     * Set body
+     *
+     * @param string $body
+     * @return Item
+     */
+    public function setBody($body)
+    {
+        $this->body = $body;
+
+        return $this;
+    }
+
+    /**
+     * Get body
+     *
+     * @return string 
+     */
+    public function getBody()
+    {
+        return $this->body;
+    }
+
+    /**
+     * Set stats
+     *
+     * @param string $stats
+     * @return Item
+     */
+    public function setStats($stats)
+    {
+        $this->stats = $stats;
+
+        return $this;
+    }
+
+    /**
+     * Get stats
+     *
+     * @return string 
+     */
+    public function getStats()
+    {
+        return $this->stats;
+    }
+
+}

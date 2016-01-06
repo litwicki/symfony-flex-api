@@ -1,0 +1,32 @@
+user_profile:
+    path: /user
+    defaults: { _controller: TavroAppBundle:User:profile }
+
+user_profile_id:
+    path: /users/{user}
+    defaults: { _controller: TavroAppBundle:User:user }
+    requirements:
+        user: \d+
+
+user_profile_edit:
+    path: /users/{user}/edit
+    defaults: { _controller: TavroAppBundle:User:profile }
+
+user_profile_username:
+    path: /users/{username}
+    defaults: { _controller: TavroAppBundle:User:username }
+    requirements:
+        username: "[a-z0-9]+"
+
+user_api:
+    path: /user/api
+    defaults: { _controller: TavroAppBundle:User:userApi }
+
+user_request_dev:
+    path: /user/request-dev
+    defaults: { _controller: TavroAppBundle:User:userRequestDev }
+
+user_avatar_save:
+    path: /users/{user}/avatar/save
+    defaults: { _controller: TavroAppBundle:User:userAvatarSave }
+    methods: [POST|PUT]

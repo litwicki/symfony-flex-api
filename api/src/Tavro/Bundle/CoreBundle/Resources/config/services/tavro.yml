@@ -1,0 +1,79 @@
+services:
+
+    tavro.user_activity_listener:
+          class: Tavro\Bundle\CoreBundle\EventListener\UserActivityListener
+          arguments: ["@security.token_storage", "@doctrine.orm.main_entity_manager"]
+          tags:
+              - { name: kernel.event_listener, event: kernel.controller, method: onCoreController }
+
+    tavro.mailer:
+        class: Tavro\Bundle\CoreBundle\Services\TavroMailer
+        arguments: ["@mailer", "@templating"]
+        calls:
+            - [ setContainer, [ '@service_container' ] ]
+
+    tavro.validator:
+        class: Tavro\Bundle\CoreBundle\Services\TavroValidator
+        calls:
+            - [ setContainer, [ '@service_container' ] ]
+
+    tavro.file_manager:
+        class: Tavro\Bundle\CoreBundle\Services\FileManager
+        arguments: ["%aws_access_key_id%", "%aws_secret_access_key%", %aws_s3_region% ]
+        calls:
+            - [ setContainer, [ '@service_container' ] ]
+
+    tavro.dbal:
+        class: Tavro\Bundle\CoreBundle\Services\Dbal
+        arguments: []
+        calls:
+            - [ setContainer, [ '@service_container' ] ]
+
+    cache:
+        class: Doctrine\Common\Cache\ApcCache
+
+    tavro_serializer:
+        class: Tavro\Bundle\CoreBundle\Services\Serializer
+        arguments: ["@serializer"]
+
+    tavro.request_listener:
+        class: Tavro\Bundle\CoreBundle\EventListener\RequestListener
+        calls:
+            - [ setContainer, [ '@service_container' ] ]
+        tags:
+            - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest, priority: 2 }
+
+    tavro.exception_listener:
+        class: Tavro\Bundle\CoreBundle\EventListener\ExceptionListener
+        calls:
+            - [ setContainer, [ '@service_container' ] ]
+        arguments: ["@twig", "%kernel.environment%"]
+        tags:
+            - { name: kernel.event_listener, event: kernel.exception, method: onKernelException }
+
+    # Twig
+    twig.listener.date:
+        class: Tavro\Bundle\CoreBundle\Twig\DateListener
+        arguments: ["@twig"]
+        tags:
+            - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest }
+
+    twig.extension.time_ago:
+        class: Tavro\Bundle\CoreBundle\Twig\Extension\TimeAgoExtension
+        tags:
+            - { name: twig.extension }
+
+    twig.extension.url_autolink:
+        class: Tavro\Bundle\CoreBundle\Twig\Extension\UrlAutolinkExtension
+        tags:
+            - { name: twig.extension }
+
+    twig.extension.img_cleanup:
+        class: Tavro\Bundle\CoreBundle\Twig\Extension\ImageCleanupExtension
+        tags:
+            - { name: twig.extension }
+
+    tavro.doctrine_listener.pre_update:
+        class: Tavro\Bundle\CoreBundle\EventListener\Doctrine\PreUpdateListener
+        tags:
+            - { name: doctrine.event_listener, event: preUpdate }

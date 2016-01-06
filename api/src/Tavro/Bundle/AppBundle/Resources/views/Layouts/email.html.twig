@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>{{ app_hostname }}</title>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" />
+</head>
+<body>
+{% block body -%}
+
+  <div class="container-fluid main">
+    {% block email %}{% endblock %}
+
+    {% block footer %}
+    <div id="footer">
+      <div class="clearfix">
+       <div class="col-md-10">
+         <p>{{ app_hostname }} built by <a href="http://{{ app_hostname }}">{{ app_hostname }}</a>.</p>
+         <p>You are receiving this email because you are an active member.</p>
+       </div>
+       <div class="col-md-2">
+         <a href="{{ url('index') }}"><img alt="tavromods logo" src="{{ amazon_s3_url}}/{{ asset_bucket}}/img/CU_Logos04_trans.png" /></a>
+       </div>
+      </div>
+    </div>
+    {% endblock %}
+
+  </div>
+
+  {% include 'TavroCoreBundle:Email:signature.html.twig' %}
+
+{% endblock %}
+
+</body>
+</html>

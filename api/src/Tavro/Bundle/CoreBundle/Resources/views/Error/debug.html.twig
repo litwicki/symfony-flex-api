@@ -1,0 +1,12 @@
+<hr />
+
+<div class="clearfix panel panel-default">
+  <div class="panel-body">
+    <h4 class="page-header" style="margin-top: 0;"><i class="fa fa-fw fa-user-md"></i> User Token</h4>
+    <code>{% if app.user is not null %}{{ app.user }}{% else %}Anonymous{% endif %}</code>
+    <h4 class="page-header"><i class="fa fa-fw fa-warning"></i> Message</h4>
+    <p><code>{{ exception.message }}</code></p>
+    <h4 class="page-header"><i class="fa fa-fw fa-terminal"></i> Stack Trace</h4>
+    <pre>{{ exception.trace }}</pre>
+  </div>
+</div>

@@ -1,0 +1,17 @@
+---
+server:
+    install: '1'
+    packages: [vim, git, nodejs, npm]
+    timezone: UTC
+    locale: en_US.UTF-8
+vagrant_local:
+    install: '1'
+    vm: { base_box: trusty64, hostname: tavro.dev, ip: 192.168.50.13, memory: '1024', sharedfolder: ./, useVagrantCloud: '1', syncType: nfs }
+mysql:
+    install: '1'
+    root_password: tavro
+    database: tavro
+    user: root
+    password: 'tavro'
+php7_configure_string: --prefix=/usr/local/php7 --enable-bcmath --with-bz2 --enable-calendar --enable-exif --enable-dba --enable-fpm --enable-ftp --with-gettext --with-gd --enable-mbstring --with-mcrypt --with-mhash --enable-mysqlnd --with-mysql=mysqlnd --with-mysqli=mysqlnd --with-pdo-mysql=mysqlnd --with-openssl --enable-pcntl --with-pspell --enable-shmop --enable-soap --enable-sockets --enable-sysvmsg --enable-sysvsem --enable-sysvshm --enable-wddx --with-zlib --enable-zip --with-readline --with-curl
+php7_cli_configure_string: --with-config-file-path=/etc/php7/cli --with-config-file-scan-dir=/etc/php7/cli/conf.d

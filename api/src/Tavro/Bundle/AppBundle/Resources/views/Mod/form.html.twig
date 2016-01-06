@@ -1,0 +1,19 @@
+<!-- begin mod form -->
+<div id="mod-form">
+
+  <ul class="nav nav-tabs" role="tablist">
+    <li role="presentation" class="active"><a href="#mod" aria-controls="mod" role="tab" data-toggle="tab"><i class="fa fa-fw fa-cube"></i> Mod</a></li>
+    <li role="presentation"><a href="#images" aria-controls="images" role="tab" data-toggle="tab"><i class="fa fa-fw fa-image"></i> Images</a></li>
+  </ul>
+
+  <div class="tab-content">
+    <div role="tabpanel" class="tab-pane active" id="mod">
+      {% include 'TavroAppBundle:Mod:form-mod.html.twig' %}
+    </div>
+    <div role="tabpanel" class="tab-pane" id="images">
+      {% include 'TavroAppBundle:Mod:form-images.html.twig' %}
+    </div>
+  </div>
+
+</div>
+<!-- end mod form -->

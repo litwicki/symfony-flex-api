@@ -1,0 +1,47 @@
+parameters:
+    database_driver: pdo_mysql
+    database_host: 127.0.0.1
+    database_port: ~
+    database_name: ~
+    database_user: root
+    database_password: ~
+
+    app_version: 0.1-BETA
+    app_email: info@tavro.dev
+    app_email_name: Tavro
+
+    status_pending: 2
+    status_active: 1
+    status_disabled: 0
+
+    page_size: 25
+
+    mailer_host: smtp.mailgun.org
+    mailer_user: postmaster@zoadilack.com
+    mailer_transport: smtp
+    mailer_port: 587
+    mailer_encryption: tls
+    mailer_auth_mode: login
+    mailer_password: ~
+    mailgun_url: https://api.mailgun.net/v3/zoadilack.com
+    mailgun_api_key: ~
+
+    locale: en
+    # A secret key that's used to generate certain security-related tokens
+    secret: 8E75RYcBW$sIJf0C1IslAh1EuHqUJxIH6^i40eFzNqe5Fe%$OJf!WfP#QTp!2qLj
+
+    app_hostname: tavro.dev
+    api_hostname: api.tavro.dev
+
+    # AWS
+    aws_sdk_version: '2006-03-01'
+    aws_access_key_id: ~
+    aws_secret_access_key: ~
+    aws_s3_region: us-east-1
+    image_bucket: tavro-images-dev
+    file_bucket: tavro-files-dev
+    asset_bucket: tavro-assets-dev
+    amazon_s3_url: 'https://s3.amazonaws.com'
+
+    github_username: github_username
+    github_password: github_password

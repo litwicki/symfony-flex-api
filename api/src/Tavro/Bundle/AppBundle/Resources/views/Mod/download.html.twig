@@ -1,0 +1,40 @@
+{% extends 'TavroAppBundle:Layouts:app.html.twig' %}
+
+{% block header %}
+<ol class="breadcrumb visible-desktop">
+  <li><i class="fa fa-fw fa-folder-open"></i> <a href="{{ path('mods') }}">Mods</a></li>
+  <li><i class="fa fa-fw fa-cubes"></i> <a href="/mods/categories/{[mod.category.slug]}">{[mod.category.title]}</a></li>
+  <li><i class="fa fa-fw fa-cube"></i> {[mod.title]}</li>
+</ol>
+{% endblock %}
+
+{% block content -%}
+
+  <div id="mod-{{ mod.id }}" class="mod mod-view" ng-controller="ModController as mCtrl">
+  <section ng-init="downloadMod()">
+
+    <div ng-if="mod.status != 1" class="alert alert-warning">
+      <i class="fa fa-fw fa-warning"></i> This Mod is not active as of <strong>{[mod.update_date|date:'medium']}</strong>
+    </div>
+
+    <div class="page-header">
+      <h1>{[mod.title]}</h1>
+      <p class="lead"><i class="fa fa-fw fa-download"></i>  Download the latest version of {[mod.title]}.</p>
+    </div>
+
+    <p>Your download will begin in <timer interval="1" countdown="10">{{countdown}}</timer> seconds. If your download does not begin, you can <a href="">download the file</a> manually.</p>
+
+  </section>
+  </div>
+
+{% endblock %}
+
+{% block sidebar %}
+  {% include 'TavroAppBundle:Mod:sidebar.html.twig' %}
+{% endblock %}
+
+{% block js %}
+  <script type="text/javascript">
+    tavro.current_mod = "{% if mod and mod.id %}{{ mod.id }}{% else %}0{% endif %}";
+  </script>
+{% endblock %}

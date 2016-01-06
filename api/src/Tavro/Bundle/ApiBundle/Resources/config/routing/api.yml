@@ -1,0 +1,77 @@
+api_get_entity:
+    path: /{group}/{entity}/{id}.{_format}
+    defaults: { _controller: TavroApiBundle:Api:get, _format: json }
+    methods: GET
+    requirements:
+        group: "(api|tavro|profile|summary|detail)"
+        id: \d+
+        _format:  json|xml
+
+api_typeahead_entities:
+    path:  /typeahead/{entity}.{_format}
+    defaults: { _controller: TavroApiBundle:Api:typeahead, _format: json }
+    methods: GET
+    requirements:
+        _format:  json|xml
+
+api_get_all_entities:
+    path:  /{group}/{entity}.{_format}
+    defaults: { _controller: TavroApiBundle:Api:getAll, _format: json }
+    methods: GET
+    requirements:
+        group: "(api|tavro|summary|detail)"
+        _format:  json|xml
+
+api_post_entity:
+    path:  /{group}/{entity}.{_format}
+    defaults: { _controller: TavroApiBundle:Api:post, _format: json }
+    methods: POST
+    requirements:
+        group: "(api|tavro)"
+        _format:  json|xml
+
+api_patch_entity:
+    path:  /{group}/{entity}/{id}.{_format}
+    defaults: { _controller: TavroApiBundle:Api:patch, _format: json }
+    methods: PATCH
+    requirements:
+        group: "(api|tavro)"
+        id: \d+
+        _format:  json|xml
+
+api_put_entity:
+    path:  /{group}/{entity}/{id}.{_format}
+    defaults: { _controller: TavroApiBundle:Api:put, _format: json }
+    methods: PUT
+    requirements:
+        group: "(api|tavro)"
+        id: \d+
+        _format:  json|xml
+
+api_delete_entity:
+    path:  /{entity}/{id}.{_format}
+    defaults: { _controller: TavroApiBundle:Api:delete, _format: json }
+    methods: DELETE
+    requirements:
+        id: \d+
+        _format:  json|xml
+
+# ==============
+# UNIQUE ROUTES
+# ==============
+api_user_regenerate_api_key:
+    path: /users/{user}/reset/api-key.{_format}
+    defaults: { _controller: TavroApiBundle:User:resetApiKey, _format: json}
+    methods: POST
+    requirements:
+        id: \d+
+        _format: json|xml
+
+api_user_regenerate_api_password:
+    path: /users/{user}/reset/api-password.{_format}
+    defaults: { _controller: TavroApiBundle:User:resetApiPassword, _format: json}
+    methods: POST
+    requirements:
+        id: \d+
+        _format: json|xml
+

@@ -1,0 +1,80 @@
+<?php
+
+namespace CamelotMods\Bundle\CoreBundle\Entity;
+
+use Doctrine\ORM\Mapping AS ORM;
+
+use JMS\Serializer\Annotation\Accessor;
+use JMS\Serializer\Annotation\ExclusionPolicy;
+use JMS\Serializer\Annotation\Expose;
+use JMS\Serializer\Annotation\Type;
+use JMS\Serializer\Annotation\VirtualProperty;
+use Doctrine\ORM\Mapping\Table;
+
+use CamelotMods\Bundle\CoreBundle\Model\Entity;
+use CamelotMods\Bundle\CoreBundle\Model\EntityInterface;
+
+/**
+ * @ORM\Entity
+ * @ORM\Table(name="camelot_realm_bane", indexes={@ORM\Index(name="REALM_BANE", columns={"realm_id","bane_id"})})
+ */
+class RealmBane extends Entity implements EntityInterface
+{
+    /**
+     * @ORM\ManyToOne(targetEntity="CamelotMods\Bundle\CoreBundle\Entity\Realm", inversedBy="realm_banes")
+     * @ORM\JoinColumn(name="realm_id", referencedColumnName="id", nullable=false)
+     */
+    private $realm;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="CamelotMods\Bundle\CoreBundle\Entity\Bane", inversedBy="realm_banes")
+     * @ORM\JoinColumn(name="bane_id", referencedColumnName="id", nullable=false)
+     */
+    private $bane;
+
+    /**
+     * Set realm
+     *
+     * @param \CamelotMods\Bundle\CoreBundle\Entity\Realm $realm
+     * @return RealmBane
+     */
+    public function setRealm(\CamelotMods\Bundle\CoreBundle\Entity\Realm $realm)
+    {
+        $this->realm = $realm;
+
+        return $this;
+    }
+
+    /**
+     * Get realm
+     *
+     * @return \CamelotMods\Bundle\CoreBundle\Entity\Realm 
+     */
+    public function getRealm()
+    {
+        return $this->realm;
+    }
+
+    /**
+     * Set bane
+     *
+     * @param \CamelotMods\Bundle\CoreBundle\Entity\Bane $bane
+     * @return RealmBane
+     */
+    public function setBane(\CamelotMods\Bundle\CoreBundle\Entity\Bane $bane)
+    {
+        $this->bane = $bane;
+
+        return $this;
+    }
+
+    /**
+     * Get bane
+     *
+     * @return \CamelotMods\Bundle\CoreBundle\Entity\Bane 
+     */
+    public function getBane()
+    {
+        return $this->bane;
+    }
+}

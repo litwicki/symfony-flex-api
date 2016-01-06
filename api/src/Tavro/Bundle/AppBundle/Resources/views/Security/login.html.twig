@@ -1,0 +1,63 @@
+{# src/tavromods/UserBundle/Resources/views/Security/login.html.twig #}
+
+{% extends '::base.html.twig' %}
+
+{% block body_classes %}login{% endblock %}
+{% block title %}Login{% endblock %}
+{% block header %}{% endblock %}
+{% block body %}
+
+  <div class="clearfix">
+    <div class="col-md-6 col-lg-offset-3">
+
+      <h1><i class="fa fa-fw fa-sign-in"></i> Login</h1>
+      <div class="panel panel-default">
+        <div class="panel-body">
+          {% if error %}
+            <div class="alert alert-danger">{{ error.message }}</div>
+          {% endif %}
+
+          <form action="{{ path('login_check') }}" method="post" role="form">
+
+            <div class="form-group username">
+              <label for="username">Email or Username</label>
+              <input type="text" id="username" name="_username" value="{{ last_username }}" class="form-control" />
+            </div>
+
+            <div class="form-group password">
+              <label for="password">Password</label>
+              <input type="password" id="password" name="_password" class="form-control" />
+            </div>
+
+            <div class="form-group remember">
+              <input type="checkbox" id="remember_me" name="_remember_me" checked />
+              <label for="remember_me">Keep me logged in</label>
+            </div>
+
+            <div class="form-group">
+              <button type="submit" class="btn btn-success pull-left">
+                <i class="fa fa-fw fa-key"></i>&nbsp;Authenticate
+              </button>
+              <a class="small pull-right" href="{{ path('forgot_password') }}">
+                <i class="fa fa-fw fa-question-circle"></i>&nbsp; Forgot your password?
+              </a>
+            </div>
+
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-2"></div>
+    <div class="col-md-6">
+
+      {% if activate_success is defined and activate_success %}
+        <div class="alert alert-success">
+          <strong>Congratulations!</strong><br />
+          <p>You are successfully activated!</p>
+        </div>
+      {% endif %}
+
+    </div>
+  </div>
+
+{% endblock %}

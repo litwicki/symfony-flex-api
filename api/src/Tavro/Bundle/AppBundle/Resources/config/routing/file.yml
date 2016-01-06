@@ -1,0 +1,6 @@
+file_download:
+    path: /files/{file}/download
+    defaults: { _controller: "TavroAppBundle:File:download" }
+    requirements:
+        file: \d+
+    methods: [GET]

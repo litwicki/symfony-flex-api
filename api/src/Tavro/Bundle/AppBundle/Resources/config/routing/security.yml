@@ -1,0 +1,39 @@
+# login and logout
+login:
+    path: /login
+    defaults: { _controller: "TavroAppBundle:Security:login" }
+
+login_check:
+    path: /login/submit
+    methods: post
+
+logout:
+    path: /logout
+
+# register a new user
+signup:
+    path: /signup
+    defaults: { _controller: "TavroAppBundle:Security:signup" }
+
+register:
+    path: /register
+    defaults: { _controller: "TavroAppBundle:Security:register" }
+    methods: [POST]
+
+forgot_password:
+    path: /user/forgot
+    defaults: { _controller: "TavroAppBundle:Security:forgot" }
+
+forgot_password_submit:
+    path: /user/forgot/submit
+    defaults: { _controller: "TavroAppBundle:Security:forgotSubmit" }
+    methods: [POST]
+
+reset_password:
+    path: /user/reset/{token}
+    defaults: { _controller: "TavroAppBundle:Security:reset" }
+
+reset_password_submit:
+    path: /user/reset/{token}/submit
+    defaults: { _controller: "TavroAppBundle:Security:resetSubmit" }
+    methods: [POST]

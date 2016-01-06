@@ -1,0 +1,24 @@
+# ======================================
+# APPLICATION FRONTEND (ANGULAR et-all)
+# ======================================
+#tavro_app:
+    #resource: "@TavroAppBundle/Resources/config/routing.yml"
+
+# =============
+# API ROUTING
+# =============
+tavro_api:
+#    host: %api_hostname%
+    resource: "@TavroApiBundle/Resources/config/routing.yml"
+    prefix: /api/v1/
+#    requirements:
+#        api_host: ^(api_hostname%|api.localhost)$
+#    defaults:
+#        api_host: %api_hostname%
+
+
+# =======================
+# CONTRIB BUNDLE ROUTING
+# =======================
+_liip_imagine:
+    resource: "@LiipImagineBundle/Resources/config/routing.xml"

@@ -1,0 +1,11 @@
+{{ user.username }},
+
+Welcome to Tavro!
+
+Add your first Mod: {{ url('mod_new') }}
+
+View the latest Mods from the community: {{ url('mods') }}
+
+Check out some fantastic Tavro guides for modding, or maximizing your killing potential in Tavro Unchained: {{ url('guides') }}
+
+{% include 'TavroCoreBundle:Email:signature.txt.twig' %}

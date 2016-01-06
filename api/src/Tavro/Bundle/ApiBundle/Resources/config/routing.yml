@@ -1,0 +1,8 @@
+tavro_user_api:
+    resource: "@TavroApiBundle/Resources/config/routing/user.yml"
+
+# ****************************************************************** #
+# ***** Keep me last for the override scenarios to be priority ***** #
+# ****************************************************************** #
+tavro_api:
+    resource: "@TavroApiBundle/Resources/config/routing/api.yml"

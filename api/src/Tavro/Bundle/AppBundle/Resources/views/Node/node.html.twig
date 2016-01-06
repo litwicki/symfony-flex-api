@@ -1,0 +1,27 @@
+<div class="clearfix">
+
+  <div class="page-header">
+    <h1>{[node.title]}</h1>
+    <ul class="small list-inline">
+      <li class="">{% include 'TavroAppBundle:Node:icon.html.twig' %} Created <span class="text-muted">{[node.create_date | date:'short']}</span> by <a href="/users/{[node.user.username]}">{[node.user.username]}</a>.</li>
+      <li class=""><i class="fa fa-fw fa-refresh"></i> Updated <span class="text-muted">{[node.update_date | timeago]}</span></li>
+      <li class="text-info"><i class="fa fa-fw fa-eye"></i> {[ node.views ]} VIEWS</li>
+      <li class="text-primary"><i class="fa fa-fw fa-bookmark"></i> {[ node.read_count ]} READ<span ng-if="node.read_count != 1">S</span></li>
+    </ul>
+  </div>
+  {#<div class="node-author">#}
+    {#<div class="small list-group">#}
+      {#<a class="list-group-item" href="/users/{[node.user.username]}">#}
+        {#<img class="img-responsive img-thumbnail img-{[node.user.avatar.id]}" ng-if="node.user.avatar.aws_key" src="/media/cache/resolve/avatar/{[ node.user.avatar.aws_key ]}" alt="{[node.user.username]}" />#}
+      {#</a>#}
+      {#<a class="list-group-item" href="/users/{[node.user.username]}">#}
+        {#<strong><i class="fa fa-user"></i> {[node.user.username]}</strong>#}
+      {#</a>#}
+    {#</div>#}
+  {#</div>#}
+
+  <div class="node-body" ng-bind-html="node.body">
+    {[ node.body ]}
+  </div>
+
+</div>

@@ -1,0 +1,41 @@
+services:
+    tavro.form.roles:
+        class: Tavro\Bundle\CoreBundle\Form\RoleType
+        tags:
+         -  { name: form.type, alias: role_type }
+    tavro.form.users:
+        class: Tavro\Bundle\CoreBundle\Form\UserType
+        tags:
+         -  { name: form.type, alias: user_type }
+    tavro.form.user_register:
+        class: Tavro\Bundle\CoreBundle\Form\UserRegisterType
+        tags:
+         -  { name: form.type, alias: user_register_type }
+    tavro.form.comments:
+        class: Tavro\Bundle\CoreBundle\Form\CommentType
+        tags:
+         -  { name: form.type, alias: comment_type }
+    tavro.form.files:
+        class: Tavro\Bundle\CoreBundle\Form\FileType
+        tags:
+         -  { name: form.type, alias: file_type }
+    tavro.form.images:
+        class: Tavro\Bundle\CoreBundle\Form\ImageType
+        tags:
+         -  { name: form.type, alias: image_type }
+    tavro.form.nodes:
+        class: Tavro\Bundle\CoreBundle\Form\NodeType
+        tags:
+         -  { name: form.type, alias: node_type }
+    tavro.form.node_tags:
+        class: Tavro\Bundle\CoreBundle\Form\NodeTagType
+        tags:
+         -  { name: form.type, alias: node_tag_type }
+    tavro.form.variables:
+        class: Tavro\Bundle\CoreBundle\Form\VariableType
+        tags:
+         -  { name: form.type, alias: variable_type }
+    tavro.form.tags:
+        class: Tavro\Bundle\CoreBundle\Form\TagType
+        tags:
+         -  { name: form.type, alias: tag_type }

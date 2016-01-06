@@ -1,0 +1,120 @@
+<?php
+
+namespace CamelotMods\Bundle\CoreBundle\Entity;
+
+use Doctrine\ORM\Mapping AS ORM;
+
+use JMS\Serializer\Annotation\Accessor;
+use JMS\Serializer\Annotation\ExclusionPolicy;
+use JMS\Serializer\Annotation\Expose;
+use JMS\Serializer\Annotation\Type;
+use JMS\Serializer\Annotation\VirtualProperty;
+use Doctrine\ORM\Mapping\Table;
+
+use CamelotMods\Bundle\CoreBundle\Model\Entity;
+use CamelotMods\Bundle\CoreBundle\Model\EntityInterface;
+
+/**
+ * @ORM\Entity
+ * @ORM\HasLifecycleCallbacks
+ * @Table(name="camelot_mod_category")
+ *
+ * @ExclusionPolicy("all")
+ */
+class ModCategory extends Entity implements EntityInterface
+{
+    /**
+     * @ORM\Column(type="string", unique=true, nullable=true)
+     */
+    protected $title;
+
+    /**
+     * @ORM\Column(type="string", unique=true, nullable=true)
+     */
+    protected $slug;
+
+    /**
+     * @ORM\OneToMany(targetEntity="CamelotMods\Bundle\CoreBundle\Entity\Mod", mappedBy="category")
+     * @ORM\OrderBy({"id" = "DESC"})
+     */
+    protected $mods;
+
+    /**
+     * Set title
+     *
+     * @param string $title
+     * @return ModCategory
+     */
+    public function setTitle($title)
+    {
+        $this->title = $title;
+
+        return $this;
+    }
+
+    /**
+     * Get title
+     *
+     * @return string 
+     */
+    public function getTitle()
+    {
+        return $this->title;
+    }
+
+    /**
+     * Set slug
+     *
+     * @param string $slug
+     * @return ModCategory
+     */
+    public function setSlug($slug)
+    {
+        $this->slug = $slug;
+
+        return $this;
+    }
+
+    /**
+     * Get slug
+     *
+     * @return string 
+     */
+    public function getSlug()
+    {
+        return $this->slug;
+    }
+
+    /**
+     * Add mods
+     *
+     * @param \CamelotMods\Bundle\CoreBundle\Entity\Mod $mods
+     * @return ModCategory
+     */
+    public function addMod(\CamelotMods\Bundle\CoreBundle\Entity\Mod $mods)
+    {
+        $this->mods[] = $mods;
+
+        return $this;
+    }
+
+    /**
+     * Remove mods
+     *
+     * @param \CamelotMods\Bundle\CoreBundle\Entity\Mod $mods
+     */
+    public function removeMod(\CamelotMods\Bundle\CoreBundle\Entity\Mod $mods)
+    {
+        $this->mods->removeElement($mods);
+    }
+
+    /**
+     * Get mods
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getMods()
+    {
+        return $this->mods;
+    }
+}

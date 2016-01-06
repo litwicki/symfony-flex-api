@@ -1,0 +1,32 @@
+remove_trailing_slash:
+    path: /{url}
+    defaults: { _controller: TavroAppBundle:Default:removeTrailingSlash }
+    requirements:
+        url: .*/$
+    methods: get
+
+tavro_admin:
+    resource: "@TavroAppBundle/Resources/config/routing/admin.yml"
+
+tavro_profile:
+    resource: "@TavroAppBundle/Resources/config/routing/user.yml"
+
+tavro_node:
+    resource: "@TavroAppBundle/Resources/config/routing/node.yml"
+
+default:
+    resource: "@TavroAppBundle/Resources/config/routing/default.yml"
+
+security:
+    resource: "@TavroAppBundle/Resources/config/routing/security.yml"
+
+github:
+    resource: "@TavroAppBundle/Resources/config/routing/github.yml"
+    prefix: /github
+
+file:
+    resource: "@TavroAppBundle/Resources/config/routing/file.yml"
+
+ajax:
+    resource: "@TavroAppBundle/Resources/config/routing/ajax.yml"
+    prefix: /ajax

@@ -1,0 +1,653 @@
+<?php
+
+namespace Camelot\Bundle\CoreBundle\Entity;
+
+use Camelot\Bundle\CoreBundle\Model\ApiEntityInterface;
+use Doctrine\ORM\Mapping AS ORM;
+
+use JMS\Serializer\Annotation\Accessor;
+use JMS\Serializer\Annotation\AccessType;
+use JMS\Serializer\Annotation\ExclusionPolicy;
+use JMS\Serializer\Annotation\Expose;
+use JMS\Serializer\Annotation\Type;
+use JMS\Serializer\Annotation\VirtualProperty;
+use JMS\Serializer\Annotation\Groups;
+use JMS\Serializer\Annotation\MaxDepth;
+use JMS\Serializer\Annotation\SerializedName;
+use Doctrine\ORM\Mapping\Table;
+
+use Symfony\Component\Validator\Constraints as Assert;
+
+use Camelot\Bundle\CoreBundle\Model\ApiEntity;
+use Camelot\Bundle\CoreBundle\Model\EntityInterface;
+
+/**
+ * @ORM\Entity
+ * @ORM\HasLifecycleCallbacks
+ * @Table(name="camelot_mod")
+ */
+class Mod extends ApiEntity
+{
+    /**
+     * @ORM\Column(type="string", length=500, nullable=false)
+     * @Groups({"api", "camelot", "summary"})
+     */
+    protected $title;
+
+    /**
+     * @ORM\Column(type="string", length=8000, nullable=true)
+     * @Groups({"api", "camelot", "summary"})
+     */
+    protected $body;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Camelot\Bundle\CoreBundle\Entity\User", inversedBy="mods")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id", nullable=false)
+     * @Groups({"api", "camelot", "summary"})
+     * @MaxDepth(2)
+     */
+    protected $user;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Camelot\Bundle\CoreBundle\Entity\ModCategory", inversedBy="mods")
+     * @ORM\JoinColumn(name="category_id", referencedColumnName="id", nullable=false)
+     * @Groups({"api", "camelot", "summary"})
+     * @MaxDepth(2)
+     */
+    protected $category;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true, unique=true)
+     * @Groups({"api", "camelot"})
+     */
+    protected $github_repo;
+
+    /**
+     * @ORM\Column(type="integer", nullable=false)
+     * @Groups({"api", "camelot", "summary"})
+     */
+    protected $views;
+
+    /**
+     * @ORM\Column(type="integer", nullable=false)
+     * @Groups({"api", "camelot", "summary"})
+     */
+    protected $downloads;
+
+    /**
+     * @ORM\Column(type="boolean", nullable=false)
+     * @Groups({"api", "camelot", "summary"})
+     */
+    protected $spotlight;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Camelot\Bundle\CoreBundle\Entity\ModComment", mappedBy="mod", cascade={"remove"})
+     */
+    protected $mod_comments;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Camelot\Bundle\CoreBundle\Entity\ModImage", mappedBy="mod", cascade={"remove"})
+     * @Groups({"api", "camelot", "summary"})
+     * @Accessor("getImages")
+     * @MaxDepth(3)
+     */
+    protected $mod_images;
+
+    /**
+     * @ORM\Column(type="datetime", length=1000, nullable=true)
+     * @Groups({"api", "camelot"})
+     */
+    protected $approval_date;
+
+    /**
+     * @ORM\Column(type="datetime", length=1000, nullable=true)
+     * @Groups({"api", "camelot"})
+     */
+    protected $suspend_date;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Camelot\Bundle\CoreBundle\Entity\ModFile", mappedBy="mod", cascade={"remove"})
+     */
+    protected $mod_files;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Camelot\Bundle\CoreBundle\Entity\ModUser", mappedBy="mod", cascade={"remove"})
+     */
+    protected $mod_users;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Camelot\Bundle\CoreBundle\Entity\ModTag", mappedBy="mod", cascade={"remove"})
+     */
+    protected $mod_tags;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->mod_tags = new \Doctrine\Common\Collections\ArrayCollection();;
+        $this->mod_comments = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->mod_images = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->mod_files = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->mod_users = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->views = 0;
+        $this->downloads = 0;
+        $this->status = $this::STATUS_PENDING;
+        $this->create_date = new \DateTime();
+        $this->update_date = new \DateTime();
+        $this->spotlight = false;
+    }
+
+    /**
+     * Set title
+     *
+     * @param string $title
+     * @return Mod
+     */
+    public function setTitle($title)
+    {
+        $this->title = $title;
+
+        return $this;
+    }
+
+    /**
+     * Get title
+     *
+     * @return string 
+     */
+    public function getTitle()
+    {
+        return $this->title;
+    }
+
+    /**
+     * Set body
+     *
+     * @param string $body
+     * @return Mod
+     */
+    public function setBody($body)
+    {
+        $this->body = $body;
+
+        return $this;
+    }
+
+    /**
+     * Get body
+     *
+     * @return string 
+     */
+    public function getBody()
+    {
+        return $this->body;
+    }
+
+    /**
+     * Set url
+     *
+     * @param string $url
+     * @return Mod
+     */
+    public function setUrl($url)
+    {
+        $this->url = $url;
+
+        return $this;
+    }
+
+    /**
+     * Get url
+     *
+     * @return string 
+     */
+    public function getUrl()
+    {
+        return $this->url;
+    }
+
+
+    /**
+     * Set github_repo
+     *
+     * @param string $github_repo
+     * @return Mod
+     */
+    public function setGithubRepo($github_repo)
+    {
+        $this->github_repo = $github_repo;
+
+        return $this;
+    }
+
+    /**
+     * Get github_repo
+     *
+     * @return string
+     */
+    public function getGithubRepo()
+    {
+        return $this->github_repo;
+    }
+
+    /**
+     * Set views
+     *
+     * @param integer $views
+     * @return Mod
+     */
+    public function setViews($views)
+    {
+        $this->views = $views;
+
+        return $this;
+    }
+
+    /**
+     * Get views
+     *
+     * @return integer 
+     */
+    public function getViews()
+    {
+        return $this->views;
+    }
+
+    /**
+     * Set user
+     *
+     * @param \Camelot\Bundle\CoreBundle\Entity\User $user
+     * @return Mod
+     */
+    public function setUser(\Camelot\Bundle\CoreBundle\Entity\User $user)
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return \Camelot\Bundle\CoreBundle\Entity\User
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
+
+    /**
+     * Set category
+     *
+     * @param \Camelot\Bundle\CoreBundle\Entity\ModCategory $category
+     * @return Mod
+     */
+    public function setCategory(\Camelot\Bundle\CoreBundle\Entity\ModCategory $category)
+    {
+        $this->category = $category;
+
+        return $this;
+    }
+
+    /**
+     * Get category
+     *
+     * @return \Camelot\Bundle\CoreBundle\Entity\ModCategory
+     */
+    public function getCategory()
+    {
+        return $this->category;
+    }
+
+    /**
+     * Add mod_comments
+     *
+     * @param \Camelot\Bundle\CoreBundle\Entity\ModComment $modComments
+     * @return Mod
+     */
+    public function addModComment(\Camelot\Bundle\CoreBundle\Entity\ModComment $modComments)
+    {
+        $this->mod_comments[] = $modComments;
+
+        return $this;
+    }
+
+    /**
+     * Remove mod_comments
+     *
+     * @param \Camelot\Bundle\CoreBundle\Entity\ModComment $modComments
+     */
+    public function removeModComment(\Camelot\Bundle\CoreBundle\Entity\ModComment $modComments)
+    {
+        $this->mod_comments->removeElement($modComments);
+    }
+
+    /**
+     * Get mod_comments
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getModComments()
+    {
+        return $this->mod_comments;
+    }
+
+    /**
+     * Add mod_images
+     *
+     * @param \Camelot\Bundle\CoreBundle\Entity\ModImage $modImages
+     * @return Mod
+     */
+    public function addModImage(\Camelot\Bundle\CoreBundle\Entity\ModImage $modImages)
+    {
+        $this->mod_images[] = $modImages;
+
+        return $this;
+    }
+
+    /**
+     * Remove mod_images
+     *
+     * @param \Camelot\Bundle\CoreBundle\Entity\ModImage $modImages
+     */
+    public function removeModImage(\Camelot\Bundle\CoreBundle\Entity\ModImage $modImages)
+    {
+        $this->mod_images->removeElement($modImages);
+    }
+
+    /**
+     * Get mod_images
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getModImages()
+    {
+        return $this->mod_images;
+    }
+
+    /**
+     * Set approval_date
+     *
+     * @param \DateTime $approvalDate
+     * @return Mod
+     */
+    public function setApprovalDate($approvalDate)
+    {
+        $this->approval_date = $approvalDate;
+
+        return $this;
+    }
+
+    /**
+     * Get approval_date
+     *
+     * @return \DateTime 
+     */
+    public function getApprovalDate()
+    {
+        return $this->approval_date;
+    }
+
+    /**
+     * Set suspend_date
+     *
+     * @param \DateTime $suspendDate
+     * @return Mod
+     */
+    public function setSuspendDate($suspendDate)
+    {
+        $this->suspend_date = $suspendDate;
+
+        return $this;
+    }
+
+    /**
+     * Get suspend_date
+     *
+     * @return \DateTime 
+     */
+    public function getSuspendDate()
+    {
+        return $this->suspend_date;
+    }
+
+    /**
+     * @return array
+     */
+    public function getComments()
+    {
+        $comments = new \Doctrine\Common\Collections\ArrayCollection();
+        foreach($this->mod_comments as $modComment) {
+
+            $comment = $modComment->getComment();
+            if($comment->getStatus() === 0) {
+                $comments->add(array(
+                    'id' => $comment->getId(),
+                    'status' => $comment->getStatus(),
+                    'user' => $comment->getUser(),
+                    'removed_by' => $comment->getRemovedBy(),
+                    'create_date' => $comment->getCreateDate(),
+                    'update_date' => $comment->getUpdateDate(),
+                ));
+            }
+            else {
+                $comments->add($comment);
+            }
+        }
+        return $comments;
+    }
+
+    /**
+     * @return array
+     */
+    public function getImages()
+    {
+        $images = new \Doctrine\Common\Collections\ArrayCollection();
+        foreach($this->mod_images as $modImage) {
+            $images->add($modImage->getImage());
+        }
+        return $images;
+    }
+
+    /**
+     * Set downloads
+     *
+     * @param integer $downloads
+     * @return Mod
+     */
+    public function setDownloads($downloads)
+    {
+        $this->downloads = $downloads;
+
+        return $this;
+    }
+
+    /**
+     * Get downloads
+     *
+     * @return integer 
+     */
+    public function getDownloads()
+    {
+        return $this->downloads;
+    }
+
+    /**
+     * Set spotlight
+     *
+     * @param boolean $spotlight
+     * @return Mod
+     */
+    public function setSpotlight($spotlight)
+    {
+        $this->spotlight = $spotlight;
+
+        return $this;
+    }
+
+    /**
+     * Get spotlight
+     *
+     * @return boolean 
+     */
+    public function getSpotlight()
+    {
+        return $this->spotlight;
+    }
+
+    /**
+     * @VirtualProperty
+     * @SerializedName("image_url")
+     * @Groups({"api", "camelot", "summary"})
+     *
+     */
+    public function getImageUrl()
+    {
+        if($this->mod_images->isEmpty()) {
+            return null;
+        }
+        else {
+            return $this->mod_images->first()->getAwsUrl();
+        }
+    }
+
+    /**
+     * @VirtualProperty
+     * @SerializedName("comment_count")
+     * @Groups({"api", "camelot", "summary"})
+     * @return int
+     */
+    public function getCommentCount()
+    {
+        return $this->mod_comments->count();
+    }
+
+    /**
+     * @VirtualProperty
+     * @SerializedName("mod_contributors")
+     * @Groups({"api"})
+     * @MaxDepth(2)
+     */
+    public function getModContributors()
+    {
+        $items = array();
+        if($this->mod_users->count()) {
+            foreach($this->mod_users as $modUser) {
+                $items[] = $modUser->getUser();
+            }
+        }
+        return $items;
+    }
+
+    /**
+     * Add mod_users
+     *
+     * @param \Camelot\Bundle\CoreBundle\Entity\ModUser $modUsers
+     * @return Mod
+     */
+    public function addModUser(\Camelot\Bundle\CoreBundle\Entity\ModUser $modUsers)
+    {
+        $this->mod_users[] = $modUsers;
+
+        return $this;
+    }
+
+    /**
+     * Remove mod_users
+     *
+     * @param \Camelot\Bundle\CoreBundle\Entity\ModUser $modUsers
+     */
+    public function removeModUser(\Camelot\Bundle\CoreBundle\Entity\ModUser $modUsers)
+    {
+        $this->mod_users->removeElement($modUsers);
+    }
+
+    /**
+     * Get mod_users
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getModUsers()
+    {
+        return $this->mod_users;
+    }
+
+    /**
+     * Add mod_files
+     *
+     * @param \Camelot\Bundle\CoreBundle\Entity\ModFile $modFiles
+     * @return Mod
+     */
+    public function addModFile(\Camelot\Bundle\CoreBundle\Entity\ModFile $modFiles)
+    {
+        $this->mod_files[] = $modFiles;
+
+        return $this;
+    }
+
+    /**
+     * Remove mod_files
+     *
+     * @param \Camelot\Bundle\CoreBundle\Entity\ModFile $modFiles
+     */
+    public function removeModFile(\Camelot\Bundle\CoreBundle\Entity\ModFile $modFiles)
+    {
+        $this->mod_files->removeElement($modFiles);
+    }
+
+    /**
+     * Get mod_files
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getModFiles()
+    {
+        return $this->mod_files;
+    }
+
+    /**
+     * @VirtualProperty
+     * @SerializedName("mod_files")
+     * @Groups({"camelot","detail"})
+     * @MaxDepth(2)
+     */
+    public function getFiles()
+    {
+        $files = new \Doctrine\Common\Collections\ArrayCollection();
+        foreach($this->mod_files as $modFile) {
+            $files->add($modFile->getFile());
+        }
+        return $files;
+    }
+
+    /**
+     * @VirtualProperty
+     * @SerializedName("file")
+     * @Groups({"api", "camelot", "summary"})
+     * @MaxDepth(2)
+     */
+    public function getFile()
+    {
+        if($this->mod_files->count()) {
+            return $this->mod_files->last()->getFile();
+        }
+        return null;
+    }
+
+    /**
+     * @VirtualProperty
+     * @SerializedName("mod_tags")
+     * @Groups({"api", "camelot","detail"})
+     * @MaxDepth(2)
+     */
+    public function getTags()
+    {
+        $tags = new \Doctrine\Common\Collections\ArrayCollection();
+        foreach($this->mod_tags as $modTag) {
+            $tags->add($modTag->getTag());
+        }
+        return $tags;
+    }
+
+}

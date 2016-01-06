@@ -1,0 +1,62 @@
+<!-- begin node form -->
+<form novalidate ng-submit="nCtrl.saveNode(node)">
+
+  <div class="form-group">
+    <label for="title">Title</label>
+    <div class="input-group">
+      <div class="input-group-addon"><i class="fa fa-fw fa-file-text"></i></div>
+      <input type="text" class="form-control" id="title" ng-model="node.title" placeholder="Node title">
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class="hidden-xs" for="display-date">Display Date</label>
+    <div class="input-group date">
+      <div class="input-group-addon"><i class="fa fa-fw fa-calendar"></i></div>
+      <input type="text" class="form-control" id="display-date" placeholder="Date to show online (defaults to create date)" ng-model="node.display_date">
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="type">Content Type</label>
+    <select class="form-control" ng-model="node.type" id="type">
+      <option data-icon="fa file-newspaper-o" value="article" ng-selected="node.type == 'article'">Article</option>
+      <option data-icon="fa file-text" value="guide" ng-selected="node.type == 'guide'">Guide</option>
+      <option data-icon="fa file-text-o" value="wiki" ng-selected="node.type == 'wiki'">Wiki</option>
+    </select>
+  </div>
+
+  <div class="form-group" id="node-tags">
+    <p><strong>Node tags</strong></p>
+    <div class="row">
+      <div class="col-sm-4">
+        <div class="form-group"><input type="text"
+               id="node-tag"
+               class="form-control"
+               ng-model="tag"
+               data-animation="am-flip-x"
+               bs-options="tag.title as tag.title for tag in getTags($viewValue)"
+               placeholder="Add a tag.."
+               bs-typeahead /></div>
+        {#<button type="button" class="btn btn-xs btn-success" ng-click="createTag(tag)"><i class="fa fa-fw fa-plus-circle"></i> Create new tag</button>#}
+      </div>
+      <div class="col-sm-8">
+        <div class="alert alert-warning small" ng-if="!node.node_tags.length"><i class="fa fa-fw fa-tag"></i> There are no tags associated with this node yet.</div>
+        <div class="tag btn btn-xs btn-default" ng-repeat="tag in node.node_tags" data-tooltip="{[tag.body]}" ng-click="removeTag(tag)" ng-model="tag.title">
+          <i class="fa fa-minus-circle text-danger"></i> {[tag.title]}
+        </div>
+      </div>
+    </div>
+    <hr />
+  </div>
+
+  <div class="form-group">
+    <div text-angular ng-model="node.body"></div>
+  </div>
+
+  <hr />
+  <button class="btn btn-danger" type="button" ng-click="toggleEdit()"><i class="fa fa-fw fa-close"></i> Cancel</button>
+  <button class="btn btn-success" type="button" ng-click="saveNode(node)"><i class="fa fa-fw fa-check"></i> Save</button>
+
+</form>
+<!-- end node form -->

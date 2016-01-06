@@ -1,0 +1,48 @@
+{% extends 'TavroAppBundle:Layouts:app.html.twig' %}
+
+{% block header %}
+<div class="page-header">
+  <h1><i class="ra ra-repair"></i> Mods</h1>
+</div>
+{% endblock %}
+
+{% block content -%}
+
+  <div id="mods" ng-controller="ModController as mCtrl">
+    <section ng-init="initializeModIndex()">
+
+    <div ng-show="modsLoading" class="text-primary" style="line-height: 180px;">
+      <h1 class="text-center"><i class="fa fa-fw fa-refresh fa-spin fa-5x"></i><br />Mods loading...</h1>
+    </div>
+
+    <div class="row" ng-if="!modsLoading">
+
+      <div ng-repeat="(category_id,data) in modIndex" class="mod-category-tile col-lg-4">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <a href="/mods/categories/{[data.category.slug]}"><strong><i class="{[data.category.icon]}"></i> {[data.category.title]}</strong></a>
+          </div>
+          <div class="panel-body" ng-if="!data.mods.length">
+            <p class="small">There are no {[category]} mods.</p>
+          </div>
+          <div class="small list-group" ng-if="data.mods.length">
+            <a ng-repeat="mod in data.mods" class="list-group-item" href="/mods/{[mod.slug]}">{[mod.title | limitTo:26]}
+              <span ng-if="mod.title.length > 26">...</span> <span class="pull-right">{[mod.downloads]}</span></a>
+            <a class="list-group-item text-right" href="/mods/categories/{[data.category.slug]}">List All ({[data.category.mod_count]}) <i class="fa fa-fw fa-arrow-circle-right"></i> </a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    </section>
+  </div>
+{% endblock %}
+
+{% block sidebar %}
+  {% include 'TavroAppBundle:Mod:sidebar.html.twig' %}
+{% endblock %}
+
+{% block js %}
+
+{% endblock %}

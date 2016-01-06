@@ -1,0 +1,15 @@
+{% extends 'TavroAppBundle:Layouts:admin.html.twig' %}
+
+{% block content -%}
+    <h1>Variable creation</h1>
+
+    {{ form(form) }}
+
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('variable_list') }}">
+            Back to the list
+        </a>
+    </li>
+</ul>
+{% endblock %}

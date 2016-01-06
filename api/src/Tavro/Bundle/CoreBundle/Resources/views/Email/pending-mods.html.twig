@@ -1,0 +1,21 @@
+{% extends 'TavroAppBundle:Layouts:email.html.twig' %}
+
+{% block email %}
+
+  {% if mods|length > 0 %}
+
+    <p>There are {{ mods|length }} pending mod(s): {{ url('admin_mods') }}</p>
+
+    <ol>
+    {% for mod in mods %}
+      <li>{{ url('mod_view', {'slug':mod.slug}) }}</li>
+    {% endfor %}
+    </ol>
+
+  {% else %}
+
+    <p>There are no pending Mods to review. All quiet on the UI mod front..</p>
+
+  {% endif %}
+
+{% endblock %}

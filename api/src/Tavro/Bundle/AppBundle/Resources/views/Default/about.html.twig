@@ -1,0 +1,56 @@
+{% extends '::base.html.twig' %}
+{% block body_classes %}about-page{% endblock %}
+{% block header %}
+<div class="page-header">
+  <h1>Tavro Hub</h1>
+</div>
+{% endblock %}
+{% block body %}
+
+  <div class="row">
+
+    <div class="col-lg-4">
+
+      <div class="panel panel-info">
+        <div class="panel-body">
+          <p class="lead">What Is Tavro?</p>
+          <p>This project was created as a means to support the gaming community for <a href="http://http://citystateentertainment.com" target="_blank">City State Entertainment</a>; specifically for <a href="http://tavrounchained.com" target="_blank">Tavro Unchained</a>.</p>
+          <p>Tavro is an open-source project supported by a community of developers and designers.</p>
+        </div>
+      </div>
+      <div class="panel panel-success">
+        <div class="panel-body">
+          <p class="lead"><i class="fa fa-fw fa-dollar"></i> Donations</p>
+          <p>We are an open source project so the maintenance and expense of maintaining the website relies exclusively on the contributions from donors. All contributions go exclusively to the maintenance and expense associated with running this website. This includes costs for Amazon Web Services, software licenses, security certificates, and more.</p>
+          <p><a href="https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=jake%2elitwicki%40gmail%2ecom&lc=US&item_name=Tavro%20%28tavro%2ecom%29&no_note=1&no_shipping=1&rm=1&return=http%3a%2f%2ftavro%2ecom%2fthanks&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted" target="_blank"><i class="fa fa-fw fa-paypal"></i> Show your support</a></p>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-4">
+      <div class="panel panel-primary">
+        <div class="panel-body">
+          <p class="lead">Why Did We Build This?</p>
+          <p>We built Tavro for two reasons. Primarily because we are nerds, and Thezdin specifically has been an avid supported of Mark Jacobs' games since Dark Age of Tavro. However, mostly because this is fun, and we love Tavro Unchained and want to help it succeed. We have no intentions to turn Tavro into a profiteering website but will do what we can to break even.</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-4">
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <p class="lead"><i class="fa fa-fw fa-car"></i> Roadmap</p>
+          <p>Our development roadmap for continuous updates and improvements to the Tavro platform.</p>
+          <p><a href="https://bitbucket.org/zoadilack/tavro/wiki/Roadmap" target="_blank"><i class="fa fa-fw fa-external-link-square"></i> Roadmap</a></p>
+        </div>
+      </div>
+      <div class="panel panel-warning">
+        <div class="panel-body">
+          <p class="lead"><i class="fa fa-fw fa-heart"></i> Contributing</p>
+          <p>As an open source project we welcome any developer with any skillset to contribute their time and efforts to improving the website. We follow a (mostly) traditional agile process (git workflow) run and managed by the creators.</p>
+          <p class="text-info">If you are comfortable with any open-source web technology, Adobe Air, or AWS we would love to have your continued support.</p>
+          <p><a href="mailto:dev@zoadilack.com?Contribute to Tavro!"><i class="fa fa-fw fa-external-link-square"></i> Offer your help!</a></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+{% endblock %}

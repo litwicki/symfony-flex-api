@@ -1,0 +1,113 @@
+<?php
+
+namespace CamelotMods\Bundle\CoreBundle\Entity;
+
+use Doctrine\ORM\Mapping AS ORM;
+
+use JMS\Serializer\Annotation\Accessor;
+use JMS\Serializer\Annotation\ExclusionPolicy;
+use JMS\Serializer\Annotation\Expose;
+use JMS\Serializer\Annotation\Type;
+use JMS\Serializer\Annotation\VirtualProperty;
+use Doctrine\ORM\Mapping\Table;
+
+use CamelotMods\Bundle\CoreBundle\Model\Entity;
+use CamelotMods\Bundle\CoreBundle\Model\EntityInterface;
+
+/**
+ * @ORM\Entity
+ * @ORM\HasLifecycleCallbacks
+ * @Table(name="camelot_ability")
+ * @ExclusionPolicy("all")
+ */
+class Ability extends Entity implements EntityInterface
+{
+
+    /**
+     * @ORM\Column(type="string", length=500, nullable=true)
+     * @Expose
+     */
+    protected $title;
+
+    /**
+     * @ORM\Column(type="string", length=8000, nullable=true)
+     * @Expose
+     */
+    protected $body;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="CamelotMods\Bundle\CoreBundle\Entity\CamelotClass", inversedBy="abilities")
+     * @ORM\JoinColumn(name="class_id", referencedColumnName="id")
+     * @Expose
+     */
+    protected $class;
+
+    /**
+     * Set title
+     *
+     * @param string $title
+     * @return Ability
+     */
+    public function setTitle($title)
+    {
+        $this->title = $title;
+
+        return $this;
+    }
+
+    /**
+     * Get title
+     *
+     * @return string 
+     */
+    public function getTitle()
+    {
+        return $this->title;
+    }
+
+    /**
+     * Set body
+     *
+     * @param string $body
+     * @return Ability
+     */
+    public function setBody($body)
+    {
+        $this->body = $body;
+
+        return $this;
+    }
+
+    /**
+     * Get body
+     *
+     * @return string 
+     */
+    public function getBody()
+    {
+        return $this->body;
+    }
+
+    /**
+     * Set class
+     *
+     * @param \CamelotMods\Bundle\CoreBundle\Entity\CamelotClass $class
+     * @return Ability
+     */
+    public function setClass(\CamelotMods\Bundle\CoreBundle\Entity\CamelotClass $class = null)
+    {
+        $this->class = $class;
+
+        return $this;
+    }
+
+    /**
+     * Get class
+     *
+     * @return \CamelotMods\Bundle\CoreBundle\Entity\CamelotClass 
+     */
+    public function getClass()
+    {
+        return $this->class;
+    }
+}
