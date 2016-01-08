@@ -1,34 +1,38 @@
 <?php
 
-namespace CamelotMods\Bundle\CoreBundle\Entity;
+namespace Tavro\Bundle\CoreBundle\Entity;
 
 use Doctrine\ORM\Mapping AS ORM;
 
 use Symfony\Component\Security\Core\Role\RoleInterface;
-use CamelotMods\Bundle\CoreBundle\Model\EntityInterface;
-use CamelotMods\Bundle\CoreBundle\Model\Entity;
+use Tavro\Bundle\CoreBundle\Model\EntityInterface;
+use Tavro\Bundle\CoreBundle\Model\Entity;
 
 use JMS\Serializer\Annotation\Accessor;
 use JMS\Serializer\Annotation\ExclusionPolicy;
 use JMS\Serializer\Annotation\Expose;
 use JMS\Serializer\Annotation\Type;
 use JMS\Serializer\Annotation\VirtualProperty;
+use JMS\Serializer\Annotation\Groups;
 use Doctrine\ORM\Mapping\Table;
 
 /**
  * @ORM\Entity
- * @Table(name="camelot_role")
+ * @Table(name="tavro_role")
+ *
  */
 class Role extends Entity implements RoleInterface, EntityInterface, \Serializable
 {
 
     /**
      * @ORM\Column(type="string", unique=true, nullable=true)
+     * @Groups({"api", "tavro", "summary"})
      */
     protected $name;
 
     /**
      * @ORM\Column(type="string", unique=true, nullable=true)
+     * @Groups({"api", "tavro", "summary"})
      */
     protected $role;
 
@@ -102,10 +106,10 @@ class Role extends Entity implements RoleInterface, EntityInterface, \Serializab
     /**
      * Add user
      *
-     * @param \CamelotMods\Bundle\CoreBundle\Entity\User $user
+     * @param \Tavro\Bundle\CoreBundle\Entity\User $user
      * @return Role
      */
-    public function addUser(\CamelotMods\Bundle\CoreBundle\Entity\User $user)
+    public function addUser(\Tavro\Bundle\CoreBundle\Entity\User $user)
     {
         $this->users[] = $user;
 
@@ -115,9 +119,9 @@ class Role extends Entity implements RoleInterface, EntityInterface, \Serializab
     /**
      * Remove user
      *
-     * @param \CamelotMods\Bundle\CoreBundle\Entity\User $user
+     * @param \Tavro\Bundle\CoreBundle\Entity\User $user
      */
-    public function removeUser(\CamelotMods\Bundle\CoreBundle\Entity\User $user)
+    public function removeUser(\Tavro\Bundle\CoreBundle\Entity\User $user)
     {
         $this->users->removeElement($user);
     }

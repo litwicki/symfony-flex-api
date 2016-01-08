@@ -140,4 +140,62 @@ class Funding extends ApiEntity
         return $this->organization;
     }
 
+
+    /**
+     * Set name
+     *
+     * @param string $name
+     *
+     * @return Funding
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    /**
+     * Get name
+     *
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * Add shareholder
+     *
+     * @param \Tavro\Bundle\CoreBundle\Entity\Shareholder $shareholder
+     *
+     * @return Funding
+     */
+    public function addShareholder(\Tavro\Bundle\CoreBundle\Entity\Shareholder $shareholder)
+    {
+        $this->shareholders[] = $shareholder;
+
+        return $this;
+    }
+
+    /**
+     * Remove shareholder
+     *
+     * @param \Tavro\Bundle\CoreBundle\Entity\Shareholder $shareholder
+     */
+    public function removeShareholder(\Tavro\Bundle\CoreBundle\Entity\Shareholder $shareholder)
+    {
+        $this->shareholders->removeElement($shareholder);
+    }
+
+    /**
+     * Get shareholders
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getShareholders()
+    {
+        return $this->shareholders;
+    }
 }

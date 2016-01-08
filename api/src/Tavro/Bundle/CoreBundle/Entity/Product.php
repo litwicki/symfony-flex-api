@@ -141,4 +141,28 @@ class Product extends ApiEntity
         return $this->organization;
     }
 
+
+    /**
+     * Set category
+     *
+     * @param \Tavro\Bundle\CoreBundle\Entity\ProductCategory $category
+     *
+     * @return Product
+     */
+    public function setCategory(\Tavro\Bundle\CoreBundle\Entity\ProductCategory $category)
+    {
+        $this->category = $category;
+
+        return $this;
+    }
+
+    /**
+     * Get category
+     *
+     * @return \Tavro\Bundle\CoreBundle\Entity\ProductCategory
+     */
+    public function getCategory()
+    {
+        return $this->category;
+    }
 }

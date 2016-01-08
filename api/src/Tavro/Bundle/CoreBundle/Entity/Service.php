@@ -141,4 +141,28 @@ class Service extends ApiEntity
         return $this->organization;
     }
 
+
+    /**
+     * Set category
+     *
+     * @param \Tavro\Bundle\CoreBundle\Entity\ServiceCategory $category
+     *
+     * @return Service
+     */
+    public function setCategory(\Tavro\Bundle\CoreBundle\Entity\ServiceCategory $category)
+    {
+        $this->category = $category;
+
+        return $this;
+    }
+
+    /**
+     * Get category
+     *
+     * @return \Tavro\Bundle\CoreBundle\Entity\ServiceCategory
+     */
+    public function getCategory()
+    {
+        return $this->category;
+    }
 }

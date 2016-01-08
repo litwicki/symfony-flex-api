@@ -8,6 +8,7 @@ use JMS\Serializer\Annotation\ExclusionPolicy;
 use JMS\Serializer\Annotation\Expose;
 use JMS\Serializer\Annotation\Type;
 use JMS\Serializer\Annotation\VirtualProperty;
+use JMS\Serializer\Annotation\MaxDepth;
 use JMS\Serializer\Annotation\Groups;
 use Doctrine\ORM\Mapping\Table;
 

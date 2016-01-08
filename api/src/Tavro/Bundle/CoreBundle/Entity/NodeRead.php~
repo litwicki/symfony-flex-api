@@ -1,6 +1,6 @@
 <?php
 
-namespace CamelotMods\Bundle\CoreBundle\Entity;
+namespace Tavro\Bundle\CoreBundle\Entity;
 
 use Doctrine\ORM\Mapping AS ORM;
 
@@ -9,37 +9,38 @@ use JMS\Serializer\Annotation\ExclusionPolicy;
 use JMS\Serializer\Annotation\Expose;
 use JMS\Serializer\Annotation\Type;
 use JMS\Serializer\Annotation\VirtualProperty;
+use JMS\Serializer\Annotation\Groups;
 use Doctrine\ORM\Mapping\Table;
 
-use CamelotMods\Bundle\CoreBundle\Model\Entity;
-use CamelotMods\Bundle\CoreBundle\Model\EntityInterface;
+use Tavro\Bundle\CoreBundle\Model\Entity;
+use Tavro\Bundle\CoreBundle\Model\EntityInterface;
 
 /**
  * @ORM\Entity
- * @ORM\Table(name="camelot_node_read", indexes={@ORM\Index(name="USER_NODE_READ", columns={"user_id","node_id"})})
+ * @ORM\Table(name="tavro_node_read", indexes={@ORM\Index(name="USER_NODE_READ", columns={"user_id","node_id"})})
  */
-class NodeRead extends Entity implements EntityInterface
+class NodeRead extends Entity
 {
 
     /**
-     * @ORM\ManyToOne(targetEntity="CamelotMods\Bundle\CoreBundle\Entity\User", inversedBy="nodes_read")
+     * @ORM\ManyToOne(targetEntity="Tavro\Bundle\CoreBundle\Entity\User", inversedBy="nodes_read")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id", nullable=false)
      */
-    private $user;
+    protected $user;
 
     /**
-     * @ORM\ManyToOne(targetEntity="CamelotMods\Bundle\CoreBundle\Entity\Node", inversedBy="nodes_read",)
+     * @ORM\ManyToOne(targetEntity="Tavro\Bundle\CoreBundle\Entity\Node", inversedBy="nodes_read",)
      * @ORM\JoinColumn(name="node_id", referencedColumnName="id", nullable=false)
      */
-    private $node;
+    protected $node;
 
     /**
      * Set user
      *
-     * @param \CamelotMods\Bundle\CoreBundle\Entity\User $user
+     * @param \Tavro\Bundle\CoreBundle\Entity\User $user
      * @return nodeRead
      */
-    public function setUser(\CamelotMods\Bundle\CoreBundle\Entity\User $user)
+    public function setUser(\Tavro\Bundle\CoreBundle\Entity\User $user)
     {
         $this->user = $user;
 
@@ -49,7 +50,7 @@ class NodeRead extends Entity implements EntityInterface
     /**
      * Get user
      *
-     * @return \CamelotMods\Bundle\CoreBundle\Entity\User
+     * @return \Tavro\Bundle\CoreBundle\Entity\User
      */
     public function getUser()
     {
@@ -59,10 +60,10 @@ class NodeRead extends Entity implements EntityInterface
     /**
      * Set node
      *
-     * @param \CamelotMods\Bundle\CoreBundle\Entity\node $node
+     * @param \Tavro\Bundle\CoreBundle\Entity\node $node
      * @return nodeRead
      */
-    public function setNode(\CamelotMods\Bundle\CoreBundle\Entity\Node $node)
+    public function setNode(\Tavro\Bundle\CoreBundle\Entity\Node $node)
     {
         $this->node = $node;
 
@@ -72,7 +73,7 @@ class NodeRead extends Entity implements EntityInterface
     /**
      * Get node
      *
-     * @return \CamelotMods\Bundle\CoreBundle\Entity\Node
+     * @return \Tavro\Bundle\CoreBundle\Entity\Node
      */
     public function getNode()
     {

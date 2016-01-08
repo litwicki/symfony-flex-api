@@ -94,4 +94,72 @@ class Tag extends ApiEntity
         return $this->body;
     }
 
+
+    /**
+     * Add nodeTag
+     *
+     * @param \Tavro\Bundle\CoreBundle\Entity\NodeTag $nodeTag
+     *
+     * @return Tag
+     */
+    public function addNodeTag(\Tavro\Bundle\CoreBundle\Entity\NodeTag $nodeTag)
+    {
+        $this->node_tags[] = $nodeTag;
+
+        return $this;
+    }
+
+    /**
+     * Remove nodeTag
+     *
+     * @param \Tavro\Bundle\CoreBundle\Entity\NodeTag $nodeTag
+     */
+    public function removeNodeTag(\Tavro\Bundle\CoreBundle\Entity\NodeTag $nodeTag)
+    {
+        $this->node_tags->removeElement($nodeTag);
+    }
+
+    /**
+     * Get nodeTags
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getNodeTags()
+    {
+        return $this->node_tags;
+    }
+
+    /**
+     * Add expenseTag
+     *
+     * @param \Tavro\Bundle\CoreBundle\Entity\ExpenseTag $expenseTag
+     *
+     * @return Tag
+     */
+    public function addExpenseTag(\Tavro\Bundle\CoreBundle\Entity\ExpenseTag $expenseTag)
+    {
+        $this->expense_tags[] = $expenseTag;
+
+        return $this;
+    }
+
+    /**
+     * Remove expenseTag
+     *
+     * @param \Tavro\Bundle\CoreBundle\Entity\ExpenseTag $expenseTag
+     */
+    public function removeExpenseTag(\Tavro\Bundle\CoreBundle\Entity\ExpenseTag $expenseTag)
+    {
+        $this->expense_tags->removeElement($expenseTag);
+    }
+
+    /**
+     * Get expenseTags
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getExpenseTags()
+    {
+        return $this->expense_tags;
+    }
 }

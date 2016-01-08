@@ -1,6 +1,6 @@
 <?php
 
-namespace Camelot\Bundle\CoreBundle\Entity;
+namespace Tavro\Bundle\CoreBundle\Entity;
 
 use Doctrine\ORM\Mapping AS ORM;
 
@@ -9,96 +9,92 @@ use JMS\Serializer\Annotation\ExclusionPolicy;
 use JMS\Serializer\Annotation\Expose;
 use JMS\Serializer\Annotation\Type;
 use JMS\Serializer\Annotation\VirtualProperty;
+use JMS\Serializer\Annotation\Groups;
 use Doctrine\ORM\Mapping\Table;
 
-use Camelot\Bundle\CoreBundle\Model\Entity;
-use Camelot\Bundle\CoreBundle\Model\EntityInterface;
+use Tavro\Bundle\CoreBundle\Model\Entity;
+use Tavro\Bundle\CoreBundle\Model\EntityInterface;
+use Tavro\Bundle\CoreBundle\Model\S3EntityInterface;
 
 /**
  * @ORM\Entity
  * @ORM\HasLifecycleCallbacks
- * @Table(name="camelot_file")
+ * @Table(name="tavro_file")
  *
- * @ExclusionPolicy("all")
+ *
  */
-class File extends Entity implements EntityInterface
+class File extends Entity implements S3EntityInterface
 {
 
     /**
      * @ORM\Column(type="string", length=500, nullable=false)
-     * @Expose
+     * @Groups({"api", "tavro", "summary"})
      */
-    protected $path;
+    protected $aws_url;
 
     /**
-     * @ORM\Column(type="string", length=500, nullable=false)
-     * @Expose
+     * @ORM\Column(type="string", length=32, nullable=false)
+     * @Groups({"api", "tavro", "summary"})
      */
     protected $bucket;
 
     /**
      * @ORM\Column(type="string", length=500, nullable=false)
-     * @Expose
+     * @Groups({"api", "tavro", "summary"})
      */
-    protected $key;
+    protected $aws_key;
 
     /**
      * @ORM\Column(type="string", length=500, nullable=false)
-     * @Expose
+     * @Groups({"api", "tavro", "summary"})
      */
     protected $original_filename;
 
     /**
      * @ORM\Column(type="string", length=500, nullable=false)
-     * @Expose
+     * @Groups({"api", "tavro", "summary"})
      */
     protected $mime_type;
 
     /**
      * @ORM\Column(type="integer", nullable=false)
-     * @Expose
+     * @Groups({"api", "tavro", "summary"})
      */
     protected $filesize;
 
     /**
      * @ORM\Column(type="integer", nullable=false)
-     * @Expose
+     * @Groups({"api", "tavro", "summary"})
      */
-    protected $version;
+    protected $downloads = 0;
 
     /**
-     * @ORM\Column(type="integer", nullable=false)
-     * @Expose
-     */
-    protected $downloads;
-
-    /**
-     * @ORM\OneToOne(targetEntity="Camelot\Bundle\CoreBundle\Entity\Mod", inversedBy="file")
+     * @ORM\OneToOne(targetEntity="Tavro\Bundle\CoreBundle\Entity\Mod", inversedBy="file")
      * @ORM\JoinColumn(name="mod_id", referencedColumnName="id")
      */
-    private $mod;
+    protected $mod;
 
     /**
-     * Set path
+     * Set aws_url
      *
-     * @param string $path
-     * @return File
+     * @param string $aws_url
+     * @return Image
      */
-    public function setPath($path)
+    public function setPath($aws_url)
     {
-        $this->path = $path;
+        $this->aws_url = $aws_url;
 
         return $this;
     }
 
     /**
-     * Get path
+     * Get aws_url
      *
-     * @return string 
+     * @return string
      */
     public function getPath()
     {
-        return $this->path;
+        return $this->aws_url;
     }
 
     /**
@@ -171,29 +167,6 @@ class File extends Entity implements EntityInterface
     }
 
     /**
-     * Set version
-     *
-     * @param integer $version
-     * @return File
-     */
-    public function setVersion($version)
-    {
-        $this->version = $version;
-
-        return $this;
-    }
-
-    /**
-     * Get version
-     *
-     * @return integer 
-     */
-    public function getVersion()
-    {
-        return $this->version;
-    }
-
-    /**
      * Set downloads
      *
      * @param integer $downloads
@@ -217,9 +190,22 @@ class File extends Entity implements EntityInterface
     }
 
     /**
+     * Set mod
+     *
+     * @param \Tavro\Bundle\CoreBundle\Entity\Mod $mod
+     *
+     * @return File
+     */
+    public function setMod(\Tavro\Bundle\CoreBundle\Entity\Mod $mod)
+    {
+        $this->mod = $mod;
+        return $this;
+    }
+
+    /**
      * Get mod
      *
-     * @return \Camelot\Bundle\CoreBundle\Entity\Mod
+     * @return \Tavro\Bundle\CoreBundle\Entity\Mod
      */
     public function getMod()
     {
@@ -252,12 +238,12 @@ class File extends Entity implements EntityInterface
     /**
      * Set key
      *
-     * @param string $key
+     * @param string $aws_key
      * @return File
      */
-    public function setKey($key)
+    public function setAwsKey($aws_key)
     {
-        $this->key = $key;
+        $this->aws_key = $aws_key;
 
         return $this;
     }
@@ -267,9 +253,32 @@ class File extends Entity implements EntityInterface
      *
      * @return string 
      */
-    public function getKey()
+    public function getAwsKey()
     {
-        return $this->key;
+        return $this->aws_key;
+    }
+
+    /**
+     * Set aws_url
+     *
+     * @param string $aws_url
+     * @return File
+     */
+    public function setAwsUrl($aws_url)
+    {
+        $this->aws_url = $aws_url;
+
+        return $this;
+    }
+
+    /**
+     * Get aws_url
+     *
+     * @return string
+     */
+    public function getAwsUrl()
+    {
+        return $this->aws_url;
     }
 
 }

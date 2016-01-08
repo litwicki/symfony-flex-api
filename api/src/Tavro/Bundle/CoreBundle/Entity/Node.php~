@@ -1,7 +1,7 @@
 <?php
-namespace Camelot\Bundle\CoreBundle\Entity;
+namespace Tavro\Bundle\CoreBundle\Entity;
 
-use Camelot\Bundle\CoreBundle\Model\ApiEntityInterface;
+use Tavro\Bundle\CoreBundle\Model\ApiEntityInterface;
 use Doctrine\ORM\Mapping AS ORM;
 
 use JMS\Serializer\Annotation\Accessor;
@@ -15,13 +15,13 @@ use JMS\Serializer\Annotation\SerializedName;
 use Doctrine\ORM\Mapping\Table;
 use Symfony\Component\Validator\Constraints as Assert;
 
-use Camelot\Bundle\CoreBundle\Model\ApiEntity;
-use Camelot\Bundle\CoreBundle\Model\EntityInterface;
+use Tavro\Bundle\CoreBundle\Model\ApiEntity;
+use Tavro\Bundle\CoreBundle\Model\EntityInterface;
 
 /**
  * @ORM\Entity
  * @ORM\HasLifecycleCallbacks
- * @ORM\Table(name="camelot_node", indexes={@ORM\Index(name="NODE_TYPE", columns={"type"})})
+ * @ORM\Table(name="tavro_node", indexes={@ORM\Index(name="NODE_TYPE", columns={"type"})})
  *
  */
 class Node extends ApiEntity
@@ -33,55 +33,64 @@ class Node extends ApiEntity
      *      choices = { "guide", "node", "page", "article", "wiki"},
      *      message = "Choose a valid node type."
      * )
-     * @Groups({"api", "camelot", "summary"})
+     * @Groups({"api", "tavro", "summary"})
      */
     protected $type;
 
     /**
      * @ORM\Column(type="string", length=500, nullable=false)
-     * @Groups({"api", "camelot", "summary"})
+     * @Groups({"api", "tavro", "summary"})
      */
     protected $title;
 
     /**
      * @ORM\Column(type="string", length=8000, nullable=true)
-     * @Groups({"api", "camelot", "summary"})
+     * @Groups({"api", "tavro", "summary"})
      */
     protected $body;
 
     /**
      * @ORM\Column(type="datetime", length=1000, nullable=true)
+     * @Groups({"api", "tavro", "summary"})
      */
     protected $display_date;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
-     * @Groups({"api", "camelot", "summary"})
+     * @ORM\Column(type="integer", nullable=true, options={"default" = 0})
+     * @Groups({"api", "tavro", "summary"})
      */
     protected $views;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Camelot\Bundle\CoreBundle\Entity\User", inversedBy="nodes")
+     * @ORM\ManyToOne(targetEntity="Tavro\Bundle\CoreBundle\Entity\User", inversedBy="nodes")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id", nullable=false)
-     * @Groups({"api", "camelot", "summary"})
+     * @Groups({"api", "tavro", "summary"})
      * @MaxDepth(3)
      */
     protected $user;
 
     /**
-     * @ORM\OneToMany(targetEntity="Camelot\Bundle\CoreBundle\Entity\NodeComment", mappedBy="node", cascade={"remove"})
+     * @ORM\OneToMany(targetEntity="Tavro\Bundle\CoreBundle\Entity\NodeComment", mappedBy="node", cascade={"remove"})
      */
     protected $node_comments;
 
     /**
-     * @ORM\OneToMany(targetEntity="Camelot\Bundle\CoreBundle\Entity\NodeTag", mappedBy="node", cascade={"remove"})
+     * @ORM\OneToMany(targetEntity="Tavro\Bundle\CoreBundle\Entity\NodeTag", mappedBy="node", cascade={"remove"})
      */
     protected $node_tags;
 
     /**
-     * @ORM\OneToMany(targetEntity="Camelot\Bundle\CoreBundle\Entity\NodeRead", mappedBy="node", cascade={"remove"})
+     * @ORM\OneToMany(targetEntity="Tavro\Bundle\CoreBundle\Entity\NodeRead", mappedBy="node", cascade={"remove"})
      */
     protected $nodes_read;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Tavro\Bundle\CoreBundle\Entity\Organization", inversedBy="nodes")
+     * @ORM\JoinColumn(name="organization_id", referencedColumnName="id", nullable=false)
+     * @Groups({"api", "tavro", "summary"})
+     * @MaxDepth(3)
+     */
+    protected $organization;
 
     /**
      * Constructor
@@ -178,10 +187,10 @@ class Node extends ApiEntity
     /**
      * Set user
      *
-     * @param \Camelot\Bundle\CoreBundle\Entity\User $user
+     * @param \Tavro\Bundle\CoreBundle\Entity\User $user
      * @return Node
      */
-    public function setUser(\Camelot\Bundle\CoreBundle\Entity\User $user)
+    public function setUser(\Tavro\Bundle\CoreBundle\Entity\User $user)
     {
         $this->user = $user;
 
@@ -191,11 +200,34 @@ class Node extends ApiEntity
     /**
      * Get user
      *
-     * @return \Camelot\Bundle\CoreBundle\Entity\User
+     * @return \Tavro\Bundle\CoreBundle\Entity\User
      */
     public function getUser()
     {
         return $this->user;
+    }
+
+    /**
+     * Set organization
+     *
+     * @param \Tavro\Bundle\CoreBundle\Entity\Organization $organization
+     * @return Node
+     */
+    public function setOrganization(\Tavro\Bundle\CoreBundle\Entity\Organization $organization)
+    {
+        $this->organization = $organization;
+
+        return $this;
+    }
+
+    /**
+     * Get organization
+     *
+     * @return \Tavro\Bundle\CoreBundle\Entity\Organization
+     */
+    public function getOrganization()
+    {
+        return $this->organization;
     }
 
     /**
@@ -224,10 +256,10 @@ class Node extends ApiEntity
     /**
      * Add images
      *
-     * @param \Camelot\Bundle\CoreBundle\Entity\Node $images
+     * @param \Tavro\Bundle\CoreBundle\Entity\Node $images
      * @return Node
      */
-    public function addImage(\Camelot\Bundle\CoreBundle\Entity\Node $images)
+    public function addImage(\Tavro\Bundle\CoreBundle\Entity\Node $images)
     {
         $this->images[] = $images;
 
@@ -237,9 +269,9 @@ class Node extends ApiEntity
     /**
      * Remove images
      *
-     * @param \Camelot\Bundle\CoreBundle\Entity\Node $images
+     * @param \Tavro\Bundle\CoreBundle\Entity\Node $images
      */
-    public function removeImage(\Camelot\Bundle\CoreBundle\Entity\Node $images)
+    public function removeImage(\Tavro\Bundle\CoreBundle\Entity\Node $images)
     {
         $this->images->removeElement($images);
     }
@@ -258,10 +290,10 @@ class Node extends ApiEntity
     /**
      * Add node_comments
      *
-     * @param \Camelot\Bundle\CoreBundle\Entity\NodeComment $nodeComments
+     * @param \Tavro\Bundle\CoreBundle\Entity\NodeComment $nodeComments
      * @return Node
      */
-    public function addNodeComment(\Camelot\Bundle\CoreBundle\Entity\NodeComment $nodeComments)
+    public function addNodeComment(\Tavro\Bundle\CoreBundle\Entity\NodeComment $nodeComments)
     {
         $this->node_comments[] = $nodeComments;
 
@@ -271,9 +303,9 @@ class Node extends ApiEntity
     /**
      * Remove node_comments
      *
-     * @param \Camelot\Bundle\CoreBundle\Entity\NodeComment $nodeComments
+     * @param \Tavro\Bundle\CoreBundle\Entity\NodeComment $nodeComments
      */
-    public function removeNodeComment(\Camelot\Bundle\CoreBundle\Entity\NodeComment $nodeComments)
+    public function removeNodeComment(\Tavro\Bundle\CoreBundle\Entity\NodeComment $nodeComments)
     {
         $this->node_comments->removeElement($nodeComments);
     }
@@ -291,10 +323,10 @@ class Node extends ApiEntity
     /**
      * Add nodes_read
      *
-     * @param \Camelot\Bundle\CoreBundle\Entity\NodeRead $nodesRead
+     * @param \Tavro\Bundle\CoreBundle\Entity\NodeRead $nodesRead
      * @return Node
      */
-    public function addNodesRead(\Camelot\Bundle\CoreBundle\Entity\NodeRead $nodesRead)
+    public function addNodesRead(\Tavro\Bundle\CoreBundle\Entity\NodeRead $nodesRead)
     {
         $this->nodes_read[] = $nodesRead;
 
@@ -304,9 +336,9 @@ class Node extends ApiEntity
     /**
      * Remove nodes_read
      *
-     * @param \Camelot\Bundle\CoreBundle\Entity\NodeRead $nodesRead
+     * @param \Tavro\Bundle\CoreBundle\Entity\NodeRead $nodesRead
      */
-    public function removeNodesRead(\Camelot\Bundle\CoreBundle\Entity\NodeRead $nodesRead)
+    public function removeNodesRead(\Tavro\Bundle\CoreBundle\Entity\NodeRead $nodesRead)
     {
         $this->nodes_read->removeElement($nodesRead);
     }
@@ -347,7 +379,7 @@ class Node extends ApiEntity
     /**
      * @VirtualProperty
      * @SerializedName("node_comments")
-     * @Groups({"api", "camelot","detail"})
+     * @Groups({"api", "tavro","detail"})
      * @MaxDepth(2)
      */
     public function getComments()
@@ -362,7 +394,7 @@ class Node extends ApiEntity
     /**
      * @VirtualProperty
      * @SerializedName("read_count")
-     * @Groups({"api", "camelot", "summary"})
+     * @Groups({"api", "tavro", "summary"})
      * @return int
      */
     public function getReadCount()
@@ -373,7 +405,7 @@ class Node extends ApiEntity
     /**
      * @VirtualProperty
      * @SerializedName("comment_count")
-     * @Groups({"api", "camelot", "summary"})
+     * @Groups({"api", "tavro", "summary"})
      * @return int
      */
     public function getCommentCount()
@@ -384,7 +416,7 @@ class Node extends ApiEntity
     /**
      * @VirtualProperty
      * @SerializedName("node_tags")
-     * @Groups({"api", "camelot","detail"})
+     * @Groups({"api", "tavro","detail"})
      * @MaxDepth(2)
      */
     public function getTags()
@@ -399,10 +431,10 @@ class Node extends ApiEntity
     /**
      * Add node_tags
      *
-     * @param \Camelot\Bundle\CoreBundle\Entity\NodeTag $nodeTags
+     * @param \Tavro\Bundle\CoreBundle\Entity\NodeTag $nodeTags
      * @return Node
      */
-    public function addNodeTag(\Camelot\Bundle\CoreBundle\Entity\NodeTag $nodeTags)
+    public function addNodeTag(\Tavro\Bundle\CoreBundle\Entity\NodeTag $nodeTags)
     {
         $this->node_tags[] = $nodeTags;
 
@@ -412,9 +444,9 @@ class Node extends ApiEntity
     /**
      * Remove node_tags
      *
-     * @param \Camelot\Bundle\CoreBundle\Entity\NodeTag $nodeTags
+     * @param \Tavro\Bundle\CoreBundle\Entity\NodeTag $nodeTags
      */
-    public function removeNodeTag(\Camelot\Bundle\CoreBundle\Entity\NodeTag $nodeTags)
+    public function removeNodeTag(\Tavro\Bundle\CoreBundle\Entity\NodeTag $nodeTags)
     {
         $this->node_tags->removeElement($nodeTags);
     }

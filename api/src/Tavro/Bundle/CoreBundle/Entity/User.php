@@ -1041,4 +1041,52 @@ class User extends Entity implements UserInterface, \Serializable
     {
         return $this->avatar;
     }
+
+    /**
+     * Add organization
+     *
+     * @param \Tavro\Bundle\CoreBundle\Entity\Organization $organization
+     *
+     * @return User
+     */
+    public function addOrganization(\Tavro\Bundle\CoreBundle\Entity\Organization $organization)
+    {
+        $this->organizations[] = $organization;
+
+        return $this;
+    }
+
+    /**
+     * Remove organization
+     *
+     * @param \Tavro\Bundle\CoreBundle\Entity\Organization $organization
+     */
+    public function removeOrganization(\Tavro\Bundle\CoreBundle\Entity\Organization $organization)
+    {
+        $this->organizations->removeElement($organization);
+    }
+
+    /**
+     * Get organizations
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getOrganizations()
+    {
+        return $this->organizations;
+    }
+
+    /**
+     * Add userOrganization
+     *
+     * @param \Tavro\Bundle\CoreBundle\Entity\UserOrganization $userOrganization
+     *
+     * @return User
+     */
+    public function addUserOrganization(\Tavro\Bundle\CoreBundle\Entity\UserOrganization $userOrganization)
+    {
+        $this->user_organizations[] = $userOrganization;
+
+        return $this;
+    }
 }

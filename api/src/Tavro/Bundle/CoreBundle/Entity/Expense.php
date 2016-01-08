@@ -313,4 +313,28 @@ class Expense extends ApiEntity
         return $this->expense_tags;
     }
 
+
+    /**
+     * Set category
+     *
+     * @param \Tavro\Bundle\CoreBundle\Entity\ExpenseCategory $category
+     *
+     * @return Expense
+     */
+    public function setCategory(\Tavro\Bundle\CoreBundle\Entity\ExpenseCategory $category)
+    {
+        $this->category = $category;
+
+        return $this;
+    }
+
+    /**
+     * Get category
+     *
+     * @return \Tavro\Bundle\CoreBundle\Entity\ExpenseCategory
+     */
+    public function getCategory()
+    {
+        return $this->category;
+    }
 }

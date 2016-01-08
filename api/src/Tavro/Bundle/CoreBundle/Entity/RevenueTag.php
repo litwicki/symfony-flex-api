@@ -82,4 +82,28 @@ class RevenueTag extends Entity
         return $this->expense;
     }
 
+
+    /**
+     * Set expense
+     *
+     * @param \Tavro\Bundle\CoreBundle\Entity\Revenue $expense
+     *
+     * @return RevenueTag
+     */
+    public function setExpense(\Tavro\Bundle\CoreBundle\Entity\Revenue $expense)
+    {
+        $this->expense = $expense;
+
+        return $this;
+    }
+
+    /**
+     * Get expense
+     *
+     * @return \Tavro\Bundle\CoreBundle\Entity\Revenue
+     */
+    public function getExpense()
+    {
+        return $this->expense;
+    }
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace Camelot\Bundle\CoreBundle\Entity;
+namespace Tavro\Bundle\CoreBundle\Entity;
 
 use Doctrine\ORM\Mapping AS ORM;
 use Rhumsaa\Uuid\Uuid;
@@ -18,29 +18,29 @@ use Doctrine\ORM\Mapping\Table;
 
 use Symfony\Component\Validator\Constraints as Assert;
 
-use Camelot\Bundle\CoreBundle\Model\UserInterface;
-use Camelot\Bundle\CoreBundle\Model\Entity;
-use Camelot\Bundle\CoreBundle\Model\EntityInterface;
+use Tavro\Bundle\CoreBundle\Model\UserInterface;
+use Tavro\Bundle\CoreBundle\Model\Entity;
+use Tavro\Bundle\CoreBundle\Model\EntityInterface;
 use JMS\Serializer\Annotation\MaxDepth;
 
 /**
  * @ORM\Entity
- * @Table(name="camelot_user")
+ * @Table(name="tavro_user")
  *
  * @XmlRoot("user")
- * @XmlNamespace(uri="http://camelotmods.com/api/users")
+ * @XmlNamespace(uri="http://tavromods.com/api/users")
  */
 class User extends Entity implements UserInterface, \Serializable
 {
     /**
      * @ORM\Column(type="string", length=255, unique=true, nullable=false)
-     * @Groups({"api", "camelot", "summary"})
+     * @Groups({"api", "tavro", "summary", "typeahead"})
      */
     protected $username;
 
     /**
      * @ORM\Column(type="string", length=255, unique=true, nullable=true)
-     * @Groups({"api", "camelot", "summary"})
+     * @Groups({"api", "tavro", "summary"})
      */
     protected $github_username;
 
@@ -66,52 +66,52 @@ class User extends Entity implements UserInterface, \Serializable
 
     /**
      * @ORM\Column(type="string", unique=true, length=255, nullable=false)
-     * @Groups({"api", "camelot", "summary"})
+     * @Groups({"api", "tavro", "summary", "typeahead"})
      */
     protected $email;
 
     /**
      * @ORM\Column(type="string", length=500, nullable=true)
-     * @Groups({"api", "camelot"})
+     * @Groups({"api", "tavro"})
      */
     protected $signature;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
-     * @Groups({"api", "camelot"})
+     * @Groups({"api", "tavro"})
      */
     protected $last_online_date;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=false)
-     * @Groups({"api", "camelot"})
+     * @Groups({"api", "tavro"})
      * @Accessor(getter="getApiKey", setter="setApiKey")
      */
     protected $api_key;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=false)
-     * @Groups({"api", "camelot"})
+     * @Groups({"api", "tavro"})
      * @Accessor(getter="getApiPassword", setter="setApiPassword")
      */
     protected $api_password;
 
     /**
      * @ORM\Column(type="boolean", nullable=false)
-     * @Groups({"api", "camelot"})
+     * @Groups({"api", "tavro"})
      */
     protected $api_enabled;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=false)
-     * @Groups({"api", "camelot"})
+     * @Groups({"api", "tavro"})
      * @Accessor(getter="getGuid", setter="setGuid")
      */
     protected $guid;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @Groups({"api", "camelot"})
+     * @Groups({"api", "tavro"})
      */
     protected $user_ip;
 
@@ -121,103 +121,74 @@ class User extends Entity implements UserInterface, \Serializable
      *      choices = { "male", "female", "other" },
      *      message = "Choose a valid gender."
      * )
-     * @Groups({"api", "camelot", "summary"})
+     * @Groups({"api", "tavro", "summary"})
      * @Accessor(getter="getGender", setter="setGuid")
      */
     protected $gender;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @Groups({"api", "camelot"})
+     * @Groups({"api", "tavro"})
      */
     protected $user_agent;
 
     /**
      * @ORM\Column(type="date", length=255, nullable=true)
-     * @Groups({"api", "camelot"})
+     * @Groups({"api", "tavro"})
      */
     protected $birthday;
 
     /**
-     * @ORM\OneToMany(targetEntity="Camelot\Bundle\CoreBundle\Entity\Node", mappedBy="user")
+     * @ORM\OneToMany(targetEntity="Tavro\Bundle\CoreBundle\Entity\Node", mappedBy="user")
      * @ORM\OrderBy({"id" = "DESC"})
-     * @Groups({"camelot"})
+     * @Groups({"tavro"})
      */
     protected $nodes;
 
     /**
-     * @ORM\OneToMany(targetEntity="Camelot\Bundle\CoreBundle\Entity\Comment", mappedBy="user")
+     * @ORM\OneToMany(targetEntity="Tavro\Bundle\CoreBundle\Entity\Organization", mappedBy="owner")
+     * @ORM\OrderBy({"id" = "DESC"})
+     * @Groups({"tavro"})
+     */
+    protected $organizations;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Tavro\Bundle\CoreBundle\Entity\Comment", mappedBy="user")
      * @ORM\OrderBy({"id" = "DESC"})
      */
     protected $comments;
 
     /**
-     * @ORM\OneToMany(targetEntity="Camelot\Bundle\CoreBundle\Entity\Mod", mappedBy="user")
-     * @ORM\OrderBy({"id" = "DESC"})
-     * @Groups({"camelot"})
-     * @Accessor(getter="getSerializedMods")
-     * @MaxDepth(3)
-     */
-    protected $mods;
-
-    /**
-     * @ORM\ManyToMany(targetEntity="Camelot\Bundle\CoreBundle\Entity\Role", inversedBy="users")
+     * @ORM\ManyToMany(targetEntity="Tavro\Bundle\CoreBundle\Entity\Role", inversedBy="users")
      * @ORM\JoinTable(
-     *     name="camelot_user_role",
+     *     name="tavro_user_role",
      *     joinColumns={@ORM\JoinColumn(name="user_id", referencedColumnName="id", nullable=false)},
      *     inverseJoinColumns={@ORM\JoinColumn(name="role_id", referencedColumnName="id", nullable=false)}
      * )
      * @Type("array<string>")
      * @Accessor(getter="getSerializedRoles")
-     * @Groups({"api", "camelot", "summary"})
+     * @Groups({"api", "tavro", "summary"})
      * @MaxDepth(3)
      */
     protected $roles;
 
     /**
-     * @ORM\OneToMany(targetEntity="Camelot\Bundle\CoreBundle\Entity\NodeRead", mappedBy="user")
+     * @ORM\OneToMany(targetEntity="Tavro\Bundle\CoreBundle\Entity\NodeRead", mappedBy="user")
      */
     protected $nodes_read;
 
     /**
-     * @ORM\Column(type="integer", nullable=true, unique=true)
-     * @Groups({"api", "camelot", "summary"})
+     * @ORM\OneToMany(targetEntity="Tavro\Bundle\CoreBundle\Entity\UserOrganization", mappedBy="user")
      */
-    protected $billing_id;
+    protected $user_organizations;
 
     /**
-     * @ORM\Column(type="boolean", nullable=false)
-     * @Groups({"api", "camelot", "summary"})
-     */
-    protected $enable_daily_digest;
-
-    /**
-     * @ORM\Column(type="boolean", nullable=false)
-     * @Groups({"api", "camelot", "summary"})
-     */
-    protected $enable_notifications;
-
-    /**
-     * @ORM\Column(type="boolean", nullable=false)
-     * @Groups({"api", "camelot", "summary"})
-     */
-    protected $enable_protected_messages;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="Camelot\Bundle\CoreBundle\Entity\Image")
+     * @ORM\ManyToOne(targetEntity="Tavro\Bundle\CoreBundle\Entity\Image")
      * @ORM\JoinColumn(name="avatar_image_id", referencedColumnName="id", nullable=true)
-     * @Groups({"api", "camelot", "summary"})
-     * @MaxDepth(1)
-     */
-    protected $avatar;
-
-    /**
-     * @ORM\OneToMany(targetEntity="Camelot\Bundle\CoreBundle\Entity\Mod_user", mappedBy="user", cascade={"remove"})
-     * @Groups({"api", "camelot", "detail"})
-     * @Accessor(getter="getContributorMods")
+     * @Groups({"api", "tavro", "summary"})
      * @MaxDepth(2)
      */
-    protected $mod_users;
+    protected $avatar;
 
     /**
      * Constructor
@@ -227,9 +198,10 @@ class User extends Entity implements UserInterface, \Serializable
         $this->create_date = new \DateTime();
         $this->update_date = new \DateTime();
         $this->nodes = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->organizations = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->user_organizations = new \Doctrine\Common\Collections\ArrayCollection();
         $this->roles = new \Doctrine\Common\Collections\ArrayCollection();
         $this->nodes_read = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->mods = new \Doctrine\Common\Collections\ArrayCollection();
 
         $this->guid = Uuid::uuid4();
         $this->salt = md5($this->guid);
@@ -239,7 +211,7 @@ class User extends Entity implements UserInterface, \Serializable
 
         $this->api_enabled = false;
 
-        $this->enable_protected_messages = true;
+        $this->enable_private_messages = true;
         $this->enable_notifications = true;
         $this->enable_daily_digest = true;
 
@@ -433,9 +405,9 @@ class User extends Entity implements UserInterface, \Serializable
      * @param string $passwordToken
      * @return User
      */
-    public function setPasswordToken()
+    public function setPasswordToken($passwordToken)
     {
-        $this->password_token = md5(time());
+        $this->password_token = $passwordToken;
 
         return $this;
     }
@@ -684,10 +656,10 @@ class User extends Entity implements UserInterface, \Serializable
     /**
      * Add node
      *
-     * @param \Camelot\Bundle\CoreBundle\Entity\Node $node
+     * @param \Tavro\Bundle\CoreBundle\Entity\Node $node
      * @return User
      */
-    public function addNode(\Camelot\Bundle\CoreBundle\Entity\Node $node)
+    public function addNode(\Tavro\Bundle\CoreBundle\Entity\Node $node)
     {
         $this->nodes[] = $node;
 
@@ -697,9 +669,9 @@ class User extends Entity implements UserInterface, \Serializable
     /**
      * Remove node
      *
-     * @param \Camelot\Bundle\CoreBundle\Entity\Node $node
+     * @param \Tavro\Bundle\CoreBundle\Entity\Node $node
      */
-    public function removeNode(\Camelot\Bundle\CoreBundle\Entity\Node $node)
+    public function removeNode(\Tavro\Bundle\CoreBundle\Entity\Node $node)
     {
         $this->nodes->removeElement($node);
     }
@@ -717,10 +689,10 @@ class User extends Entity implements UserInterface, \Serializable
     /**
      * Add comment
      *
-     * @param \Camelot\Bundle\CoreBundle\Entity\Comment $comment
+     * @param \Tavro\Bundle\CoreBundle\Entity\Comment $comment
      * @return User
      */
-    public function addComment(\Camelot\Bundle\CoreBundle\Entity\Comment $comment)
+    public function addComment(\Tavro\Bundle\CoreBundle\Entity\Comment $comment)
     {
         $this->comments[] = $comment;
 
@@ -730,9 +702,9 @@ class User extends Entity implements UserInterface, \Serializable
     /**
      * Remove comment
      *
-     * @param \Camelot\Bundle\CoreBundle\Entity\Comment $comment
+     * @param \Tavro\Bundle\CoreBundle\Entity\Comment $comment
      */
-    public function removeComment(\Camelot\Bundle\CoreBundle\Entity\Comment $comment)
+    public function removeComment(\Tavro\Bundle\CoreBundle\Entity\Comment $comment)
     {
         $this->comments->removeElement($comment);
     }
@@ -753,10 +725,10 @@ class User extends Entity implements UserInterface, \Serializable
     /**
      * Add role
      *
-     * @param \Camelot\Bundle\CoreBundle\Entity\Role $role
+     * @param \Tavro\Bundle\CoreBundle\Entity\Role $role
      * @return User
      */
-    public function addRole(\Camelot\Bundle\CoreBundle\Entity\Role $role)
+    public function addRole(\Tavro\Bundle\CoreBundle\Entity\Role $role)
     {
         $this->roles[] = $role;
 
@@ -766,9 +738,9 @@ class User extends Entity implements UserInterface, \Serializable
     /**
      * Remove role
      *
-     * @param \Camelot\Bundle\CoreBundle\Entity\Role $role
+     * @param \Tavro\Bundle\CoreBundle\Entity\Role $role
      */
-    public function removeRole(\Camelot\Bundle\CoreBundle\Entity\Role $role)
+    public function removeRole(\Tavro\Bundle\CoreBundle\Entity\Role $role)
     {
         $this->roles->removeElement($role);
     }
@@ -783,7 +755,6 @@ class User extends Entity implements UserInterface, \Serializable
             return $this->roles->toArray();
         }
         return $this->roles;
-
     }
 
     /**
@@ -812,10 +783,10 @@ class User extends Entity implements UserInterface, \Serializable
     /**
      * Add nodes_read
      *
-     * @param \Camelot\Bundle\CoreBundle\Entity\NodeRead $nodesRead
+     * @param \Tavro\Bundle\CoreBundle\Entity\NodeRead $nodesRead
      * @return User
      */
-    public function addNodesRead(\Camelot\Bundle\CoreBundle\Entity\NodeRead $nodesRead)
+    public function addNodesRead(\Tavro\Bundle\CoreBundle\Entity\NodeRead $nodesRead)
     {
         $this->nodes_read[] = $nodesRead;
 
@@ -825,9 +796,9 @@ class User extends Entity implements UserInterface, \Serializable
     /**
      * Remove nodes_read
      *
-     * @param \Camelot\Bundle\CoreBundle\Entity\NodeRead $nodesRead
+     * @param \Tavro\Bundle\CoreBundle\Entity\NodeRead $nodesRead
      */
-    public function removeNodesRead(\Camelot\Bundle\CoreBundle\Entity\NodeRead $nodesRead)
+    public function removeNodesRead(\Tavro\Bundle\CoreBundle\Entity\NodeRead $nodesRead)
     {
         $this->nodes_read->removeElement($nodesRead);
     }
@@ -838,6 +809,39 @@ class User extends Entity implements UserInterface, \Serializable
      * @return \Doctrine\Common\Collections\Collection 
      */
     public function getNodesRead()
+    {
+        return $this->nodes_read;
+    }
+
+    /**
+     * Add user_organization
+     *
+     * @param \Tavro\Bundle\CoreBundle\Entity\UserOrganization $user_organization
+     * @return UserOrganization
+     */
+    public function addUserOrganizations(\Tavro\Bundle\CoreBundle\Entity\UserOrganization $user_organization)
+    {
+        $this->user_organizations[] = $user_organization;
+
+        return $this;
+    }
+
+    /**
+     * Remove user_organization
+     *
+     * @param \Tavro\Bundle\CoreBundle\Entity\UserOrganization $user_organization
+     */
+    public function removeUserOrganization(\Tavro\Bundle\CoreBundle\Entity\UserOrganization $user_organization)
+    {
+        $this->user_organizations->removeElement($user_organization);
+    }
+
+    /**
+     * Get user_organizations
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getUserOrganizations()
     {
         return $this->nodes_read;
     }
@@ -863,39 +867,6 @@ class User extends Entity implements UserInterface, \Serializable
     public function getBillingId()
     {
         return $this->billing_id;
-    }
-
-    /**
-     * Add mods
-     *
-     * @param \Camelot\Bundle\CoreBundle\Entity\Mod $mods
-     * @return User
-     */
-    public function addMod(\Camelot\Bundle\CoreBundle\Entity\Mod $mods)
-    {
-        $this->mods[] = $mods;
-
-        return $this;
-    }
-
-    /**
-     * Remove mods
-     *
-     * @param \Camelot\Bundle\CoreBundle\Entity\Mod $mods
-     */
-    public function removeMod(\Camelot\Bundle\CoreBundle\Entity\Mod $mods)
-    {
-        $this->mods->removeElement($mods);
-    }
-
-    /**
-     * Get mods
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getMods()
-    {
-        return $this->mods;
     }
 
     /**
@@ -946,75 +917,6 @@ class User extends Entity implements UserInterface, \Serializable
     }
 
     /**
-     * Set enable_daily_digest
-     *
-     * @param $enableDailyDigest
-     * @return User
-     */
-    public function setEnableDailyDigest($enableDailyDigest)
-    {
-        $this->enable_daily_digest = $enableDailyDigest;
-
-        return $this;
-    }
-
-    /**
-     * Get enable_daily_digest
-     *
-     * @return 
-     */
-    public function getEnableDailyDigest()
-    {
-        return $this->enable_daily_digest;
-    }
-
-    /**
-     * Set enable_notifications
-     *
-     * @param $enableNotifications
-     * @return User
-     */
-    public function setEnableNotifications($enableNotifications)
-    {
-        $this->enable_notifications = $enableNotifications;
-
-        return $this;
-    }
-
-    /**
-     * Get enable_notifications
-     *
-     * @return 
-     */
-    public function getEnableNotifications()
-    {
-        return $this->enable_notifications;
-    }
-
-    /**
-     * Set enable_protected_messages
-     *
-     * @param $enablePrivateMessages
-     * @return User
-     */
-    public function setEnablePrivateMessages($enablePrivateMessages)
-    {
-        $this->enable_protected_messages = $enablePrivateMessages;
-
-        return $this;
-    }
-
-    /**
-     * Get enable_protected_messages
-     *
-     * @return 
-     */
-    public function getEnablePrivateMessages()
-    {
-        return $this->enable_protected_messages;
-    }
-
-    /**
      * Set gender
      *
      * @param string $gender
@@ -1040,20 +942,6 @@ class User extends Entity implements UserInterface, \Serializable
     /**
      * @return array
      */
-    public function getSerializedMods()
-    {
-        $mods = new \Doctrine\Common\Collections\ArrayCollection();
-        foreach($this->mods as $mod) {
-            if($mod->getStatus() > 0) {
-                $mods->add($mod);
-            }
-        }
-        return $mods;
-    }
-
-    /**
-     * @return array
-     */
     public function getSerializedRoles()
     {
         $roles = array();
@@ -1065,25 +953,8 @@ class User extends Entity implements UserInterface, \Serializable
 
     /**
      * @VirtualProperty
-     * @SerializedName("is_moderator")
-     * @Groups({"api", "camelot", "summary"})
-     *
-     */
-    public function getIsModerator()
-    {
-        $roles = $this->getRoles();
-        foreach($roles as $role) {
-            if($role->getRole() == 'ROLE_MODERATOR' || $role->getRole() == 'ROLE_ADMIN') {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    /**
-     * @VirtualProperty
      * @SerializedName("is_admin")
-     * @Groups({"api", "camelot", "summary"})
+     * @Groups({"api", "tavro", "summary"})
      *
      */
     public function getIsAdmin()
@@ -1100,7 +971,7 @@ class User extends Entity implements UserInterface, \Serializable
     /**
      * @VirtualProperty
      * @SerializedName("is_developer")
-     * @Groups({"api", "camelot", "summary"})
+     * @Groups({"api", "tavro", "summary"})
      *
      */
     public function getIsDeveloper()
@@ -1116,19 +987,8 @@ class User extends Entity implements UserInterface, \Serializable
 
     /**
      * @VirtualProperty
-     * @SerializedName("mod_count")
-     * @Groups({"api", "camelot", "summary"})
-     *
-     */
-    public function modCount()
-    {
-        return $this->mods->count();
-    }
-
-    /**
-     * @VirtualProperty
      * @SerializedName("node_count")
-     * @Groups({"api", "camelot", "summary"})
+     * @Groups({"api", "tavro", "summary"})
      *
      */
     public function nodeCount()
@@ -1137,35 +997,35 @@ class User extends Entity implements UserInterface, \Serializable
     }
 
     /**
-     * Set enable_protected_messages
+     * Set enable_private_messages
      *
      * @param boolean $enableProtectedMessages
      * @return User
      */
     public function setEnableProtectedMessages($enableProtectedMessages)
     {
-        $this->enable_protected_messages = $enableProtectedMessages;
+        $this->enable_private_messages = $enableProtectedMessages;
 
         return $this;
     }
 
     /**
-     * Get enable_protected_messages
+     * Get enable_private_messages
      *
      * @return boolean 
      */
     public function getEnableProtectedMessages()
     {
-        return $this->enable_protected_messages;
+        return $this->enable_private_messages;
     }
 
     /**
      * Set avatar
      *
-     * @param \Camelot\Bundle\CoreBundle\Entity\Image $avatar
+     * @param \Tavro\Bundle\CoreBundle\Entity\Image $avatar
      * @return User
      */
-    public function setAvatar(\Camelot\Bundle\CoreBundle\Entity\Image $avatar)
+    public function setAvatar(\Tavro\Bundle\CoreBundle\Entity\Image $avatar)
     {
         $this->avatar = $avatar;
 
@@ -1175,7 +1035,7 @@ class User extends Entity implements UserInterface, \Serializable
     /**
      * Get avatar
      *
-     * @return \Camelot\Bundle\CoreBundle\Entity\Image 
+     * @return \Tavro\Bundle\CoreBundle\Entity\Image
      */
     public function getAvatar()
     {

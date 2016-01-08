@@ -313,4 +313,28 @@ class Revenue extends ApiEntity
         return $this->revenue_tags;
     }
 
+
+    /**
+     * Set category
+     *
+     * @param \Tavro\Bundle\CoreBundle\Entity\RevenueCategory $category
+     *
+     * @return Revenue
+     */
+    public function setCategory(\Tavro\Bundle\CoreBundle\Entity\RevenueCategory $category)
+    {
+        $this->category = $category;
+
+        return $this;
+    }
+
+    /**
+     * Get category
+     *
+     * @return \Tavro\Bundle\CoreBundle\Entity\RevenueCategory
+     */
+    public function getCategory()
+    {
+        return $this->category;
+    }
 }
