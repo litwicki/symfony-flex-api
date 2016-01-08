@@ -14,6 +14,6 @@ mysql -uroot -p$DBPASSWD -e "grant all on *.* to 'root'@'192.168.50.1' identifie
 sudo php /var/www/$APPNAME/www/app/console doctrine:database:create
 sudo php /var/www/$APPNAME/www/app/console doctrine:migrations:migrate --no-interaction
 
-sudo php /var/www/$APPNAME/www/app/console doctrine:fixtures:load --fixtures=/var/www/$APPNAME/www/src/Camelot/Bundle/CoreBundle/DataFixtures/ORM/Core/v1/ --append
+sudo php /var/www/$APPNAME/www/app/console doctrine:fixtures:load --fixtures=/var/www/$APPNAME/www/src/Tavro/Bundle/CoreBundle/DataFixtures/ORM/Core/v1/ --append
 
 echo 'DEVELOPMENT ENVIRONMENT COMPLETE!'

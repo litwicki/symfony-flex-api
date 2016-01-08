@@ -7,15 +7,7 @@
   <div id="jumbotron">
     <div class="container">
       <div id="jumbotron-content" class="col-lg-8">
-        <h1>The <strong>ultimate</strong> <a href="http://tavrounchained.com" target="_blank">Tavro Unchained</a> resource!</h1>
-
-        <p class="lead">Download UI mods, skins, guides, and more to enhance your Tavro Unchained interface and gaming experience. Best of all, everything is free! <a href="{{ path('premium') }}">Premium</a> memberships are available for power-developers and super-users who want to extend Tavro Hub to their own fansite or app.</p>
-
-        <p>
-          <a ng-if="!user" href="{{ path('signup') }}"><span class="btn btn-lg btn-success"><i class="fa fa-fw fa-check"></i> Sign Up Free Today</span></a>
-          {#<a ng-if="user && !user.billing_id" href="{{ path('premium') }}"><span class="btn btn-success"><i class="fa fa-fw fa-dollar"></i> Go Premium!</span></a>#}
-          <a href="{{ path('mods') }}"><span class="btn btn-lg btn-primary"><i class="fa fa-fw fa-cubes"></i> Get Mods Now!</span></a>
-        </p>
+        <h1>Tackle your business by the Horns!</h1>
       </div>
       <div class="pull-right visible-lg">
         {% if app.environment == 'prod' %}
@@ -32,69 +24,7 @@
 {% block body %}
 
   <div class="container">
-    <div class="row" id="front-spotlight">
 
-      <div class="col-lg-4">
-
-        <div class="page-header">
-          <h3><i class="ra ra-repair"></i> Latest Mods</h3>
-        </div>
-        <p class="lead text-warning" ng-show="!summary.latest_mods.length">There are no mods.</p>
-        <div class="list-row media" ng-class="{'first':$first, 'last':$last}" ng-repeat="mod in summary.latest_mods">
-          <div class="col-lg-4 visible-lg">
-            <a href="/mods/{[mod.slug]}">
-              <i class="fa fa-border fa-image fa-3x text-muted" ng-if="!mod.mod_images.length"></i>
-              <img class="img-rounded img-thumbnail img-responsive" alt="mod-image" ng-src="/media/cache/resolve/mod_thumbnail/{[mod.mod_images[0].aws_key]}" ng-if="mod.mod_images.length" />
-            </a>
-          </div>
-          <div class="col-lg-8">
-            <a href="/mods/{[mod.slug]}"><h4 class="list-group-item-heading">{[mod.title]}</h4></a>
-            <p class="small text-muted"><i class="{[mod.category.icon]}"></i> <a href="/mods/categories/{[mod.category.slug]}">{[mod.category.title]}</a></p>
-            <ul class="list-inline small text-muted">
-              <li><i class="fa fa-fw fa-search"></i> {[mod.views]} views</li>
-              <li><i class="fa fa-fw fa-cloud-download"></i> {[mod.downloads]} downloads</li>
-            </ul>
-          </div>
-        </div>
-
-      </div>
-
-      <div class="col-lg-4">
-
-        <div class="page-header">
-          <h3><i class="ra ra-burning-book"></i> Recent Content</h3>
-        </div>
-
-        <p class="lead text-warning" ng-show="!summary.latest_mods.length">There is no content.</p>
-
-        <div class="row">
-          <div class="list-row" ng-repeat="node in summary.news">
-            <a href="/{[node.type]}s/{[node.slug]}">
-              <h4 class="list-group-item-heading">{[node.title | limitTo: 32]}<span ng-if="node.title.length > 32">...</span></h4>
-            </a>
-            <p class="list-group-item-text small">
-              {% include 'TavroAppBundle:Node:icon.html.twig' %}
-              <a href="/{[node.type]}s">{[node.type | uppercase]}</a> by <i class="fa fa-fw fa-user"></i> <a href="/users/{[node.user.username]}">{[node.user.username]}</a> {[node.create_date|date:'short']}.<br />
-              <ul class="small text-muted list-inline">
-                <li><i class="fa fa-fw fa-book"></i> {[node.read_count]} unique reads</li>
-                <li><i class="fa fa-fw fa-comment"></i> {[node.comment_count]} comments</li>
-                <li><i class="fa fa-fw fa-search"></i> {[node.views]} views</li>
-              </ul>
-            </p>
-          </div>
-        </div>
-
-      </div>
-
-      <div class="col-lg-4">
-        <div style="margin-top: 3em;">
-          <canvas id="mod-stats" class="chart chart-doughnut" data="mod_stat_data" labels="mod_stat_labels" legend="true"></canvas>
-          {#<hr />#}
-          {#<canvas style="padding: 10px;" id="trend-data" class="chart chart-line" data="trend_data" labels="trend_labels" legend="true" series="trend_series"></canvas>#}
-        </div>
-      </div>
-
-    </div>
   </div>
 
 

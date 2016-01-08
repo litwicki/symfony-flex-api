@@ -1,0 +1,18 @@
+---
+- hosts: localhost
+  vars:
+    dbname: "{{dbname}}"
+    dbpass: "{{dbpass}}"
+    dbuser: "{{dbuser}}"
+    dbhost: "{{dbhost}}"
+    api_root: /var/www/tavro/api/
+
+  tasks:
+    - name: drop database
+      shell: mysql -u{{dbuser}} -p{{dbpass}} -e "DROP DATABASE IF EXISTS {{dbname}}"
+
+    - name: recreate database
+      shell: sudo php {{api_root}}bin/console doctrine:database:create
+
+    - name: execute migrations
+      shell: sudo php {{api_root}}bin/console doctrine:migrations:migrate --no-interaction
