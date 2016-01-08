@@ -27,13 +27,6 @@ class ApiEntity extends Entity implements ApiEntityInterface
 
     /**
      * @ORM\ManyToOne(targetEntity="Tavro\Bundle\CoreBundle\Entity\User")
-     * @ORM\JoinColumn(name="removed_by_user_id", referencedColumnName="id")
-     * @Groups({"api", "tavro"})
-     */
-    protected $removed_by;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="Tavro\Bundle\CoreBundle\Entity\User")
      * @ORM\JoinColumn(name="updated_by_user_id", referencedColumnName="id")
      * @Groups({"api", "tavro"})
      */
@@ -60,29 +53,6 @@ class ApiEntity extends Entity implements ApiEntityInterface
     public function getSlug()
     {
         return $this->slug;
-    }
-
-    /**
-     * Set removed_by
-     *
-     * @param \Tavro\Bundle\CoreBundle\Entity\User $removedBy
-     * @return EntityInterface
-     */
-    public function setRemovedBy(\Tavro\Bundle\CoreBundle\Entity\User $removedBy = null)
-    {
-        $this->removed_by = $removedBy;
-
-        return $this;
-    }
-
-    /**
-     * Get removed_by
-     *
-     * @return \Tavro\Bundle\CoreBundle\Entity\User
-     */
-    public function getRemovedBy()
-    {
-        return $this->removed_by;
     }
 
     /**

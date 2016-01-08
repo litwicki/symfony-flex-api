@@ -21,25 +21,34 @@ use Tavro\Bundle\CoreBundle\Model\EntityInterface;
 /**
  * @ORM\Entity
  * @ORM\HasLifecycleCallbacks
- * @ORM\Table(name="tavro_tag")
+ * @ORM\Table(name="tavro_service")
  *
  */
-class ExpenseCategory extends ApiEntity
+class Service extends ApiEntity
 {
-    /**
-     * @ORM\Column(type="string", length=500, nullable=false)
-     * @Groups({"api", "tavro", "summary", "typeahead"})
-     */
-    protected $title;
 
     /**
      * @ORM\Column(type="string", length=500, nullable=false)
      * @Groups({"api", "tavro", "summary"})
      */
+    protected $title;
+
+    /**
+     * @ORM\Column(type="string", length=8000, nullable=true)
+     * @Groups({"api", "tavro", "summary"})
+     */
     protected $body;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Tavro\Bundle\CoreBundle\Entity\Organization", inversedBy="expense_categories")
+     * @ORM\ManyToOne(targetEntity="Tavro\Bundle\CoreBundle\Entity\ServiceCategory", inversedBy="services")
+     * @ORM\JoinColumn(name="category_id", referencedColumnName="id", nullable=false)
+     * @Groups({"api", "tavro", "summary"})
+     * @MaxDepth(3)
+     */
+    protected $category;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Tavro\Bundle\CoreBundle\Entity\Organization", inversedBy="services")
      * @ORM\JoinColumn(name="organization_id", referencedColumnName="id", nullable=false)
      * @Groups({"api", "tavro", "summary"})
      * @MaxDepth(3)
@@ -47,10 +56,27 @@ class ExpenseCategory extends ApiEntity
     protected $organization;
 
     /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->status = 1;
+        $now = new \DateTime();
+        $tz = new \DateTimeZone('America/New_York');
+        $now->setTimezone($tz);
+        $this->create_date = $now;
+    }
+
+    public function __toString()
+    {
+        return $this->title;
+    }
+
+    /**
      * Set title
      *
      * @param string $title
-     * @return Tag
+     * @return Service
      */
     public function setTitle($title)
     {
@@ -73,7 +99,7 @@ class ExpenseCategory extends ApiEntity
      * Set body
      *
      * @param string $body
-     * @return Tag
+     * @return Service
      */
     public function setBody($body)
     {
@@ -96,7 +122,7 @@ class ExpenseCategory extends ApiEntity
      * Set organization
      *
      * @param \Tavro\Bundle\CoreBundle\Entity\Organization $organization
-     * @return Expense
+     * @return Service
      */
     public function setOrganization(\Tavro\Bundle\CoreBundle\Entity\Organization $organization)
     {
@@ -114,6 +140,5 @@ class ExpenseCategory extends ApiEntity
     {
         return $this->organization;
     }
-
 
 }

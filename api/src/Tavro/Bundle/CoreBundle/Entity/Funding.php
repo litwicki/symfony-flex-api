@@ -21,25 +21,26 @@ use Tavro\Bundle\CoreBundle\Model\EntityInterface;
 /**
  * @ORM\Entity
  * @ORM\HasLifecycleCallbacks
- * @ORM\Table(name="tavro_tag")
+ * @ORM\Table(name="tavro_service")
  *
  */
-class ExpenseCategory extends ApiEntity
+class Funding extends ApiEntity
 {
-    /**
-     * @ORM\Column(type="string", length=500, nullable=false)
-     * @Groups({"api", "tavro", "summary", "typeahead"})
-     */
-    protected $title;
 
     /**
      * @ORM\Column(type="string", length=500, nullable=false)
      * @Groups({"api", "tavro", "summary"})
      */
+    protected $name;
+
+    /**
+     * @ORM\Column(type="string", length=8000, nullable=true)
+     * @Groups({"api", "tavro", "summary"})
+     */
     protected $body;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Tavro\Bundle\CoreBundle\Entity\Organization", inversedBy="expense_categories")
+     * @ORM\ManyToOne(targetEntity="Tavro\Bundle\CoreBundle\Entity\Organization", inversedBy="funding")
      * @ORM\JoinColumn(name="organization_id", referencedColumnName="id", nullable=false)
      * @Groups({"api", "tavro", "summary"})
      * @MaxDepth(3)
@@ -47,33 +48,57 @@ class ExpenseCategory extends ApiEntity
     protected $organization;
 
     /**
-     * Set title
-     *
-     * @param string $title
-     * @return Tag
+     * @ORM\OneToMany(targetEntity="Tavro\Bundle\CoreBundle\Entity\Shareholder", mappedBy="funding")
+     * @ORM\OrderBy({"id" = "DESC"})
+     * @Groups({"api", "tavro", "summary"})
      */
-    public function setTitle($title)
+    protected $shareholders;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
     {
-        $this->title = $title;
+        $this->status = 1;
+        $now = new \DateTime();
+        $tz = new \DateTimeZone('America/New_York');
+        $now->setTimezone($tz);
+        $this->create_date = $now;
+    }
+
+    public function __toString()
+    {
+        return $this->name;
+    }
+
+    /**
+     * Set name
+     *
+     * @param string $name
+     * @return Service
+     */
+    public function setTitle($name)
+    {
+        $this->name = $name;
 
         return $this;
     }
 
     /**
-     * Get title
+     * Get name
      *
      * @return string
      */
     public function getTitle()
     {
-        return $this->title;
+        return $this->name;
     }
 
     /**
      * Set body
      *
      * @param string $body
-     * @return Tag
+     * @return Service
      */
     public function setBody($body)
     {
@@ -96,7 +121,7 @@ class ExpenseCategory extends ApiEntity
      * Set organization
      *
      * @param \Tavro\Bundle\CoreBundle\Entity\Organization $organization
-     * @return Expense
+     * @return Service
      */
     public function setOrganization(\Tavro\Bundle\CoreBundle\Entity\Organization $organization)
     {
@@ -114,6 +139,5 @@ class ExpenseCategory extends ApiEntity
     {
         return $this->organization;
     }
-
 
 }

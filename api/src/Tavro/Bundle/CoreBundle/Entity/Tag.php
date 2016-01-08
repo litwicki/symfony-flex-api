@@ -44,6 +44,11 @@ class Tag extends ApiEntity
     protected $node_tags;
 
     /**
+     * @ORM\OneToMany(targetEntity="Tavro\Bundle\CoreBundle\Entity\ExpenseTag", mappedBy="tag", cascade={"remove"})
+     */
+    protected $expense_tags;
+
+    /**
      * Set title
      *
      * @param string $title

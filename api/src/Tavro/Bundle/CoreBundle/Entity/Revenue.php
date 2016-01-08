@@ -21,10 +21,10 @@ use Tavro\Bundle\CoreBundle\Model\EntityInterface;
 /**
  * @ORM\Entity
  * @ORM\HasLifecycleCallbacks
- * @ORM\Table(name="tavro_expense")
+ * @ORM\Table(name="tavro_revenue")
  *
  */
-class Expense extends ApiEntity
+class Revenue extends ApiEntity
 {
 
     /**
@@ -40,7 +40,7 @@ class Expense extends ApiEntity
     protected $body;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Tavro\Bundle\CoreBundle\Entity\ExpenseCategory", inversedBy="expenses")
+     * @ORM\ManyToOne(targetEntity="Tavro\Bundle\CoreBundle\Entity\RevenueCategory", inversedBy="revenues")
      * @ORM\JoinColumn(name="category_id", referencedColumnName="id", nullable=false)
      * @Groups({"api", "tavro", "summary"})
      * @MaxDepth(3)
@@ -48,7 +48,7 @@ class Expense extends ApiEntity
     protected $category;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Tavro\Bundle\CoreBundle\Entity\User", inversedBy="expenses")
+     * @ORM\ManyToOne(targetEntity="Tavro\Bundle\CoreBundle\Entity\User", inversedBy="revenues")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id", nullable=false)
      * @Groups({"api", "tavro", "summary"})
      * @MaxDepth(3)
@@ -56,17 +56,17 @@ class Expense extends ApiEntity
     protected $user;
 
     /**
-     * @ORM\OneToMany(targetEntity="Tavro\Bundle\CoreBundle\Entity\ExpenseComment", mappedBy="expense", cascade={"remove"})
+     * @ORM\OneToMany(targetEntity="Tavro\Bundle\CoreBundle\Entity\RevenueComment", mappedBy="revenue", cascade={"remove"})
      */
-    protected $expense_comments;
+    protected $revenue_comments;
 
     /**
-     * @ORM\OneToMany(targetEntity="Tavro\Bundle\CoreBundle\Entity\ExpenseTag", mappedBy="expense", cascade={"remove"})
+     * @ORM\OneToMany(targetEntity="Tavro\Bundle\CoreBundle\Entity\RevenueTag", mappedBy="revenue", cascade={"remove"})
      */
-    protected $expense_tags;
+    protected $revenue_tags;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Tavro\Bundle\CoreBundle\Entity\Organization", inversedBy="expenses")
+     * @ORM\ManyToOne(targetEntity="Tavro\Bundle\CoreBundle\Entity\Organization", inversedBy="revenues")
      * @ORM\JoinColumn(name="organization_id", referencedColumnName="id", nullable=false)
      * @Groups({"api", "tavro", "summary"})
      * @MaxDepth(3)
@@ -78,8 +78,8 @@ class Expense extends ApiEntity
      */
     public function __construct()
     {
-        $this->expense_tags = new \Doctrine\Common\Collections\ArrayCollection();;
-        $this->expense_comments = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->revenue_tags = new \Doctrine\Common\Collections\ArrayCollection();;
+        $this->revenue_comments = new \Doctrine\Common\Collections\ArrayCollection();
         $this->status = 1;
         $now = new \DateTime();
         $tz = new \DateTimeZone('America/New_York');
@@ -96,7 +96,7 @@ class Expense extends ApiEntity
      * Set type
      *
      * @param string $type
-     * @return Expense
+     * @return Revenue
      */
     public function setType($type)
     {
@@ -119,7 +119,7 @@ class Expense extends ApiEntity
      * Set title
      *
      * @param string $title
-     * @return Expense
+     * @return Revenue
      */
     public function setTitle($title)
     {
@@ -142,7 +142,7 @@ class Expense extends ApiEntity
      * Set body
      *
      * @param string $body
-     * @return Expense
+     * @return Revenue
      */
     public function setBody($body)
     {
@@ -165,7 +165,7 @@ class Expense extends ApiEntity
      * Set user
      *
      * @param \Tavro\Bundle\CoreBundle\Entity\User $user
-     * @return Expense
+     * @return Revenue
      */
     public function setUser(\Tavro\Bundle\CoreBundle\Entity\User $user)
     {
@@ -188,7 +188,7 @@ class Expense extends ApiEntity
      * Set organization
      *
      * @param \Tavro\Bundle\CoreBundle\Entity\Organization $organization
-     * @return Expense
+     * @return Revenue
      */
     public function setOrganization(\Tavro\Bundle\CoreBundle\Entity\Organization $organization)
     {
@@ -208,49 +208,49 @@ class Expense extends ApiEntity
     }
 
     /**
-     * Add expense_comments
+     * Add revenue_comments
      *
-     * @param \Tavro\Bundle\CoreBundle\Entity\ExpenseComment $expenseComments
-     * @return Expense
+     * @param \Tavro\Bundle\CoreBundle\Entity\RevenueComment $revenueComments
+     * @return Revenue
      */
-    public function addExpenseComment(\Tavro\Bundle\CoreBundle\Entity\ExpenseComment $expenseComments)
+    public function addRevenueComment(\Tavro\Bundle\CoreBundle\Entity\RevenueComment $revenueComments)
     {
-        $this->expense_comments[] = $expenseComments;
+        $this->revenue_comments[] = $revenueComments;
 
         return $this;
     }
 
     /**
-     * Remove expense_comments
+     * Remove revenue_comments
      *
-     * @param \Tavro\Bundle\CoreBundle\Entity\ExpenseComment $expenseComments
+     * @param \Tavro\Bundle\CoreBundle\Entity\RevenueComment $revenueComments
      */
-    public function removeExpenseComment(\Tavro\Bundle\CoreBundle\Entity\ExpenseComment $expenseComments)
+    public function removeRevenueComment(\Tavro\Bundle\CoreBundle\Entity\RevenueComment $revenueComments)
     {
-        $this->expense_comments->removeElement($expenseComments);
+        $this->revenue_comments->removeElement($revenueComments);
     }
 
     /**
-     * Get expense_comments
+     * Get revenue_comments
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getExpenseComments()
+    public function getRevenueComments()
     {
-        return $this->expense_comments;
+        return $this->revenue_comments;
     }
 
     /**
      * @VirtualProperty
-     * @SerializedName("expense_comments")
+     * @SerializedName("revenue_comments")
      * @Groups({"api", "tavro","detail"})
      * @MaxDepth(2)
      */
     public function getComments()
     {
         $comments = new \Doctrine\Common\Collections\ArrayCollection();
-        foreach($this->expense_comments as $expenseComment) {
-            $comments->add($expenseComment->getComment());
+        foreach($this->revenue_comments as $revenueComment) {
+            $comments->add($revenueComment->getComment());
         }
         return $comments;
     }
@@ -262,55 +262,55 @@ class Expense extends ApiEntity
      */
     public function getCommentCount()
     {
-        return $this->expense_comments->count();
+        return $this->revenue_comments->count();
     }
 
     /**
      * @VirtualProperty
-     * @SerializedName("expense_tags")
+     * @SerializedName("revenue_tags")
      * @Groups({"api", "tavro","detail"})
      * @MaxDepth(2)
      */
     public function getTags()
     {
         $tags = new \Doctrine\Common\Collections\ArrayCollection();
-        foreach($this->expense_tags as $expenseTag) {
-            $tags->add($expenseTag->getTag());
+        foreach($this->revenue_tags as $revenueTag) {
+            $tags->add($revenueTag->getTag());
         }
         return $tags;
     }
-    
+
     /**
-     * Add expense_tags
+     * Add revenue_tags
      *
-     * @param \Tavro\Bundle\CoreBundle\Entity\ExpenseTag $expenseTags
-     * @return Expense
+     * @param \Tavro\Bundle\CoreBundle\Entity\RevenueTag $revenueTags
+     * @return Revenue
      */
-    public function addExpenseTag(\Tavro\Bundle\CoreBundle\Entity\ExpenseTag $expenseTags)
+    public function addRevenueTag(\Tavro\Bundle\CoreBundle\Entity\RevenueTag $revenueTags)
     {
-        $this->expense_tags[] = $expenseTags;
+        $this->revenue_tags[] = $revenueTags;
 
         return $this;
     }
 
     /**
-     * Remove expense_tags
+     * Remove revenue_tags
      *
-     * @param \Tavro\Bundle\CoreBundle\Entity\ExpenseTag $expenseTags
+     * @param \Tavro\Bundle\CoreBundle\Entity\RevenueTag $revenueTags
      */
-    public function removeExpenseTag(\Tavro\Bundle\CoreBundle\Entity\ExpenseTag $expenseTags)
+    public function removeRevenueTag(\Tavro\Bundle\CoreBundle\Entity\RevenueTag $revenueTags)
     {
-        $this->expense_tags->removeElement($expenseTags);
+        $this->revenue_tags->removeElement($revenueTags);
     }
 
     /**
-     * Get expense_tags
+     * Get revenue_tags
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
-    public function getExpenseTags()
+    public function getRevenueTags()
     {
-        return $this->expense_tags;
+        return $this->revenue_tags;
     }
 
 }

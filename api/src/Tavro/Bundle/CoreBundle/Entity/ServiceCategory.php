@@ -24,7 +24,7 @@ use Tavro\Bundle\CoreBundle\Model\EntityInterface;
  * @ORM\Table(name="tavro_tag")
  *
  */
-class ExpenseCategory extends ApiEntity
+class ServiceCategory extends ApiEntity
 {
     /**
      * @ORM\Column(type="string", length=500, nullable=false)
@@ -39,7 +39,7 @@ class ExpenseCategory extends ApiEntity
     protected $body;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Tavro\Bundle\CoreBundle\Entity\Organization", inversedBy="expense_categories")
+     * @ORM\ManyToOne(targetEntity="Tavro\Bundle\CoreBundle\Entity\Organization", inversedBy="service_categories")
      * @ORM\JoinColumn(name="organization_id", referencedColumnName="id", nullable=false)
      * @Groups({"api", "tavro", "summary"})
      * @MaxDepth(3)
