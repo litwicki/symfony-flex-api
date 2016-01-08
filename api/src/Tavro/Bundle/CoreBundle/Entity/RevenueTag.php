@@ -18,23 +18,23 @@ use Tavro\Bundle\CoreBundle\Model\EntityInterface;
 
 /**
  * @ORM\Entity
- * @ORM\Table(name="tavro_expense_tag", indexes={@ORM\Index(name="EXPENSE_TAG", columns={"tag_id","expense_id"})})
+ * @ORM\Table(name="tavro_revenue_tag", indexes={@ORM\Index(name="REVENUE_TAG", columns={"tag_id","revenue_id"})})
  * @ExclusionPolicy("all")
  */
 class RevenueTag extends Entity
 {
     /**
-     * @ORM\ManyToOne(targetEntity="Tavro\Bundle\CoreBundle\Entity\Tag", inversedBy="expense_tags")
+     * @ORM\ManyToOne(targetEntity="Tavro\Bundle\CoreBundle\Entity\Tag", inversedBy="revenue_tags")
      * @ORM\JoinColumn(name="tag_id", referencedColumnName="id", nullable=false)
      * @Groups({"api", "tavro"})
      */
     protected $tag;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Tavro\Bundle\CoreBundle\Entity\Revenue", inversedBy="expense_tags")
-     * @ORM\JoinColumn(name="expense_id", referencedColumnName="id", nullable=false)
+     * @ORM\ManyToOne(targetEntity="Tavro\Bundle\CoreBundle\Entity\Revenue", inversedBy="revenue_tags")
+     * @ORM\JoinColumn(name="revenue_id", referencedColumnName="id", nullable=false)
      */
-    protected $expense;
+    protected $revenue;
 
     /**
      * Set tag
@@ -62,12 +62,12 @@ class RevenueTag extends Entity
     /**
      * Set Revenue
      *
-     * @param \Tavro\Bundle\CoreBundle\Entity\Revenue $expense
+     * @param \Tavro\Bundle\CoreBundle\Entity\Revenue $revenue
      * @return RevenueTag
      */
-    public function setRevenue(\Tavro\Bundle\CoreBundle\Entity\Revenue $expense)
+    public function setRevenue(\Tavro\Bundle\CoreBundle\Entity\Revenue $revenue)
     {
-        $this->expense = $expense;
+        $this->revenue = $revenue;
 
         return $this;
     }
@@ -79,31 +79,7 @@ class RevenueTag extends Entity
      */
     public function getRevenue()
     {
-        return $this->expense;
+        return $this->revenue;
     }
 
-
-    /**
-     * Set expense
-     *
-     * @param \Tavro\Bundle\CoreBundle\Entity\Revenue $expense
-     *
-     * @return RevenueTag
-     */
-    public function setExpense(\Tavro\Bundle\CoreBundle\Entity\Revenue $expense)
-    {
-        $this->expense = $expense;
-
-        return $this;
-    }
-
-    /**
-     * Get expense
-     *
-     * @return \Tavro\Bundle\CoreBundle\Entity\Revenue
-     */
-    public function getExpense()
-    {
-        return $this->expense;
-    }
 }

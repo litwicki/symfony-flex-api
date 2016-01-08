@@ -6,6 +6,7 @@
     dbuser: "{{dbuser}}"
     dbhost: "{{dbhost}}"
     api_root: /var/www/tavro/api/
+    core_fixture_path: src/Tavro/Bundle/CoreBundle/DataFixtures/ORM/Core/v1
 
   tasks:
     - name: drop database
@@ -16,3 +17,6 @@
 
     - name: execute migrations
       shell: sudo php {{api_root}}bin/console doctrine:migrations:migrate --no-interaction
+
+    - name: setup core data fixtures
+      shell: sudo php {{api_root}}bin/console doctrine:fixtures:load --fixtures={{api_root}}{{core_fixture_path}} --append

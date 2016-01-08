@@ -96,20 +96,9 @@
       </div><!--/.container-fluid -->
     </nav>
 
-    {% block jumbotron %}{% endblock %}
-
     <!-- begin body -->
     <section id="page-body">
-      {% if route != 'index' %}
-      <div id="app-header">
-        <!-- "That the powerful play goes on, and you may contribute a verse." -->
-      </div>
-      {% endif %}
-      <div class="container">
-        {% if route != 'index' %}
-          <header id="page-header">{% block header %}{% endblock %}</header>
-        {% endif %}
-      </div>
+
       <div class="container">
 
         {% for label, flashes in app.session.flashbag.all %}

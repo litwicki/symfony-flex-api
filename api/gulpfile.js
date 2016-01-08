@@ -33,26 +33,6 @@ var javascripts = [
   'src/Tavro/Bundle/AppBundle/Resources/public/js/common/textAngular/textAngular.js',
   'src/Tavro/Bundle/AppBundle/Resources/public/js/*.js',
   'src/Tavro/Bundle/AppBundle/Resources/public/js/app.jquery.js',
-  'src/Tavro/Bundle/AppBundle/Resources/public/js/app.js',
-  'src/Tavro/Bundle/AppBundle/Resources/public/js/directives/*.js',
-  'src/Tavro/Bundle/AppBundle/Resources/public/js/filters/*.js',
-  'src/Tavro/Bundle/AppBundle/Resources/public/js/components/ComponentController.js',
-  'src/Tavro/Bundle/AppBundle/Resources/public/js/components/core/CoreController.js',
-  'src/Tavro/Bundle/AppBundle/Resources/public/js/components/user/UserController.js',
-  'src/Tavro/Bundle/AppBundle/Resources/public/js/components/user/user.jquery.js',
-  'src/Tavro/Bundle/AppBundle/Resources/public/js/components/node/NodeController.js',
-  'src/Tavro/Bundle/AppBundle/Resources/public/js/components/node/node.jquery.js',
-  'src/Tavro/Bundle/AppBundle/Resources/public/js/components/admin/AdminController.js',
-  'src/Tavro/Bundle/AppBundle/Resources/public/js/components/comment/CommentController.js',
-  'src/Tavro/Bundle/AppBundle/Resources/public/js/services/tavroServices.js',
-  'src/Tavro/Bundle/AppBundle/Resources/public/js/services/ajaxServices.js',
-  'src/Tavro/Bundle/AppBundle/Resources/public/js/services/alertServices.js',
-  'src/Tavro/Bundle/AppBundle/Resources/public/js/services/ApiServices.js',
-  'src/Tavro/Bundle/AppBundle/Resources/public/js/services/nodeService.js',
-  'src/Tavro/Bundle/AppBundle/Resources/public/js/services/dialogs.js',
-  'src/Tavro/Bundle/AppBundle/Resources/public/js/services/dialogs-default-translations.js',
-  'src/Tavro/Bundle/AppBundle/Resources/public/js/services/userService.js',
-  'src/Tavro/Bundle/ApiBundle/Resources/public/js/*.js'
 ];
 
 var images = [

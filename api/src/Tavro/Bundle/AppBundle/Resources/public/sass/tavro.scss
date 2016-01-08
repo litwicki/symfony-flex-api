@@ -3,9 +3,68 @@
  * @copyright Zoadilack, zoadilack.com
  */
 
-@import url(http://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700,400italic,700italic|Droid+Sans:400,700|Ubuntu:300,400,500,700,300italic,400italic,500italic,700italic|Droid+Sans+Mono|Ubuntu+Condensed|Droid+Serif:400,700,400italic,700italic);
+@import url('https://fonts.googleapis.com/css?family=Passion+One|Kadwa|Droid+Sans|Droid+Serif');
 
 body {
-  background: #252525;
-  font-family: 'Droid Sans', Ubuntu, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  background: #27ae60;
+  font-family: 'Droid Serif', 'Helvetica Neue', Georgia, "Times New Roman", Times, serif;
+}
+
+h1,h2,h3 {
+  font-family: 'Passion One', sans-serif;
+}
+
+h4,h5,h6 {
+  font-family: Kadwa, serif;
+}
+
+
+#page {
+
+  background: #f9f9f9;
+
+  .navbar, .navbar-inverse {
+    border-radius: 0px !important;
+  }
+
+  #page-body {
+
+    header {
+      .page-header {
+        margin-top: 0;
+      }
+    }
+
+    min-height: 500px;
+    padding: 0 0 2em 0;
+
+    #content {
+
+      .tab-content {
+
+        background: #fff;
+        border-bottom-left-radius: 6px;
+        border-bottom-right-radius: 6px;
+        border: 1px solid #ddd;
+        border-top: none !important;
+
+        .tab-pane {
+          padding: 2em;
+        }
+
+      }
+
+    }
+
+    .panel-collapse {
+      .panel-heading {
+        a {
+          text-decoration: none;
+          color: #000 !important;
+        }
+      }
+    }
+
+  }
+
 }

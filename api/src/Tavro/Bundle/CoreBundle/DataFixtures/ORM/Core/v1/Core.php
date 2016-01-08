@@ -66,7 +66,6 @@ class Core extends AbstractFixture implements OrderedFixtureInterface, Container
         $roles = array(
             'ROLE_USER'         => 'User',
             'ROLE_DEVELOPER'    => 'Developer',
-            'ROLE_MODERATOR'    => 'Manager',
             'ROLE_ADMIN'        => 'Administrator',
             'ROLE_SUPERUSER'    => 'Superuser',
         );

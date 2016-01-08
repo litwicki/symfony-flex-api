@@ -21,7 +21,7 @@ use Tavro\Bundle\CoreBundle\Model\EntityInterface;
 /**
  * @ORM\Entity
  * @ORM\HasLifecycleCallbacks
- * @ORM\Table(name="tavro_service")
+ * @ORM\Table(name="tavro_funding")
  *
  */
 class Funding extends ApiEntity

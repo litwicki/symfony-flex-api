@@ -21,7 +21,7 @@ use Tavro\Bundle\CoreBundle\Model\EntityInterface;
 /**
  * @ORM\Entity
  * @ORM\HasLifecycleCallbacks
- * @ORM\Table(name="tavro_tag")
+ * @ORM\Table(name="tavro_product_category")
  *
  */
 class ProductCategory extends ApiEntity
