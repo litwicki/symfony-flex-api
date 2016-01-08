@@ -18,6 +18,13 @@ use Tavro\Bundle\CoreBundle\Entity\User;
  */
 class ApiEntity extends Entity implements ApiEntityInterface
 {
+
+    /**
+     * @ORM\Column(type="string", length=500, nullable=true)
+     * @Groups({"api", "tavro", "summary"})
+     */
+    protected $title;
+
     /**
      * @Gedmo\Slug(fields={"id", "title"}, updatable=true, dateFormat="Ymd/")
      * @ORM\Column(type="string", length=64, nullable=false, unique=true)
@@ -53,6 +60,29 @@ class ApiEntity extends Entity implements ApiEntityInterface
     public function getSlug()
     {
         return $this->slug;
+    }
+
+    /**
+     * Set title
+     *
+     * @param string $title
+     * @return $this
+     */
+    public function setTitle($title)
+    {
+        $this->title = $title;
+
+        return $this;
+    }
+
+    /**
+     * Get title
+     *
+     * @return string
+     */
+    public function getTitle()
+    {
+        return $this->title;
     }
 
     /**

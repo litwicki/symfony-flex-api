@@ -26,13 +26,6 @@ use Tavro\Bundle\CoreBundle\Model\EntityInterface;
  */
 class Funding extends ApiEntity
 {
-
-    /**
-     * @ORM\Column(type="string", length=500, nullable=false)
-     * @Groups({"api", "tavro", "summary"})
-     */
-    protected $name;
-
     /**
      * @ORM\Column(type="string", length=8000, nullable=true)
      * @Groups({"api", "tavro", "summary"})
@@ -67,29 +60,6 @@ class Funding extends ApiEntity
     }
 
     public function __toString()
-    {
-        return $this->name;
-    }
-
-    /**
-     * Set name
-     *
-     * @param string $name
-     * @return Service
-     */
-    public function setTitle($name)
-    {
-        $this->name = $name;
-
-        return $this;
-    }
-
-    /**
-     * Get name
-     *
-     * @return string
-     */
-    public function getTitle()
     {
         return $this->name;
     }
@@ -138,31 +108,6 @@ class Funding extends ApiEntity
     public function getOrganization()
     {
         return $this->organization;
-    }
-
-
-    /**
-     * Set name
-     *
-     * @param string $name
-     *
-     * @return Funding
-     */
-    public function setName($name)
-    {
-        $this->name = $name;
-
-        return $this;
-    }
-
-    /**
-     * Get name
-     *
-     * @return string
-     */
-    public function getName()
-    {
-        return $this->name;
     }
 
     /**

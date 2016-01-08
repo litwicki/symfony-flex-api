@@ -28,12 +28,6 @@ class ProductCategory extends ApiEntity
 {
     /**
      * @ORM\Column(type="string", length=500, nullable=false)
-     * @Groups({"api", "tavro", "summary", "typeahead"})
-     */
-    protected $title;
-
-    /**
-     * @ORM\Column(type="string", length=500, nullable=false)
      * @Groups({"api", "tavro", "summary"})
      */
     protected $body;
@@ -45,29 +39,6 @@ class ProductCategory extends ApiEntity
      * @MaxDepth(3)
      */
     protected $organization;
-
-    /**
-     * Set title
-     *
-     * @param string $title
-     * @return Tag
-     */
-    public function setTitle($title)
-    {
-        $this->title = $title;
-
-        return $this;
-    }
-
-    /**
-     * Get title
-     *
-     * @return string
-     */
-    public function getTitle()
-    {
-        return $this->title;
-    }
 
     /**
      * Set body

@@ -28,7 +28,7 @@ use JMS\Serializer\Annotation\MaxDepth;
  * @Table(name="tavro_user")
  *
  * @XmlRoot("user")
- * @XmlNamespace(uri="http://tavromods.com/api/users")
+ * @XmlNamespace(uri="http://tavro.io/api/users")
  */
 class User extends Entity implements UserInterface, \Serializable
 {
@@ -210,10 +210,6 @@ class User extends Entity implements UserInterface, \Serializable
         $this->resetApiPassword();
 
         $this->api_enabled = false;
-
-        $this->enable_private_messages = true;
-        $this->enable_notifications = true;
-        $this->enable_daily_digest = true;
 
     }
 

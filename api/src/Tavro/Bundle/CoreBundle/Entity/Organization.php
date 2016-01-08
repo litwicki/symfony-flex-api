@@ -30,7 +30,7 @@ class Organization extends ApiEntity
      * @ORM\Column(type="string", length=500, nullable=false)
      * @Groups({"api", "tavro", "summary", "typeahead"})
      */
-    protected $name;
+    protected $title;
 
     /**
      * @ORM\Column(type="string", length=500, nullable=false)
@@ -95,29 +95,6 @@ class Organization extends ApiEntity
      * @ORM\OneToMany(targetEntity="Tavro\Bundle\CoreBundle\Entity\Variable", mappedBy="organization", cascade={"remove"})
      */
     protected $variables;
-
-    /**
-     * Set name
-     *
-     * @param string $name
-     * @return Organization
-     */
-    public function setName($name)
-    {
-        $this->name = $name;
-
-        return $this;
-    }
-
-    /**
-     * Get name
-     *
-     * @return string 
-     */
-    public function getName()
-    {
-        return $this->name;
-    }
 
     /**
      * Set body

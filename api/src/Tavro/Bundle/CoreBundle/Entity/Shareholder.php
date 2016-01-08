@@ -29,9 +29,9 @@ use Tavro\Bundle\CoreBundle\Model\ApiEntity;
  * @Table(name="tavro_shareholder")
  *
  * @XmlRoot("shareholder")
- * @XmlNamespace(uri="http://tavromods.com/api/shareholders")
+ * @XmlNamespace(uri="http://tavro.io/api/shareholders")
  */
-class Shareholder extends ApiEntity
+class Shareholder extends Entity
 {
     /**
      * @ORM\Column(type="string", length=255, nullable=false)

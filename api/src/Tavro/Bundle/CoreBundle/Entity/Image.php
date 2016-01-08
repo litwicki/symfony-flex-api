@@ -80,11 +80,6 @@ class Image extends Entity implements S3EntityInterface
      */
     protected $width;
 
-    /**
-     * @ORM\OneToMany(targetEntity="Tavro\Bundle\CoreBundle\Entity\ModImage", mappedBy="image", cascade={"remove"})
-     */
-    protected $mod_images;
-
     public function __toString()
     {
         return $this->original_filename;
@@ -234,39 +229,6 @@ class Image extends Entity implements S3EntityInterface
     public function __construct()
     {
         $this->mod_images = new \Doctrine\Common\Collections\ArrayCollection();
-    }
-
-    /**
-     * Add mod_images
-     *
-     * @param \Tavro\Bundle\CoreBundle\Entity\ModImage $modImages
-     * @return Image
-     */
-    public function addModImage(\Tavro\Bundle\CoreBundle\Entity\ModImage $modImages)
-    {
-        $this->mod_images[] = $modImages;
-
-        return $this;
-    }
-
-    /**
-     * Remove mod_images
-     *
-     * @param \Tavro\Bundle\CoreBundle\Entity\ModImage $modImages
-     */
-    public function removeModImage(\Tavro\Bundle\CoreBundle\Entity\ModImage $modImages)
-    {
-        $this->mod_images->removeElement($modImages);
-    }
-
-    /**
-     * Get mod_images
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getModImages()
-    {
-        return $this->mod_images;
     }
 
     /**

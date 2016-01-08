@@ -24,11 +24,6 @@ use Tavro\Bundle\CoreBundle\Model\EntityInterface;
  */
 class Comment extends ApiEntity
 {
-    /**
-     * @ORM\Column(type="string", length=500, nullable=true)
-     * @Groups({"api", "tavro", "summary"})
-     */
-    protected $title;
 
     /**
      * @ORM\Column(type="string", length=8000, nullable=true)
@@ -42,9 +37,19 @@ class Comment extends ApiEntity
     protected $node_comments;
 
     /**
-     * @ORM\OneToMany(targetEntity="Tavro\Bundle\CoreBundle\Entity\ModComment", mappedBy="comment", cascade={"remove"})
+     * @ORM\OneToMany(targetEntity="Tavro\Bundle\CoreBundle\Entity\ExpenseComment", mappedBy="comment", cascade={"remove"})
      */
-    protected $mod_comments;
+    protected $expense_comments;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Tavro\Bundle\CoreBundle\Entity\RevenueComment", mappedBy="comment", cascade={"remove"})
+     */
+    protected $revenue_comments;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Tavro\Bundle\CoreBundle\Entity\FundingComment", mappedBy="comment", cascade={"remove"})
+     */
+    protected $funding_comments;
 
     /**
      * @ORM\ManyToOne(targetEntity="Tavro\Bundle\CoreBundle\Entity\User", inversedBy="comments")
@@ -65,29 +70,6 @@ class Comment extends ApiEntity
     }
 
     public function __toString()
-    {
-        return $this->title;
-    }
-
-    /**
-     * Set title
-     *
-     * @param string $title
-     * @return Comment
-     */
-    public function setTitle($title)
-    {
-        $this->title = $title;
-
-        return $this;
-    }
-
-    /**
-     * Get title
-     *
-     * @return string 
-     */
-    public function getTitle()
     {
         return $this->title;
     }
@@ -172,115 +154,104 @@ class Comment extends ApiEntity
     }
 
     /**
-     * Add mod_comments
+     * Add expenseComment
      *
-     * @param \Tavro\Bundle\CoreBundle\Entity\ModComment $modComments
+     * @param \Tavro\Bundle\CoreBundle\Entity\ExpenseComment $expenseComment
+     *
      * @return Comment
      */
-    public function addModComment(\Tavro\Bundle\CoreBundle\Entity\ModComment $modComments)
+    public function addExpenseComment(\Tavro\Bundle\CoreBundle\Entity\ExpenseComment $expenseComment)
     {
-        $this->mod_comments[] = $modComments;
+        $this->expense_comments[] = $expenseComment;
 
         return $this;
     }
 
     /**
-     * Remove mod_comments
+     * Remove expenseComment
      *
-     * @param \Tavro\Bundle\CoreBundle\Entity\ModComment $modComments
+     * @param \Tavro\Bundle\CoreBundle\Entity\ExpenseComment $expenseComment
      */
-    public function removeModComment(\Tavro\Bundle\CoreBundle\Entity\ModComment $modComments)
+    public function removeExpenseComment(\Tavro\Bundle\CoreBundle\Entity\ExpenseComment $expenseComment)
     {
-        $this->mod_comments->removeElement($modComments);
+        $this->expense_comments->removeElement($expenseComment);
     }
 
     /**
-     * Get mod_comments
+     * Get expenseComments
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
-    public function getModComments()
+    public function getExpenseComments()
     {
-        return $this->mod_comments;
+        return $this->expense_comments;
     }
 
     /**
-     * Get id
+     * Add revenueComment
      *
-     * @return integer 
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * Set status
+     * @param \Tavro\Bundle\CoreBundle\Entity\RevenueComment $revenueComment
      *
-     * @param integer $status
      * @return Comment
      */
-    public function setStatus($status)
+    public function addRevenueComment(\Tavro\Bundle\CoreBundle\Entity\RevenueComment $revenueComment)
     {
-        $this->status = $status;
+        $this->revenue_comments[] = $revenueComment;
 
         return $this;
     }
 
     /**
-     * Get status
+     * Remove revenueComment
      *
-     * @return integer 
+     * @param \Tavro\Bundle\CoreBundle\Entity\RevenueComment $revenueComment
      */
-    public function getStatus()
+    public function removeRevenueComment(\Tavro\Bundle\CoreBundle\Entity\RevenueComment $revenueComment)
     {
-        return $this->status;
+        $this->revenue_comments->removeElement($revenueComment);
     }
 
     /**
-     * Set create_date
+     * Get revenueComments
      *
-     * @param \DateTime $createDate
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getRevenueComments()
+    {
+        return $this->revenue_comments;
+    }
+
+    /**
+     * Add fundingComment
+     *
+     * @param \Tavro\Bundle\CoreBundle\Entity\FundingComment $fundingComment
+     *
      * @return Comment
      */
-    public function setCreateDate($createDate)
+    public function addFundingComment(\Tavro\Bundle\CoreBundle\Entity\FundingComment $fundingComment)
     {
-        $this->create_date = $createDate;
+        $this->funding_comments[] = $fundingComment;
 
         return $this;
     }
 
     /**
-     * Get create_date
+     * Remove fundingComment
      *
-     * @return \DateTime 
+     * @param \Tavro\Bundle\CoreBundle\Entity\FundingComment $fundingComment
      */
-    public function getCreateDate()
+    public function removeFundingComment(\Tavro\Bundle\CoreBundle\Entity\FundingComment $fundingComment)
     {
-        return $this->create_date;
+        $this->funding_comments->removeElement($fundingComment);
     }
 
     /**
-     * Set update_date
+     * Get fundingComments
      *
-     * @param \DateTime $updateDate
-     * @return Comment
+     * @return \Doctrine\Common\Collections\Collection
      */
-    public function setUpdateDate($updateDate)
+    public function getFundingComments()
     {
-        $this->update_date = $updateDate;
-
-        return $this;
+        return $this->funding_comments;
     }
-
-    /**
-     * Get update_date
-     *
-     * @return \DateTime 
-     */
-    public function getUpdateDate()
-    {
-        return $this->update_date;
-    }
-
 }

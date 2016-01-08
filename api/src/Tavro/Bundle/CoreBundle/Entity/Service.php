@@ -26,13 +26,6 @@ use Tavro\Bundle\CoreBundle\Model\EntityInterface;
  */
 class Service extends ApiEntity
 {
-
-    /**
-     * @ORM\Column(type="string", length=500, nullable=false)
-     * @Groups({"api", "tavro", "summary"})
-     */
-    protected $title;
-
     /**
      * @ORM\Column(type="string", length=8000, nullable=true)
      * @Groups({"api", "tavro", "summary"})
@@ -68,29 +61,6 @@ class Service extends ApiEntity
     }
 
     public function __toString()
-    {
-        return $this->title;
-    }
-
-    /**
-     * Set title
-     *
-     * @param string $title
-     * @return Service
-     */
-    public function setTitle($title)
-    {
-        $this->title = $title;
-
-        return $this;
-    }
-
-    /**
-     * Get title
-     *
-     * @return string
-     */
-    public function getTitle()
     {
         return $this->title;
     }

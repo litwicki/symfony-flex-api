@@ -26,13 +26,6 @@ use Tavro\Bundle\CoreBundle\Model\EntityInterface;
  */
 class Product extends ApiEntity
 {
-
-    /**
-     * @ORM\Column(type="string", length=500, nullable=false)
-     * @Groups({"api", "tavro", "summary"})
-     */
-    protected $title;
-
     /**
      * @ORM\Column(type="string", length=8000, nullable=true)
      * @Groups({"api", "tavro", "summary"})
@@ -71,30 +64,6 @@ class Product extends ApiEntity
     {
         return $this->title;
     }
-
-    /**
-     * Set title
-     *
-     * @param string $title
-     * @return Product
-     */
-    public function setTitle($title)
-    {
-        $this->title = $title;
-
-        return $this;
-    }
-
-    /**
-     * Get title
-     *
-     * @return string
-     */
-    public function getTitle()
-    {
-        return $this->title;
-    }
-
     /**
      * Set body
      *

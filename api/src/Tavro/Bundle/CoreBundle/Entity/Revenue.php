@@ -28,12 +28,6 @@ class Revenue extends ApiEntity
 {
 
     /**
-     * @ORM\Column(type="string", length=500, nullable=false)
-     * @Groups({"api", "tavro", "summary"})
-     */
-    protected $title;
-
-    /**
      * @ORM\Column(type="string", length=8000, nullable=true)
      * @Groups({"api", "tavro", "summary"})
      */
@@ -113,29 +107,6 @@ class Revenue extends ApiEntity
     public function getType()
     {
         return $this->type;
-    }
-
-    /**
-     * Set title
-     *
-     * @param string $title
-     * @return Revenue
-     */
-    public function setTitle($title)
-    {
-        $this->title = $title;
-
-        return $this;
-    }
-
-    /**
-     * Get title
-     *
-     * @return string
-     */
-    public function getTitle()
-    {
-        return $this->title;
     }
 
     /**
