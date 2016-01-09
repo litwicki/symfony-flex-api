@@ -14,12 +14,10 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 class ExceptionListener implements ContainerAwareInterface
 {
     private $twig;
-    private $environment;
 
     public function __construct($twig, $env)
     {
         $this->twig = $twig;
-        $this->environment = $env;
     }
 
     /**
@@ -30,31 +28,10 @@ class ExceptionListener implements ContainerAwareInterface
         $this->container = $container;
     }
 
-//    public function onKernelException(GetResponseForExceptionEvent $event)
-//    {
-//        // You get the exception object from the received event
-//        $exception = $event->getException();
-//
-//        // HttpExceptionInterface is a special type of exception that
-//        // holds status code and header details
-//        if ($exception instanceof HttpExceptionInterface) {
-//            $statusCode = $exception->getStatusCode();
-//        }
-//        else {
-//            $statusCode = Response::HTTP_INTERNAL_SERVER_ERROR;
-//        }
-//
-//        $request = $event->getRequest();
-//        $accept = AcceptHeader::fromString($request->headers->get('Accept'));
-//
-//        /**
-//         * @TODO: Log Exceptions here..
-//         */
-//
-//
-//
-//    }
-
+    /**
+     * Handle the Kernel Exception
+     * @param \Symfony\Component\HttpKernel\Event\GetResponseForExceptionEvent $event
+     */
     public function onKernelException(GetResponseForExceptionEvent $event)
     {
         // You get the exception object from the received event
@@ -73,10 +50,16 @@ class ExceptionListener implements ContainerAwareInterface
 
         if(preg_match('/api/', $request->getHost())) {
 
-            $response = new JsonResponse(array(
-                'code' => 1,
+            $data = array(
+                'code' => $statusCode,
                 'message' => $exception->getMessage(),
-            ));
+            );
+
+            if($this->container->get('kernel')->getEnvironment() != 'prod') {
+                $data['trace'] = $exception->getTrace();
+            }
+
+            $response = new JsonResponse($data);
 
             $event->setResponse($response);
 
