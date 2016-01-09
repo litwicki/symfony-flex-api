@@ -7,10 +7,9 @@
 {% block header %}{% endblock %}
 {% block body %}
 
-  <div class="clearfix">
-    <div class="col-md-6 col-lg-offset-3">
+  <div class="row">
+    <div class="col-xs-6">
 
-      <h1><i class="fa fa-fw fa-sign-in"></i> Login</h1>
       <div class="panel panel-default">
         <div class="panel-body">
           {% if error %}
@@ -47,15 +46,7 @@
         </div>
       </div>
     </div>
-    <div class="col-md-2"></div>
-    <div class="col-md-6">
-
-      {% if activate_success is defined and activate_success %}
-        <div class="alert alert-success">
-          <strong>Congratulations!</strong><br />
-          <p>You are successfully activated!</p>
-        </div>
-      {% endif %}
+    <div class="col-xs-6">
 
     </div>
   </div>

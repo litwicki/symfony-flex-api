@@ -79,4 +79,4 @@ security:
 
         # Leave last!
         - { path: ^/, roles: [IS_AUTHENTICATED_ANONYMOUSLY], host: app_hostname }
-        - { path: ^/api/*, roles: [ROLE_USER], host: api.tavro.dev }
+        - { path: ^/, roles: [ROLE_USER], host: api.tavro.dev }

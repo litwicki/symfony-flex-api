@@ -53,7 +53,11 @@
   <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
   <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 
+  {% if app.environment == 'prod' %}
   <link rel="stylesheet" href="{{ amazon_s3_url }}/{{ asset_bucket }}/assets/css/tavro.css" />
+  {% else %}
+  <link rel="stylesheet" href="/assets/css/tavro.css" />
+  {% endif %}
 
 </head>
 <body ng-app="tavro" class="{% block body_classes %}{% endblock %}">
@@ -96,9 +100,20 @@
       </div><!--/.container-fluid -->
     </nav>
 
+    {% block jumbotron %}{% endblock %}
+
     <!-- begin body -->
     <section id="page-body">
-
+      {% if route != 'index' %}
+      <div id="app-header">
+        <!-- "That the powerful play goes on, and you may contribute a verse." -->
+      </div>
+      {% endif %}
+      <div class="container">
+        {% if route != 'index' %}
+          <header id="page-header">{% block header %}{% endblock %}</header>
+        {% endif %}
+      </div>
       <div class="container">
 
         {% for label, flashes in app.session.flashbag.all %}
