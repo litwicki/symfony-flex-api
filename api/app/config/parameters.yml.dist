@@ -39,9 +39,5 @@ parameters:
     aws_secret_access_key: ~
     aws_s3_region: us-east-1
     image_bucket: tavro-images-dev
-    file_bucket: tavro-files-dev
     asset_bucket: tavro-assets-dev
     amazon_s3_url: 'https://s3.amazonaws.com'
-
-    github_username: github_username
-    github_password: github_password

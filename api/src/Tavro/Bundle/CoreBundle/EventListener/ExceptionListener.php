@@ -55,7 +55,6 @@ class ExceptionListener implements ContainerAwareInterface
 //
 //    }
 
-
     public function onKernelException(GetResponseForExceptionEvent $event)
     {
         // You get the exception object from the received event
@@ -71,40 +70,46 @@ class ExceptionListener implements ContainerAwareInterface
         }
 
         $request = $event->getRequest();
-        $accept = AcceptHeader::fromString($request->headers->get('Accept'));
 
-        /**
-         *  If the original request is accepting application/json skip this...
-         */
-        if ($accept->has('application/json') || strpos('curl', $request->headers->get('user-agent'))) {
-            return;
-        }
+        if(preg_match('/api/', $request->getHost())) {
 
-        switch ($statusCode) {
-            case '401':
-            case '403':
-            case '404':
-            case '405':
-            case '406':
-                $filename = 'TavroCoreBundle:Error:general.html.twig';
-                break;
-            default:
-                $filename = 'TavroCoreBundle:Error:exception.html.twig';
-                break;
-        }
-
-        $page = array(
-            'exception' => array(
-                'trace' => $exception->getTraceAsString(),
+            $response = new JsonResponse(array(
+                'code' => 1,
                 'message' => $exception->getMessage(),
-                'statusCode' => $statusCode,
-                'line' => $exception->getLine()
-            )
-        );
+            ));
 
-        $response = new Response($this->twig->render($filename, $page));
+            $event->setResponse($response);
 
-        $event->setResponse($response);
+        }
+        else {
+
+            switch ($statusCode) {
+                case '401':
+                case '403':
+                case '404':
+                case '405':
+                case '406':
+                    $filename = 'TavroCoreBundle:Error:general.html.twig';
+                    break;
+                default:
+                    $filename = 'TavroCoreBundle:Error:exception.html.twig';
+                    break;
+            }
+
+            $page = array(
+                'exception' => array(
+                    'trace' => $exception->getTraceAsString(),
+                    'message' => $exception->getMessage(),
+                    'statusCode' => $statusCode,
+                    'line' => $exception->getLine()
+                )
+            );
+
+            $response = new Response($this->twig->render($filename, $page));
+
+            $event->setResponse($response);
+
+        }
 
     }
 

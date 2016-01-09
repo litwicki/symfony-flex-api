@@ -62,8 +62,8 @@ class People extends AbstractFixture implements OrderedFixtureInterface, Contain
                 'username' => 'admin',
                 'roles' => array('ROLE_ADMIN'),
             ),
-            'super@tavro.dev' => array(
-                'username' => 'owner',
+            'superuser@tavro.dev' => array(
+                'username' => 'superuser',
                 'roles' => array('ROLE_SUPERUSER'),
             ),
         );

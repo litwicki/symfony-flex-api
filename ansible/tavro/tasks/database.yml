@@ -1,12 +1,5 @@
 ---
-- hosts: localhost
-  vars:
-    dbname: "{{dbname}}"
-    dbpass: "{{dbpass}}"
-    dbuser: "{{dbuser}}"
-    dbhost: "{{dbhost}}"
-    api_root: /var/www/tavro/api/
-    core_fixture_path: src/Tavro/Bundle/CoreBundle/DataFixtures/ORM/Core/v1
+- hosts: all
 
   tasks:
     - name: drop database

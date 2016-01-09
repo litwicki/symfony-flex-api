@@ -33,22 +33,16 @@ You can now access your dev machine at [https://tavro.dev](https://tavro.dev)
 
 ## Scripts
 
-Available scripts to automate or speed up several tasks.
+First, we need to setup our ansible environment variables.
 
-Make sure you're *in* the Virtual Machine first, and in the repo root:
 
-    $ cd /path/to/tavro
     
 ### Reset Database
 
-    $ sudo bash ./scripts/symfony-db.sh
-    
-### Rebuild an empty Database
-
-    $ sudo bash ./scripts/symfony-db-empty.sh
+    $ ansible-playbook /var/www/tavro/ansible/roles/tavro/tasks/database.yml --extra-vars="dbname={dbname} dbuser={dbuser} dbpass={dbpass} dbhost={dbhost}"
     
 ### Rebuild an environment with Demo Data
 
 **NOTE** This process takes a substantial amount of time, and will upload 'dummy' images to AWS!
 
-    $ sudo bash ./scripts/build-demo.sh
+    $ ansible-playbook /var/www/tavro/ansible/roles/tavro/tasks/demo.yml --extra-vars=""

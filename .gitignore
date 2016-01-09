@@ -79,6 +79,7 @@ api/app/config/parameters.yml
 api/vendor
 api/npm-debug.log
 api/aws.json
+api/ansible/vars/env.yml
 
 app/web/assets/*
 app/aws.json

@@ -15,6 +15,19 @@
 
   <div class="row">
     <div class="col-xs-6">
+      <label for="api_password">API Key</label>
+      <input type="text" class="form-control" name="api_key" id="api_key" ng-model="user.api_key" />
+    </div>
+    <div class="col-xs-6">
+      <label for="api_password">API Password</label>
+      <input type="text" class="form-control" name="api_password" id="api_password" ng-model="user.api_password" />
+    </div>
+  </div>
+
+  <hr />
+
+  <div class="row">
+    <div class="col-xs-6">
       <div class="panel panel-default">
         <div class="panel-heading"><code>GET</code> Organization <span class="text-muted pull-right">/api/v1/Organization:id</span></div>
         <div class="panel-body">

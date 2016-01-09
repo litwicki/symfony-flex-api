@@ -6,6 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Tavro\Bundle\ApiBundle\Exception\ApiException;
 use Tavro\Bundle\ApiBundle\Exception\ApiNotFoundException;
 use Tavro\Bundle\ApiBundle\Exception\ApiRequestLimitException;
@@ -17,7 +18,6 @@ use Litwicki\Common\Common;
 
 class ApiController extends Controller
 {
-
     /**
      * @param $data
      * @param string $format
@@ -108,6 +108,7 @@ class ApiController extends Controller
      * @param $_format
      *
      * @return \Symfony\Component\HttpFoundation\Response
+     * @throws
      */
     public function getUserEntitiesAction(Request $request, $entity, $_format)
     {

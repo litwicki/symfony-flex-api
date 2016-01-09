@@ -74,8 +74,9 @@ security:
         - { path: ^/register$, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/signup$, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/profile$, role: ROLE_USER }
-        - { path: ^/api, role: IS_AUTHENTICATED_ANONYMOUSLY, ips: [127.0.0.1, ::1] }
+        - { path: ^/api, role: ROLE_USER, ips: [127.0.0.1, ::1] }
         - { path: ^/admin, role: ROLE_ADMIN }
 
         # Leave last!
-        - { path: ^/, roles: [IS_AUTHENTICATED_ANONYMOUSLY] }
+        - { path: ^/, roles: [IS_AUTHENTICATED_ANONYMOUSLY], host: app_hostname }
+        - { path: ^/api/*, roles: [ROLE_USER], host: api.tavro.dev }
