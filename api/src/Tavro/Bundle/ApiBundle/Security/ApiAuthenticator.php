@@ -59,12 +59,8 @@ class ApiAuthenticator implements SimplePreAuthenticatorInterface, Authenticatio
         try {
 
             if (!$userProvider instanceof UserProviderInterface) {
-                throw new \InvalidArgumentException(
-                    sprintf(
-                        'The user provider must be an instance of Symfony\Component\Security\Core\User\UserProviderInterface (%s was given).',
-                        get_class($userProvider)
-                    )
-                );
+                //'The user provider must be an instance of Symfony\Component\Security\Core\User\UserProviderInterface (%s was given).',
+                throw new \InvalidArgumentException('Invalid User Provider type given!');
             }
 
             $apiKey = $token->getCredentials();

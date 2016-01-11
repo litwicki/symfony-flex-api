@@ -76,18 +76,18 @@ class People extends AbstractFixture implements OrderedFixtureInterface, Contain
             $users[] = $handler->create($data);
         }
 
-        /**
-         * Generate a bunch of "fake" users.
-         */
-        $finder = new Finder();
-
-        //create the female users
-        $finder->files()->in('src/Tavro/Bundle/CoreBundle/Resources/public/img/avatars/female');
-        $this->createDummyUsers($manager, $finder);
-
-        //create the male users
-        $finder->files()->in('src/Tavro/Bundle/CoreBundle/Resources/public/img/avatars/male');
-        $this->createDummyUsers($manager, $finder);
+//        /**
+//         * Generate a bunch of "fake" users.
+//         */
+//        $finder = new Finder();
+//
+//        //create the female users
+//        $finder->files()->in('src/Tavro/Bundle/CoreBundle/Resources/public/img/avatars/female');
+//        $this->createDummyUsers($manager, $finder);
+//
+//        //create the male users
+//        $finder->files()->in('src/Tavro/Bundle/CoreBundle/Resources/public/img/avatars/male');
+//        $this->createDummyUsers($manager, $finder);
 
         $manager->flush();
 

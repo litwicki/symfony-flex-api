@@ -11,6 +11,7 @@ use Tavro\Bundle\ApiBundle\Exception\ApiException;
 use Tavro\Bundle\ApiBundle\Exception\ApiNotFoundException;
 use Tavro\Bundle\ApiBundle\Exception\ApiRequestLimitException;
 use Tavro\Bundle\ApiBundle\Exception\ApiAccessDeniedException;
+use Tavro\Bundle\CoreBundle\Exception\Form\InvalidFormException;
 
 use Doctrine\Common\Inflector\Inflector;
 
@@ -215,7 +216,7 @@ class ApiController extends Controller
             $data = json_decode($request->getContent(), true);
 
             $handler = $this->getHandler($entity);
-            $newEntity = $handler->post($data);
+            $newEntity = $handler->post($request, $data);
 
             $routeOptions = array(
                 'group'   => $group,
@@ -257,10 +258,10 @@ class ApiController extends Controller
             $handler = $this->getHandler($entity);
 
             if (!($item = $handler->find($id))) {
-                $item = $handler->post($item, $post);
+                $item = $handler->post($request, $item, $post);
             }
             else {
-                $item = $handler->put($item, $post);
+                $item = $handler->put($request, $item, $post);
             }
 
             $routeOptions = array(
@@ -306,7 +307,7 @@ class ApiController extends Controller
             $handler = $this->getHandler($entity);
             $object = $handler->find($id);
 
-            $handler->patch($object, $patch);
+            $handler->patch($request, $object, $patch);
 
             $mod = $handler->find($id);
             $data = $this->serialize($mod, 'json', $group);

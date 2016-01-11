@@ -3,7 +3,7 @@ api_get_entity:
     defaults: { _controller: TavroApiBundle:Api:get, _format: json }
     methods: GET
     requirements:
-        group: "(api|tavro|profile|summary|detail)"
+        group: "(api|tavro)"
         id: \d+
         _format:  json|xml
 
@@ -19,7 +19,7 @@ api_get_all_entities:
     defaults: { _controller: TavroApiBundle:Api:getAll, _format: json }
     methods: GET
     requirements:
-        group: "(api|tavro|summary|detail)"
+        group: "(api|tavro)"
         _format:  json|xml
 
 api_post_entity:

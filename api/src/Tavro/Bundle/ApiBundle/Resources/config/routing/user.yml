@@ -3,7 +3,7 @@
 # ==============
 api_user_regenerate_api_key:
     path: /users/{user}/reset/api-key.{_format}
-    defaults: { _controller: TavroApiBundle:UserApi:resetApiKey, _format: json}
+    defaults: { _controller: CamelotApiBundle:User:resetApiKey, _format: json}
     methods: POST
     requirements:
         id: \d+
@@ -11,7 +11,7 @@ api_user_regenerate_api_key:
 
 api_user_regenerate_api_password:
     path: /users/{user}/reset/api-password.{_format}
-    defaults: { _controller: TavroApiBundle:UserApi:resetApiPassword, _format: json}
+    defaults: { _controller: CamelotApiBundle:User:resetApiPassword, _format: json}
     methods: POST
     requirements:
         id: \d+

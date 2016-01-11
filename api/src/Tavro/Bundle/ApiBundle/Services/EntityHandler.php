@@ -13,6 +13,7 @@ use Symfony\Component\Debug\Exception\ContextErrorException;
 use Symfony\Component\DependencyInjection\Container;
 use Symfony\Component\Form\Form;
 use Symfony\Component\Form\Exception\FormException;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\File\Exception\AccessDeniedException;
 
 use Tavro\Bundle\CoreBundle\Entity\User;
@@ -251,15 +252,18 @@ class EntityHandler implements HandlerInterface
     }
 
     /**
+     * Submit a new Entity.
+     *
+     * @param \Symfony\Component\HttpFoundation\Request $request
      * @param array $parameters
      *
      * @return \Tavro\Bundle\CoreBundle\Model\EntityInterface|void
      * @throws \Exception
      */
-    public function post(array $parameters)
+    public function post(Request $request, array $parameters)
     {
         try {
-            return $this->create($parameters);
+            return $this->create($request, $parameters);
         }
         catch(ApiAccessDeniedException $e) {
             throw $e;
@@ -284,13 +288,13 @@ class EntityHandler implements HandlerInterface
      * @return \Tavro\Bundle\CoreBundle\Model\EntityInterface|mixed
      * @throws \Exception
      */
-    public function create(array $parameters)
+    public function create(Request $request, array $parameters)
     {
         try {
 
             $entity = $this->createEntity();
             $this->validate($entity, $parameters);
-            $entity = $this->processForm($entity, $parameters, 'POST');
+            $entity = $this->processForm($request, $entity, $parameters, 'POST');
 
             /**
              * If this is an ApiEntity immediately save so the slug property
@@ -321,17 +325,18 @@ class EntityHandler implements HandlerInterface
     }
 
     /**
-     * Edit a Entity.
+     * Edit an Interface.
      *
-     * @param EntityInterface $entity
-     * @param array         $parameters
+     * @param \Symfony\Component\HttpFoundation\Request $request
+     * @param \Tavro\Bundle\CoreBundle\Model\EntityInterface $entity
+     * @param array $parameters
      *
-     * @return EntityInterface
+     * @return \Tavro\Bundle\CoreBundle\Model\EntityInterface|void
      */
-    public function put(EntityInterface $entity, array $parameters)
+    public function put(Request $request, EntityInterface $entity, array $parameters)
     {
         try {
-            return $this->processForm($entity, $parameters, 'PUT');
+            return $this->processForm($request, $entity, $parameters, 'PUT');
         }
         catch(ApiAccessDeniedException $e) {
             throw $e;
@@ -387,13 +392,14 @@ class EntityHandler implements HandlerInterface
     }
 
     /**
+     * @param \Symfony\Component\HttpFoundation\Request $request
      * @param \Tavro\Bundle\CoreBundle\Model\EntityInterface $entity
      * @param array $parameters
      *
      * @return \Tavro\Bundle\CoreBundle\Model\EntityInterface
      * @throws \Exception
      */
-    public function patch(EntityInterface $entity, array $parameters)
+    public function patch(Request $request, EntityInterface $entity, array $parameters)
     {
         try {
 
@@ -402,7 +408,7 @@ class EntityHandler implements HandlerInterface
                 throw new ApiAccessDeniedException($message);
             }
 
-            return $this->applyPatch($entity, $parameters);
+            return $this->applyPatch($request, $entity, $parameters);
 
         }
         catch(\Exception $e) {
@@ -414,16 +420,18 @@ class EntityHandler implements HandlerInterface
      * Separate the actual application of the patch parameters, so we can override
      * in individual entities without replicating this code repeatedly.
      *
+     * @param \Symfony\Component\HttpFoundation\Request $request
      * @param \Tavro\Bundle\CoreBundle\Model\EntityInterface $entity
      * @param array $parameters
      *
-     * @throws \Exception
      * @return \Tavro\Bundle\CoreBundle\Model\EntityInterface
+     * @throws \Exception
+     * @internal param $Request
      */
-    public function applyPatch(EntityInterface $entity, array $parameters)
+    public function applyPatch(Request $request, EntityInterface $entity, array $parameters)
     {
         try {
-            $entity = $this->processForm($entity, $parameters, 'PATCH');
+            $entity = $this->processForm($request, $entity, $parameters, 'PATCH');
             return $entity;
         }
         catch(\Exception $e) {
@@ -434,6 +442,7 @@ class EntityHandler implements HandlerInterface
     /**
      * Process the form submission through the specified FormType validation process.
      *
+     * @param \Symfony\Component\HttpFoundation\Request $request
      * @param \Tavro\Bundle\CoreBundle\Model\EntityInterface $entity
      * @param array $parameters
      * @param string $method
@@ -441,7 +450,7 @@ class EntityHandler implements HandlerInterface
      * @throws \Exception
      * @throws \Symfony\Component\Debug\Exception\ContextErrorException
      */
-    public function processForm(EntityInterface $entity, array $parameters, $method = 'PUT')
+    public function processForm(Request $request, EntityInterface $entity, array $parameters, $method = 'PUT')
     {
         try {
 
@@ -540,24 +549,15 @@ class EntityHandler implements HandlerInterface
         try {
 
             $array = array(
-                'Tavro\Bundle\CoreBundle\Entity\User'         => 'user_type',
-                'Tavro\Bundle\CoreBundle\Entity\Mod'          => 'mod_type',
+                'Tavro\Bundle\CoreBundle\Entity\User'         => 'Tavro\Bundle\CoreBundle\Form\UserType',
                 'Tavro\Bundle\CoreBundle\Entity\Image'        => 'image_type',
                 'Tavro\Bundle\CoreBundle\Entity\File'         => 'file_type',
                 'Tavro\Bundle\CoreBundle\Entity\Node'         => 'node_type',
                 'Tavro\Bundle\CoreBundle\Entity\Comment'      => 'comment_type',
-                'Tavro\Bundle\CoreBundle\Entity\Ability'      => 'ability_type',
-                'Tavro\Bundle\CoreBundle\Entity\Bane'         => 'bane_type',
-                'Tavro\Bundle\CoreBundle\Entity\Boon'         => 'boon_type',
-                'Tavro\Bundle\CoreBundle\Entity\TavroClass' => 'class_type',
-                'Tavro\Bundle\CoreBundle\Entity\Item'         => 'item_type',
-                'Tavro\Bundle\CoreBundle\Entity\Race'         => 'race_type',
-                'Tavro\Bundle\CoreBundle\Entity\Realm'        => 'realm_type',
                 'Tavro\Bundle\CoreBundle\Entity\Role'         => 'role_type',
                 'Tavro\Bundle\CoreBundle\Entity\Variable'     => 'variable_type',
                 'Tavro\Bundle\CoreBundle\Entity\NodeTag'      => 'node_tag_type',
                 'Tavro\Bundle\CoreBundle\Entity\Tag'          => 'tag_type',
-                'Tavro\Bundle\CoreBundle\Entity\ModUser'      => 'mod_user_type',
             );
 
             if (array_key_exists($entity, $array)) {

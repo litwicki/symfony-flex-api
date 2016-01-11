@@ -28,8 +28,8 @@ class AngularApiAuthenticator extends ApiAuthenticator implements SimplePreAuthe
     public function createToken(Request $request, $providerKey)
     {
 
-        // look for a tavro-api-key header
-        $apiKey = base64_decode($request->headers->get('tavro-api-key'));
+        // look for a camelot-api-key header
+        $apiKey = base64_decode($request->headers->get('camelot-api-key'));
 
         if (!$apiKey) {
             return null;

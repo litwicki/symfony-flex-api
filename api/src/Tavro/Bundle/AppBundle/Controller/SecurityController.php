@@ -11,6 +11,9 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 
 use Tavro\Bundle\CoreBundle\Entity\User;
 use Tavro\Bundle\CoreBundle\Form\UserType;
@@ -162,10 +165,10 @@ class SecurityController extends Controller
     {
         $form = $this->createFormBuilder()
             ->setAction($this->generateUrl('forgot_password_submit'))
-            ->add('email', 'email', array(
+            ->add('email', EmailType::class, array(
                 'required' => true
             ))
-            ->add('submit', 'submit', array(
+            ->add('submit', SubmitType::class, array(
                 'label' => 'Submit',
                 'attr' => array('class' => 'btn btn-default'),
             ));
@@ -182,19 +185,19 @@ class SecurityController extends Controller
     {
         $form = $this->createFormBuilder()
             ->setAction($this->generateUrl('reset_password_submit', array('token' => $token)))
-            ->add('password', 'password', array(
+            ->add('password', PasswordType::class, array(
                 'required' => true,
                 'attr' => array(
                     'placeholder' => 'Enter your new password'
                 )
             ))
-            ->add('password_confirm', 'password', array(
+            ->add('password_confirm', PasswordType::class, array(
                 'required' => true,
                 'attr' => array(
                     'placeholder' => 'Confirm the password'
                 )
             ))
-            ->add('submit', 'submit', array(
+            ->add('submit', SubmitType::class, array(
                 'label' => 'Submit',
                 'attr' => array('class' => 'btn btn-default'),
             ));
@@ -283,7 +286,7 @@ class SecurityController extends Controller
     {
 
         $this->get('security.token_storage')->setToken(null);
-        $this->get('request')->getSession()->invalidate();
+        $request->getSession()->invalidate();
 
         $user = $this->getDoctrine()
                 ->getManager()

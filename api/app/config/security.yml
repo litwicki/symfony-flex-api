@@ -2,10 +2,7 @@ security:
     role_hierarchy:
         ROLE_API: [ROLE_USER]
         ROLE_DEVELOPER: [ROLE_USER]
-        ROLE_CSE: [ROLE_USER]
-        ROLE_CONTRIBUTOR: [ROLE_USER]
-        ROLE_MODERATOR: [ROLE_USER]
-        ROLE_ADMIN: [ROLE_API,ROLE_MODERATOR,ROLE_CONTRIBUTOR,ROLE_DEVELOPER]
+        ROLE_ADMIN: [ROLE_API,ROLE_DEVELOPER]
         ROLE_SUPERUSER: [ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
 
     providers:
@@ -26,27 +23,8 @@ security:
             pattern:  ^/(_(profiler|wdt)|css|images|js)/
             security: false
 
-        api_v1:
-            #host: %api_hostname%
-            pattern: ^/api
-            anonymous: ~
-            provider: api_key_user_provider
-            stateless: true
-            #http_basic: ~
-            simple_preauth:
-                authenticator: tavro.angular_api_authenticator
-
-        api_v2:
-            host: %api_hostname%
-            pattern: ^/api
-            anonymous: ~
-            provider: api_key_user_provider
-            stateless: true
-            simple_preauth:
-                authenticator: tavro.api_authenticator
-
         main:
-            host: %app_hostname%
+            host: %api_hostname%
             pattern: ^/
             anonymous: ~
             provider: main
@@ -73,10 +51,8 @@ security:
         - { path: ^/logout, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/register$, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/signup$, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/profile$, role: ROLE_USER }
-        - { path: ^/api, role: ROLE_USER, ips: [127.0.0.1, ::1] }
-        - { path: ^/admin, role: ROLE_ADMIN }
+        - { path: ^/forgot, role: IS_AUTHENTICATED_ANONYMOUSLY }
 
         # Leave last!
-        - { path: ^/, roles: [IS_AUTHENTICATED_ANONYMOUSLY], host: app_hostname }
-        - { path: ^/, roles: [ROLE_USER], host: api.tavro.dev }
+
+        - { path: ^/, roles: [ROLE_USER] }

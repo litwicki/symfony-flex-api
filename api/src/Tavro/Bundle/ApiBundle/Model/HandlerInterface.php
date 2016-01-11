@@ -34,35 +34,38 @@ Interface HandlerInterface
      *
      * @api
      *
+     * @param \Symfony\Component\HttpFoundation\Request $request
      * @param array $parameters
      *
-     * @return EntityInterface
+     * @return \Tavro\Bundle\CoreBundle\Model\EntityInterface
      */
-    public function post(array $parameters);
+    public function post(Request $request, array $parameters);
 
     /**
      * Edit a User.
      *
      * @api
      *
+     * @param \Symfony\Component\HttpFoundation\Request $request
      * @param EntityInterface   $entity
      * @param array           $parameters
      *
      * @return EntityInterface
      */
-    public function put(EntityInterface $entity, array $parameters);
+    public function put(Request $request, EntityInterface $entity, array $parameters);
 
     /**
      * Partially update a User.
      *
      * @api
      *
+     * @param \Symfony\Component\HttpFoundation\Request $request
      * @param EntityInterface   $entity
      * @param array           $parameters
      *
      * @return EntityInterface
      */
-    public function patch(EntityInterface $entity, array $parameters);
+    public function patch(Request $request, EntityInterface $entity, array $parameters);
     
     /**
      * Partially update a User.

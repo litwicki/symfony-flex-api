@@ -29,9 +29,6 @@ services:
         calls:
             - [ setContainer, [ '@service_container' ] ]
 
-    cache:
-        class: Doctrine\Common\Cache\ApcCache
-
     tavro_serializer:
         class: Tavro\Bundle\CoreBundle\Services\Serializer
         arguments: ["@serializer"]
@@ -42,14 +39,6 @@ services:
             - [ setContainer, [ '@service_container' ] ]
         tags:
             - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest, priority: 2 }
-
-    tavro.exception_listener:
-        class: Tavro\Bundle\CoreBundle\EventListener\ExceptionListener
-        calls:
-            - [ setContainer, [ '@service_container' ] ]
-        arguments: ["@twig", "%kernel.environment%"]
-        tags:
-            - { name: kernel.event_listener, event: kernel.exception, method: onKernelException }
 
     # Twig
     twig.listener.date:

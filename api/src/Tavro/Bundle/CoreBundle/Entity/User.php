@@ -215,7 +215,7 @@ class User extends Entity implements UserInterface, \Serializable
 
     public function __toString()
     {
-        return $this->username;
+        return strval($this->username);
     }
 
     /**
