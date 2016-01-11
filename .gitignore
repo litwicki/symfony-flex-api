@@ -80,6 +80,9 @@ api/vendor
 api/npm-debug.log
 api/aws.json
 api/ansible/vars/env.yml
+api/node_modules
+api/bower_components
+api/web/assets/*
 
 app/web/assets/*
 app/aws.json
