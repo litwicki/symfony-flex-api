@@ -46,7 +46,14 @@ class UserVoter implements VoterInterface, ContainerAwareInterface
         }
 
         // Allow all creates
-        if($attribute == self::CREATE || $attribute == self::VIEW) {
+        if($attribute == self::CREATE) {
+            return VoterInterface::ACCESS_GRANTED;
+        }
+
+        /**
+         * Except for SELF, noly Admins can view Users.
+         */
+        if($attribute == self::VIEW && ($user->getId() === $entity->getId())) {
             return VoterInterface::ACCESS_GRANTED;
         }
 
@@ -57,7 +64,10 @@ class UserVoter implements VoterInterface, ContainerAwareInterface
             return VoterInterface::ACCESS_GRANTED;
         }
 
-        if($user instanceof User && $attribute == self::DELETE && ($user->getId() === $entity->getId())) {
+        /**
+         * Only Admins can delete, but not themselves!
+         */
+        if($user instanceof User && $attribute == self::DELETE && ($user->getId() != $entity->getId())) {
             return VoterInterface::ACCESS_GRANTED;
         }
 

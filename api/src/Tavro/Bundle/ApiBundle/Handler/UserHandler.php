@@ -252,6 +252,64 @@ class UserHandler extends EntityHandler implements ApiHandlerInterface
     }
 
     /**
+     * Find all Entities (limit the response size)
+     * Optionally page the result set by LIMIT and OFFSET.
+     *
+     * @param array $params
+     *
+     * @return array|void
+     */
+    public function findAll(array $params = null)
+    {
+        try {
+
+            $page = isset($params['page']) ? $params['page'] : 1;
+            $size = isset($params['size']) ? $params['size'] : $this->pageSize;
+
+            $sort = (isset($params['sort'])) ? $params['sort'] : 'desc';
+            $orderBy = (isset($params['orderBy'])) ? $params['orderBy'] : 'id';
+
+            $sortOrder = array($orderBy => $sort);
+
+            if(!isset($params['status'])) {
+                $params['status'] = $this->statusActive; //@TODO: Make this a constant fetched from Model\Entity.php
+            }
+
+            $offset = ($page - 1) * $size;
+
+            $params = $this->filterParams($params);
+
+            $entities = $this->repository->findBy(
+                $params,
+                $sortOrder,
+                $size,
+                $offset
+            );
+
+            $items = array();
+
+            foreach($entities as $entity) {
+                if($this->auth->isGranted('view', $entity)) {
+                    $items[] = $entity;
+                }
+            }
+
+            /**
+             * Filter out Users that are not
+             */
+
+            return $items;
+
+        }
+        catch(ApiAccessDeniedException $e) {
+            throw $e;
+        }
+        catch(\Exception $e) {
+            throw new ApiException($e->getMessage());
+        }
+    }
+
+    /**
      * @param \Tavro\Bundle\CoreBundle\Entity\User $user
      * @param array $roles
      *
