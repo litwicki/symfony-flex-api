@@ -50,3 +50,7 @@ services:
     tavro.handler.node_tags:
         class: Tavro\Bundle\ApiBundle\Handler\NodeTagHandler
         arguments: ["@service_container", "@doctrine.orm.main_entity_manager", Tavro\Bundle\CoreBundle\Entity\NodeTag]
+
+    tavro.handler.organizations:
+        class: Tavro\Bundle\ApiBundle\Handler\OrganizationHandler
+        arguments: ["@service_container", "@doctrine.orm.main_entity_manager", Tavro\Bundle\CoreBundle\Entity\Organization]

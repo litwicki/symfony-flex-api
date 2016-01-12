@@ -39,3 +39,7 @@ services:
         class: Tavro\Bundle\CoreBundle\Form\TagType
         tags:
          -  { name: form.type, alias: tag_type }
+    tavro.form.organization:
+        class: Tavro\Bundle\CoreBundle\Form\OrganizationType
+        tags:
+         -  { name: form.type, alias: organizaton_type }
