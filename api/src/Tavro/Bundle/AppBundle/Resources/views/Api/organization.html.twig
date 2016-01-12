@@ -1,0 +1,53 @@
+
+  <div class="panel panel-default">
+    <div class="panel-heading"><code>GET</code> Organization <span class="text-muted pull-right">/api/v1/Organization:id</span></div>
+    <div class="panel-body">
+
+      <p>This provides data about an individual Organization.</p>
+
+      <table class="table table-striped">
+        <tr>
+          <th>Parameter</th>
+          <th>Value</th>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+        <tr>
+          <td>:id</td>
+          <td><input type="text" class="form-control" /></td>
+          <td>string</td>
+          <td>The ID of the organization to retrieve.</td>
+        </tr>
+        <tr>
+          <td>locale</td>
+          <td>
+            <select class="form-control">
+              <option value="en-us">English (US)</option>
+              <option value="en-gb">English (UK)</option>
+            </select>
+          </td>
+          <td>string</td>
+          <td>What locale to use in the response</td>
+        </tr>
+      </table>
+
+      <button type="submit" class="btn btn-sm btn-success">
+        <i class="fa fa-fw fa-refresh"></i> Run
+      </button>
+
+    </div>
+  </div>
+
+
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4 class="panel-title">Request</h4>
+    </div>
+    <ul class="list-group">
+      <li class="list-group-item">URI: <code>/api/v1/Organization/1</code></li>
+      <li class="list-group-item">Status: <code>403 Forbidden</code></li>
+    </ul>
+  </div>
+
+  <h4>Response</h4>
+  <pre class="danger">Content-Type: application/json<br>Date: Fri, 08 Jan 2016 22:00:55 GMT<br>Content-Length: 61<br>Connection: keep-alive<hr />{<br>  "code": 403,<br>  "type": "Forbidden",<br>  "detail": "Account Inactive"<br>}</pre>

@@ -3,7 +3,9 @@
  * @copyright Zoadilack, zoadilack.com
  */
 
-@import url('https://fonts.googleapis.com/css?family=Passion+One|Kadwa|Droid+Sans|Droid+Serif');
+@import url('https://fonts.googleapis.com/css?family=Ubuntu:400,400italic,700,700italic|Ubuntu+Mono');
+@import url('https://fonts.googleapis.com/css?family=Passion+One|Kadwa');
+
 $green: #27ae60;
 $offwhite: #f9f9f9;
 $white: #fff;
@@ -11,7 +13,7 @@ $black: #000;
 
 body {
   background: $black;
-  font-family: 'Droid Sans', 'Helvetica Neue', Georgia, "Times New Roman", Times, serif !important;
+  font-family: 'Ubuntu', 'Helvetica Neue', Georgia, "Times New Roman", Times, serif !important;
 }
 
 h1,h2,h3 {
@@ -20,6 +22,10 @@ h1,h2,h3 {
 
 h4,h5,h6 {
   font-family: Kadwa, serif !important;
+}
+
+code, pre {
+  font-family: 'Ubuntu Mono';
 }
 
 #page {
