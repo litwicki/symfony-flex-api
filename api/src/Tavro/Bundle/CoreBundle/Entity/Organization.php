@@ -47,6 +47,11 @@ class Organization extends ApiEntity
     protected $owner;
 
     /**
+     * @ORM\OneToMany(targetEntity="Tavro\Bundle\CoreBundle\Entity\Node", mappedBy="organization", cascade={"remove"})
+     */
+    protected $nodes;
+
+    /**
      * @ORM\OneToMany(targetEntity="Tavro\Bundle\CoreBundle\Entity\UserOrganization", mappedBy="organization", cascade={"remove"})
      */
     protected $user_organizations;
@@ -90,11 +95,6 @@ class Organization extends ApiEntity
      * @ORM\OneToMany(targetEntity="Tavro\Bundle\CoreBundle\Entity\Revenue", mappedBy="organization", cascade={"remove"})
      */
     protected $revenues;
-
-    /**
-     * @ORM\OneToMany(targetEntity="Tavro\Bundle\CoreBundle\Entity\Variable", mappedBy="organization", cascade={"remove"})
-     */
-    protected $variables;
 
     /**
      * Set body
