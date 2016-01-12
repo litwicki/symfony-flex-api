@@ -623,7 +623,7 @@ class User extends Entity implements UserInterface, \Serializable
      */
     public function getGuid()
     {
-        return $this->api_enabled ? $this->guid : '********************************';
+        return $this->guid;
     }
 
     /**
