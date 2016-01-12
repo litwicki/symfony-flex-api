@@ -1,5 +1,11 @@
 /** Tavro */
 jQuery(document).ready(function ($) {
+  $('.input-group.date').datepicker();
+  $('.bootstrap-select').selectpicker();
+
+  $('.btn-reset').click(function(){
+    $($(this).attr('rel')).val('');
+  });
 
   $("ul.nav-tabs li").on("click", function() {
     var cookieTabName = 'tab-'+document.URL.replace("/", "").replace(":", "").replace("%", "").replace("#", "");

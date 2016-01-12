@@ -33,6 +33,18 @@ var javascripts = [
   'src/Tavro/Bundle/AppBundle/Resources/public/js/common/textAngular/textAngular.js',
   'src/Tavro/Bundle/AppBundle/Resources/public/js/*.js',
   'src/Tavro/Bundle/AppBundle/Resources/public/js/app.jquery.js',
+  'src/Tavro/Bundle/AppBundle/Resources/public/js/app.js',
+  'src/Tavro/Bundle/AppBundle/Resources/public/js/directives/*.js',
+  'src/Tavro/Bundle/AppBundle/Resources/public/js/filters/*.js',
+  'src/Tavro/Bundle/AppBundle/Resources/public/js/components/ComponentController.js',
+  'src/Tavro/Bundle/AppBundle/Resources/public/js/components/core/CoreController.js',
+  'src/Tavro/Bundle/AppBundle/Resources/public/js/services/tavroServices.js',
+  'src/Tavro/Bundle/AppBundle/Resources/public/js/services/ajaxServices.js',
+  'src/Tavro/Bundle/AppBundle/Resources/public/js/services/alertServices.js',
+  'src/Tavro/Bundle/AppBundle/Resources/public/js/services/ApiServices.js',
+  'src/Tavro/Bundle/AppBundle/Resources/public/js/services/dialogs.js',
+  'src/Tavro/Bundle/AppBundle/Resources/public/js/services/dialogs-default-translations.js',
+  'src/Tavro/Bundle/ApiBundle/Resources/public/js/*.js'
 ];
 
 var images = [
