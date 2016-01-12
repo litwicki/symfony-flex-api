@@ -4,81 +4,96 @@
 
 {% block body %}
 
-  <div class="container">
-    <h1>A clever heading title</h1>
-    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean malesuada placerat sapien malesuada aliquet. Integer eleifend mi sit amet lacus sagittis rutrum. Curabitur nunc ante, rhoncus eget cursus et, pharetra sit amet felis. Donec neque nunc, condimentum nec risus vitae, ultricies viverra tellus. Phasellus lorem massa, interdum a blandit nec, mollis eget felis. Ut ornare risus ut odio sollicitudin, sit amet sollicitudin metus hendrerit. Interdum et malesuada fames ac ante ipsum primis in faucibus. Aliquam iaculis egestas rhoncus. Aenean vestibulum sed elit vitae efficitur.</p>
-    <p>Nullam lacinia enim ligula, ac mattis orci tristique placerat. Nunc scelerisque a dui laoreet cursus. Curabitur eget sapien a elit egestas elementum ut quis enim. Sed posuere purus nec quam convallis, pulvinar bibendum urna laoreet. Morbi viverra odio nec nulla gravida, in lobortis metus finibus. In tempus eu dui sed sollicitudin. Duis pellentesque porttitor lobortis.</p>
-    <p>Etiam vitae placerat arcu. Cras posuere imperdiet ante nec viverra. Sed imperdiet pretium est, ac finibus ante tristique id. Fusce quis rhoncus ipsum. Vestibulum et diam pretium, rhoncus ex ut, ornare risus. Fusce tristique placerat leo at hendrerit. Mauris pretium, odio at aliquet volutpat, lacus lacus volutpat ligula, id dignissim ex ex aliquet massa. Phasellus sit amet sem ornare, sollicitudin turpis ut, condimentum quam. Nulla nec hendrerit ante, ac suscipit nibh. Mauris ornare convallis rutrum. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.</p>
+  <div class="page-header">
+    <h1><i class="fa fa-fw fa-code-fork"></i> Tavro Api</h1>
+    <p>Grab your business by the horns, and use Tavro to do it!</p>
   </div>
 
-  <hr />
-
   <div class="row">
-    <div class="col-xs-6">
-      <label for="api_password">API Key</label>
-      <input type="text" class="form-control" name="api_key" id="api_key" placeholder="{{ user.apiKey }}" />
+
+    <div class="col-xs-2">
+      <ul class="nav nav-pills nav-stacked" role="tablist">
+        <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab"><i class="fa fa-fw fa-code"></i> Tavro Api</a></li>
+        <li role="presentation"><a href="#organizations" aria-controls="organiations" role="tab" data-toggle="tab"><i class="fa fa-fw fa-building"></i> Organization</a></li>
+        <li role="presentation"><a href="#organizations" aria-controls="organiations" role="tab" data-toggle="tab"><i class="fa fa-fw fa-group"></i> Organization User</a></li>
+        <li role="presentation"><a href="#organizations" aria-controls="organiations" role="tab" data-toggle="tab"><i class="fa fa-fw fa-money"></i> Revenue</a></li>
+        <li role="presentation"><a href="#organizations" aria-controls="organiations" role="tab" data-toggle="tab"><i class="fa fa-fw fa-bar-chart"></i> Expense</a></li>
+        <li role="presentation"><a href="#organizations" aria-controls="organiations" role="tab" data-toggle="tab"><i class="fa fa-fw fa-bank"></i> Funding</a></li>
+        <li role="presentation"><a href="#organizations" aria-controls="organiations" role="tab" data-toggle="tab"><i class="fa fa-fw fa-cube"></i> Product</a></li>
+        <li role="presentation"><a href="#organizations" aria-controls="organiations" role="tab" data-toggle="tab"><i class="fa fa-fw fa-tasks"></i> Service</a></li>
+        <li role="presentation"><a href="#organizations" aria-controls="organiations" role="tab" data-toggle="tab"><i class="fa fa-fw fa-user"></i> User</a></li>
+      </ul>
     </div>
-    <div class="col-xs-6">
-      <label for="api_password">API Password</label>
-      <input type="text" class="form-control" name="api_password" id="api_password" placeholder="{{ user.apiPassword }}"/>
-    </div>
-  </div>
 
-  <hr />
+    <div class="col-xs-10">
+      <div class="tab-content">
+        <div role="tabpanel" class="tab-pane active" id="home">
+          <div class="col-xs-6">
+            <label for="api_password">API Key</label>
+            <input type="text" class="form-control" name="api_key" id="api_key" placeholder="{{ user.apiKey }}" />
+          </div>
+          <div class="col-xs-6">
+            <label for="api_password">API Password</label>
+            <input type="text" class="form-control" name="api_password" id="api_password" placeholder="{{ user.apiPassword }}"/>
+          </div>
+        </div>
+        <div role="tabpanel" class="tab-pane" id="organizations">
+          <div class="col-xs-6">
+            <div class="panel panel-default">
+              <div class="panel-heading"><code>GET</code> Organization <span class="text-muted pull-right">/api/v1/Organization:id</span></div>
+              <div class="panel-body">
 
-  <div class="row">
-    <div class="col-xs-6">
-      <div class="panel panel-default">
-        <div class="panel-heading"><code>GET</code> Organization <span class="text-muted pull-right">/api/v1/Organization:id</span></div>
-        <div class="panel-body">
+                <p>This provides data about an individual Organization.</p>
 
-          <p>This provides data about an individual Organization.</p>
+                <table class="table table-striped">
+                  <tr>
+                    <th>Parameter</th>
+                    <th>Value</th>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                  <tr>
+                    <td>:id</td>
+                    <td><input type="text" class="form-control" /></td>
+                    <td>string</td>
+                    <td>The ID of the organization to retrieve.</td>
+                  </tr>
+                  <tr>
+                    <td>locale</td>
+                    <td>
+                      <select class="form-control">
+                        <option value="en-us">English (US)</option>
+                        <option value="en-gb">English (UK)</option>
+                      </select>
+                    </td>
+                    <td>string</td>
+                    <td>What locale to use in the response</td>
+                  </tr>
+                </table>
 
-          <table class="table table-striped">
-            <tr>
-              <th>Parameter</th>
-              <th>Value</th>
-              <th>Type</th>
-              <th>Description</th>
-            </tr>
-            <tr>
-              <td>:id</td>
-              <td><input type="text" class="form-control" /></td>
-              <td>string</td>
-              <td>The ID of the organization to retrieve.</td>
-            </tr>
-            <tr>
-              <td>locale</td>
-              <td>
-                <select class="form-control">
-                  <option value="en-us">English (US)</option>
-                  <option value="en-gb">English (UK)</option>
-                </select>
-              </td>
-              <td>string</td>
-              <td>What locale to use in the response</td>
-            </tr>
-          </table>
+              </div>
+            </div>
+          </div>
+          <div class="col-xs-6">
 
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <h4 class="panel-title">Request</h4>
+              </div>
+              <ul class="list-group">
+                <li class="list-group-item">URI: <code>/api/v1/Organization/1</code></li>
+                <li class="list-group-item">Status: <code>403 Forbidden</code></li>
+              </ul>
+            </div>
+
+            <h4>Response</h4>
+            <pre class="danger">Content-Type: application/json<br>Date: Fri, 08 Jan 2016 22:00:55 GMT<br>Content-Length: 61<br>Connection: keep-alive<hr />{<br>  "code": 403,<br>  "type": "Forbidden",<br>  "detail": "Account Inactive"<br>}</pre>
+
+          </div>
         </div>
       </div>
     </div>
-    <div class="col-xs-6">
 
-      <div class="panel panel-default">
-        <div class="panel-heading">
-          <h4 class="panel-title">Request</h4>
-        </div>
-        <ul class="list-group">
-          <li class="list-group-item">URI: <code>/api/v1/Organization/1</code></li>
-          <li class="list-group-item">Status: <code>403 Forbidden</code></li>
-        </ul>
-      </div>
-
-      <h4>Response</h4>
-      <pre class="danger">Content-Type: application/json<br>Date: Fri, 08 Jan 2016 22:00:55 GMT<br>Content-Length: 61<br>Connection: keep-alive<hr />{<br>  "code": 403,<br>  "type": "Forbidden",<br>  "detail": "Account Inactive"<br>}</pre>
-
-    </div>
   </div>
 
 {% endblock %}
