@@ -24,7 +24,7 @@ class VariableType extends AbstractType
             ->add('status')
             ->add('create_date', DateTimeType::class)
             ->add('update_date', DateTimeType::class)
-            ->add('submit', SubmitTYpe::class)
+            ->add('submit', SubmitType::class)
         ;
     }
     
