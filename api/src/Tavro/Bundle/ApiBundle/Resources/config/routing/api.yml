@@ -7,13 +7,6 @@ api_get_entity:
         id: \d+
         _format:  json|xml
 
-api_typeahead_entities:
-    path:  /typeahead/{entity}.{_format}
-    defaults: { _controller: TavroApiBundle:Api:typeahead, _format: json }
-    methods: GET
-    requirements:
-        _format:  json|xml
-
 api_get_all_entities:
     path:  /{group}/{entity}.{_format}
     defaults: { _controller: TavroApiBundle:Api:getAll, _format: json }
@@ -56,22 +49,9 @@ api_delete_entity:
         id: \d+
         _format:  json|xml
 
-# ==============
-# UNIQUE ROUTES
-# ==============
-api_user_regenerate_api_key:
-    path: /users/{user}/reset/api-key.{_format}
-    defaults: { _controller: TavroApiBundle:User:resetApiKey, _format: json}
-    methods: POST
+api_typeahead_entities:
+    path:  /typeahead/{entity}.{_format}
+    defaults: { _controller: TavroApiBundle:Api:typeahead, _format: json }
+    methods: GET
     requirements:
-        id: \d+
-        _format: json|xml
-
-api_user_regenerate_api_password:
-    path: /users/{user}/reset/api-password.{_format}
-    defaults: { _controller: TavroApiBundle:User:resetApiPassword, _format: json}
-    methods: POST
-    requirements:
-        id: \d+
-        _format: json|xml
-
+        _format:  json|xml

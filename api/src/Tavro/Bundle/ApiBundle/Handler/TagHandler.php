@@ -29,9 +29,8 @@ class TagHandler extends EntityHandler
 
                 $em = $this->container->get('doctrine')->getManager();
 
-                $query = $em->createQuery(
-                    'SELECT t FROM TavroCoreBundle:Tag t WHERE t.title LIKE :title'
-                );
+                $sql = 'SELECT t FROM TavroCoreBundle:Tag t WHERE t.title LIKE :title';
+                $query = $em->createQuery($sql);
 
                 $query->setParameter('title', '%' . $parameters['title'] . '%');
 
@@ -43,16 +42,6 @@ class TagHandler extends EntityHandler
             }
 
             return $entities;
-
-//            $items = array();
-//
-//            foreach($entities as $entity) {
-//                if($this->auth->isGranted('view', $entity)) {
-//                    $items[] = $entity;
-//                }
-//            }
-//
-//            return $items;
 
         }
         catch(ApiAccessDeniedException $e) {
