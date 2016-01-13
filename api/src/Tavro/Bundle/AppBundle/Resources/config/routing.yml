@@ -5,9 +5,13 @@ remove_trailing_slash:
         url: .*/$
     methods: get
 
+index:
+    path: /
+    defaults: { _controller: "TavroAppBundle:Default:index" }
+
 security:
     resource: "@TavroAppBundle/Resources/config/routing/security.yml"
 
-tavro:
-    resource: "@TavroAppBundle/Resources/config/routing/default.yml"
-
+documentation:
+    resource: "@TavroAppBundle/Resources/config/routing/documentation.yml"
+    prefix: /docs

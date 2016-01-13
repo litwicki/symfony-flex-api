@@ -33,10 +33,7 @@ class DefaultController extends Controller
      */
     public function indexAction(Request $request)
     {
-        $page = array(
-            'user' => $this->getUser()
-        );
-        return $this->render('TavroAppBundle:Default:index.html.twig', $page);
+        return $this->redirectToRoute('api_doc_index');
     }
 
 }
