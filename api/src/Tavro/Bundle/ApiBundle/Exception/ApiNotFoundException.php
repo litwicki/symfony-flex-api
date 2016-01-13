@@ -5,7 +5,7 @@ namespace Tavro\Bundle\ApiBundle\Exception;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 
 /**
- * @author jake@tavromods.com
+ * @author jake@zoadilack.com
  */
 class ApiNotFoundException extends HttpException
 {

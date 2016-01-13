@@ -3,7 +3,7 @@
 namespace Tavro\Bundle\ApiBundle\Handler;
 
 use Tavro\Bundle\ApiBundle\Model\OwnershipHandlerInterface;
-use Tavro\Bundle\ApiBundle\Services\EntityHandler;
+use Tavro\Bundle\ApiBundle\Services\OrganizationEntityHandler;
 use Tavro\Bundle\ApiBundle\Exception\ApiException;
 use Tavro\Bundle\ApiBundle\Exception\ApiNotFoundException;
 use Tavro\Bundle\ApiBundle\Exception\ApiAccessDeniedException;
@@ -26,7 +26,7 @@ use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
  *
  * @package Tavro\Bundle\ApiBundle\Handler
  */
-class NodeHandler extends EntityHandler implements OwnershipHandlerInterface
+class NodeHandler extends OrganizationEntityHandler implements OwnershipHandlerInterface
 {
 
     /**

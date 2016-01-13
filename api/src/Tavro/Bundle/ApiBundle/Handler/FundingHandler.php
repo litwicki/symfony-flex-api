@@ -5,6 +5,7 @@ namespace Tavro\Bundle\ApiBundle\Handler;
 use Tavro\Bundle\ApiBundle\Exception\ApiException;
 use Tavro\Bundle\ApiBundle\Model\ApiHandlerInterface;
 use Tavro\Bundle\ApiBundle\Services\EntityHandler;
+use Tavro\Bundle\ApiBundle\Services\OrganizationEntityHandler;
 use Tavro\Bundle\CoreBundle\Exception\Form\InvalidFormException;
 use Tavro\Bundle\CoreBundle\Model\EntityInterface;
 use Tavro\Bundle\ApiBundle\Exception\ApiAccessDeniedException;
@@ -28,7 +29,7 @@ use Symfony\Component\HttpFoundation\Request;
  *
  * @package Tavro\Bundle\ApiBundle\Handler
  */
-class FundingHandler extends EntityHandler
+class FundingHandler extends OrganizationEntityHandler
 {
 
 }

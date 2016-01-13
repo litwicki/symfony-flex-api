@@ -5,7 +5,7 @@ namespace Tavro\Bundle\CoreBundle\Exception\Password;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 
 /**
- * @author jake@tavromods.com
+ * @author jake@zoadilack.com
  */
 class PasswordComplexityException extends HttpException
 {

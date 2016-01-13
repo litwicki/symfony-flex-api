@@ -7,7 +7,7 @@ use Symfony\Component\HttpKernel\Exception\HttpException;
 /**
  * @author jake@zoadilack.com
  */
-class InvalidUsernameException extends HttpException
+class NotAuthorizedOrganizationException extends HttpException
 {
     /**
      * Constructor.
@@ -18,6 +18,6 @@ class InvalidUsernameException extends HttpException
      */
     public function __construct($message = NULL, \Exception $previous = NULL, $code = 0)
     {
-        parent::__construct(400, $message, $previous, array(), $code);
+        parent::__construct(403, $message, $previous, array(), $code);
     }
 }

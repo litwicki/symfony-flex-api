@@ -45,6 +45,7 @@ class EntityHandler implements HandlerInterface
     public $amazon_s3_url;
     public $isModerator = false;
     public $isAdmin = false;
+    public $user = false;
 
     public function __construct(Container $container, ObjectManager $om, $entityClass)
     {
@@ -63,13 +64,10 @@ class EntityHandler implements HandlerInterface
         $this->statusActive = $this->container->getparameter('status_active');
         $this->amazon_s3_url = $this->container->getParameter('amazon_s3_url');
 
-        $this->statusPending = $this->container->getparameter('status_pending');
-        $this->statusDisabled = $this->container->getparameter('status_disabled');
-        $this->statusActive = $this->container->getparameter('status_active');
-
         $token = $this->tokenStorage->getToken();
 
         if(!is_null($token)) {
+            $this->user = $token->getUser();
             $this->isModerator = $this->auth->isGranted('ROLE_MODERATOR');
             $this->isAdmin = $this->auth->isGranted('ROLE_ADMIN');
         }
