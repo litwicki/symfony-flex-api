@@ -68,13 +68,43 @@
 
     <div class="page-header">
       <h2>Authentication</h2>
-      <p>Authentication is handled with HTTP Basic Authentication using your API KEY and API PASSWORD.</p>
+      <p>Authentication is handled with <strong>HTTP Basic Authentication</strong> using your <code>API KEY</code> and <code>API PASSWORD</code>.</p>
     </div>
+
+    <h4>Sample Authenticated Request</h4>
+
+    <pre>curl -u API_KEY:API_PASSWORD https://{YOUR_ACCOUNT_NAME}.tavro.io/api/v1/organizations.json</pre>
 
     <div class="page-header">
       <h2>Response Data</h2>
       <p>Data is returned as <code>XML</code> or <code>JSON</code>. If you do not specify a proper <code>Accept</code> header, <code>JSON</code> will be returned.</p>
     </div>
+
+    <h4>Sample Response Data</h4>
+
+    <pre><code class="jsonview">{
+    data: [
+      {
+        id: 14,
+        status: 1,
+        create_date: "2016-01-11T18:30:36+0000",
+        update_date: "2016-01-11T18:30:36+0000",
+        username: "user",
+        email: "user@tavro.dev",
+        last_online_date: "2016-01-13T19:09:48+0000",
+        api_enabled: true,
+        guid: "1ecfcf03-c31a-42b4-b8ad-6dd507b25d6d",
+        nodes: [ ],
+        organizations: [ ],
+        roles: [
+            "ROLE_USER"
+        ],
+        avatar: null
+      }
+    ],
+    code: 200,
+    message: "something clever..."
+  }</code></pre>
 
   </div>
 

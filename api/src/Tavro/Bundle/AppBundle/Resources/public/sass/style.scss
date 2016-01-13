@@ -1,4 +1,4 @@
-@import url('variables.scss');
+@import "variables.scss";
 
 html,body {
   font-family: 'Ubuntu';
@@ -6,6 +6,11 @@ html,body {
 
 code,pre {
   font-family: 'Ubuntu Mono';
+}
+
+code {
+  background-color: transparent;
+  color: $brand-success;
 }
 
 h1,h2 {
