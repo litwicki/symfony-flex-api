@@ -5,6 +5,10 @@ namespace Tavro\Bundle\CoreBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Gregwar\CaptchaBundle\Type\CaptchaType;
 
 class UserRegisterType extends AbstractType
 {
@@ -16,24 +20,19 @@ class UserRegisterType extends AbstractType
     {
         $builder
             ->add('username')
-            ->add('email', 'email')
-            ->add('password', 'password')
-            ->add('password_confirm', 'password', array(
+            ->add('email', EmailType::class)
+            ->add('password', PasswordType::class)
+            ->add('password_confirm', PasswordType::class,  array(
                 'mapped' => false,
             ))
-            ->add('captcha', 'captcha', array(
+            ->add('captcha', CaptchaType::class, array(
                 'label' => 'Human Check',
                 'mapped' => false,
                 'attr' => array(
                     'placeholder' => 'Please enter the code above'
                 )
             ))
-            ->add('submit', 'submit', array(
-                'label' => 'Sign Up',
-                'attr' => array(
-                    'class' => 'btn btn-success'
-                )
-            ))
+            ->add('submit', SubmitType::class)
         ;
     }
 

@@ -40,14 +40,9 @@ class FileHandler extends EntityHandler
 
             switch($directory) {
 
-                case 'mods':
-                    $adapterName    = 'mods';
-                    $alias          = 'mods_filesystem';
-                    break;
-
                 default:
-                    $adapterName    = 'mods';
-                    $alias          = 'mods_filesystem';
+                    $adapterName    = 'tavro';
+                    $alias          = 'tavro_filesystem';
                     break;
 
             }
@@ -172,24 +167,6 @@ class FileHandler extends EntityHandler
         }
         catch(\Exception $e) {
             throw new ApiException($e->getMessage());
-        }
-    }
-
-    /**
-     * @param \Tavro\Bundle\CoreBundle\Entity\Mod $mod
-     *
-     * @return object
-     * @throws \Exception
-     */
-    public function findByMod(Mod $mod)
-    {
-        try {
-            return $this->repository->findOneBy(array(
-                'mod' => $mod->getId()
-            ));
-        }
-        catch(\Exception $e) {
-            throw $e;
         }
     }
 

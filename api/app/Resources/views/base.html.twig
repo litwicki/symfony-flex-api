@@ -29,7 +29,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Tavro{% if app.environment != 'prod' %} ({{ app.environment }}) {% endif %} - {% block title %}The Tavro.io Api!{% endblock %}</title>
+  <title>Tavro{% if app.environment != 'prod' %} ({{ app.environment }}) {% endif %} - {% block title %}The Tavro Unchained UI Mod resource!{% endblock %}</title>
 
   <link rel="apple-touch-icon" sizes="57x57" href="/apple-icon-57x57.png">
   <link rel="apple-touch-icon" sizes="60x60" href="/apple-icon-60x60.png">
@@ -50,8 +50,11 @@
   <meta name="theme-color" content="#ffffff">
 
   <!--BEGIN CSS-->
+
   <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
   <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  <link href="https://fonts.googleapis.com/css?family=Ubuntu:400,400italic,700,700italic|Ubuntu+Mono" rel="stylesheet" type="text/css" />
+  <link href="https://fonts.googleapis.com/css?family=Oswald" rel="stylesheet" type="text/css" />
 
   {% if app.environment == 'prod' %}
   <link rel="stylesheet" href="{{ amazon_s3_url }}/{{ asset_bucket }}/assets/css/tavro.css" />
@@ -60,62 +63,14 @@
   {% endif %}
 
 </head>
-<body ng-app="tavro" class="{% block body_classes %}{% endblock %}">
-<div id="tavro" ng-controller="CoreController as coreCtrl" ng-init="init()">
+<body class="{% block body_classes %}{% endblock %}">
+<div id="tavro">
 
   <section id="page">
 
-    <!-- Static navbar -->
-    <nav class="navbar navbar-inverse">
-      <div class="container">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-controls="navbar">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="/"><i class="ra ra-fw ra-helmet text-danger"></i> Tavro</a>
-        </div>
-        <div id="navbar" class="navbar-collapse collapse">
-          <ul id="tavro-menu" class="nav navbar-nav">
-            <li><a href="#"><i class="fa fa-fw fa-code"></i> Documentation</a></li>
-          </ul>
-
-          <ul class="nav navbar-nav navbar-right">
-            {% if app.user %}
-            <li class="dropdown">
-              <a href="#" data-toggle="dropdown" ng-model="user.username"><i class="fa fa-fw fa-user"></i> {{app.user.username}} <i class="fa fa-fw fa-caret-down"></i></a>
-              <ul class="dropdown-menu" role="menu">
-                <li><a href="#"><i class="fa fa-fw fa-sign-out"></i> Sign Out</a></li>
-              </ul>
-            </li>
-            {#<li><a href="{{ path('premium') }}"><span class="btn btn-xs btn-success"><i class="fa fa-fw fa-dollar"></i> Premium</span></a></li>#}
-            {% else %}
-            <li><a href="{{ url('login') }}"><i class="fa fa-fw fa-sign-in"></i> Login</a></li>
-            {% endif %}
-          </ul>
-
-        </div><!--/.nav-collapse -->
-      </div><!--/.container-fluid -->
-    </nav>
-
-    {% block jumbotron %}{% endblock %}
-
     <!-- begin body -->
     <section id="page-body">
-      {% if route != 'index' %}
-      <div id="app-header">
-        <!-- "That the powerful play goes on, and you may contribute a verse." -->
-      </div>
-      {% endif %}
-      <div class="container">
-        {% if route != 'index' %}
-          <header id="page-header">{% block header %}{% endblock %}</header>
-        {% endif %}
-      </div>
-      <div class="container">
-
+      <div class="container-fluid">
         {% for label, flashes in app.session.flashbag.all %}
 
           {% if flashes|length > 0 %}
@@ -140,9 +95,10 @@
 
   <!-- begin footer -->
   <section id="footer">
-    <div class="container">
+    <div class="container-fluid">
       <footer>
-
+        <hr />
+        Copyright &copy; 2016 <a href="http://zoadilack.com">Zoadilack</a>.
       </footer>
     </div>
   </section>
@@ -152,35 +108,6 @@
   <script src="//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/js/bootstrap.min.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js"></script>
-
-  <!-- begin angular -->
-  <script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.2/angular.min.js"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.2/angular-cookies.js"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.2/angular-animate.min.js"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.2/angular-sanitize.min.js"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.2/angular-route.min.js"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/angular-ui/0.4.0/angular-ui.min.js"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/textAngular/1.4.1/dist/textAngular.min.js"></script>
-  <!-- end angular -->
-
-  {% if app.environment == 'prod' %}
-  <script type="text/javascript" src="{{ amazon_s3_url }}/{{ asset_bucket }}/assets/js/tavro.js"></script>
-  {% else %}
-  <script type="text/javascript" src="/assets/js/tavro.js"></script>
-  {% endif %}
-
-  <script type="text/javascript">
-    // Make sure the tavro object is available.
-    if (typeof tavro === 'undefined') {
-      tavro = {};
-    }
-    tavro.current_path = "{{ app.request.attributes.get('_route') }}";
-    tavro.current_user = "{% if app.user.id is defined %}{{ app.user.id }}{% else %}0{% endif %}";
-    tavro.api_hostname = "{{ api_hostname }}";
-    tavro.asset_path = "{{ amazon_s3_url }}/{{ asset_bucket }}/assets/img";
-  </script>
-
-  {% block js %}{% endblock %}
 
 {% if app.environment == 'prod' %}
   <script>

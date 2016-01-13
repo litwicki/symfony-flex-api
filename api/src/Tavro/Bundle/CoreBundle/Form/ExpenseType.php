@@ -9,7 +9,7 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 
-class VariableType extends AbstractType
+class ExpenseType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
@@ -18,13 +18,29 @@ class VariableType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name')
+            ->add('body')
+            ->add('title')
             ->add('slug')
-            ->add('value')
             ->add('status')
             ->add('create_date', DateTimeType::class)
             ->add('update_date', DateTimeType::class)
-            ->add('submit', SubmitTYpe::class)
+            ->add('category', EntityType::class, array(
+                'class' => 'TavroCoreBundle:ExpenseCategory',
+                'choice_label' => 'Category'
+            ))
+            ->add('user', EntityType::class, array(
+                'class' => 'TavroCoreBundle:User',
+                'choice_label' => 'User'
+            ))
+            ->add('organization', EntityType::class, array(
+                'class' => 'TavroCoreBundle:Organization',
+                'choice_label' => 'Organization'
+            ))
+            ->add('updated_by', EntityType::class, array(
+                'class' => 'TavroCoreBundle:User',
+                'choice_label' => 'User'
+            ))
+            ->add('submit', SubmitType::class)
         ;
     }
     
@@ -34,7 +50,7 @@ class VariableType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Tavro\Bundle\CoreBundle\Entity\Variable'
+            'data_class' => 'Tavro\Bundle\CoreBundle\Entity\Expense'
         ));
     }
 }

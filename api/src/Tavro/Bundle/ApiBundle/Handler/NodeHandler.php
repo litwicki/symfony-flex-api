@@ -12,6 +12,7 @@ use Tavro\Bundle\CoreBundle\Model\ApiEntityInterface;
 use Symfony\Component\Form\Exception\TransformationFailedException;
 use Symfony\Component\Form\Exception\UnexpectedTypeException;
 use Symfony\Component\PropertyAccess\Exception\InvalidPropertyPathException;
+use Symfony\Component\HttpFoundation\Request;
 use Tavro\Bundle\CoreBundle\Entity\User;
 use Tavro\Bundle\CoreBundle\Entity\Node;
 use Tavro\Bundle\CoreBundle\Entity\NodeRead;
@@ -34,7 +35,7 @@ class NodeHandler extends EntityHandler implements OwnershipHandlerInterface
      * @return \Tavro\Bundle\CoreBundle\Model\EntityInterface|mixed
      * @throws \Exception
      */
-    public function create(array $parameters)
+    public function create(Request $request, array $parameters)
     {
         try {
 
@@ -54,7 +55,7 @@ class NodeHandler extends EntityHandler implements OwnershipHandlerInterface
             }
 
             $entity = $this->createEntity();
-            $entity = $this->processForm($entity, $parameters, 'POST');
+            $entity = $this->processForm($request, $entity, $parameters, 'POST');
 
             if(isset($parameters['node_tags'])) {
                 $tags = $parameters['node_tags'];
@@ -67,7 +68,7 @@ class NodeHandler extends EntityHandler implements OwnershipHandlerInterface
              * is updated correctly with the entity Id: {id}-{url-save-title}
              */
             if($entity instanceof ApiEntityInterface) {
-                return $this->put($entity, $parameters);
+                return $this->put($request, $entity, $parameters);
             }
 
             return $entity;
@@ -149,7 +150,7 @@ class NodeHandler extends EntityHandler implements OwnershipHandlerInterface
      * @return \Tavro\Bundle\CoreBundle\Model\EntityInterface
      * @throws \Exception
      */
-    public function patch(EntityInterface $entity, array $parameters)
+    public function patch(Request $request, EntityInterface $entity, array $parameters)
     {
         try {
 
@@ -158,7 +159,7 @@ class NodeHandler extends EntityHandler implements OwnershipHandlerInterface
                 throw new ApiAccessDeniedException($message);
             }
 
-            $node = $this->applyPatch($entity, $parameters);
+            $node = $this->applyPatch($request, $entity, $parameters);
 
             $token = $this->tokenStorage->getToken();
 

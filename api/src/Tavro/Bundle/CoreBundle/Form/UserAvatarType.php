@@ -5,6 +5,10 @@ namespace Tavro\Bundle\CoreBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 
 class UserAvatarType extends AbstractType
 {
@@ -15,13 +19,8 @@ class UserAvatarType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('avatar', 'file')
-            ->add('submit', 'submit', array(
-                'label' => 'Save Avatar',
-                'attr' => array(
-                    'class' => 'btn btn-sm btn-primary'
-                )
-            ))
+            ->add('avatar', FileType::class)
+            ->add('submit', SubmitType::class)
         ;
     }
 

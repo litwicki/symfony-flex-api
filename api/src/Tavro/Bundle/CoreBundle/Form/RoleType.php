@@ -5,6 +5,9 @@ namespace Tavro\Bundle\CoreBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 
 class RoleType extends AbstractType
 {
@@ -17,27 +20,24 @@ class RoleType extends AbstractType
         $builder
             ->add('name')
             ->add('role')
+            ->add('status')
+            ->add('create_date', DateTimeType::class)
+            ->add('update_date', DateTimeType::class)
+            ->add('users', EntityType::class, array(
+                'class' => 'TavroCoreBundle:User',
+                'choice_label' => 'User'
+            ))
+            ->add('submit', SubmitType::class)
         ;
     }
     
     /**
-     * Define the default validation groups.
-     *
-     * @param \Symfony\Component\OptionsResolver\OptionsResolver $resolver
+     * @param OptionsResolver $resolver
      */
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'validation_groups' => array('api'),
-            'csrf_protection' => false,
+            'data_class' => 'Tavro\Bundle\CoreBundle\Entity\Role'
         ));
-    }
-
-    /**
-     * @return string
-     */
-    public function getName()
-    {
-        return 'role_type';
     }
 }

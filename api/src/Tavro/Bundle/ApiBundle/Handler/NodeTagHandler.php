@@ -10,6 +10,7 @@ use Tavro\Bundle\CoreBundle\Model\ApiEntityInterface;
 use Symfony\Component\Form\Exception\TransformationFailedException;
 use Symfony\Component\Form\Exception\UnexpectedTypeException;
 use Symfony\Component\PropertyAccess\Exception\InvalidPropertyPathException;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Class NodeTagHandler
@@ -108,12 +109,12 @@ class NodeTagHandler extends EntityHandler
      * @return \Tavro\Bundle\CoreBundle\Model\EntityInterface|mixed
      * @throws \Exception
      */
-    public function create(array $parameters)
+    public function create(Request $request, array $parameters)
     {
         try {
 
             $entity = $this->createEntity();
-            $entity = $this->processForm($entity, $parameters, 'POST');
+            $entity = $this->processForm($request, $entity, $parameters, 'POST');
 
             return $entity;
 

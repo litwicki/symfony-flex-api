@@ -1,79 +1,11 @@
-/**
- * Aggregated core style for Tavro
- * @copyright Zoadilack, zoadilack.com
- */
-
-@import url('https://fonts.googleapis.com/css?family=Ubuntu:400,400italic,700,700italic|Ubuntu+Mono');
-@import url('https://fonts.googleapis.com/css?family=Passion+One|Kadwa');
-
-$green: #27ae60;
-$offwhite: #f9f9f9;
-$white: #fff;
-$black: #000;
-
-body {
-  background: $black;
-  font-family: 'Ubuntu', 'Helvetica Neue', Georgia, "Times New Roman", Times, serif !important;
+html,body {
+  font-family: 'Ubuntu';
 }
 
-h1,h2,h3 {
-  font-family: 'Passion One', sans-serif !important;
-}
-
-h4,h5,h6 {
-  font-family: Kadwa, serif !important;
-}
-
-code, pre {
+code,pre {
   font-family: 'Ubuntu Mono';
 }
 
-#page {
-
-  background: $offwhite;
-
-  .navbar, .navbar-inverse {
-    border-radius: 0px !important;
-  }
-
-  #page-body {
-
-    header {
-      .page-header {
-        margin-top: 0;
-      }
-    }
-
-    min-height: 500px;
-    padding: 4em 0;
-
-    #content {
-
-      .tab-content {
-
-        background: #fff;
-        border-bottom-left-radius: 6px;
-        border-bottom-right-radius: 6px;
-        border: 1px solid #ddd;
-        border-top: none !important;
-
-        .tab-pane {
-          padding: 2em;
-        }
-
-      }
-
-    }
-
-    .panel-collapse {
-      .panel-heading {
-        a {
-          text-decoration: none;
-          color: #000 !important;
-        }
-      }
-    }
-
-  }
-
+h1,h2 {
+  font-family: 'Oswald';
 }

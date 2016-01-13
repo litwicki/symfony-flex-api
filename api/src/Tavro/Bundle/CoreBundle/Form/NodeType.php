@@ -5,6 +5,9 @@ namespace Tavro\Bundle\CoreBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 
 class NodeType extends AbstractType
 {
@@ -15,44 +18,38 @@ class NodeType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('title', 'text')
-            ->add('body', 'textarea')
-            ->add('slug', 'text')
-            ->add('display_date', 'date', array('required' => false))
-            ->add('type', 'choice', array(
-                'choices' => array(
-                    'article'   => 'Article',
-                    'page'      => 'Page',
-                    'wiki'      => 'Wiki Entry',
-                    'node'      => 'Node',
-                    'guide'     => 'Guide'
-                ),
-                'required' => true,
-            ))
+            ->add('type')
+            ->add('body')
+            ->add('display_date', DateTimeType::class)
             ->add('views')
+            ->add('title')
+            ->add('slug')
             ->add('status')
-            ->add('user')
+            ->add('create_date', DateTimeType::class)
+            ->add('update_date', DateTimeType::class)
+            ->add('user', EntityType::class, array(
+                'class' => 'TavroCoreBundle:User',
+                'choice_label' => 'User'
+            ))
+            ->add('organization', EntityType::class, array(
+                'class' => 'TavroCoreBundle:Organization',
+                'choice_label' => 'Organization'
+            ))
+            ->add('updated_by', EntityType::class, array(
+                'class' => 'TavroCoreBundle:ComUserment',
+                'choice_label' => 'User'
+            ))
+            ->add('submit', SubmitType::class)
         ;
     }
-
+    
     /**
-     * Define the default validation groups.
-     *
-     * @param \Symfony\Component\OptionsResolver\OptionsResolver $resolver
+     * @param OptionsResolver $resolver
      */
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Tavro\Bundle\CoreBundle\Entity\Node',
-            'csrf_protection' => false
+            'data_class' => 'Tavro\Bundle\CoreBundle\Entity\Node'
         ));
-    }
-
-    /**
-     * @return string
-     */
-    public function getName()
-    {
-        return 'node_type';
     }
 }

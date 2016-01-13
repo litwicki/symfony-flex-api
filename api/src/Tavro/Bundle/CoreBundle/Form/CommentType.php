@@ -5,6 +5,9 @@ namespace Tavro\Bundle\CoreBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 
 class CommentType extends AbstractType
 {
@@ -15,38 +18,31 @@ class CommentType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('title')
             ->add('body')
-            ->add('user')
-            ->add('mod', 'entity', array(
-                'class' => 'Tavro\Bundle\CoreBundle\Entity\Mod',
-                'mapped' => false,
+            ->add('title')
+            ->add('slug')
+            ->add('status')
+            ->add('create_date', DateTimeType::class)
+            ->add('update_date', DateTimeType::class)
+            ->add('user', EntityType::class, array(
+                'class' => 'TavroCoreBundle:User',
+                'choice_label' => 'User'
             ))
-            ->add('node', 'entity', array(
-                'class' => 'Tavro\Bundle\CoreBundle\Entity\Node',
-                'mapped' => false,
+            ->add('updated_by', EntityType::class, array(
+                'class' => 'TavroCoreBundle:User',
+                'choice_label' => 'User'
             ))
+            ->add('submit', SubmitType::class)
         ;
     }
-
+    
     /**
-     * Define the default validation groups.
-     *
-     * @param \Symfony\Component\OptionsResolver\OptionsResolver $resolver
+     * @param OptionsResolver $resolver
      */
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'validation_groups' => array('api'),
-            'csrf_protection' => false
+            'data_class' => 'Tavro\Bundle\CoreBundle\Entity\Comment'
         ));
-    }
-
-    /**
-     * @return string
-     */
-    public function getName()
-    {
-        return 'comment_type';
     }
 }

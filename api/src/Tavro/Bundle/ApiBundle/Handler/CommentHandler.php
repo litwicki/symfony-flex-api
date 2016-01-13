@@ -10,9 +10,9 @@ use Tavro\Bundle\ApiBundle\Exception\ApiException;
 use Tavro\Bundle\CoreBundle\Entity\User;
 use Tavro\Bundle\CoreBundle\Entity\Comment;
 use Tavro\Bundle\CoreBundle\Entity\NodeComment;
-use Tavro\Bundle\CoreBundle\Entity\ModComment;
 use Tavro\Bundle\CoreBundle\Entity\Node;
-use Tavro\Bundle\CoreBundle\Entity\Mod;
+
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Class CommentHandler
@@ -28,7 +28,7 @@ class CommentHandler extends OwnershipEntityHandler
      * @return \Tavro\Bundle\CoreBundle\Model\EntityInterface
      * @throws \Exception
      */
-    public function patch(EntityInterface $entity, array $parameters)
+    public function patch(Request $request, EntityInterface $entity, array $parameters)
     {
         try {
 
@@ -45,7 +45,7 @@ class CommentHandler extends OwnershipEntityHandler
                 $parameters['removed_by'] = $this->container->get('tavro.handler.users')->find($parameters['removed_by']);
             }
 
-            return $this->applyPatch($entity, $parameters);
+            return $this->applyPatch($request, $entity, $parameters);
 
         }
         catch(\Exception $e) {
@@ -58,6 +58,7 @@ class CommentHandler extends OwnershipEntityHandler
      *
      * @param array $params
      *
+     * @return array
      * @throws \Exception
      */
     public function filterParams(array $params)
@@ -65,7 +66,7 @@ class CommentHandler extends OwnershipEntityHandler
         try {
 
             $parameters = array();
-            $options = array('status', 'mod', 'node');
+            $options = array('status');
 
             foreach($params as $name => $value) {
                 if(in_array($name, $options)) {
@@ -168,30 +169,12 @@ class CommentHandler extends OwnershipEntityHandler
      *
      * @return \Tavro\Bundle\CoreBundle\Model\EntityInterface|mixed
      */
-    public function create(array $parameters)
+    public function create(Request $request, array $parameters)
     {
         try {
 
-            if(isset($parameters['mod'])) {
-                $mod = $this->om->getRepository('TavroCoreBundle:Mod')->find($parameters['mod']);
-                unset($parameters['mod']);
-            }
-
-            if(isset($parameters['node'])) {
-                $node = $this->om->getRepository('TavroCoreBundle:Node')->find($parameters['node']);
-                unset($parameters['node']);
-            }
-
             $entity = $this->createEntity();
-            $comment = $this->processForm($entity, $parameters, 'POST');
-
-            if(isset($mod) && $mod instanceof Mod) {
-                $this->createModComment($mod, $comment);
-            }
-
-            if(isset($node) && $node instanceof Node) {
-                $this->createNodeComment($node, $comment);
-            }
+            $comment = $this->processForm($request, $entity, $parameters, 'POST');
 
             return $comment;
 
@@ -201,46 +184,6 @@ class CommentHandler extends OwnershipEntityHandler
         }
         catch(\Exception $e) {
             throw new ApiException($e->getMessage());
-        }
-    }
-
-    /**
-     * @param \Tavro\Bundle\CoreBundle\Entity\Mod $mod
-     * @param \Tavro\Bundle\ApiBundle\Handler\Comment $comment
-     *
-     * @throws \Exception
-     */
-    public function createModComment(Mod $mod, Comment $comment)
-    {
-        try {
-            $mc = new ModComment();
-            $mc->setComment($comment);
-            $mc->setMod($mod);
-            $this->om->persist($mc);
-            $this->om->flush();
-        }
-        catch(\Exception $e) {
-            throw $e;
-        }
-    }
-
-    /**
-     * @param \Tavro\Bundle\CoreBundle\Entity\Node $node
-     * @param \Tavro\Bundle\ApiBundle\Handler\Comment $comment
-     *
-     * @throws \Exception
-     */
-    public function createNodeComment(Node $node, Comment $comment)
-    {
-        try {
-            $mc = new NodeComment();
-            $mc->setComment($comment);
-            $mc->setNode($node);
-            $this->om->persist($mc);
-            $this->om->flush();
-        }
-        catch(\Exception $e) {
-            throw $e;
         }
     }
 

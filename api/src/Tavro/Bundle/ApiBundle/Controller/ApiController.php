@@ -30,7 +30,13 @@ class ApiController extends Controller
     {
         try {
 
-            $response = new Response($data);
+            $result = array(
+                'data' => json_decode($data, true),
+                'code' => $code,
+                'message' => 'something clever...'
+            );
+
+            $response = new Response(json_encode($result));
 
             if($format == 'json') {
                 $response->headers->set('Content-Type', 'application/json');

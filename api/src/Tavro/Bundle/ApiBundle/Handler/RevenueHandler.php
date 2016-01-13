@@ -24,11 +24,11 @@ use Symfony\Component\Debug\Exception\ContextErrorException;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
- * Class OrganizationHandler
+ * Class RevenueHandler
  *
  * @package Tavro\Bundle\ApiBundle\Handler
  */
-class OrganizationHandler extends EntityHandler
+class RevenueHandler extends EntityHandler
 {
 
 }

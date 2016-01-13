@@ -7,11 +7,10 @@ use Tavro\Bundle\ApiBundle\Exception\ApiException;
 use Tavro\Bundle\ApiBundle\Exception\ApiAccessDeniedException;
 use Tavro\Bundle\CoreBundle\Entity\User;
 use Tavro\Bundle\CoreBundle\Entity\Image;
-use Tavro\Bundle\CoreBundle\Entity\Mod;
-use Tavro\Bundle\CoreBundle\Entity\ModImage;
 use Tavro\Bundle\CoreBundle\Model\EntityInterface;
 use Tavro\Bundle\CoreBundle\Model\S3EntityInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\HttpFoundation\Request;
 use Gaufrette\Adapter\AwsS3;
 
 /**
@@ -65,7 +64,7 @@ class ImageHandler extends OwnershipEntityHandler
      * @return \Tavro\Bundle\CoreBundle\Model\EntityInterface|mixed|\Symfony\Component\HttpFoundation\File\UploadedFile
      * @throws \Exception
      */
-    public function upload(UploadedFile $image, $directory = '')
+    public function upload(Request $request, UploadedFile $image, $directory = '')
     {
         try {
 
@@ -88,7 +87,7 @@ class ImageHandler extends OwnershipEntityHandler
                 'width'                 => $width,
             );
 
-            $image = $this->create($params);
+            $image = $this->create($request, $params);
 
             return $image;
 
@@ -106,7 +105,7 @@ class ImageHandler extends OwnershipEntityHandler
      * @return \Tavro\Bundle\CoreBundle\Model\EntityInterface
      * @throws \Exception
      */
-    public function move(array $data, $filename, $directory = '')
+    public function move(Request $request, array $data, $filename, $directory = '')
     {
         try {
 
@@ -143,7 +142,7 @@ class ImageHandler extends OwnershipEntityHandler
                 'width'                 => $data['params']['width'],
             );
 
-            $image = $this->create($params);
+            $image = $this->create($request, $params);
 
             return $image;
 

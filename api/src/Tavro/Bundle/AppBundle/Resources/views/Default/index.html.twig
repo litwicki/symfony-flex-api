@@ -9,47 +9,4 @@
     <p>Grab your business by the horns, and use Tavro to do it!</p>
   </div>
 
-  <div class="row">
-
-    <div class="col-md-2">
-      <ul class="nav nav-pills nav-stacked" role="tablist">
-        <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab"><i class="fa fa-fw fa-code"></i> Tavro Api</a></li>
-        <li role="presentation"><a href="#organizations" aria-controls="organizations" role="tab" data-toggle="tab"><i class="fa fa-fw fa-building"></i> Organization</a></li>
-        <li role="presentation"><a href="#orgusers" aria-controls="orgusers" role="tab" data-toggle="tab"><i class="fa fa-fw fa-group"></i> Org User</a></li>
-        <li role="presentation"><a href="#revenues" aria-controls="revenues" role="tab" data-toggle="tab"><i class="fa fa-fw fa-money"></i> Revenue</a></li>
-        <li role="presentation"><a href="#expenses" aria-controls="expenses" role="tab" data-toggle="tab"><i class="fa fa-fw fa-bar-chart"></i> Expense</a></li>
-        <li role="presentation"><a href="#funding" aria-controls="funding" role="tab" data-toggle="tab"><i class="fa fa-fw fa-bank"></i> Funding</a></li>
-        <li role="presentation"><a href="#products" aria-controls="products" role="tab" data-toggle="tab"><i class="fa fa-fw fa-cube"></i> Product</a></li>
-        <li role="presentation"><a href="#services" aria-controls="services" role="tab" data-toggle="tab"><i class="fa fa-fw fa-tasks"></i> Service</a></li>
-        <li role="presentation"><a href="#users" aria-controls="users" role="tab" data-toggle="tab"><i class="fa fa-fw fa-user"></i> User</a></li>
-      </ul>
-    </div>
-
-    <div class="col-md-10">
-      <div class="tab-content">
-        <div role="tabpanel" class="tab-pane active" id="home">
-          <div class="col-xs-6">
-            <label for="api_password">API Key</label>
-            <input type="text" class="form-control" name="api_key" id="api_key" placeholder="{{ user.apiKey }}" />
-          </div>
-          <div class="col-xs-6">
-            <label for="api_password">API Password</label>
-            <input type="text" class="form-control" name="api_password" id="api_password" placeholder="{{ user.apiPassword }}"/>
-          </div>
-        </div>
-        <div role="tabpanel" class="tab-pane" id="organizations">
-          {% include 'TavroAppBundle:Api:organization.html.twig' %}
-        </div>
-        <div role="tabpanel" class="tab-pane" id="orgusers"></div>
-        <div role="tabpanel" class="tab-pane" id="revenues"></div>
-        <div role="tabpanel" class="tab-pane" id="expenses"></div>
-        <div role="tabpanel" class="tab-pane" id="funding"></div>
-        <div role="tabpanel" class="tab-pane" id="products"></div>
-        <div role="tabpanel" class="tab-pane" id="services"></div>
-        <div role="tabpanel" class="tab-pane" id="users"></div>
-      </div>
-    </div>
-
-  </div>
-
 {% endblock %}
