@@ -13,12 +13,14 @@ var config = {
 };
 
 var stylesheets = [
-  'src/Tavro/Bundle/AppBundle/Resources/public/sass/*.scss'
+    'src/Tavro/Bundle/AppBundle/Resources/public/sass/style.scss',
+    'src/Tavro/Bundle/AppBundle/Resources/public/sass/sidebar.scss'
 ];
 
 var javascripts = [
-  'src/Tavro/Bundle/ApiBundle/Resources/public/js/*.js',
-  'src/Tavro/Bundle/AppBundle/Resources/public/js/*.js'
+    'src/Tavro/Bundle/ApiBundle/Resources/public/js/common/*.js',
+    'src/Tavro/Bundle/ApiBundle/Resources/public/js/tavro.jquery.js',
+    'src/Tavro/Bundle/AppBundle/Resources/public/js/*.js'
 ];
 
 var images = [

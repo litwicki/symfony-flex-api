@@ -5,9 +5,9 @@ remove_trailing_slash:
         url: .*/$
     methods: get
 
-tavro_admin:
-    resource: "@TavroAppBundle/Resources/config/routing/admin.yml"
-default:
-    resource: "@TavroAppBundle/Resources/config/routing/default.yml"
 security:
     resource: "@TavroAppBundle/Resources/config/routing/security.yml"
+
+tavro:
+    resource: "@TavroAppBundle/Resources/config/routing/default.yml"
+

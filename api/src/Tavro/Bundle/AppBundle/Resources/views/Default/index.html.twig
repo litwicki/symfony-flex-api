@@ -5,8 +5,77 @@
 {% block body %}
 
   <div class="page-header">
-    <h1><i class="fa fa-fw fa-code-fork"></i> Tavro Api</h1>
-    <p>Grab your business by the horns, and use Tavro to do it!</p>
+    <h1>Getting Started</h1>
+    <p class="lead"><i class="fa fa-fw fa-code-fork"></i> Interact with <code>api.tavro.io</code> and enhance your business.</p>
+  </div>
+
+  <div class="well">
+    <h3>Disclaimer</h3>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla sed elit at magna suscipit consectetur in in diam. Suspendisse condimentum lobortis semper. Donec suscipit nunc eu enim finibus sagittis. Ut vel risus ut metus molestie feugiat non at turpis. Phasellus consequat turpis viverra massa finibus pretium. Fusce ac leo lectus. Nam euismod nibh non magna semper, vitae condimentum mi sodales. Aenean sapien enim, imperdiet non metus sed, ultrices varius mauris. In libero nunc, hendrerit et mattis varius, rutrum et turpis. Pellentesque nec suscipit tellus.</p>
+  </div>
+
+  <div class="page-content">
+
+    <div class="page-header">
+      <h2>Introduction</h2>
+      <p>The Tavro API allows you to interact directly with any object associated with <strong>your</strong> Organizations, as well as your personal profile.</p>
+    </div>
+
+    <ul>
+      <li>User
+        <ul>
+          <li>Profile</li>
+          <li>Organizations</li>
+        </ul>
+      </li>
+      <li>Organization
+        <ul>
+          <li>Expense
+          <ul>
+            <li>Category</li>
+            <li>Comment</li>
+            <li>Tag</li>
+          </ul></li>
+          <li>Funding
+          <ul>
+            <li>Category</li>
+            <li>Comment</li>
+          </ul></li>
+          <li>Node
+          <ul>
+            <li>Comment</li>
+            <li>Tag</li>
+          </ul></li>
+          <li>Product
+          <ul>
+            <li>Category</li>
+          </ul></li>
+          <li>Revenue
+          <ul>
+            <li>Category</li>
+            <li>Comment</li>
+            <li>Tag</li>
+          </ul></li>
+          <li>Service
+          <ul>
+            <li>Category</li>
+          </ul></li>
+          <li>Shareholder</li>
+          <li>Users (UserOrganization)</li>
+        </ul>
+      </li>
+    </ul>
+
+    <div class="page-header">
+      <h2>Authentication</h2>
+      <p>Authentication is handled with HTTP Basic Authentication using your API KEY and API PASSWORD.</p>
+    </div>
+
+    <div class="page-header">
+      <h2>Response Data</h2>
+      <p>Data is returned as <code>XML</code> or <code>JSON</code>. If you do not specify a proper <code>Accept</code> header, <code>JSON</code> will be returned.</p>
+    </div>
+
   </div>
 
 {% endblock %}

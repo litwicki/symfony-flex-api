@@ -1,23 +1,3 @@
 index:
     path: /
     defaults: { _controller: "TavroAppBundle:Default:index" }
-
-premium:
-    path: /premium
-    defaults: { _controller: "TavroAppBundle:Default:premium" }
-
-terms:
-    path: /terms
-    defaults: { _controller: "TavroAppBundle:Default:terms" }
-
-privacy:
-    path: /privacy
-    defaults: { _controller: "TavroAppBundle:Default:privacy" }
-
-about:
-    path: /about
-    defaults: { _controller: "TavroAppBundle:Default:about" }
-
-tavro:
-    path: /tavro
-    defaults: { _controller: "TavroAppBundle:Default:tavro" }

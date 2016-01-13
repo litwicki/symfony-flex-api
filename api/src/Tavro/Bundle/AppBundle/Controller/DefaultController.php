@@ -39,44 +39,4 @@ class DefaultController extends Controller
         return $this->render('TavroAppBundle:Default:index.html.twig', $page);
     }
 
-    /**
-     * @param \Symfony\Component\HttpFoundation\Request $request
-     *
-     * @return \Symfony\Component\HttpFoundation\Response
-     */
-    public function termsAction(Request $request)
-    {
-        return $this->render('TavroAppBundle:Default:terms.html.twig');
-    }
-
-    /**
-     * @param \Symfony\Component\HttpFoundation\Request $request
-     *
-     * @return \Symfony\Component\HttpFoundation\Response
-     */
-    public function privacyAction(Request $request)
-    {
-        return $this->render('TavroAppBundle:Default:privacy.html.twig');
-    }
-
-    /**
-     * @param \Symfony\Component\HttpFoundation\Request $request
-     *
-     * @return \Symfony\Component\HttpFoundation\Response
-     */
-    public function aboutAction(Request $request)
-    {
-        return $this->render('TavroAppBundle:Default:about.html.twig');
-    }
-
-    /**
-     * @param \Symfony\Component\HttpFoundation\Request $request
-     *
-     * @return \Symfony\Component\HttpFoundation\Response
-     */
-    public function premiumAction(Request $request)
-    {
-        return $this->render('TavroAppBundle:Default:premium.html.twig');
-    }
-
 }
