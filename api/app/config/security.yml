@@ -35,9 +35,9 @@ security:
                 remember_me: true
                 always_use_default_target_path: false
                 success_handler: tavro.login_listener
-                failure_path:   /login
+                failure_path:   /user/login
             logout:
-                path: /logout
+                path: /user/logout
                 target: /
                 success_handler: tavro.logout_listener
             remember_me:
@@ -47,11 +47,7 @@ security:
                 path: /
 
     access_control:
-        - { path: ^/login, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/logout, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/register$, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/signup$, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/forgot, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/user, role: IS_AUTHENTICATED_ANONYMOUSLY }
 
         # Leave last!
 

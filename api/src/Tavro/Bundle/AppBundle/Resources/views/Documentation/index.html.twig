@@ -1,8 +1,8 @@
-{% extends '::base.html.twig' %}
-{% set front_page = true %}
-{% block body_classes %}front-page{% endblock %}
+{% extends 'TavroAppBundle:Layouts:documentation.html.twig' %}
+{% set front_page = false %}
+{% block body_classes %}doc-page{% endblock %}
 
-{% block body %}
+{% block content %}
 
   <div class="page-header">
     <h1>Getting Started</h1>
@@ -73,7 +73,55 @@
 
     <h4>Sample Authenticated Request</h4>
 
-    <pre>curl -u API_KEY:API_PASSWORD https://{YOUR_ACCOUNT_NAME}.tavro.io/api/v1/organizations.json</pre>
+    <!-- Nav tabs -->
+    <ul class="nav nav-pills" role="tablist">
+      <li role="presentation" class="active"><a href="#angular" aria-controls="angular" role="tab" data-toggle="tab">Angular</a></li>
+      <li role="presentation"><a href="#php" aria-controls="php" role="tab" data-toggle="tab">PHP</a></li>
+    </ul>
+
+    <!-- Tab panes -->
+    <div class="tab-content" style="margin-top: 2em;">
+      <div role="tabpanel" class="tab-pane active" id="angular">
+<pre><code class="javascript">var profile = {
+  username: '{{ app.user.username }}',
+  email: '{{ app.user.email }}',
+  birthday: '{{ app.user.birthday }}',
+  gender: '{{ app.user.gender }}',
+};
+
+var my_user_id = {{ app.user.id }};
+
+var url = 'https://example.tavro.io/api/v1/users/' + my_user_id;
+
+$http.patch(url, profile)
+.success(function(data) {
+  alert('Your profile has been updated!');
+});</code></pre>
+      </div>
+      <div role="tabpanel" class="tab-pane" id="php">
+<pre><code class="php">$profile = [
+  'username' => '{{ app.user.username }}',
+  'email' => '{{ app.user.email }}',
+  'gender' => '{{ app.user.gender }}',
+  'birthday' => '{{ app.user.birthday }}'
+];
+
+$my_user_id = {{ app.user.id }};
+
+$url = sprintf('https://example.tavro.io/api/v1/users/%s', $my_user_id);
+
+$curl = new Curl();
+$curl->setBasicAuthentication('{{ app.user.apiKey }}', '{{ app.user.apiPassword }}');
+$curl->patch($url, $profile);
+
+if ($curl->error) {
+    echo 'Error: ' . $curl->errorCode . ': ' . $curl->errorMessage;
+}
+else {
+    echo $curl->response;
+}</code></pre>
+      </div>
+    </div>
 
     <div class="page-header">
       <h2>Response Data</h2>

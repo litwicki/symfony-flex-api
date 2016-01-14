@@ -1,11 +1,179 @@
-{% extends '::base.html.twig' %}
-{% set front_page = true %}
-{% block body_classes %}front-page{% endblock %}
+{% extends 'TavroAppBundle:Layouts:documentation.html.twig' %}
+{% set front_page = false %}
+{% block body_classes %}doc-page{% endblock %}
 
-{% block body %}
+{% block content %}
 
   <div class="page-header">
+
     <h1>User API</h1>
     <p class="lead"><i class="fa fa-fw fa-user"></i> Interact with <code>api.tavro.io</code> and manage your User profile.</p>
+
+    <div class="alert alert-warning">
+      <i class="fa fa-fw fa-info-circle"></i> All PHP examples assume the use of: <a href="https://github.com/php-curl-class/php-curl-class" target="_blank">https://github.com/php-curl-class/php-curl-class</a>.
+    </div>
+
   </div>
+
+  <div class="panel panel-info">
+    <div class="panel-heading">
+      User Model
+    </div>
+    <table class="table table-hover table-striped">
+      <thead>
+        <tr>
+          <th>Field</th>
+          <th>Type</th>
+          <th>Methods</th>
+          <th>Notes</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>id</td>
+          <td>integer</td>
+          <td>GET, DELETE</td>
+          <td>Unique identifier.</td>
+        </tr>
+        <tr>
+          <td>guid</td>
+          <td>string</td>
+          <td>GET</td>
+          <td>Globally unique identifier.</td>
+        </tr>
+        <tr>
+          <td>update_date</td>
+          <td>date</td>
+          <td>GET</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>create_date</td>
+          <td>date</td>
+          <td>GET</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>last_online_date</td>
+          <td>date</td>
+          <td>GET</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>api_key</td>
+          <td>string</td>
+          <td>GET</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>api_password</td>
+          <td>string</td>
+          <td>GET</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>status</td>
+          <td>integer</td>
+          <td>GET</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>email</td>
+          <td>string</td>
+          <td>GET, CREATE, PUT, PATCH</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>username</td>
+          <td>string</td>
+          <td>GET, CREATE, PUT, PATCH</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>gender</td>
+          <td>string</td>
+          <td>GET, CREATE, PUT, PATCH</td>
+          <td>[Male, Female, Other]</td>
+        </tr>
+        <tr>
+          <td>birthday</td>
+          <td>date</td>
+          <td>GET, CREATE, PUT, PATCH</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>organizations</td>
+          <td>array</td>
+          <td>GET, PUT</td>
+          <td>Organizations this User owns.</td>
+        </tr>
+        <tr>
+          <td>user_organizations</td>
+          <td>array</td>
+          <td>GET, PUT</td>
+          <td>Organizations this user is assigned to.</td>
+        </tr>
+        <tr>
+          <td>nodes</td>
+          <td>array</td>
+          <td>GET, PUT</td>
+          <td>Nodes this User has created.</td>
+        </tr>
+        <tr>
+          <td>roles</td>
+          <td>array</td>
+          <td>GET</td>
+          <td>Roles this User has.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div id="profile">
+
+    <div class="page-header">
+      <h2>Profile</h2>
+      <a name="profile"></a>
+      <p>User Profile Api details.</p>
+    </div>
+
+    <table class="table table-striped table-hover">
+      <tr>
+        <th>URL</th>
+        <td><code>https://{account}.tavro.io/api/v1/users/{id}.{format}</code></td>
+      </tr>
+      <tr>
+        <th>GET</th>
+        <td><i class="fa fa-fw fa-check-circle text-success"></i></td>
+      </tr>
+      <tr>
+        <th>PATCH</th>
+        <td><i class="fa fa-fw fa-check-circle text-success"></i></td>
+      </tr>
+      <tr>
+        <th>PUT</th>
+        <td><i class="fa fa-fw fa-check-circle text-success"></i></td>
+      </tr>
+      <tr>
+        <th>DELETE</th>
+        <td><i class="fa fa-fw fa-close text-danger"></i></td>
+      </tr>
+    </table>
+
+  </div>
+
+  <div id="organizations">
+
+    <div class="page-header">
+      <a name="#organizations"></a>
+      <h2>Organizations</h2>
+      <p>Manage the Organizations this User belongs to.</p>
+      <pre>https://{example}.tavro.io/api/v1/users/{id}/organizations.{format}</pre>
+    </div>
+
+    <h3>Request</h3>
+    <p>Updating your Profile.</p>
+
+  </div>
+
 {% endblock %}

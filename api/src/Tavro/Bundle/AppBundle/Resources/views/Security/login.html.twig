@@ -1,4 +1,4 @@
-{# src/tavromods/UserBundle/Resources/views/Security/login.html.twig #}
+{# src/tavro/UserBundle/Resources/views/Security/login.html.twig #}
 
 {% extends '::base.html.twig' %}
 
@@ -8,10 +8,15 @@
 {% block body %}
 
   <div class="row">
-    <div class="col-lg-6 col-md-offset-3">
+    <div class="col-md-6 col-md-offset-3">
 
-      <div class="panel panel-default">
+      <div class="panel panel-success">
         <div class="panel-body">
+
+          <h1>Api Login</h1>
+          <p>Login to your secure <code>api.tavro.io</code>.</p>
+          <hr />
+
           {% if error %}
             <div class="alert alert-danger">{{ error.message }}</div>
           {% endif %}
@@ -35,13 +40,12 @@
 
             <div class="form-group">
               <button type="submit" class="btn btn-success pull-left">
-                <i class="fa fa-fw fa-key"></i>&nbsp;Authenticate
+                <i class="fa fa-fw fa-sign-in"></i>&nbsp;Sign In
               </button>
-              <a class="small pull-right" href="{{ path('forgot_password') }}">
-                <i class="fa fa-fw fa-question-circle"></i>&nbsp; Forgot your password?
-              </a>
             </div>
-
+            <a class="small pull-right btn btn-info btn-xs" href="{{ path('forgot_password') }}">
+              <i class="fa fa-fw fa-question-circle"></i>&nbsp; Forgot your password?
+            </a>
           </form>
         </div>
       </div>

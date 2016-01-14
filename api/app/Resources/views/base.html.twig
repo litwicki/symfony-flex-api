@@ -31,73 +31,10 @@
 
 </head>
 
-<body>
+<body class="{% if not app.user %}no-auth{% endif %} {% block body_classes %}{% endblock %}">
 
-<div class="nav-side-menu">
-    <div class="brand">Tavro.io API</div>
-    <i class="fa fa-bars fa-2x toggle-btn" data-toggle="collapse" data-target="#menu-content"></i>
-
-    <div class="menu-list">
-
-        <ul id="menu-content" class="menu-content collapse out">
-            <li><a href="{{ url('api_doc_index') }}"><i class="fa fa-fw fa-home"></i> Introduction</a></li>
-            <li data-toggle="collapse" data-target="#user" class="collapsed"><a href="#"><i class="fa fa-fw fa-user"></i> User <span class="arrow"></span></a>
-                <ul class="sub-menu collapse" id="user">
-                    <li><a href="{{ url('api_doc_user') }}#profile">Profile</a></li>
-                    <li><a href="{{ url('api_doc_user') }}#organization">Organizations</a></li>
-                </ul>
-            </li>
-            <li><a href="{{ url('api_doc_organization') }}"><i class="fa fa-fw fa-building"></i> Organization</a></li>
-            <li data-toggle="collapse" data-target="#expense" class="collapsed"><a href="#"><i class="fa fa-fw fa-credit-card"></i> Expense <span class="arrow"></span></a>
-                <ul class="sub-menu collapse" id="expense">
-                    <li><a href="{{ url('api_doc_expense') }}">Expenses</a></li>
-                    <li><a href="{{ url('api_doc_expense') }}#category">Category</a></li>
-                    <li><a href="{{ url('api_doc_expense') }}#comment">Comment</a></li>
-                    <li><a href="{{ url('api_doc_expense') }}#tag">Tag</a></li>
-                </ul>
-            </li>
-            <li data-toggle="collapse" data-target="#funding" class="collapsed"><a href="#"><i class="fa fa-fw fa-bank"></i> Funding <span class="arrow"></span></a>
-                <ul class="sub-menu collapse" id="funding">
-                    <li><a href="{{ url('api_doc_funding') }}">Funding</a></li>
-                    <li><a href="{{ url('api_doc_funding') }}#category">Category</a></li>
-                    <li><a href="{{ url('api_doc_funding') }}#comment">Comment</a></li>
-                </ul>
-            </li>
-            <li data-toggle="collapse" data-target="#node" class="collapsed"><a href="#"><i class="fa fa-fw fa-cube"></i> Node <span class="arrow"></span></a>
-                <ul class="sub-menu collapse" id="node">
-                    <li><a href="{{ url('api_doc_node') }}">Nodes</a></li>
-                    <li><a href="{{ url('api_doc_node') }}#comment">Comment</a></li>
-                    <li><a href="{{ url('api_doc_node') }}#tag">Tag</a></li>
-                </ul>
-            </li>
-            <li data-toggle="collapse" data-target="#product" class="collapsed"><a href="#"><i class="fa fa-fw fa-car"></i> Product <span class="arrow"></span></a>
-                <ul class="sub-menu collapse" id="product">
-                    <li><a href="{{ url('api_doc_product') }}">Products</a></li>
-                    <li><a href="{{ url('api_doc_product') }}#category">Category</a></li>
-                </ul>
-            </li>
-            <li data-toggle="collapse" data-target="#revenue" class="collapsed"><a href="#"><i class="fa fa-fw fa-money"></i> Revenue <span class="arrow"></span></a>
-                <ul class="sub-menu collapse" id="revenue">
-                    <li><a href="{{ url('api_doc_revenue') }}">Revenues</a></li>
-                    <li><a href="{{ url('api_doc_revenue') }}#category">Category</a></li>
-                    <li><a href="{{ url('api_doc_revenue') }}#comment">Comment</a></li>
-                    <li><a href="{{ url('api_doc_revenue') }}#tag">Tag</a></li>
-                </ul>
-            </li>
-            <li data-toggle="collapse" data-target="#service" class="collapsed"><a href="#"><i class="fa fa-fw fa-briefcase"></i> Service <span class="arrow"></span></a>
-                <ul class="sub-menu collapse" id="service">
-                    <li><a href="{{ url('api_doc_service') }}">Services</a></li>
-                    <li><a href="{{ url('api_doc_service') }}#tag">Category</a></li>
-                </ul>
-            </li>
-            <li><a href="{{ url('api_doc_shareholder') }}"><i class="fa fa-fw fa-user-secret"></i> Shareholders</a></li>
-            <li><a href="{{ url('api_doc_comment') }}"><i class="fa fa-fw fa-comment"></i> Comment</a></li>
-        </ul>
-    </div>
-</div>
-
-<div id="page-body">
-    <div class="container-fluid">{% block body %}{% endblock %}</div>
+<div class="container-fluid">
+    {% block body %}{% endblock %}
 </div>
 
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>

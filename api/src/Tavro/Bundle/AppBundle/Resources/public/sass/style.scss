@@ -17,8 +17,22 @@ h1,h2 {
   font-family: 'Oswald';
 }
 
+.no-auth {
+
+  background: darken($white, 5%);
+  padding-top: 10%;
+
+  .panel {
+    box-shadow: 0px 0px 10px darken($white, 25%);
+  }
+
+}
+
 @media (min-width: 767px) {
   #page-body {
     margin-left: 270px;
+  }
+  .no-auth {
+    padding-top: 20%;
   }
 }

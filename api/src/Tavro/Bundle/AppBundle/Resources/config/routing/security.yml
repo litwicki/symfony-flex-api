@@ -1,24 +1,14 @@
 # login and logout
 login:
-    path: /login
+    path: /user/login
     defaults: { _controller: "TavroAppBundle:Security:login" }
 
 login_check:
-    path: /login/submit
+    path: /user/login/submit
     methods: post
 
 logout:
-    path: /logout
-
-# register a new user
-signup:
-    path: /signup
-    defaults: { _controller: "TavroAppBundle:Security:signup" }
-
-register:
-    path: /register
-    defaults: { _controller: "TavroAppBundle:Security:register" }
-    methods: [POST]
+    path: /user/logout
 
 forgot_password:
     path: /user/forgot
