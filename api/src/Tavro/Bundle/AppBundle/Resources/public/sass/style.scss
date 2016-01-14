@@ -28,6 +28,36 @@ h1,h2 {
 
 }
 
+#intro-menu {
+
+  margin: 0;
+  padding: 0;
+
+  li {
+
+    list-style: none;
+    margin: 0;
+    padding: 0;
+
+    &:before {
+      font-family: FontAwesome;
+      content: "\f105";
+      display: inline-block;
+      padding-left: 10px;
+      padding-right: 10px;
+      vertical-align: middle;
+    }
+
+    ul {
+
+      margin: 5px 20px;
+      padding: 0;
+    }
+
+  }
+
+}
+
 @media (min-width: 767px) {
   #page-body {
     margin-left: 270px;
