@@ -210,13 +210,11 @@ else {
 <pre><code class="javascript">var auth = Base64.encode({API_KEY} + ':' + {API_PASSWORD});
 $http.defaults.headers.common['Authorization'] = 'Basic ' + auth;
 
-var my_user_id = {user};
-
 var user = {
     email: 'fezzik@florin.com'
 };
 
-var url = 'https://{{ api_hostname }}/api/v1/users/' + my_user_id;
+var url = 'https://{{ api_hostname }}/api/v1/users/{user}.{format};
 
 $http.patch(url, user)
 .success(function(data) {
@@ -226,7 +224,7 @@ $http.patch(url, user)
       <div role="tabpanel" class="tab-pane" id="user-update-php">
 <pre><code class="php">$my_user_id = {user};
 
-$url = sprintf('https://{{ api_hostname }}/api/v1/users/%s', $my_user_id);
+$url = 'https://{{ api_hostname }}/api/v1/users/{user}.{format}';
 
 $user = [
     'email' => 'fezzik@florin.com',
@@ -296,11 +294,102 @@ else {
       <a name="#organizations"></a>
       <h2>User Organizations</h2>
       <p>Manage the Organizations this User belongs to.</p>
-
       <pre><i class="fa fa-fw fa-link"></i> https://{account}.tavro.io/api/v1/users/{user}/organizations.{format}</pre>
-
     </div>
 
+    <!-- Nav tabs -->
+    <ul class="nav nav-tabs" role="tablist">
+      <li role="presentation" class="active"><a href="#user-org-create" aria-controls="user-org-create" role="tab" data-toggle="tab"><i class="fa fa-fw fa-plus-circle text-success"></i> Create</a></li>
+      <li role="presentation"><a href="#user-org-delete" aria-controls="user-org-delete" role="tab" data-toggle="tab"><i class="fa fa-fw fa-close text-danger"></i> Delete</a></li>
+    </ul>
+
+    <div class="tab-content">
+      <div role="tabpanel" class="tab-pane active" id="user-org-create">
+
+        <!-- Nav tabs -->
+        <ul class="nav nav-pills" role="tablist">
+          <li role="presentation" class="active"><a href="#user-org-create-angular" aria-controls="user-org-create-angular" role="tab" data-toggle="tab">Angular</a></li>
+          <li role="presentation"><a href="#user-org-create-php" aria-controls="user-org-create-php" role="tab" data-toggle="tab">PHP</a></li>
+        </ul>
+
+        <!-- Tab panes -->
+        <div class="tab-content">
+          <div role="tabpanel" class="tab-pane active" id="user-org-create-angular">
+<pre><code class="javascript">var auth = Base64.encode({API_KEY} + ':' + {API_PASSWORD});
+$http.defaults.headers.common['Authorization'] = 'Basic ' + auth;
+
+var user_org = {
+    user: {user},
+    organization: {organization}
+};
+
+var url = 'https://{{ api_hostname }}/api/v1/users/{user}/organizations.{format}';
+
+$http.post(url)
+.success(function(data) {
+  alert('Successfully added User {user} to Organization {organization}.');
+});</code></pre>
+      </div>
+          <div role="tabpanel" class="tab-pane" id="user-org-create-php">
+<pre><code class="php">$url = 'https://{{ api_hostname }}/api/v1/users/{user}/organizations.{format}';
+
+$user = [
+    'user' => '{user}',
+    'organization' => '{organization}'
+];
+
+$curl = new Curl();
+$curl->setBasicAuthentication('{API_KEY}', '{API_PASSWORD}');
+$curl->post($url, $user);
+
+if ($curl->error) {
+    echo 'Error: ' . $curl->errorCode . ': ' . $curl->errorMessage;
+}
+else {
+    echo $curl->response;
+}</code></pre>
+          </div>
+        </div>
+
+      </div>
+      <div role="tabpanel" class="tab-pane" id="user-org-delete">
+
+        <!-- Nav tabs -->
+        <ul class="nav nav-pills" role="tablist">
+          <li role="presentation" class="active"><a href="#user-org-delete-angular" aria-controls="user-org-delete-angular" role="tab" data-toggle="tab">Angular</a></li>
+          <li role="presentation"><a href="#user-org-delete-php" aria-controls="user-org-delete-php" role="tab" data-toggle="tab">PHP</a></li>
+        </ul>
+
+        <!-- Tab panes -->
+        <div class="tab-content">
+          <div role="tabpanel" class="tab-pane active" id="user-org-delete-angular">
+<pre><code class="javascript">var auth = Base64.encode({API_KEY} + ':' + {API_PASSWORD});
+$http.defaults.headers.common['Authorization'] = 'Basic ' + auth;
+
+var url = 'https://{{ api_hostname }}/api/v1/users/{user}/organizations/{organization}';
+
+$http.delete(url)
+.success(function(data) {
+  alert('Your profile has been deleted!');
+});</code></pre>
+      </div>
+      <div role="tabpanel" class="tab-pane" id="user-org-delete-php">
+<pre><code class="php">$url = 'https://{{ api_hostname }}/api/v1/users/{user}/organizations';
+
+$curl = new Curl();
+$curl->setBasicAuthentication('{API_KEY}', '{API_PASSWORD}');
+$curl->delete($url);
+
+if ($curl->error) {
+    echo 'Error: ' . $curl->errorCode . ': ' . $curl->errorMessage;
+}
+else {
+    echo $curl->response;
+}</code></pre>
+          </div>
+        </div>
+      </div>
+    </div>
 
   </div>
 
