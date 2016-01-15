@@ -2,6 +2,7 @@
 
 html,body {
   font-family: 'Ubuntu';
+  background: darken($white, 2%);
 }
 
 code,pre {
@@ -26,6 +27,14 @@ h1,h2 {
     box-shadow: 0px 0px 10px darken($white, 25%);
   }
 
+}
+
+.nav-side-menu {
+  #menu-content {
+    #symfony {
+      background: $brand-primary;
+    }
+  }
 }
 
 #intro-menu {
@@ -54,6 +63,41 @@ h1,h2 {
       padding: 0;
     }
 
+  }
+
+}
+
+table {
+
+  &.table-api {
+
+    .string,
+    .date,
+    .integer,
+    .array,
+    .float,
+    .decimal,
+    .datetime,
+    .boolean {
+      font-family: 'Ubuntu Mono';
+      font-weight: 600;
+    }
+
+  }
+
+}
+
+.tab-content {
+  background: $white;
+  margin: 0;
+  padding: 2em;
+  border: 1px solid #ddd;
+  border-top: none;
+
+  .tab-content {
+    border: none !important;
+    padding: 0;
+    margin: 2em 0 0 0;
   }
 
 }

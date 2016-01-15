@@ -11,7 +11,6 @@
     <div class="menu-list">
 
         <ul id="menu-content" class="menu-content collapse out">
-            {% if app.user %}<li id="symfony"><a href="{{ url('logout') }}"><i class="fa fa-fw fa-sign-out"></i> Sign out as [{{ app.user.username }}]</a></li>{% endif %}
             <li><a href="{{ url('api_doc_index') }}"><i class="fa fa-fw fa-home"></i> Introduction</a></li>
             <li data-toggle="collapse" data-target="#user" class="collapsed"><a href="#"><i class="fa fa-fw fa-user"></i> User <span class="arrow"></span></a>
                 <ul class="sub-menu collapse" id="user">
@@ -64,6 +63,8 @@
             </li>
             <li><a href="{{ url('api_doc_shareholder') }}"><i class="fa fa-fw fa-user-secret"></i> Shareholders</a></li>
             <li><a href="{{ url('api_doc_comment') }}"><i class="fa fa-fw fa-comment"></i> Comment</a></li>
+            {% if app.user %}<li id="symfony"><a href="{{ url('logout') }}"><i class="fa fa-fw fa-sign-out"></i> Sign out as [{{ app.user.username }}]</a></li>{% endif %}
+
         </ul>
     </div>
 </div>
