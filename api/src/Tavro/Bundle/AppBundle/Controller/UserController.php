@@ -99,6 +99,7 @@ class UserController extends ApiController
 
     /**
      * @param \Symfony\Component\HttpFoundation\Request $request
+     * @param \Tavro\Bundle\CoreBundle\Entity\User|null $user
      *
      * @return \Symfony\Component\HttpFoundation\Response
      */

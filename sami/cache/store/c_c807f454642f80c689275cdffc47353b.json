@@ -1,0 +1,49 @@
+{
+    "name": "Tavro\\Bundle\\CoreBundle\\Model\\EntityInterface",
+    "line": 10,
+    "short_desc": "Interface EntityInterface",
+    "long_desc": "",
+    "hint": null,
+    "tags": {
+        "package": [
+            [
+                "Tavro\\Bundle\\CoreBundle\\Model"
+            ]
+        ]
+    },
+    "namespace": "Tavro\\Bundle\\CoreBundle\\Model",
+    "file": "..\/api\/src\/Tavro\/Bundle\/CoreBundle\/Model\/EntityInterface.php",
+    "relative_file": null,
+    "hash": "ada15ddf459579b726ba9933f453cb74a6c0311a",
+    "parent": null,
+    "modifiers": "Stmt_Interface",
+    "is_trait": false,
+    "is_interface": true,
+    "aliases": [],
+    "errors": [],
+    "interfaces": [],
+    "traits": [],
+    "properties": [],
+    "methods": {
+        "getId": {
+            "name": "getId",
+            "line": 17,
+            "short_desc": "Get id",
+            "long_desc": "",
+            "hint": [
+                [
+                    "integer",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": []
+        }
+    },
+    "constants": []
+}

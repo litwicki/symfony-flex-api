@@ -1,0 +1,40 @@
+{
+    "name": "Tavro\\Bundle\\ApiBundle\\Tests\\Controller\\DefaultControllerTest",
+    "line": 7,
+    "short_desc": "",
+    "long_desc": "",
+    "hint": null,
+    "tags": [],
+    "namespace": "Tavro\\Bundle\\ApiBundle\\Tests\\Controller",
+    "file": "..\/api\/src\/Tavro\/Bundle\/ApiBundle\/Tests\/Controller\/DefaultControllerTest.php",
+    "relative_file": null,
+    "hash": "d54a85fe3d25e03750f2cf7756724bcc4972ad80",
+    "parent": "Symfony\\Bundle\\FrameworkBundle\\Test\\WebTestCase",
+    "modifiers": "Stmt_Class",
+    "is_trait": false,
+    "is_interface": false,
+    "aliases": {
+        "WebTestCase": "Symfony\\Bundle\\FrameworkBundle\\Test\\WebTestCase"
+    },
+    "errors": [],
+    "interfaces": [],
+    "traits": [],
+    "properties": [],
+    "methods": {
+        "testIndex": {
+            "name": "testIndex",
+            "line": 9,
+            "short_desc": "",
+            "long_desc": "",
+            "hint": null,
+            "hint_desc": null,
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": []
+        }
+    },
+    "constants": []
+}

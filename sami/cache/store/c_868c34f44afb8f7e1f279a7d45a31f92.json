@@ -1,0 +1,68 @@
+{
+    "name": "Tavro\\Bundle\\CoreBundle\\Model\\S3EntityInterface",
+    "line": 10,
+    "short_desc": "Interface S3EntityInterface",
+    "long_desc": "",
+    "hint": null,
+    "tags": {
+        "package": [
+            [
+                "Tavro\\Bundle\\CoreBundle\\Model"
+            ]
+        ]
+    },
+    "namespace": "Tavro\\Bundle\\CoreBundle\\Model",
+    "file": "..\/api\/src\/Tavro\/Bundle\/CoreBundle\/Model\/S3EntityInterface.php",
+    "relative_file": null,
+    "hash": "ba6439cc1688d75fdb7d201e0399e2cbb1849b20",
+    "parent": null,
+    "modifiers": "Stmt_Interface",
+    "is_trait": false,
+    "is_interface": true,
+    "aliases": [],
+    "errors": [],
+    "interfaces": [],
+    "traits": [],
+    "properties": [],
+    "methods": {
+        "getAwsKey": {
+            "name": "getAwsKey",
+            "line": 17,
+            "short_desc": "Get Key",
+            "long_desc": "",
+            "hint": [
+                [
+                    "string",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": []
+        },
+        "getBucket": {
+            "name": "getBucket",
+            "line": 24,
+            "short_desc": "Get Bucket",
+            "long_desc": "",
+            "hint": [
+                [
+                    "string",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": []
+        }
+    },
+    "constants": []
+}

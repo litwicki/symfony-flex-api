@@ -58,10 +58,11 @@ class ImageHandler extends OwnershipEntityHandler
     }
 
     /**
+     * @param \Symfony\Component\HttpFoundation\Request $request
      * @param \Symfony\Component\HttpFoundation\File\UploadedFile $image
      * @param string $directory
      *
-     * @return \Tavro\Bundle\CoreBundle\Model\EntityInterface|mixed|\Symfony\Component\HttpFoundation\File\UploadedFile
+     * @return mixed|\Symfony\Component\HttpFoundation\File\UploadedFile|\Tavro\Bundle\CoreBundle\Model\EntityInterface
      * @throws \Exception
      */
     public function upload(Request $request, UploadedFile $image, $directory = '')
@@ -98,11 +99,12 @@ class ImageHandler extends OwnershipEntityHandler
     }
 
     /**
+     * @param \Symfony\Component\HttpFoundation\Request $request
      * @param array $data
      * @param $filename
-     * @param string $bucket
+     * @param string $directory
      *
-     * @return \Tavro\Bundle\CoreBundle\Model\EntityInterface
+     * @return mixed|\Tavro\Bundle\CoreBundle\Model\EntityInterface
      * @throws \Exception
      */
     public function move(Request $request, array $data, $filename, $directory = '')

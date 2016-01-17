@@ -104,9 +104,10 @@ class NodeTagHandler extends EntityHandler
     }
 
     /**
+     * @param \Symfony\Component\HttpFoundation\Request $request
      * @param array $parameters
      *
-     * @return \Tavro\Bundle\CoreBundle\Model\EntityInterface|mixed
+     * @return object|void
      * @throws \Exception
      */
     public function create(Request $request, array $parameters)

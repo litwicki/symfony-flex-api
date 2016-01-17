@@ -41,8 +41,11 @@ class FileManager implements ContainerAwareInterface
     }
 
     /**
+     * FileManager constructor.
+     *
      * @param $aws_access_key_id
      * @param $aws_secret_access_key
+     * @param $aws_s3_region
      */
     public function __construct($aws_access_key_id, $aws_secret_access_key, $aws_s3_region)
     {

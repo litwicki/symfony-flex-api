@@ -30,9 +30,10 @@ class NodeHandler extends OrganizationEntityHandler implements OwnershipHandlerI
 {
 
     /**
+     * @param \Symfony\Component\HttpFoundation\Request $request
      * @param array $parameters
      *
-     * @return \Tavro\Bundle\CoreBundle\Model\EntityInterface|mixed
+     * @return object|void
      * @throws \Exception
      */
     public function create(Request $request, array $parameters)
@@ -144,10 +145,11 @@ class NodeHandler extends OrganizationEntityHandler implements OwnershipHandlerI
     }
 
     /**
+     * @param \Symfony\Component\HttpFoundation\Request $request
      * @param \Tavro\Bundle\CoreBundle\Model\EntityInterface $entity
      * @param array $parameters
      *
-     * @return \Tavro\Bundle\CoreBundle\Model\EntityInterface
+     * @return \Tavro\Bundle\CoreBundle\Model\EntityInterface|void
      * @throws \Exception
      */
     public function patch(Request $request, EntityInterface $entity, array $parameters)
@@ -182,10 +184,10 @@ class NodeHandler extends OrganizationEntityHandler implements OwnershipHandlerI
     }
 
     /**
-     * @param array $parameters
      * @param \Tavro\Bundle\CoreBundle\Model\EntityInterface $entity
+     * @param array $parameters
      *
-     * @throws \ApiException
+     * @return bool|void
      * @throws \Exception
      */
     public function validate(EntityInterface $entity, array $parameters)

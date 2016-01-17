@@ -1,0 +1,25 @@
+{
+    "name": "Tavro\\Bundle\\CoreBundle\\Tests\\Controller\\UserControllerTest",
+    "line": 7,
+    "short_desc": "",
+    "long_desc": "",
+    "hint": null,
+    "tags": [],
+    "namespace": "Tavro\\Bundle\\CoreBundle\\Tests\\Controller",
+    "file": "..\/api\/src\/Tavro\/Bundle\/CoreBundle\/Tests\/Controller\/UserControllerTest.php",
+    "relative_file": null,
+    "hash": "9a726a264b8fd5bd76c6d3d6ecae964a2a34e4ad",
+    "parent": "Symfony\\Bundle\\FrameworkBundle\\Test\\WebTestCase",
+    "modifiers": "Stmt_Class",
+    "is_trait": false,
+    "is_interface": false,
+    "aliases": {
+        "WebTestCase": "Symfony\\Bundle\\FrameworkBundle\\Test\\WebTestCase"
+    },
+    "errors": [],
+    "interfaces": [],
+    "traits": [],
+    "properties": [],
+    "methods": [],
+    "constants": []
+}

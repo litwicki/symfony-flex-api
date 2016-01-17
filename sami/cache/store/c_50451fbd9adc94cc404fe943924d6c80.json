@@ -1,0 +1,44 @@
+{
+    "name": "Tavro\\Bundle\\CoreBundle\\Services\\JsonSerializationVisitor",
+    "line": 10,
+    "short_desc": "Class JsonSerializationVisitor",
+    "long_desc": "",
+    "hint": null,
+    "tags": {
+        "package": [
+            [
+                "Tavro\\Bundle\\CoreBundle\\Services"
+            ]
+        ]
+    },
+    "namespace": "Tavro\\Bundle\\CoreBundle\\Services",
+    "file": "..\/api\/src\/Tavro\/Bundle\/CoreBundle\/Services\/JsonSerializationVisitor.php",
+    "relative_file": null,
+    "hash": "b7792e492aac00b29222f1aae9324ec813a59891",
+    "parent": "JMS\\Serializer\\JsonSerializationVisitor",
+    "modifiers": "Stmt_Class",
+    "is_trait": false,
+    "is_interface": false,
+    "aliases": [],
+    "errors": [],
+    "interfaces": [],
+    "traits": [],
+    "properties": [],
+    "methods": {
+        "getResult": {
+            "name": "getResult",
+            "line": 12,
+            "short_desc": "",
+            "long_desc": "",
+            "hint": null,
+            "hint_desc": null,
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": []
+        }
+    },
+    "constants": []
+}

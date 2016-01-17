@@ -1,0 +1,158 @@
+{
+    "name": "Tavro\\Bundle\\CoreBundle\\Entity\\NodeRead",
+    "line": 22,
+    "short_desc": "",
+    "long_desc": "",
+    "hint": null,
+    "tags": {
+        "ORM\\Entity": [
+            [
+                ""
+            ]
+        ],
+        "ORM\\Table": [
+            [
+                "(name=\"tavro_node_read\",",
+                "indexes={@ORM\\Index(name=\"USER_NODE_READ\",",
+                "columns={\"user_id\",\"node_id\"})})"
+            ]
+        ]
+    },
+    "namespace": "Tavro\\Bundle\\CoreBundle\\Entity",
+    "file": "..\/api\/src\/Tavro\/Bundle\/CoreBundle\/Entity\/NodeRead.php",
+    "relative_file": null,
+    "hash": "37a206e28b870dfd80664b82f130f1ad8dc22c78",
+    "parent": "Tavro\\Bundle\\CoreBundle\\Model\\Entity",
+    "modifiers": "Stmt_Class",
+    "is_trait": false,
+    "is_interface": false,
+    "aliases": {
+        "ORM": "Doctrine\\ORM\\Mapping",
+        "Accessor": "JMS\\Serializer\\Annotation\\Accessor",
+        "ExclusionPolicy": "JMS\\Serializer\\Annotation\\ExclusionPolicy",
+        "Expose": "JMS\\Serializer\\Annotation\\Expose",
+        "Type": "JMS\\Serializer\\Annotation\\Type",
+        "VirtualProperty": "JMS\\Serializer\\Annotation\\VirtualProperty",
+        "Groups": "JMS\\Serializer\\Annotation\\Groups",
+        "Table": "Doctrine\\ORM\\Mapping\\Table",
+        "Entity": "Tavro\\Bundle\\CoreBundle\\Model\\Entity",
+        "EntityInterface": "Tavro\\Bundle\\CoreBundle\\Model\\EntityInterface"
+    },
+    "errors": [],
+    "interfaces": [],
+    "traits": [],
+    "properties": [],
+    "methods": {
+        "setUser": {
+            "name": "setUser",
+            "line": 43,
+            "short_desc": "Set user",
+            "long_desc": "",
+            "hint": [
+                [
+                    "\\Tavro\\Bundle\\CoreBundle\\Entity\\nodeRead",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "user": {
+                    "name": "user",
+                    "line": 43,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "Tavro\\Bundle\\CoreBundle\\Entity\\Tavro\\Bundle\\CoreBundle\\Entity\\User",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "Tavro\\Bundle\\CoreBundle\\Entity\\User",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "getUser": {
+            "name": "getUser",
+            "line": 55,
+            "short_desc": "Get user",
+            "long_desc": "",
+            "hint": [
+                [
+                    "\\Tavro\\Bundle\\CoreBundle\\Entity\\User",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": []
+        },
+        "setNode": {
+            "name": "setNode",
+            "line": 66,
+            "short_desc": "Set node",
+            "long_desc": "",
+            "hint": [
+                [
+                    "\\Tavro\\Bundle\\CoreBundle\\Entity\\nodeRead",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "node": {
+                    "name": "node",
+                    "line": 66,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "Tavro\\Bundle\\CoreBundle\\Entity\\Tavro\\Bundle\\CoreBundle\\Entity\\Node",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "Tavro\\Bundle\\CoreBundle\\Entity\\Node",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "getNode": {
+            "name": "getNode",
+            "line": 78,
+            "short_desc": "Get node",
+            "long_desc": "",
+            "hint": [
+                [
+                    "\\Tavro\\Bundle\\CoreBundle\\Entity\\Node",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": []
+        }
+    },
+    "constants": []
+}

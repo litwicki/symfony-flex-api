@@ -1,0 +1,176 @@
+{
+    "name": "Tavro\\Bundle\\CoreBundle\\DataFixtures\\ORM\\Dev\\People\\People",
+    "line": 28,
+    "short_desc": "Defines all predefined installed types created during install.",
+    "long_desc": "",
+    "hint": null,
+    "tags": {
+        "author": [
+            [
+                "jake.litwicki@gmail.com"
+            ]
+        ]
+    },
+    "namespace": "Tavro\\Bundle\\CoreBundle\\DataFixtures\\ORM\\Dev\\People",
+    "file": "..\/api\/src\/Tavro\/Bundle\/CoreBundle\/DataFixtures\/ORM\/Dev\/People\/People.php",
+    "relative_file": null,
+    "hash": "8511a0693336c39f7c84dfbbe6e22e7fa1151ae4",
+    "parent": "Doctrine\\Common\\DataFixtures\\AbstractFixture",
+    "modifiers": "Stmt_Class",
+    "is_trait": false,
+    "is_interface": false,
+    "aliases": {
+        "AbstractFixture": "Doctrine\\Common\\DataFixtures\\AbstractFixture",
+        "OrderedFixtureInterface": "Doctrine\\Common\\DataFixtures\\OrderedFixtureInterface",
+        "ObjectManager": "Doctrine\\Common\\Persistence\\ObjectManager",
+        "ContainerAwareInterface": "Symfony\\Component\\DependencyInjection\\ContainerAwareInterface",
+        "ContainerInterface": "Symfony\\Component\\DependencyInjection\\ContainerInterface",
+        "User": "Tavro\\Bundle\\CoreBundle\\Entity\\User",
+        "Role": "Tavro\\Bundle\\CoreBundle\\Entity\\Role",
+        "Variable": "Tavro\\Bundle\\CoreBundle\\Entity\\Variable",
+        "Mod": "Tavro\\Bundle\\CoreBundle\\Entity\\Mod",
+        "Node": "Tavro\\Bundle\\CoreBundle\\Entity\\Node",
+        "Comment": "Tavro\\Bundle\\CoreBundle\\Entity\\Comment",
+        "ModComment": "Tavro\\Bundle\\CoreBundle\\Entity\\ModComment",
+        "NodeComment": "Tavro\\Bundle\\CoreBundle\\Entity\\NodeComment",
+        "Finder": "Symfony\\Component\\Finder\\Finder"
+    },
+    "errors": [],
+    "interfaces": {
+        "Doctrine\\Common\\DataFixtures\\OrderedFixtureInterface": "Doctrine\\Common\\DataFixtures\\OrderedFixtureInterface",
+        "Symfony\\Component\\DependencyInjection\\ContainerAwareInterface": "Symfony\\Component\\DependencyInjection\\ContainerAwareInterface"
+    },
+    "traits": [],
+    "properties": [],
+    "methods": {
+        "setContainer": {
+            "name": "setContainer",
+            "line": 39,
+            "short_desc": "{@inheritDoc}",
+            "long_desc": "",
+            "hint": null,
+            "hint_desc": null,
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "container": {
+                    "name": "container",
+                    "line": 39,
+                    "short_desc": null,
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "Tavro\\Bundle\\CoreBundle\\DataFixtures\\ORM\\Dev\\People\\Symfony\\Component\\DependencyInjection\\ContainerInterface",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "Symfony\\Component\\DependencyInjection\\ContainerInterface",
+                    "default": "NULL",
+                    "is_by_ref": false
+                }
+            }
+        },
+        "load": {
+            "name": "load",
+            "line": 47,
+            "short_desc": "{@inheritDoc}",
+            "long_desc": "",
+            "hint": null,
+            "hint_desc": null,
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "manager": {
+                    "name": "manager",
+                    "line": 47,
+                    "short_desc": null,
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "Tavro\\Bundle\\CoreBundle\\DataFixtures\\ORM\\Dev\\People\\Doctrine\\Common\\Persistence\\ObjectManager",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "Doctrine\\Common\\Persistence\\ObjectManager",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "createDummyUsers": {
+            "name": "createDummyUsers",
+            "line": 104,
+            "short_desc": "Create \"dummy\" users for fake data for testing.",
+            "long_desc": "",
+            "hint": null,
+            "hint_desc": null,
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [
+                [
+                    "\\Exception",
+                    ""
+                ]
+            ],
+            "errors": [],
+            "parameters": {
+                "manager": {
+                    "name": "manager",
+                    "line": 104,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "Tavro\\Bundle\\CoreBundle\\DataFixtures\\ORM\\Dev\\People\\Doctrine\\Common\\Persistence\\ObjectManager",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "Doctrine\\Common\\Persistence\\ObjectManager",
+                    "default": null,
+                    "is_by_ref": false
+                },
+                "finder": {
+                    "name": "finder",
+                    "line": 104,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "Tavro\\Bundle\\CoreBundle\\DataFixtures\\ORM\\Dev\\People\\Symfony\\Component\\Finder\\Finder",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "Symfony\\Component\\Finder\\Finder",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "getOrder": {
+            "name": "getOrder",
+            "line": 147,
+            "short_desc": "{@inheritDoc}",
+            "long_desc": "",
+            "hint": null,
+            "hint_desc": null,
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": []
+        }
+    },
+    "constants": []
+}

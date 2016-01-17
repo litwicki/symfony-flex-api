@@ -1,0 +1,68 @@
+{
+    "name": "Tavro\\Bundle\\CoreBundle\\Model\\ApiEntityInterface",
+    "line": 10,
+    "short_desc": "Interface ApiEntityInterface",
+    "long_desc": "",
+    "hint": null,
+    "tags": {
+        "package": [
+            [
+                "Tavro\\Bundle\\CoreBundle\\Model"
+            ]
+        ]
+    },
+    "namespace": "Tavro\\Bundle\\CoreBundle\\Model",
+    "file": "..\/api\/src\/Tavro\/Bundle\/CoreBundle\/Model\/ApiEntityInterface.php",
+    "relative_file": null,
+    "hash": "c5b3a11d0adba42895754b9c4f53df80143ec5e4",
+    "parent": null,
+    "modifiers": "Stmt_Interface",
+    "is_trait": false,
+    "is_interface": true,
+    "aliases": [],
+    "errors": [],
+    "interfaces": [],
+    "traits": [],
+    "properties": [],
+    "methods": {
+        "getId": {
+            "name": "getId",
+            "line": 17,
+            "short_desc": "Get id",
+            "long_desc": "",
+            "hint": [
+                [
+                    "integer",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": []
+        },
+        "getSlug": {
+            "name": "getSlug",
+            "line": 24,
+            "short_desc": "Get Slug (mixed alphanumeric for URLs)",
+            "long_desc": "",
+            "hint": [
+                [
+                    "mixed",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": []
+        }
+    },
+    "constants": []
+}

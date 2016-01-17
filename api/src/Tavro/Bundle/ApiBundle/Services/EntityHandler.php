@@ -281,9 +281,10 @@ class EntityHandler implements HandlerInterface
     }
 
     /**
+     * @param \Symfony\Component\HttpFoundation\Request $request
      * @param array $parameters
      *
-     * @return \Tavro\Bundle\CoreBundle\Model\EntityInterface|mixed
+     * @return object|\Tavro\Bundle\CoreBundle\Model\EntityInterface|void
      * @throws \Exception
      */
     public function create(Request $request, array $parameters)

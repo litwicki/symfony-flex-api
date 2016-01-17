@@ -1,0 +1,95 @@
+{
+    "name": "Tavro\\Bundle\\ApiBundle\\Exception\\ApiRequestSizeException",
+    "line": 10,
+    "short_desc": "",
+    "long_desc": "",
+    "hint": null,
+    "tags": {
+        "author": [
+            [
+                "jake@zoadilack.com"
+            ]
+        ]
+    },
+    "namespace": "Tavro\\Bundle\\ApiBundle\\Exception",
+    "file": "..\/api\/src\/Tavro\/Bundle\/ApiBundle\/Exception\/ApiRequestSizeException.php",
+    "relative_file": null,
+    "hash": "f1784564d099a66786b5d159c71c051d9a144d20",
+    "parent": "Symfony\\Component\\HttpKernel\\Exception\\HttpException",
+    "modifiers": "Stmt_Class",
+    "is_trait": false,
+    "is_interface": false,
+    "aliases": {
+        "HttpException": "Symfony\\Component\\HttpKernel\\Exception\\HttpException"
+    },
+    "errors": [],
+    "interfaces": [],
+    "traits": [],
+    "properties": [],
+    "methods": {
+        "__construct": {
+            "name": "__construct",
+            "line": 19,
+            "short_desc": "Constructor.",
+            "long_desc": "",
+            "hint": null,
+            "hint_desc": null,
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "message": {
+                    "name": "message",
+                    "line": 19,
+                    "short_desc": "The internal exception message",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "string",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "",
+                    "default": "NULL",
+                    "is_by_ref": false
+                },
+                "previous": {
+                    "name": "previous",
+                    "line": 19,
+                    "short_desc": "The previous exception",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "Tavro\\Bundle\\ApiBundle\\Exception\\Exception",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "Exception",
+                    "default": "NULL",
+                    "is_by_ref": false
+                },
+                "code": {
+                    "name": "code",
+                    "line": 19,
+                    "short_desc": "The internal exception code",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "int",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "",
+                    "default": "0",
+                    "is_by_ref": false
+                }
+            }
+        }
+    },
+    "constants": []
+}

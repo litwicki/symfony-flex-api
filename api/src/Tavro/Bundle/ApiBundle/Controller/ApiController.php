@@ -110,29 +110,6 @@ class ApiController extends Controller
     }
 
     /**
-     * @param \Symfony\Component\HttpFoundation\Request $request
-     * @param $entity
-     * @param $_format
-     *
-     * @return \Symfony\Component\HttpFoundation\Response
-     * @throws
-     */
-    public function getUserEntitiesAction(Request $request, $entity, $_format)
-    {
-        try {
-            $page = $request->query->get('page');
-            $size = $request->query->get('size');
-            $handler = $this->getHandler($entity);
-            $items = $handler->findByUser($this->getUser(), true, $size, $page);
-            $data = $this->serialize($items, $_format);
-            return $this->apiResponse($data, $_format);
-        }
-        catch(\Exception $e) {
-            throw new ApiException($e->getMessage());
-        }
-    }
-
-    /**
      * Fetch a list of entities based on passed parameters that can be displayed
      * in a typeahead autocomplete widget.
      *
@@ -164,14 +141,14 @@ class ApiController extends Controller
      * @return \Symfony\Component\HttpFoundation\Response
      * @throws \Exception
      */
-    public function getAllAction(Request $request, $group, $entity, $_format)
+    public function getAllAction(Request $request, $entity, $_format)
     {
         try {
 
             $params = $request->query->all();
             $handler = $this->getHandler($entity);
             $items = $handler->findAll($params);
-            $data = $this->serialize($items, $_format, $group);
+            $data = $this->serialize($items, $_format);
             return $this->apiResponse($data, $_format);
         }
         catch(\Exception $e) {
@@ -182,19 +159,18 @@ class ApiController extends Controller
     /**
      * Get (find) an entity by Id.
      *
-     * @param $group
      * @param $entity
      * @param $id
      * @param $_format
      *
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function getAction($group, $entity, $id, $_format)
+    public function getAction($entity, $id, $_format)
     {
         try {
             $handler = $this->getHandler($entity);
             $item = $handler->find($id);
-            $data = $this->serialize($item, $_format, $group);
+            $data = $this->serialize($item, $_format);
             return $this->apiResponse($data, $_format);
         }
         catch(ApiAccessDeniedException $e) {
@@ -209,13 +185,12 @@ class ApiController extends Controller
      * Post (create) a new Entity
      *
      * @param \Symfony\Component\HttpFoundation\Request $request
-     * @param $group
      * @param $entity
      * @param $_format
      *
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function postAction(Request $request, $group, $entity, $_format)
+    public function postAction(Request $request, $entity, $_format)
     {
         try {
 
@@ -225,7 +200,6 @@ class ApiController extends Controller
             $newEntity = $handler->post($request, $data);
 
             $routeOptions = array(
-                'group'   => $group,
                 'entity'  => $entity,
                 'id'      => $newEntity->getId(),
                 'format'  => $_format,
@@ -255,7 +229,7 @@ class ApiController extends Controller
      * @return \Symfony\Component\HttpFoundation\Response
      * @throws \Exception
      */
-    public function putAction(Request $request, $group, $entity, $id, $_format)
+    public function putAction(Request $request, $entity, $id, $_format)
     {
         try {
 
@@ -271,7 +245,6 @@ class ApiController extends Controller
             }
 
             $routeOptions = array(
-                'group' => $group,
                 'entity'  => $entity,
                 'id'      => $item->getId(),
                 '_format'  => $_format,
@@ -297,7 +270,6 @@ class ApiController extends Controller
      * the permission sets used to apply the PATCH.
      *
      * @param \Symfony\Component\HttpFoundation\Request $request
-     * @param $group
      * @param $entity
      * @param $id
      * @param $_format
@@ -305,7 +277,7 @@ class ApiController extends Controller
      * @return \Symfony\Component\HttpFoundation\Response
      * @throws \Exception
      */
-    public function patchAction(Request $request, $group, $entity, $id, $_format)
+    public function patchAction(Request $request, $entity, $id, $_format)
     {
         try {
 
@@ -316,7 +288,7 @@ class ApiController extends Controller
             $handler->patch($request, $object, $patch);
 
             $mod = $handler->find($id);
-            $data = $this->serialize($mod, 'json', $group);
+            $data = $this->serialize($mod, 'json');
             return $this->apiResponse($data);
 
         }

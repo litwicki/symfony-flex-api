@@ -25,8 +25,8 @@ use Litwicki\Common\Common as Litwicki;
 class SecurityController extends Controller
 {
     /**
-     * Auto authenticate the User.
      * @param \Tavro\Bundle\CoreBundle\Entity\User $user
+     * @param $password
      */
     public function authenticate(User $user, $password)
     {

@@ -22,6 +22,7 @@ use Symfony\Component\HttpFoundation\Request;
 class CommentHandler extends OwnershipEntityHandler
 {
     /**
+     * @param \Symfony\Component\HttpFoundation\Request $request
      * @param \Tavro\Bundle\CoreBundle\Model\EntityInterface $entity
      * @param array $parameters
      *
@@ -163,11 +164,10 @@ class CommentHandler extends OwnershipEntityHandler
     }
 
     /**
-     * Dynamically create a Comment for either a Node or a Mod.
-     *
+     * @param \Symfony\Component\HttpFoundation\Request $request
      * @param array $parameters
      *
-     * @return \Tavro\Bundle\CoreBundle\Model\EntityInterface|mixed
+     * @return mixed|\Tavro\Bundle\CoreBundle\Model\EntityInterface|void
      */
     public function create(Request $request, array $parameters)
     {

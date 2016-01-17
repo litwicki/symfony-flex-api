@@ -1,0 +1,156 @@
+{
+    "name": "Tavro\\Bundle\\CoreBundle\\Services\\TavroValidator",
+    "line": 15,
+    "short_desc": "",
+    "long_desc": "",
+    "hint": null,
+    "tags": [],
+    "namespace": "Tavro\\Bundle\\CoreBundle\\Services",
+    "file": "..\/api\/src\/Tavro\/Bundle\/CoreBundle\/Services\/TavroValidator.php",
+    "relative_file": null,
+    "hash": "6ca7c49c1d7008f00dd342dbaf697f227db1ea34",
+    "parent": null,
+    "modifiers": "Stmt_Class",
+    "is_trait": false,
+    "is_interface": false,
+    "aliases": {
+        "Response": "Symfony\\Component\\HttpFoundation\\Response",
+        "Request": "Symfony\\Component\\HttpFoundation\\Request",
+        "Controller": "Symfony\\Bundle\\FrameworkBundle\\Controller\\Controller",
+        "PasswordComplexityException": "Tavro\\Bundle\\CoreBundle\\Exception\\Password\\PasswordComplexityException",
+        "PasswordLengthException": "Tavro\\Bundle\\CoreBundle\\Exception\\Password\\PasswordLengthException",
+        "PasswordInvalidCharacterException": "Tavro\\Bundle\\CoreBundle\\Exception\\Password\\PasswordInvalidCharacterException",
+        "ContainerAwareInterface": "Symfony\\Component\\DependencyInjection\\ContainerAwareInterface",
+        "ContainerInterface": "Symfony\\Component\\DependencyInjection\\ContainerInterface"
+    },
+    "errors": [],
+    "interfaces": {
+        "Symfony\\Component\\DependencyInjection\\ContainerAwareInterface": "Symfony\\Component\\DependencyInjection\\ContainerAwareInterface"
+    },
+    "traits": [],
+    "properties": [],
+    "methods": {
+        "__construct": {
+            "name": "__construct",
+            "line": 17,
+            "short_desc": "",
+            "long_desc": "",
+            "hint": null,
+            "hint_desc": null,
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": []
+        },
+        "setContainer": {
+            "name": "setContainer",
+            "line": 24,
+            "short_desc": "",
+            "long_desc": "",
+            "hint": null,
+            "hint_desc": null,
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "container": {
+                    "name": "container",
+                    "line": 24,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "Tavro\\Bundle\\CoreBundle\\Services\\Symfony\\Component\\DependencyInjection\\ContainerInterface",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "Symfony\\Component\\DependencyInjection\\ContainerInterface",
+                    "default": "null",
+                    "is_by_ref": false
+                }
+            }
+        },
+        "emails": {
+            "name": "emails",
+            "line": 36,
+            "short_desc": "Validates a single email address (or an array of email addresses)",
+            "long_desc": "",
+            "hint": [
+                [
+                    "array",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "item": {
+                    "name": "item",
+                    "line": 36,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "array",
+                            false
+                        ],
+                        [
+                            "string",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "passwordComplexity": {
+            "name": "passwordComplexity",
+            "line": 59,
+            "short_desc": "",
+            "long_desc": "",
+            "hint": [
+                [
+                    "bool",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [
+                [
+                    "\\Exception",
+                    ""
+                ]
+            ],
+            "errors": [],
+            "parameters": {
+                "password": {
+                    "name": "password",
+                    "line": 59,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [],
+                    "tags": [],
+                    "modifiers": "",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        }
+    },
+    "constants": []
+}

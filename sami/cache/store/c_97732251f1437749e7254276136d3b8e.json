@@ -1,0 +1,309 @@
+{
+    "name": "Tavro\\Bundle\\CoreBundle\\Voter\\UserVoter",
+    "line": 16,
+    "short_desc": "Description of UserVoter",
+    "long_desc": "",
+    "hint": null,
+    "tags": [],
+    "namespace": "Tavro\\Bundle\\CoreBundle\\Voter",
+    "file": "..\/api\/src\/Tavro\/Bundle\/CoreBundle\/Voter\/UserVoter.php",
+    "relative_file": null,
+    "hash": "8da0df72bef99266f1031b6b5af72bb31601c2cd",
+    "parent": null,
+    "modifiers": "Stmt_Class",
+    "is_trait": false,
+    "is_interface": false,
+    "aliases": {
+        "VoterInterface": "Symfony\\Component\\Security\\Core\\Authorization\\Voter\\VoterInterface",
+        "TokenInterface": "Symfony\\Component\\Security\\Core\\Authentication\\Token\\TokenInterface",
+        "ContainerAware": "Symfony\\Component\\DependencyInjection\\ContainerAware",
+        "User": "Tavro\\Bundle\\CoreBundle\\Entity\\User",
+        "ContainerAwareInterface": "Symfony\\Component\\DependencyInjection\\ContainerAwareInterface",
+        "ContainerInterface": "Symfony\\Component\\DependencyInjection\\ContainerInterface"
+    },
+    "errors": [],
+    "interfaces": {
+        "Symfony\\Component\\Security\\Core\\Authorization\\Voter\\VoterInterface": "Symfony\\Component\\Security\\Core\\Authorization\\Voter\\VoterInterface",
+        "Symfony\\Component\\DependencyInjection\\ContainerAwareInterface": "Symfony\\Component\\DependencyInjection\\ContainerAwareInterface"
+    },
+    "traits": [],
+    "properties": [],
+    "methods": {
+        "setContainer": {
+            "name": "setContainer",
+            "line": 22,
+            "short_desc": "",
+            "long_desc": "",
+            "hint": null,
+            "hint_desc": null,
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "container": {
+                    "name": "container",
+                    "line": 22,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "Tavro\\Bundle\\CoreBundle\\Voter\\Symfony\\Component\\DependencyInjection\\ContainerInterface",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "Symfony\\Component\\DependencyInjection\\ContainerInterface",
+                    "default": "null",
+                    "is_by_ref": false
+                }
+            }
+        },
+        "checkAccess": {
+            "name": "checkAccess",
+            "line": 37,
+            "short_desc": "Allows full access to members belonging to the growth cse, view access to outside admins.",
+            "long_desc": "",
+            "hint": [
+                [
+                    "int",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [
+                [
+                    "\\Exception",
+                    ""
+                ]
+            ],
+            "errors": [],
+            "parameters": {
+                "user": {
+                    "name": "user",
+                    "line": 37,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "\\Tavro\\Bundle\\CoreBundle\\Entity\\User",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "",
+                    "default": null,
+                    "is_by_ref": false
+                },
+                "entity": {
+                    "name": "entity",
+                    "line": 37,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "Tavro\\Bundle\\CoreBundle\\Voter\\Tavro\\Bundle\\CoreBundle\\Entity\\User",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "Tavro\\Bundle\\CoreBundle\\Entity\\User",
+                    "default": null,
+                    "is_by_ref": false
+                },
+                "attribute": {
+                    "name": "attribute",
+                    "line": 37,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "string",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "supportsAttribute": {
+            "name": "supportsAttribute",
+            "line": 91,
+            "short_desc": "Returns true if the attribute matches known attributes.",
+            "long_desc": "",
+            "hint": [
+                [
+                    "bool",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "attribute": {
+                    "name": "attribute",
+                    "line": 91,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "string",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "supportsClass": {
+            "name": "supportsClass",
+            "line": 102,
+            "short_desc": "Returns true if object is an instance of GrowthCase.",
+            "long_desc": "",
+            "hint": [
+                [
+                    "bool",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "class": {
+                    "name": "class",
+                    "line": 102,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "object",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "vote": {
+            "name": "vote",
+            "line": 115,
+            "short_desc": "Returns if the user should have access to the entity.",
+            "long_desc": "",
+            "hint": [
+                [
+                    "int",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "token": {
+                    "name": "token",
+                    "line": 115,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "Tavro\\Bundle\\CoreBundle\\Voter\\Symfony\\Component\\Security\\Core\\Authentication\\Token\\TokenInterface",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "Symfony\\Component\\Security\\Core\\Authentication\\Token\\TokenInterface",
+                    "default": null,
+                    "is_by_ref": false
+                },
+                "entity": {
+                    "name": "entity",
+                    "line": 115,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "object",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "",
+                    "default": null,
+                    "is_by_ref": false
+                },
+                "attributes": {
+                    "name": "attributes",
+                    "line": 115,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "array",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "array",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        }
+    },
+    "constants": {
+        "CREATE": {
+            "name": "CREATE",
+            "line": 78,
+            "short_desc": "",
+            "long_desc": ""
+        },
+        "VIEW": {
+            "name": "VIEW",
+            "line": 79,
+            "short_desc": "",
+            "long_desc": ""
+        },
+        "EDIT": {
+            "name": "EDIT",
+            "line": 80,
+            "short_desc": "",
+            "long_desc": ""
+        },
+        "PATCH": {
+            "name": "PATCH",
+            "line": 81,
+            "short_desc": "",
+            "long_desc": ""
+        },
+        "DELETE": {
+            "name": "DELETE",
+            "line": 82,
+            "short_desc": "",
+            "long_desc": ""
+        }
+    }
+}

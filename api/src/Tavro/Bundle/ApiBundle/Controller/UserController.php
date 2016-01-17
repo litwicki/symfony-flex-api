@@ -30,12 +30,13 @@ class UserController extends ApiController
     public function resetApiKeyAction(Request $request, User $user, $_format)
     {
         try {
-            $this->getHandler('users')->resetApiKey($user);
+            $handler = $this->container->get('tavro.handler.users');
+            $handler->resetApiKey($user);
             $cookie = new Cookie('api_key', $user->getApiKey(), 0, '/', NULL, false, false);
             $data = $this->serialize($user, $_format);
             $response = $this->apiResponse($data, $_format);
             $response->headers->setCookie($cookie);
-            $this->container->get('tavro.handler.users')->reauthenticate($user);
+            $handler->reauthenticate($user);
             return $response;
         }
         catch(\Exception $e) {
@@ -52,17 +53,23 @@ class UserController extends ApiController
     public function resetApiPasswordAction(Request $request, User $user, $_format)
     {
         try {
-            $this->getHandler('users')->resetApiPassword($user);
+            $handler = $this->container->get('tavro.handler.users');
+            $handler->resetApiPassword($user);
             $cookie = new Cookie('api_password', $user->getApiPassword(), 0, '/', NULL, false, false);
             $data = $this->serialize($user, $_format);
             $response = $this->apiResponse($data, $_format);
             $response->headers->setCookie($cookie);
-            $this->container->get('tavro.handler.users')->reauthenticate($user);
+            $handler->reauthenticate($user);
             return $response;
         }
         catch(\Exception $e) {
             throw new ApiException($e->getMessage());
         }
+    }
+
+    public function createUserOrganization(Request $request, User $user)
+    {
+
     }
 
 }
