@@ -32,6 +32,9 @@
 - name: copy app config
   copy: src=app.conf dest=/etc/nginx/sites-available/app.conf owner=www-data group=www-data mode=0644
 
+- name: copy docs config
+  copy: src=app.conf dest=/etc/nginx/sites-available/docs.conf owner=www-data group=www-data mode=0644
+
 - name: enable api vhost
   file:
     src: /etc/nginx/sites-available/api.conf
