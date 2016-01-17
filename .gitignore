@@ -88,3 +88,5 @@ app/web/assets/*
 app/aws.json
 app/node_modules
 app/bower_components
+/sami/build/*
+/sami/cache/*
