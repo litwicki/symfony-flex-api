@@ -12,21 +12,9 @@
 
         <ul id="menu-content" class="menu-content collapse out">
             <li><a href="{{ url('api_doc_index') }}"><i class="fa fa-fw fa-home"></i> Introduction</a></li>
-            <li data-toggle="collapse" data-target="#user" class="collapsed"><a href="#"><i class="fa fa-fw fa-user"></i> User <span class="arrow"></span></a>
-                <ul class="sub-menu collapse" id="user">
-                    <li><a href="{{ url('api_doc_user') }}#profile">Profile</a></li>
-                    <li><a href="{{ url('api_doc_user') }}#organization">Organizations</a></li>
-                </ul>
-            </li>
+            <li data-toggle="collapse" data-target="#user" class="collapsed"><a href="{{ url('api_doc_user') }}"><i class="fa fa-fw fa-user"></i> User</a></li>
             <li><a href="{{ url('api_doc_organization') }}"><i class="fa fa-fw fa-building"></i> Organization</a></li>
-            <li data-toggle="collapse" data-target="#expense" class="collapsed"><a href="#"><i class="fa fa-fw fa-credit-card"></i> Expense <span class="arrow"></span></a>
-                <ul class="sub-menu collapse" id="expense">
-                    <li><a href="{{ url('api_doc_expense') }}">Expenses</a></li>
-                    <li><a href="{{ url('api_doc_expense') }}#category">Category</a></li>
-                    <li><a href="{{ url('api_doc_expense') }}#comment">Comment</a></li>
-                    <li><a href="{{ url('api_doc_expense') }}#tag">Tag</a></li>
-                </ul>
-            </li>
+            <li><a href="{{ url('api_doc_expense') }}">Expenses</a></li>
             <li data-toggle="collapse" data-target="#funding" class="collapsed"><a href="#"><i class="fa fa-fw fa-bank"></i> Funding <span class="arrow"></span></a>
                 <ul class="sub-menu collapse" id="funding">
                     <li><a href="{{ url('api_doc_funding') }}">Funding</a></li>
