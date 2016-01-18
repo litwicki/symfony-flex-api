@@ -71,6 +71,7 @@ table {
 
   &.table-api {
 
+    .code,
     .string,
     .date,
     .integer,
@@ -81,6 +82,28 @@ table {
     .boolean {
       font-family: 'Ubuntu Mono';
       font-weight: 600;
+    }
+
+    .code {
+      &.get {
+        color: $brand-primary;
+      }
+
+      &.post {
+        color: $brand-success;
+      }
+
+      &.put {
+        color: $brand-info;
+      }
+
+      &.patch {
+        color: $brand-info;
+      }
+
+      &.delete {
+        color: $brand-danger;
+      }
     }
 
   }
@@ -102,8 +125,17 @@ table {
 
 }
 
+#page-footer {
+  padding: 2em 0;
+  margin: 2em 0;
+  footer {
+    border-top: 1px solid $brand-primary;
+    padding: 2em 0 0 0;
+  }
+}
+
 @media (min-width: 767px) {
-  #page-body {
+  #page-body, #page-footer {
     margin-left: 270px;
   }
   .no-auth {

@@ -138,7 +138,7 @@
     <hr />
 
     <div class="panel panel-default">
-        <table class="table table-striped table-hover">
+        <table class="table table-striped table-hover table-api">
             <tr>
                 <th>Path</th>
                 <th>Method(s)</th>
@@ -166,17 +166,17 @@
             </tr>
             <tr>
                 <td class="code">/api/v1/users.{format}</td>
-                <td class="code delete">POST</td>
+                <td class="code post">POST</td>
                 <td>Create a User.</td>
             </tr>
             <tr>
                 <td class="code">/api/v1/users/{user}/reset/api-password.{format}</td>
-                <td class="code">POST</td>
+                <td class="code post">POST</td>
                 <td>Reset a User's Api Password</td>
             </tr>
             <tr>
                 <td class="code">/api/v1/users/{user}/reset/api-key.{format}</td>
-                <td class="code">POST</td>
+                <td class="code post">POST</td>
                 <td>Reset a User's Api Key</td>
             </tr>
         </table>
