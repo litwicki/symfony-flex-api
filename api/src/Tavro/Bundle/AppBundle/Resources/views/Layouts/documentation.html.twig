@@ -11,46 +11,17 @@
     <div class="menu-list">
 
         <ul id="menu-content" class="menu-content collapse out">
-            <li><a href="{{ url('api_doc_index') }}"><i class="fa fa-fw fa-home"></i> Introduction</a></li>
-            <li data-toggle="collapse" data-target="#user" class="collapsed"><a href="{{ url('api_doc_user') }}"><i class="fa fa-fw fa-user"></i> User</a></li>
-            <li><a href="{{ url('api_doc_organization') }}"><i class="fa fa-fw fa-building"></i> Organization</a></li>
-            <li><a href="{{ url('api_doc_expense') }}">Expenses</a></li>
-            <li data-toggle="collapse" data-target="#funding" class="collapsed"><a href="#"><i class="fa fa-fw fa-bank"></i> Funding <span class="arrow"></span></a>
-                <ul class="sub-menu collapse" id="funding">
-                    <li><a href="{{ url('api_doc_funding') }}">Funding</a></li>
-                    <li><a href="{{ url('api_doc_funding') }}#category">Category</a></li>
-                    <li><a href="{{ url('api_doc_funding') }}#comment">Comment</a></li>
-                </ul>
-            </li>
-            <li data-toggle="collapse" data-target="#node" class="collapsed"><a href="#"><i class="fa fa-fw fa-cube"></i> Node <span class="arrow"></span></a>
-                <ul class="sub-menu collapse" id="node">
-                    <li><a href="{{ url('api_doc_node') }}">Nodes</a></li>
-                    <li><a href="{{ url('api_doc_node') }}#comment">Comment</a></li>
-                    <li><a href="{{ url('api_doc_node') }}#tag">Tag</a></li>
-                </ul>
-            </li>
-            <li data-toggle="collapse" data-target="#product" class="collapsed"><a href="#"><i class="fa fa-fw fa-car"></i> Product <span class="arrow"></span></a>
-                <ul class="sub-menu collapse" id="product">
-                    <li><a href="{{ url('api_doc_product') }}">Products</a></li>
-                    <li><a href="{{ url('api_doc_product') }}#category">Category</a></li>
-                </ul>
-            </li>
-            <li data-toggle="collapse" data-target="#revenue" class="collapsed"><a href="#"><i class="fa fa-fw fa-money"></i> Revenue <span class="arrow"></span></a>
-                <ul class="sub-menu collapse" id="revenue">
-                    <li><a href="{{ url('api_doc_revenue') }}">Revenues</a></li>
-                    <li><a href="{{ url('api_doc_revenue') }}#category">Category</a></li>
-                    <li><a href="{{ url('api_doc_revenue') }}#comment">Comment</a></li>
-                    <li><a href="{{ url('api_doc_revenue') }}#tag">Tag</a></li>
-                </ul>
-            </li>
-            <li data-toggle="collapse" data-target="#service" class="collapsed"><a href="#"><i class="fa fa-fw fa-briefcase"></i> Service <span class="arrow"></span></a>
-                <ul class="sub-menu collapse" id="service">
-                    <li><a href="{{ url('api_doc_service') }}">Services</a></li>
-                    <li><a href="{{ url('api_doc_service') }}#tag">Category</a></li>
-                </ul>
-            </li>
-            <li><a href="{{ url('api_doc_shareholder') }}"><i class="fa fa-fw fa-user-secret"></i> Shareholders</a></li>
-            <li><a href="{{ url('api_doc_comment') }}"><i class="fa fa-fw fa-comment"></i> Comment</a></li>
+            <li {% if front_page is defined %}class="active"{% endif %}><a href="{{ url('api_doc_index') }}"><i class="fa fa-fw fa-home"></i> Getting Started</a></li>
+            <li {% if user_page is defined %}class="active"{% endif %}><a href="{{ url('api_doc_user') }}"><i class="fa fa-fw fa-user"></i> User</a></li>
+            <li {% if organization_page is defined %}class="active"{% endif %}><a href="{{ url('api_doc_organization') }}"><i class="fa fa-fw fa-building"></i> Organization</a></li>
+            <li {% if expense_page is defined %}class="active"{% endif %}><a href="{{ url('api_doc_expense') }}"><i class="fa fa-fw fa-credit-card"></i> Expenses</a></li>
+            <li {% if funding_page is defined %}class="active"{% endif %}><a href="{{ url('api_doc_funding') }}"><i class="fa fa-fw fa-bank"></i> Funding</li>
+            <li {% if node_page is defined %}class="active"{% endif %}><a href="{{ url('api_doc_node') }}"><i class="fa fa-fw fa-cube"></i> Node</a></li>
+            <li {% if product_page is defined %}class="active"{% endif %}><a href="{{ url('api_doc_product') }}"><i class="fa fa-fw fa-car"></i> Product </a></li>
+            <li {% if revenue_page is defined %}class="active"{% endif %}><a href="{{ url('api_doc_revenue') }}"><i class="fa fa-fw fa-money"></i> Revenue </a></li>
+            <li {% if service_page is defined %}class="active"{% endif %}><a href="{{ url('api_doc_service') }}"><i class="fa fa-fw fa-briefcase"></i> Service</a></li>
+            <li {% if shareholder_page is defined %}class="active"{% endif %}><a href="{{ url('api_doc_shareholder') }}"><i class="fa fa-fw fa-user-secret"></i> Shareholders</a></li>
+            <li {% if comment_page is defined %}class="active"{% endif %}><a href="{{ url('api_doc_comment') }}"><i class="fa fa-fw fa-comment"></i> Comment</a></li>
             {% if app.user %}<li id="symfony"><a href="{{ url('logout') }}"><i class="fa fa-fw fa-sign-out"></i> Sign out as [{{ app.user.username }}]</a></li>{% endif %}
 
         </ul>

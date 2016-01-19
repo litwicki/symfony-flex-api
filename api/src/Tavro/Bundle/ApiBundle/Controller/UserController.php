@@ -67,9 +67,56 @@ class UserController extends ApiController
         }
     }
 
-    public function createUserOrganization(Request $request, User $user)
+    /**
+     * @param \Symfony\Component\HttpFoundation\Request $request
+     * @param \Tavro\Bundle\CoreBundle\Entity\User $user
+     * @param $_format
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function organizationsAction(Request $request, User $user, $_format)
     {
 
+        $uos = $user->getUserOrganizations();
+
+        $items = array();
+
+        foreach($uos as $uo) {
+            $org = $uo->getOrganization();
+            $items[$org->getId()] = $org;
+        }
+
+        /**
+         * Cross Reference every Organization this User owns but may not be
+         * a "User" of..
+         */
+        $entities = $this->getDoctrine()->getManager()->getRepository('TavroCoreBundle:Organization')->findBy(array(
+            'user' => $user
+        ));
+
+        foreach($entities as $entity) {
+            $items[$entity->getId()] = $entity;
+        }
+
+        $data = $this->serialize($items, $_format);
+        $response = $this->apiResponse($data, $_format);
+        return $response;
+
+    }
+
+    /**
+     * @param \Symfony\Component\HttpFoundation\Request $request
+     * @param \Tavro\Bundle\CoreBundle\Entity\User $user
+     * @param $_format
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function nodesAction(Request $request, User $user, $_format)
+    {
+        $nodes = $user->getNodes();
+        $data = $this->serialize($nodes, $_format);
+        $response = $this->apiResponse($data, $_format);
+        return $response;
     }
 
 }

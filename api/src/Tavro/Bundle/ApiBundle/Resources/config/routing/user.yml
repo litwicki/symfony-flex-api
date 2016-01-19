@@ -16,3 +16,19 @@ api_user_regenerate_api_password:
     requirements:
         user: \d+
         _format: json|xml
+
+api_user_nodes:
+    path: /users/{user}/nodes.{_format}
+    defaults: { _controller: TavroApiBundle:User:nodes, _format: json}
+    methods: GET
+    requirements:
+        user: \d+
+        _format: json|xml
+
+api_user_organizations:
+    path: /users/{user}/organizations.{_format}
+    defaults: { _controller: TavroApiBundle:User:organizations, _format: json}
+    methods: GET
+    requirements:
+        user: \d+
+        _format: json|xml

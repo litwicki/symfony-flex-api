@@ -5,15 +5,18 @@ namespace Tavro\Bundle\CoreBundle\Voter;
 use Symfony\Component\Security\Core\Authorization\Voter\VoterInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\DependencyInjection\ContainerAware;
+use Tavro\Bundle\CoreBundle\Entity\UserOrganization;
 use Tavro\Bundle\CoreBundle\Entity\User;
 
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
- * Description of UserVoter
+ * Class UserOrganizationVoter
+ *
+ * @package Tavro\Bundle\CoreBundle\Voter
  */
-class UserVoter implements VoterInterface, ContainerAwareInterface
+class UserOrganizationVoter implements VoterInterface, ContainerAwareInterface
 {
 
     /**
@@ -28,46 +31,19 @@ class UserVoter implements VoterInterface, ContainerAwareInterface
      * Allows full access to members belonging to the growth cse, view access to outside admins.
      *
      * @param User $user
-     * @param \Tavro\Bundle\CoreBundle\Entity\User $entity
+     * @param \Tavro\Bundle\CoreBundle\Entity\UserOrganization $entity
      * @param string  $attribute
      *
      * @throws \Exception
      * @return int
      */
-    public function checkAccess($user, User $entity, $attribute)
+    public function checkAccess($user, UserOrganization $entity, $attribute)
     {
-
-        if($attribute == self::PATCH) {
-            return VoterInterface::ACCESS_GRANTED;
-        }
-
         if($this->container->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
             return VoterInterface::ACCESS_GRANTED;
         }
 
-        // Allow all creates
-        if($attribute == self::CREATE) {
-            return VoterInterface::ACCESS_GRANTED;
-        }
-
-        /**
-         * Except for SELF, only Admins can view Users.
-         */
-        if($attribute == self::VIEW && ($user->getId() === $entity->getId())) {
-            return VoterInterface::ACCESS_GRANTED;
-        }
-
-        /**
-         * Only Admins, or *the* User can edit
-         */
-        if($user instanceof User && $attribute == self::EDIT && ($user->getId() === $entity->getId())) {
-            return VoterInterface::ACCESS_GRANTED;
-        }
-
-        /**
-         * Only Admins can delete, but not themselves!
-         */
-        if($user instanceof User && $attribute == self::DELETE && ($user->getId() != $entity->getId())) {
+        if($attribute == self::VIEW) {
             return VoterInterface::ACCESS_GRANTED;
         }
 
@@ -78,7 +54,6 @@ class UserVoter implements VoterInterface, ContainerAwareInterface
     const CREATE = 'create';
     const VIEW = 'view';
     const EDIT = 'edit';
-    const PATCH = 'patch';
     const DELETE = 'delete';
 
     /**
@@ -89,7 +64,7 @@ class UserVoter implements VoterInterface, ContainerAwareInterface
      * @return bool
      */
     public function supportsAttribute($attribute) {
-        return in_array($attribute, array(self::PATCH, self::CREATE, self::VIEW, self::EDIT, self::DELETE));
+        return in_array($attribute, array(self::CREATE, self::VIEW, self::EDIT, self::DELETE));
     }
 
     /**
@@ -100,7 +75,7 @@ class UserVoter implements VoterInterface, ContainerAwareInterface
      * @return bool
      */
     public function supportsClass($class) {
-        return $class instanceof User;
+        return $class instanceof UserOrganization;
     }
 
     /**

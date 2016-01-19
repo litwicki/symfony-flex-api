@@ -28,7 +28,6 @@ use JMS\Serializer\Annotation\MaxDepth;
  * @Table(name="tavro_user")
  *
  * @XmlRoot("user")
- * @XmlNamespace(uri="http://tavro.io/api/users")
  */
 class User extends Entity implements UserInterface, \Serializable
 {
@@ -41,6 +40,7 @@ class User extends Entity implements UserInterface, \Serializable
     /**
      * @ORM\Column(type="string", length=255, unique=true, nullable=true)
      * @Groups({"api", "tavro", "summary"})
+     * @MaxDepth(1)
      */
     protected $github_username;
 
@@ -79,6 +79,7 @@ class User extends Entity implements UserInterface, \Serializable
     /**
      * @ORM\Column(type="datetime", nullable=true)
      * @Groups({"api", "tavro"})
+     * @MaxDepth(1)
      */
     protected $last_online_date;
 
@@ -86,6 +87,7 @@ class User extends Entity implements UserInterface, \Serializable
      * @ORM\Column(type="string", length=255, nullable=false)
      * @Groups({"api", "tavro"})
      * @Accessor(getter="getApiKey", setter="setApiKey")
+     * @MaxDepth(1)
      */
     protected $api_key;
 
@@ -93,12 +95,14 @@ class User extends Entity implements UserInterface, \Serializable
      * @ORM\Column(type="string", length=255, nullable=false)
      * @Groups({"api", "tavro"})
      * @Accessor(getter="getApiPassword", setter="setApiPassword")
+     * @MaxDepth(1)
      */
     protected $api_password;
 
     /**
      * @ORM\Column(type="boolean", nullable=false)
      * @Groups({"api", "tavro"})
+     * @MaxDepth(1)
      */
     protected $api_enabled;
 
@@ -112,6 +116,7 @@ class User extends Entity implements UserInterface, \Serializable
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      * @Groups({"api", "tavro"})
+     * @MaxDepth(1)
      */
     protected $user_ip;
 
@@ -123,32 +128,33 @@ class User extends Entity implements UserInterface, \Serializable
      * )
      * @Groups({"api", "tavro", "summary"})
      * @Accessor(getter="getGender", setter="setGuid")
+     * @MaxDepth(1)
      */
     protected $gender;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      * @Groups({"api", "tavro"})
+     * @MaxDepth(1)
      */
     protected $user_agent;
 
     /**
      * @ORM\Column(type="date", length=255, nullable=true)
      * @Groups({"api", "tavro"})
+     * @MaxDepth(1)
      */
     protected $birthday;
 
     /**
      * @ORM\OneToMany(targetEntity="Tavro\Bundle\CoreBundle\Entity\Node", mappedBy="user")
      * @ORM\OrderBy({"id" = "DESC"})
-     * @Groups({"tavro"})
      */
     protected $nodes;
 
     /**
      * @ORM\OneToMany(targetEntity="Tavro\Bundle\CoreBundle\Entity\Organization", mappedBy="owner")
      * @ORM\OrderBy({"id" = "DESC"})
-     * @Groups({"tavro"})
      */
     protected $organizations;
 
@@ -186,7 +192,7 @@ class User extends Entity implements UserInterface, \Serializable
      * @ORM\ManyToOne(targetEntity="Tavro\Bundle\CoreBundle\Entity\Image")
      * @ORM\JoinColumn(name="avatar_image_id", referencedColumnName="id", nullable=true)
      * @Groups({"api", "tavro", "summary"})
-     * @MaxDepth(2)
+     * @MaxDepth(1)
      */
     protected $avatar;
 
@@ -839,7 +845,7 @@ class User extends Entity implements UserInterface, \Serializable
      */
     public function getUserOrganizations()
     {
-        return $this->nodes_read;
+        return $this->user_organizations;
     }
 
     /**

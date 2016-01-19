@@ -90,3 +90,19 @@ services:
              - { name: security.voter }
          calls:
              - [ setContainer, [ '@service_container' ] ]
+
+    tavro.voter.user_organization:
+         class:      Tavro\Bundle\CoreBundle\Voter\UserOrganizationVoter
+         public:     false
+         tags:
+             - { name: security.voter }
+         calls:
+             - [ setContainer, [ '@service_container' ] ]
+
+    tavro.voter.organization:
+         class:      Tavro\Bundle\CoreBundle\Voter\OrganizationVoter
+         public:     false
+         tags:
+             - { name: security.voter }
+         calls:
+             - [ setContainer, [ '@service_container' ] ]

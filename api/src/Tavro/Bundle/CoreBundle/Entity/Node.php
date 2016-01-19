@@ -59,7 +59,7 @@ class Node extends ApiEntity
      * @ORM\ManyToOne(targetEntity="Tavro\Bundle\CoreBundle\Entity\User", inversedBy="nodes")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id", nullable=false)
      * @Groups({"api", "tavro", "summary"})
-     * @MaxDepth(3)
+     * @MaxDepth(1)
      */
     protected $user;
 

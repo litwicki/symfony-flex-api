@@ -54,3 +54,7 @@ services:
     tavro.handler.organizations:
         class: Tavro\Bundle\ApiBundle\Handler\OrganizationHandler
         arguments: ["@service_container", "@doctrine.orm.main_entity_manager", Tavro\Bundle\CoreBundle\Entity\Organization]
+
+    tavro.handler.user_organizations:
+        class: Tavro\Bundle\ApiBundle\Handler\OrganizationHandler
+        arguments: ["@service_container", "@doctrine.orm.main_entity_manager", Tavro\Bundle\CoreBundle\Entity\UserOrganization]

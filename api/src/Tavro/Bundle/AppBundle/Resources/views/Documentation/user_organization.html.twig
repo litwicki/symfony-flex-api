@@ -1,0 +1,99 @@
+<div id="user-organization">
+
+  <div class="page-header">
+    <h2>User Organization Api</h2>
+    <p class="lead"><i class="fa fa-fw fa-cube"></i> Interact with <code>api.tavro.io</code> and manage UserOrganization relationships.</p>
+  </div>
+
+  <div class="page-header">
+    <h3>UserOrganization Model</h3>
+    <p>The User:Organization object model.</p>
+  </div>
+
+  <div class="panel panel-default">
+    <table class="table table-striped table-hover table-api">
+      <thead>
+        <tr>
+          <th>Field</th>
+          <th>Type</th>
+          <th>Methods</th>
+          <th>Notes</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+            <td>id</td>
+            <td class="integer">integer</td>
+            <td>GET, DELETE</td>
+            <td>Unique identifier.</td>
+        </tr>
+        <tr>
+            <td>guid</td>
+            <td class="string">string</td>
+            <td>GET</td>
+            <td>Globally unique identifier.</td>
+        </tr>
+        <tr>
+            <td>update_date</td>
+            <td class="date">date</td>
+            <td>GET</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>create_date</td>
+            <td class="date">date</td>
+            <td>GET</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>user_id</td>
+            <td class="integer">integer</td>
+            <td>GET</td>
+            <td>The unique identifier for the User object.</td>
+        </tr>
+        <tr>
+            <td>organization_id</td>
+            <td class="integer">integer</td>
+            <td>GET</td>
+            <td>The unique identifier for the Organization object.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="page-header">
+      <h3><i class="fa fa-fw fa-location-arrow"></i> UserOrganization Api Routes</h3>
+  </div>
+
+  <ul>
+      <li><code>{user_organization}</code> must be the integer ID of a UserOrganization object.</li>
+      <li><code>{format}</code> must be <code>XML</code> or <code>JSON</code> (if not provided the default is <code>JSON</code>).</li>
+  </ul>
+
+  <hr />
+
+  <div class="panel panel-default">
+    <table class="table table-striped table-hover table-api">
+      <thead>
+        <tr>
+          <th>Path</th>
+          <th>Method(s)</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+            <td class="code">/api/v1/user_organizations/{user_organization}.{format}</td>
+            <td class="code delete">DELETE</td>
+            <td>Delete a UserOrganization (remove a User from an Organization).</td>
+        </tr>
+        <tr>
+            <td class="code">/api/v1/user_organizations.{format}</td>
+            <td class="code post">POST</td>
+            <td>Create a UserOrganization (add a User to an Organization).</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>

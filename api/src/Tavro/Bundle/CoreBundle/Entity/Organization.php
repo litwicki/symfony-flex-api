@@ -28,21 +28,21 @@ class Organization extends ApiEntity
 {
     /**
      * @ORM\Column(type="string", length=500, nullable=false)
-     * @Groups({"api", "tavro", "summary", "typeahead"})
+     * @Groups({"api", "tavro", "typeahead"})
      */
     protected $title;
 
     /**
      * @ORM\Column(type="string", length=500, nullable=false)
-     * @Groups({"api", "tavro", "summary"})
+     * @Groups({"api", "tavro"})
      */
     protected $body;
 
     /**
      * @ORM\ManyToOne(targetEntity="Tavro\Bundle\CoreBundle\Entity\User", inversedBy="organizations")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id", nullable=false)
-     * @Groups({"api", "tavro", "summary"})
-     * @MaxDepth(3)
+     * @Groups({"api", "tavro"})
+     * @MaxDepth(1)
      */
     protected $owner;
 
@@ -58,41 +58,57 @@ class Organization extends ApiEntity
 
     /**
      * @ORM\OneToMany(targetEntity="Tavro\Bundle\CoreBundle\Entity\ServiceCategory", mappedBy="organization", cascade={"remove"})
+     * @Groups({"tavro"})
+     * @MaxDepth(3)
      */
     protected $service_categories;
 
     /**
      * @ORM\OneToMany(targetEntity="Tavro\Bundle\CoreBundle\Entity\ExpenseCategory", mappedBy="organization", cascade={"remove"})
+     * @Groups({"tavro"})
+     * @MaxDepth(3)
      */
     protected $expense_categories;
 
     /**
      * @ORM\OneToMany(targetEntity="Tavro\Bundle\CoreBundle\Entity\ProductCategory", mappedBy="organization", cascade={"remove"})
+     * @Groups({"tavro"})
+     * @MaxDepth(3)
      */
     protected $product_categories;
 
     /**
      * @ORM\OneToMany(targetEntity="Tavro\Bundle\CoreBundle\Entity\RevenueCategory", mappedBy="organization", cascade={"remove"})
+     * @Groups({"tavro"})
+     * @MaxDepth(3)
      */
     protected $revenue_categories;
 
     /**
      * @ORM\OneToMany(targetEntity="Tavro\Bundle\CoreBundle\Entity\Service", mappedBy="organization", cascade={"remove"})
+     * @Groups({"tavro"})
+     * @MaxDepth(3)
      */
     protected $services;
 
     /**
      * @ORM\OneToMany(targetEntity="Tavro\Bundle\CoreBundle\Entity\Expense", mappedBy="organization", cascade={"remove"})
+     * @Groups({"tavro"})
+     * @MaxDepth(3)
      */
     protected $expenses;
 
     /**
      * @ORM\OneToMany(targetEntity="Tavro\Bundle\CoreBundle\Entity\Product", mappedBy="organization", cascade={"remove"})
+     * @Groups({"tavro"})
+     * @MaxDepth(3)
      */
     protected $products;
 
     /**
      * @ORM\OneToMany(targetEntity="Tavro\Bundle\CoreBundle\Entity\Revenue", mappedBy="organization", cascade={"remove"})
+     * @Groups({"tavro"})
+     * @MaxDepth(3)
      */
     protected $revenues;
 

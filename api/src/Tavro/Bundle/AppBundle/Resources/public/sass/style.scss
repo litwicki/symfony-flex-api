@@ -110,19 +110,28 @@ table {
 
 }
 
-.tab-content {
-  background: $white;
-  margin: 0;
-  padding: 2em;
-  border: 1px solid #ddd;
-  border-top: none;
+.api-tabs {
 
   .tab-content {
-    border: none !important;
-    padding: 0;
-    margin: 2em 0 0 0;
+
+    background: $white;
+    margin: 0;
+    padding: 2em;
+    border: 1px solid #ddd;
+    border-top: none;
+
+    .tab-content {
+      border: none !important;
+      padding: 0;
+      margin: 2em 0 0 0;
+    }
+
   }
 
+}
+
+.tab-content {
+  margin-top: 2em;
 }
 
 #page-footer {

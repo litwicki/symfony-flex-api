@@ -30,13 +30,7 @@ class ApiController extends Controller
     {
         try {
 
-            $result = array(
-                'data' => json_decode($data, true),
-                'code' => $code,
-                'message' => 'something clever...'
-            );
-
-            $response = new Response(json_encode($result));
+            $response = new Response($data);
 
             if($format == 'json') {
                 $response->headers->set('Content-Type', 'application/json');
@@ -53,6 +47,20 @@ class ApiController extends Controller
         }
 
         return $response;
+    }
+
+    function toXml(\SimpleXMLElement $object, array $data)
+    {
+        foreach ($data as $key => $value) {
+            if (is_array($value)) {
+                $new_object = $object->addChild($key);
+                $this->toXml($new_object, $value);
+            }
+            else {
+                $object->addChild($key, $value);
+            }
+        }
+        return $object;
     }
 
     /**
