@@ -4,8 +4,205 @@
 
 {% block content %}
 
-  <div class="page-header">
-    <h1>Organization API</h1>
-    <p class="lead"><i class="fa fa-fw fa-building"></i> Interact with <code>api.tavro.io</code> and manage your Organizations.</p>
-  </div>
+    <div class="page-header">
+        <h1>Organization API</h1>
+        <p class="lead"><i class="fa fa-fw fa-building"></i> Interact with <code>api.tavro.io</code> and manage your Organizations.</p>
+    </div>
+
+    <div class="page-header">
+        <h3><i class="fa fa-fw fa-database"></i> Organization Model</h3>
+        <p>The Organization object model.</p>
+    </div>
+
+    <div class="panel panel-default">
+        <table class="table table-hover table-striped table-api">
+            <thead>
+            <tr>
+                <th>Field</th>
+                <th>Type</th>
+                <th>Methods</th>
+                <th>Notes</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>id</td>
+                <td class="integer">integer</td>
+                <td>GET, DELETE</td>
+                <td>Unique identifier.</td>
+            </tr>
+            <tr>
+                <td>update_date</td>
+                <td class="date">date</td>
+                <td>GET</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>create_date</td>
+                <td class="date">date</td>
+                <td>GET</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>title</td>
+                <td class="string">string</td>
+                <td>GET</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>slug</td>
+                <td class="string">string</td>
+                <td>GET</td>
+                <td>The URL slug.</td>
+            </tr>
+            <tr>
+                <td>status</td>
+                <td class="integer">integer</td>
+                <td>GET</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>owner</td>
+                <td class="integer">object</td>
+                <td>GET</td>
+                <td>The User who owns this Organization.</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Nav tabs -->
+    <ul class="nav nav-pills" role="tablist">
+        <li role="presentation" class="active"><a href="#json" aria-controls="angular" role="tab" data-toggle="tab">JSON</a></li>
+        <li role="presentation"><a href="#xml" aria-controls="php" role="tab" data-toggle="tab">XML</a></li>
+    </ul>
+
+    <!-- Tab panes -->
+    <div class="tab-content">
+        <div role="tabpanel" class="tab-pane active" id="json">
+<pre><code class="jsonview">{
+    id: 1,
+    status: 1,
+    create_date: "2015-01-15T00:00:00+0000",
+    update_date: "2015-01-15T00:00:00+0000",
+    title: "Zoadilack",
+    slug: "zoadilack",
+    updated_by: null,
+    body: "zoadilack.com",
+    owner: {}
+}</code></pre>
+        </div>
+        <div role="tabpanel" class="tab-pane" id="xml">
+<pre><code class="xml">&#x3C;?xml version=&#x22;1.0&#x22; encoding=&#x22;UTF-8&#x22;?&#x3E;
+    &#x3C;result xmlns:xsi=&#x22;http://www.w3.org/2001/XMLSchema-instance&#x22;&#x3E;
+    &#x3C;id&#x3E;1&#x3C;/id&#x3E;
+    &#x3C;status&#x3E;1&#x3C;/status&#x3E;
+    &#x3C;create_date&#x3E;&#x3C;![CDATA[2015-01-15T00:00:00+0000]]&#x3E;&#x3C;/create_date&#x3E;
+    &#x3C;update_date&#x3E;&#x3C;![CDATA[2015-01-15T00:00:00+0000]]&#x3E;&#x3C;/update_date&#x3E;
+    &#x3C;title&#x3E;&#x3C;![CDATA[Zoadilack]]&#x3E;&#x3C;/title&#x3E;
+    &#x3C;slug&#x3E;&#x3C;![CDATA[zoadilack]]&#x3E;&#x3C;/slug&#x3E;
+    &#x3C;updated_by xsi:nil=&#x22;true&#x22;/&#x3E;
+    &#x3C;body&#x3E;&#x3C;![CDATA[zoadilack.com]]&#x3E;&#x3C;/body&#x3E;
+    &#x3C;owner&#x3E;&#x3C;/owner&#x3E;
+&#x3C;/result&#x3E;</code></pre>
+        </div>
+    </div>
+
+    <div class="page-header">
+        <h3><i class="fa fa-fw fa-location-arrow"></i> User Api Routes</h3>
+    </div>
+
+    <ul>
+        <li><code>{organization}</code> must be the integer ID of a User.</li>
+        <li><code>{format}</code> must be <code>XML</code> or <code>JSON</code> (if not provided the default is <code>JSON</code>).</li>
+    </ul>
+
+    <hr/>
+
+    <div class="panel panel-default">
+        <table class="table table-striped table-hover table-api">
+            <tr>
+                <th>Path</th>
+                <th>Method(s)</th>
+                <th>Description</th>
+            </tr>
+            <tr>
+                <td class="code">/api/v1/organizations.{format}</td>
+                <td class="code get">GET</td>
+                <td>Get all Organizations.</td>
+            </tr>
+            <tr>
+                <td class="code">/api/v1/organizations/{organization}.{format}</td>
+                <td class="code get">GET</td>
+                <td>Get an Organization by Id.</td>
+            </tr>
+            <tr>
+                <td class="code">/api/v1/organizations/{organization}.{format}</td>
+                <td class="code update">PUT, PATCH</td>
+                <td>Update an Organization by Id.</td>
+            </tr>
+            <tr>
+                <td class="code">/api/v1/organizations/{organization}.{format}</td>
+                <td class="code delete">DELETE</td>
+                <td>Delete an Organization by Id.</td>
+            </tr>
+            <tr>
+                <td class="code">/api/v1/organizations.{format}</td>
+                <td class="code post">POST</td>
+                <td>Create an Organization.</td>
+            </tr>
+            <tr>
+                <th colspan="3">Additional Routes</th>
+            </tr>
+            <tr>
+                <td class="code">/api/v1/organizations/{organization}/users.{format}</td>
+                <td class="code post">GET</td>
+                <td>Get all Users that belong to this Organization.</td>
+            </tr>
+            <tr>
+                <td class="code">/api/v1/organizations/{organization}/services.{format}</td>
+                <td class="code post">GET</td>
+                <td>Get all Services that belong to this Organization.</td>
+            </tr>
+            <tr>
+                <td class="code">/api/v1/organizations/{organization}/services/categories.{format}</td>
+                <td class="code post">GET</td>
+                <td>Get all Service Categories for this Organization.</td>
+            </tr>
+            <tr>
+                <td class="code">/api/v1/organizations/{organization}/products.{format}</td>
+                <td class="code post">GET</td>
+                <td>Get all Products that are linked to this Organization.</td>
+            </tr>
+            <tr>
+                <td class="code">/api/v1/organizations/{organization}/products/categories.{format}</td>
+                <td class="code post">GET</td>
+                <td>Get all Product Categories for this Organization.</td>
+            </tr>
+            <tr>
+                <td class="code">/api/v1/organizations/{organization}/revenues.{format}</td>
+                <td class="code post">GET</td>
+                <td>Get all Revenues that are linked to this Organization.</td>
+            </tr>
+            <tr>
+                <td class="code">/api/v1/organizations/{organization}/expenses.{format}</td>
+                <td class="code post">GET</td>
+                <td>Get all Expenses that are linked to this Organization.</td>
+            </tr>
+            <tr>
+                <td class="code">/api/v1/organizations/{organization}/expenses/categories.{format}</td>
+                <td class="code post">GET</td>
+                <td>Get all Expense Categories for this Organization.</td>
+            </tr>
+            <tr>
+                <td class="code">/api/v1/organizations/{organization}/nodes.{format}</td>
+                <td class="code post">GET</td>
+                <td>Get all Nodes that belong to this Organization.</td>
+            </tr>
+
+        </table>
+    </div>
+
+    {% include 'TavroAppBundle:Documentation:partials/user_organization.html.twig' %}
+
 {% endblock %}
