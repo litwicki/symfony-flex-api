@@ -4,8 +4,152 @@
 
 {% block content %}
 
-  <div class="page-header">
-    <h1>Expense API</h1>
-    <p class="lead"><i class="fa fa-fw fa-credit-card"></i> Interact with <code>api.tavro.io</code> and manage your Expenses.</p>
-  </div>
+    <div class="page-header">
+        <h1>Expense API</h1>
+        <p class="lead"><i class="fa fa-fw fa-credit-card"></i> Interact with <code>api.tavro.io</code> and manage a Expense object and associations.</p>
+    </div>
+
+    <div class="page-header">
+        <h3><i class="fa fa-fw fa-database"></i> Expense Model</h3>
+        <p>The Expense object model.</p>
+    </div>
+
+    <div class="panel panel-default">
+        <table class="table table-hover table-striped table-api">
+            <thead>
+            <tr>
+                <th>Field</th>
+                <th>Type</th>
+                <th>Methods</th>
+                <th>Notes</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>id</td>
+                <td class="integer">integer</td>
+                <td>GET, DELETE</td>
+                <td>Unique identifier.</td>
+            </tr>
+            <tr>
+                <td>update_date</td>
+                <td class="date">date</td>
+                <td>GET, PATCH, PUT</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>create_date</td>
+                <td class="date">date</td>
+                <td>GET</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>organization <code>organization_id</code></td>
+                <td class="integer">integer</td>
+                <td>GET, PATCH, PUT</td>
+                <td>The Organization.</td>
+            </tr>
+            <tr>
+                <td>category <code>category_id</code></td>
+                <td class="integer">integer</td>
+                <td>GET, PUT, PATCH</td>
+                <td>The ExpenseCategory</td>
+            </tr>
+            <tr>
+                <td>user <code>user_id</code></td>
+                <td class="integer">integer</td>
+                <td>GET, PUT, PATCH</td>
+                <td>The User who created the Expense.</td>
+            </tr>
+            <tr>
+                <td>comments</td>
+                <td class="array">array</td>
+                <td>GET, POST</td>
+                <td>Comments on this Expense.</td>
+            </tr>
+            <tr>
+                <td>tags</td>
+                <td class="array">array</td>
+                <td>GET, POST</td>
+                <td>Tags on this Expense.</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="page-header">
+        <h3><i class="fa fa-fw fa-location-arrow"></i> Expense Api Routes</h3>
+    </div>
+
+    <ul>
+        <li><code>{expense}</code> must be the integer ID of an Expense.</li>
+        <li><code>{format}</code> must be <code>XML</code> or <code>JSON</code> (if not provided the default is <code>JSON</code>).</li>
+    </ul>
+
+    <hr/>
+
+    <div class="panel panel-default">
+        <table class="table table-striped table-hover table-api">
+            <tr>
+                <th>Path</th>
+                <th>Method(s)</th>
+                <th>Description</th>
+            </tr>
+            <tr>
+                <td class="code">/api/v1/expenses.{format}</td>
+                <td class="code get">GET</td>
+                <td>Get all Expenses.</td>
+            </tr>
+            <tr>
+                <td class="code">/api/v1/expenses/{expense}.{format}</td>
+                <td class="code get">GET</td>
+                <td>Get an Expense by Id.</td>
+            </tr>
+            <tr>
+                <td class="code">/api/v1/expenses/{expense}.{format}</td>
+                <td class="code update">PUT, PATCH</td>
+                <td>Update an Expense by Id.</td>
+            </tr>
+            <tr>
+                <td class="code">/api/v1/expenses/{expense}.{format}</td>
+                <td class="code delete">DELETE</td>
+                <td>Delete an Expense by Id.</td>
+            </tr>
+            <tr>
+                <td class="code">/api/v1/expenses.{format}</td>
+                <td class="code post">POST</td>
+                <td>Create an Expense.</td>
+            </tr>
+            <tr>
+                <th colspan="3">Additional Routes</th>
+            </tr>
+            <tr>
+                <td class="code">/api/v1/expenses/{expense}/comments.{format}</td>
+                <td class="code get">GET</td>
+                <td>Get all comments for this Expense.</td>
+            </tr>
+            <tr>
+                <td class="code">/api/v1/expenses/{expense}/comments.{format}</td>
+                <td class="code post">POST</td>
+                <td>Create a new comment for this Expense.</td>
+            </tr>
+            <tr>
+                <td class="code">/api/v1/expenses/{expense}/tags.{format}</td>
+                <td class="code get">GET</td>
+                <td>Get all tags for this Expense.</td>
+            </tr>
+            <tr>
+                <td class="code">/api/v1/expenses/{expense}/tags.{format}</td>
+                <td class="code post">POST</td>
+                <td>Add a new Tag to this Expense.</td>
+            </tr>
+        </table>
+    </div>
+
+    <hr />
+    
+    <div class="alert alert-info">
+        <strong>For more information on managing <code><a href="{{ url('api_doc_tag') }}">Tags</a></code> or <code><a href="{{ url('api_doc_comment') }}">Comments</a></code> visit their respective sections of the documentation.</strong>
+    </div>
+
 {% endblock %}

@@ -31,3 +31,6 @@ api_doc_shareholder:
 api_doc_comment:
     path: /comment
     defaults: { _controller: "TavroAppBundle:Documentation:comment" }
+api_doc_tag:
+    path: /tag
+    defaults: { _controller: "TavroAppBundle:Documentation:tag" }
