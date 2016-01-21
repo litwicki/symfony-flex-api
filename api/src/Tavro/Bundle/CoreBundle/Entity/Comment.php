@@ -27,7 +27,7 @@ class Comment extends ApiEntity
 
     /**
      * @ORM\Column(type="string", length=8000, nullable=true)
-     * @Groups({"api", "tavro", "summary"})
+     * @Groups({"api", "tavro", "simple"})
      */
     protected $body;
 
@@ -54,7 +54,7 @@ class Comment extends ApiEntity
     /**
      * @ORM\ManyToOne(targetEntity="Tavro\Bundle\CoreBundle\Entity\User", inversedBy="comments")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
-     * @Groups({"api", "tavro", "summary"})
+     * @Groups({"api", "tavro", "simple"})
      * @MaxDepth(2)
      */
     protected $user;

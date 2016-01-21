@@ -497,4 +497,39 @@ class Organization extends ApiEntity
     {
         return $this->variables;
     }
+
+
+
+    /**
+     * Add node
+     *
+     * @param \Tavro\Bundle\CoreBundle\Entity\Node $node
+     * @return User
+     */
+    public function addNode(\Tavro\Bundle\CoreBundle\Entity\Node $node)
+    {
+        $this->nodes[] = $node;
+
+        return $this;
+    }
+
+    /**
+     * Remove node
+     *
+     * @param \Tavro\Bundle\CoreBundle\Entity\Node $node
+     */
+    public function removeNode(\Tavro\Bundle\CoreBundle\Entity\Node $node)
+    {
+        $this->nodes->removeElement($node);
+    }
+
+    /**
+     * Get node
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getNodes()
+    {
+        return $this->nodes;
+    }
 }

@@ -46,13 +46,13 @@ class Image extends Entity implements S3EntityInterface
 
     /**
      * @ORM\Column(type="string", length=500, nullable=false)
-     * @Groups({"api", "tavro", "summary"})
+     * @Groups({"api", "tavro", "simple"})
      */
     protected $aws_key;
 
     /**
      * @ORM\Column(type="string", length=500, nullable=false)
-     * @Groups({"api", "tavro", "summary"})
+     * @Groups({"api", "tavro", "simple"})
      */
     protected $original_filename;
 

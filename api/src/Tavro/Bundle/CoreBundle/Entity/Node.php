@@ -33,32 +33,32 @@ class Node extends ApiEntity
      *      choices = { "guide", "node", "page", "article", "wiki"},
      *      message = "Choose a valid node type."
      * )
-     * @Groups({"api", "tavro", "summary"})
+     * @Groups({"api", "tavro", "simple"})
      */
     protected $type;
 
     /**
      * @ORM\Column(type="string", length=8000, nullable=true)
-     * @Groups({"api", "tavro", "summary"})
+     * @Groups({"api", "tavro", "simple"})
      */
     protected $body;
 
     /**
      * @ORM\Column(type="datetime", length=1000, nullable=true)
-     * @Groups({"api", "tavro", "summary"})
+     * @Groups({"api", "tavro", "simple"})
      */
     protected $display_date;
 
     /**
      * @ORM\Column(type="integer", nullable=true, options={"default" = 0})
-     * @Groups({"api", "tavro", "summary"})
+     * @Groups({"api", "tavro", "simple"})
      */
     protected $views;
 
     /**
      * @ORM\ManyToOne(targetEntity="Tavro\Bundle\CoreBundle\Entity\User", inversedBy="nodes")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id", nullable=false)
-     * @Groups({"api", "tavro", "summary"})
+     * @Groups({"api", "tavro", "simple"})
      * @MaxDepth(1)
      */
     protected $user;
@@ -81,7 +81,7 @@ class Node extends ApiEntity
     /**
      * @ORM\ManyToOne(targetEntity="Tavro\Bundle\CoreBundle\Entity\Organization", inversedBy="nodes")
      * @ORM\JoinColumn(name="organization_id", referencedColumnName="id", nullable=false)
-     * @Groups({"api", "tavro", "summary"})
+     * @Groups({"api", "tavro", "simple"})
      * @MaxDepth(3)
      */
     protected $organization;
@@ -365,7 +365,7 @@ class Node extends ApiEntity
     /**
      * @VirtualProperty
      * @SerializedName("read_count")
-     * @Groups({"api", "tavro", "summary"})
+     * @Groups({"api", "tavro", "simple"})
      * @return int
      */
     public function getReadCount()
@@ -376,7 +376,7 @@ class Node extends ApiEntity
     /**
      * @VirtualProperty
      * @SerializedName("comment_count")
-     * @Groups({"api", "tavro", "summary"})
+     * @Groups({"api", "tavro", "simple"})
      * @return int
      */
     public function getCommentCount()

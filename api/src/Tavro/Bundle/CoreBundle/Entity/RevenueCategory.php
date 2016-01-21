@@ -28,14 +28,14 @@ class RevenueCategory extends ApiEntity
 {
     /**
      * @ORM\Column(type="string", length=500, nullable=false)
-     * @Groups({"api", "tavro", "summary"})
+     * @Groups({"api", "tavro", "simple"})
      */
     protected $body;
 
     /**
      * @ORM\ManyToOne(targetEntity="Tavro\Bundle\CoreBundle\Entity\Organization", inversedBy="revenue_categories")
      * @ORM\JoinColumn(name="organization_id", referencedColumnName="id", nullable=false)
-     * @Groups({"api", "tavro", "summary"})
+     * @Groups({"api", "tavro", "simple"})
      * @MaxDepth(3)
      */
     protected $organization;

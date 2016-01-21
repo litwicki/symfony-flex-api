@@ -49,7 +49,47 @@ class ApiController extends Controller
         return $response;
     }
 
-    function toXml(\SimpleXMLElement $object, array $data)
+    public function toArray($object, $format = 'json', $group = 'api')
+    {
+
+        switch($format) {
+            case 'xml':
+                $string = $this->get('tavro_serializer')->serialize($object, $format, $group);
+                return json_decode(json_encode((array) simplexml_load_string($string)), true);
+                break;
+            case 'json':
+            default:
+                return json_decode($this->get('tavro_serializer')->serialize($object, $format, $group), true);
+                break;
+        }
+
+    }
+
+    /**
+     * Convert SimpleXMLObject to an Array.
+     * @see: http://www.php.net/manual/en/ref.simplexml.php#111227
+     *
+     * @param $xmlObject
+     * @param array $out
+     *
+     * @return array
+     */
+    public function xml2array($xmlObject, $out = array())
+    {
+        foreach ( (array) $xmlObject as $index => $node ) {
+            $out[$index] = (is_object($node) || is_array($node)) ? $this->xml2array($node) : $node;
+        }
+
+        return $out;
+    }
+
+    /**
+     * @param \SimpleXMLElement $object
+     * @param array $data
+     *
+     * @return \SimpleXMLElement
+     */
+    public function toXml(\SimpleXMLElement $object, array $data)
     {
         foreach ($data as $key => $value) {
             if (is_array($value)) {

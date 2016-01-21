@@ -29,14 +29,14 @@ class Expense extends ApiEntity
 
     /**
      * @ORM\Column(type="string", length=8000, nullable=true)
-     * @Groups({"api", "tavro", "summary"})
+     * @Groups({"api", "tavro", "simple"})
      */
     protected $body;
 
     /**
      * @ORM\ManyToOne(targetEntity="Tavro\Bundle\CoreBundle\Entity\ExpenseCategory", inversedBy="expenses")
      * @ORM\JoinColumn(name="category_id", referencedColumnName="id", nullable=false)
-     * @Groups({"api", "tavro", "summary"})
+     * @Groups({"api", "tavro", "simple"})
      * @MaxDepth(3)
      */
     protected $category;
@@ -44,7 +44,7 @@ class Expense extends ApiEntity
     /**
      * @ORM\ManyToOne(targetEntity="Tavro\Bundle\CoreBundle\Entity\User", inversedBy="expenses")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id", nullable=false)
-     * @Groups({"api", "tavro", "summary"})
+     * @Groups({"api", "tavro", "simple"})
      * @MaxDepth(3)
      */
     protected $user;
@@ -62,7 +62,7 @@ class Expense extends ApiEntity
     /**
      * @ORM\ManyToOne(targetEntity="Tavro\Bundle\CoreBundle\Entity\Organization", inversedBy="expenses")
      * @ORM\JoinColumn(name="organization_id", referencedColumnName="id", nullable=false)
-     * @Groups({"api", "tavro", "summary"})
+     * @Groups({"api", "tavro", "simple"})
      * @MaxDepth(3)
      */
     protected $organization;
@@ -228,7 +228,7 @@ class Expense extends ApiEntity
     /**
      * @VirtualProperty
      * @SerializedName("comment_count")
-     * @Groups({"api", "tavro", "summary"})
+     * @Groups({"api", "tavro", "simple"})
      * @return int
      */
     public function getCommentCount()

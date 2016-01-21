@@ -55,7 +55,7 @@ $http.get(url)
 <pre><code class="php">$my_user_id = {user};
 
 $url = sprintf('https://{{ api_hostname }}/api/v1/users/%s', $my_user_id);
-        
+
 $curl = new Curl();
 $curl->setBasicAuthentication('{API_KEY}', '{API_PASSWORD}');
 $curl->get($url);

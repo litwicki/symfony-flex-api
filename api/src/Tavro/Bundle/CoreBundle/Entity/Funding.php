@@ -28,14 +28,14 @@ class Funding extends ApiEntity
 {
     /**
      * @ORM\Column(type="string", length=8000, nullable=true)
-     * @Groups({"api", "tavro", "summary"})
+     * @Groups({"api", "tavro", "simple"})
      */
     protected $body;
 
     /**
      * @ORM\ManyToOne(targetEntity="Tavro\Bundle\CoreBundle\Entity\Organization", inversedBy="funding")
      * @ORM\JoinColumn(name="organization_id", referencedColumnName="id", nullable=false)
-     * @Groups({"api", "tavro", "summary"})
+     * @Groups({"api", "tavro", "simple"})
      * @MaxDepth(3)
      */
     protected $organization;
@@ -43,7 +43,7 @@ class Funding extends ApiEntity
     /**
      * @ORM\OneToMany(targetEntity="Tavro\Bundle\CoreBundle\Entity\Shareholder", mappedBy="funding")
      * @ORM\OrderBy({"id" = "DESC"})
-     * @Groups({"api", "tavro", "summary"})
+     * @Groups({"api", "tavro", "simple"})
      */
     protected $shareholders;
 

@@ -1,6 +1,10 @@
 tavro_user_api:
     resource: "@TavroApiBundle/Resources/config/routing/user.yml"
-    prefix: /api/v1
+    prefix: /api/v1/users
+
+tavro_organization_api:
+    resource: "@TavroApiBundle/Resources/config/routing/organization.yml"
+    prefix: /api/v1/organizations
 
 # Keep me last for the override scenarios to be priority
 tavro_api:

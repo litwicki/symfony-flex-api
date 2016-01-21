@@ -35,61 +35,61 @@ class Shareholder extends Entity
 {
     /**
      * @ORM\Column(type="string", length=255, nullable=false)
-     * @Groups({"api", "tavro", "summary", "typeahead"})
+     * @Groups({"api", "tavro", "simple", "typeahead"})
      */
     protected $first_name;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=false)
-     * @Groups({"api", "tavro", "summary", "typeahead"})
+     * @Groups({"api", "tavro", "simple", "typeahead"})
      */
     protected $last_name;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @Groups({"api", "tavro", "summary", "typeahead"})
+     * @Groups({"api", "tavro", "simple", "typeahead"})
      */
     protected $title;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=false)
-     * @Groups({"api", "tavro", "summary"})
+     * @Groups({"api", "tavro", "simple"})
      */
     protected $address;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=false)
-     * @Groups({"api", "tavro", "summary"})
+     * @Groups({"api", "tavro", "simple"})
      */
     protected $address2;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=false)
-     * @Groups({"api", "tavro", "summary"})
+     * @Groups({"api", "tavro", "simple"})
      */
     protected $city;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=false)
-     * @Groups({"api", "tavro", "summary"})
+     * @Groups({"api", "tavro", "simple"})
      */
     protected $state;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=false)
-     * @Groups({"api", "tavro", "summary"})
+     * @Groups({"api", "tavro", "simple"})
      */
     protected $zip;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=false)
-     * @Groups({"api", "tavro", "summary", "typeahead"})
+     * @Groups({"api", "tavro", "simple", "typeahead"})
      */
     protected $email;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=false)
-     * @Groups({"api", "tavro", "summary", "typeahead"})
+     * @Groups({"api", "tavro", "simple", "typeahead"})
      */
     protected $shares;
 

@@ -9,7 +9,7 @@
     <meta name="description" content="Tavro.io API">
     <meta name="author" content="Zoadilack, LLC">
 
-    <title>TAVRO.IO | API</title>
+    <title>TAVRO API</title>
 
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
@@ -54,9 +54,9 @@
 <script>hljs.initHighlightingOnLoad();</script>
 
 {% if app.environment == 'prod' %}
-    <link rel="stylesheet" href="{{ amazon_s3_url }}/{{ asset_bucket }}/assets/js/tavro.js"/>
+<link rel="stylesheet" href="{{ amazon_s3_url }}/{{ asset_bucket }}/assets/js/tavro.js"/>
 {% else %}
-    <link rel="stylesheet" href="/assets/js/tavro.js"/>
+<link rel="stylesheet" href="/assets/js/tavro.js"/>
 {% endif %}
 
 {% if app.environment == 'prod' %}

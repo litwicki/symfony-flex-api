@@ -1,0 +1,23 @@
+api_organization_users:
+    path: /{organization}/users.{_format}
+    defaults: { _controller: TavroApiBundle:Organization:users, _format: json}
+    methods: GET
+    requirements:
+        organization: \d+
+        _format: json|xml
+
+api_organization_services:
+    path: /{organization}/services.{_format}
+    defaults: { _controller: TavroApiBundle:Organization:services, _format: json}
+    methods: GET
+    requirements:
+        organization: \d+
+        _format: json|xml
+
+api_organization_service_categories:
+    path: /{organization}/services/categories.{_format}
+    defaults: { _controller: TavroApiBundle:Organization:serviceCategories, _format: json}
+    methods: GET
+    requirements:
+        organization: \d+
+        _format: json|xml

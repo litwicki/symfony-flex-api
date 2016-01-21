@@ -21,14 +21,14 @@ class ApiEntity extends Entity implements ApiEntityInterface
 
     /**
      * @ORM\Column(type="string", length=500, nullable=true)
-     * @Groups({"api", "tavro", "summary"})
+     * @Groups({"api", "tavro", "simple"})
      */
     protected $title;
 
     /**
      * @Gedmo\Slug(fields={"id", "title"}, updatable=true, dateFormat="Ymd/")
      * @ORM\Column(type="string", length=64, nullable=false, unique=true)
-     * @Groups({"api", "tavro", "summary"})
+     * @Groups({"api", "tavro", "simple"})
      */
     protected $slug;
 

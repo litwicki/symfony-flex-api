@@ -33,13 +33,13 @@ class User extends Entity implements UserInterface, \Serializable
 {
     /**
      * @ORM\Column(type="string", length=255, unique=true, nullable=false)
-     * @Groups({"api", "tavro", "summary", "typeahead"})
+     * @Groups({"api", "tavro", "simple", "typeahead"})
      */
     protected $username;
 
     /**
      * @ORM\Column(type="string", length=255, unique=true, nullable=true)
-     * @Groups({"api", "tavro", "summary"})
+     * @Groups({"api", "tavro"})
      * @MaxDepth(1)
      */
     protected $github_username;
@@ -66,7 +66,7 @@ class User extends Entity implements UserInterface, \Serializable
 
     /**
      * @ORM\Column(type="string", unique=true, length=255, nullable=false)
-     * @Groups({"api", "tavro", "summary", "typeahead"})
+     * @Groups({"api", "tavro", "simple", "typeahead"})
      */
     protected $email;
 
@@ -78,7 +78,7 @@ class User extends Entity implements UserInterface, \Serializable
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
-     * @Groups({"api", "tavro"})
+     * @Groups({"api", "tavro", "simple"})
      * @MaxDepth(1)
      */
     protected $last_online_date;
@@ -126,7 +126,7 @@ class User extends Entity implements UserInterface, \Serializable
      *      choices = { "male", "female", "other" },
      *      message = "Choose a valid gender."
      * )
-     * @Groups({"api", "tavro", "summary"})
+     * @Groups({"api", "tavro", "simple"})
      * @Accessor(getter="getGender", setter="setGuid")
      * @MaxDepth(1)
      */
@@ -173,7 +173,7 @@ class User extends Entity implements UserInterface, \Serializable
      * )
      * @Type("array<string>")
      * @Accessor(getter="getSerializedRoles")
-     * @Groups({"api", "tavro", "summary"})
+     * @Groups({"api", "tavro"})
      * @MaxDepth(3)
      */
     protected $roles;
@@ -191,7 +191,7 @@ class User extends Entity implements UserInterface, \Serializable
     /**
      * @ORM\ManyToOne(targetEntity="Tavro\Bundle\CoreBundle\Entity\Image")
      * @ORM\JoinColumn(name="avatar_image_id", referencedColumnName="id", nullable=true)
-     * @Groups({"api", "tavro", "summary"})
+     * @Groups({"api", "tavro", "simple"})
      * @MaxDepth(1)
      */
     protected $avatar;
@@ -956,7 +956,7 @@ class User extends Entity implements UserInterface, \Serializable
     /**
      * @VirtualProperty
      * @SerializedName("is_admin")
-     * @Groups({"api", "tavro", "summary"})
+     * @Groups({"api", "tavro"})
      *
      */
     public function getIsAdmin()
@@ -973,7 +973,7 @@ class User extends Entity implements UserInterface, \Serializable
     /**
      * @VirtualProperty
      * @SerializedName("is_developer")
-     * @Groups({"api", "tavro", "summary"})
+     * @Groups({"api", "tavro"})
      *
      */
     public function getIsDeveloper()
@@ -990,7 +990,7 @@ class User extends Entity implements UserInterface, \Serializable
     /**
      * @VirtualProperty
      * @SerializedName("node_count")
-     * @Groups({"api", "tavro", "summary"})
+     * @Groups({"api", "tavro"})
      *
      */
     public function nodeCount()

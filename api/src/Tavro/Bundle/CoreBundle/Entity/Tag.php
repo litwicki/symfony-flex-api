@@ -28,13 +28,13 @@ class Tag extends ApiEntity
 {
     /**
      * @ORM\Column(type="string", length=500, nullable=false)
-     * @Groups({"api", "tavro", "summary", "typeahead"})
+     * @Groups({"api", "tavro", "simple", "typeahead"})
      */
     protected $title;
 
     /**
      * @ORM\Column(type="string", length=500, nullable=false)
-     * @Groups({"api", "tavro", "summary"})
+     * @Groups({"api", "tavro", "simple"})
      */
     protected $body;
 
