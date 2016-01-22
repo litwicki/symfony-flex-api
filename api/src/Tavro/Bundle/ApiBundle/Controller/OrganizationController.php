@@ -258,4 +258,50 @@ class OrganizationController extends ApiController
             return $response;
         }
     }
+
+    /**
+     * @param \Symfony\Component\HttpFoundation\Request $request
+     * @param \Tavro\Bundle\CoreBundle\Entity\Organization $organization
+     * @param $_format
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     * @throws \Exception
+     */
+    public function fundingAction(Request $request, Organization $organization, $_format)
+    {
+        try {
+            $entities = $organization->getFunding();
+        }
+        catch(\Exception $e) {
+            throw $e;
+        }
+        finally {
+            $data = $this->serialize($entities, $_format, $group = 'simple');
+            $response = $this->apiResponse($data, $_format);
+            return $response;
+        }
+    }
+
+    /**
+     * @param \Symfony\Component\HttpFoundation\Request $request
+     * @param \Tavro\Bundle\CoreBundle\Entity\Organization $organization
+     * @param $_format
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     * @throws \Exception
+     */
+    public function shareholdersAction(Request $request, Organization $organization, $_format)
+    {
+        try {
+            $entities = $organization->getShareholders();
+        }
+        catch(\Exception $e) {
+            throw $e;
+        }
+        finally {
+            $data = $this->serialize($entities, $_format, $group = 'simple');
+            $response = $this->apiResponse($data, $_format);
+            return $response;
+        }
+    }
 }

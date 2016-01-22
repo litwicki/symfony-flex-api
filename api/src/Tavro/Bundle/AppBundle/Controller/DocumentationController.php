@@ -152,4 +152,17 @@ class DocumentationController extends DefaultController
         return $this->render('TavroAppBundle:Documentation:comment.html.twig', $page);
     }
 
+    /**
+     * @param \Symfony\Component\HttpFoundation\Request $request
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function tagAction(Request $request)
+    {
+        $page = array(
+            'user' => $this->getUser()
+        );
+        return $this->render('TavroAppBundle:Documentation:tag.html.twig', $page);
+    }
+
 }

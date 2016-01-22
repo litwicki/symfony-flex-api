@@ -113,6 +113,20 @@ class Organization extends ApiEntity
     protected $revenues;
 
     /**
+     * @ORM\OneToMany(targetEntity="Tavro\Bundle\CoreBundle\Entity\Funding", mappedBy="organization", cascade={"remove"})
+     * @Groups({"tavro"})
+     * @MaxDepth(3)
+     */
+    protected $funding;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Tavro\Bundle\CoreBundle\Entity\Shareholder", mappedBy="organization", cascade={"remove"})
+     * @Groups({"tavro"})
+     * @MaxDepth(3)
+     */
+    protected $shareholders;
+
+    /**
      * Set body
      *
      * @param string $body
@@ -531,5 +545,73 @@ class Organization extends ApiEntity
     public function getNodes()
     {
         return $this->nodes;
+    }
+
+    /**
+     * Add Funding
+     *
+     * @param \Tavro\Bundle\CoreBundle\Entity\Funding $funding
+     *
+     * @return Organization
+     */
+    public function addFunding(\Tavro\Bundle\CoreBundle\Entity\Funding $funding)
+    {
+        $this->funding[] = $funding;
+
+        return $this;
+    }
+
+    /**
+     * Remove funding
+     *
+     * @param \Tavro\Bundle\CoreBundle\Entity\Funding $funding
+     */
+    public function removeFunding(\Tavro\Bundle\CoreBundle\Entity\Funding $funding)
+    {
+        $this->funding->removeElement($funding);
+    }
+
+    /**
+     * Get products
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getFunding()
+    {
+        return $this->funding;
+    }
+
+    /**
+     * Add Shareholder
+     *
+     * @param \Tavro\Bundle\CoreBundle\Entity\Shareholder $shareholder
+     *
+     * @return Organization
+     */
+    public function addShareholder(\Tavro\Bundle\CoreBundle\Entity\Shareholder $shareholder)
+    {
+        $this->shareholders[] = $shareholder;
+
+        return $this;
+    }
+
+    /**
+     * Remove shareholder
+     *
+     * @param \Tavro\Bundle\CoreBundle\Entity\Shareholder $shareholder
+     */
+    public function removeShareholder(\Tavro\Bundle\CoreBundle\Entity\Shareholder $shareholder)
+    {
+        $this->shareholders->removeElement($shareholder);
+    }
+
+    /**
+     * Get products
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getShareholders()
+    {
+        return $this->shareholder;
     }
 }

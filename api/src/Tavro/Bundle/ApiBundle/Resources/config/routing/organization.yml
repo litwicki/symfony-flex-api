@@ -21,3 +21,67 @@ api_organization_service_categories:
     requirements:
         organization: \d+
         _format: json|xml
+
+api_organization_expenses:
+    path: /{organization}/expenses.{_format}
+    defaults: { _controller: TavroApiBundle:Organization:expenses, _format: json}
+    methods: GET
+    requirements:
+        organization: \d+
+        _format: json|xml
+
+api_organization_expense_categories:
+    path: /{organization}/expenses/categories.{_format}
+    defaults: { _controller: TavroApiBundle:Organization:expenseCategories, _format: json}
+    methods: GET
+    requirements:
+        organization: \d+
+        _format: json|xml
+
+api_organization_products:
+    path: /{organization}/products.{_format}
+    defaults: { _controller: TavroApiBundle:Organization:products, _format: json}
+    methods: GET
+    requirements:
+        organization: \d+
+        _format: json|xml
+
+api_organization_product_categories:
+    path: /{organization}/products/categories.{_format}
+    defaults: { _controller: TavroApiBundle:Organization:productCategories, _format: json}
+    methods: GET
+    requirements:
+        organization: \d+
+        _format: json|xml
+
+api_organization_revenues:
+    path: /{organization}/revenues.{_format}
+    defaults: { _controller: TavroApiBundle:Organization:revenues, _format: json}
+    methods: GET
+    requirements:
+        organization: \d+
+        _format: json|xml
+
+api_organization_nodes:
+    path: /{organization}/services.{_format}
+    defaults: { _controller: TavroApiBundle:Organization:nodes, _format: json}
+    methods: GET
+    requirements:
+        organization: \d+
+        _format: json|xml
+
+api_organization_funding:
+    path: /{organization}/funding.{_format}
+    defaults: { _controller: TavroApiBundle:Organization:funding, _format: json}
+    methods: GET
+    requirements:
+        organization: \d+
+        _format: json|xml
+
+api_organization_shareholders:
+    path: /{organization}/shareholders.{_format}
+    defaults: { _controller: TavroApiBundle:Organization:shareholders, _format: json}
+    methods: GET
+    requirements:
+        organization: \d+
+        _format: json|xml
