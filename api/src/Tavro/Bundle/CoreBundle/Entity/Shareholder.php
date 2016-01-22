@@ -91,7 +91,32 @@ class Shareholder extends Entity
      * @ORM\Column(type="string", length=255, nullable=false)
      * @Groups({"api", "tavro", "simple", "typeahead"})
      */
+    protected $phone;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=false)
+     * @Groups({"api", "tavro", "simple", "typeahead"})
+     */
     protected $shares;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Tavro\Bundle\CoreBundle\Entity\User", inversedBy="shareholders")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id", nullable=true)
+     * @Groups({"api", "tavro", "simple"})
+     * @MaxDepth(1)
+     */
+    protected $user;
+
+    /**
+     * @ORM\Column(type="string", length=8000, nullable=true)
+     * @Groups({"api", "tavro", "simple"})
+     */
+    protected $notes;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Tavro\Bundle\CoreBundle\Entity\OrganizationShareholder", mappedBy="shareholder", cascade={"remove"})
+     */
+    protected $organization_shareholders;
 
     /**
      * Constructor
@@ -107,6 +132,28 @@ class Shareholder extends Entity
         return sprintf('%s, %s', $this->last_name, $this->first_name);
     }
 
+    /**
+     * Set notes
+     *
+     * @param string $notes
+     * @return Node
+     */
+    public function setNotes($notes)
+    {
+        $this->notes = $notes;
+
+        return $this;
+    }
+
+    /**
+     * Get notes
+     *
+     * @return string
+     */
+    public function getNotes()
+    {
+        return $this->notes;
+    }
 
     /**
      * Set firstName
@@ -346,5 +393,85 @@ class Shareholder extends Entity
     public function getShares()
     {
         return $this->shares;
+    }
+
+    /**
+     * Set user
+     *
+     * @param \Tavro\Bundle\CoreBundle\Entity\User $user
+     * @return Node
+     */
+    public function setUser(\Tavro\Bundle\CoreBundle\Entity\User $user)
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return \Tavro\Bundle\CoreBundle\Entity\User
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
+
+    /**
+     * Set phone
+     *
+     * @param string $phone
+     *
+     * @return Shareholder
+     */
+    public function setPhone($phone)
+    {
+        $this->phone = $phone;
+
+        return $this;
+    }
+
+    /**
+     * Get phone
+     *
+     * @return string
+     */
+    public function getPhone()
+    {
+        return $this->phone;
+    }
+
+    /**
+     * Add organization_shareholders
+     *
+     * @param \Tavro\Bundle\CoreBundle\Entity\OrganizationShareholder $nodeComments
+     * @return Node
+     */
+    public function addOrganizationShareholder(\Tavro\Bundle\CoreBundle\Entity\OrganizationShareholder $nodeComments)
+    {
+        $this->organization_shareholders[] = $nodeComments;
+
+        return $this;
+    }
+
+    /**
+     * Remove organization_shareholders
+     *
+     * @param \Tavro\Bundle\CoreBundle\Entity\OrganizationShareholder $nodeComments
+     */
+    public function removeOrganizationShareholder(\Tavro\Bundle\CoreBundle\Entity\OrganizationShareholder $nodeComments)
+    {
+        $this->organization_shareholders->removeElement($nodeComments);
+    }
+
+    /**
+     * Get organization_shareholders
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getOrganizationShareholders()
+    {
+        return $this->organization_shareholders;
     }
 }

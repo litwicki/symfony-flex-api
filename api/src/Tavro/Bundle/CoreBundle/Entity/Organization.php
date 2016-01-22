@@ -52,6 +52,11 @@ class Organization extends ApiEntity
     protected $nodes;
 
     /**
+     * @ORM\OneToMany(targetEntity="Tavro\Bundle\CoreBundle\Entity\OrganizationShareholder", mappedBy="organization", cascade={"remove"})
+     */
+    protected $organization_shareholders;
+
+    /**
      * @ORM\OneToMany(targetEntity="Tavro\Bundle\CoreBundle\Entity\UserOrganization", mappedBy="organization", cascade={"remove"})
      */
     protected $user_organizations;
@@ -582,36 +587,44 @@ class Organization extends ApiEntity
     }
 
     /**
-     * Add Shareholder
+     * Add organization_shareholders
      *
-     * @param \Tavro\Bundle\CoreBundle\Entity\Shareholder $shareholder
-     *
-     * @return Organization
+     * @param \Tavro\Bundle\CoreBundle\Entity\OrganizationShareholder $nodeComments
+     * @return Node
      */
-    public function addShareholder(\Tavro\Bundle\CoreBundle\Entity\Shareholder $shareholder)
+    public function addOrganizationShareholder(\Tavro\Bundle\CoreBundle\Entity\OrganizationShareholder $nodeComments)
     {
-        $this->shareholders[] = $shareholder;
+        $this->organization_shareholders[] = $nodeComments;
 
         return $this;
     }
 
     /**
-     * Remove shareholder
+     * Remove organization_shareholders
      *
-     * @param \Tavro\Bundle\CoreBundle\Entity\Shareholder $shareholder
+     * @param \Tavro\Bundle\CoreBundle\Entity\OrganizationShareholder $nodeComments
      */
-    public function removeShareholder(\Tavro\Bundle\CoreBundle\Entity\Shareholder $shareholder)
+    public function removeOrganizationShareholder(\Tavro\Bundle\CoreBundle\Entity\OrganizationShareholder $nodeComments)
     {
-        $this->shareholders->removeElement($shareholder);
+        $this->organization_shareholders->removeElement($nodeComments);
     }
 
     /**
-     * Get products
+     * Get organization_shareholders
      *
      * @return \Doctrine\Common\Collections\Collection
      */
+    public function getOrganizationShareholders()
+    {
+        return $this->organization_shareholders;
+    }
+
     public function getShareholders()
     {
-        return $this->shareholder;
+        $items = array();
+        foreach($this->organization_shareholders as $item) {
+            $items[] = $item->getShareholder();
+        }
+        return $items;
     }
 }
