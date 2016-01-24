@@ -117,7 +117,7 @@ class Organization extends ApiEntity
      * @Groups({"tavro"})
      * @MaxDepth(3)
      */
-    protected $funding_round;
+    protected $funding_rounds;
 
     /**
      * Set body
@@ -549,7 +549,7 @@ class Organization extends ApiEntity
      */
     public function addFundingRound(\Tavro\Bundle\CoreBundle\Entity\FundingRound $funding_round)
     {
-        $this->funding_round[] = $funding_round;
+        $this->funding_rounds[] = $funding_round;
 
         return $this;
     }
@@ -561,7 +561,7 @@ class Organization extends ApiEntity
      */
     public function removeFundingRound(\Tavro\Bundle\CoreBundle\Entity\FundingRound $funding_round)
     {
-        $this->funding_round->removeElement($funding_round);
+        $this->funding_rounds->removeElement($funding_round);
     }
 
     /**
@@ -569,9 +569,9 @@ class Organization extends ApiEntity
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getFundingRound()
+    public function getFundingRounds()
     {
-        return $this->funding_round;
+        return $this->funding_rounds;
     }
 
 }

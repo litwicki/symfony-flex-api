@@ -270,7 +270,7 @@ class OrganizationController extends ApiController
     public function fundingAction(Request $request, Organization $organization, $_format)
     {
         try {
-            $entities = $organization->getFunding();
+            $entities = $organization->getFundingRounds();
         }
         catch(\Exception $e) {
             throw $e;
