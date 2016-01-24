@@ -39,12 +39,11 @@
     </div>
 </section>
 
-<section id="page-footer">
+{% if app.user is not null %}<section id="page-footer">
     <footer class="container-fluid text-center">
-        <p class="small">You are logged in as <strong class="text-success">{{ app.user.username }}</strong>. If you are not {{ app.user.username }} please <a href="{{ url('logout') }}">log out immediately</a>.</p>
-        <p class="text-muted">Copyright &copy; 2016 <a target="_blank" href="http://{{ app_hostname }}">Tavro.io</a>, a <a href="http://zoadilack.com">Zoadilack</a> company. All Rights Reserved.</p>
+        <p class="small text-muted">Copyright &copy; 2016 <a target="_blank" href="http://{{ app_hostname }}">Tavro.io</a>. All Rights Reserved.</p>
     </footer>
-</section>
+</section>{% endif %}
 
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>

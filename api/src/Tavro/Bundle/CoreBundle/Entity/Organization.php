@@ -52,11 +52,6 @@ class Organization extends ApiEntity
     protected $nodes;
 
     /**
-     * @ORM\OneToMany(targetEntity="Tavro\Bundle\CoreBundle\Entity\OrganizationShareholder", mappedBy="organization", cascade={"remove"})
-     */
-    protected $organization_shareholders;
-
-    /**
      * @ORM\OneToMany(targetEntity="Tavro\Bundle\CoreBundle\Entity\UserOrganization", mappedBy="organization", cascade={"remove"})
      */
     protected $user_organizations;
@@ -118,18 +113,11 @@ class Organization extends ApiEntity
     protected $revenues;
 
     /**
-     * @ORM\OneToMany(targetEntity="Tavro\Bundle\CoreBundle\Entity\Funding", mappedBy="organization", cascade={"remove"})
+     * @ORM\OneToMany(targetEntity="Tavro\Bundle\CoreBundle\Entity\FundingRound", mappedBy="organization", cascade={"remove"})
      * @Groups({"tavro"})
      * @MaxDepth(3)
      */
-    protected $funding;
-
-    /**
-     * @ORM\OneToMany(targetEntity="Tavro\Bundle\CoreBundle\Entity\Shareholder", mappedBy="organization", cascade={"remove"})
-     * @Groups({"tavro"})
-     * @MaxDepth(3)
-     */
-    protected $shareholders;
+    protected $funding_round;
 
     /**
      * Set body
@@ -553,27 +541,27 @@ class Organization extends ApiEntity
     }
 
     /**
-     * Add Funding
+     * Add FundingRound
      *
-     * @param \Tavro\Bundle\CoreBundle\Entity\Funding $funding
+     * @param \Tavro\Bundle\CoreBundle\Entity\FundingRound $funding_round
      *
      * @return Organization
      */
-    public function addFunding(\Tavro\Bundle\CoreBundle\Entity\Funding $funding)
+    public function addFundingRound(\Tavro\Bundle\CoreBundle\Entity\FundingRound $funding_round)
     {
-        $this->funding[] = $funding;
+        $this->funding_round[] = $funding_round;
 
         return $this;
     }
 
     /**
-     * Remove funding
+     * Remove funding_round
      *
-     * @param \Tavro\Bundle\CoreBundle\Entity\Funding $funding
+     * @param \Tavro\Bundle\CoreBundle\Entity\FundingRound $funding_round
      */
-    public function removeFunding(\Tavro\Bundle\CoreBundle\Entity\Funding $funding)
+    public function removeFundingRound(\Tavro\Bundle\CoreBundle\Entity\FundingRound $funding_round)
     {
-        $this->funding->removeElement($funding);
+        $this->funding_round->removeElement($funding_round);
     }
 
     /**
@@ -581,50 +569,9 @@ class Organization extends ApiEntity
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getFunding()
+    public function getFundingRound()
     {
-        return $this->funding;
+        return $this->funding_round;
     }
 
-    /**
-     * Add organization_shareholders
-     *
-     * @param \Tavro\Bundle\CoreBundle\Entity\OrganizationShareholder $nodeComments
-     * @return Node
-     */
-    public function addOrganizationShareholder(\Tavro\Bundle\CoreBundle\Entity\OrganizationShareholder $nodeComments)
-    {
-        $this->organization_shareholders[] = $nodeComments;
-
-        return $this;
-    }
-
-    /**
-     * Remove organization_shareholders
-     *
-     * @param \Tavro\Bundle\CoreBundle\Entity\OrganizationShareholder $nodeComments
-     */
-    public function removeOrganizationShareholder(\Tavro\Bundle\CoreBundle\Entity\OrganizationShareholder $nodeComments)
-    {
-        $this->organization_shareholders->removeElement($nodeComments);
-    }
-
-    /**
-     * Get organization_shareholders
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getOrganizationShareholders()
-    {
-        return $this->organization_shareholders;
-    }
-
-    public function getShareholders()
-    {
-        $items = array();
-        foreach($this->organization_shareholders as $item) {
-            $items[] = $item->getShareholder();
-        }
-        return $items;
-    }
 }

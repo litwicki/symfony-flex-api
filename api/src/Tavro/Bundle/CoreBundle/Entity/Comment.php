@@ -47,9 +47,9 @@ class Comment extends ApiEntity
     protected $revenue_comments;
 
     /**
-     * @ORM\OneToMany(targetEntity="Tavro\Bundle\CoreBundle\Entity\FundingComment", mappedBy="comment", cascade={"remove"})
+     * @ORM\OneToMany(targetEntity="Tavro\Bundle\CoreBundle\Entity\FundingRoundComment", mappedBy="comment", cascade={"remove"})
      */
-    protected $funding_comments;
+    protected $funding_round_comments;
 
     /**
      * @ORM\ManyToOne(targetEntity="Tavro\Bundle\CoreBundle\Entity\User", inversedBy="comments")
@@ -222,36 +222,36 @@ class Comment extends ApiEntity
     }
 
     /**
-     * Add fundingComment
+     * Add funding_roundComment
      *
-     * @param \Tavro\Bundle\CoreBundle\Entity\FundingComment $fundingComment
+     * @param \Tavro\Bundle\CoreBundle\Entity\FundingRoundComment $funding_round_comment
      *
      * @return Comment
      */
-    public function addFundingComment(\Tavro\Bundle\CoreBundle\Entity\FundingComment $fundingComment)
+    public function addFundingRoundComment(\Tavro\Bundle\CoreBundle\Entity\FundingRoundComment $funding_round_comment)
     {
-        $this->funding_comments[] = $fundingComment;
+        $this->funding_round_comments[] = $funding_round_comment;
 
         return $this;
     }
 
     /**
-     * Remove fundingComment
+     * Remove funding_roundComment
      *
-     * @param \Tavro\Bundle\CoreBundle\Entity\FundingComment $fundingComment
+     * @param \Tavro\Bundle\CoreBundle\Entity\FundingRoundComment $funding_round_comment
      */
-    public function removeFundingComment(\Tavro\Bundle\CoreBundle\Entity\FundingComment $fundingComment)
+    public function removeFundingRoundComment(\Tavro\Bundle\CoreBundle\Entity\FundingRoundComment $funding_round_comment)
     {
-        $this->funding_comments->removeElement($fundingComment);
+        $this->funding_round_comments->removeElement($funding_round_comment);
     }
 
     /**
-     * Get fundingComments
+     * Get funding_roundComments
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getFundingComments()
+    public function getFundingRoundComments()
     {
-        return $this->funding_comments;
+        return $this->funding_round_comments;
     }
 }

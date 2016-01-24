@@ -18,29 +18,29 @@ use Tavro\Bundle\CoreBundle\Model\EntityInterface;
 
 /**
  * @ORM\Entity
- * @ORM\Table(name="tavro_funding_comment", indexes={@ORM\Index(name="NODE_COMMENT", columns={"comment_id","funding_id"})})
+ * @ORM\Table(name="tavro_funding_round_comment", indexes={@ORM\Index(name="FUNDING_ROUND_COMMENT", columns={"comment_id","funding_round_id"})})
  * @ExclusionPolicy("all")
  */
-class FundingComment extends Entity
+class FundingRoundComment extends Entity
 {
     /**
-     * @ORM\ManyToOne(targetEntity="Tavro\Bundle\CoreBundle\Entity\Comment", inversedBy="funding_comments")
+     * @ORM\ManyToOne(targetEntity="Tavro\Bundle\CoreBundle\Entity\Comment", inversedBy="funding_round_comments")
      * @ORM\JoinColumn(name="comment_id", referencedColumnName="id", nullable=false)
      * @Groups({"api", "tavro"})
      */
     protected $comment;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Tavro\Bundle\CoreBundle\Entity\Funding", inversedBy="funding_comments")
-     * @ORM\JoinColumn(name="funding_id", referencedColumnName="id", nullable=false)
+     * @ORM\ManyToOne(targetEntity="Tavro\Bundle\CoreBundle\Entity\FundingRound", inversedBy="funding_round_comments")
+     * @ORM\JoinColumn(name="funding_round_id", referencedColumnName="id", nullable=false)
      */
-    protected $funding;
+    protected $funding_round;
 
     /**
      * Set comment
      *
      * @param \Tavro\Bundle\CoreBundle\Entity\Comment $comment
-     * @return FundingComment
+     * @return FundingRoundComment
      */
     public function setComment(\Tavro\Bundle\CoreBundle\Entity\Comment $comment)
     {
@@ -60,26 +60,26 @@ class FundingComment extends Entity
     }
 
     /**
-     * Set Funding
+     * Set FundingRound
      *
-     * @param \Tavro\Bundle\CoreBundle\Entity\Funding $funding
-     * @return FundingComment
+     * @param \Tavro\Bundle\CoreBundle\Entity\FundingRound $funding_round
+     * @return FundingRoundComment
      */
-    public function setFunding(\Tavro\Bundle\CoreBundle\Entity\Funding $funding)
+    public function setFundingRound(\Tavro\Bundle\CoreBundle\Entity\FundingRound $funding_round)
     {
-        $this->funding = $funding;
+        $this->funding_round = $funding_round;
 
         return $this;
     }
 
     /**
-     * Get Funding
+     * Get FundingRound
      *
-     * @return \Tavro\Bundle\CoreBundle\Entity\Funding
+     * @return \Tavro\Bundle\CoreBundle\Entity\FundingRound
      */
-    public function getFunding()
+    public function getFundingRound()
     {
-        return $this->funding;
+        return $this->funding_round;
     }
 
 }

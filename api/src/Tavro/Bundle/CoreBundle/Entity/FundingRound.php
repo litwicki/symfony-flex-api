@@ -15,16 +15,16 @@ use JMS\Serializer\Annotation\SerializedName;
 use Doctrine\ORM\Mapping\Table;
 use Symfony\Component\Validator\Constraints as Assert;
 
-use Tavro\Bundle\CoreBundle\Model\ApiEntity;
+use Tavro\Bundle\CoreBundle\Model\Entity;
 use Tavro\Bundle\CoreBundle\Model\EntityInterface;
 
 /**
  * @ORM\Entity
  * @ORM\HasLifecycleCallbacks
- * @ORM\Table(name="tavro_funding")
+ * @ORM\Table(name="tavro_funding_round")
  *
  */
-class Funding extends ApiEntity
+class FundingRound extends Entity
 {
     /**
      * @ORM\Column(type="string", length=8000, nullable=true)
@@ -33,7 +33,31 @@ class Funding extends ApiEntity
     protected $body;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Tavro\Bundle\CoreBundle\Entity\Organization", inversedBy="funding")
+     * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"api", "tavro", "simple"})
+     */
+    protected $type;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"api", "tavro", "simple"})
+     */
+    protected $prospectus;
+
+    /**
+     * @ORM\Column(type="float", nullable=true, options={"default" = 0})
+     * @Groups({"api", "tavro", "simple"})
+     */
+    protected $share_price;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true, options={"default" = 0})
+     * @Groups({"api", "tavro", "simple"})
+     */
+    protected $total_shares;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Tavro\Bundle\CoreBundle\Entity\Organization", inversedBy="funding_round")
      * @ORM\JoinColumn(name="organization_id", referencedColumnName="id", nullable=false)
      * @Groups({"api", "tavro", "simple"})
      * @MaxDepth(3)
@@ -41,9 +65,7 @@ class Funding extends ApiEntity
     protected $organization;
 
     /**
-     * @ORM\OneToMany(targetEntity="Tavro\Bundle\CoreBundle\Entity\Shareholder", mappedBy="funding")
-     * @ORM\OrderBy({"id" = "DESC"})
-     * @Groups({"api", "tavro", "simple"})
+     * @ORM\OneToMany(targetEntity="Tavro\Bundle\CoreBundle\Entity\Shareholder", mappedBy="funding_round", cascade={"remove"})
      */
     protected $shareholders;
 
@@ -57,6 +79,7 @@ class Funding extends ApiEntity
         $tz = new \DateTimeZone('America/New_York');
         $now->setTimezone($tz);
         $this->create_date = $now;
+        $this->shareholders = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     public function __toString()
@@ -115,7 +138,7 @@ class Funding extends ApiEntity
      *
      * @param \Tavro\Bundle\CoreBundle\Entity\Shareholder $shareholder
      *
-     * @return Funding
+     * @return Shareholder
      */
     public function addShareholder(\Tavro\Bundle\CoreBundle\Entity\Shareholder $shareholder)
     {

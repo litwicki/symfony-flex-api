@@ -15,7 +15,7 @@ use JMS\Serializer\Annotation\SerializedName;
 use Doctrine\ORM\Mapping\Table;
 use Symfony\Component\Validator\Constraints as Assert;
 
-use Tavro\Bundle\CoreBundle\Model\ApiEntity;
+use Tavro\Bundle\CoreBundle\Model\Entity;
 use Tavro\Bundle\CoreBundle\Model\EntityInterface;
 
 /**
@@ -24,7 +24,7 @@ use Tavro\Bundle\CoreBundle\Model\EntityInterface;
  * @ORM\Table(name="tavro_expense_category")
  *
  */
-class ExpenseCategory extends ApiEntity
+class ExpenseCategory extends Entity
 {
 
     /**

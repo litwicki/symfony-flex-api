@@ -1,0 +1,109 @@
+<div class="page-header">
+    <h3><i class="fa fa-fw fa-location-arrow"></i> Shareholder Api Routes</h3>
+</div>
+
+<ul>
+    <li><code>{shareholder}</code> must be the integer ID of a Shareholder.</li>
+    <li><code>{format}</code> must be <code>XML</code> or <code>JSON</code> (if not provided the default is <code>JSON</code>).</li>
+</ul>
+
+<hr/>
+
+<div class="panel panel-default">
+    <table class="table table-striped table-hover table-api">
+        <tr>
+            <th>Path</th>
+            <th>Method(s)</th>
+            <th>Description</th>
+        </tr>
+        <tr>
+            <td class="code">/api/v1/shareholders.{format}</td>
+            <td class="code get">GET</td>
+            <td>Get all Shareholders.</td>
+        </tr>
+        <tr>
+            <td class="code">/api/v1/shareholders/{funding}.{format}</td>
+            <td class="code get">GET</td>
+            <td>Get a Shareholder by Id.</td>
+        </tr>
+        <tr>
+            <td class="code">/api/v1/shareholders/{funding}.{format}</td>
+            <td class="code update">PUT, PATCH</td>
+            <td>Update a Shareholder by Id.</td>
+        </tr>
+        <tr>
+            <td class="code">/api/v1/shareholders/{funding}.{format}</td>
+            <td class="code delete">DELETE</td>
+            <td>Delete a Shareholder by Id.</td>
+        </tr>
+        <tr>
+            <td class="code">/api/v1/shareholders.{format}</td>
+            <td class="code post">POST</td>
+            <td>Create a Shareholder.</td>
+        </tr>
+    </table>
+</div>
+
+<div class="page-header">
+    <h3><i class="fa fa-fw fa-cube"></i> Creating a Shareholder</h3>
+</div>
+<!-- Nav tabs -->
+<ul class="nav nav-pills" role="tablist">
+  <li role="presentation" class="active"><a href="#angular" aria-controls="angular" role="tab" data-toggle="tab">Angular</a></li>
+  <li role="presentation"><a href="#php" aria-controls="php" role="tab" data-toggle="tab">PHP</a></li>
+</ul>
+
+<!-- Tab panes -->
+<div class="tab-content" style="margin-top: 2em;">
+  <div role="tabpanel" class="tab-pane active" id="angular">
+<pre><code class="javascript">var auth = Base64.encode({API_KEY} + ':' + {API_PASSWORD});
+$http.defaults.headers.common['Authorization'] = 'Basic ' + auth;
+
+var url = 'https://{{ api_hostname }}/api/v1/{shareholders}.{format}';
+
+var shareholder = {
+    first_name: 'Inigo',
+    last_name: 'Montoya',
+    title: 'Fencer',
+    address: '12345 Florin Lane',
+    city: 'Florin',
+    state: 'Fantasy',
+    zip: '12345',
+    email: 'inigo@florin.net',
+    shares: 100,
+    notes: 'Do not invite to shareholder meetings with 6-fingered man present.',
+    user: 9,
+};
+
+$http.post(url, comment)
+.success(function(data) {
+    alert('Comment has been created!');
+});</code></pre>
+  </div>
+  <div role="tabpanel" class="tab-pane" id="php">
+<pre><code class="php">$url = 'https://{{ api_hostname }}/api/v1/shareholders.{format}';
+
+$curl = new Curl();
+$curl->setBasicAuthentication('{API_KEY}', '{API_PASSWORD}');
+$curl->post($url, array(
+    'first_name' => 'Inigo',
+    'last_name' => 'Montoya',
+    'title' => 'Fencer',
+    'address' => '12345 Florin Lane',
+    'city' => 'Florin',
+    'state' => 'Fantasy',
+    'zip' => '12345',
+    'email' => 'inigo@florin.net',
+    'shares' => 100,
+    'notes' => 'Do not invite to shareholder meetings with 6-fingered man present.',
+    'user' => 9,
+));
+
+if ($curl->error) {
+    echo 'Error: ' . $curl->errorCode . ': ' . $curl->errorMessage;
+}
+else {
+    echo $curl->response;
+}</code></pre>
+  </div>
+</div>

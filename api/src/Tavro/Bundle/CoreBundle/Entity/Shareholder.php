@@ -94,8 +94,8 @@ class Shareholder extends Entity
     protected $phone;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=false)
-     * @Groups({"api", "tavro", "simple", "typeahead"})
+     * @ORM\Column(type="integer", nullable=true, options={"default" = 0})
+     * @Groups({"api", "tavro", "simple"})
      */
     protected $shares;
 
@@ -112,11 +112,6 @@ class Shareholder extends Entity
      * @Groups({"api", "tavro", "simple"})
      */
     protected $notes;
-
-    /**
-     * @ORM\OneToMany(targetEntity="Tavro\Bundle\CoreBundle\Entity\OrganizationShareholder", mappedBy="shareholder", cascade={"remove"})
-     */
-    protected $organization_shareholders;
 
     /**
      * Constructor
@@ -442,36 +437,4 @@ class Shareholder extends Entity
         return $this->phone;
     }
 
-    /**
-     * Add organization_shareholders
-     *
-     * @param \Tavro\Bundle\CoreBundle\Entity\OrganizationShareholder $nodeComments
-     * @return Node
-     */
-    public function addOrganizationShareholder(\Tavro\Bundle\CoreBundle\Entity\OrganizationShareholder $nodeComments)
-    {
-        $this->organization_shareholders[] = $nodeComments;
-
-        return $this;
-    }
-
-    /**
-     * Remove organization_shareholders
-     *
-     * @param \Tavro\Bundle\CoreBundle\Entity\OrganizationShareholder $nodeComments
-     */
-    public function removeOrganizationShareholder(\Tavro\Bundle\CoreBundle\Entity\OrganizationShareholder $nodeComments)
-    {
-        $this->organization_shareholders->removeElement($nodeComments);
-    }
-
-    /**
-     * Get organization_shareholders
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getOrganizationShareholders()
-    {
-        return $this->organization_shareholders;
-    }
 }
