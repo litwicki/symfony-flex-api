@@ -57,15 +57,17 @@ class FundingRound extends Entity
     protected $total_shares;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Tavro\Bundle\CoreBundle\Entity\Organization", inversedBy="funding_round")
+     * @ORM\ManyToOne(targetEntity="Tavro\Bundle\CoreBundle\Entity\Organization", inversedBy="funding_rounds")
      * @ORM\JoinColumn(name="organization_id", referencedColumnName="id", nullable=false)
-     * @Groups({"api", "tavro", "simple"})
+     * @Groups({"api", "tavro"})
      * @MaxDepth(3)
      */
     protected $organization;
 
     /**
      * @ORM\OneToMany(targetEntity="Tavro\Bundle\CoreBundle\Entity\Shareholder", mappedBy="funding_round", cascade={"remove"})
+     * @Groups({"tavro"})
+     * @MaxDepth(3)
      */
     protected $shareholders;
 
