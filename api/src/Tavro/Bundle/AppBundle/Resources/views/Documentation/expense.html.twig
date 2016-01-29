@@ -157,10 +157,6 @@
         </table>
     </div>
 
-    <div class="alert alert-info">
-        <strong>For more information on managing <code><a href="{{ url('api_doc_tag') }}">Tags</a></code> or <code><a href="{{ url('api_doc_comment') }}">Comments</a></code> visit their respective sections of the documentation.</strong>
-    </div>
-
     <div class="page-header">
         <a name="expense-category"></a>
         <h3><i class="fa fa-fw fa-briefcase"></i> Expense Category</h3>
@@ -263,5 +259,9 @@
             </tr>
         </table>
     </div>
+
+    {% include 'TavroAppBundle:Documentation/partials:comment.html.twig' %}
+
+    {% include 'TavroAppBundle:Documentation/partials:tag.html.twig' %}
 
 {% endblock %}
