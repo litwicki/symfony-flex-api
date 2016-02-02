@@ -80,6 +80,16 @@ class Image extends Entity implements S3EntityInterface
      */
     protected $width;
 
+    /**
+     * @ORM\OneToMany(targetEntity="Tavro\Bundle\CoreBundle\Entity\ProductImage", mappedBy="image", cascade={"remove"})
+     */
+    protected $product_images;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Tavro\Bundle\CoreBundle\Entity\ServiceImage", mappedBy="image", cascade={"remove"})
+     */
+    protected $service_images;
+
     public function __toString()
     {
         return $this->original_filename;
@@ -323,4 +333,72 @@ class Image extends Entity implements S3EntityInterface
         return $this->directory;
     }
 
+
+    /**
+     * Add productImage
+     *
+     * @param \Tavro\Bundle\CoreBundle\Entity\ProductImage $productImage
+     *
+     * @return Image
+     */
+    public function addProductImage(\Tavro\Bundle\CoreBundle\Entity\ProductImage $productImage)
+    {
+        $this->product_images[] = $productImage;
+
+        return $this;
+    }
+
+    /**
+     * Remove productImage
+     *
+     * @param \Tavro\Bundle\CoreBundle\Entity\ProductImage $productImage
+     */
+    public function removeProductImage(\Tavro\Bundle\CoreBundle\Entity\ProductImage $productImage)
+    {
+        $this->product_images->removeElement($productImage);
+    }
+
+    /**
+     * Get productImages
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getProductImages()
+    {
+        return $this->product_images;
+    }
+
+    /**
+     * Add serviceImage
+     *
+     * @param \Tavro\Bundle\CoreBundle\Entity\ServiceImage $serviceImage
+     *
+     * @return Image
+     */
+    public function addServiceImage(\Tavro\Bundle\CoreBundle\Entity\ServiceImage $serviceImage)
+    {
+        $this->service_images[] = $serviceImage;
+
+        return $this;
+    }
+
+    /**
+     * Remove serviceImage
+     *
+     * @param \Tavro\Bundle\CoreBundle\Entity\ServiceImage $serviceImage
+     */
+    public function removeServiceImage(\Tavro\Bundle\CoreBundle\Entity\ServiceImage $serviceImage)
+    {
+        $this->service_images->removeElement($serviceImage);
+    }
+
+    /**
+     * Get serviceImages
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getServiceImages()
+    {
+        return $this->service_images;
+    }
 }

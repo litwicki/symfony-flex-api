@@ -49,6 +49,11 @@ class Product extends ApiEntity
     protected $organization;
 
     /**
+     * @ORM\OneToMany(targetEntity="Tavro\Bundle\CoreBundle\Entity\ProductImage", mappedBy="product", cascade={"remove"})
+     */
+    protected $product_images;
+
+    /**
      * Constructor
      */
     public function __construct()
@@ -133,5 +138,39 @@ class Product extends ApiEntity
     public function getCategory()
     {
         return $this->category;
+    }
+
+    /**
+     * Add productImage
+     *
+     * @param \Tavro\Bundle\CoreBundle\Entity\ProductImage $productImage
+     *
+     * @return Product
+     */
+    public function addProductImage(\Tavro\Bundle\CoreBundle\Entity\ProductImage $productImage)
+    {
+        $this->product_images[] = $productImage;
+
+        return $this;
+    }
+
+    /**
+     * Remove productImage
+     *
+     * @param \Tavro\Bundle\CoreBundle\Entity\ProductImage $productImage
+     */
+    public function removeProductImage(\Tavro\Bundle\CoreBundle\Entity\ProductImage $productImage)
+    {
+        $this->product_images->removeElement($productImage);
+    }
+
+    /**
+     * Get productImages
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getProductImages()
+    {
+        return $this->product_images;
     }
 }

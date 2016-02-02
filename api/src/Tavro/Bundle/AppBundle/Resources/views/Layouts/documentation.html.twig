@@ -23,6 +23,7 @@
             <li {% if shareholder_page is defined %}class="active"{% endif %}><a href="{{ url('api_doc_shareholder') }}"><i class="fa fa-fw fa-user-secret"></i> Shareholders</a></li>
             <li {% if comment_page is defined %}class="active"{% endif %}><a href="{{ url('api_doc_comment') }}"><i class="fa fa-fw fa-comment"></i> Comment</a></li>
             <li {% if tag_page is defined %}class="active"{% endif %}><a href="{{ url('api_doc_tag') }}"><i class="fa fa-fw fa-tag"></i> Tag</a></li>
+            <li {% if image_page is defined %}class="active"{% endif %}><a href="{{ url('api_doc_image') }}"><i class="fa fa-fw fa-image"></i> Image</a></li>
             {% if app.user %}<li id="symfony"><a href="{{ url('logout') }}"><i class="fa fa-fw fa-sign-out"></i> Sign out as [{{ app.user.username }}]</a></li>{% endif %}
         </ul>
     </div>

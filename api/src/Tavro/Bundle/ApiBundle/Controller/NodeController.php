@@ -143,7 +143,7 @@ class NodeController extends ApiController
 
             $data = json_decode($request->getContent(), true);
 
-            $handler = $this->getHandler('tag');
+            $handler = $this->getHandler('tags');
             $tag = $handler->post($request, $data);
 
             /**

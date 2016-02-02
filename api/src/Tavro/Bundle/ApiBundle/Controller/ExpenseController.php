@@ -70,13 +70,13 @@ class ExpenseController extends ApiController
 
             $data = json_decode($request->getContent(), true);
 
-            $handler = $this->getHandler('comment');
+            $handler = $this->getHandler('comments');
             $comment = $handler->post($request, $data);
 
             /**
              * Attach the Comment to the Expense
              */
-            $this->getHandler('expense_comment')->post($request, array(
+            $this->getHandler('expense_comments')->post($request, array(
                 'comment' => $comment->getId(),
                 'expense' => $expense->getId()
             ));
@@ -143,13 +143,13 @@ class ExpenseController extends ApiController
 
             $data = json_decode($request->getContent(), true);
 
-            $handler = $this->getHandler('tag');
+            $handler = $this->getHandler('tags');
             $tag = $handler->post($request, $data);
 
             /**
              * Attach the Comment to the Expense
              */
-            $this->getHandler('expense_tag')->post($request, array(
+            $this->getHandler('expense_tags')->post($request, array(
                 'comment' => $tag->getId(),
                 'expense' => $expense->getId()
             ));
