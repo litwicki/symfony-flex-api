@@ -293,13 +293,17 @@ class OrganizationController extends ApiController
     public function shareholdersAction(Request $request, Organization $organization, $_format)
     {
         try {
-            $entities = $organization->getShareholders();
+            $items = array();
+            $entities = $organization->getOrganizationShareholders();
+            foreach($entities as $entity) {
+                $items = $entity->getShareholder();
+            }
         }
         catch(\Exception $e) {
             throw $e;
         }
         finally {
-            $data = $this->serialize($entities, $_format, $group = 'simple');
+            $data = $this->serialize($items, $_format, $group = 'simple');
             $response = $this->apiResponse($data, $_format);
             return $response;
         }
