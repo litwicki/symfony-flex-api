@@ -39,8 +39,38 @@
             </tr>
             <tr>
                 <td>body</td>
-                <td class="text">text</td>
+                <td class="string">text</td>
                 <td>GET, PUT, PATCH</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>url</td>
+                <td class="string">string</td>
+                <td>GET</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>bucket</td>
+                <td class="string">string</td>
+                <td>GET</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>filesize</td>
+                <td class="integer">integer</td>
+                <td>GET</td>
+                <td>Filesize in bytes.</td>
+            </tr>
+            <tr>
+                <td>height</td>
+                <td class="integer">integer</td>
+                <td>GET</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>width</td>
+                <td class="integer">integer</td>
+                <td>GET</td>
                 <td></td>
             </tr>
             <tr>
@@ -112,7 +142,7 @@
     </div>
 
     <div class="page-header">
-        <h3><i class="fa fa-fw fa-images"></i> Attaching Images</h3>
+        <h3><i class="fa fa-fw fa-image"></i> Adding Images</h3>
         <p>Images can be "attached" to several different types of Objects.</p>
     </div>
 
@@ -136,7 +166,7 @@
                 <tr>
                     <td class="code">/api/v1/funding/{funding}/images.{format}</td>
                     <td class="code post">PUT, POST</td>
-                    <td>Add a Image to a Funding object.</td>
+                    <td>Add a Image to a FundingRound.</td>
                 </tr>
                 <tr>
                     <td class="code">/api/v1/nodes/{node}/images.{format}</td>
@@ -146,7 +176,17 @@
                 <tr>
                     <td class="code">/api/v1/revenues/{revenue}/images.{format}</td>
                     <td class="code post">PUT, POST</td>
-                    <td>Add a Image to a Revenue item.</td>
+                    <td>Add a Image to a Revenue.</td>
+                </tr>
+                <tr>
+                    <td class="code">/api/v1/products/{product}/images.{format}</td>
+                    <td class="code post">PUT, POST</td>
+                    <td>Add a Image to a Product.</td>
+                </tr>
+                <tr>
+                    <td class="code">/api/v1/services/{services}/images.{format}</td>
+                    <td class="code post">PUT, POST</td>
+                    <td>Add a Image to a Service.</td>
                 </tr>
             </tbody>
         </table>
