@@ -120,6 +120,11 @@ class Organization extends ApiEntity
     protected $funding_rounds;
 
     /**
+     * @ORM\OneToMany(targetEntity="Tavro\Bundle\CoreBundle\Entity\OrganizationShareholder", mappedBy="organization", cascade={"remove"})
+     */
+    protected $organization_shareholders;
+
+    /**
      * Set body
      *
      * @param string $body
@@ -574,4 +579,37 @@ class Organization extends ApiEntity
         return $this->funding_rounds;
     }
 
+    /**
+     * Add shareholderOrganization
+     *
+     * @param \Tavro\Bundle\CoreBundle\Entity\OrganizationShareholder $shareholderOrganization
+     *
+     * @return Shareholder
+     */
+    public function addOrganizationShareholder(\Tavro\Bundle\CoreBundle\Entity\OrganizationShareholder $shareholderOrganization)
+    {
+        $this->organization_shareholders[] = $shareholderOrganization;
+
+        return $this;
+    }
+
+    /**
+     * Remove shareholderOrganization
+     *
+     * @param \Tavro\Bundle\CoreBundle\Entity\OrganizationShareholder $shareholderOrganization
+     */
+    public function removeOrganizationShareholder(\Tavro\Bundle\CoreBundle\Entity\OrganizationShareholder $shareholderOrganization)
+    {
+        $this->organization_shareholders->removeElement($shareholderOrganization);
+    }
+
+    /**
+     * Get shareholderOrganizations
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getOrganizationShareholders()
+    {
+        return $this->organization_shareholders;
+    }
 }

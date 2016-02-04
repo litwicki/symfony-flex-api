@@ -114,6 +114,11 @@ class Shareholder extends Entity
     protected $notes;
 
     /**
+     * @ORM\OneToMany(targetEntity="Tavro\Bundle\CoreBundle\Entity\OrganizationShareholder", mappedBy="shareholder", cascade={"remove"})
+     */
+    protected $organization_shareholders;
+
+    /**
      * Constructor
      */
     public function __construct()
@@ -437,4 +442,37 @@ class Shareholder extends Entity
         return $this->phone;
     }
 
+    /**
+     * Add shareholderOrganization
+     *
+     * @param \Tavro\Bundle\CoreBundle\Entity\OrganizationShareholder $shareholderOrganization
+     *
+     * @return Shareholder
+     */
+    public function addOrganizationShareholder(\Tavro\Bundle\CoreBundle\Entity\OrganizationShareholder $shareholderOrganization)
+    {
+        $this->organization_shareholders[] = $shareholderOrganization;
+
+        return $this;
+    }
+
+    /**
+     * Remove shareholderOrganization
+     *
+     * @param \Tavro\Bundle\CoreBundle\Entity\OrganizationShareholder $shareholderOrganization
+     */
+    public function removeOrganizationShareholder(\Tavro\Bundle\CoreBundle\Entity\OrganizationShareholder $shareholderOrganization)
+    {
+        $this->organization_shareholders->removeElement($shareholderOrganization);
+    }
+
+    /**
+     * Get shareholderOrganizations
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getOrganizationShareholders()
+    {
+        return $this->organization_shareholders;
+    }
 }
