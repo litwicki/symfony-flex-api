@@ -14,6 +14,7 @@
             <li {% if front_page is defined %}class="active"{% endif %}><a href="{{ url('api_doc_index') }}"><i class="fa fa-fw fa-home"></i> Getting Started</a></li>
             <li {% if user_page is defined %}class="active"{% endif %}><a href="{{ url('api_doc_user') }}"><i class="fa fa-fw fa-user"></i> User</a></li>
             <li {% if organization_page is defined %}class="active"{% endif %}><a href="{{ url('api_doc_organization') }}"><i class="fa fa-fw fa-building"></i> Organization</a></li>
+            <li {% if customer_page is defined %}class="active"{% endif %}><a href="{{ url('api_doc_customer') }}"><i class="fa fa-fw fa-cube"></i> Customer</a></li>
             <li {% if expense_page is defined %}class="active"{% endif %}><a href="{{ url('api_doc_expense') }}"><i class="fa fa-fw fa-credit-card"></i> Expenses</a></li>
             <li {% if funding_page is defined %}class="active"{% endif %}><a href="{{ url('api_doc_funding') }}"><i class="fa fa-fw fa-bank"></i> Funding Round</a></li>
             <li {% if node_page is defined %}class="active"{% endif %}><a href="{{ url('api_doc_node') }}"><i class="fa fa-fw fa-cube"></i> Node</a></li>

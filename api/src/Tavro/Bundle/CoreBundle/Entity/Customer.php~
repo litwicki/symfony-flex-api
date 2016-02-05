@@ -94,6 +94,12 @@ class Customer extends Entity
     protected $phone;
 
     /**
+     * @ORM\Column(type="integer", nullable=true, options={"default" = 0})
+     * @Groups({"api", "tavro", "simple"})
+     */
+    protected $shares;
+
+    /**
      * @ORM\ManyToOne(targetEntity="Tavro\Bundle\CoreBundle\Entity\User", inversedBy="shareholders")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id", nullable=true)
      * @Groups({"api", "tavro", "simple"})
@@ -368,6 +374,30 @@ class Customer extends Entity
     }
 
     /**
+     * Set shares
+     *
+     * @param string $shares
+     *
+     * @return Shareholder
+     */
+    public function setShares($shares)
+    {
+        $this->shares = $shares;
+
+        return $this;
+    }
+
+    /**
+     * Get shares
+     *
+     * @return string
+     */
+    public function getShares()
+    {
+        return $this->shares;
+    }
+
+    /**
      * Set user
      *
      * @param \Tavro\Bundle\CoreBundle\Entity\User $user
@@ -447,29 +477,5 @@ class Customer extends Entity
     public function getCustomerComments()
     {
         return $this->customer_comments;
-    }
-
-    /**
-     * Set organization
-     *
-     * @param \Tavro\Bundle\CoreBundle\Entity\Organization $organization
-     *
-     * @return Customer
-     */
-    public function setOrganization(\Tavro\Bundle\CoreBundle\Entity\Organization $organization)
-    {
-        $this->organization = $organization;
-
-        return $this;
-    }
-
-    /**
-     * Get organization
-     *
-     * @return \Tavro\Bundle\CoreBundle\Entity\Organization
-     */
-    public function getOrganization()
-    {
-        return $this->organization;
     }
 }

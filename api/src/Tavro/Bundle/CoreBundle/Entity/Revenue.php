@@ -34,6 +34,16 @@ class Revenue extends ApiEntity
     protected $body;
 
     /**
+     * @ORM\Column(type="string", nullable=true)
+     * @Assert\Choice(
+     *      choices = { "guide", "node", "page", "article", "wiki"},
+     *      message = "Choose a valid node type."
+     * )
+     * @Groups({"api", "tavro", "simple"})
+     */
+    protected $type;
+
+    /**
      * @ORM\ManyToOne(targetEntity="Tavro\Bundle\CoreBundle\Entity\RevenueCategory", inversedBy="revenues")
      * @ORM\JoinColumn(name="category_id", referencedColumnName="id", nullable=false)
      * @Groups({"api", "tavro", "simple"})
@@ -48,6 +58,14 @@ class Revenue extends ApiEntity
      * @MaxDepth(3)
      */
     protected $user;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Tavro\Bundle\CoreBundle\Entity\Customer", inversedBy="revenues")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id", nullable=true)
+     * @Groups({"api", "tavro", "simple"})
+     * @MaxDepth(3)
+     */
+    protected $customer;
 
     /**
      * @ORM\OneToMany(targetEntity="Tavro\Bundle\CoreBundle\Entity\RevenueComment", mappedBy="revenue", cascade={"remove"})
@@ -307,5 +325,29 @@ class Revenue extends ApiEntity
     public function getCategory()
     {
         return $this->category;
+    }
+
+    /**
+     * Set customer
+     *
+     * @param \Tavro\Bundle\CoreBundle\Entity\Customer $customer
+     *
+     * @return Revenue
+     */
+    public function setCustomer(\Tavro\Bundle\CoreBundle\Entity\Customer $customer)
+    {
+        $this->customer = $customer;
+
+        return $this;
+    }
+
+    /**
+     * Get customer
+     *
+     * @return \Tavro\Bundle\CoreBundle\Entity\Customer
+     */
+    public function getCustomer()
+    {
+        return $this->customer;
     }
 }

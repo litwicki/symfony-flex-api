@@ -34,6 +34,18 @@ class Expense extends ApiEntity
     protected $body;
 
     /**
+     * @ORM\Column(type="float", nullable=false)
+     * @Groups({"api", "tavro", "simple"})
+     */
+    protected $amount;
+
+    /**
+     * @ORM\Column(type="datetime", length=1000, nullable=false)
+     * @Groups({"api", "tavro", "simple"})
+     */
+    protected $expense_date;
+
+    /**
      * @ORM\ManyToOne(targetEntity="Tavro\Bundle\CoreBundle\Entity\ExpenseCategory", inversedBy="expenses")
      * @ORM\JoinColumn(name="category_id", referencedColumnName="id", nullable=false)
      * @Groups({"api", "tavro", "simple"})
@@ -66,6 +78,14 @@ class Expense extends ApiEntity
      * @MaxDepth(3)
      */
     protected $organization;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Tavro\Bundle\CoreBundle\Entity\Organization", inversedBy="expenses")
+     * @ORM\JoinColumn(name="organization_id", referencedColumnName="id", nullable=true)
+     * @Groups({"api", "tavro", "simple"})
+     * @MaxDepth(3)
+     */
+    protected $customer;
 
     /**
      * Constructor
@@ -307,5 +327,77 @@ class Expense extends ApiEntity
     public function getCategory()
     {
         return $this->category;
+    }
+
+    /**
+     * Set amount
+     *
+     * @param float $amount
+     *
+     * @return Expense
+     */
+    public function setAmount($amount)
+    {
+        $this->amount = $amount;
+
+        return $this;
+    }
+
+    /**
+     * Get amount
+     *
+     * @return float
+     */
+    public function getAmount()
+    {
+        return $this->amount;
+    }
+
+    /**
+     * Set expenseDate
+     *
+     * @param \DateTime $expenseDate
+     *
+     * @return Expense
+     */
+    public function setExpenseDate($expenseDate)
+    {
+        $this->expense_date = $expenseDate;
+
+        return $this;
+    }
+
+    /**
+     * Get expenseDate
+     *
+     * @return \DateTime
+     */
+    public function getExpenseDate()
+    {
+        return $this->expense_date;
+    }
+
+    /**
+     * Set customer
+     *
+     * @param \Tavro\Bundle\CoreBundle\Entity\Organization $customer
+     *
+     * @return Expense
+     */
+    public function setCustomer(\Tavro\Bundle\CoreBundle\Entity\Organization $customer = null)
+    {
+        $this->customer = $customer;
+
+        return $this;
+    }
+
+    /**
+     * Get customer
+     *
+     * @return \Tavro\Bundle\CoreBundle\Entity\Organization
+     */
+    public function getCustomer()
+    {
+        return $this->customer;
     }
 }

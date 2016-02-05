@@ -28,21 +28,27 @@ class Expense extends ApiEntity
 {
 
     /**
-     * @ORM\Column(type="string", length=500, nullable=false)
-     * @Groups({"api", "tavro", "summary"})
-     */
-    protected $title;
-
-    /**
      * @ORM\Column(type="string", length=8000, nullable=true)
-     * @Groups({"api", "tavro", "summary"})
+     * @Groups({"api", "tavro", "simple"})
      */
     protected $body;
 
     /**
+     * @ORM\Column(type="float", nullable=false)
+     * @Groups({"api", "tavro", "simple"})
+     */
+    protected $amount;
+
+    /**
+     * @ORM\Column(type="datetime", length=1000, nullable=false)
+     * @Groups({"api", "tavro", "simple"})
+     */
+    protected $expense_date;
+
+    /**
      * @ORM\ManyToOne(targetEntity="Tavro\Bundle\CoreBundle\Entity\ExpenseCategory", inversedBy="expenses")
      * @ORM\JoinColumn(name="category_id", referencedColumnName="id", nullable=false)
-     * @Groups({"api", "tavro", "summary"})
+     * @Groups({"api", "tavro", "simple"})
      * @MaxDepth(3)
      */
     protected $category;
@@ -50,7 +56,7 @@ class Expense extends ApiEntity
     /**
      * @ORM\ManyToOne(targetEntity="Tavro\Bundle\CoreBundle\Entity\User", inversedBy="expenses")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id", nullable=false)
-     * @Groups({"api", "tavro", "summary"})
+     * @Groups({"api", "tavro", "simple"})
      * @MaxDepth(3)
      */
     protected $user;
@@ -68,10 +74,18 @@ class Expense extends ApiEntity
     /**
      * @ORM\ManyToOne(targetEntity="Tavro\Bundle\CoreBundle\Entity\Organization", inversedBy="expenses")
      * @ORM\JoinColumn(name="organization_id", referencedColumnName="id", nullable=false)
-     * @Groups({"api", "tavro", "summary"})
+     * @Groups({"api", "tavro", "simple"})
      * @MaxDepth(3)
      */
     protected $organization;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Tavro\Bundle\CoreBundle\Entity\Organization", inversedBy="expenses")
+     * @ORM\JoinColumn(name="organization_id", referencedColumnName="id", nullable=true)
+     * @Groups({"api", "tavro", "simple"})
+     * @MaxDepth(3)
+     */
+    protected $customer;
 
     /**
      * Constructor
@@ -113,29 +127,6 @@ class Expense extends ApiEntity
     public function getType()
     {
         return $this->type;
-    }
-
-    /**
-     * Set title
-     *
-     * @param string $title
-     * @return Expense
-     */
-    public function setTitle($title)
-    {
-        $this->title = $title;
-
-        return $this;
-    }
-
-    /**
-     * Get title
-     *
-     * @return string
-     */
-    public function getTitle()
-    {
-        return $this->title;
     }
 
     /**
@@ -257,7 +248,7 @@ class Expense extends ApiEntity
     /**
      * @VirtualProperty
      * @SerializedName("comment_count")
-     * @Groups({"api", "tavro", "summary"})
+     * @Groups({"api", "tavro", "simple"})
      * @return int
      */
     public function getCommentCount()
@@ -313,4 +304,76 @@ class Expense extends ApiEntity
         return $this->expense_tags;
     }
 
+
+    /**
+     * Set category
+     *
+     * @param \Tavro\Bundle\CoreBundle\Entity\ExpenseCategory $category
+     *
+     * @return Expense
+     */
+    public function setCategory(\Tavro\Bundle\CoreBundle\Entity\ExpenseCategory $category)
+    {
+        $this->category = $category;
+
+        return $this;
+    }
+
+    /**
+     * Get category
+     *
+     * @return \Tavro\Bundle\CoreBundle\Entity\ExpenseCategory
+     */
+    public function getCategory()
+    {
+        return $this->category;
+    }
+
+    /**
+     * Set amount
+     *
+     * @param float $amount
+     *
+     * @return Expense
+     */
+    public function setAmount($amount)
+    {
+        $this->amount = $amount;
+
+        return $this;
+    }
+
+    /**
+     * Get amount
+     *
+     * @return float
+     */
+    public function getAmount()
+    {
+        return $this->amount;
+    }
+
+    /**
+     * Set expenseDate
+     *
+     * @param \DateTime $expenseDate
+     *
+     * @return Expense
+     */
+    public function setExpenseDate($expenseDate)
+    {
+        $this->expense_date = $expenseDate;
+
+        return $this;
+    }
+
+    /**
+     * Get expenseDate
+     *
+     * @return \DateTime
+     */
+    public function getExpenseDate()
+    {
+        return $this->expense_date;
+    }
 }
