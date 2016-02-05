@@ -10,13 +10,8 @@ use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 use Tavro\Bundle\CoreBundle\Entity\User;
-use Tavro\Bundle\CoreBundle\Entity\ModCategory;
 use Tavro\Bundle\CoreBundle\Entity\Role;
 use Tavro\Bundle\CoreBundle\Entity\Variable;
-use Tavro\Bundle\CoreBundle\Entity\Archetype;
-use Tavro\Bundle\CoreBundle\Entity\Realm;
-use Tavro\Bundle\CoreBundle\Entity\Race;
-use Tavro\Bundle\CoreBundle\Entity\TavroClass;
 
 use Cocur\Slugify\Slugify;
 

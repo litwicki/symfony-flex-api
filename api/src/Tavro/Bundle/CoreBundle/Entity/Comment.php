@@ -47,6 +47,11 @@ class Comment extends ApiEntity
     protected $revenue_comments;
 
     /**
+     * @ORM\OneToMany(targetEntity="Tavro\Bundle\CoreBundle\Entity\CustomerComment", mappedBy="comment", cascade={"remove"})
+     */
+    protected $customer_comments;
+
+    /**
      * @ORM\OneToMany(targetEntity="Tavro\Bundle\CoreBundle\Entity\FundingRoundComment", mappedBy="comment", cascade={"remove"})
      */
     protected $funding_round_comments;
@@ -253,5 +258,39 @@ class Comment extends ApiEntity
     public function getFundingRoundComments()
     {
         return $this->funding_round_comments;
+    }
+
+    /**
+     * Add customerComment
+     *
+     * @param \Tavro\Bundle\CoreBundle\Entity\CustomerComment $customerComment
+     *
+     * @return Comment
+     */
+    public function addCustomerComment(\Tavro\Bundle\CoreBundle\Entity\CustomerComment $customerComment)
+    {
+        $this->customer_comments[] = $customerComment;
+
+        return $this;
+    }
+
+    /**
+     * Remove customerComment
+     *
+     * @param \Tavro\Bundle\CoreBundle\Entity\CustomerComment $customerComment
+     */
+    public function removeCustomerComment(\Tavro\Bundle\CoreBundle\Entity\CustomerComment $customerComment)
+    {
+        $this->customer_comments->removeElement($customerComment);
+    }
+
+    /**
+     * Get customerComments
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getCustomerComments()
+    {
+        return $this->customer_comments;
     }
 }

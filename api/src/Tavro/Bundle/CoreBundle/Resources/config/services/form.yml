@@ -15,10 +15,6 @@ services:
         class: Tavro\Bundle\CoreBundle\Form\CommentType
         tags:
          -  { name: form.type, alias: comment_type }
-    tavro.form.files:
-        class: Tavro\Bundle\CoreBundle\Form\FileType
-        tags:
-         -  { name: form.type, alias: file_type }
     tavro.form.images:
         class: Tavro\Bundle\CoreBundle\Form\ImageType
         tags:
@@ -43,3 +39,11 @@ services:
         class: Tavro\Bundle\CoreBundle\Form\OrganizationType
         tags:
          -  { name: form.type, alias: organizaton_type }
+    tavro.form.customer:
+        class: Tavro\Bundle\CoreBundle\Form\CustomerType
+        tags:
+         -  { name: form.type, alias: customer_type }
+    tavro.form.customer_comment:
+        class: Tavro\Bundle\CoreBundle\Form\CustomerCommentType
+        tags:
+         -  { name: form.type, alias: customer_comment_type }

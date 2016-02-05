@@ -20,6 +20,10 @@ services:
         class: Tavro\Bundle\ApiBundle\Handler\CommentHandler
         arguments: ["@service_container", "@doctrine.orm.main_entity_manager", Tavro\Bundle\CoreBundle\Entity\Comment]
 
+    tavro.handler.customers:
+        class: Tavro\Bundle\ApiBundle\Handler\CustomerHandler
+        arguments: ["@service_container", "@doctrine.orm.main_entity_manager", Tavro\Bundle\CoreBundle\Entity\Customer]
+
     tavro.handler.expenses:
         class: Tavro\Bundle\ApiBundle\Handler\ExpenseHandler
         arguments: ["@service_container", "@doctrine.orm.main_entity_manager", Tavro\Bundle\CoreBundle\Entity\Expense]
