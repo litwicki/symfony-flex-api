@@ -24,7 +24,7 @@ class AppKernel extends Kernel
             new Gregwar\CaptchaBundle\GregwarCaptchaBundle()
         );
 
-        $camelot = array(
+        $tavro = array(
             new Tavro\Bundle\CoreBundle\TavroCoreBundle(),
             new Tavro\Bundle\ApiBundle\TavroApiBundle(),
             new Tavro\Bundle\AppBundle\TavroAppBundle(),
@@ -35,11 +35,11 @@ class AppKernel extends Kernel
             $bundles[] = new Symfony\Bundle\WebProfilerBundle\WebProfilerBundle();
             $bundles[] = new Sensio\Bundle\DistributionBundle\SensioDistributionBundle();
             $bundles[] = new Sensio\Bundle\GeneratorBundle\SensioGeneratorBundle();
-            //$bundles[] = new RaulFraile\Bundle\LadybugBundle\RaulFraileLadybugBundle();
-            //$bundles[] = new Apoutchika\LoremIpsumBundle\ApoutchikaLoremIpsumBundle();
+            $bundles[] = new RaulFraile\Bundle\LadybugBundle\RaulFraileLadybugBundle();
+            $bundles[] = new Apoutchika\LoremIpsumBundle\ApoutchikaLoremIpsumBundle();
         }
 
-        return array_merge($bundles, $camelot);
+        return array_merge($bundles, $tavro);
     }
 
     public function getRootDir()

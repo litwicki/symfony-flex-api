@@ -38,13 +38,6 @@ class User extends Entity implements UserInterface, \Serializable
     protected $username;
 
     /**
-     * @ORM\Column(type="string", length=255, unique=true, nullable=true)
-     * @Groups({"api", "tavro"})
-     * @MaxDepth(1)
-     */
-    protected $github_username;
-
-    /**
      * @ORM\Column(type="string", length=255, nullable=false)
      */
     protected $password;

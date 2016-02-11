@@ -58,7 +58,7 @@ class Shareholder extends Entity
     protected $address;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=false)
+     * @ORM\Column(type="string", length=255, nullable=true)
      * @Groups({"api", "tavro", "simple"})
      */
     protected $address2;

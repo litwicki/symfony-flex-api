@@ -26,7 +26,7 @@ use Tavro\Bundle\CoreBundle\Model\ApiEntity;
 
 /**
  * @ORM\Entity
- * @Table(name="tavro_shareholder")
+ * @Table(name="tavro_customer")
  *
  * @XmlRoot("shareholder")
  * @XmlNamespace(uri="http://tavro.io/api/shareholders")
@@ -58,7 +58,7 @@ class Customer extends Entity
     protected $address;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=false)
+     * @ORM\Column(type="string", length=255, nullable=true)
      * @Groups({"api", "tavro", "simple"})
      */
     protected $address2;

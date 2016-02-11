@@ -68,6 +68,20 @@ class Sample extends AbstractFixture implements OrderedFixtureInterface, Contain
         return $cities;
     }
 
+    public function getStates()
+    {
+        $states = Litwicki::getStateSelectChoices();
+        $states = array_keys($states);
+        unset($states['AS']);
+        unset($states['AP']);
+        unset($states['AA']);
+        unset($states['AE']);
+        unset($states['DC']);
+        unset($states['PR']);
+        unset($states['VI']);
+        return $states;
+    }
+
     /**
      * {@inheritDoc}
      */
@@ -75,9 +89,6 @@ class Sample extends AbstractFixture implements OrderedFixtureInterface, Contain
     {
         $lipsum = $this->container->get('apoutchika.lorem_ipsum');
         $size = 10;
-        $cities = $this->getCities('wa');
-        $states = Litwicki::getStateSelectChoices();
-        $states = array_keys($states);
 
         $organizations = [];
         $users = [];
@@ -87,8 +98,12 @@ class Sample extends AbstractFixture implements OrderedFixtureInterface, Contain
 
         for($i=0;$i<$size;$i++) {
 
-            $username = $lipsum->getWords(1);
+            $username = sprintf('user%s', $i);
             $email = sprintf('%s@tavro.dev', $username);
+            $salt = md5($email);
+            $password = 'Password1!';
+            $encoder = $this->container->get('tavro.password_encoder');
+            $password = $encoder->encodePassword($password, $salt);
 
             $user = new User();
             $user->setStatus(rand(0,1));
@@ -97,6 +112,8 @@ class Sample extends AbstractFixture implements OrderedFixtureInterface, Contain
             $user->setEmail($email);
             $user->setUsername($username);
             $user->setGender($genders[rand(0,1)]);
+            $user->setSalt($salt);
+            $user->setPassword($password);
             $manager->persist($user);
             $users[] = $user;
         }
@@ -120,6 +137,10 @@ class Sample extends AbstractFixture implements OrderedFixtureInterface, Contain
         $manager->flush();
 
         foreach($organizations as $organization) {
+
+            for($i=0;$i<$size;$i++) {
+                //@TODO: Add OrganizationUser
+            }
 
             $expenseCategories = array();
             $revenueCategories = array();
@@ -179,8 +200,7 @@ class Sample extends AbstractFixture implements OrderedFixtureInterface, Contain
                 $name = $lipsum->getWords(1);
                 $email = sprintf('%s@tavro-customer.dev', $name);
 
-                $state = $states[rand(0,count($states)-1)];
-                $cities = $this->getCities($state);
+                $cities = $this->getCities('WA');
 
                 $customer = new Customer();
                 $customer->setEmail($email);
@@ -189,8 +209,8 @@ class Sample extends AbstractFixture implements OrderedFixtureInterface, Contain
                 $customer->setStatus(rand(0,1));
                 $customer->setCreateDate($now);
                 $customer->setAddress($lipsum->getWords(rand(1,3)));
-                $customer->setCity($cities[rand(0,count($cities)-1)]);
-                $customer->setState($state);
+                $customer->setCity($cities[array_rand($cities)]);
+                $customer->setState('WA');
                 $customer->setZip(rand(11111,99999));
                 $customer->setOrganization($organization);
                 $customer->setPhone(sprintf('(%s) %s-%s', rand(111,999), rand(111,999), rand(1111,9999)));
@@ -201,24 +221,23 @@ class Sample extends AbstractFixture implements OrderedFixtureInterface, Contain
 
             $manager->flush();
 
-            for($i=0;$i<$size;$i++) {
-
-                $organization = $organizations[rand(0,count($organizations)-1)];
-                $expenseDate = $now;
-                $interval = new \DateInterval(sprintf('PT%sd', rand(-90,0)));
-                $category = $expenseCategories[rand(0,count($expenseCategories)-1)];
-
-                $expense = new Expense();
-                $expense->setOrganization($organization);
-                $expense->setCreateDate($now);
-                $expense->setStatus(rand(0,1));
-                $expense->setAmount(rand(0,9999));
-                $expense->setExpenseDate($expenseDate->add($interval));
-                $expense->setCategory($category);
-                $manager->persist($expense);
-            }
-
-            $manager->flush();
+//            for($i=0;$i<$size;$i++) {
+//
+//                $expenseDate = $now;
+//                $category = $expenseCategories[array_rand($expenseCategories)];
+//
+//                $expense = new Expense();
+//                $expense->setOrganization($organization);
+//                $expense->setCreateDate($now);
+//                $expense->setStatus(rand(0,1));
+//                $expense->setAmount(rand(0,9999));
+//                $expense->setExpenseDate($expenseDate->add(\DateInterval::createFromDateString(sprintf('-%s days', rand(1,90)))));
+//                $expense->setCategory($category);
+//                $expense->setUser($users[array_rand($users)]);
+//                $manager->persist($expense);
+//            }
+//
+//            $manager->flush();
 
         }
 
