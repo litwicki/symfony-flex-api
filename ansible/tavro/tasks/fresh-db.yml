@@ -3,7 +3,7 @@
 
   tasks:
     - name: drop database
-      shell: mysql -u{{dbuser}} -p{{dbpass}} -e "DROP DATABASE IF EXISTS {{dbname}}"
+      shell: sudo php {{api_root}}bin/console doctrine:database:drop --force
 
     - name: recreate database
       shell: sudo php {{api_root}}bin/console doctrine:database:create

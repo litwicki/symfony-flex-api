@@ -1,0 +1,18 @@
+---
+- hosts: all
+
+  tasks:
+    - name: drop database
+      shell: sudo php {{api_root}}bin/console doctrine:database:drop --force
+
+    - name: recreate database
+      shell: sudo php {{api_root}}bin/console doctrine:database:create
+
+    - name: rebuild migrations
+      shell: sudo php {{api_root}}bin/console doctrine:migrations:diff
+
+    - name: run migrations
+      shell: sudo php {{api_root}bin/console doctrine:migrations:migrate --no-interaction
+
+    - name: setup core data fixtures
+      shell: sudo php {{api_root}}bin/console doctrine:fixtures:load --fixtures={{api_root}}{{core_fixture_path}} --append

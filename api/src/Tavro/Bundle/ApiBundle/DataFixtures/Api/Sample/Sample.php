@@ -138,9 +138,17 @@ class Sample extends AbstractFixture implements OrderedFixtureInterface, Contain
 
         foreach($organizations as $organization) {
 
-            for($i=0;$i<$size;$i++) {
-                //@TODO: Add OrganizationUser
+            for($i=0;$i<rand(0,$size);$i++) {
+                $user = $users[array_rand($users)];
+                $uo = new UserOrganization();
+                $uo->setUser($user);
+                $uo->setOrganization($organization);
+                $uo->setStatus(rand(0,1));
+                $uo->setCreateDate($now);
+                $manager->persist($uo);
             }
+
+            $manager->flush();
 
             $expenseCategories = array();
             $revenueCategories = array();
