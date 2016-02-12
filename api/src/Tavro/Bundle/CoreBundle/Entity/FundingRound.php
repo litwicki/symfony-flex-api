@@ -65,11 +65,11 @@ class FundingRound extends Entity
     protected $organization;
 
     /**
-     * @ORM\OneToMany(targetEntity="Tavro\Bundle\CoreBundle\Entity\Shareholder", mappedBy="funding_round", cascade={"remove"})
+     * @ORM\OneToMany(targetEntity="Tavro\Bundle\CoreBundle\Entity\FundingRoundShareholder", mappedBy="funding_round", cascade={"remove"})
      * @Groups({"tavro"})
      * @MaxDepth(3)
      */
-    protected $shareholders;
+    protected $funding_round_shareholders;
 
     /**
      * Constructor
@@ -136,36 +136,141 @@ class FundingRound extends Entity
     }
 
     /**
-     * Add shareholder
+     * Set type
      *
-     * @param \Tavro\Bundle\CoreBundle\Entity\Shareholder $shareholder
+     * @param string $type
      *
-     * @return Shareholder
+     * @return FundingRound
      */
-    public function addShareholder(\Tavro\Bundle\CoreBundle\Entity\Shareholder $shareholder)
+    public function setType($type)
     {
-        $this->shareholders[] = $shareholder;
+        $this->type = $type;
 
         return $this;
     }
 
     /**
-     * Remove shareholder
+     * Get type
      *
-     * @param \Tavro\Bundle\CoreBundle\Entity\Shareholder $shareholder
+     * @return string
      */
-    public function removeShareholder(\Tavro\Bundle\CoreBundle\Entity\Shareholder $shareholder)
+    public function getType()
     {
-        $this->shareholders->removeElement($shareholder);
+        return $this->type;
     }
 
     /**
-     * Get shareholders
+     * Set prospectus
+     *
+     * @param string $prospectus
+     *
+     * @return FundingRound
+     */
+    public function setProspectus($prospectus)
+    {
+        $this->prospectus = $prospectus;
+
+        return $this;
+    }
+
+    /**
+     * Get prospectus
+     *
+     * @return string
+     */
+    public function getProspectus()
+    {
+        return $this->prospectus;
+    }
+
+    /**
+     * Set sharePrice
+     *
+     * @param float $sharePrice
+     *
+     * @return FundingRound
+     */
+    public function setSharePrice($sharePrice)
+    {
+        $this->share_price = $sharePrice;
+
+        return $this;
+    }
+
+    /**
+     * Get sharePrice
+     *
+     * @return float
+     */
+    public function getSharePrice()
+    {
+        return $this->share_price;
+    }
+
+    /**
+     * Set totalShares
+     *
+     * @param integer $totalShares
+     *
+     * @return FundingRound
+     */
+    public function setTotalShares($totalShares)
+    {
+        $this->total_shares = $totalShares;
+
+        return $this;
+    }
+
+    /**
+     * Get totalShares
+     *
+     * @return integer
+     */
+    public function getTotalShares()
+    {
+        return $this->total_shares;
+    }
+
+    /**
+     * Add fundingRoundShareholder
+     *
+     * @param \Tavro\Bundle\CoreBundle\Entity\FundingRoundShareholder $fundingRoundShareholder
+     *
+     * @return FundingRound
+     */
+    public function addFundingRoundShareholder(\Tavro\Bundle\CoreBundle\Entity\FundingRoundShareholder $fundingRoundShareholder)
+    {
+        $this->funding_round_shareholders[] = $fundingRoundShareholder;
+
+        return $this;
+    }
+
+    /**
+     * Remove fundingRoundShareholder
+     *
+     * @param \Tavro\Bundle\CoreBundle\Entity\FundingRoundShareholder $fundingRoundShareholder
+     */
+    public function removeFundingRoundShareholder(\Tavro\Bundle\CoreBundle\Entity\FundingRoundShareholder $fundingRoundShareholder)
+    {
+        $this->funding_round_shareholders->removeElement($fundingRoundShareholder);
+    }
+
+    /**
+     * Get fundingRoundShareholders
      *
      * @return \Doctrine\Common\Collections\Collection
      */
+    public function getFundingRoundShareholders()
+    {
+        return $this->funding_round_shareholders;
+    }
+
     public function getShareholders()
     {
-        return $this->shareholders;
+        $items = array();
+        foreach($this->funding_round_shareholders as $entity) {
+            $items[] = $entity->getShareholder();
+        }
+        return $items;
     }
 }

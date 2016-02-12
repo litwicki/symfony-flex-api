@@ -33,6 +33,18 @@ class Product extends ApiEntity
     protected $body;
 
     /**
+     * @ORM\Column(type="float", nullable=true, options={"default" = 0})
+     * @Groups({"api", "tavro", "simple"})
+     */
+    protected $price;
+
+    /**
+     * @ORM\Column(type="float", nullable=true, options={"default" = 0})
+     * @Groups({"api", "tavro", "simple"})
+     */
+    protected $cost;
+
+    /**
      * @ORM\ManyToOne(targetEntity="Tavro\Bundle\CoreBundle\Entity\ProductCategory", inversedBy="products")
      * @ORM\JoinColumn(name="category_id", referencedColumnName="id", nullable=false)
      * @Groups({"api", "tavro", "simple"})
@@ -172,5 +184,53 @@ class Product extends ApiEntity
     public function getProductImages()
     {
         return $this->product_images;
+    }
+
+    /**
+     * Set price
+     *
+     * @param float $price
+     *
+     * @return Product
+     */
+    public function setPrice($price)
+    {
+        $this->price = $price;
+
+        return $this;
+    }
+
+    /**
+     * Get price
+     *
+     * @return float
+     */
+    public function getPrice()
+    {
+        return $this->price;
+    }
+
+    /**
+     * Set cost
+     *
+     * @param float $cost
+     *
+     * @return Product
+     */
+    public function setCost($cost)
+    {
+        $this->cost = $cost;
+
+        return $this;
+    }
+
+    /**
+     * Get cost
+     *
+     * @return float
+     */
+    public function getCost()
+    {
+        return $this->cost;
     }
 }

@@ -58,7 +58,7 @@ class Shareholder extends Entity
     protected $address;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=false)
+     * @ORM\Column(type="string", length=255, nullable=true)
      * @Groups({"api", "tavro", "simple"})
      */
     protected $address2;
@@ -114,9 +114,11 @@ class Shareholder extends Entity
     protected $notes;
 
     /**
-     * @ORM\OneToMany(targetEntity="Tavro\Bundle\CoreBundle\Entity\ShareholderOrganization", mappedBy="organization", cascade={"remove"})
+     * @ORM\OneToMany(targetEntity="Tavro\Bundle\CoreBundle\Entity\FundingRoundShareholder", mappedBy="shareholder", cascade={"remove"})
+     * @Groups({"tavro"})
+     * @MaxDepth(3)
      */
-    protected $shareholder_organizations;
+    protected $funding_round_shareholders;
 
     /**
      * Constructor

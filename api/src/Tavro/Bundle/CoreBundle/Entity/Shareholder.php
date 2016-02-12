@@ -94,12 +94,6 @@ class Shareholder extends Entity
     protected $phone;
 
     /**
-     * @ORM\Column(type="integer", nullable=true, options={"default" = 0})
-     * @Groups({"api", "tavro", "simple"})
-     */
-    protected $shares;
-
-    /**
      * @ORM\ManyToOne(targetEntity="Tavro\Bundle\CoreBundle\Entity\User", inversedBy="shareholders")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id", nullable=true)
      * @Groups({"api", "tavro", "simple"})
@@ -114,9 +108,11 @@ class Shareholder extends Entity
     protected $notes;
 
     /**
-     * @ORM\OneToMany(targetEntity="Tavro\Bundle\CoreBundle\Entity\OrganizationShareholder", mappedBy="shareholder", cascade={"remove"})
+     * @ORM\OneToMany(targetEntity="Tavro\Bundle\CoreBundle\Entity\FundingRoundShareholder", mappedBy="shareholder", cascade={"remove"})
+     * @Groups({"tavro"})
+     * @MaxDepth(3)
      */
-    protected $organization_shareholders;
+    protected $funding_round_shareholders;
 
     /**
      * Constructor
@@ -442,37 +438,38 @@ class Shareholder extends Entity
         return $this->phone;
     }
 
+
     /**
-     * Add shareholderOrganization
+     * Add fundingRoundShareholder
      *
-     * @param \Tavro\Bundle\CoreBundle\Entity\OrganizationShareholder $shareholderOrganization
+     * @param \Tavro\Bundle\CoreBundle\Entity\FundingRoundShareholder $fundingRoundShareholder
      *
      * @return Shareholder
      */
-    public function addOrganizationShareholder(\Tavro\Bundle\CoreBundle\Entity\OrganizationShareholder $shareholderOrganization)
+    public function addFundingRoundShareholder(\Tavro\Bundle\CoreBundle\Entity\FundingRoundShareholder $fundingRoundShareholder)
     {
-        $this->organization_shareholders[] = $shareholderOrganization;
+        $this->funding_round_shareholders[] = $fundingRoundShareholder;
 
         return $this;
     }
 
     /**
-     * Remove shareholderOrganization
+     * Remove fundingRoundShareholder
      *
-     * @param \Tavro\Bundle\CoreBundle\Entity\OrganizationShareholder $shareholderOrganization
+     * @param \Tavro\Bundle\CoreBundle\Entity\FundingRoundShareholder $fundingRoundShareholder
      */
-    public function removeOrganizationShareholder(\Tavro\Bundle\CoreBundle\Entity\OrganizationShareholder $shareholderOrganization)
+    public function removeFundingRoundShareholder(\Tavro\Bundle\CoreBundle\Entity\FundingRoundShareholder $fundingRoundShareholder)
     {
-        $this->organization_shareholders->removeElement($shareholderOrganization);
+        $this->funding_round_shareholders->removeElement($fundingRoundShareholder);
     }
 
     /**
-     * Get shareholderOrganizations
+     * Get fundingRoundShareholders
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getOrganizationShareholders()
+    public function getFundingRoundShareholders()
     {
-        return $this->organization_shareholders;
+        return $this->funding_round_shareholders;
     }
 }
