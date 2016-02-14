@@ -28,21 +28,14 @@ use JMS\Serializer\Annotation\MaxDepth;
  * @Table(name="tavro_user")
  *
  * @XmlRoot("user")
- * @XmlNamespace(uri="http://tavromods.com/api/users")
  */
 class User extends Entity implements UserInterface, \Serializable
 {
     /**
      * @ORM\Column(type="string", length=255, unique=true, nullable=false)
-     * @Groups({"api", "tavro", "summary", "typeahead"})
+     * @Groups({"api", "tavro", "simple", "typeahead"})
      */
     protected $username;
-
-    /**
-     * @ORM\Column(type="string", length=255, unique=true, nullable=true)
-     * @Groups({"api", "tavro", "summary"})
-     */
-    protected $github_username;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=false)
@@ -66,7 +59,7 @@ class User extends Entity implements UserInterface, \Serializable
 
     /**
      * @ORM\Column(type="string", unique=true, length=255, nullable=false)
-     * @Groups({"api", "tavro", "summary", "typeahead"})
+     * @Groups({"api", "tavro", "simple", "typeahead"})
      */
     protected $email;
 
@@ -78,7 +71,8 @@ class User extends Entity implements UserInterface, \Serializable
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
-     * @Groups({"api", "tavro"})
+     * @Groups({"api", "tavro", "simple"})
+     * @MaxDepth(1)
      */
     protected $last_online_date;
 
@@ -86,6 +80,7 @@ class User extends Entity implements UserInterface, \Serializable
      * @ORM\Column(type="string", length=255, nullable=false)
      * @Groups({"api", "tavro"})
      * @Accessor(getter="getApiKey", setter="setApiKey")
+     * @MaxDepth(1)
      */
     protected $api_key;
 
@@ -93,12 +88,14 @@ class User extends Entity implements UserInterface, \Serializable
      * @ORM\Column(type="string", length=255, nullable=false)
      * @Groups({"api", "tavro"})
      * @Accessor(getter="getApiPassword", setter="setApiPassword")
+     * @MaxDepth(1)
      */
     protected $api_password;
 
     /**
      * @ORM\Column(type="boolean", nullable=false)
      * @Groups({"api", "tavro"})
+     * @MaxDepth(1)
      */
     protected $api_enabled;
 
@@ -112,6 +109,7 @@ class User extends Entity implements UserInterface, \Serializable
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      * @Groups({"api", "tavro"})
+     * @MaxDepth(1)
      */
     protected $user_ip;
 
@@ -121,34 +119,35 @@ class User extends Entity implements UserInterface, \Serializable
      *      choices = { "male", "female", "other" },
      *      message = "Choose a valid gender."
      * )
-     * @Groups({"api", "tavro", "summary"})
+     * @Groups({"api", "tavro", "simple"})
      * @Accessor(getter="getGender", setter="setGuid")
+     * @MaxDepth(1)
      */
     protected $gender;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      * @Groups({"api", "tavro"})
+     * @MaxDepth(1)
      */
     protected $user_agent;
 
     /**
      * @ORM\Column(type="date", length=255, nullable=true)
      * @Groups({"api", "tavro"})
+     * @MaxDepth(1)
      */
     protected $birthday;
 
     /**
      * @ORM\OneToMany(targetEntity="Tavro\Bundle\CoreBundle\Entity\Node", mappedBy="user")
      * @ORM\OrderBy({"id" = "DESC"})
-     * @Groups({"tavro"})
      */
     protected $nodes;
 
     /**
      * @ORM\OneToMany(targetEntity="Tavro\Bundle\CoreBundle\Entity\Organization", mappedBy="owner")
      * @ORM\OrderBy({"id" = "DESC"})
-     * @Groups({"tavro"})
      */
     protected $organizations;
 
@@ -167,7 +166,7 @@ class User extends Entity implements UserInterface, \Serializable
      * )
      * @Type("array<string>")
      * @Accessor(getter="getSerializedRoles")
-     * @Groups({"api", "tavro", "summary"})
+     * @Groups({"api", "tavro"})
      * @MaxDepth(3)
      */
     protected $roles;
@@ -185,8 +184,8 @@ class User extends Entity implements UserInterface, \Serializable
     /**
      * @ORM\ManyToOne(targetEntity="Tavro\Bundle\CoreBundle\Entity\Image")
      * @ORM\JoinColumn(name="avatar_image_id", referencedColumnName="id", nullable=true)
-     * @Groups({"api", "tavro", "summary"})
-     * @MaxDepth(2)
+     * @Groups({"api", "tavro", "simple"})
+     * @MaxDepth(1)
      */
     protected $avatar;
 
@@ -211,15 +210,11 @@ class User extends Entity implements UserInterface, \Serializable
 
         $this->api_enabled = false;
 
-        $this->enable_private_messages = true;
-        $this->enable_notifications = true;
-        $this->enable_daily_digest = true;
-
     }
 
     public function __toString()
     {
-        return $this->username;
+        return strval($this->username);
     }
 
     /**
@@ -627,7 +622,7 @@ class User extends Entity implements UserInterface, \Serializable
      */
     public function getGuid()
     {
-        return $this->api_enabled ? $this->guid : '********************************';
+        return $this->guid;
     }
 
     /**
@@ -843,7 +838,7 @@ class User extends Entity implements UserInterface, \Serializable
      */
     public function getUserOrganizations()
     {
-        return $this->nodes_read;
+        return $this->user_organizations;
     }
 
     /**
@@ -954,7 +949,7 @@ class User extends Entity implements UserInterface, \Serializable
     /**
      * @VirtualProperty
      * @SerializedName("is_admin")
-     * @Groups({"api", "tavro", "summary"})
+     * @Groups({"api", "tavro"})
      *
      */
     public function getIsAdmin()
@@ -971,7 +966,7 @@ class User extends Entity implements UserInterface, \Serializable
     /**
      * @VirtualProperty
      * @SerializedName("is_developer")
-     * @Groups({"api", "tavro", "summary"})
+     * @Groups({"api", "tavro"})
      *
      */
     public function getIsDeveloper()
@@ -988,7 +983,7 @@ class User extends Entity implements UserInterface, \Serializable
     /**
      * @VirtualProperty
      * @SerializedName("node_count")
-     * @Groups({"api", "tavro", "summary"})
+     * @Groups({"api", "tavro"})
      *
      */
     public function nodeCount()
@@ -1040,5 +1035,53 @@ class User extends Entity implements UserInterface, \Serializable
     public function getAvatar()
     {
         return $this->avatar;
+    }
+
+    /**
+     * Add organization
+     *
+     * @param \Tavro\Bundle\CoreBundle\Entity\Organization $organization
+     *
+     * @return User
+     */
+    public function addOrganization(\Tavro\Bundle\CoreBundle\Entity\Organization $organization)
+    {
+        $this->organizations[] = $organization;
+
+        return $this;
+    }
+
+    /**
+     * Remove organization
+     *
+     * @param \Tavro\Bundle\CoreBundle\Entity\Organization $organization
+     */
+    public function removeOrganization(\Tavro\Bundle\CoreBundle\Entity\Organization $organization)
+    {
+        $this->organizations->removeElement($organization);
+    }
+
+    /**
+     * Get organizations
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getOrganizations()
+    {
+        return $this->organizations;
+    }
+
+    /**
+     * Add userOrganization
+     *
+     * @param \Tavro\Bundle\CoreBundle\Entity\UserOrganization $userOrganization
+     *
+     * @return User
+     */
+    public function addUserOrganization(\Tavro\Bundle\CoreBundle\Entity\UserOrganization $userOrganization)
+    {
+        $this->user_organizations[] = $userOrganization;
+
+        return $this;
     }
 }

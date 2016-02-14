@@ -120,9 +120,9 @@ class Organization extends ApiEntity
     protected $funding_rounds;
 
     /**
-     * @ORM\OneToMany(targetEntity="Tavro\Bundle\CoreBundle\Entity\ShareholderOrganization", mappedBy="organization", cascade={"remove"})
+     * @ORM\OneToMany(targetEntity="Tavro\Bundle\CoreBundle\Entity\FundingRoundShareholder", mappedBy="organization", cascade={"remove"})
      */
-    protected $shareholder_organizations;
+    protected $funding_round_shareholders;
 
     /**
      * Set body
@@ -579,4 +579,37 @@ class Organization extends ApiEntity
         return $this->funding_rounds;
     }
 
+    /**
+     * Add shareholderOrganization
+     *
+     * @param \Tavro\Bundle\CoreBundle\Entity\FundingRoundShareholder $shareholderOrganization
+     *
+     * @return Shareholder
+     */
+    public function addFundingRoundShareholder(\Tavro\Bundle\CoreBundle\Entity\FundingRoundShareholder $shareholderOrganization)
+    {
+        $this->funding_round_shareholders[] = $shareholderOrganization;
+
+        return $this;
+    }
+
+    /**
+     * Remove shareholderOrganization
+     *
+     * @param \Tavro\Bundle\CoreBundle\Entity\FundingRoundShareholder $shareholderOrganization
+     */
+    public function removeFundingRoundShareholder(\Tavro\Bundle\CoreBundle\Entity\FundingRoundShareholder $shareholderOrganization)
+    {
+        $this->funding_round_shareholders->removeElement($shareholderOrganization);
+    }
+
+    /**
+     * Get shareholderOrganizations
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getFundingRoundShareholders()
+    {
+        return $this->funding_round_shareholders;
+    }
 }

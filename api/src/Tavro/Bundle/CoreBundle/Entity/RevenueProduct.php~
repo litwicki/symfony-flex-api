@@ -18,52 +18,58 @@ use Tavro\Bundle\CoreBundle\Model\EntityInterface;
 
 /**
  * @ORM\Entity
- * @ORM\Table(name="tavro_revenue_tag", indexes={@ORM\Index(name="REVENUE_TAG", columns={"tag_id","revenue_id"})})
+ * @ORM\Table(name="tavro_revenue_product", indexes={@ORM\Index(name="REVENUE_PRODUCT", columns={"product_id","revenue_id"})})
  * @ExclusionPolicy("all")
  */
-class RevenueTag extends Entity
+class RevenueProduct extends Entity
 {
     /**
-     * @ORM\ManyToOne(targetEntity="Tavro\Bundle\CoreBundle\Entity\Tag", inversedBy="revenue_tags")
-     * @ORM\JoinColumn(name="tag_id", referencedColumnName="id", nullable=false)
+     * @ORM\ManyToOne(targetEntity="Tavro\Bundle\CoreBundle\Entity\Product", inversedBy="revenue_products")
+     * @ORM\JoinColumn(name="product_id", referencedColumnName="id", nullable=false)
      * @Groups({"api", "tavro"})
      */
-    protected $tag;
+    protected $product;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Tavro\Bundle\CoreBundle\Entity\Revenue", inversedBy="revenue_tags")
+     * @ORM\ManyToOne(targetEntity="Tavro\Bundle\CoreBundle\Entity\Revenue", inversedBy="revenue_products")
      * @ORM\JoinColumn(name="revenue_id", referencedColumnName="id", nullable=false)
      */
     protected $revenue;
 
     /**
-     * Set tag
-     *
-     * @param \Tavro\Bundle\CoreBundle\Entity\Tag $tag
-     * @return RevenueTag
+     * @ORM\Column(type="integer", nullable=true, options={"default" = 0})
+     * @Groups({"api", "tavro", "simple"})
      */
-    public function setTag(\Tavro\Bundle\CoreBundle\Entity\Tag $tag)
+    protected $qty;
+
+    /**
+     * Set product
+     *
+     * @param \Tavro\Bundle\CoreBundle\Entity\Product $product
+     * @return RevenueProduct
+     */
+    public function setProduct(\Tavro\Bundle\CoreBundle\Entity\Product $product)
     {
-        $this->tag = $tag;
+        $this->product = $product;
 
         return $this;
     }
 
     /**
-     * Get tag
+     * Get product
      *
-     * @return \Tavro\Bundle\CoreBundle\Entity\Tag
+     * @return \Tavro\Bundle\CoreBundle\Entity\Product
      */
-    public function getTag()
+    public function getProduct()
     {
-        return $this->tag;
+        return $this->product;
     }
 
     /**
      * Set Revenue
      *
      * @param \Tavro\Bundle\CoreBundle\Entity\Revenue $revenue
-     * @return RevenueTag
+     * @return RevenueProduct
      */
     public function setRevenue(\Tavro\Bundle\CoreBundle\Entity\Revenue $revenue)
     {

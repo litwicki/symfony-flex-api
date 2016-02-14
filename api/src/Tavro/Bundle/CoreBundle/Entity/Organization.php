@@ -120,9 +120,9 @@ class Organization extends ApiEntity
     protected $funding_rounds;
 
     /**
-     * @ORM\OneToMany(targetEntity="Tavro\Bundle\CoreBundle\Entity\OrganizationShareholder", mappedBy="organization", cascade={"remove"})
+     * @ORM\OneToMany(targetEntity="Tavro\Bundle\CoreBundle\Entity\FundingRoundShareholder", mappedBy="organization", cascade={"remove"})
      */
-    protected $organization_shareholders;
+    protected $funding_round_shareholders;
 
     /**
      * Set body
@@ -582,13 +582,13 @@ class Organization extends ApiEntity
     /**
      * Add shareholderOrganization
      *
-     * @param \Tavro\Bundle\CoreBundle\Entity\OrganizationShareholder $shareholderOrganization
+     * @param \Tavro\Bundle\CoreBundle\Entity\FundingRoundShareholder $shareholderOrganization
      *
      * @return Shareholder
      */
-    public function addOrganizationShareholder(\Tavro\Bundle\CoreBundle\Entity\OrganizationShareholder $shareholderOrganization)
+    public function addFundingRoundShareholder(\Tavro\Bundle\CoreBundle\Entity\FundingRoundShareholder $shareholderOrganization)
     {
-        $this->organization_shareholders[] = $shareholderOrganization;
+        $this->funding_round_shareholders[] = $shareholderOrganization;
 
         return $this;
     }
@@ -596,11 +596,11 @@ class Organization extends ApiEntity
     /**
      * Remove shareholderOrganization
      *
-     * @param \Tavro\Bundle\CoreBundle\Entity\OrganizationShareholder $shareholderOrganization
+     * @param \Tavro\Bundle\CoreBundle\Entity\FundingRoundShareholder $shareholderOrganization
      */
-    public function removeOrganizationShareholder(\Tavro\Bundle\CoreBundle\Entity\OrganizationShareholder $shareholderOrganization)
+    public function removeFundingRoundShareholder(\Tavro\Bundle\CoreBundle\Entity\FundingRoundShareholder $shareholderOrganization)
     {
-        $this->organization_shareholders->removeElement($shareholderOrganization);
+        $this->funding_round_shareholders->removeElement($shareholderOrganization);
     }
 
     /**
@@ -608,8 +608,8 @@ class Organization extends ApiEntity
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getOrganizationShareholders()
+    public function getFundingRoundShareholders()
     {
-        return $this->organization_shareholders;
+        return $this->funding_round_shareholders;
     }
 }

@@ -367,4 +367,38 @@ class Image extends Entity implements S3EntityInterface
     {
         return $this->product_images;
     }
+
+    /**
+     * Add serviceImage
+     *
+     * @param \Tavro\Bundle\CoreBundle\Entity\ServiceImage $serviceImage
+     *
+     * @return Image
+     */
+    public function addServiceImage(\Tavro\Bundle\CoreBundle\Entity\ServiceImage $serviceImage)
+    {
+        $this->service_images[] = $serviceImage;
+
+        return $this;
+    }
+
+    /**
+     * Remove serviceImage
+     *
+     * @param \Tavro\Bundle\CoreBundle\Entity\ServiceImage $serviceImage
+     */
+    public function removeServiceImage(\Tavro\Bundle\CoreBundle\Entity\ServiceImage $serviceImage)
+    {
+        $this->service_images->removeElement($serviceImage);
+    }
+
+    /**
+     * Get serviceImages
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getServiceImages()
+    {
+        return $this->service_images;
+    }
 }

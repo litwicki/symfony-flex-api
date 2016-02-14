@@ -26,13 +26,13 @@ class Role extends Entity implements RoleInterface, EntityInterface, \Serializab
 
     /**
      * @ORM\Column(type="string", unique=true, nullable=true)
-     * @Groups({"api", "tavro", "summary"})
+     * @Groups({"api", "tavro"})
      */
     protected $name;
 
     /**
      * @ORM\Column(type="string", unique=true, nullable=true)
-     * @Groups({"api", "tavro", "summary"})
+     * @Groups({"api", "tavro"})
      */
     protected $role;
 

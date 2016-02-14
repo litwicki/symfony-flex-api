@@ -18,52 +18,52 @@ use Tavro\Bundle\CoreBundle\Model\EntityInterface;
 
 /**
  * @ORM\Entity
- * @ORM\Table(name="tavro_revenue_tag", indexes={@ORM\Index(name="REVENUE_TAG", columns={"tag_id","revenue_id"})})
+ * @ORM\Table(name="tavro_revenue_comment", indexes={@ORM\Index(name="NODE_COMMENT", columns={"comment_id","revenue_id"})})
  * @ExclusionPolicy("all")
  */
-class RevenueTag extends Entity
+class RevenueComment extends Entity
 {
     /**
-     * @ORM\ManyToOne(targetEntity="Tavro\Bundle\CoreBundle\Entity\Tag", inversedBy="revenue_tags")
-     * @ORM\JoinColumn(name="tag_id", referencedColumnName="id", nullable=false)
+     * @ORM\ManyToOne(targetEntity="Tavro\Bundle\CoreBundle\Entity\Comment", inversedBy="revenue_comments")
+     * @ORM\JoinColumn(name="comment_id", referencedColumnName="id", nullable=false)
      * @Groups({"api", "tavro"})
      */
-    protected $tag;
+    protected $comment;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Tavro\Bundle\CoreBundle\Entity\Revenue", inversedBy="revenue_tags")
+     * @ORM\ManyToOne(targetEntity="Tavro\Bundle\CoreBundle\Entity\Revenue", inversedBy="revenue_comments")
      * @ORM\JoinColumn(name="revenue_id", referencedColumnName="id", nullable=false)
      */
     protected $revenue;
 
     /**
-     * Set tag
+     * Set comment
      *
-     * @param \Tavro\Bundle\CoreBundle\Entity\Tag $tag
-     * @return RevenueTag
+     * @param \Tavro\Bundle\CoreBundle\Entity\Comment $comment
+     * @return RevenueComment
      */
-    public function setTag(\Tavro\Bundle\CoreBundle\Entity\Tag $tag)
+    public function setComment(\Tavro\Bundle\CoreBundle\Entity\Comment $comment)
     {
-        $this->tag = $tag;
+        $this->comment = $comment;
 
         return $this;
     }
 
     /**
-     * Get tag
+     * Get comment
      *
-     * @return \Tavro\Bundle\CoreBundle\Entity\Tag
+     * @return \Tavro\Bundle\CoreBundle\Entity\Comment
      */
-    public function getTag()
+    public function getComment()
     {
-        return $this->tag;
+        return $this->comment;
     }
 
     /**
      * Set Revenue
      *
      * @param \Tavro\Bundle\CoreBundle\Entity\Revenue $revenue
-     * @return RevenueTag
+     * @return RevenueComment
      */
     public function setRevenue(\Tavro\Bundle\CoreBundle\Entity\Revenue $revenue)
     {

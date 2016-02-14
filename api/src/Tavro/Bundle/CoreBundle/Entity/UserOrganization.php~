@@ -19,7 +19,6 @@ use Tavro\Bundle\CoreBundle\Model\EntityInterface;
 /**
  * @ORM\Entity
  * @ORM\Table(name="tavro_user_organization", indexes={@ORM\Index(name="USER_ORGANIZATION", columns={"organization_id","user_id"})})
- * @ExclusionPolicy("all")
  */
 class UserOrganization extends Entity
 {
@@ -27,12 +26,15 @@ class UserOrganization extends Entity
      * @ORM\ManyToOne(targetEntity="Tavro\Bundle\CoreBundle\Entity\Organization", inversedBy="user_organizations")
      * @ORM\JoinColumn(name="organization_id", referencedColumnName="id", nullable=false)
      * @Groups({"api", "tavro"})
+     * @MaxDepth(3)
      */
     protected $organization;
 
     /**
      * @ORM\ManyToOne(targetEntity="Tavro\Bundle\CoreBundle\Entity\User", inversedBy="user_organizations")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id", nullable=false)
+     * @Groups({"api", "tavro"})
+     * @MaxDepth(3)
      */
     protected $user;
 

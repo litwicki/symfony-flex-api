@@ -376,4 +376,28 @@ class Expense extends ApiEntity
     {
         return $this->expense_date;
     }
+
+    /**
+     * Set customer
+     *
+     * @param \Tavro\Bundle\CoreBundle\Entity\Organization $customer
+     *
+     * @return Expense
+     */
+    public function setCustomer(\Tavro\Bundle\CoreBundle\Entity\Organization $customer = null)
+    {
+        $this->customer = $customer;
+
+        return $this;
+    }
+
+    /**
+     * Get customer
+     *
+     * @return \Tavro\Bundle\CoreBundle\Entity\Organization
+     */
+    public function getCustomer()
+    {
+        return $this->customer;
+    }
 }

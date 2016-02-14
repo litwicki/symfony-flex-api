@@ -26,7 +26,7 @@ use Tavro\Bundle\CoreBundle\Model\ApiEntity;
 
 /**
  * @ORM\Entity
- * @Table(name="tavro_shareholder")
+ * @Table(name="tavro_customer")
  *
  * @XmlRoot("shareholder")
  * @XmlNamespace(uri="http://tavro.io/api/shareholders")
@@ -58,7 +58,7 @@ class Customer extends Entity
     protected $address;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=false)
+     * @ORM\Column(type="string", length=255, nullable=true)
      * @Groups({"api", "tavro", "simple"})
      */
     protected $address2;
@@ -92,12 +92,6 @@ class Customer extends Entity
      * @Groups({"api", "tavro", "simple", "typeahead"})
      */
     protected $phone;
-
-    /**
-     * @ORM\Column(type="integer", nullable=true, options={"default" = 0})
-     * @Groups({"api", "tavro", "simple"})
-     */
-    protected $shares;
 
     /**
      * @ORM\ManyToOne(targetEntity="Tavro\Bundle\CoreBundle\Entity\User", inversedBy="shareholders")
@@ -374,30 +368,6 @@ class Customer extends Entity
     }
 
     /**
-     * Set shares
-     *
-     * @param string $shares
-     *
-     * @return Shareholder
-     */
-    public function setShares($shares)
-    {
-        $this->shares = $shares;
-
-        return $this;
-    }
-
-    /**
-     * Get shares
-     *
-     * @return string
-     */
-    public function getShares()
-    {
-        return $this->shares;
-    }
-
-    /**
      * Set user
      *
      * @param \Tavro\Bundle\CoreBundle\Entity\User $user
@@ -477,5 +447,29 @@ class Customer extends Entity
     public function getCustomerComments()
     {
         return $this->customer_comments;
+    }
+
+    /**
+     * Set organization
+     *
+     * @param \Tavro\Bundle\CoreBundle\Entity\Organization $organization
+     *
+     * @return Customer
+     */
+    public function setOrganization(\Tavro\Bundle\CoreBundle\Entity\Organization $organization)
+    {
+        $this->organization = $organization;
+
+        return $this;
+    }
+
+    /**
+     * Get organization
+     *
+     * @return \Tavro\Bundle\CoreBundle\Entity\Organization
+     */
+    public function getOrganization()
+    {
+        return $this->organization;
     }
 }
