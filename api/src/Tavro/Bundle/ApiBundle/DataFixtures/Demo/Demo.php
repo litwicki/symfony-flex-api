@@ -14,7 +14,6 @@ use Tavro\Bundle\CoreBundle\Entity\User;
 use Tavro\Bundle\CoreBundle\Entity\Role;
 use Tavro\Bundle\CoreBundle\Entity\Variable;
 use Tavro\Bundle\CoreBundle\Entity\Organization;
-use Tavro\Bundle\CoreBundle\Entity\OrganizationShareholder;
 use Tavro\Bundle\CoreBundle\Entity\Shareholder;
 use Tavro\Bundle\CoreBundle\Entity\Product;
 use Tavro\Bundle\CoreBundle\Entity\Service;
@@ -35,6 +34,8 @@ use Tavro\Bundle\CoreBundle\Entity\ServiceCategory;
 use Tavro\Bundle\CoreBundle\Entity\Customer;
 use Tavro\Bundle\CoreBundle\Entity\CustomerComment;
 use Tavro\Bundle\CoreBundle\Entity\FundingRoundShareholder;
+use Tavro\Bundle\CoreBundle\Entity\RevenueService;
+use Tavro\Bundle\CoreBundle\Entity\RevenueProduct;
 
 use Cocur\Slugify\Slugify;
 use Litwicki\Common\Common as Litwicki;
@@ -286,6 +287,8 @@ class Demo extends AbstractFixture implements OrderedFixtureInterface, Container
 
             }
 
+            $customers = array();
+
             for($i=0;$i<$size;$i++) {
 
                 $name = $lipsum->getWords(1);
@@ -422,6 +425,8 @@ class Demo extends AbstractFixture implements OrderedFixtureInterface, Container
 
             }
 
+            $products = array();
+
             for($i=0;$i<rand(0,$size);$i++) {
 
                 $category = $productCategories[array_rand($productCategories)];
@@ -436,6 +441,74 @@ class Demo extends AbstractFixture implements OrderedFixtureInterface, Container
                 $product->setCost($cost);
                 $product->setPrice($cost * 1.15);
                 $manager->persist($product);
+                $products[] = $product;
+
+            }
+
+            $manager->flush();
+
+            $services = array();
+
+            for($i=0;$i<rand(0,$size);$i++) {
+
+                $category = $serviceCategories[array_rand($serviceCategories)];
+                $cost = rand(0.99, 999.99);
+                $service = new Product();
+                $service->setCategory($category);
+                $service->setCreateDate(new \DateTime());
+                $service->setStatus(rand(0,1));
+                $service->setTitle($lipsum->getWords(1,10));
+                $service->setBody($lipsum->getParagraphs(1,3));
+                $service->setOrganization($organization);
+                $service->setCost($cost);
+                $service->setPrice($cost * 1.15);
+                $manager->persist($service);
+                $services[] = $service;
+
+            }
+
+            $manager->flush();
+
+            $revenues = array();
+
+            for($i=0;$i<rand(0,$size);$i++) {
+
+                $revenue = new Revenue();
+                $revenue->setOrganization($organization);
+                $revenue->setTitle($lipsum->getWords(3,10));
+                $revenue->setStatus(rand(0,1));
+                $revenue->setCreateDate(new \DateTime());
+                $revenue->setType('');
+                $revenue->setBody($lipsum->getParagraphs((rand(1,3))));
+                $revenue->setCategory($revenueCategories[array_rand($revenueCategories)]);
+                $revenue->setCustomer($customers[array_rand($customers)]);
+                $revenue->setUser($users[array_rand($users)]);
+                $manager->persist($revenue);
+
+            }
+
+            $manager->flush();
+
+            foreach($revenues as $revenue) {
+
+                $service = rand(0,1);
+
+                for($i=0;$i<rand(0,$size);$i++) {
+
+                    if($service) {
+                        $entity = new RevenueService();
+                        $entity->setService($services[array_rand($services)]);
+                    }
+                    else {
+                        $entity = new RevenueProduct();
+                        $entity->setProduct($products[array_rand($products)]);
+                    }
+
+                    $entity->setRevenue($revenue);
+                    $entity->setCreateDate(new \DateTime());
+                    $manager->persist($entity);
+
+                }
 
             }
 
