@@ -14,7 +14,6 @@ use Tavro\Bundle\CoreBundle\Entity\User;
 use Tavro\Bundle\CoreBundle\Entity\Role;
 use Tavro\Bundle\CoreBundle\Entity\Variable;
 use Tavro\Bundle\CoreBundle\Entity\Organization;
-use Tavro\Bundle\CoreBundle\Entity\OrganizationShareholder;
 use Tavro\Bundle\CoreBundle\Entity\Shareholder;
 use Tavro\Bundle\CoreBundle\Entity\Product;
 use Tavro\Bundle\CoreBundle\Entity\Service;
@@ -95,16 +94,18 @@ class Expenses extends AbstractFixture implements OrderedFixtureInterface, Conta
 
             for($i=0;$i<$size;$i++) {
 
-                $expenseDate = new \DateTime();
+                $date = new \DateTime();
                 $category = $expenseCategories[array_rand($expenseCategories)];
 
                 $expense = new Expense();
                 $expense->setOrganization($organization);
                 $expense->setCategory($category);
+                $expense->setTitle($lipsum->getWords(rand(1,10)));
+                $expense->setBody($lipsum->getSentences(rand(1,3)));
                 $expense->setCreateDate(new \DateTime());
                 $expense->setStatus(rand(0,1));
                 $expense->setAmount(rand(0,9999));
-                $expense->setExpenseDate($expenseDate->add(\DateInterval::createFromDateString(sprintf('-%s days', rand(1,90)))));
+                $expense->setExpenseDate($date->add(\DateInterval::createFromDateString(sprintf('-%s days', rand(1,90)))));
                 $expense->setCategory($category);
                 $expense->setUser($users[array_rand($users)]);
                 $manager->persist($expense);

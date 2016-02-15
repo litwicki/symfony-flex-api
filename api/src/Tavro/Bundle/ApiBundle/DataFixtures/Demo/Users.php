@@ -91,6 +91,16 @@ class Users extends AbstractFixture implements OrderedFixtureInterface, Containe
 
         $genders = array('male', 'female');
 
+        $userRole = $manager->getRepository('TavroCoreBundle:Role')->findOneBy(array(
+            'role' => 'ROLE_USER',
+        ));
+
+        $developerRole = $manager->getRepository('TavroCoreBundle:Role')->findOneBy(array(
+            'role' => 'ROLE_DEVELOPER',
+        ));
+
+        $roles = array($userRole, $developerRole);
+
         for($i=0;$i<$size;$i++) {
 
             $username = sprintf('user%s', $i);
@@ -109,6 +119,7 @@ class Users extends AbstractFixture implements OrderedFixtureInterface, Containe
             $user->setGender($genders[rand(0,1)]);
             $user->setSalt($salt);
             $user->setPassword($password);
+            $user->addRole($roles[array_rand($roles)]);
             $manager->persist($user);
             $users[] = $user;
         }

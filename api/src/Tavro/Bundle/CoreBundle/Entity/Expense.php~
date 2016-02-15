@@ -74,7 +74,7 @@ class Expense extends ApiEntity
     /**
      * @ORM\ManyToOne(targetEntity="Tavro\Bundle\CoreBundle\Entity\Organization", inversedBy="expenses")
      * @ORM\JoinColumn(name="organization_id", referencedColumnName="id", nullable=false)
-     * @Groups({"api", "tavro", "simple"})
+     * @Groups({"api", "tavro"})
      * @MaxDepth(3)
      */
     protected $organization;
@@ -101,38 +101,12 @@ class Expense extends ApiEntity
         $this->create_date = $now;
     }
 
-    public function __toString()
-    {
-        return $this->title;
-    }
-
-    /**
-     * Set type
-     *
-     * @param string $type
-     * @return Expense
-     */
-    public function setType($type)
-    {
-        $this->type = $type;
-
-        return $this;
-    }
-
-    /**
-     * Get type
-     *
-     * @return string
-     */
-    public function getType()
-    {
-        return $this->type;
-    }
 
     /**
      * Set body
      *
      * @param string $body
+     *
      * @return Expense
      */
     public function setBody($body)
@@ -150,183 +124,6 @@ class Expense extends ApiEntity
     public function getBody()
     {
         return $this->body;
-    }
-
-    /**
-     * Set user
-     *
-     * @param \Tavro\Bundle\CoreBundle\Entity\User $user
-     * @return Expense
-     */
-    public function setUser(\Tavro\Bundle\CoreBundle\Entity\User $user)
-    {
-        $this->user = $user;
-
-        return $this;
-    }
-
-    /**
-     * Get user
-     *
-     * @return \Tavro\Bundle\CoreBundle\Entity\User
-     */
-    public function getUser()
-    {
-        return $this->user;
-    }
-
-    /**
-     * Set organization
-     *
-     * @param \Tavro\Bundle\CoreBundle\Entity\Organization $organization
-     * @return Expense
-     */
-    public function setOrganization(\Tavro\Bundle\CoreBundle\Entity\Organization $organization)
-    {
-        $this->organization = $organization;
-
-        return $this;
-    }
-
-    /**
-     * Get organization
-     *
-     * @return \Tavro\Bundle\CoreBundle\Entity\Organization
-     */
-    public function getOrganization()
-    {
-        return $this->organization;
-    }
-
-    /**
-     * Add expense_comments
-     *
-     * @param \Tavro\Bundle\CoreBundle\Entity\ExpenseComment $expenseComments
-     * @return Expense
-     */
-    public function addExpenseComment(\Tavro\Bundle\CoreBundle\Entity\ExpenseComment $expenseComments)
-    {
-        $this->expense_comments[] = $expenseComments;
-
-        return $this;
-    }
-
-    /**
-     * Remove expense_comments
-     *
-     * @param \Tavro\Bundle\CoreBundle\Entity\ExpenseComment $expenseComments
-     */
-    public function removeExpenseComment(\Tavro\Bundle\CoreBundle\Entity\ExpenseComment $expenseComments)
-    {
-        $this->expense_comments->removeElement($expenseComments);
-    }
-
-    /**
-     * Get expense_comments
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getExpenseComments()
-    {
-        return $this->expense_comments;
-    }
-
-    /**
-     * @VirtualProperty
-     * @SerializedName("expense_comments")
-     * @Groups({"api", "tavro","detail"})
-     * @MaxDepth(2)
-     */
-    public function getComments()
-    {
-        $comments = new \Doctrine\Common\Collections\ArrayCollection();
-        foreach($this->expense_comments as $expenseComment) {
-            $comments->add($expenseComment->getComment());
-        }
-        return $comments;
-    }
-    /**
-     * @VirtualProperty
-     * @SerializedName("comment_count")
-     * @Groups({"api", "tavro", "simple"})
-     * @return int
-     */
-    public function getCommentCount()
-    {
-        return $this->expense_comments->count();
-    }
-
-    /**
-     * @VirtualProperty
-     * @SerializedName("expense_tags")
-     * @Groups({"api", "tavro","detail"})
-     * @MaxDepth(2)
-     */
-    public function getTags()
-    {
-        $tags = new \Doctrine\Common\Collections\ArrayCollection();
-        foreach($this->expense_tags as $expenseTag) {
-            $tags->add($expenseTag->getTag());
-        }
-        return $tags;
-    }
-    
-    /**
-     * Add expense_tags
-     *
-     * @param \Tavro\Bundle\CoreBundle\Entity\ExpenseTag $expenseTags
-     * @return Expense
-     */
-    public function addExpenseTag(\Tavro\Bundle\CoreBundle\Entity\ExpenseTag $expenseTags)
-    {
-        $this->expense_tags[] = $expenseTags;
-
-        return $this;
-    }
-
-    /**
-     * Remove expense_tags
-     *
-     * @param \Tavro\Bundle\CoreBundle\Entity\ExpenseTag $expenseTags
-     */
-    public function removeExpenseTag(\Tavro\Bundle\CoreBundle\Entity\ExpenseTag $expenseTags)
-    {
-        $this->expense_tags->removeElement($expenseTags);
-    }
-
-    /**
-     * Get expense_tags
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getExpenseTags()
-    {
-        return $this->expense_tags;
-    }
-
-
-    /**
-     * Set category
-     *
-     * @param \Tavro\Bundle\CoreBundle\Entity\ExpenseCategory $category
-     *
-     * @return Expense
-     */
-    public function setCategory(\Tavro\Bundle\CoreBundle\Entity\ExpenseCategory $category)
-    {
-        $this->category = $category;
-
-        return $this;
-    }
-
-    /**
-     * Get category
-     *
-     * @return \Tavro\Bundle\CoreBundle\Entity\ExpenseCategory
-     */
-    public function getCategory()
-    {
-        return $this->category;
     }
 
     /**
@@ -375,6 +172,146 @@ class Expense extends ApiEntity
     public function getExpenseDate()
     {
         return $this->expense_date;
+    }
+
+    /**
+     * Set category
+     *
+     * @param \Tavro\Bundle\CoreBundle\Entity\ExpenseCategory $category
+     *
+     * @return Expense
+     */
+    public function setCategory(\Tavro\Bundle\CoreBundle\Entity\ExpenseCategory $category)
+    {
+        $this->category = $category;
+
+        return $this;
+    }
+
+    /**
+     * Get category
+     *
+     * @return \Tavro\Bundle\CoreBundle\Entity\ExpenseCategory
+     */
+    public function getCategory()
+    {
+        return $this->category;
+    }
+
+    /**
+     * Set user
+     *
+     * @param \Tavro\Bundle\CoreBundle\Entity\User $user
+     *
+     * @return Expense
+     */
+    public function setUser(\Tavro\Bundle\CoreBundle\Entity\User $user)
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return \Tavro\Bundle\CoreBundle\Entity\User
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
+
+    /**
+     * Add expenseComment
+     *
+     * @param \Tavro\Bundle\CoreBundle\Entity\ExpenseComment $expenseComment
+     *
+     * @return Expense
+     */
+    public function addExpenseComment(\Tavro\Bundle\CoreBundle\Entity\ExpenseComment $expenseComment)
+    {
+        $this->expense_comments[] = $expenseComment;
+
+        return $this;
+    }
+
+    /**
+     * Remove expenseComment
+     *
+     * @param \Tavro\Bundle\CoreBundle\Entity\ExpenseComment $expenseComment
+     */
+    public function removeExpenseComment(\Tavro\Bundle\CoreBundle\Entity\ExpenseComment $expenseComment)
+    {
+        $this->expense_comments->removeElement($expenseComment);
+    }
+
+    /**
+     * Get expenseComments
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getExpenseComments()
+    {
+        return $this->expense_comments;
+    }
+
+    /**
+     * Add expenseTag
+     *
+     * @param \Tavro\Bundle\CoreBundle\Entity\ExpenseTag $expenseTag
+     *
+     * @return Expense
+     */
+    public function addExpenseTag(\Tavro\Bundle\CoreBundle\Entity\ExpenseTag $expenseTag)
+    {
+        $this->expense_tags[] = $expenseTag;
+
+        return $this;
+    }
+
+    /**
+     * Remove expenseTag
+     *
+     * @param \Tavro\Bundle\CoreBundle\Entity\ExpenseTag $expenseTag
+     */
+    public function removeExpenseTag(\Tavro\Bundle\CoreBundle\Entity\ExpenseTag $expenseTag)
+    {
+        $this->expense_tags->removeElement($expenseTag);
+    }
+
+    /**
+     * Get expenseTags
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getExpenseTags()
+    {
+        return $this->expense_tags;
+    }
+
+    /**
+     * Set organization
+     *
+     * @param \Tavro\Bundle\CoreBundle\Entity\Organization $organization
+     *
+     * @return Expense
+     */
+    public function setOrganization(\Tavro\Bundle\CoreBundle\Entity\Organization $organization)
+    {
+        $this->organization = $organization;
+
+        return $this;
+    }
+
+    /**
+     * Get organization
+     *
+     * @return \Tavro\Bundle\CoreBundle\Entity\Organization
+     */
+    public function getOrganization()
+    {
+        return $this->organization;
     }
 
     /**

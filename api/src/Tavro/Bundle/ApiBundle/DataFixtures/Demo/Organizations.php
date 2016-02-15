@@ -79,7 +79,6 @@ class Organizations extends AbstractFixture implements OrderedFixtureInterface, 
             $organization->setCreateDate(new \DateTime());
             $organization->setOwner($users[array_rand($users)]);
             $organization->setStatus(rand(0,1));
-            $organization->setUpdateDate($users[rand(0,$size-1)]);
             $manager->persist($organization);
             $organizations[] = $organization;
 

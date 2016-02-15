@@ -10,4 +10,3 @@ sudo php $api_path/bin/console doctrine:database:create
 sudo php $api_path/bin/console doctrine:migrations:migrate --no-interaction
 
 sudo php $api_path/bin/console doctrine:fixtures:load --fixtures=$core_fixture_path/ORM/Core --append
-sudo php $api_path/bin/console doctrine:fixtures:load --fixtures=$api_fixture_path/Demo --append

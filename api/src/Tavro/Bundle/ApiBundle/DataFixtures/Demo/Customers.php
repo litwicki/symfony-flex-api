@@ -14,7 +14,7 @@ use Tavro\Bundle\CoreBundle\Entity\User;
 use Tavro\Bundle\CoreBundle\Entity\Role;
 use Tavro\Bundle\CoreBundle\Entity\Variable;
 use Tavro\Bundle\CoreBundle\Entity\Organization;
-use Tavro\Bundle\CoreBundle\Entity\OrganizationShareholder;
+
 use Tavro\Bundle\CoreBundle\Entity\Shareholder;
 use Tavro\Bundle\CoreBundle\Entity\Product;
 use Tavro\Bundle\CoreBundle\Entity\Service;
@@ -97,11 +97,11 @@ class Customers extends AbstractFixture implements OrderedFixtureInterface, Cont
 
                 $customer = new Customer();
                 $customer->setEmail($email);
-                $customer->setFirstName($name);
-                $customer->setLastName($lipsum->getWords(1));
+                $customer->setFirstName(ucfirst($name));
+                $customer->setLastName(ucfirst($lipsum->getWords(1)));
                 $customer->setStatus(rand(0,1));
                 $customer->setCreateDate(new \DateTime());
-                $customer->setAddress($lipsum->getWords(rand(1,3)));
+                $customer->setAddress(ucwords($lipsum->getWords(rand(1,3))));
                 $customer->setCity($cities[array_rand($cities)]);
                 $customer->setState('WA');
                 $customer->setZip(rand(11111,99999));

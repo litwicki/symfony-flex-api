@@ -14,7 +14,7 @@ use Tavro\Bundle\CoreBundle\Entity\User;
 use Tavro\Bundle\CoreBundle\Entity\Role;
 use Tavro\Bundle\CoreBundle\Entity\Variable;
 use Tavro\Bundle\CoreBundle\Entity\Organization;
-use Tavro\Bundle\CoreBundle\Entity\OrganizationShareholder;
+
 use Tavro\Bundle\CoreBundle\Entity\Shareholder;
 use Tavro\Bundle\CoreBundle\Entity\Product;
 use Tavro\Bundle\CoreBundle\Entity\Service;
@@ -94,7 +94,9 @@ class Shareholders extends AbstractFixture implements OrderedFixtureInterface, C
             $shareholder = new Shareholder();
             $shareholder->setTitle($lipsum->getSentences(1));
             $shareholder->setCreateDate(new \DateTime());
-            $shareholder->setAddress($lipsum->getWords(rand(1,3)));
+            $shareholder->setFirstName(ucfirst($lipsum->getWords(1)));
+            $shareholder->setLastName(ucfirst($lipsum->getWords(1)));
+            $shareholder->setAddress(ucwords($lipsum->getWords(rand(1,3))));
             $shareholder->setCity($cities[array_rand($cities)]);
             $shareholder->setState('WA');
             $shareholder->setZip(rand(11111,99999));
@@ -103,6 +105,8 @@ class Shareholders extends AbstractFixture implements OrderedFixtureInterface, C
             $manager->persist($shareholder);
             $shareholders[] = $shareholder;
         }
+
+        $manager->flush();
 
     }
 
