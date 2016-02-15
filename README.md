@@ -63,18 +63,22 @@ You can now access your dev machine at [https://tavro.dev](https://tavro.dev)
     $ git clone git@bitbucket.org:zoadilack/tavro.git /path/to/tavro
     $ vagrant up
 
-## Scripts
+## Development
+
+Workflow and useful 'stuff' for developing in Tavro.
+
+### Scripts
 
 These scripts all require you first login to the VM via SSH:
 
     $ cd /path/to/tavro
     $ vagrant ssh
     
-### Restore to a Clean Database
+###$ Restore to a Clean Database
 
     $ sudo bash /var/www/tavro/scripts/reset-clean.sh
    
-### Restore to Development "dummy" data
+###$ Restore to Development "dummy" data
 
     $ sudo bash /var/www/tavro/scripts/reset-dev.sh
     
