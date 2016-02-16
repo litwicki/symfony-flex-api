@@ -1,0 +1,214 @@
+{
+    "name": "Tavro\\Bundle\\CoreBundle\\Entity\\FundingRoundShareholder",
+    "line": 23,
+    "short_desc": "",
+    "long_desc": "",
+    "hint": null,
+    "tags": {
+        "ORM\\Entity": [
+            [
+                ""
+            ]
+        ],
+        "ORM\\Table": [
+            [
+                "(name=\"tavro_funding_round_shareholder\",",
+                "indexes={@ORM\\Index(name=\"ORGANIZATION_SHAREHOLDER\",",
+                "columns={\"shareholder_id\",\"funding_round_id\"})})"
+            ]
+        ]
+    },
+    "namespace": "Tavro\\Bundle\\CoreBundle\\Entity",
+    "file": "\/var\/www\/tavro\/api\/src\/Tavro\/Bundle\/CoreBundle\/Entity\/FundingRoundShareholder.php",
+    "relative_file": null,
+    "hash": "b90d91b191246e1e84027c15c18c5c2026c2ffc8",
+    "parent": "Tavro\\Bundle\\CoreBundle\\Model\\Entity",
+    "modifiers": "Stmt_Class",
+    "is_trait": false,
+    "is_interface": false,
+    "aliases": {
+        "ORM": "Doctrine\\ORM\\Mapping",
+        "Accessor": "JMS\\Serializer\\Annotation\\Accessor",
+        "ExclusionPolicy": "JMS\\Serializer\\Annotation\\ExclusionPolicy",
+        "Expose": "JMS\\Serializer\\Annotation\\Expose",
+        "Type": "JMS\\Serializer\\Annotation\\Type",
+        "VirtualProperty": "JMS\\Serializer\\Annotation\\VirtualProperty",
+        "Groups": "JMS\\Serializer\\Annotation\\Groups",
+        "MaxDepth": "JMS\\Serializer\\Annotation\\MaxDepth",
+        "Table": "Doctrine\\ORM\\Mapping\\Table",
+        "Entity": "Tavro\\Bundle\\CoreBundle\\Model\\Entity",
+        "EntityInterface": "Tavro\\Bundle\\CoreBundle\\Model\\EntityInterface"
+    },
+    "errors": [],
+    "interfaces": [],
+    "traits": [],
+    "properties": [],
+    "methods": {
+        "setShareholder": {
+            "name": "setShareholder",
+            "line": 53,
+            "short_desc": "Set shareholder",
+            "long_desc": "",
+            "hint": [
+                [
+                    "\\Tavro\\Bundle\\CoreBundle\\Entity\\FundingRoundShareholder",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "shareholder": {
+                    "name": "shareholder",
+                    "line": 53,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "Tavro\\Bundle\\CoreBundle\\Entity\\Tavro\\Bundle\\CoreBundle\\Entity\\Shareholder",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "Tavro\\Bundle\\CoreBundle\\Entity\\Shareholder",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "getShareholder": {
+            "name": "getShareholder",
+            "line": 65,
+            "short_desc": "Get shareholder",
+            "long_desc": "",
+            "hint": [
+                [
+                    "\\Tavro\\Bundle\\CoreBundle\\Entity\\Shareholder",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": []
+        },
+        "setFundingRound": {
+            "name": "setFundingRound",
+            "line": 76,
+            "short_desc": "Set FundingRound",
+            "long_desc": "",
+            "hint": [
+                [
+                    "\\Tavro\\Bundle\\CoreBundle\\Entity\\FundingRoundShareholder",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "funding_round": {
+                    "name": "funding_round",
+                    "line": 76,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "Tavro\\Bundle\\CoreBundle\\Entity\\Tavro\\Bundle\\CoreBundle\\Entity\\FundingRound",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "Tavro\\Bundle\\CoreBundle\\Entity\\FundingRound",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "getFundingRound": {
+            "name": "getFundingRound",
+            "line": 88,
+            "short_desc": "Get FundingRound",
+            "long_desc": "",
+            "hint": [
+                [
+                    "\\Tavro\\Bundle\\CoreBundle\\Entity\\FundingRound",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": []
+        },
+        "setShares": {
+            "name": "setShares",
+            "line": 101,
+            "short_desc": "Set shares",
+            "long_desc": "",
+            "hint": [
+                [
+                    "\\Tavro\\Bundle\\CoreBundle\\Entity\\FundingRoundShareholder",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "shares": {
+                    "name": "shares",
+                    "line": 101,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "integer",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "getShares": {
+            "name": "getShares",
+            "line": 113,
+            "short_desc": "Get shares",
+            "long_desc": "",
+            "hint": [
+                [
+                    "integer",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": []
+        }
+    },
+    "constants": []
+}

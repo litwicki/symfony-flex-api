@@ -1,0 +1,178 @@
+{
+    "name": "Tavro\\Bundle\\CoreBundle\\Model\\LoggableInterface",
+    "line": 10,
+    "short_desc": "Used for outputting to activity log",
+    "long_desc": "",
+    "hint": null,
+    "tags": [],
+    "namespace": "Tavro\\Bundle\\CoreBundle\\Model",
+    "file": "\/var\/www\/tavro\/api\/src\/Tavro\/Bundle\/CoreBundle\/Model\/LoggableInterface.php",
+    "relative_file": null,
+    "hash": "537a1391f16ddc3b0ae510b0c9bfc57711167cf8",
+    "parent": null,
+    "modifiers": "Stmt_Interface",
+    "is_trait": false,
+    "is_interface": true,
+    "aliases": {
+        "User": "Tavro\\Bundle\\CoreBundle\\Entity\\User"
+    },
+    "errors": [],
+    "interfaces": [],
+    "traits": [],
+    "properties": [],
+    "methods": {
+        "logCreate": {
+            "name": "logCreate",
+            "line": 18,
+            "short_desc": "Adds a log message when member creates an item",
+            "long_desc": "",
+            "hint": [
+                [
+                    "String",
+                    false
+                ]
+            ],
+            "hint_desc": "(log entry)",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "user": {
+                    "name": "user",
+                    "line": 18,
+                    "short_desc": null,
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "Tavro\\Bundle\\CoreBundle\\Model\\Tavro\\Bundle\\CoreBundle\\Entity\\User",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "Tavro\\Bundle\\CoreBundle\\Entity\\User",
+                    "default": null,
+                    "is_by_ref": false
+                },
+                "entity": {
+                    "name": "entity",
+                    "line": 18,
+                    "short_desc": null,
+                    "long_desc": null,
+                    "hint": null,
+                    "tags": [],
+                    "modifiers": "",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "logEdit": {
+            "name": "logEdit",
+            "line": 25,
+            "short_desc": "Adds a log message when member edits or marks inactive an item",
+            "long_desc": "",
+            "hint": [
+                [
+                    "String",
+                    false
+                ]
+            ],
+            "hint_desc": "(log entry)",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "user": {
+                    "name": "user",
+                    "line": 25,
+                    "short_desc": null,
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "Tavro\\Bundle\\CoreBundle\\Model\\Tavro\\Bundle\\CoreBundle\\Entity\\User",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "Tavro\\Bundle\\CoreBundle\\Entity\\User",
+                    "default": null,
+                    "is_by_ref": false
+                },
+                "entity": {
+                    "name": "entity",
+                    "line": 25,
+                    "short_desc": null,
+                    "long_desc": null,
+                    "hint": null,
+                    "tags": [],
+                    "modifiers": "",
+                    "default": null,
+                    "is_by_ref": false
+                },
+                "args": {
+                    "name": "args",
+                    "line": 25,
+                    "short_desc": null,
+                    "long_desc": null,
+                    "hint": null,
+                    "tags": [],
+                    "modifiers": "",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "logDelete": {
+            "name": "logDelete",
+            "line": 32,
+            "short_desc": "Adds a log message when member deletes an item",
+            "long_desc": "",
+            "hint": [
+                [
+                    "String",
+                    false
+                ]
+            ],
+            "hint_desc": "(log entry)",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "user": {
+                    "name": "user",
+                    "line": 32,
+                    "short_desc": null,
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "Tavro\\Bundle\\CoreBundle\\Model\\Tavro\\Bundle\\CoreBundle\\Entity\\User",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "Tavro\\Bundle\\CoreBundle\\Entity\\User",
+                    "default": null,
+                    "is_by_ref": false
+                },
+                "entity": {
+                    "name": "entity",
+                    "line": 32,
+                    "short_desc": null,
+                    "long_desc": null,
+                    "hint": null,
+                    "tags": [],
+                    "modifiers": "",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        }
+    },
+    "constants": []
+}

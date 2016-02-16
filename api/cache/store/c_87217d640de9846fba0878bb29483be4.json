@@ -1,0 +1,170 @@
+{
+    "name": "Tavro\\Bundle\\CoreBundle\\Services\\Serializer",
+    "line": 14,
+    "short_desc": "Class Serializer",
+    "long_desc": "",
+    "hint": null,
+    "tags": {
+        "package": [
+            [
+                "Tavro\\Bundle\\CoreBundle\\Services"
+            ]
+        ]
+    },
+    "namespace": "Tavro\\Bundle\\CoreBundle\\Services",
+    "file": "\/var\/www\/tavro\/api\/src\/Tavro\/Bundle\/CoreBundle\/Services\/Serializer.php",
+    "relative_file": null,
+    "hash": "522774d454964b8588251df306a7575060034474",
+    "parent": null,
+    "modifiers": "Stmt_Class",
+    "is_trait": false,
+    "is_interface": false,
+    "aliases": {
+        "SerializationContext": "JMS\\Serializer\\SerializationContext",
+        "Common": "Litwicki\\Common\\Common"
+    },
+    "errors": [],
+    "interfaces": [],
+    "traits": [],
+    "properties": [],
+    "methods": {
+        "__construct": {
+            "name": "__construct",
+            "line": 22,
+            "short_desc": "",
+            "long_desc": "",
+            "hint": null,
+            "hint_desc": null,
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "serializer": {
+                    "name": "serializer",
+                    "line": 22,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [],
+                    "tags": [],
+                    "modifiers": "",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "serialize": {
+            "name": "serialize",
+            "line": 36,
+            "short_desc": "Serialize \"stuff\"",
+            "long_desc": "",
+            "hint": null,
+            "hint_desc": null,
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [
+                [
+                    "\\Exception",
+                    ""
+                ]
+            ],
+            "errors": [],
+            "parameters": {
+                "data": {
+                    "name": "data",
+                    "line": 36,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [],
+                    "tags": [],
+                    "modifiers": "",
+                    "default": null,
+                    "is_by_ref": false
+                },
+                "format": {
+                    "name": "format",
+                    "line": 36,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [],
+                    "tags": [],
+                    "modifiers": "",
+                    "default": null,
+                    "is_by_ref": false
+                },
+                "group": {
+                    "name": "group",
+                    "line": 36,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "string",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "",
+                    "default": "'api'",
+                    "is_by_ref": false
+                }
+            }
+        },
+        "deserialize": {
+            "name": "deserialize",
+            "line": 71,
+            "short_desc": "",
+            "long_desc": "",
+            "hint": null,
+            "hint_desc": null,
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [
+                [
+                    "\\Exception",
+                    ""
+                ]
+            ],
+            "errors": [],
+            "parameters": {
+                "string": {
+                    "name": "string",
+                    "line": 71,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [],
+                    "tags": [],
+                    "modifiers": "",
+                    "default": null,
+                    "is_by_ref": false
+                },
+                "format": {
+                    "name": "format",
+                    "line": 71,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [],
+                    "tags": [],
+                    "modifiers": "",
+                    "default": null,
+                    "is_by_ref": false
+                },
+                "typeName": {
+                    "name": "typeName",
+                    "line": 71,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [],
+                    "tags": [],
+                    "modifiers": "",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        }
+    },
+    "constants": []
+}

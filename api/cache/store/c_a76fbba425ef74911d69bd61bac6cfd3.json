@@ -1,0 +1,182 @@
+{
+    "name": "Tavro\\Bundle\\ApiBundle\\Handler\\NodeTagHandler",
+    "line": 20,
+    "short_desc": "Class NodeTagHandler",
+    "long_desc": "",
+    "hint": null,
+    "tags": {
+        "package": [
+            [
+                "Tavro\\Bundle\\ApiBundle\\Handler"
+            ]
+        ]
+    },
+    "namespace": "Tavro\\Bundle\\ApiBundle\\Handler",
+    "file": "\/var\/www\/tavro\/api\/src\/Tavro\/Bundle\/ApiBundle\/Handler\/NodeTagHandler.php",
+    "relative_file": null,
+    "hash": "265288b76b0bf13db32cb5545d40a3e28fa358a0",
+    "parent": "Tavro\\Bundle\\ApiBundle\\Services\\EntityHandler",
+    "modifiers": "Stmt_Class",
+    "is_trait": false,
+    "is_interface": false,
+    "aliases": {
+        "EntityHandler": "Tavro\\Bundle\\ApiBundle\\Services\\EntityHandler",
+        "ApiException": "Tavro\\Bundle\\ApiBundle\\Exception\\ApiException",
+        "ApiAccessDeniedException": "Tavro\\Bundle\\ApiBundle\\Exception\\ApiAccessDeniedException",
+        "EntityInterface": "Tavro\\Bundle\\CoreBundle\\Model\\EntityInterface",
+        "ApiEntityInterface": "Tavro\\Bundle\\CoreBundle\\Model\\ApiEntityInterface",
+        "TransformationFailedException": "Symfony\\Component\\Form\\Exception\\TransformationFailedException",
+        "UnexpectedTypeException": "Symfony\\Component\\Form\\Exception\\UnexpectedTypeException",
+        "InvalidPropertyPathException": "Symfony\\Component\\PropertyAccess\\Exception\\InvalidPropertyPathException",
+        "Request": "Symfony\\Component\\HttpFoundation\\Request"
+    },
+    "errors": [],
+    "interfaces": [],
+    "traits": [],
+    "properties": [],
+    "methods": {
+        "filterParams": {
+            "name": "filterParams",
+            "line": 31,
+            "short_desc": "Filter out parameters we don't want to give access to.",
+            "long_desc": "",
+            "hint": [
+                [
+                    "array",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [
+                [
+                    "\\Exception",
+                    ""
+                ]
+            ],
+            "errors": [],
+            "parameters": {
+                "params": {
+                    "name": "params",
+                    "line": 31,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "array",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "array",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "findAll": {
+            "name": "findAll",
+            "line": 60,
+            "short_desc": "Find all Entities (limit the response size)\nOptionally page the result set by LIMIT and OFFSET.",
+            "long_desc": "",
+            "hint": [
+                [
+                    "array",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "params": {
+                    "name": "params",
+                    "line": 60,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "array",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "array",
+                    "default": "null",
+                    "is_by_ref": false
+                }
+            }
+        },
+        "create": {
+            "name": "create",
+            "line": 113,
+            "short_desc": "",
+            "long_desc": "",
+            "hint": [
+                [
+                    "object",
+                    false
+                ],
+                [
+                    "\\Tavro\\Bundle\\CoreBundle\\Model\\EntityInterface",
+                    false
+                ],
+                [
+                    "void",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [
+                [
+                    "\\Exception",
+                    ""
+                ]
+            ],
+            "errors": [],
+            "parameters": {
+                "request": {
+                    "name": "request",
+                    "line": 113,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "Tavro\\Bundle\\ApiBundle\\Services\\Symfony\\Component\\HttpFoundation\\Request",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "Symfony\\Component\\HttpFoundation\\Request",
+                    "default": null,
+                    "is_by_ref": false
+                },
+                "parameters": {
+                    "name": "parameters",
+                    "line": 113,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "array",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "array",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        }
+    },
+    "constants": []
+}

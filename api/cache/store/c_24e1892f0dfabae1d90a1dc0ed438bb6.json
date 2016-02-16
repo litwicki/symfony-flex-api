@@ -1,0 +1,252 @@
+{
+    "name": "Tavro\\Bundle\\ApiBundle\\Security\\ApiAuthenticator",
+    "line": 18,
+    "short_desc": "",
+    "long_desc": "",
+    "hint": null,
+    "tags": [],
+    "namespace": "Tavro\\Bundle\\ApiBundle\\Security",
+    "file": "\/var\/www\/tavro\/api\/src\/Tavro\/Bundle\/ApiBundle\/Security\/ApiAuthenticator.php",
+    "relative_file": null,
+    "hash": "fbe3f247e515c668f4a1c6f9e9926a314caf8de4",
+    "parent": null,
+    "modifiers": "Stmt_Class",
+    "is_trait": false,
+    "is_interface": false,
+    "aliases": {
+        "UserProvider": "Tavro\\Bundle\\CoreBundle\\Security\\UserProvider",
+        "SimplePreAuthenticatorInterface": "Symfony\\Component\\Security\\Http\\Authentication\\SimplePreAuthenticatorInterface",
+        "TokenInterface": "Symfony\\Component\\Security\\Core\\Authentication\\Token\\TokenInterface",
+        "AuthenticationException": "Symfony\\Component\\Security\\Core\\Exception\\AuthenticationException",
+        "PreAuthenticatedToken": "Symfony\\Component\\Security\\Core\\Authentication\\Token\\PreAuthenticatedToken",
+        "UserProviderInterface": "Symfony\\Component\\Security\\Core\\User\\UserProviderInterface",
+        "BadCredentialsException": "Symfony\\Component\\Security\\Core\\Exception\\BadCredentialsException",
+        "AuthenticationFailureHandlerInterface": "Symfony\\Component\\Security\\Http\\Authentication\\AuthenticationFailureHandlerInterface",
+        "Request": "Symfony\\Component\\HttpFoundation\\Request",
+        "Response": "Symfony\\Component\\HttpFoundation\\Response"
+    },
+    "errors": [],
+    "interfaces": {
+        "Symfony\\Component\\Security\\Http\\Authentication\\SimplePreAuthenticatorInterface": "Symfony\\Component\\Security\\Http\\Authentication\\SimplePreAuthenticatorInterface",
+        "Symfony\\Component\\Security\\Http\\Authentication\\AuthenticationFailureHandlerInterface": "Symfony\\Component\\Security\\Http\\Authentication\\AuthenticationFailureHandlerInterface"
+    },
+    "traits": [],
+    "properties": [],
+    "methods": {
+        "createToken": {
+            "name": "createToken",
+            "line": 26,
+            "short_desc": "",
+            "long_desc": "",
+            "hint": [
+                [
+                    "\\Symfony\\Component\\Security\\Core\\Authentication\\Token\\PreAuthenticatedToken",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "request": {
+                    "name": "request",
+                    "line": 26,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "Tavro\\Bundle\\ApiBundle\\Security\\Symfony\\Component\\HttpFoundation\\Request",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "Symfony\\Component\\HttpFoundation\\Request",
+                    "default": null,
+                    "is_by_ref": false
+                },
+                "providerKey": {
+                    "name": "providerKey",
+                    "line": 26,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [],
+                    "tags": [],
+                    "modifiers": "",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "authenticateToken": {
+            "name": "authenticateToken",
+            "line": 56,
+            "short_desc": "",
+            "long_desc": "",
+            "hint": [
+                [
+                    "\\Symfony\\Component\\Security\\Core\\Authentication\\Token\\PreAuthenticatedToken",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [
+                [
+                    "\\Exception",
+                    ""
+                ]
+            ],
+            "errors": [],
+            "parameters": {
+                "token": {
+                    "name": "token",
+                    "line": 56,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "Tavro\\Bundle\\ApiBundle\\Security\\Symfony\\Component\\Security\\Core\\Authentication\\Token\\TokenInterface",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "Symfony\\Component\\Security\\Core\\Authentication\\Token\\TokenInterface",
+                    "default": null,
+                    "is_by_ref": false
+                },
+                "userProvider": {
+                    "name": "userProvider",
+                    "line": 56,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "Tavro\\Bundle\\ApiBundle\\Security\\Symfony\\Component\\Security\\Core\\User\\UserProviderInterface",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "Symfony\\Component\\Security\\Core\\User\\UserProviderInterface",
+                    "default": null,
+                    "is_by_ref": false
+                },
+                "providerKey": {
+                    "name": "providerKey",
+                    "line": 56,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [],
+                    "tags": [],
+                    "modifiers": "",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "supportsToken": {
+            "name": "supportsToken",
+            "line": 97,
+            "short_desc": "",
+            "long_desc": "",
+            "hint": [
+                [
+                    "bool",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "token": {
+                    "name": "token",
+                    "line": 97,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "Tavro\\Bundle\\ApiBundle\\Security\\Symfony\\Component\\Security\\Core\\Authentication\\Token\\TokenInterface",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "Symfony\\Component\\Security\\Core\\Authentication\\Token\\TokenInterface",
+                    "default": null,
+                    "is_by_ref": false
+                },
+                "providerKey": {
+                    "name": "providerKey",
+                    "line": 97,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [],
+                    "tags": [],
+                    "modifiers": "",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "onAuthenticationFailure": {
+            "name": "onAuthenticationFailure",
+            "line": 108,
+            "short_desc": "",
+            "long_desc": "",
+            "hint": [
+                [
+                    "\\Symfony\\Component\\HttpFoundation\\Response",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "request": {
+                    "name": "request",
+                    "line": 108,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "Tavro\\Bundle\\ApiBundle\\Security\\Symfony\\Component\\HttpFoundation\\Request",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "Symfony\\Component\\HttpFoundation\\Request",
+                    "default": null,
+                    "is_by_ref": false
+                },
+                "exception": {
+                    "name": "exception",
+                    "line": 108,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "Tavro\\Bundle\\ApiBundle\\Security\\Symfony\\Component\\Security\\Core\\Exception\\AuthenticationException",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "Symfony\\Component\\Security\\Core\\Exception\\AuthenticationException",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        }
+    },
+    "constants": []
+}

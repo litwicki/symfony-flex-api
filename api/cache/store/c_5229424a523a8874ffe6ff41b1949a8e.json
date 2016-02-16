@@ -1,0 +1,289 @@
+{
+    "name": "Tavro\\Bundle\\ApiBundle\\Controller\\UserController",
+    "line": 22,
+    "short_desc": "",
+    "long_desc": "",
+    "hint": null,
+    "tags": [],
+    "namespace": "Tavro\\Bundle\\ApiBundle\\Controller",
+    "file": "\/var\/www\/tavro\/api\/src\/Tavro\/Bundle\/ApiBundle\/Controller\/UserController.php",
+    "relative_file": null,
+    "hash": "ff7f75b861982270bf4e4317a805ab3c5b406a92",
+    "parent": "Tavro\\Bundle\\ApiBundle\\Controller\\ApiController",
+    "modifiers": "Stmt_Class",
+    "is_trait": false,
+    "is_interface": false,
+    "aliases": {
+        "Request": "Symfony\\Component\\HttpFoundation\\Request",
+        "Response": "Symfony\\Component\\HttpFoundation\\Response",
+        "ApiException": "Tavro\\Bundle\\ApiBundle\\Exception\\ApiException",
+        "ApiNotFoundException": "Tavro\\Bundle\\ApiBundle\\Exception\\ApiNotFoundException",
+        "ApiRequestLimitException": "Tavro\\Bundle\\ApiBundle\\Exception\\ApiRequestLimitException",
+        "ApiAccessDeniedException": "Tavro\\Bundle\\ApiBundle\\Exception\\ApiAccessDeniedException",
+        "InvalidFormException": "Tavro\\Bundle\\CoreBundle\\Exception\\Form\\InvalidFormException",
+        "Inflector": "Doctrine\\Common\\Inflector\\Inflector",
+        "Paginator": "Doctrine\\ORM\\Tools\\Pagination\\Paginator",
+        "User": "Tavro\\Bundle\\CoreBundle\\Entity\\User",
+        "Cookie": "Symfony\\Component\\HttpFoundation\\Cookie",
+        "Common": "Litwicki\\Common\\Common"
+    },
+    "errors": [],
+    "interfaces": [],
+    "traits": [],
+    "properties": [],
+    "methods": {
+        "resetApiKeyAction": {
+            "name": "resetApiKeyAction",
+            "line": 30,
+            "short_desc": "",
+            "long_desc": "",
+            "hint": [
+                [
+                    "\\Symfony\\Component\\HttpFoundation\\Response",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "request": {
+                    "name": "request",
+                    "line": 30,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "Tavro\\Bundle\\ApiBundle\\Controller\\Symfony\\Component\\HttpFoundation\\Request",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "Symfony\\Component\\HttpFoundation\\Request",
+                    "default": null,
+                    "is_by_ref": false
+                },
+                "user": {
+                    "name": "user",
+                    "line": 30,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "Tavro\\Bundle\\ApiBundle\\Controller\\Tavro\\Bundle\\CoreBundle\\Entity\\User",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "Tavro\\Bundle\\CoreBundle\\Entity\\User",
+                    "default": null,
+                    "is_by_ref": false
+                },
+                "_format": {
+                    "name": "_format",
+                    "line": 30,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [],
+                    "tags": [],
+                    "modifiers": "",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "resetApiPasswordAction": {
+            "name": "resetApiPasswordAction",
+            "line": 53,
+            "short_desc": "",
+            "long_desc": "",
+            "hint": [
+                [
+                    "\\Symfony\\Component\\HttpFoundation\\Response",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "request": {
+                    "name": "request",
+                    "line": 53,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "Tavro\\Bundle\\ApiBundle\\Controller\\Symfony\\Component\\HttpFoundation\\Request",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "Symfony\\Component\\HttpFoundation\\Request",
+                    "default": null,
+                    "is_by_ref": false
+                },
+                "user": {
+                    "name": "user",
+                    "line": 53,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "Tavro\\Bundle\\ApiBundle\\Controller\\Tavro\\Bundle\\CoreBundle\\Entity\\User",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "Tavro\\Bundle\\CoreBundle\\Entity\\User",
+                    "default": null,
+                    "is_by_ref": false
+                },
+                "_format": {
+                    "name": "_format",
+                    "line": 53,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [],
+                    "tags": [],
+                    "modifiers": "",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "organizationsAction": {
+            "name": "organizationsAction",
+            "line": 77,
+            "short_desc": "",
+            "long_desc": "",
+            "hint": [
+                [
+                    "\\Symfony\\Component\\HttpFoundation\\Response",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "request": {
+                    "name": "request",
+                    "line": 77,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "Tavro\\Bundle\\ApiBundle\\Controller\\Symfony\\Component\\HttpFoundation\\Request",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "Symfony\\Component\\HttpFoundation\\Request",
+                    "default": null,
+                    "is_by_ref": false
+                },
+                "user": {
+                    "name": "user",
+                    "line": 77,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "Tavro\\Bundle\\ApiBundle\\Controller\\Tavro\\Bundle\\CoreBundle\\Entity\\User",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "Tavro\\Bundle\\CoreBundle\\Entity\\User",
+                    "default": null,
+                    "is_by_ref": false
+                },
+                "_format": {
+                    "name": "_format",
+                    "line": 77,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [],
+                    "tags": [],
+                    "modifiers": "",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "nodesAction": {
+            "name": "nodesAction",
+            "line": 114,
+            "short_desc": "",
+            "long_desc": "",
+            "hint": [
+                [
+                    "\\Symfony\\Component\\HttpFoundation\\Response",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "request": {
+                    "name": "request",
+                    "line": 114,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "Tavro\\Bundle\\ApiBundle\\Controller\\Symfony\\Component\\HttpFoundation\\Request",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "Symfony\\Component\\HttpFoundation\\Request",
+                    "default": null,
+                    "is_by_ref": false
+                },
+                "user": {
+                    "name": "user",
+                    "line": 114,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "Tavro\\Bundle\\ApiBundle\\Controller\\Tavro\\Bundle\\CoreBundle\\Entity\\User",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "Tavro\\Bundle\\CoreBundle\\Entity\\User",
+                    "default": null,
+                    "is_by_ref": false
+                },
+                "_format": {
+                    "name": "_format",
+                    "line": 114,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [],
+                    "tags": [],
+                    "modifiers": "",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        }
+    },
+    "constants": []
+}

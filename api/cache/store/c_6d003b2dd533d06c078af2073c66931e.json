@@ -1,0 +1,212 @@
+{
+    "name": "Tavro\\Bundle\\CoreBundle\\Model\\ApiEntity",
+    "line": 19,
+    "short_desc": "",
+    "long_desc": "",
+    "hint": null,
+    "tags": {
+        "ORM\\Entity": [
+            [
+                ""
+            ]
+        ],
+        "ORM\\HasLifecycleCallbacks": [
+            [
+                ""
+            ]
+        ]
+    },
+    "namespace": "Tavro\\Bundle\\CoreBundle\\Model",
+    "file": "\/var\/www\/tavro\/api\/src\/Tavro\/Bundle\/CoreBundle\/Model\/ApiEntity.php",
+    "relative_file": null,
+    "hash": "55ef29241752e1ac04d081d15cbd57d3bb1d1ca2",
+    "parent": "Tavro\\Bundle\\CoreBundle\\Model\\Entity",
+    "modifiers": "Stmt_Class",
+    "is_trait": false,
+    "is_interface": false,
+    "aliases": {
+        "ORM": "Doctrine\\ORM\\Mapping",
+        "Gedmo": "Gedmo\\Mapping\\Annotation",
+        "Accessor": "JMS\\Serializer\\Annotation\\Accessor",
+        "ExclusionPolicy": "JMS\\Serializer\\Annotation\\ExclusionPolicy",
+        "Expose": "JMS\\Serializer\\Annotation\\Expose",
+        "Type": "JMS\\Serializer\\Annotation\\Type",
+        "VirtualProperty": "JMS\\Serializer\\Annotation\\VirtualProperty",
+        "Groups": "JMS\\Serializer\\Annotation\\Groups",
+        "User": "Tavro\\Bundle\\CoreBundle\\Entity\\User"
+    },
+    "errors": [],
+    "interfaces": {
+        "Tavro\\Bundle\\CoreBundle\\Model\\ApiEntityInterface": "Tavro\\Bundle\\CoreBundle\\Model\\ApiEntityInterface"
+    },
+    "traits": [],
+    "properties": [],
+    "methods": {
+        "setSlug": {
+            "name": "setSlug",
+            "line": 48,
+            "short_desc": "Set slug",
+            "long_desc": "",
+            "hint": [
+                [
+                    "Tavro\\Bundle\\CoreBundle\\Model\\$this",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "slug": {
+                    "name": "slug",
+                    "line": 48,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "string",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "getSlug": {
+            "name": "getSlug",
+            "line": 60,
+            "short_desc": "Get slug",
+            "long_desc": "",
+            "hint": [
+                [
+                    "mixed",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": []
+        },
+        "setTitle": {
+            "name": "setTitle",
+            "line": 71,
+            "short_desc": "Set title",
+            "long_desc": "",
+            "hint": [
+                [
+                    "Tavro\\Bundle\\CoreBundle\\Model\\$this",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "title": {
+                    "name": "title",
+                    "line": 71,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "string",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "getTitle": {
+            "name": "getTitle",
+            "line": 83,
+            "short_desc": "Get title",
+            "long_desc": "",
+            "hint": [
+                [
+                    "string",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": []
+        },
+        "setUpdatedBy": {
+            "name": "setUpdatedBy",
+            "line": 94,
+            "short_desc": "Set updated_by",
+            "long_desc": "",
+            "hint": [
+                [
+                    "\\Tavro\\Bundle\\CoreBundle\\Model\\EntityInterface",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "updatedBy": {
+                    "name": "updatedBy",
+                    "line": 94,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "Tavro\\Bundle\\CoreBundle\\Model\\Tavro\\Bundle\\CoreBundle\\Entity\\User",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "Tavro\\Bundle\\CoreBundle\\Entity\\User",
+                    "default": "null",
+                    "is_by_ref": false
+                }
+            }
+        },
+        "getUpdatedBy": {
+            "name": "getUpdatedBy",
+            "line": 106,
+            "short_desc": "Get updated_by",
+            "long_desc": "",
+            "hint": [
+                [
+                    "\\Tavro\\Bundle\\CoreBundle\\Entity\\User",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": []
+        }
+    },
+    "constants": []
+}

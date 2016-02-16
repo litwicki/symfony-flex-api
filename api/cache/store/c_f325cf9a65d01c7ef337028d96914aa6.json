@@ -1,0 +1,354 @@
+{
+    "name": "Tavro\\Bundle\\CoreBundle\\Model\\Entity",
+    "line": 20,
+    "short_desc": "",
+    "long_desc": "",
+    "hint": null,
+    "tags": {
+        "ORM\\Entity": [
+            [
+                ""
+            ]
+        ],
+        "ORM\\HasLifecycleCallbacks": [
+            [
+                ""
+            ]
+        ]
+    },
+    "namespace": "Tavro\\Bundle\\CoreBundle\\Model",
+    "file": "\/var\/www\/tavro\/api\/src\/Tavro\/Bundle\/CoreBundle\/Model\/Entity.php",
+    "relative_file": null,
+    "hash": "1c31db837b7e47d08912eb404b4b17b2f28105cc",
+    "parent": null,
+    "modifiers": "Stmt_Class",
+    "is_trait": false,
+    "is_interface": false,
+    "aliases": {
+        "ORM": "Doctrine\\ORM\\Mapping",
+        "Accessor": "JMS\\Serializer\\Annotation\\Accessor",
+        "ExclusionPolicy": "JMS\\Serializer\\Annotation\\ExclusionPolicy",
+        "Expose": "JMS\\Serializer\\Annotation\\Expose",
+        "Type": "JMS\\Serializer\\Annotation\\Type",
+        "VirtualProperty": "JMS\\Serializer\\Annotation\\VirtualProperty",
+        "Groups": "JMS\\Serializer\\Annotation\\Groups",
+        "User": "Tavro\\Bundle\\CoreBundle\\Entity\\User"
+    },
+    "errors": [],
+    "interfaces": {
+        "Tavro\\Bundle\\CoreBundle\\Model\\EntityInterface": "Tavro\\Bundle\\CoreBundle\\Model\\EntityInterface"
+    },
+    "traits": [],
+    "properties": [],
+    "methods": {
+        "__call": {
+            "name": "__call",
+            "line": 54,
+            "short_desc": "",
+            "long_desc": "",
+            "hint": null,
+            "hint_desc": null,
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "method": {
+                    "name": "method",
+                    "line": 54,
+                    "short_desc": null,
+                    "long_desc": null,
+                    "hint": null,
+                    "tags": [],
+                    "modifiers": "",
+                    "default": null,
+                    "is_by_ref": false
+                },
+                "args": {
+                    "name": "args",
+                    "line": 54,
+                    "short_desc": null,
+                    "long_desc": null,
+                    "hint": null,
+                    "tags": [],
+                    "modifiers": "",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "__construct": {
+            "name": "__construct",
+            "line": 59,
+            "short_desc": "",
+            "long_desc": "",
+            "hint": null,
+            "hint_desc": null,
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": []
+        },
+        "__toString": {
+            "name": "__toString",
+            "line": 68,
+            "short_desc": "Return a string representation of the Entity.",
+            "long_desc": "",
+            "hint": null,
+            "hint_desc": null,
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": []
+        },
+        "getId": {
+            "name": "getId",
+            "line": 95,
+            "short_desc": "Get id",
+            "long_desc": "",
+            "hint": [
+                [
+                    "integer",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": []
+        },
+        "setStatus": {
+            "name": "setStatus",
+            "line": 106,
+            "short_desc": "Set status",
+            "long_desc": "",
+            "hint": [
+                [
+                    "Tavro\\Bundle\\CoreBundle\\Model\\$this",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "status": {
+                    "name": "status",
+                    "line": 106,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "integer",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "getStatus": {
+            "name": "getStatus",
+            "line": 118,
+            "short_desc": "Get status",
+            "long_desc": "",
+            "hint": [
+                [
+                    "integer",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": []
+        },
+        "setCreateDate": {
+            "name": "setCreateDate",
+            "line": 129,
+            "short_desc": "Set create_date",
+            "long_desc": "",
+            "hint": [
+                [
+                    "Tavro\\Bundle\\CoreBundle\\Model\\$this",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "createDate": {
+                    "name": "createDate",
+                    "line": 129,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "\\DateTime",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "getCreateDate": {
+            "name": "getCreateDate",
+            "line": 141,
+            "short_desc": "Get create_date",
+            "long_desc": "",
+            "hint": [
+                [
+                    "\\DateTime",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": []
+        },
+        "setUpdateDate": {
+            "name": "setUpdateDate",
+            "line": 152,
+            "short_desc": "Set update_date",
+            "long_desc": "",
+            "hint": [
+                [
+                    "Tavro\\Bundle\\CoreBundle\\Model\\$this",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "updateDate": {
+                    "name": "updateDate",
+                    "line": 152,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "\\DateTime",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "getUpdateDate": {
+            "name": "getUpdateDate",
+            "line": 164,
+            "short_desc": "Get update_date",
+            "long_desc": "",
+            "hint": [
+                [
+                    "\\DateTime",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": []
+        },
+        "onPrePersist": {
+            "name": "onPrePersist",
+            "line": 173,
+            "short_desc": "Automatically set the create_date and last_update_date on persist.",
+            "long_desc": "",
+            "hint": null,
+            "hint_desc": null,
+            "tags": {
+                "ORM\\PrePersist": [
+                    [
+                        ""
+                    ]
+                ]
+            },
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": []
+        },
+        "getSerializedUserId": {
+            "name": "getSerializedUserId",
+            "line": 179,
+            "short_desc": "",
+            "long_desc": "",
+            "hint": null,
+            "hint_desc": null,
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": []
+        }
+    },
+    "constants": {
+        "STATUS_ENABLED": {
+            "name": "STATUS_ENABLED",
+            "line": 23,
+            "short_desc": "",
+            "long_desc": ""
+        },
+        "STATUS_DISABLED": {
+            "name": "STATUS_DISABLED",
+            "line": 24,
+            "short_desc": "",
+            "long_desc": ""
+        },
+        "STATUS_PENDING": {
+            "name": "STATUS_PENDING",
+            "line": 25,
+            "short_desc": "",
+            "long_desc": ""
+        },
+        "STATUS_OTHER": {
+            "name": "STATUS_OTHER",
+            "line": 26,
+            "short_desc": "",
+            "long_desc": ""
+        }
+    }
+}

@@ -1,0 +1,105 @@
+{
+    "name": "Tavro\\Bundle\\CoreBundle\\EventListener\\RequestListener",
+    "line": 19,
+    "short_desc": "",
+    "long_desc": "",
+    "hint": null,
+    "tags": [],
+    "namespace": "Tavro\\Bundle\\CoreBundle\\EventListener",
+    "file": "\/var\/www\/tavro\/api\/src\/Tavro\/Bundle\/CoreBundle\/EventListener\/RequestListener.php",
+    "relative_file": null,
+    "hash": "ca1915f8abc707ec2957462433990854c4dcb43c",
+    "parent": "Symfony\\Bundle\\FrameworkBundle\\Controller\\Controller",
+    "modifiers": "Stmt_Class",
+    "is_trait": false,
+    "is_interface": false,
+    "aliases": {
+        "Controller": "Symfony\\Bundle\\FrameworkBundle\\Controller\\Controller",
+        "RedirectResponse": "Symfony\\Component\\HttpFoundation\\RedirectResponse",
+        "HttpKernel": "Symfony\\Component\\HttpKernel\\HttpKernel",
+        "GetResponseEvent": "Symfony\\Component\\HttpKernel\\Event\\GetResponseEvent",
+        "ContainerAwareInterface": "Symfony\\Component\\DependencyInjection\\ContainerAwareInterface",
+        "ContainerInterface": "Symfony\\Component\\DependencyInjection\\ContainerInterface",
+        "User": "Tavro\\Bundle\\CoreBundle\\Entity\\User",
+        "RememberMeToken": "Symfony\\Component\\Security\\Core\\Authentication\\Token\\RememberMeToken",
+        "UsernamePasswordToken": "Symfony\\Component\\Security\\Core\\Authentication\\Token\\UsernamePasswordToken",
+        "AnonymousToken": "Symfony\\Component\\Security\\Core\\Authentication\\Token\\AnonymousToken",
+        "Cookie": "Symfony\\Component\\HttpFoundation\\Cookie"
+    },
+    "errors": [],
+    "interfaces": {
+        "Symfony\\Component\\DependencyInjection\\ContainerAwareInterface": "Symfony\\Component\\DependencyInjection\\ContainerAwareInterface"
+    },
+    "traits": [],
+    "properties": [],
+    "methods": {
+        "setContainer": {
+            "name": "setContainer",
+            "line": 24,
+            "short_desc": "",
+            "long_desc": "",
+            "hint": null,
+            "hint_desc": null,
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "container": {
+                    "name": "container",
+                    "line": 24,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "Tavro\\Bundle\\CoreBundle\\EventListener\\Symfony\\Component\\DependencyInjection\\ContainerInterface",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "Symfony\\Component\\DependencyInjection\\ContainerInterface",
+                    "default": "null",
+                    "is_by_ref": false
+                }
+            }
+        },
+        "onKernelRequest": {
+            "name": "onKernelRequest",
+            "line": 34,
+            "short_desc": "",
+            "long_desc": "",
+            "hint": [
+                [
+                    "\\Symfony\\Component\\HttpFoundation\\RedirectResponse",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "event": {
+                    "name": "event",
+                    "line": 34,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "Tavro\\Bundle\\CoreBundle\\EventListener\\Symfony\\Component\\HttpKernel\\Event\\GetResponseEvent",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "Symfony\\Component\\HttpKernel\\Event\\GetResponseEvent",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        }
+    },
+    "constants": []
+}

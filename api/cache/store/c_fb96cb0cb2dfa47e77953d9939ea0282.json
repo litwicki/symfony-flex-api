@@ -1,0 +1,82 @@
+{
+    "name": "Tavro\\Bundle\\ApiBundle\\Services\\OwnershipEntityHandler",
+    "line": 22,
+    "short_desc": "",
+    "long_desc": "",
+    "hint": null,
+    "tags": [],
+    "namespace": "Tavro\\Bundle\\ApiBundle\\Services",
+    "file": "\/var\/www\/tavro\/api\/src\/Tavro\/Bundle\/ApiBundle\/Services\/OwnershipEntityHandler.php",
+    "relative_file": null,
+    "hash": "1383e57630587d0028ee15e126a1ab4898f34e19",
+    "parent": "Tavro\\Bundle\\ApiBundle\\Services\\EntityHandler",
+    "modifiers": "Stmt_Class",
+    "is_trait": false,
+    "is_interface": false,
+    "aliases": {
+        "ObjectManager": "Doctrine\\Common\\Persistence\\ObjectManager",
+        "Container": "Symfony\\Component\\DependencyInjection\\Container",
+        "FormException": "Symfony\\Component\\Form\\Exception\\FormException",
+        "AccessDeniedException": "Symfony\\Component\\HttpFoundation\\File\\Exception\\AccessDeniedException",
+        "User": "Tavro\\Bundle\\CoreBundle\\Entity\\User",
+        "EntityHandler": "Tavro\\Bundle\\ApiBundle\\Services\\EntityHandler",
+        "HandlerInterface": "Tavro\\Bundle\\ApiBundle\\Model\\HandlerInterface",
+        "EntityInterface": "Tavro\\Bundle\\CoreBundle\\Model\\EntityInterface",
+        "ApiException": "Tavro\\Bundle\\ApiBundle\\Exception\\ApiException",
+        "ApiNotFoundException": "Tavro\\Bundle\\ApiBundle\\Exception\\ApiNotFoundException",
+        "ApiRequestLimitException": "Tavro\\Bundle\\ApiBundle\\Exception\\ApiRequestLimitException",
+        "ApiAccessDeniedException": "Tavro\\Bundle\\ApiBundle\\Exception\\ApiAccessDeniedException",
+        "ApiRequestSizeException": "Tavro\\Bundle\\ApiBundle\\Exception\\ApiRequestSizeException",
+        "OwnershipHandlerInterface": "Tavro\\Bundle\\ApiBundle\\Model\\OwnershipHandlerInterface"
+    },
+    "errors": [],
+    "interfaces": {
+        "Tavro\\Bundle\\ApiBundle\\Model\\OwnershipHandlerInterface": "Tavro\\Bundle\\ApiBundle\\Model\\OwnershipHandlerInterface"
+    },
+    "traits": [],
+    "properties": [],
+    "methods": {
+        "findByUser": {
+            "name": "findByUser",
+            "line": 30,
+            "short_desc": "",
+            "long_desc": "",
+            "hint": [
+                [
+                    "mixed",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [
+                [
+                    "\\Tavro\\Bundle\\ApiBundle\\Exception\\ApiException",
+                    ""
+                ]
+            ],
+            "errors": [],
+            "parameters": {
+                "user": {
+                    "name": "user",
+                    "line": 30,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "Tavro\\Bundle\\ApiBundle\\Model\\Tavro\\Bundle\\CoreBundle\\Entity\\User",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "Tavro\\Bundle\\CoreBundle\\Entity\\User",
+                    "default": "null",
+                    "is_by_ref": false
+                }
+            }
+        }
+    },
+    "constants": []
+}

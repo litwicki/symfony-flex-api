@@ -1,0 +1,50 @@
+{
+    "name": "Tavro\\Bundle\\ApiBundle\\Handler\\FundingHandler",
+    "line": 32,
+    "short_desc": "Class FundingHandler",
+    "long_desc": "",
+    "hint": null,
+    "tags": {
+        "package": [
+            [
+                "Tavro\\Bundle\\ApiBundle\\Handler"
+            ]
+        ]
+    },
+    "namespace": "Tavro\\Bundle\\ApiBundle\\Handler",
+    "file": "\/var\/www\/tavro\/api\/src\/Tavro\/Bundle\/ApiBundle\/Handler\/FundingHandler.php",
+    "relative_file": null,
+    "hash": "4055dfa8552d48086f702184a17915f4fe66f8b8",
+    "parent": "Tavro\\Bundle\\ApiBundle\\Services\\OrganizationEntityHandler",
+    "modifiers": "Stmt_Class",
+    "is_trait": false,
+    "is_interface": false,
+    "aliases": {
+        "ApiException": "Tavro\\Bundle\\ApiBundle\\Exception\\ApiException",
+        "ApiHandlerInterface": "Tavro\\Bundle\\ApiBundle\\Model\\ApiHandlerInterface",
+        "EntityHandler": "Tavro\\Bundle\\ApiBundle\\Services\\EntityHandler",
+        "OrganizationEntityHandler": "Tavro\\Bundle\\ApiBundle\\Services\\OrganizationEntityHandler",
+        "InvalidFormException": "Tavro\\Bundle\\CoreBundle\\Exception\\Form\\InvalidFormException",
+        "EntityInterface": "Tavro\\Bundle\\CoreBundle\\Model\\EntityInterface",
+        "ApiAccessDeniedException": "Tavro\\Bundle\\ApiBundle\\Exception\\ApiAccessDeniedException",
+        "User": "Tavro\\Bundle\\CoreBundle\\Entity\\User",
+        "Role": "Tavro\\Bundle\\CoreBundle\\Entity\\Role",
+        "UsernameNotUniqueException": "Tavro\\Bundle\\CoreBundle\\Exception\\UsernameNotUniqueException",
+        "EmailNotUniqueException": "Tavro\\Bundle\\CoreBundle\\Exception\\EmailNotUniqueException",
+        "ApiEntityInterface": "Tavro\\Bundle\\CoreBundle\\Model\\ApiEntityInterface",
+        "Uuid": "Rhumsaa\\Uuid\\Uuid",
+        "UsernamePasswordToken": "Symfony\\Component\\Security\\Core\\Authentication\\Token\\UsernamePasswordToken",
+        "InvalidPropertyPathException": "Symfony\\Component\\PropertyAccess\\Exception\\InvalidPropertyPathException",
+        "TransformationFailedException": "Symfony\\Component\\Form\\Exception\\TransformationFailedException",
+        "UnexpectedTypeException": "Symfony\\Component\\Form\\Exception\\UnexpectedTypeException",
+        "InvalidUsernameException": "Tavro\\Bundle\\CoreBundle\\Exception\\InvalidUsernameException",
+        "ContextErrorException": "Symfony\\Component\\Debug\\Exception\\ContextErrorException",
+        "Request": "Symfony\\Component\\HttpFoundation\\Request"
+    },
+    "errors": [],
+    "interfaces": [],
+    "traits": [],
+    "properties": [],
+    "methods": [],
+    "constants": []
+}

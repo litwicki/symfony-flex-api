@@ -1,0 +1,626 @@
+{
+    "name": "Tavro\\Bundle\\CoreBundle\\Entity\\Expense",
+    "line": 27,
+    "short_desc": "",
+    "long_desc": "",
+    "hint": null,
+    "tags": {
+        "ORM\\Entity": [
+            [
+                ""
+            ]
+        ],
+        "ORM\\HasLifecycleCallbacks": [
+            [
+                ""
+            ]
+        ],
+        "ORM\\Table": [
+            [
+                "(name=\"tavro_expense\")"
+            ]
+        ]
+    },
+    "namespace": "Tavro\\Bundle\\CoreBundle\\Entity",
+    "file": "\/var\/www\/tavro\/api\/src\/Tavro\/Bundle\/CoreBundle\/Entity\/Expense.php",
+    "relative_file": null,
+    "hash": "c67e70912227cb83d25baa5921781daedb9f886b",
+    "parent": "Tavro\\Bundle\\CoreBundle\\Model\\ApiEntity",
+    "modifiers": "Stmt_Class",
+    "is_trait": false,
+    "is_interface": false,
+    "aliases": {
+        "ApiEntityInterface": "Tavro\\Bundle\\CoreBundle\\Model\\ApiEntityInterface",
+        "ORM": "Doctrine\\ORM\\Mapping",
+        "Accessor": "JMS\\Serializer\\Annotation\\Accessor",
+        "ExclusionPolicy": "JMS\\Serializer\\Annotation\\ExclusionPolicy",
+        "Expose": "JMS\\Serializer\\Annotation\\Expose",
+        "Type": "JMS\\Serializer\\Annotation\\Type",
+        "VirtualProperty": "JMS\\Serializer\\Annotation\\VirtualProperty",
+        "Groups": "JMS\\Serializer\\Annotation\\Groups",
+        "MaxDepth": "JMS\\Serializer\\Annotation\\MaxDepth",
+        "SerializedName": "JMS\\Serializer\\Annotation\\SerializedName",
+        "Table": "Doctrine\\ORM\\Mapping\\Table",
+        "Assert": "Symfony\\Component\\Validator\\Constraints",
+        "ApiEntity": "Tavro\\Bundle\\CoreBundle\\Model\\ApiEntity",
+        "EntityInterface": "Tavro\\Bundle\\CoreBundle\\Model\\EntityInterface"
+    },
+    "errors": [],
+    "interfaces": [],
+    "traits": [],
+    "properties": [],
+    "methods": {
+        "__construct": {
+            "name": "__construct",
+            "line": 93,
+            "short_desc": "Constructor",
+            "long_desc": "",
+            "hint": null,
+            "hint_desc": null,
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": []
+        },
+        "setBody": {
+            "name": "setBody",
+            "line": 111,
+            "short_desc": "Set body",
+            "long_desc": "",
+            "hint": [
+                [
+                    "\\Tavro\\Bundle\\CoreBundle\\Entity\\Expense",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "body": {
+                    "name": "body",
+                    "line": 111,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "string",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "getBody": {
+            "name": "getBody",
+            "line": 123,
+            "short_desc": "Get body",
+            "long_desc": "",
+            "hint": [
+                [
+                    "string",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": []
+        },
+        "setAmount": {
+            "name": "setAmount",
+            "line": 135,
+            "short_desc": "Set amount",
+            "long_desc": "",
+            "hint": [
+                [
+                    "\\Tavro\\Bundle\\CoreBundle\\Entity\\Expense",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "amount": {
+                    "name": "amount",
+                    "line": 135,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "float",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "getAmount": {
+            "name": "getAmount",
+            "line": 147,
+            "short_desc": "Get amount",
+            "long_desc": "",
+            "hint": [
+                [
+                    "float",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": []
+        },
+        "setExpenseDate": {
+            "name": "setExpenseDate",
+            "line": 159,
+            "short_desc": "Set expenseDate",
+            "long_desc": "",
+            "hint": [
+                [
+                    "\\Tavro\\Bundle\\CoreBundle\\Entity\\Expense",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "expenseDate": {
+                    "name": "expenseDate",
+                    "line": 159,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "\\DateTime",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "getExpenseDate": {
+            "name": "getExpenseDate",
+            "line": 171,
+            "short_desc": "Get expenseDate",
+            "long_desc": "",
+            "hint": [
+                [
+                    "\\DateTime",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": []
+        },
+        "setCategory": {
+            "name": "setCategory",
+            "line": 183,
+            "short_desc": "Set category",
+            "long_desc": "",
+            "hint": [
+                [
+                    "\\Tavro\\Bundle\\CoreBundle\\Entity\\Expense",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "category": {
+                    "name": "category",
+                    "line": 183,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "Tavro\\Bundle\\CoreBundle\\Entity\\Tavro\\Bundle\\CoreBundle\\Entity\\ExpenseCategory",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "Tavro\\Bundle\\CoreBundle\\Entity\\ExpenseCategory",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "getCategory": {
+            "name": "getCategory",
+            "line": 195,
+            "short_desc": "Get category",
+            "long_desc": "",
+            "hint": [
+                [
+                    "\\Tavro\\Bundle\\CoreBundle\\Entity\\ExpenseCategory",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": []
+        },
+        "setUser": {
+            "name": "setUser",
+            "line": 207,
+            "short_desc": "Set user",
+            "long_desc": "",
+            "hint": [
+                [
+                    "\\Tavro\\Bundle\\CoreBundle\\Entity\\Expense",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "user": {
+                    "name": "user",
+                    "line": 207,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "Tavro\\Bundle\\CoreBundle\\Entity\\Tavro\\Bundle\\CoreBundle\\Entity\\User",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "Tavro\\Bundle\\CoreBundle\\Entity\\User",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "getUser": {
+            "name": "getUser",
+            "line": 219,
+            "short_desc": "Get user",
+            "long_desc": "",
+            "hint": [
+                [
+                    "\\Tavro\\Bundle\\CoreBundle\\Entity\\User",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": []
+        },
+        "addExpenseComment": {
+            "name": "addExpenseComment",
+            "line": 231,
+            "short_desc": "Add expenseComment",
+            "long_desc": "",
+            "hint": [
+                [
+                    "\\Tavro\\Bundle\\CoreBundle\\Entity\\Expense",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "expenseComment": {
+                    "name": "expenseComment",
+                    "line": 231,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "Tavro\\Bundle\\CoreBundle\\Entity\\Tavro\\Bundle\\CoreBundle\\Entity\\ExpenseComment",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "Tavro\\Bundle\\CoreBundle\\Entity\\ExpenseComment",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "removeExpenseComment": {
+            "name": "removeExpenseComment",
+            "line": 243,
+            "short_desc": "Remove expenseComment",
+            "long_desc": "",
+            "hint": null,
+            "hint_desc": null,
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "expenseComment": {
+                    "name": "expenseComment",
+                    "line": 243,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "Tavro\\Bundle\\CoreBundle\\Entity\\Tavro\\Bundle\\CoreBundle\\Entity\\ExpenseComment",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "Tavro\\Bundle\\CoreBundle\\Entity\\ExpenseComment",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "getExpenseComments": {
+            "name": "getExpenseComments",
+            "line": 253,
+            "short_desc": "Get expenseComments",
+            "long_desc": "",
+            "hint": [
+                [
+                    "\\Doctrine\\Common\\Collections\\Collection",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": []
+        },
+        "addExpenseTag": {
+            "name": "addExpenseTag",
+            "line": 265,
+            "short_desc": "Add expenseTag",
+            "long_desc": "",
+            "hint": [
+                [
+                    "\\Tavro\\Bundle\\CoreBundle\\Entity\\Expense",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "expenseTag": {
+                    "name": "expenseTag",
+                    "line": 265,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "Tavro\\Bundle\\CoreBundle\\Entity\\Tavro\\Bundle\\CoreBundle\\Entity\\ExpenseTag",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "Tavro\\Bundle\\CoreBundle\\Entity\\ExpenseTag",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "removeExpenseTag": {
+            "name": "removeExpenseTag",
+            "line": 277,
+            "short_desc": "Remove expenseTag",
+            "long_desc": "",
+            "hint": null,
+            "hint_desc": null,
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "expenseTag": {
+                    "name": "expenseTag",
+                    "line": 277,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "Tavro\\Bundle\\CoreBundle\\Entity\\Tavro\\Bundle\\CoreBundle\\Entity\\ExpenseTag",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "Tavro\\Bundle\\CoreBundle\\Entity\\ExpenseTag",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "getExpenseTags": {
+            "name": "getExpenseTags",
+            "line": 287,
+            "short_desc": "Get expenseTags",
+            "long_desc": "",
+            "hint": [
+                [
+                    "\\Doctrine\\Common\\Collections\\Collection",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": []
+        },
+        "setOrganization": {
+            "name": "setOrganization",
+            "line": 299,
+            "short_desc": "Set organization",
+            "long_desc": "",
+            "hint": [
+                [
+                    "\\Tavro\\Bundle\\CoreBundle\\Entity\\Expense",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "organization": {
+                    "name": "organization",
+                    "line": 299,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "Tavro\\Bundle\\CoreBundle\\Entity\\Tavro\\Bundle\\CoreBundle\\Entity\\Organization",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "Tavro\\Bundle\\CoreBundle\\Entity\\Organization",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "getOrganization": {
+            "name": "getOrganization",
+            "line": 310,
+            "short_desc": "Get organization",
+            "long_desc": "",
+            "hint": [
+                [
+                    "\\Tavro\\Bundle\\CoreBundle\\Entity\\Organization",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": []
+        },
+        "setCustomer": {
+            "name": "setCustomer",
+            "line": 322,
+            "short_desc": "Set customer",
+            "long_desc": "",
+            "hint": [
+                [
+                    "\\Tavro\\Bundle\\CoreBundle\\Entity\\Expense",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "customer": {
+                    "name": "customer",
+                    "line": 322,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "Tavro\\Bundle\\CoreBundle\\Entity\\Tavro\\Bundle\\CoreBundle\\Entity\\Organization",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "Tavro\\Bundle\\CoreBundle\\Entity\\Organization",
+                    "default": "null",
+                    "is_by_ref": false
+                }
+            }
+        },
+        "getCustomer": {
+            "name": "getCustomer",
+            "line": 334,
+            "short_desc": "Get customer",
+            "long_desc": "",
+            "hint": [
+                [
+                    "\\Tavro\\Bundle\\CoreBundle\\Entity\\Organization",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": []
+        }
+    },
+    "constants": []
+}

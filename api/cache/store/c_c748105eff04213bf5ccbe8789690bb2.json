@@ -1,0 +1,25 @@
+{
+    "name": "Tavro\\Bundle\\AppBundle\\TavroAppBundle",
+    "line": 7,
+    "short_desc": "",
+    "long_desc": "",
+    "hint": null,
+    "tags": [],
+    "namespace": "Tavro\\Bundle\\AppBundle",
+    "file": "\/var\/www\/tavro\/api\/src\/Tavro\/Bundle\/AppBundle\/TavroAppBundle.php",
+    "relative_file": null,
+    "hash": "b8254903069c8cda4bcb256d2a6310e5a9708ad5",
+    "parent": "Symfony\\Component\\HttpKernel\\Bundle\\Bundle",
+    "modifiers": "Stmt_Class",
+    "is_trait": false,
+    "is_interface": false,
+    "aliases": {
+        "Bundle": "Symfony\\Component\\HttpKernel\\Bundle\\Bundle"
+    },
+    "errors": [],
+    "interfaces": [],
+    "traits": [],
+    "properties": [],
+    "methods": [],
+    "constants": []
+}

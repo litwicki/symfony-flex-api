@@ -1,0 +1,109 @@
+{
+    "name": "Tavro\\Bundle\\CoreBundle\\Form\\RevenueServiceType",
+    "line": 12,
+    "short_desc": "",
+    "long_desc": "",
+    "hint": null,
+    "tags": [],
+    "namespace": "Tavro\\Bundle\\CoreBundle\\Form",
+    "file": "\/var\/www\/tavro\/api\/src\/Tavro\/Bundle\/CoreBundle\/Form\/RevenueServiceType.php",
+    "relative_file": null,
+    "hash": "d71bbf098b2ef9f9e650e2c32d2629056ac13bdd",
+    "parent": "Symfony\\Component\\Form\\AbstractType",
+    "modifiers": "Stmt_Class",
+    "is_trait": false,
+    "is_interface": false,
+    "aliases": {
+        "AbstractType": "Symfony\\Component\\Form\\AbstractType",
+        "FormBuilderInterface": "Symfony\\Component\\Form\\FormBuilderInterface",
+        "OptionsResolver": "Symfony\\Component\\OptionsResolver\\OptionsResolver",
+        "EntityType": "Symfony\\Bridge\\Doctrine\\Form\\Type\\EntityType",
+        "DateTimeType": "Symfony\\Component\\Form\\Extension\\Core\\Type\\DateTimeType",
+        "SubmitType": "Symfony\\Component\\Form\\Extension\\Core\\Type\\SubmitType"
+    },
+    "errors": [],
+    "interfaces": [],
+    "traits": [],
+    "properties": [],
+    "methods": {
+        "buildForm": {
+            "name": "buildForm",
+            "line": 18,
+            "short_desc": "",
+            "long_desc": "",
+            "hint": null,
+            "hint_desc": null,
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "builder": {
+                    "name": "builder",
+                    "line": 18,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "Tavro\\Bundle\\CoreBundle\\Form\\Symfony\\Component\\Form\\FormBuilderInterface",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "Symfony\\Component\\Form\\FormBuilderInterface",
+                    "default": null,
+                    "is_by_ref": false
+                },
+                "options": {
+                    "name": "options",
+                    "line": 18,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "array",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "array",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "configureOptions": {
+            "name": "configureOptions",
+            "line": 39,
+            "short_desc": "",
+            "long_desc": "",
+            "hint": null,
+            "hint_desc": null,
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "resolver": {
+                    "name": "resolver",
+                    "line": 39,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "Tavro\\Bundle\\CoreBundle\\Form\\Symfony\\Component\\OptionsResolver\\OptionsResolver",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "Symfony\\Component\\OptionsResolver\\OptionsResolver",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        }
+    },
+    "constants": []
+}

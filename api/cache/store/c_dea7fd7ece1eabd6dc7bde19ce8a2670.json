@@ -1,0 +1,64 @@
+{
+    "name": "Tavro\\Bundle\\ApiBundle\\Model\\OwnershipHandlerInterface",
+    "line": 9,
+    "short_desc": "",
+    "long_desc": "",
+    "hint": null,
+    "tags": [],
+    "namespace": "Tavro\\Bundle\\ApiBundle\\Model",
+    "file": "\/var\/www\/tavro\/api\/src\/Tavro\/Bundle\/ApiBundle\/Model\/OwnershipHandlerInterface.php",
+    "relative_file": null,
+    "hash": "5b9dbe05ce9c8a590e770400b3b64fc90bec22f6",
+    "parent": null,
+    "modifiers": "Stmt_Interface",
+    "is_trait": false,
+    "is_interface": true,
+    "aliases": {
+        "EntityInterface": "Tavro\\Bundle\\CoreBundle\\Model\\EntityInterface",
+        "Request": "Symfony\\Component\\HttpFoundation\\Request",
+        "User": "Tavro\\Bundle\\CoreBundle\\Entity\\User"
+    },
+    "errors": [],
+    "interfaces": [],
+    "traits": [],
+    "properties": [],
+    "methods": {
+        "findByUser": {
+            "name": "findByUser",
+            "line": 18,
+            "short_desc": "Find all Entities owned by a User.",
+            "long_desc": "",
+            "hint": [
+                [
+                    "mixed",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "user": {
+                    "name": "user",
+                    "line": 18,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "Tavro\\Bundle\\ApiBundle\\Model\\Tavro\\Bundle\\CoreBundle\\Entity\\User",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "Tavro\\Bundle\\CoreBundle\\Entity\\User",
+                    "default": "null",
+                    "is_by_ref": false
+                }
+            }
+        }
+    },
+    "constants": []
+}

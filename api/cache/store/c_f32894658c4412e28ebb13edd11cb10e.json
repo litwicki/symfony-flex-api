@@ -1,0 +1,1283 @@
+{
+    "name": "Tavro\\Bundle\\CoreBundle\\Entity\\Organization",
+    "line": 27,
+    "short_desc": "",
+    "long_desc": "",
+    "hint": null,
+    "tags": {
+        "ORM\\Entity": [
+            [
+                ""
+            ]
+        ],
+        "ORM\\HasLifecycleCallbacks": [
+            [
+                ""
+            ]
+        ],
+        "ORM\\Table": [
+            [
+                "(name=\"tavro_organization\")"
+            ]
+        ]
+    },
+    "namespace": "Tavro\\Bundle\\CoreBundle\\Entity",
+    "file": "\/var\/www\/tavro\/api\/src\/Tavro\/Bundle\/CoreBundle\/Entity\/Organization.php",
+    "relative_file": null,
+    "hash": "889e94d295335ca6bb3258c5e3fcb2fca29f4294",
+    "parent": "Tavro\\Bundle\\CoreBundle\\Model\\ApiEntity",
+    "modifiers": "Stmt_Class",
+    "is_trait": false,
+    "is_interface": false,
+    "aliases": {
+        "ApiEntityInterface": "Tavro\\Bundle\\CoreBundle\\Model\\ApiEntityInterface",
+        "ORM": "Doctrine\\ORM\\Mapping",
+        "Accessor": "JMS\\Serializer\\Annotation\\Accessor",
+        "ExclusionPolicy": "JMS\\Serializer\\Annotation\\ExclusionPolicy",
+        "Expose": "JMS\\Serializer\\Annotation\\Expose",
+        "Type": "JMS\\Serializer\\Annotation\\Type",
+        "VirtualProperty": "JMS\\Serializer\\Annotation\\VirtualProperty",
+        "Groups": "JMS\\Serializer\\Annotation\\Groups",
+        "MaxDepth": "JMS\\Serializer\\Annotation\\MaxDepth",
+        "SerializedName": "JMS\\Serializer\\Annotation\\SerializedName",
+        "Table": "Doctrine\\ORM\\Mapping\\Table",
+        "Assert": "Symfony\\Component\\Validator\\Constraints",
+        "ApiEntity": "Tavro\\Bundle\\CoreBundle\\Model\\ApiEntity",
+        "EntityInterface": "Tavro\\Bundle\\CoreBundle\\Model\\EntityInterface"
+    },
+    "errors": [],
+    "interfaces": [],
+    "traits": [],
+    "properties": [],
+    "methods": {
+        "setBody": {
+            "name": "setBody",
+            "line": 133,
+            "short_desc": "Set body",
+            "long_desc": "",
+            "hint": [
+                [
+                    "\\Tavro\\Bundle\\CoreBundle\\Entity\\Organization",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "body": {
+                    "name": "body",
+                    "line": 133,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "string",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "getBody": {
+            "name": "getBody",
+            "line": 145,
+            "short_desc": "Get body",
+            "long_desc": "",
+            "hint": [
+                [
+                    "string",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": []
+        },
+        "setOwner": {
+            "name": "setOwner",
+            "line": 156,
+            "short_desc": "Set owner",
+            "long_desc": "",
+            "hint": [
+                [
+                    "\\Tavro\\Bundle\\CoreBundle\\Entity\\User",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "owner": {
+                    "name": "owner",
+                    "line": 156,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "Tavro\\Bundle\\CoreBundle\\Entity\\Tavro\\Bundle\\CoreBundle\\Entity\\User",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "Tavro\\Bundle\\CoreBundle\\Entity\\User",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "getOwner": {
+            "name": "getOwner",
+            "line": 168,
+            "short_desc": "Get user",
+            "long_desc": "",
+            "hint": [
+                [
+                    "\\Tavro\\Bundle\\CoreBundle\\Entity\\User",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": []
+        },
+        "addUserOrganization": {
+            "name": "addUserOrganization",
+            "line": 180,
+            "short_desc": "Add userOrganization",
+            "long_desc": "",
+            "hint": [
+                [
+                    "\\Tavro\\Bundle\\CoreBundle\\Entity\\Organization",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "userOrganization": {
+                    "name": "userOrganization",
+                    "line": 180,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "Tavro\\Bundle\\CoreBundle\\Entity\\Tavro\\Bundle\\CoreBundle\\Entity\\UserOrganization",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "Tavro\\Bundle\\CoreBundle\\Entity\\UserOrganization",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "removeUserOrganization": {
+            "name": "removeUserOrganization",
+            "line": 192,
+            "short_desc": "Remove userOrganization",
+            "long_desc": "",
+            "hint": null,
+            "hint_desc": null,
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "userOrganization": {
+                    "name": "userOrganization",
+                    "line": 192,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "Tavro\\Bundle\\CoreBundle\\Entity\\Tavro\\Bundle\\CoreBundle\\Entity\\UserOrganization",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "Tavro\\Bundle\\CoreBundle\\Entity\\UserOrganization",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "getUserOrganizations": {
+            "name": "getUserOrganizations",
+            "line": 202,
+            "short_desc": "Get userOrganizations",
+            "long_desc": "",
+            "hint": [
+                [
+                    "\\Doctrine\\Common\\Collections\\Collection",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": []
+        },
+        "addServiceCategory": {
+            "name": "addServiceCategory",
+            "line": 214,
+            "short_desc": "Add serviceCategory",
+            "long_desc": "",
+            "hint": [
+                [
+                    "\\Tavro\\Bundle\\CoreBundle\\Entity\\Organization",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "serviceCategory": {
+                    "name": "serviceCategory",
+                    "line": 214,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "Tavro\\Bundle\\CoreBundle\\Entity\\Tavro\\Bundle\\CoreBundle\\Entity\\ServiceCategory",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "Tavro\\Bundle\\CoreBundle\\Entity\\ServiceCategory",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "removeServiceCategory": {
+            "name": "removeServiceCategory",
+            "line": 226,
+            "short_desc": "Remove serviceCategory",
+            "long_desc": "",
+            "hint": null,
+            "hint_desc": null,
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "serviceCategory": {
+                    "name": "serviceCategory",
+                    "line": 226,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "Tavro\\Bundle\\CoreBundle\\Entity\\Tavro\\Bundle\\CoreBundle\\Entity\\ServiceCategory",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "Tavro\\Bundle\\CoreBundle\\Entity\\ServiceCategory",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "getServiceCategories": {
+            "name": "getServiceCategories",
+            "line": 236,
+            "short_desc": "Get serviceCategories",
+            "long_desc": "",
+            "hint": [
+                [
+                    "\\Doctrine\\Common\\Collections\\Collection",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": []
+        },
+        "addExpenseCategory": {
+            "name": "addExpenseCategory",
+            "line": 248,
+            "short_desc": "Add expenseCategory",
+            "long_desc": "",
+            "hint": [
+                [
+                    "\\Tavro\\Bundle\\CoreBundle\\Entity\\Organization",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "expenseCategory": {
+                    "name": "expenseCategory",
+                    "line": 248,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "Tavro\\Bundle\\CoreBundle\\Entity\\Tavro\\Bundle\\CoreBundle\\Entity\\ExpenseCategory",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "Tavro\\Bundle\\CoreBundle\\Entity\\ExpenseCategory",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "removeExpenseCategory": {
+            "name": "removeExpenseCategory",
+            "line": 260,
+            "short_desc": "Remove expenseCategory",
+            "long_desc": "",
+            "hint": null,
+            "hint_desc": null,
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "expenseCategory": {
+                    "name": "expenseCategory",
+                    "line": 260,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "Tavro\\Bundle\\CoreBundle\\Entity\\Tavro\\Bundle\\CoreBundle\\Entity\\ExpenseCategory",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "Tavro\\Bundle\\CoreBundle\\Entity\\ExpenseCategory",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "getExpenseCategories": {
+            "name": "getExpenseCategories",
+            "line": 270,
+            "short_desc": "Get expenseCategories",
+            "long_desc": "",
+            "hint": [
+                [
+                    "\\Doctrine\\Common\\Collections\\Collection",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": []
+        },
+        "addProductCategory": {
+            "name": "addProductCategory",
+            "line": 282,
+            "short_desc": "Add productCategory",
+            "long_desc": "",
+            "hint": [
+                [
+                    "\\Tavro\\Bundle\\CoreBundle\\Entity\\Organization",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "productCategory": {
+                    "name": "productCategory",
+                    "line": 282,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "Tavro\\Bundle\\CoreBundle\\Entity\\Tavro\\Bundle\\CoreBundle\\Entity\\ProductCategory",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "Tavro\\Bundle\\CoreBundle\\Entity\\ProductCategory",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "removeProductCategory": {
+            "name": "removeProductCategory",
+            "line": 294,
+            "short_desc": "Remove productCategory",
+            "long_desc": "",
+            "hint": null,
+            "hint_desc": null,
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "productCategory": {
+                    "name": "productCategory",
+                    "line": 294,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "Tavro\\Bundle\\CoreBundle\\Entity\\Tavro\\Bundle\\CoreBundle\\Entity\\ProductCategory",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "Tavro\\Bundle\\CoreBundle\\Entity\\ProductCategory",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "getProductCategories": {
+            "name": "getProductCategories",
+            "line": 304,
+            "short_desc": "Get productCategories",
+            "long_desc": "",
+            "hint": [
+                [
+                    "\\Doctrine\\Common\\Collections\\Collection",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": []
+        },
+        "addRevenueCategory": {
+            "name": "addRevenueCategory",
+            "line": 316,
+            "short_desc": "Add revenueCategory",
+            "long_desc": "",
+            "hint": [
+                [
+                    "\\Tavro\\Bundle\\CoreBundle\\Entity\\Organization",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "revenueCategory": {
+                    "name": "revenueCategory",
+                    "line": 316,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "Tavro\\Bundle\\CoreBundle\\Entity\\Tavro\\Bundle\\CoreBundle\\Entity\\RevenueCategory",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "Tavro\\Bundle\\CoreBundle\\Entity\\RevenueCategory",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "removeRevenueCategory": {
+            "name": "removeRevenueCategory",
+            "line": 328,
+            "short_desc": "Remove revenueCategory",
+            "long_desc": "",
+            "hint": null,
+            "hint_desc": null,
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "revenueCategory": {
+                    "name": "revenueCategory",
+                    "line": 328,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "Tavro\\Bundle\\CoreBundle\\Entity\\Tavro\\Bundle\\CoreBundle\\Entity\\RevenueCategory",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "Tavro\\Bundle\\CoreBundle\\Entity\\RevenueCategory",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "getRevenueCategories": {
+            "name": "getRevenueCategories",
+            "line": 338,
+            "short_desc": "Get revenueCategories",
+            "long_desc": "",
+            "hint": [
+                [
+                    "\\Doctrine\\Common\\Collections\\Collection",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": []
+        },
+        "addService": {
+            "name": "addService",
+            "line": 350,
+            "short_desc": "Add service",
+            "long_desc": "",
+            "hint": [
+                [
+                    "\\Tavro\\Bundle\\CoreBundle\\Entity\\Organization",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "service": {
+                    "name": "service",
+                    "line": 350,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "Tavro\\Bundle\\CoreBundle\\Entity\\Tavro\\Bundle\\CoreBundle\\Entity\\Service",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "Tavro\\Bundle\\CoreBundle\\Entity\\Service",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "removeService": {
+            "name": "removeService",
+            "line": 362,
+            "short_desc": "Remove service",
+            "long_desc": "",
+            "hint": null,
+            "hint_desc": null,
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "service": {
+                    "name": "service",
+                    "line": 362,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "Tavro\\Bundle\\CoreBundle\\Entity\\Tavro\\Bundle\\CoreBundle\\Entity\\Service",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "Tavro\\Bundle\\CoreBundle\\Entity\\Service",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "getServices": {
+            "name": "getServices",
+            "line": 372,
+            "short_desc": "Get services",
+            "long_desc": "",
+            "hint": [
+                [
+                    "\\Doctrine\\Common\\Collections\\Collection",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": []
+        },
+        "addExpense": {
+            "name": "addExpense",
+            "line": 384,
+            "short_desc": "Add expense",
+            "long_desc": "",
+            "hint": [
+                [
+                    "\\Tavro\\Bundle\\CoreBundle\\Entity\\Organization",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "expense": {
+                    "name": "expense",
+                    "line": 384,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "Tavro\\Bundle\\CoreBundle\\Entity\\Tavro\\Bundle\\CoreBundle\\Entity\\Expense",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "Tavro\\Bundle\\CoreBundle\\Entity\\Expense",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "removeExpense": {
+            "name": "removeExpense",
+            "line": 396,
+            "short_desc": "Remove expense",
+            "long_desc": "",
+            "hint": null,
+            "hint_desc": null,
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "expense": {
+                    "name": "expense",
+                    "line": 396,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "Tavro\\Bundle\\CoreBundle\\Entity\\Tavro\\Bundle\\CoreBundle\\Entity\\Expense",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "Tavro\\Bundle\\CoreBundle\\Entity\\Expense",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "getExpenses": {
+            "name": "getExpenses",
+            "line": 406,
+            "short_desc": "Get expenses",
+            "long_desc": "",
+            "hint": [
+                [
+                    "\\Doctrine\\Common\\Collections\\Collection",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": []
+        },
+        "addProduct": {
+            "name": "addProduct",
+            "line": 418,
+            "short_desc": "Add product",
+            "long_desc": "",
+            "hint": [
+                [
+                    "\\Tavro\\Bundle\\CoreBundle\\Entity\\Organization",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "product": {
+                    "name": "product",
+                    "line": 418,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "Tavro\\Bundle\\CoreBundle\\Entity\\Tavro\\Bundle\\CoreBundle\\Entity\\Product",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "Tavro\\Bundle\\CoreBundle\\Entity\\Product",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "removeProduct": {
+            "name": "removeProduct",
+            "line": 430,
+            "short_desc": "Remove product",
+            "long_desc": "",
+            "hint": null,
+            "hint_desc": null,
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "product": {
+                    "name": "product",
+                    "line": 430,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "Tavro\\Bundle\\CoreBundle\\Entity\\Tavro\\Bundle\\CoreBundle\\Entity\\Product",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "Tavro\\Bundle\\CoreBundle\\Entity\\Product",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "getProducts": {
+            "name": "getProducts",
+            "line": 440,
+            "short_desc": "Get products",
+            "long_desc": "",
+            "hint": [
+                [
+                    "\\Doctrine\\Common\\Collections\\Collection",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": []
+        },
+        "addRevenue": {
+            "name": "addRevenue",
+            "line": 452,
+            "short_desc": "Add revenue",
+            "long_desc": "",
+            "hint": [
+                [
+                    "\\Tavro\\Bundle\\CoreBundle\\Entity\\Organization",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "revenue": {
+                    "name": "revenue",
+                    "line": 452,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "Tavro\\Bundle\\CoreBundle\\Entity\\Tavro\\Bundle\\CoreBundle\\Entity\\Revenue",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "Tavro\\Bundle\\CoreBundle\\Entity\\Revenue",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "removeRevenue": {
+            "name": "removeRevenue",
+            "line": 464,
+            "short_desc": "Remove revenue",
+            "long_desc": "",
+            "hint": null,
+            "hint_desc": null,
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "revenue": {
+                    "name": "revenue",
+                    "line": 464,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "Tavro\\Bundle\\CoreBundle\\Entity\\Tavro\\Bundle\\CoreBundle\\Entity\\Revenue",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "Tavro\\Bundle\\CoreBundle\\Entity\\Revenue",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "getRevenues": {
+            "name": "getRevenues",
+            "line": 474,
+            "short_desc": "Get revenues",
+            "long_desc": "",
+            "hint": [
+                [
+                    "\\Doctrine\\Common\\Collections\\Collection",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": []
+        },
+        "addVariable": {
+            "name": "addVariable",
+            "line": 486,
+            "short_desc": "Add variable",
+            "long_desc": "",
+            "hint": [
+                [
+                    "\\Tavro\\Bundle\\CoreBundle\\Entity\\Organization",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "variable": {
+                    "name": "variable",
+                    "line": 486,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "Tavro\\Bundle\\CoreBundle\\Entity\\Tavro\\Bundle\\CoreBundle\\Entity\\Variable",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "Tavro\\Bundle\\CoreBundle\\Entity\\Variable",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "removeVariable": {
+            "name": "removeVariable",
+            "line": 498,
+            "short_desc": "Remove variable",
+            "long_desc": "",
+            "hint": null,
+            "hint_desc": null,
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "variable": {
+                    "name": "variable",
+                    "line": 498,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "Tavro\\Bundle\\CoreBundle\\Entity\\Tavro\\Bundle\\CoreBundle\\Entity\\Variable",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "Tavro\\Bundle\\CoreBundle\\Entity\\Variable",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "getVariables": {
+            "name": "getVariables",
+            "line": 508,
+            "short_desc": "Get variables",
+            "long_desc": "",
+            "hint": [
+                [
+                    "\\Doctrine\\Common\\Collections\\Collection",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": []
+        },
+        "addNode": {
+            "name": "addNode",
+            "line": 521,
+            "short_desc": "Add node",
+            "long_desc": "",
+            "hint": [
+                [
+                    "\\Tavro\\Bundle\\CoreBundle\\Entity\\User",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "node": {
+                    "name": "node",
+                    "line": 521,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "Tavro\\Bundle\\CoreBundle\\Entity\\Tavro\\Bundle\\CoreBundle\\Entity\\Node",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "Tavro\\Bundle\\CoreBundle\\Entity\\Node",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "removeNode": {
+            "name": "removeNode",
+            "line": 533,
+            "short_desc": "Remove node",
+            "long_desc": "",
+            "hint": null,
+            "hint_desc": null,
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "node": {
+                    "name": "node",
+                    "line": 533,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "Tavro\\Bundle\\CoreBundle\\Entity\\Tavro\\Bundle\\CoreBundle\\Entity\\Node",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "Tavro\\Bundle\\CoreBundle\\Entity\\Node",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "getNodes": {
+            "name": "getNodes",
+            "line": 543,
+            "short_desc": "Get node",
+            "long_desc": "",
+            "hint": [
+                [
+                    "\\Doctrine\\Common\\Collections\\Collection",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": []
+        },
+        "addFundingRound": {
+            "name": "addFundingRound",
+            "line": 555,
+            "short_desc": "Add FundingRound",
+            "long_desc": "",
+            "hint": [
+                [
+                    "\\Tavro\\Bundle\\CoreBundle\\Entity\\Organization",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "funding_round": {
+                    "name": "funding_round",
+                    "line": 555,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "Tavro\\Bundle\\CoreBundle\\Entity\\Tavro\\Bundle\\CoreBundle\\Entity\\FundingRound",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "Tavro\\Bundle\\CoreBundle\\Entity\\FundingRound",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "removeFundingRound": {
+            "name": "removeFundingRound",
+            "line": 567,
+            "short_desc": "Remove funding_round",
+            "long_desc": "",
+            "hint": null,
+            "hint_desc": null,
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "funding_round": {
+                    "name": "funding_round",
+                    "line": 567,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "Tavro\\Bundle\\CoreBundle\\Entity\\Tavro\\Bundle\\CoreBundle\\Entity\\FundingRound",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "Tavro\\Bundle\\CoreBundle\\Entity\\FundingRound",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "getFundingRounds": {
+            "name": "getFundingRounds",
+            "line": 577,
+            "short_desc": "Get products",
+            "long_desc": "",
+            "hint": [
+                [
+                    "\\Doctrine\\Common\\Collections\\Collection",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": []
+        },
+        "addFundingRoundShareholder": {
+            "name": "addFundingRoundShareholder",
+            "line": 589,
+            "short_desc": "Add shareholderOrganization",
+            "long_desc": "",
+            "hint": [
+                [
+                    "\\Tavro\\Bundle\\CoreBundle\\Entity\\Shareholder",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "shareholderOrganization": {
+                    "name": "shareholderOrganization",
+                    "line": 589,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "Tavro\\Bundle\\CoreBundle\\Entity\\Tavro\\Bundle\\CoreBundle\\Entity\\FundingRoundShareholder",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "Tavro\\Bundle\\CoreBundle\\Entity\\FundingRoundShareholder",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "removeFundingRoundShareholder": {
+            "name": "removeFundingRoundShareholder",
+            "line": 601,
+            "short_desc": "Remove shareholderOrganization",
+            "long_desc": "",
+            "hint": null,
+            "hint_desc": null,
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "shareholderOrganization": {
+                    "name": "shareholderOrganization",
+                    "line": 601,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "Tavro\\Bundle\\CoreBundle\\Entity\\Tavro\\Bundle\\CoreBundle\\Entity\\FundingRoundShareholder",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "Tavro\\Bundle\\CoreBundle\\Entity\\FundingRoundShareholder",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "getFundingRoundShareholders": {
+            "name": "getFundingRoundShareholders",
+            "line": 611,
+            "short_desc": "Get shareholderOrganizations",
+            "long_desc": "",
+            "hint": [
+                [
+                    "\\Doctrine\\Common\\Collections\\Collection",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": []
+        }
+    },
+    "constants": []
+}

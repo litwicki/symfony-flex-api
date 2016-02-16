@@ -1,0 +1,402 @@
+{
+    "name": "Tavro\\Bundle\\CoreBundle\\Services\\FileManager",
+    "line": 26,
+    "short_desc": "Class FileManager",
+    "long_desc": "",
+    "hint": null,
+    "tags": {
+        "package": [
+            [
+                "Tavro\\Bundle\\CoreBundle\\Services"
+            ]
+        ]
+    },
+    "namespace": "Tavro\\Bundle\\CoreBundle\\Services",
+    "file": "\/var\/www\/tavro\/api\/src\/Tavro\/Bundle\/CoreBundle\/Services\/FileManager.php",
+    "relative_file": null,
+    "hash": "501056f2f671b704a789576be724b72d8527b5e6",
+    "parent": null,
+    "modifiers": "Stmt_Class",
+    "is_trait": false,
+    "is_interface": false,
+    "aliases": {
+        "UploadedFile": "Symfony\\Component\\HttpFoundation\\File\\UploadedFile",
+        "ContainerAwareInterface": "Symfony\\Component\\DependencyInjection\\ContainerAwareInterface",
+        "ContainerInterface": "Symfony\\Component\\DependencyInjection\\ContainerInterface",
+        "EntityInterface": "Tavro\\Bundle\\CoreBundle\\Model\\EntityInterface",
+        "S3EntityInterface": "Tavro\\Bundle\\CoreBundle\\Model\\S3EntityInterface",
+        "EntityManager": "Doctrine\\ORM\\EntityManager",
+        "Filesystem": "Gaufrette\\Filesystem",
+        "AwsS3": "Gaufrette\\Adapter\\AwsS3",
+        "S3Client": "Aws\\S3\\S3Client",
+        "S3Exception": "Aws\\S3\\Exception\\S3Exception",
+        "Credentials": "Aws\\Credentials\\Credentials"
+    },
+    "errors": [],
+    "interfaces": {
+        "Symfony\\Component\\DependencyInjection\\ContainerAwareInterface": "Symfony\\Component\\DependencyInjection\\ContainerAwareInterface"
+    },
+    "traits": [],
+    "properties": [],
+    "methods": {
+        "setContainer": {
+            "name": "setContainer",
+            "line": 38,
+            "short_desc": "",
+            "long_desc": "",
+            "hint": null,
+            "hint_desc": null,
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "container": {
+                    "name": "container",
+                    "line": 38,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "Tavro\\Bundle\\CoreBundle\\Services\\Symfony\\Component\\DependencyInjection\\ContainerInterface",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "Symfony\\Component\\DependencyInjection\\ContainerInterface",
+                    "default": "null",
+                    "is_by_ref": false
+                }
+            }
+        },
+        "__construct": {
+            "name": "__construct",
+            "line": 50,
+            "short_desc": "FileManager constructor.",
+            "long_desc": "",
+            "hint": null,
+            "hint_desc": null,
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "aws_access_key_id": {
+                    "name": "aws_access_key_id",
+                    "line": 50,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [],
+                    "tags": [],
+                    "modifiers": "",
+                    "default": null,
+                    "is_by_ref": false
+                },
+                "aws_secret_access_key": {
+                    "name": "aws_secret_access_key",
+                    "line": 50,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [],
+                    "tags": [],
+                    "modifiers": "",
+                    "default": null,
+                    "is_by_ref": false
+                },
+                "aws_s3_region": {
+                    "name": "aws_s3_region",
+                    "line": 50,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [],
+                    "tags": [],
+                    "modifiers": "",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "upload": {
+            "name": "upload",
+            "line": 74,
+            "short_desc": "",
+            "long_desc": "",
+            "hint": [
+                [
+                    "mixed",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [
+                [
+                    "\\Exception",
+                    ""
+                ]
+            ],
+            "errors": [],
+            "parameters": {
+                "file": {
+                    "name": "file",
+                    "line": 74,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "Tavro\\Bundle\\CoreBundle\\Services\\Symfony\\Component\\HttpFoundation\\File\\UploadedFile",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "Symfony\\Component\\HttpFoundation\\File\\UploadedFile",
+                    "default": null,
+                    "is_by_ref": false
+                },
+                "adapter": {
+                    "name": "adapter",
+                    "line": 74,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "Tavro\\Bundle\\CoreBundle\\Services\\Gaufrette\\Adapter\\AwsS3",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "Gaufrette\\Adapter\\AwsS3",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "move": {
+            "name": "move",
+            "line": 100,
+            "short_desc": "",
+            "long_desc": "",
+            "hint": [
+                [
+                    "mixed",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [
+                [
+                    "\\Exception",
+                    ""
+                ]
+            ],
+            "errors": [],
+            "parameters": {
+                "data": {
+                    "name": "data",
+                    "line": 100,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "array",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "array",
+                    "default": null,
+                    "is_by_ref": false
+                },
+                "filename": {
+                    "name": "filename",
+                    "line": 100,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [],
+                    "tags": [],
+                    "modifiers": "",
+                    "default": null,
+                    "is_by_ref": false
+                },
+                "adapter": {
+                    "name": "adapter",
+                    "line": 100,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "Tavro\\Bundle\\CoreBundle\\Services\\Gaufrette\\Adapter\\AwsS3",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "Gaufrette\\Adapter\\AwsS3",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "delete": {
+            "name": "delete",
+            "line": 123,
+            "short_desc": "Physically delete a file from S3.",
+            "long_desc": "",
+            "hint": null,
+            "hint_desc": null,
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [
+                [
+                    "\\Exception",
+                    ""
+                ]
+            ],
+            "errors": [],
+            "parameters": {
+                "entity": {
+                    "name": "entity",
+                    "line": 123,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "Tavro\\Bundle\\CoreBundle\\Services\\Tavro\\Bundle\\CoreBundle\\Model\\S3EntityInterface",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "Tavro\\Bundle\\CoreBundle\\Model\\S3EntityInterface",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "getBucketFiles": {
+            "name": "getBucketFiles",
+            "line": 149,
+            "short_desc": "Get all files in a bucket.",
+            "long_desc": "",
+            "hint": [
+                [
+                    "\\ArrayIterator",
+                    false
+                ],
+                [
+                    "\\Iterator",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [
+                [
+                    "\\Exception",
+                    ""
+                ]
+            ],
+            "errors": [],
+            "parameters": {
+                "bucket": {
+                    "name": "bucket",
+                    "line": 149,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [],
+                    "tags": [],
+                    "modifiers": "",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "fixMetadata": {
+            "name": "fixMetadata",
+            "line": 168,
+            "short_desc": "Fix the ContentType Metadata for an array of S3 objects.",
+            "long_desc": "",
+            "hint": null,
+            "hint_desc": null,
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [
+                [
+                    "\\Exception",
+                    ""
+                ]
+            ],
+            "errors": [],
+            "parameters": {
+                "bucket": {
+                    "name": "bucket",
+                    "line": 168,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [],
+                    "tags": [],
+                    "modifiers": "",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "setMimeType": {
+            "name": "setMimeType",
+            "line": 195,
+            "short_desc": "Set the mime type of a file based on its extension.",
+            "long_desc": "Admittedly not a beautiful solution, but it fixes Assetic\/S3 defaulting\nto octet\/stream which breaks most things.",
+            "hint": [
+                [
+                    "mixed",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [
+                [
+                    "\\Exception",
+                    ""
+                ]
+            ],
+            "errors": [],
+            "parameters": {
+                "bucket": {
+                    "name": "bucket",
+                    "line": 195,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [],
+                    "tags": [],
+                    "modifiers": "",
+                    "default": null,
+                    "is_by_ref": false
+                },
+                "key": {
+                    "name": "key",
+                    "line": 195,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [],
+                    "tags": [],
+                    "modifiers": "",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        }
+    },
+    "constants": []
+}

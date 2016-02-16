@@ -1,0 +1,59 @@
+{
+    "name": "Tavro\\Bundle\\CoreBundle\\EventListener\\Doctrine\\PreUpdateListener",
+    "line": 9,
+    "short_desc": "",
+    "long_desc": "",
+    "hint": null,
+    "tags": [],
+    "namespace": "Tavro\\Bundle\\CoreBundle\\EventListener\\Doctrine",
+    "file": "\/var\/www\/tavro\/api\/src\/Tavro\/Bundle\/CoreBundle\/EventListener\/Doctrine\/PreUpdateListener.php",
+    "relative_file": null,
+    "hash": "036f85c06fc73a099be98401447546d41605877f",
+    "parent": null,
+    "modifiers": "Stmt_Class",
+    "is_trait": false,
+    "is_interface": false,
+    "aliases": {
+        "LifecycleEventArgs": "Doctrine\\ORM\\Event\\LifecycleEventArgs",
+        "EntityInterface": "Tavro\\Bundle\\CoreBundle\\Model\\EntityInterface",
+        "S3EntityInterface": "Tavro\\Bundle\\CoreBundle\\Model\\S3EntityInterface"
+    },
+    "errors": [],
+    "interfaces": [],
+    "traits": [],
+    "properties": [],
+    "methods": {
+        "preUpdate": {
+            "name": "preUpdate",
+            "line": 15,
+            "short_desc": "Absolutely *NO* logic should be handled here. This is strictly to handle simple\nEntity updates on dates, statuses, etc.",
+            "long_desc": "",
+            "hint": null,
+            "hint_desc": null,
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "args": {
+                    "name": "args",
+                    "line": 15,
+                    "short_desc": null,
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "Tavro\\Bundle\\CoreBundle\\EventListener\\Doctrine\\Doctrine\\ORM\\Event\\LifecycleEventArgs",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "Doctrine\\ORM\\Event\\LifecycleEventArgs",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        }
+    },
+    "constants": []
+}

@@ -1,0 +1,805 @@
+{
+    "name": "Tavro\\Bundle\\CoreBundle\\Entity\\Image",
+    "line": 27,
+    "short_desc": "",
+    "long_desc": "",
+    "hint": null,
+    "tags": {
+        "ORM\\Entity": [
+            [
+                ""
+            ]
+        ],
+        "ORM\\HasLifecycleCallbacks": [
+            [
+                ""
+            ]
+        ],
+        "Table": [
+            [
+                "(name=\"tavro_image\")"
+            ]
+        ]
+    },
+    "namespace": "Tavro\\Bundle\\CoreBundle\\Entity",
+    "file": "\/var\/www\/tavro\/api\/src\/Tavro\/Bundle\/CoreBundle\/Entity\/Image.php",
+    "relative_file": null,
+    "hash": "fc873b9716f012586df7be7b706b478450450494",
+    "parent": "Tavro\\Bundle\\CoreBundle\\Model\\Entity",
+    "modifiers": "Stmt_Class",
+    "is_trait": false,
+    "is_interface": false,
+    "aliases": {
+        "ApiEntityInterface": "Tavro\\Bundle\\CoreBundle\\Model\\ApiEntityInterface",
+        "ORM": "Doctrine\\ORM\\Mapping",
+        "Accessor": "JMS\\Serializer\\Annotation\\Accessor",
+        "ExclusionPolicy": "JMS\\Serializer\\Annotation\\ExclusionPolicy",
+        "Expose": "JMS\\Serializer\\Annotation\\Expose",
+        "Type": "JMS\\Serializer\\Annotation\\Type",
+        "VirtualProperty": "JMS\\Serializer\\Annotation\\VirtualProperty",
+        "Groups": "JMS\\Serializer\\Annotation\\Groups",
+        "Table": "Doctrine\\ORM\\Mapping\\Table",
+        "Entity": "Tavro\\Bundle\\CoreBundle\\Model\\Entity",
+        "EntityInterface": "Tavro\\Bundle\\CoreBundle\\Model\\EntityInterface",
+        "S3EntityInterface": "Tavro\\Bundle\\CoreBundle\\Model\\S3EntityInterface"
+    },
+    "errors": [],
+    "interfaces": {
+        "Tavro\\Bundle\\CoreBundle\\Model\\S3EntityInterface": "Tavro\\Bundle\\CoreBundle\\Model\\S3EntityInterface"
+    },
+    "traits": [],
+    "properties": [],
+    "methods": {
+        "__toString": {
+            "name": "__toString",
+            "line": 93,
+            "short_desc": "Return a string representation of the Entity.",
+            "long_desc": "",
+            "hint": null,
+            "hint_desc": null,
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": []
+        },
+        "setPath": {
+            "name": "setPath",
+            "line": 104,
+            "short_desc": "Set aws_url",
+            "long_desc": "",
+            "hint": [
+                [
+                    "\\Tavro\\Bundle\\CoreBundle\\Entity\\Image",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "aws_url": {
+                    "name": "aws_url",
+                    "line": 104,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "string",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "getPath": {
+            "name": "getPath",
+            "line": 116,
+            "short_desc": "Get aws_url",
+            "long_desc": "",
+            "hint": [
+                [
+                    "string",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": []
+        },
+        "setOriginalFilename": {
+            "name": "setOriginalFilename",
+            "line": 127,
+            "short_desc": "Set original_filename",
+            "long_desc": "",
+            "hint": [
+                [
+                    "\\Tavro\\Bundle\\CoreBundle\\Entity\\Image",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "originalFilename": {
+                    "name": "originalFilename",
+                    "line": 127,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "string",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "getOriginalFilename": {
+            "name": "getOriginalFilename",
+            "line": 139,
+            "short_desc": "Get original_filename",
+            "long_desc": "",
+            "hint": [
+                [
+                    "string",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": []
+        },
+        "setMimeType": {
+            "name": "setMimeType",
+            "line": 150,
+            "short_desc": "Set mime_type",
+            "long_desc": "",
+            "hint": [
+                [
+                    "\\Tavro\\Bundle\\CoreBundle\\Entity\\Image",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "mimeType": {
+                    "name": "mimeType",
+                    "line": 150,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "string",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "getMimeType": {
+            "name": "getMimeType",
+            "line": 162,
+            "short_desc": "Get mime_type",
+            "long_desc": "",
+            "hint": [
+                [
+                    "string",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": []
+        },
+        "setFilesize": {
+            "name": "setFilesize",
+            "line": 173,
+            "short_desc": "Set filesize",
+            "long_desc": "",
+            "hint": [
+                [
+                    "\\Tavro\\Bundle\\CoreBundle\\Entity\\Image",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "filesize": {
+                    "name": "filesize",
+                    "line": 173,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "integer",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "getFilesize": {
+            "name": "getFilesize",
+            "line": 185,
+            "short_desc": "Get filesize",
+            "long_desc": "",
+            "hint": [
+                [
+                    "integer",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": []
+        },
+        "setHeight": {
+            "name": "setHeight",
+            "line": 196,
+            "short_desc": "Set height",
+            "long_desc": "",
+            "hint": [
+                [
+                    "\\Tavro\\Bundle\\CoreBundle\\Entity\\Image",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "height": {
+                    "name": "height",
+                    "line": 196,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "integer",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "getHeight": {
+            "name": "getHeight",
+            "line": 208,
+            "short_desc": "Get height",
+            "long_desc": "",
+            "hint": [
+                [
+                    "integer",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": []
+        },
+        "setWidth": {
+            "name": "setWidth",
+            "line": 219,
+            "short_desc": "Set width",
+            "long_desc": "",
+            "hint": [
+                [
+                    "\\Tavro\\Bundle\\CoreBundle\\Entity\\Image",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "width": {
+                    "name": "width",
+                    "line": 219,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "integer",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "getWidth": {
+            "name": "getWidth",
+            "line": 231,
+            "short_desc": "Get width",
+            "long_desc": "",
+            "hint": [
+                [
+                    "integer",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": []
+        },
+        "__construct": {
+            "name": "__construct",
+            "line": 239,
+            "short_desc": "Constructor",
+            "long_desc": "",
+            "hint": null,
+            "hint_desc": null,
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": []
+        },
+        "setBucket": {
+            "name": "setBucket",
+            "line": 250,
+            "short_desc": "Set bucket",
+            "long_desc": "",
+            "hint": [
+                [
+                    "\\Tavro\\Bundle\\CoreBundle\\Entity\\Image",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "bucket": {
+                    "name": "bucket",
+                    "line": 250,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "string",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "getBucket": {
+            "name": "getBucket",
+            "line": 262,
+            "short_desc": "Get bucket",
+            "long_desc": "",
+            "hint": [
+                [
+                    "string",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": []
+        },
+        "setAwsUrl": {
+            "name": "setAwsUrl",
+            "line": 273,
+            "short_desc": "Set aws_url",
+            "long_desc": "",
+            "hint": [
+                [
+                    "\\Tavro\\Bundle\\CoreBundle\\Entity\\Image",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "awsUrl": {
+                    "name": "awsUrl",
+                    "line": 273,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "string",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "getAwsUrl": {
+            "name": "getAwsUrl",
+            "line": 285,
+            "short_desc": "Get aws_url",
+            "long_desc": "",
+            "hint": [
+                [
+                    "string",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": []
+        },
+        "setAwsKey": {
+            "name": "setAwsKey",
+            "line": 296,
+            "short_desc": "Set aws_key",
+            "long_desc": "",
+            "hint": [
+                [
+                    "\\Tavro\\Bundle\\CoreBundle\\Entity\\Image",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "awsKey": {
+                    "name": "awsKey",
+                    "line": 296,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "string",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "getAwsKey": {
+            "name": "getAwsKey",
+            "line": 308,
+            "short_desc": "Get aws_key",
+            "long_desc": "",
+            "hint": [
+                [
+                    "string",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": []
+        },
+        "setDirectory": {
+            "name": "setDirectory",
+            "line": 319,
+            "short_desc": "Set directory",
+            "long_desc": "",
+            "hint": [
+                [
+                    "\\Tavro\\Bundle\\CoreBundle\\Entity\\Image",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "directory": {
+                    "name": "directory",
+                    "line": 319,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "string",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "getDirectory": {
+            "name": "getDirectory",
+            "line": 331,
+            "short_desc": "Get directory",
+            "long_desc": "",
+            "hint": [
+                [
+                    "string",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": []
+        },
+        "addProductImage": {
+            "name": "addProductImage",
+            "line": 344,
+            "short_desc": "Add productImage",
+            "long_desc": "",
+            "hint": [
+                [
+                    "\\Tavro\\Bundle\\CoreBundle\\Entity\\Image",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "productImage": {
+                    "name": "productImage",
+                    "line": 344,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "Tavro\\Bundle\\CoreBundle\\Entity\\Tavro\\Bundle\\CoreBundle\\Entity\\ProductImage",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "Tavro\\Bundle\\CoreBundle\\Entity\\ProductImage",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "removeProductImage": {
+            "name": "removeProductImage",
+            "line": 356,
+            "short_desc": "Remove productImage",
+            "long_desc": "",
+            "hint": null,
+            "hint_desc": null,
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "productImage": {
+                    "name": "productImage",
+                    "line": 356,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "Tavro\\Bundle\\CoreBundle\\Entity\\Tavro\\Bundle\\CoreBundle\\Entity\\ProductImage",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "Tavro\\Bundle\\CoreBundle\\Entity\\ProductImage",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "getProductImages": {
+            "name": "getProductImages",
+            "line": 366,
+            "short_desc": "Get productImages",
+            "long_desc": "",
+            "hint": [
+                [
+                    "\\Doctrine\\Common\\Collections\\Collection",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": []
+        },
+        "addServiceImage": {
+            "name": "addServiceImage",
+            "line": 378,
+            "short_desc": "Add serviceImage",
+            "long_desc": "",
+            "hint": [
+                [
+                    "\\Tavro\\Bundle\\CoreBundle\\Entity\\Image",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "serviceImage": {
+                    "name": "serviceImage",
+                    "line": 378,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "Tavro\\Bundle\\CoreBundle\\Entity\\Tavro\\Bundle\\CoreBundle\\Entity\\ServiceImage",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "Tavro\\Bundle\\CoreBundle\\Entity\\ServiceImage",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "removeServiceImage": {
+            "name": "removeServiceImage",
+            "line": 390,
+            "short_desc": "Remove serviceImage",
+            "long_desc": "",
+            "hint": null,
+            "hint_desc": null,
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "serviceImage": {
+                    "name": "serviceImage",
+                    "line": 390,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "Tavro\\Bundle\\CoreBundle\\Entity\\Tavro\\Bundle\\CoreBundle\\Entity\\ServiceImage",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "Tavro\\Bundle\\CoreBundle\\Entity\\ServiceImage",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "getServiceImages": {
+            "name": "getServiceImages",
+            "line": 400,
+            "short_desc": "Get serviceImages",
+            "long_desc": "",
+            "hint": [
+                [
+                    "\\Doctrine\\Common\\Collections\\Collection",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": []
+        }
+    },
+    "constants": []
+}

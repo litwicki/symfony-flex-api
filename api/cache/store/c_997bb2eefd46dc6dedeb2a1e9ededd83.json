@@ -1,0 +1,93 @@
+{
+    "name": "Tavro\\Bundle\\CoreBundle\\EventListener\\LogoutListener",
+    "line": 10,
+    "short_desc": "",
+    "long_desc": "",
+    "hint": null,
+    "tags": [],
+    "namespace": "Tavro\\Bundle\\CoreBundle\\EventListener",
+    "file": "\/var\/www\/tavro\/api\/src\/Tavro\/Bundle\/CoreBundle\/EventListener\/LogoutListener.php",
+    "relative_file": null,
+    "hash": "7d94133f985f9f4b31b60d35b4177fa7ebbeebda",
+    "parent": null,
+    "modifiers": "Stmt_Class",
+    "is_trait": false,
+    "is_interface": false,
+    "aliases": {
+        "LogoutSuccessHandlerInterface": "Symfony\\Component\\Security\\Http\\Logout\\LogoutSuccessHandlerInterface",
+        "Request": "Symfony\\Component\\HttpFoundation\\Request",
+        "RedirectResponse": "Symfony\\Component\\HttpFoundation\\RedirectResponse",
+        "TokenStorage": "Symfony\\Component\\Security\\Core\\Authentication\\Token\\Storage\\TokenStorage"
+    },
+    "errors": [],
+    "interfaces": {
+        "Symfony\\Component\\Security\\Http\\Logout\\LogoutSuccessHandlerInterface": "Symfony\\Component\\Security\\Http\\Logout\\LogoutSuccessHandlerInterface"
+    },
+    "traits": [],
+    "properties": [],
+    "methods": {
+        "__construct": {
+            "name": "__construct",
+            "line": 14,
+            "short_desc": "",
+            "long_desc": "",
+            "hint": null,
+            "hint_desc": null,
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "tokenStorage": {
+                    "name": "tokenStorage",
+                    "line": 14,
+                    "short_desc": null,
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "Tavro\\Bundle\\CoreBundle\\EventListener\\Symfony\\Component\\Security\\Core\\Authentication\\Token\\Storage\\TokenStorage",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "Symfony\\Component\\Security\\Core\\Authentication\\Token\\Storage\\TokenStorage",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "onLogoutSuccess": {
+            "name": "onLogoutSuccess",
+            "line": 22,
+            "short_desc": "On Logout, terminate all Sessions for this User.",
+            "long_desc": "",
+            "hint": null,
+            "hint_desc": null,
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "request": {
+                    "name": "request",
+                    "line": 22,
+                    "short_desc": null,
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "Tavro\\Bundle\\CoreBundle\\EventListener\\Symfony\\Component\\HttpFoundation\\Request",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "Symfony\\Component\\HttpFoundation\\Request",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        }
+    },
+    "constants": []
+}

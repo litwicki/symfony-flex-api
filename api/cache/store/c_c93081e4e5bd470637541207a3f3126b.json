@@ -1,0 +1,136 @@
+{
+    "name": "Tavro\\Bundle\\CoreBundle\\Services\\TavroMailer",
+    "line": 12,
+    "short_desc": "",
+    "long_desc": "",
+    "hint": null,
+    "tags": [],
+    "namespace": "Tavro\\Bundle\\CoreBundle\\Services",
+    "file": "\/var\/www\/tavro\/api\/src\/Tavro\/Bundle\/CoreBundle\/Services\/TavroMailer.php",
+    "relative_file": null,
+    "hash": "d7ec481d749efe4f552dde0874a9f16d06fe4d08",
+    "parent": null,
+    "modifiers": "Stmt_Class",
+    "is_trait": false,
+    "is_interface": false,
+    "aliases": {
+        "Response": "Symfony\\Component\\HttpFoundation\\Response",
+        "Request": "Symfony\\Component\\HttpFoundation\\Request",
+        "Controller": "Symfony\\Bundle\\FrameworkBundle\\Controller\\Controller",
+        "ContainerAwareInterface": "Symfony\\Component\\DependencyInjection\\ContainerAwareInterface",
+        "ContainerInterface": "Symfony\\Component\\DependencyInjection\\ContainerInterface"
+    },
+    "errors": [],
+    "interfaces": {
+        "Symfony\\Component\\DependencyInjection\\ContainerAwareInterface": "Symfony\\Component\\DependencyInjection\\ContainerAwareInterface"
+    },
+    "traits": [],
+    "properties": [],
+    "methods": {
+        "__construct": {
+            "name": "__construct",
+            "line": 17,
+            "short_desc": "",
+            "long_desc": "",
+            "hint": null,
+            "hint_desc": null,
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "mailer": {
+                    "name": "mailer",
+                    "line": 17,
+                    "short_desc": null,
+                    "long_desc": null,
+                    "hint": null,
+                    "tags": [],
+                    "modifiers": "",
+                    "default": null,
+                    "is_by_ref": false
+                },
+                "templating": {
+                    "name": "templating",
+                    "line": 17,
+                    "short_desc": null,
+                    "long_desc": null,
+                    "hint": null,
+                    "tags": [],
+                    "modifiers": "",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        },
+        "setContainer": {
+            "name": "setContainer",
+            "line": 26,
+            "short_desc": "",
+            "long_desc": "",
+            "hint": null,
+            "hint_desc": null,
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "container": {
+                    "name": "container",
+                    "line": 26,
+                    "short_desc": "",
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "Tavro\\Bundle\\CoreBundle\\Services\\Symfony\\Component\\DependencyInjection\\ContainerInterface",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "Symfony\\Component\\DependencyInjection\\ContainerInterface",
+                    "default": "null",
+                    "is_by_ref": false
+                }
+            }
+        },
+        "sendEmail": {
+            "name": "sendEmail",
+            "line": 47,
+            "short_desc": "Send an email",
+            "long_desc": "@param $params array\n     Array of parameters for Swiftmailer\n         subject string\n         from mixed\n         recipient array\n         name string\n         url string\n         email string\n         html true|false",
+            "hint": null,
+            "hint_desc": null,
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [
+                [
+                    "\\Exception",
+                    "@return boolean"
+                ]
+            ],
+            "errors": [],
+            "parameters": {
+                "params": {
+                    "name": "params",
+                    "line": 47,
+                    "short_desc": null,
+                    "long_desc": null,
+                    "hint": [
+                        [
+                            "array",
+                            false
+                        ]
+                    ],
+                    "tags": [],
+                    "modifiers": "array",
+                    "default": null,
+                    "is_by_ref": false
+                }
+            }
+        }
+    },
+    "constants": []
+}

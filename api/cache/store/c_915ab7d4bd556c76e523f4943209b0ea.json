@@ -1,0 +1,27 @@
+{
+    "name": "Tavro\\Bundle\\ApiBundle\\Model\\OrganizationHandlerInterface",
+    "line": 9,
+    "short_desc": "",
+    "long_desc": "",
+    "hint": null,
+    "tags": [],
+    "namespace": "Tavro\\Bundle\\ApiBundle\\Model",
+    "file": "\/var\/www\/tavro\/api\/src\/Tavro\/Bundle\/ApiBundle\/Model\/OrganizationHandlerInterface.php",
+    "relative_file": null,
+    "hash": "775feafe81c1e0ae557fe7fb9a7412155ce874fd",
+    "parent": null,
+    "modifiers": "Stmt_Interface",
+    "is_trait": false,
+    "is_interface": true,
+    "aliases": {
+        "EntityInterface": "Tavro\\Bundle\\CoreBundle\\Model\\EntityInterface",
+        "Request": "Symfony\\Component\\HttpFoundation\\Request",
+        "User": "Tavro\\Bundle\\CoreBundle\\Entity\\User"
+    },
+    "errors": [],
+    "interfaces": [],
+    "traits": [],
+    "properties": [],
+    "methods": [],
+    "constants": []
+}

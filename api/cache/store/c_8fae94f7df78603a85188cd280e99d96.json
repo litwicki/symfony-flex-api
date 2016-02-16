@@ -1,0 +1,96 @@
+{
+    "name": "Tavro\\Bundle\\CoreBundle\\Exception\\Form\\InvalidFormException",
+    "line": 11,
+    "short_desc": "Class InvalidFormException",
+    "long_desc": "",
+    "hint": null,
+    "tags": {
+        "author": [
+            [
+                ":",
+                "jake.litwicki"
+            ]
+        ],
+        "package": [
+            [
+                "Tavro\\Bundle\\CoreBundle\\Exception\\Form"
+            ]
+        ]
+    },
+    "namespace": "Tavro\\Bundle\\CoreBundle\\Exception\\Form",
+    "file": "\/var\/www\/tavro\/api\/src\/Tavro\/Bundle\/CoreBundle\/Exception\/Form\/InvalidFormException.php",
+    "relative_file": null,
+    "hash": "3e0ecdf8660fe1ed6b997a2f5c252c63bc114e6f",
+    "parent": "RuntimeException",
+    "modifiers": "Stmt_Class",
+    "is_trait": false,
+    "is_interface": false,
+    "aliases": [],
+    "errors": [],
+    "interfaces": [],
+    "traits": [],
+    "properties": [],
+    "methods": {
+        "__construct": {
+            "name": "__construct",
+            "line": 15,
+            "short_desc": "",
+            "long_desc": "",
+            "hint": null,
+            "hint_desc": null,
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": {
+                "message": {
+                    "name": "message",
+                    "line": 15,
+                    "short_desc": null,
+                    "long_desc": null,
+                    "hint": null,
+                    "tags": [],
+                    "modifiers": "",
+                    "default": null,
+                    "is_by_ref": false
+                },
+                "form": {
+                    "name": "form",
+                    "line": 15,
+                    "short_desc": null,
+                    "long_desc": null,
+                    "hint": null,
+                    "tags": [],
+                    "modifiers": "",
+                    "default": "NULL",
+                    "is_by_ref": false
+                }
+            }
+        },
+        "getForm": {
+            "name": "getForm",
+            "line": 24,
+            "short_desc": "",
+            "long_desc": "",
+            "hint": [
+                [
+                    "array",
+                    false
+                ],
+                [
+                    "null",
+                    false
+                ]
+            ],
+            "hint_desc": "",
+            "tags": [],
+            "modifiers": "1",
+            "is_by_ref": "",
+            "exceptions": [],
+            "errors": [],
+            "parameters": []
+        }
+    },
+    "constants": []
+}
