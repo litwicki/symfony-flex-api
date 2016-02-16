@@ -66,6 +66,11 @@ class Product extends ApiEntity
     protected $product_images;
 
     /**
+     * @ORM\OneToMany(targetEntity="Tavro\Bundle\CoreBundle\Entity\RevenueProduct", mappedBy="product", cascade={"remove"})
+     */
+    protected $revenue_products;
+
+    /**
      * Constructor
      */
     public function __construct()

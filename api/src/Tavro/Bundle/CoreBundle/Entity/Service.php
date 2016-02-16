@@ -49,6 +49,11 @@ class Service extends ApiEntity
     protected $organization;
 
     /**
+     * @ORM\OneToMany(targetEntity="Tavro\Bundle\CoreBundle\Entity\RevenueService", mappedBy="service", cascade={"remove"})
+     */
+    protected $revenue_services;
+
+    /**
      * Constructor
      */
     public function __construct()
@@ -134,5 +139,39 @@ class Service extends ApiEntity
     public function getCategory()
     {
         return $this->category;
+    }
+
+    /**
+     * Add revenueService
+     *
+     * @param \Tavro\Bundle\CoreBundle\Entity\RevenueService $revenueService
+     *
+     * @return Service
+     */
+    public function addRevenueService(\Tavro\Bundle\CoreBundle\Entity\RevenueService $revenueService)
+    {
+        $this->revenue_services[] = $revenueService;
+
+        return $this;
+    }
+
+    /**
+     * Remove revenueService
+     *
+     * @param \Tavro\Bundle\CoreBundle\Entity\RevenueService $revenueService
+     */
+    public function removeRevenueService(\Tavro\Bundle\CoreBundle\Entity\RevenueService $revenueService)
+    {
+        $this->revenue_services->removeElement($revenueService);
+    }
+
+    /**
+     * Get revenueServices
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getRevenueServices()
+    {
+        return $this->revenue_services;
     }
 }

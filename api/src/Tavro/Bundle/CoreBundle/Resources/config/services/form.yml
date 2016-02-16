@@ -47,3 +47,11 @@ services:
         class: Tavro\Bundle\CoreBundle\Form\CustomerCommentType
         tags:
          -  { name: form.type, alias: customer_comment_type }
+    tavro.form.revenue_service:
+        class: Tavro\Bundle\CoreBundle\Form\RevenueServiceType
+        tags:
+         -  { name: form.type, alias: revenue_service_type }
+    tavro.form.revenue_product:
+        class: Tavro\Bundle\CoreBundle\Form\RevenueProductType
+        tags:
+         -  { name: form.type, alias: revenue_product_type }

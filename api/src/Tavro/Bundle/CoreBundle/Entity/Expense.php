@@ -81,7 +81,7 @@ class Expense extends ApiEntity
 
     /**
      * @ORM\ManyToOne(targetEntity="Tavro\Bundle\CoreBundle\Entity\Organization", inversedBy="expenses")
-     * @ORM\JoinColumn(name="organization_id", referencedColumnName="id", nullable=true)
+     * @ORM\JoinColumn(name="customer_id", referencedColumnName="id", nullable=true)
      * @Groups({"api", "tavro", "simple"})
      * @MaxDepth(3)
      */
