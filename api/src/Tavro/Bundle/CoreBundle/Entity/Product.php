@@ -66,6 +66,11 @@ class Product extends ApiEntity
     protected $product_images;
 
     /**
+     * @ORM\OneToMany(targetEntity="Tavro\Bundle\CoreBundle\Entity\RevenueProduct", mappedBy="product", cascade={"remove"})
+     */
+    protected $revenue_products;
+
+    /**
      * Constructor
      */
     public function __construct()
@@ -232,5 +237,39 @@ class Product extends ApiEntity
     public function getCost()
     {
         return $this->cost;
+    }
+
+    /**
+     * Add revenueProduct
+     *
+     * @param \Tavro\Bundle\CoreBundle\Entity\RevenueProduct $revenueProduct
+     *
+     * @return Product
+     */
+    public function addRevenueProduct(\Tavro\Bundle\CoreBundle\Entity\RevenueProduct $revenueProduct)
+    {
+        $this->revenue_products[] = $revenueProduct;
+
+        return $this;
+    }
+
+    /**
+     * Remove revenueProduct
+     *
+     * @param \Tavro\Bundle\CoreBundle\Entity\RevenueProduct $revenueProduct
+     */
+    public function removeRevenueProduct(\Tavro\Bundle\CoreBundle\Entity\RevenueProduct $revenueProduct)
+    {
+        $this->revenue_products->removeElement($revenueProduct);
+    }
+
+    /**
+     * Get revenueProducts
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getRevenueProducts()
+    {
+        return $this->revenue_products;
     }
 }

@@ -73,6 +73,16 @@ class Revenue extends ApiEntity
     protected $revenue_comments;
 
     /**
+     * @ORM\OneToMany(targetEntity="Tavro\Bundle\CoreBundle\Entity\RevenueService", mappedBy="revenue", cascade={"remove"})
+     */
+    protected $revenue_services;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Tavro\Bundle\CoreBundle\Entity\RevenueProduct", mappedBy="revenue", cascade={"remove"})
+     */
+    protected $revenue_products;
+
+    /**
      * @ORM\OneToMany(targetEntity="Tavro\Bundle\CoreBundle\Entity\RevenueTag", mappedBy="revenue", cascade={"remove"})
      */
     protected $revenue_tags;
@@ -349,5 +359,73 @@ class Revenue extends ApiEntity
     public function getCustomer()
     {
         return $this->customer;
+    }
+
+    /**
+     * Add revenueService
+     *
+     * @param \Tavro\Bundle\CoreBundle\Entity\RevenueService $revenueService
+     *
+     * @return Revenue
+     */
+    public function addRevenueService(\Tavro\Bundle\CoreBundle\Entity\RevenueService $revenueService)
+    {
+        $this->revenue_services[] = $revenueService;
+
+        return $this;
+    }
+
+    /**
+     * Remove revenueService
+     *
+     * @param \Tavro\Bundle\CoreBundle\Entity\RevenueService $revenueService
+     */
+    public function removeRevenueService(\Tavro\Bundle\CoreBundle\Entity\RevenueService $revenueService)
+    {
+        $this->revenue_services->removeElement($revenueService);
+    }
+
+    /**
+     * Get revenueServices
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getRevenueServices()
+    {
+        return $this->revenue_services;
+    }
+
+    /**
+     * Add revenueProduct
+     *
+     * @param \Tavro\Bundle\CoreBundle\Entity\RevenueProduct $revenueProduct
+     *
+     * @return Revenue
+     */
+    public function addRevenueProduct(\Tavro\Bundle\CoreBundle\Entity\RevenueProduct $revenueProduct)
+    {
+        $this->revenue_products[] = $revenueProduct;
+
+        return $this;
+    }
+
+    /**
+     * Remove revenueProduct
+     *
+     * @param \Tavro\Bundle\CoreBundle\Entity\RevenueProduct $revenueProduct
+     */
+    public function removeRevenueProduct(\Tavro\Bundle\CoreBundle\Entity\RevenueProduct $revenueProduct)
+    {
+        $this->revenue_products->removeElement($revenueProduct);
+    }
+
+    /**
+     * Get revenueProducts
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getRevenueProducts()
+    {
+        return $this->revenue_products;
     }
 }
