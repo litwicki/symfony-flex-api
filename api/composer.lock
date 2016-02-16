@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "22e1a886db6d260077dcda29f5901df2",
-    "content-hash": "092d6ef117807c47b258834e89a92197",
+    "hash": "15ce63b7bb58b068a1542004ca8ef11d",
+    "content-hash": "3392565563f9751cc9844e72560f793a",
     "packages": [
         {
             "name": "aws/aws-sdk-php",
@@ -1325,7 +1325,7 @@
         },
         {
             "name": "gregwar/captcha-bundle",
-            "version": "dev-master",
+            "version": "v2.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Gregwar/CaptchaBundle.git",
@@ -2175,16 +2175,16 @@
         },
         {
             "name": "knplabs/knp-gaufrette-bundle",
-            "version": "dev-master",
+            "version": "0.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/KnpLabs/KnpGaufretteBundle.git",
-                "reference": "cee7dbfbed23d324ac7ed23d25d7b7709da95257"
+                "reference": "44cf552e14031517516458b0e394f16dd36a131b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/KnpLabs/KnpGaufretteBundle/zipball/cee7dbfbed23d324ac7ed23d25d7b7709da95257",
-                "reference": "cee7dbfbed23d324ac7ed23d25d7b7709da95257",
+                "url": "https://api.github.com/repos/KnpLabs/KnpGaufretteBundle/zipball/44cf552e14031517516458b0e394f16dd36a131b",
+                "reference": "44cf552e14031517516458b0e394f16dd36a131b",
                 "shasum": ""
             },
             "require": {
@@ -2229,20 +2229,20 @@
                 "filesystem",
                 "media"
             ],
-            "time": "2016-02-04 07:27:14"
+            "time": "2016-01-16 00:12:11"
         },
         {
             "name": "liip/imagine-bundle",
-            "version": "1.5.1",
+            "version": "1.5.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/liip/LiipImagineBundle.git",
-                "reference": "73a6497c7126aa7c70581ef8344832db3e3be86e"
+                "reference": "3be0322e0007b54dbffd5a96faf1c11f6f91cf46"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/liip/LiipImagineBundle/zipball/73a6497c7126aa7c70581ef8344832db3e3be86e",
-                "reference": "73a6497c7126aa7c70581ef8344832db3e3be86e",
+                "url": "https://api.github.com/repos/liip/LiipImagineBundle/zipball/3be0322e0007b54dbffd5a96faf1c11f6f91cf46",
+                "reference": "3be0322e0007b54dbffd5a96faf1c11f6f91cf46",
                 "shasum": ""
             },
             "require": {
@@ -2303,20 +2303,20 @@
                 "image",
                 "imagine"
             ],
-            "time": "2016-02-13 20:34:37"
+            "time": "2016-02-16 19:35:14"
         },
         {
             "name": "litwicki/common",
-            "version": "dev-master",
+            "version": "1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/litwicki/common.git",
-                "reference": "df0d5fd13094c6c77545046f73fbdf5baedbb908"
+                "reference": "a37f862b3732ee57d0bfcc2cfc0c041cabfeca3d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/litwicki/common/zipball/df0d5fd13094c6c77545046f73fbdf5baedbb908",
-                "reference": "df0d5fd13094c6c77545046f73fbdf5baedbb908",
+                "url": "https://api.github.com/repos/litwicki/common/zipball/a37f862b3732ee57d0bfcc2cfc0c041cabfeca3d",
+                "reference": "a37f862b3732ee57d0bfcc2cfc0c041cabfeca3d",
                 "shasum": ""
             },
             "require": {
@@ -2326,9 +2326,12 @@
                 "symfony/yaml": "To use yaml based configuration."
             },
             "type": "library",
+            "extra": {
+                "branch-alias": []
+            },
             "autoload": {
                 "psr-0": {
-                    "Litwicki\\Common\\": "lib"
+                    "Litwicki": "src/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -2342,13 +2345,7 @@
                 }
             ],
             "description": "Helper functions and utilities.",
-            "homepage": "http://jakelitwicki.com",
-            "keywords": [
-                "component",
-                "helper",
-                "library"
-            ],
-            "time": "2016-02-11 21:36:56"
+            "time": "2015-05-29 17:07:25"
         },
         {
             "name": "mjohnson/decoda",
@@ -2479,30 +2476,26 @@
         },
         {
             "name": "moontoast/math",
-            "version": "dev-master",
+            "version": "1.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ramsey/moontoast-math.git",
-                "reference": "f6fc6bb891917d818cf9f8a630a96c75af0c9163"
+                "reference": "fce28a9d1e73e73376cb44e5e581675d15fbe2f3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ramsey/moontoast-math/zipball/f6fc6bb891917d818cf9f8a630a96c75af0c9163",
-                "reference": "f6fc6bb891917d818cf9f8a630a96c75af0c9163",
+                "url": "https://api.github.com/repos/ramsey/moontoast-math/zipball/fce28a9d1e73e73376cb44e5e581675d15fbe2f3",
+                "reference": "fce28a9d1e73e73376cb44e5e581675d15fbe2f3",
                 "shasum": ""
             },
             "require": {
                 "ext-bcmath": "*",
                 "php": ">=5.3.3"
             },
-            "require-dev": {
-                "phpunit/phpunit": "~4.1",
-                "satooshi/php-coveralls": "~0.6"
-            },
             "type": "library",
             "autoload": {
-                "psr-4": {
-                    "Moontoast\\Math\\": "src/Moontoast/Math/"
+                "psr-0": {
+                    "Moontoast\\Math": "src/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -2510,11 +2503,12 @@
                 "Apache-2.0"
             ],
             "description": "A mathematics library, providing functionality for large numbers",
+            "homepage": "https://github.com/moontoast/math",
             "keywords": [
                 "bcmath",
                 "math"
             ],
-            "time": "2015-12-12 17:49:14"
+            "time": "2013-01-19 17:42:34"
         },
         {
             "name": "mtdowling/jmespath.php",
@@ -3779,21 +3773,20 @@
         },
         {
             "name": "twig/twig",
-            "version": "dev-master",
+            "version": "v1.24.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/twigphp/Twig.git",
-                "reference": "2ed184ec2df1c05eb1935b13b01280965bd2c856"
+                "reference": "3e5aa30ebfbafd5951fb1b01e338e1800ce7e0e8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/twigphp/Twig/zipball/2ed184ec2df1c05eb1935b13b01280965bd2c856",
-                "reference": "2ed184ec2df1c05eb1935b13b01280965bd2c856",
+                "url": "https://api.github.com/repos/twigphp/Twig/zipball/3e5aa30ebfbafd5951fb1b01e338e1800ce7e0e8",
+                "reference": "3e5aa30ebfbafd5951fb1b01e338e1800ce7e0e8",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.5",
-                "symfony/polyfill-mbstring": "~1.0"
+                "php": ">=5.2.7"
             },
             "require-dev": {
                 "symfony/debug": "~2.7",
@@ -3802,7 +3795,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.0-dev"
+                    "dev-master": "1.24-dev"
                 }
             },
             "autoload": {
@@ -3837,7 +3830,7 @@
             "keywords": [
                 "templating"
             ],
-            "time": "2016-01-31 08:00:54"
+            "time": "2016-01-25 21:22:18"
         },
         {
             "name": "zendframework/zend-code",
@@ -3949,7 +3942,7 @@
     "packages-dev": [
         {
             "name": "apoutchika/loremipsum-bundle",
-            "version": "dev-master",
+            "version": "v1.0.3",
             "target-dir": "Apoutchika/LoremIpsumBundle",
             "source": {
                 "type": "git",
@@ -4107,13 +4100,7 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "twig/twig": 20,
-        "stof/doctrine-extensions-bundle": 20,
-        "litwicki/common": 20,
-        "knplabs/knp-gaufrette-bundle": 20,
-        "gregwar/captcha-bundle": 20,
-        "moontoast/math": 20,
-        "apoutchika/loremipsum-bundle": 20
+        "stof/doctrine-extensions-bundle": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,

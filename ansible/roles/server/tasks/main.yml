@@ -59,6 +59,10 @@
   with_items: server.packages
   when: server.packages is defined
 
+- name: Install OAUTH PHP package
+  sudo: yes
+  shell: pecl install oauth
+
 - name: Configure the timezone
   sudo: yes
   template: src=timezone.tpl dest=/etc/timezone

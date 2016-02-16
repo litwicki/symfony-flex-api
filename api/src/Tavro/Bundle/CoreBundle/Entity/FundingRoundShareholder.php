@@ -45,6 +45,14 @@ class FundingRoundShareholder extends Entity
     protected $shares;
 
     /**
+     * @ORM\ManyToOne(targetEntity="Tavro\Bundle\CoreBundle\Entity\Organization", inversedBy="funding_round_shareholders")
+     * @ORM\JoinColumn(name="organization_id", referencedColumnName="id", nullable=false)
+     * @Groups({"api", "tavro"})
+     * @MaxDepth(3)
+     */
+    protected $organization;
+
+    /**
      * Set shareholder
      *
      * @param \Tavro\Bundle\CoreBundle\Entity\Shareholder $shareholder
@@ -113,5 +121,29 @@ class FundingRoundShareholder extends Entity
     public function getShares()
     {
         return $this->shares;
+    }
+
+    /**
+     * Set organization
+     *
+     * @param \Tavro\Bundle\CoreBundle\Entity\Organization $organization
+     *
+     * @return FundingRoundShareholder
+     */
+    public function setOrganization(\Tavro\Bundle\CoreBundle\Entity\Organization $organization)
+    {
+        $this->organization = $organization;
+
+        return $this;
+    }
+
+    /**
+     * Get organization
+     *
+     * @return \Tavro\Bundle\CoreBundle\Entity\Organization
+     */
+    public function getOrganization()
+    {
+        return $this->organization;
     }
 }
