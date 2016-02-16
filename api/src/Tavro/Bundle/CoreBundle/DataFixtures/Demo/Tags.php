@@ -1,6 +1,6 @@
 <?php
 
-namespace Tavro\Bundle\ApiBundle\DataFixtures\Demo;
+namespace Tavro\Bundle\CoreBundle\DataFixtures\Demo;
 
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
@@ -14,7 +14,6 @@ use Tavro\Bundle\CoreBundle\Entity\User;
 use Tavro\Bundle\CoreBundle\Entity\Role;
 use Tavro\Bundle\CoreBundle\Entity\Variable;
 use Tavro\Bundle\CoreBundle\Entity\Organization;
-
 use Tavro\Bundle\CoreBundle\Entity\Shareholder;
 use Tavro\Bundle\CoreBundle\Entity\Product;
 use Tavro\Bundle\CoreBundle\Entity\Service;
@@ -35,6 +34,8 @@ use Tavro\Bundle\CoreBundle\Entity\ServiceCategory;
 use Tavro\Bundle\CoreBundle\Entity\Customer;
 use Tavro\Bundle\CoreBundle\Entity\CustomerComment;
 use Tavro\Bundle\CoreBundle\Entity\FundingRoundShareholder;
+use Tavro\Bundle\CoreBundle\Entity\RevenueService;
+use Tavro\Bundle\CoreBundle\Entity\RevenueProduct;
 
 use Cocur\Slugify\Slugify;
 use Litwicki\Common\Common as Litwicki;
@@ -44,7 +45,7 @@ use Litwicki\Common\Common as Litwicki;
  *
  * @author jake.litwicki@gmail.com
  */
-class Customers extends AbstractFixture implements OrderedFixtureInterface, ContainerAwareInterface
+class Tags extends AbstractFixture implements OrderedFixtureInterface, ContainerAwareInterface
 {
 
     /**
@@ -60,22 +61,6 @@ class Customers extends AbstractFixture implements OrderedFixtureInterface, Cont
         $this->container = $container;
     }
 
-    public function getCities($state)
-    {
-        $json = file_get_contents(sprintf('http://api.sba.gov/geodata/city_links_for_state_of/%s.json', $state));
-        $data = json_decode($json, true);
-        $cities = array();
-        foreach($data as $item) {
-            $cities[] = $item['name'];
-        }
-        return $cities;
-    }
-
-    public function getStates()
-    {
-        return Litwicki::getStateSelectChoices();
-    }
-
     /**
      * {@inheritDoc}
      */
@@ -84,37 +69,21 @@ class Customers extends AbstractFixture implements OrderedFixtureInterface, Cont
         $lipsum = $this->container->get('apoutchika.lorem_ipsum');
         $size = 10;
 
-        $organizations = $manager->getRepository('TavroCoreBundle:Organization')->findAll();
+        $tags = array();
 
-        foreach($organizations as $organization) {
+        for($i=0;$i<50;$i++) {
 
-            for($i=0;$i<$size;$i++) {
-
-                $name = $lipsum->getWords(1);
-                $email = sprintf('%s@tavro-customer.dev', $name);
-
-                $cities = $this->getCities('WA');
-
-                $customer = new Customer();
-                $customer->setEmail($email);
-                $customer->setFirstName(ucfirst($name));
-                $customer->setLastName(ucfirst($lipsum->getWords(1)));
-                $customer->setStatus(rand(0,1));
-                $customer->setCreateDate(new \DateTime());
-                $customer->setAddress(ucwords($lipsum->getWords(rand(1,3))));
-                $customer->setCity($cities[array_rand($cities)]);
-                $customer->setState('WA');
-                $customer->setZip(rand(11111,99999));
-                $customer->setOrganization($organization);
-                $customer->setPhone(sprintf('(%s) %s-%s', rand(111,999), rand(111,999), rand(1111,9999)));
-                $manager->persist($customer);
-                $customers[] = $customer;
-
-            }
-
-            $manager->flush();
+            $tag = new Tag();
+            $tag->setTitle($lipsum->getWords(1));
+            $tag->setBody($lipsum->getSentences(1));
+            $tag->setCreateDate(new \DateTime());
+            $tag->setStatus(1);
+            $manager->persist($tag);
+            $tags[] = $tag;
 
         }
+
+        $manager->flush();
 
     }
 
@@ -123,7 +92,7 @@ class Customers extends AbstractFixture implements OrderedFixtureInterface, Cont
      */
     public function getOrder()
     {
-        return 8; // the order in which fixtures will be loaded
+        return 5; // the order in which fixtures will be loaded
     }
 
 }

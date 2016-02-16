@@ -1,6 +1,6 @@
 <?php
 
-namespace Tavro\Bundle\ApiBundle\DataFixtures\Demo;
+namespace Tavro\Bundle\CoreBundle\DataFixtures\Demo;
 
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
@@ -14,6 +14,7 @@ use Tavro\Bundle\CoreBundle\Entity\User;
 use Tavro\Bundle\CoreBundle\Entity\Role;
 use Tavro\Bundle\CoreBundle\Entity\Variable;
 use Tavro\Bundle\CoreBundle\Entity\Organization;
+
 use Tavro\Bundle\CoreBundle\Entity\Shareholder;
 use Tavro\Bundle\CoreBundle\Entity\Product;
 use Tavro\Bundle\CoreBundle\Entity\Service;
@@ -43,7 +44,7 @@ use Litwicki\Common\Common as Litwicki;
  *
  * @author jake.litwicki@gmail.com
  */
-class Categories extends AbstractFixture implements OrderedFixtureInterface, ContainerAwareInterface
+class UserOrganizations extends AbstractFixture implements OrderedFixtureInterface, ContainerAwareInterface
 {
 
     /**
@@ -88,55 +89,14 @@ class Categories extends AbstractFixture implements OrderedFixtureInterface, Con
 
         foreach($organizations as $organization) {
 
-            $expenseCategories = array();
-            $revenueCategories = array();
-            $serviceCategories = array();
-            $productCategories = array();
-
-            for($i=0;$i<5;$i++) {
-                $productCategory = new ProductCategory();
-                $productCategory->setOrganization($organization);
-                $productCategory->setCreateDate(new \DateTime());
-                $productCategory->setStatus(1);
-                $productCategory->setBody($lipsum->getWords(rand(1,5)));
-                $manager->persist($productCategory);
-                $productCategories[] = $productCategory;
-            }
-
-            $manager->flush();
-
-            for($i=0;$i<5;$i++) {
-                $serviceCategory = new ServiceCategory();
-                $serviceCategory->setOrganization($organization);
-                $serviceCategory->setCreateDate(new \DateTime());
-                $serviceCategory->setStatus(1);
-                $serviceCategory->setBody($lipsum->getWords(rand(1,5)));
-                $manager->persist($serviceCategory);
-                $serviceCategories[] = $serviceCategory;
-            }
-
-            $manager->flush();
-
-            for($i=0;$i<5;$i++) {
-                $revenueCategory = new RevenueCategory();
-                $revenueCategory->setOrganization($organization);
-                $revenueCategory->setCreateDate(new \DateTime());
-                $revenueCategory->setStatus(1);
-                $revenueCategory->setBody($lipsum->getWords(rand(1,5)));
-                $manager->persist($revenueCategory);
-                $revenueCategories[] = $revenueCategory;
-            }
-
-            $manager->flush();
-
-            for($i=0;$i<5;$i++) {
-                $expenseCategory = new ExpenseCategory();
-                $expenseCategory->setOrganization($organization);
-                $expenseCategory->setCreateDate(new \DateTime());
-                $expenseCategory->setStatus(1);
-                $expenseCategory->setBody($lipsum->getWords(rand(1,5)));
-                $manager->persist($expenseCategory);
-                $expenseCategories[] = $expenseCategory;
+            for($i=0;$i<rand(0,$size);$i++) {
+                $user = $users[array_rand($users)];
+                $uo = new UserOrganization();
+                $uo->setUser($user);
+                $uo->setOrganization($organization);
+                $uo->setStatus(rand(0,1));
+                $uo->setCreateDate(new \DateTime());
+                $manager->persist($uo);
             }
 
             $manager->flush();
@@ -150,7 +110,7 @@ class Categories extends AbstractFixture implements OrderedFixtureInterface, Con
      */
     public function getOrder()
     {
-        return 6; // the order in which fixtures will be loaded
+        return 3; // the order in which fixtures will be loaded
     }
 
 }

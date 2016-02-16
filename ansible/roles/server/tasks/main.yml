@@ -18,9 +18,6 @@
     - python-pip
     - python-dev
 
-- name: install ansible on virtual machine
-  shell: pip install -y ansible
-
 - name: Add repository for php7
   shell: DEBIAN_FRONTEND=noninteractive sudo add-apt-repository -y ppa:ondrej/php-7.0
 

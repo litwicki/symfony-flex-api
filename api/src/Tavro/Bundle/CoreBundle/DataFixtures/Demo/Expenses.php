@@ -1,6 +1,6 @@
 <?php
 
-namespace Tavro\Bundle\ApiBundle\DataFixtures\Demo;
+namespace Tavro\Bundle\CoreBundle\DataFixtures\Demo;
 
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
@@ -89,8 +89,6 @@ class Expenses extends AbstractFixture implements OrderedFixtureInterface, Conta
         $expenseCategories = $manager->getRepository('TavroCoreBundle:ExpenseCategory')->findAll();
 
         foreach($organizations as $organization) {
-
-            $organization = $manager->getRepository('TavroCoreBundle:Organization')->find($organization->getId());
 
             $expenses = array();
 

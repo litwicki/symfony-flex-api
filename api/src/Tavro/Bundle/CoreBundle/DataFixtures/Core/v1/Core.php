@@ -1,6 +1,6 @@
 <?php
 
-namespace Tavro\Bundle\CoreBundle\DataFixtures\ORM\Core\v1;
+namespace Tavro\Bundle\CoreBundle\DataFixtures\Core\v1;
 
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;

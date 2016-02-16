@@ -1,6 +1,6 @@
 <?php
 
-namespace Tavro\Bundle\ApiBundle\DataFixtures\Demo;
+namespace Tavro\Bundle\CoreBundle\DataFixtures\Demo;
 
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
@@ -22,6 +22,7 @@ use Tavro\Bundle\CoreBundle\Entity\Expense;
 use Tavro\Bundle\CoreBundle\Entity\Node;
 use Tavro\Bundle\CoreBundle\Entity\Revenue;
 use Tavro\Bundle\CoreBundle\Entity\Tag;
+use Tavro\Bundle\CoreBundle\Entity\NodeTag;
 use Tavro\Bundle\CoreBundle\Entity\UserOrganization;
 use Tavro\Bundle\CoreBundle\Entity\ExpenseCategory;
 use Tavro\Bundle\CoreBundle\Entity\ExpenseComment;
@@ -44,7 +45,7 @@ use Litwicki\Common\Common as Litwicki;
  *
  * @author jake.litwicki@gmail.com
  */
-class Demo extends AbstractFixture implements OrderedFixtureInterface, ContainerAwareInterface
+class Nodes extends AbstractFixture implements OrderedFixtureInterface, ContainerAwareInterface
 {
 
     /**
@@ -87,28 +88,62 @@ class Demo extends AbstractFixture implements OrderedFixtureInterface, Container
         $organizations = $manager->getRepository('TavroCoreBundle:Organization')->findAll();
         $users = $manager->getRepository('TavroCoreBundle:User')->findAll();
         $tags = $manager->getRepository('TavroCoreBundle:Tag')->findAll();
-        $productCategories = $manager->getRepository('TavroCoreBundle:ProductCategory')->findAll();
 
         foreach($organizations as $organization) {
 
-            for($i=0;$i<rand(0,$size);$i++) {
+            $nodeTypes = array(
+                'article',
+                'press',
+                'wiki'
+            );
 
-                $category = $productCategories[array_rand($productCategories)];
-                $cost = rand(0.99, 999.99);
-                $product = new Product();
-                $product->setCategory($category);
-                $product->setCreateDate(new \DateTime());
-                $product->setStatus(rand(0,1));
-                $product->setTitle($lipsum->getWords(1,10));
-                $product->setBody($lipsum->getParagraphs(1,3));
-                $product->setOrganization($organization);
-                $product->setCost($cost);
-                $product->setPrice($cost * 1.15);
-                $manager->persist($product);
+            $nodes = array();
+
+            for($i=0;$i<$size;$i++) {
+
+                $node = new Node();
+                $node->setTitle($lipsum->getWords(rand(3,10)));
+                $node->setBody($lipsum->getParagraphs(rand(1,5)));
+                $node->setStatus(rand(0,1));
+                $node->setOrganization($organization);
+                $node->setType($nodeTypes[array_rand($nodeTypes)]);
+                $node->setCreateDate(new \DateTime());
+                $node->setDisplayDate(new \DateTime());
+                $node->setUser($users[array_rand($users)]);
+                $node->setViews(rand(0,999999));
+                $manager->persist($node);
+                $nodes[] = $node;
 
             }
 
             $manager->flush();
+
+            foreach($nodes as $node) {
+
+                for($i=0;$i<rand(0,$size);$i++) {
+                    $comment = new Comment();
+                    $comment->setUser($users[array_rand($users)]);
+                    $comment->setBody($lipsum->getSentences(rand(1,10)));
+                    $comment->setStatus(rand(0,1));
+                    $comment->setTitle($lipsum->getWords(rand(2,10)));
+                    $manager->persist($comment);
+                    $manager->flush();
+
+                    $nodeComment = new NodeComment();
+                    $nodeComment->setNode($node);
+                    $nodeComment->setComment($comment);
+                    $manager->persist($nodeComment);
+                    $manager->flush();
+                }
+
+                for($i=0;$i<rand(0,$size);$i++) {
+                    $nodeTag = new NodeTag();
+                    $nodeTag->setNode($node);
+                    $nodeTag->setTag($tags[array_rand($tags)]);
+                    $manager->persist($nodeTag);
+                }
+
+            }
 
         }
 
@@ -119,7 +154,7 @@ class Demo extends AbstractFixture implements OrderedFixtureInterface, Container
      */
     public function getOrder()
     {
-        return 11; // the order in which fixtures will be loaded
+        return 7; // the order in which fixtures will be loaded
     }
 
 }

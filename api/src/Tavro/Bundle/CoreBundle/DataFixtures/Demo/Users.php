@@ -1,6 +1,6 @@
 <?php
 
-namespace Tavro\Bundle\ApiBundle\DataFixtures\Demo;
+namespace Tavro\Bundle\CoreBundle\DataFixtures\Demo;
 
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
@@ -45,7 +45,7 @@ use Litwicki\Common\Common as Litwicki;
  *
  * @author jake.litwicki@gmail.com
  */
-class Tags extends AbstractFixture implements OrderedFixtureInterface, ContainerAwareInterface
+class Users extends AbstractFixture implements OrderedFixtureInterface, ContainerAwareInterface
 {
 
     /**
@@ -61,6 +61,23 @@ class Tags extends AbstractFixture implements OrderedFixtureInterface, Container
         $this->container = $container;
     }
 
+    public function getCities($state)
+    {
+        $json = file_get_contents(sprintf('http://api.sba.gov/geodata/city_links_for_state_of/%s.json', $state));
+        $data = json_decode($json, true);
+        $cities = [];
+        foreach ($data as $item) {
+            $cities[] = $item['name'];
+        }
+
+        return $cities;
+    }
+
+    public function getStates()
+    {
+        return Litwicki::getStateSelectChoices();
+    }
+
     /**
      * {@inheritDoc}
      */
@@ -69,18 +86,42 @@ class Tags extends AbstractFixture implements OrderedFixtureInterface, Container
         $lipsum = $this->container->get('apoutchika.lorem_ipsum');
         $size = 10;
 
-        $tags = array();
+        $organizations = [];
+        $users = [];
 
-        for($i=0;$i<50;$i++) {
+        $genders = array('male', 'female');
 
-            $tag = new Tag();
-            $tag->setTitle($lipsum->getWords(1));
-            $tag->setBody($lipsum->getSentences(1));
-            $tag->setCreateDate(new \DateTime());
-            $tag->setStatus(1);
-            $manager->persist($tag);
-            $tags[] = $tag;
+        $userRole = $manager->getRepository('TavroCoreBundle:Role')->findOneBy(array(
+            'role' => 'ROLE_USER',
+        ));
 
+        $developerRole = $manager->getRepository('TavroCoreBundle:Role')->findOneBy(array(
+            'role' => 'ROLE_DEVELOPER',
+        ));
+
+        $roles = array($userRole, $developerRole);
+
+        for($i=0;$i<$size;$i++) {
+
+            $username = sprintf('user%s', $i);
+            $email = sprintf('%s@tavro.dev', $username);
+            $salt = md5($email);
+            $password = 'Password1!';
+            $encoder = $this->container->get('tavro.password_encoder');
+            $password = $encoder->encodePassword($password, $salt);
+
+            $user = new User();
+            $user->setStatus(rand(0,1));
+            $user->setCreateDate(new \DateTime());
+            $user->setApiEnabled(rand(0,1));
+            $user->setEmail($email);
+            $user->setUsername($username);
+            $user->setGender($genders[rand(0,1)]);
+            $user->setSalt($salt);
+            $user->setPassword($password);
+            $user->addRole($roles[array_rand($roles)]);
+            $manager->persist($user);
+            $users[] = $user;
         }
 
         $manager->flush();
@@ -92,7 +133,6 @@ class Tags extends AbstractFixture implements OrderedFixtureInterface, Container
      */
     public function getOrder()
     {
-        return 5; // the order in which fixtures will be loaded
+        return 1; // the order in which fixtures will be loaded
     }
-
 }
