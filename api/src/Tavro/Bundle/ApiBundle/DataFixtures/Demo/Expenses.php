@@ -90,6 +90,8 @@ class Expenses extends AbstractFixture implements OrderedFixtureInterface, Conta
 
         foreach($organizations as $organization) {
 
+            $organization = $manager->getRepository('TavroCoreBundle:Organization')->find($organization->getId());
+
             $expenses = array();
 
             for($i=0;$i<$size;$i++) {

@@ -74,11 +74,11 @@ These scripts all require you first login to the VM via SSH:
     $ cd /path/to/tavro
     $ vagrant ssh
     
-###$ Restore to a Clean Database
+#### Restore to a Clean Database
 
     $ sudo bash /var/www/tavro/scripts/reset-clean.sh
    
-###$ Restore to Development "dummy" data
+#### Restore to Development "dummy" data
 
     $ sudo bash /var/www/tavro/scripts/reset-dev.sh
     
