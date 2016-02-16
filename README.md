@@ -82,3 +82,11 @@ These scripts all require you first login to the VM via SSH:
 
     $ sudo bash /var/www/tavro/scripts/reset-dev.sh
     
+### Documentation
+
+If you make any changes, updating the docs for reference is easy:
+
+    $ cd /path/to/tavro
+    $ vagrant ssh
+    $ sudo php /var/www/tavro/sami/sami update /var/www/tavro/sami/config.php
+    
