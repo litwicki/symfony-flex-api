@@ -37,3 +37,6 @@ api_doc_tag:
 api_doc_image:
     path: /image
     defaults: { _controller: "TavroAppBundle:Documentation:image" }
+api_doc_customer:
+    path: /customer
+    defaults: { _controller: "TavroAppBundle:Documentation:customer" }

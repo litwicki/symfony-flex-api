@@ -33,7 +33,7 @@ class Product extends ApiEntity
     protected $body;
 
     /**
-     * @ORM\Column(type="float", nullable=true, options={"default" = 0})
+     * @ORM\Column(type="float", nullable=false, options={"default" = 0})
      * @Groups({"api", "tavro", "simple"})
      */
     protected $price;

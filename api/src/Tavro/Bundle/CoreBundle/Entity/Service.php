@@ -33,6 +33,22 @@ class Service extends ApiEntity
     protected $body;
 
     /**
+     * @ORM\Column(type="float", nullable=false, options={"default" = 0})
+     * @Groups({"api", "tavro", "simple"})
+     */
+    protected $price;
+
+    /**
+     * @ORM\Column(type="string", nullable=false)
+     * @Assert\Choice(
+     *      choices = {"hour", "unit", "retainer"},
+     *      message = "Choose a valid service type."
+     * )
+     * @Groups({"api", "tavro", "simple"})
+     */
+    protected $type;
+
+    /**
      * @ORM\ManyToOne(targetEntity="Tavro\Bundle\CoreBundle\Entity\ServiceCategory", inversedBy="services")
      * @ORM\JoinColumn(name="category_id", referencedColumnName="id", nullable=false)
      * @Groups({"api", "tavro", "simple"})
@@ -173,5 +189,53 @@ class Service extends ApiEntity
     public function getRevenueServices()
     {
         return $this->revenue_services;
+    }
+
+    /**
+     * Set price
+     *
+     * @param float $price
+     *
+     * @return Service
+     */
+    public function setPrice($price)
+    {
+        $this->price = $price;
+
+        return $this;
+    }
+
+    /**
+     * Get price
+     *
+     * @return float
+     */
+    public function getPrice()
+    {
+        return $this->price;
+    }
+
+    /**
+     * Set type
+     *
+     * @param string $type
+     *
+     * @return Service
+     */
+    public function setType($type)
+    {
+        $this->type = $type;
+
+        return $this;
+    }
+
+    /**
+     * Get type
+     *
+     * @return string
+     */
+    public function getType()
+    {
+        return $this->type;
     }
 }

@@ -178,4 +178,17 @@ class DocumentationController extends DefaultController
         return $this->render('TavroAppBundle:Documentation:image.html.twig', $page);
     }
 
+    /**
+     * @param \Symfony\Component\HttpFoundation\Request $request
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function customerAction(Request $request)
+    {
+        $page = array(
+            'user' => $this->getUser()
+        );
+        return $this->render('TavroAppBundle:Documentation:customer.html.twig', $page);
+    }
+
 }

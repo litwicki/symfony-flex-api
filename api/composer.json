@@ -45,10 +45,10 @@
         "twig/extensions": "^1.3"
     },
     "require-dev": {
-        "raulfraile/ladybug-bundle": "dev-master",
         "apoutchika/loremipsum-bundle": "dev-master",
         "sensio/generator-bundle": "^3.0",
-        "symfony/phpunit-bridge": "^2.7"
+        "symfony/phpunit-bridge": "^2.7",
+        "symfony/var-dumper": "^3.0"
     },
     "scripts": {
         "post-install-cmd": [

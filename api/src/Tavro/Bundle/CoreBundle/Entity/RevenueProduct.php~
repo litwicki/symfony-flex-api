@@ -37,12 +37,6 @@ class RevenueProduct extends Entity
     protected $revenue;
 
     /**
-     * @ORM\Column(type="integer", nullable=true, options={"default" = 0})
-     * @Groups({"api", "tavro", "simple"})
-     */
-    protected $qty;
-
-    /**
      * Set product
      *
      * @param \Tavro\Bundle\CoreBundle\Entity\Product $product
