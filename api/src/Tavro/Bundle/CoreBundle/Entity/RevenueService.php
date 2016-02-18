@@ -18,7 +18,7 @@ use Tavro\Bundle\CoreBundle\Model\EntityInterface;
 
 /**
  * @ORM\Entity
- * @ORM\Table(name="tavro_revenue_service", indexes={@ORM\Index(name="REVENUE_PRODUCT", columns={"service_id","revenue_id"})})
+ * @ORM\Table(name="tavro_revenue_service", indexes={@ORM\Index(name="REVENUE_SERVICE", columns={"service_id","revenue_id"})})
  * @ExclusionPolicy("all")
  */
 class RevenueService extends Entity
@@ -35,6 +35,18 @@ class RevenueService extends Entity
      * @ORM\JoinColumn(name="revenue_id", referencedColumnName="id", nullable=false)
      */
     protected $revenue;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true, options={"default" = 1})
+     * @Groups({"api", "tavro", "simple"})
+     */
+    protected $qty;
+
+    public function __construct()
+    {
+        $this->qty = 1;
+        $this->create_date = new \DateTime();
+    }
 
     /**
      * Set service
@@ -82,4 +94,28 @@ class RevenueService extends Entity
         return $this->revenue;
     }
 
+
+    /**
+     * Set qty
+     *
+     * @param integer $qty
+     *
+     * @return RevenueService
+     */
+    public function setQty($qty)
+    {
+        $this->qty = $qty;
+
+        return $this;
+    }
+
+    /**
+     * Get qty
+     *
+     * @return integer
+     */
+    public function getQty()
+    {
+        return $this->qty;
+    }
 }

@@ -1,6 +1,10 @@
 imports:
     - { resource: config.yml }
 
+parameters:
+    assetic.filter.compass.images_dir: %kernel.root_dir%/../web/images
+    assetic.filter.compass.http_path:  /images
+
 framework:
     router:
         resource: "%kernel.root_dir%/config/routing_dev.yml"
@@ -14,7 +18,3 @@ web_profiler:
 swiftmailer:
     disable_delivery: false
     delivery_address: jake.litwicki@gmail.com
-
-parameters:
-    assetic.filter.compass.images_dir: %kernel.root_dir%/../web/images
-    assetic.filter.compass.http_path:  /images

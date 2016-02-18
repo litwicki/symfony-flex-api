@@ -85,11 +85,13 @@ class Demo extends AbstractFixture implements OrderedFixtureInterface, Container
         $size = 10;
 
         $organizations = $manager->getRepository('TavroCoreBundle:Organization')->findAll();
-        $users = $manager->getRepository('TavroCoreBundle:User')->findAll();
-        $tags = $manager->getRepository('TavroCoreBundle:Tag')->findAll();
-        $productCategories = $manager->getRepository('TavroCoreBundle:ProductCategory')->findAll();
+
 
         foreach($organizations as $organization) {
+
+            $productCategories = $organization->getProductCategories()->toArray();
+
+            $products = array();
 
             for($i=0;$i<rand(0,$size);$i++) {
 

@@ -191,7 +191,7 @@ class User extends Entity implements UserInterface, \Serializable
 
     /**
      * @ORM\OneToOne(targetEntity="Tavro\Bundle\CoreBundle\Entity\UserQuickbooks")
-     * @ORM\JoinColumn(name="user_quickbooks_id", referencedColumnName="id", nullable=false)
+     * @ORM\JoinColumn(name="user_quickbooks_id", referencedColumnName="id", nullable=true)
      * @Groups({"api", "tavro"})
      * @MaxDepth(1)
      */
@@ -1115,5 +1115,19 @@ class User extends Entity implements UserInterface, \Serializable
     public function getUserQuickbooks()
     {
         return $this->user_quickbooks;
+    }
+
+    /**
+     * Set userQuickbooks
+     *
+     * @param \Tavro\Bundle\CoreBundle\Entity\UserQuickbooks $userQuickbooks
+     *
+     * @return User
+     */
+    public function setUserQuickbooks(\Tavro\Bundle\CoreBundle\Entity\UserQuickbooks $userQuickbooks)
+    {
+        $this->user_quickbooks = $userQuickbooks;
+
+        return $this;
     }
 }

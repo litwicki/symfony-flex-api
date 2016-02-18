@@ -1,7 +1,3 @@
-quickbooks_oauth:
-    resource: "@QuickbooksOauthBundle/Resources/config/routing.yml"
-    prefix:   /
-
 # ======================================
 # APPLICATION FRONTEND (ANGULAR et-all)
 # ======================================

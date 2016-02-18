@@ -101,7 +101,7 @@ class Users extends AbstractFixture implements OrderedFixtureInterface, Containe
 
         $roles = array($userRole, $developerRole);
 
-        for($i=0;$i<$size;$i++) {
+        for($i=1;$i<$size;$i++) {
 
             $username = sprintf('user%s', $i);
             $email = sprintf('%s@tavro.dev', $username);

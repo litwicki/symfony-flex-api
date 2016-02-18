@@ -37,6 +37,19 @@ class RevenueProduct extends Entity
     protected $revenue;
 
     /**
+     * @ORM\Column(type="integer", nullable=true, options={"default" = 1})
+     * @Groups({"api", "tavro", "simple"})
+     */
+    protected $qty;
+
+    public function __construct()
+    {
+        $this->qty = 1;
+        $this->create_date = new \DateTime();
+    }
+
+
+    /**
      * Set product
      *
      * @param \Tavro\Bundle\CoreBundle\Entity\Product $product
@@ -82,4 +95,28 @@ class RevenueProduct extends Entity
         return $this->revenue;
     }
 
+
+    /**
+     * Set qty
+     *
+     * @param integer $qty
+     *
+     * @return RevenueProduct
+     */
+    public function setQty($qty)
+    {
+        $this->qty = $qty;
+
+        return $this;
+    }
+
+    /**
+     * Get qty
+     *
+     * @return integer
+     */
+    public function getQty()
+    {
+        return $this->qty;
+    }
 }

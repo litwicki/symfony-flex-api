@@ -37,6 +37,14 @@ class Tag extends ApiEntity
      * @Groups({"api", "tavro", "simple"})
      */
     protected $body;
+    
+    /**
+     * @ORM\ManyToOne(targetEntity="Tavro\Bundle\CoreBundle\Entity\Organization", inversedBy="nodes")
+     * @ORM\JoinColumn(name="organization_id", referencedColumnName="id", nullable=false)
+     * @Groups({"api", "tavro", "simple"})
+     * @MaxDepth(3)
+     */
+    protected $organization;
 
     /**
      * @ORM\OneToMany(targetEntity="Tavro\Bundle\CoreBundle\Entity\NodeTag", mappedBy="tag", cascade={"remove"})
@@ -161,5 +169,29 @@ class Tag extends ApiEntity
     public function getExpenseTags()
     {
         return $this->expense_tags;
+    }
+
+    /**
+     * Set organization
+     *
+     * @param \Tavro\Bundle\CoreBundle\Entity\Organization $organization
+     *
+     * @return Tag
+     */
+    public function setOrganization(\Tavro\Bundle\CoreBundle\Entity\Organization $organization)
+    {
+        $this->organization = $organization;
+
+        return $this;
+    }
+
+    /**
+     * Get organization
+     *
+     * @return \Tavro\Bundle\CoreBundle\Entity\Organization
+     */
+    public function getOrganization()
+    {
+        return $this->organization;
     }
 }

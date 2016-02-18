@@ -46,7 +46,7 @@ class Entity implements EntityInterface
     protected $create_date;
 
     /**
-     * @ORM\Column(type="datetime", length=1000, nullable=false)
+     * @ORM\Column(type="datetime", length=1000, nullable=true)
      * @Groups({"api", "tavro", "simple"})
      */
     protected $update_date;

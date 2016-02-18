@@ -136,6 +136,7 @@ class Funding extends AbstractFixture implements OrderedFixtureInterface, Contai
 
                     if($availableShares >= 0) {
                         $frs = new FundingRoundShareholder();
+                        $frs->setOrganization($organization);
                         $frs->setFundingRound($round);
                         $frs->setShareholder($shareholders[array_rand($shareholders)]);
                         $frs->setShares($shares);

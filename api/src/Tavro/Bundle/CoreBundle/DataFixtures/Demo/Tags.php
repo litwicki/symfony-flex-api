@@ -71,15 +71,24 @@ class Tags extends AbstractFixture implements OrderedFixtureInterface, Container
 
         $tags = array();
 
-        for($i=0;$i<50;$i++) {
+        $organizations = $manager->getRepository('TavroCoreBundle:Organization')->findAll();
 
-            $tag = new Tag();
-            $tag->setTitle($lipsum->getWords(1));
-            $tag->setBody($lipsum->getSentences(1));
-            $tag->setCreateDate(new \DateTime());
-            $tag->setStatus(1);
-            $manager->persist($tag);
-            $tags[] = $tag;
+        $types = array('hourly', 'unit', 'retainer');
+
+        foreach($organizations as $organization) {
+
+            for($i=0;$i<20;$i++) {
+
+                $tag = new Tag();
+                $tag->setOrganization($organization);
+                $tag->setTitle($lipsum->getWords(1));
+                $tag->setBody($lipsum->getSentences(1));
+                $tag->setCreateDate(new \DateTime());
+                $tag->setStatus(1);
+                $manager->persist($tag);
+                $tags[] = $tag;
+
+            }
 
         }
 

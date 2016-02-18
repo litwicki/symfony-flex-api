@@ -122,4 +122,28 @@ class FundingRoundShareholder extends Entity
     {
         return $this->shares;
     }
+
+    /**
+     * Set organization
+     *
+     * @param \Tavro\Bundle\CoreBundle\Entity\Organization $organization
+     *
+     * @return FundingRoundShareholder
+     */
+    public function setOrganization(\Tavro\Bundle\CoreBundle\Entity\Organization $organization)
+    {
+        $this->organization = $organization;
+
+        return $this;
+    }
+
+    /**
+     * Get organization
+     *
+     * @return \Tavro\Bundle\CoreBundle\Entity\Organization
+     */
+    public function getOrganization()
+    {
+        return $this->organization;
+    }
 }

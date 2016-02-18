@@ -83,6 +83,7 @@ api/ansible/vars/env.yml
 api/node_modules
 api/bower_components
 api/web/assets/*
+api/var/sessions/*
 
 app/web/assets/*
 app/aws.json

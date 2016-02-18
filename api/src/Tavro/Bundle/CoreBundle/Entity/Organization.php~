@@ -52,6 +52,11 @@ class Organization extends ApiEntity
     protected $nodes;
 
     /**
+     * @ORM\OneToMany(targetEntity="Tavro\Bundle\CoreBundle\Entity\Tag", mappedBy="organization", cascade={"remove"})
+     */
+    protected $tags;
+
+    /**
      * @ORM\OneToMany(targetEntity="Tavro\Bundle\CoreBundle\Entity\UserOrganization", mappedBy="organization", cascade={"remove"})
      */
     protected $user_organizations;
@@ -611,5 +616,50 @@ class Organization extends ApiEntity
     public function getFundingRoundShareholders()
     {
         return $this->funding_round_shareholders;
+    }
+
+    /**
+     * Add tag
+     *
+     * @param \Tavro\Bundle\CoreBundle\Entity\Tag $tag
+     *
+     * @return Organization
+     */
+    public function addTag(\Tavro\Bundle\CoreBundle\Entity\Tag $tag)
+    {
+        $this->tags[] = $tag;
+
+        return $this;
+    }
+
+    /**
+     * Remove tag
+     *
+     * @param \Tavro\Bundle\CoreBundle\Entity\Tag $tag
+     */
+    public function removeTag(\Tavro\Bundle\CoreBundle\Entity\Tag $tag)
+    {
+        $this->tags->removeElement($tag);
+    }
+
+    /**
+     * Get tags
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getTags()
+    {
+        return $this->tags;
+    }
+
+    public function getUsers()
+    {
+        $items = array();
+        if(!empty($this->user_organizations)) {
+            foreach($this->user_organizations as $entity) {
+                $items[] = $entity->getUser();
+            }
+        }
+        return $items;
     }
 }

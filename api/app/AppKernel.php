@@ -22,7 +22,7 @@ class AppKernel extends Kernel
             new Liip\ImagineBundle\LiipImagineBundle(),
             new Knp\Bundle\GaufretteBundle\KnpGaufretteBundle(),
             new Gregwar\CaptchaBundle\GregwarCaptchaBundle(),
-            new Quickbooks\OauthBundle\QuickbooksOauthBundle(),
+            new GWK\DynamoSessionBundle\GWKDynamoSessionBundle()
         );
 
         $tavro = array(

@@ -45,7 +45,7 @@ use Litwicki\Common\Common as Litwicki;
  *
  * @author jake.litwicki@gmail.com
  */
-class Services extends AbstractFixture implements OrderedFixtureInterface, ContainerAwareInterface
+class Revenues extends AbstractFixture implements OrderedFixtureInterface, ContainerAwareInterface
 {
 
     /**
@@ -61,23 +61,6 @@ class Services extends AbstractFixture implements OrderedFixtureInterface, Conta
         $this->container = $container;
     }
 
-    public function getCities($state)
-    {
-        $json = file_get_contents(sprintf('http://api.sba.gov/geodata/city_links_for_state_of/%s.json', $state));
-        $data = json_decode($json, true);
-        $cities = [];
-        foreach ($data as $item) {
-            $cities[] = $item['name'];
-        }
-
-        return $cities;
-    }
-
-    public function getStates()
-    {
-        return Litwicki::getStateSelectChoices();
-    }
-
     /**
      * {@inheritDoc}
      */
@@ -88,30 +71,62 @@ class Services extends AbstractFixture implements OrderedFixtureInterface, Conta
 
         $organizations = $manager->getRepository('TavroCoreBundle:Organization')->findAll();
 
-        $types = array('hourly', 'unit', 'retainer');
-
         foreach($organizations as $organization) {
 
-            $serviceCategories = $organization->getServiceCategories()->toArray();
+            $revenueCategories = $organization->getRevenueCategories()->toArray();
+            $users = $organization->getUsers();
+            $services = $organization->getServices()->toArray();
+            $products = $organization->getProducts()->toArray();
 
-            $services = array();
+            $revenues = array();
 
             for($i=0;$i<$size;$i++) {
 
-                $service = new Service();
-                $service->setOrganization($organization);
-                $service->setCreateDate(new \DateTime());
-                $service->setCategory($serviceCategories[array_rand($serviceCategories)]);
-                $service->setTitle(ucwords($lipsum->getWords(rand(1,5))));
-                $service->setBody($lipsum->getParagraphs(rand(1,3)));
-                $service->setStatus(rand(0,1));
-                $service->setPrice(rand(1.00, 999.99));
-                $service->setType($types[array_rand($types)]);
-                $manager->persist($service);
-                $services[] = $service;
+                $revenue = new Revenue();
+                $revenue->setOrganization($organization);
+                $revenue->setStatus(rand(0,1));
+                $revenue->setCreateDate(new \DateTime());
+                $revenue->setUser($users[array_rand($users)]);
+                $revenue->setTitle(ucwords($lipsum->getWords(rand(1,5))));
+                $revenue->setBody($lipsum->getParagraphs(rand(1,3)));
+                $revenue->setCategory($revenueCategories[array_rand($revenueCategories)]);
+                $manager->persist($revenue);
+                $revenues[] = $revenue;
+
             }
 
             $manager->flush();
+
+            $types = array('product', 'service');
+
+            foreach($revenues as $revenue) {
+
+                for($i=0;$i<rand(1,$size);$i++) {
+
+                    $type = $types[array_rand($types)];
+
+                    if($type == 'service') {
+                        if(count($services)) {
+                            $entity = new RevenueService();
+                            $entity->setService($services[array_rand($services)]);
+                            $entity->setRevenue($revenue);
+                            $manager->persist($entity);
+                        }
+                    }
+                    else {
+                        if(count($products)) {
+                            $entity = new RevenueProduct();
+                            $entity->setProduct($products[array_rand($products)]);
+                            $entity->setRevenue($revenue);
+                            $manager->persist($entity);
+                        }
+                    }
+
+                }
+
+                $manager->flush();
+
+            }
 
         }
 
@@ -122,6 +137,6 @@ class Services extends AbstractFixture implements OrderedFixtureInterface, Conta
      */
     public function getOrder()
     {
-        return 12; // the order in which fixtures will be loaded
+        return 13; // the order in which fixtures will be loaded
     }
 }

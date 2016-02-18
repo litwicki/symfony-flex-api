@@ -47,6 +47,12 @@
     dest: /etc/nginx/sites-enabled/app.conf
     state: link
 
+- name: enable docs vhost
+  file:
+    src: /etc/nginx/sites-available/docs.conf
+    dest: /etc/nginx/sites-enabled/docs.conf
+    state: link
+
 - name: mimic apache config loaders for nginx
   lineinfile: dest="/etc/nginx/nginx.conf" regexp="^include /etc/nginx/conf.d/*.conf; " insertbefore="include /etc/nginx/conf.d/*.conf;" line="include /etc/nginx/sites-enabled/*;"
 

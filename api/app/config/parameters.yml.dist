@@ -6,6 +6,13 @@ parameters:
     database_user: root
     database_password: ~
 
+    mongodb_username: tavro_dev
+    mongodb_password: u97XQgTJmdMb@
+    mongodb_host: ds011288.mongolab.com
+    mongodb_port: 1128
+    mongodb_database: 'tavro-dev'
+    mongodb_collection: 'sessions'
+
     app_version: 0.1-BETA
     app_email: info@tavro.dev
     app_email_name: Tavro
