@@ -4,18 +4,18 @@ namespace Tavro\Bundle\CoreBundle\Voter;
 
 use Symfony\Component\Security\Core\Authorization\Voter\VoterInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
-use Tavro\Bundle\CoreBundle\Entity\Comment;
+use Tavro\Bundle\CoreBundle\Entity\NodeRead;
 use Tavro\Bundle\CoreBundle\Entity\User;
 
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
- * Class CommentVoter
+ * Class NodeReadVoter
  *
  * @package Tavro\Bundle\CoreBundle\Voter
  */
-class CommentVoter implements VoterInterface, ContainerAwareInterface
+class NodeReadVoter implements VoterInterface, ContainerAwareInterface
 {
 
     /**
@@ -30,13 +30,13 @@ class CommentVoter implements VoterInterface, ContainerAwareInterface
      * Allows full access to members belonging to the growth cse, view access to outside admins.
      *
      * @param User $user
-     * @param \Tavro\Bundle\CoreBundle\Entity\Comment $entity
+     * @param \Tavro\Bundle\CoreBundle\Entity\NodeRead $entity
      * @param string  $attribute
      *
      * @throws \Exception
      * @return int
      */
-    public function checkAccess($user, Comment $entity, $attribute)
+    public function checkAccess($user, NodeRead $entity, $attribute)
     {
 
         if($this->container->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
@@ -63,14 +63,14 @@ class CommentVoter implements VoterInterface, ContainerAwareInterface
         $now = new \DateTime();
 
         /**
-         * Only Admins, or the author of the Comment can edit
+         * Only Admins, or the author of the NodeRead can edit
          */
         if($attribute == self::EDIT || $attribute == self::PATCH) {
 
             if($user->getId() === $entity->getUser()->getId()) {
 
                 /**
-                 * Only allow the "author" to edit their Comment within 30 minutes of Commenting
+                 * Only allow the "author" to edit their NodeRead within 30 minutes of NodeReading
                  */
                 if($now < $modifyDate) {
                     return VoterInterface::ACCESS_GRANTED;
@@ -89,7 +89,7 @@ class CommentVoter implements VoterInterface, ContainerAwareInterface
             if($user->getId() === $entity->getUser()->getId()) {
 
                 /**
-                 * Only allow the "author" to edit their Comment within 30 minutes of Commenting
+                 * Only allow the "author" to edit their NodeRead within 30 minutes of NodeReading
                  */
                 if($now < $modifyDate) {
                     return VoterInterface::ACCESS_GRANTED;
@@ -129,7 +129,7 @@ class CommentVoter implements VoterInterface, ContainerAwareInterface
      * @return bool
      */
     public function supportsClass($class) {
-        return $class instanceof Comment;
+        return $class instanceof NodeRead;
     }
 
     /**

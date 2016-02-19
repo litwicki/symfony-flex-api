@@ -73,6 +73,7 @@ api/web/assets
 api/web/uploads
 api/web/uploads/*
 api/var/cache
+/api/var/cache/*
 api/var/logs
 api/var/bootstrap.php.cache
 api/app/config/parameters.yml
