@@ -4,14 +4,14 @@ namespace Tavro\Bundle\CoreBundle\Services\Session;
 
 use Aws\DynamoDb\DynamoDbClient;
 use Aws\DynamoDb\SessionHandler;
-use SessionHandlerInterface;
 
 /**
  * Class SessionHandler
  *
  * Proxy class for \Aws\DynamoDb\Session\SessionHandler which implements SessionHandlerInteface
  */
-class DynamoDbSessionHandler implements SessionHandlerInterface {
+class DynamoDbSessionHandler implements \SessionHandlerInterface
+{
 
     /**
      * @var \Aws\DynamoDb\DynamoDbClient
