@@ -52,7 +52,8 @@ class Organization extends ApiEntity
     protected $nodes;
 
     /**
-     * @ORM\OneToMany(targetEntity="Tavro\Bundle\CoreBundle\Entity\Tag", mappedBy="organization", cascade={"remove"})
+     * @ORM\OneToMany(targetEntity="Tavro\Bundle\CoreBundle\Entity\Tag", mappedBy="organization")
+     * @ORM\OrderBy({"id" = "DESC"})
      */
     protected $tags;
 

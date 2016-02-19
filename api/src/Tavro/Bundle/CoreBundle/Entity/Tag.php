@@ -37,12 +37,12 @@ class Tag extends ApiEntity
      * @Groups({"api", "tavro", "simple"})
      */
     protected $body;
-    
+
     /**
-     * @ORM\ManyToOne(targetEntity="Tavro\Bundle\CoreBundle\Entity\Organization", inversedBy="nodes")
+     * @ORM\ManyToOne(targetEntity="Tavro\Bundle\CoreBundle\Entity\Organization", inversedBy="tags")
      * @ORM\JoinColumn(name="organization_id", referencedColumnName="id", nullable=false)
      * @Groups({"api", "tavro", "simple"})
-     * @MaxDepth(3)
+     * @MaxDepth(1)
      */
     protected $organization;
 

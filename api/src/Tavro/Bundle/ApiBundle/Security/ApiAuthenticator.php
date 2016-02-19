@@ -75,6 +75,10 @@ class ApiAuthenticator implements SimplePreAuthenticatorInterface, Authenticatio
 
             $user = $userProvider->loadUserByUsername($username);
 
+            if(!$user->getApiEnabled()) {
+                throw new AuthenticationException('Api Access it not enabled for you at this time.');
+            }
+
             return new PreAuthenticatedToken(
                 $user,
                 $apiKey,

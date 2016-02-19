@@ -43,10 +43,6 @@ class UserAuthenticator implements SimpleFormAuthenticatorInterface
                 throw new AuthenticationException(sprintf('User "%s" is currently disabled!', $token->getUsername()));
             }
 
-            if(!$user->getApiEnabled()) {
-                throw new AuthenticationException('Api Access it not enabled for you at this time.');
-            }
-
             if ($this->encoder->isPasswordValid($user->getPassword(), $token->getCredentials(), $user->getSalt())) {
                 return new UsernamePasswordToken(
                     $user,
