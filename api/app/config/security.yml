@@ -25,7 +25,7 @@ security:
 
         main:
             host: %api_hostname%
-            pattern: ^/
+            pattern: ^/docs
             anonymous: ~
             provider: main
             simple_form:
@@ -45,6 +45,14 @@ security:
                 lifetime: 25920000 # 30 days
                 #lifetime: 31536000 # 365 days
                 path: /
+
+        api:
+            host: %api_hostname%
+            pattern: ^/api
+            anonymous: ~
+            guard:
+                authenticators:
+                    - tavro.token_authenticator
 
     access_control:
         - { path: ^/user, role: IS_AUTHENTICATED_ANONYMOUSLY }
