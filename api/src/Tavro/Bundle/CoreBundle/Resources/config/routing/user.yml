@@ -1,0 +1,34 @@
+# ==============
+# UNIQUE ROUTES
+# ==============
+api_user_regenerate_api_key:
+    path: /{user}/reset/api-key.{_format}
+    defaults: { _controller: TavroCoreBundle:Api/User:resetApiKey, _format: json}
+    methods: POST
+    requirements:
+        user: \d+
+        _format: json|xml
+
+api_user_regenerate_api_password:
+    path: /{user}/reset/api-password.{_format}
+    defaults: { _controller: TavroCoreBundle:Api/User:resetApiPassword, _format: json}
+    methods: POST
+    requirements:
+        user: \d+
+        _format: json|xml
+
+api_user_nodes:
+    path: /{user}/nodes.{_format}
+    defaults: { _controller: TavroCoreBundle:Api/User:nodes, _format: json}
+    methods: GET
+    requirements:
+        user: \d+
+        _format: json|xml
+
+api_user_organizations:
+    path: /{user}/organizations.{_format}
+    defaults: { _controller: TavroCoreBundle:Api/User:organizations, _format: json}
+    methods: GET
+    requirements:
+        user: \d+
+        _format: json|xml

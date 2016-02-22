@@ -2,6 +2,8 @@ imports:
     - { resource: services/tavro.yml }
     - { resource: services/security.yml }
     - { resource: services/form.yml }
+    - { resource: services/handler.yml }
+    - { resource: services/api.yml }
 
 parameters:
     jms_serializer.json_serialization_visitor.class: Tavro\Bundle\CoreBundle\Services\JsonSerializationVisitor

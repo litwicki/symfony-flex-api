@@ -2,7 +2,7 @@
 
 namespace Tavro\Bundle\CoreBundle\Entity;
 
-use Tavro\Bundle\CoreBundle\Model\ApiEntityInterface;
+use Tavro\Bundle\CoreBundle\Model\Api\ApiEntityInterface;
 use Doctrine\ORM\Mapping AS ORM;
 
 use JMS\Serializer\Annotation\Accessor;
@@ -14,7 +14,7 @@ use JMS\Serializer\Annotation\Groups;
 use Doctrine\ORM\Mapping\Table;
 use JMS\Serializer\Annotation\MaxDepth;
 
-use Tavro\Bundle\CoreBundle\Model\ApiEntity;
+use Tavro\Bundle\CoreBundle\Model\Api\ApiEntity;
 use Tavro\Bundle\CoreBundle\Model\EntityInterface;
 
 /**

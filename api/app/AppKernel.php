@@ -27,7 +27,6 @@ class AppKernel extends Kernel
 
         $tavro = array(
             new Tavro\Bundle\CoreBundle\TavroCoreBundle(),
-            new Tavro\Bundle\ApiBundle\TavroApiBundle(),
             new Tavro\Bundle\AppBundle\TavroAppBundle(),
         );
 

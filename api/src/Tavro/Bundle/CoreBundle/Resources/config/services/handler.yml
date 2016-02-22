@@ -1,0 +1,84 @@
+services:
+    tavro.handler.comments:
+        class: Tavro\Bundle\CoreBundle\Handler\CommentHandler
+        arguments: ["@service_container", "@doctrine.orm.main_entity_manager", Tavro\Bundle\CoreBundle\Entity\Comment]
+
+    tavro.handler.customers:
+        class: Tavro\Bundle\CoreBundle\Handler\CustomerHandler
+        arguments: ["@service_container", "@doctrine.orm.main_entity_manager", Tavro\Bundle\CoreBundle\Entity\Customer]
+
+    tavro.handler.expenses:
+        class: Tavro\Bundle\CoreBundle\Handler\ExpenseHandler
+        arguments: ["@service_container", "@doctrine.orm.main_entity_manager", Tavro\Bundle\CoreBundle\Entity\Expense]
+
+    tavro.handler.expense_categories:
+        class: Tavro\Bundle\CoreBundle\Handler\ExpenseCategoryHandler
+        arguments: ["@service_container", "@doctrine.orm.main_entity_manager", Tavro\Bundle\CoreBundle\Entity\ExpenseCategory]
+
+    tavro.handler.expense_tags:
+        class: Tavro\Bundle\CoreBundle\Handler\ExpenseTagHandler
+        arguments: ["@service_container", "@doctrine.orm.main_entity_manager", Tavro\Bundle\CoreBundle\Entity\ExpenseTag]
+
+    tavro.handler.expense_comments:
+        class: Tavro\Bundle\CoreBundle\Handler\ExpenseCommentHandler
+        arguments: ["@service_container", "@doctrine.orm.main_entity_manager", Tavro\Bundle\CoreBundle\Entity\ExpenseComment]
+
+    tavro.handler.files:
+        class: Tavro\Bundle\CoreBundle\Handler\FileHandler
+        arguments: ["@service_container", "@doctrine.orm.main_entity_manager", Tavro\Bundle\CoreBundle\Entity\File]
+
+    tavro.handler.funding:
+        class: Tavro\Bundle\CoreBundle\Handler\FundingHandler
+        arguments: ["@service_container", "@doctrine.orm.main_entity_manager", Tavro\Bundle\CoreBundle\Entity\FundingRound]
+
+    tavro.handler.images:
+        class: Tavro\Bundle\CoreBundle\Handler\ImageHandler
+        arguments: ["@service_container", "@doctrine.orm.main_entity_manager", Tavro\Bundle\CoreBundle\Entity\Image]
+
+    tavro.handler.nodes:
+        class: Tavro\Bundle\CoreBundle\Handler\NodeHandler
+        arguments: ["@service_container", "@doctrine.orm.main_entity_manager", Tavro\Bundle\CoreBundle\Entity\Node]
+
+    tavro.handler.node_tags:
+        class: Tavro\Bundle\CoreBundle\Handler\NodeTagHandler
+        arguments: ["@service_container", "@doctrine.orm.main_entity_manager", Tavro\Bundle\CoreBundle\Entity\NodeTag]
+
+    tavro.handler.organizations:
+        class: Tavro\Bundle\CoreBundle\Handler\OrganizationHandler
+        arguments: ["@service_container", "@doctrine.orm.main_entity_manager", Tavro\Bundle\CoreBundle\Entity\Organization]
+
+    tavro.handler.products:
+        class: Tavro\Bundle\CoreBundle\Handler\ProductHandler
+        arguments: ["@service_container", "@doctrine.orm.main_entity_manager", Tavro\Bundle\CoreBundle\Entity\Product]
+
+    tavro.handler.revenues:
+        class: Tavro\Bundle\CoreBundle\Handler\RevenueHandler
+        arguments: ["@service_container", "@doctrine.orm.main_entity_manager", Tavro\Bundle\CoreBundle\Entity\Revenue]
+
+    tavro.handler.roles:
+        class: Tavro\Bundle\CoreBundle\Handler\RoleHandler
+        arguments: ["@service_container", "@doctrine.orm.main_entity_manager", Tavro\Bundle\CoreBundle\Entity\Role]
+
+    tavro.handler.services:
+        class: Tavro\Bundle\CoreBundle\Handler\ServiceHandler
+        arguments: ["@service_container", "@doctrine.orm.main_entity_manager", Tavro\Bundle\CoreBundle\Entity\Service]
+
+    tavro.handler.shareholders:
+        class: Tavro\Bundle\CoreBundle\Handler\ShareholderHandler
+        arguments: ["@service_container", "@doctrine.orm.main_entity_manager", Tavro\Bundle\CoreBundle\Entity\Shareholder]
+
+    tavro.handler.tags:
+        class: Tavro\Bundle\CoreBundle\Handler\TagHandler
+        arguments: ["@service_container", "@doctrine.orm.main_entity_manager", Tavro\Bundle\CoreBundle\Entity\Tag]
+
+    tavro.handler.users:
+        class: Tavro\Bundle\CoreBundle\Handler\UserHandler
+        arguments: ["@service_container", "@doctrine.orm.main_entity_manager", Tavro\Bundle\CoreBundle\Entity\User]
+
+    tavro.handler.user_organizations:
+        class: Tavro\Bundle\CoreBundle\Handler\OrganizationHandler
+        arguments: ["@service_container", "@doctrine.orm.main_entity_manager", Tavro\Bundle\CoreBundle\Entity\UserOrganization]
+
+    tavro.handler.variables:
+        class: Tavro\Bundle\CoreBundle\Handler\VariableHandler
+        arguments: ["@service_container", "@doctrine.orm.main_entity_manager", Tavro\Bundle\CoreBundle\Entity\Variable]
