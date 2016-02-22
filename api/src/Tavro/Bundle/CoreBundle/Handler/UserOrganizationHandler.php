@@ -2,18 +2,18 @@
 
 namespace Tavro\Bundle\CoreBundle\Handler;
 
-use Tavro\Bundle\CoreBundle\Exception\ApiException;
-use Tavro\Bundle\CoreBundle\Model\ApiHandlerInterface;
-use Tavro\Bundle\CoreBundle\Services\EntityHandler;
-use Tavro\Bundle\CoreBundle\Services\OrganizationEntityHandler;
+use Tavro\Bundle\CoreBundle\Exception\Api\ApiException;
+use Tavro\Bundle\CoreBundle\Model\Api\ApiHandlerInterface;
+use Tavro\Bundle\CoreBundle\Services\Api\EntityHandler;
+use Tavro\Bundle\CoreBundle\Services\Api\OrganizationEntityHandler;
 use Tavro\Bundle\CoreBundle\Exception\Form\InvalidFormException;
 use Tavro\Bundle\CoreBundle\Model\EntityInterface;
-use Tavro\Bundle\CoreBundle\Exception\ApiAccessDeniedException;
+use Tavro\Bundle\CoreBundle\Exception\Api\ApiAccessDeniedException;
 use Tavro\Bundle\CoreBundle\Entity\User;
 use Tavro\Bundle\CoreBundle\Entity\Role;
 use Tavro\Bundle\CoreBundle\Exception\UsernameNotUniqueException;
 use Tavro\Bundle\CoreBundle\Exception\EmailNotUniqueException;
-use Tavro\Bundle\CoreBundle\Model\ApiEntityInterface;
+use Tavro\Bundle\CoreBundle\Model\Api\ApiEntityInterface;
 
 use Rhumsaa\Uuid\Uuid;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
@@ -29,7 +29,7 @@ use Symfony\Component\HttpFoundation\Request;
  *
  * @package Tavro\Bundle\CoreBundle\Handler
  */
-class UserOrganizationHandler extends OrganizationEntityHandler
+class UserOrganizationHandler extends EntityHandler
 {
 
 }

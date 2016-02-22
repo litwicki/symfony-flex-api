@@ -2,9 +2,8 @@
 
 namespace Tavro\Bundle\CoreBundle\Handler;
 
-use Tavro\Bundle\CoreBundle\Services\OwnershipEntityHandler;
-use Tavro\Bundle\CoreBundle\Exception\ApiException;
-use Tavro\Bundle\CoreBundle\Exception\ApiAccessDeniedException;
+use Tavro\Bundle\CoreBundle\Exception\Api\ApiException;
+use Tavro\Bundle\CoreBundle\Exception\Api\ApiAccessDeniedException;
 use Tavro\Bundle\CoreBundle\Entity\User;
 use Tavro\Bundle\CoreBundle\Entity\Image;
 use Tavro\Bundle\CoreBundle\Model\EntityInterface;
@@ -13,12 +12,14 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 use Gaufrette\Adapter\AwsS3;
 
+use Tavro\Bundle\CoreBundle\Services\Api\EntityHandler;
+
 /**
  * Class ImageHandler
  *
  * @package Tavro\Bundle\CoreBundle\Handler
  */
-class ImageHandler extends OwnershipEntityHandler
+class ImageHandler extends EntityHandler
 {
     /**
      * @return mixed

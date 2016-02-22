@@ -2,11 +2,11 @@
 
 namespace Tavro\Bundle\CoreBundle\Handler;
 
-use Tavro\Bundle\CoreBundle\Services\EntityHandler;
-use Tavro\Bundle\CoreBundle\Exception\ApiException;
-use Tavro\Bundle\CoreBundle\Exception\ApiAccessDeniedException;
-use Tavro\Bundle\CoreBundle\Model\EntityInterface;
-use Tavro\Bundle\CoreBundle\Model\ApiEntityInterface;
+use Tavro\Bundle\CoreBundle\Services\Api\EntityHandler;
+use Tavro\Bundle\CoreBundle\Exception\Api\ApiException;
+use Tavro\Bundle\CoreBundle\Exception\Api\ApiAccessDeniedException;
+use Tavro\Bundle\CoreBundle\Model\Api\EntityInterface;
+use Tavro\Bundle\CoreBundle\Model\Api\ApiEntityInterface;
 use Symfony\Component\Form\Exception\TransformationFailedException;
 use Symfony\Component\Form\Exception\UnexpectedTypeException;
 use Symfony\Component\PropertyAccess\Exception\InvalidPropertyPathException;

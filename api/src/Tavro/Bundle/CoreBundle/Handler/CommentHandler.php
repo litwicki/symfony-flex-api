@@ -3,7 +3,6 @@
 namespace Tavro\Bundle\CoreBundle\Handler;
 
 use Tavro\Bundle\CoreBundle\Model\EntityInterface;
-use Tavro\Bundle\CoreBundle\Services\Api\OwnershipEntityHandler;
 use Tavro\Bundle\CoreBundle\Exception\Api\ApiAccessDeniedException;
 use Tavro\Bundle\CoreBundle\Exception\Api\ApiException;
 
@@ -11,6 +10,7 @@ use Tavro\Bundle\CoreBundle\Entity\User;
 use Tavro\Bundle\CoreBundle\Entity\Comment;
 use Tavro\Bundle\CoreBundle\Entity\NodeComment;
 use Tavro\Bundle\CoreBundle\Entity\Node;
+use Tavro\Bundle\CoreBundle\Services\Api\EntityHandler;
 
 use Symfony\Component\HttpFoundation\Request;
 
@@ -19,7 +19,7 @@ use Symfony\Component\HttpFoundation\Request;
  *
  * @package Tavro\Bundle\CoreBundle\Handler
  */
-class CommentHandler extends OwnershipEntityHandler
+class CommentHandler extends EntityHandler
 {
     /**
      * @param \Symfony\Component\HttpFoundation\Request $request

@@ -2,13 +2,12 @@
 
 namespace Tavro\Bundle\CoreBundle\Handler;
 
-use Tavro\Bundle\CoreBundle\Model\OwnershipHandlerInterface;
-use Tavro\Bundle\CoreBundle\Services\OrganizationEntityHandler;
-use Tavro\Bundle\CoreBundle\Exception\ApiException;
-use Tavro\Bundle\CoreBundle\Exception\ApiNotFoundException;
-use Tavro\Bundle\CoreBundle\Exception\ApiAccessDeniedException;
+use Tavro\Bundle\CoreBundle\Services\Api\OrganizationEntityHandler;
+use Tavro\Bundle\CoreBundle\Exception\Api\ApiException;
+use Tavro\Bundle\CoreBundle\Exception\Api\ApiNotFoundException;
+use Tavro\Bundle\CoreBundle\Exception\Api\ApiAccessDeniedException;
 use Tavro\Bundle\CoreBundle\Model\EntityInterface;
-use Tavro\Bundle\CoreBundle\Model\ApiEntityInterface;
+use Tavro\Bundle\CoreBundle\Model\Api\ApiEntityInterface;
 use Symfony\Component\Form\Exception\TransformationFailedException;
 use Symfony\Component\Form\Exception\UnexpectedTypeException;
 use Symfony\Component\PropertyAccess\Exception\InvalidPropertyPathException;
@@ -18,6 +17,7 @@ use Tavro\Bundle\CoreBundle\Entity\Node;
 use Tavro\Bundle\CoreBundle\Entity\NodeRead;
 use Tavro\Bundle\CoreBundle\Entity\NodeTag;
 use Tavro\Bundle\CoreBundle\Entity\Tag;
+use Tavro\Bundle\CoreBundle\Services\Api\EntityHandler;
 
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 
@@ -26,7 +26,7 @@ use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
  *
  * @package Tavro\Bundle\CoreBundle\Handler
  */
-class NodeHandler extends OrganizationEntityHandler implements OwnershipHandlerInterface
+class NodeHandler extends EntityHandler
 {
 
     /**
