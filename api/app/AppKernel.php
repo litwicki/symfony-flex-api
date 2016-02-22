@@ -21,8 +21,7 @@ class AppKernel extends Kernel
             new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
             new Liip\ImagineBundle\LiipImagineBundle(),
             new Knp\Bundle\GaufretteBundle\KnpGaufretteBundle(),
-            new Gregwar\CaptchaBundle\GregwarCaptchaBundle(),
-            new GWK\DynamoSessionBundle\GWKDynamoSessionBundle()
+            new Gregwar\CaptchaBundle\GregwarCaptchaBundle()
         );
 
         $tavro = array(

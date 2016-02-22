@@ -1,0 +1,12 @@
+---
+- name: download phpunit binary
+  command: wget https://phar.phpunit.de/phpunit.phar
+  sudo: yes
+
+- name: fix permissions on phpunit
+  command: chmod +x phpunit.phar
+  sudo: yes
+
+- name: move phpunit to local bin
+  command: mv phpunit.phar /usr/local/bin/phpunit
+  sudo: yes

@@ -9,3 +9,4 @@
     - role: mysql
     - role: nginx
     - role: app
+    - role: phpunit
