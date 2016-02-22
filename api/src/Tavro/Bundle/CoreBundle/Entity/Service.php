@@ -20,6 +20,7 @@ use Tavro\Bundle\CoreBundle\Model\EntityInterface;
 
 /**
  * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Tavro\Bundle\CoreBundle\Repository\ServiceRepository")
  * @ORM\HasLifecycleCallbacks
  * @ORM\Table(name="tavro_service")
  *

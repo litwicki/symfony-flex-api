@@ -19,6 +19,7 @@ use Tavro\Bundle\CoreBundle\Model\S3EntityInterface;
 
 /**
  * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Tavro\Bundle\CoreBundle\Repository\ImageRepository")
  * @ORM\HasLifecycleCallbacks
  * @Table(name="tavro_image")
  *

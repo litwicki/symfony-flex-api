@@ -18,6 +18,7 @@ use Tavro\Bundle\CoreBundle\Model\EntityInterface;
 
 /**
  * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Tavro\Bundle\CoreBundle\Repository\RevenueProductRepository")
  * @ORM\Table(name="tavro_revenue_product", indexes={@ORM\Index(name="REVENUE_PRODUCT", columns={"product_id","revenue_id"})})
  * @ExclusionPolicy("all")
  */

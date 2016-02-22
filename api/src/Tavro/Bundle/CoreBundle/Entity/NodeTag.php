@@ -18,6 +18,7 @@ use Tavro\Bundle\CoreBundle\Model\EntityInterface;
 
 /**
  * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Tavro\Bundle\CoreBundle\Repository\NodeTagRepository")
  * @ORM\Table(name="tavro_node_tag", indexes={@ORM\Index(name="NODE_TAG", columns={"tag_id","node_id"})})
  * @ExclusionPolicy("all")
  */

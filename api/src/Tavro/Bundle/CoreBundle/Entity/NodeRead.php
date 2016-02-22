@@ -17,6 +17,7 @@ use Tavro\Bundle\CoreBundle\Model\EntityInterface;
 
 /**
  * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Tavro\Bundle\CoreBundle\Repository\NodeReadRepository")
  * @ORM\Table(name="tavro_node_read", indexes={@ORM\Index(name="USER_NODE_READ", columns={"user_id","node_id"})})
  */
 class NodeRead extends Entity

@@ -26,6 +26,7 @@ use Tavro\Bundle\CoreBundle\Model\Api\ApiEntity;
 
 /**
  * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Tavro\Bundle\CoreBundle\Repository\CustomerRepository")
  * @Table(name="tavro_customer")
  *
  * @XmlRoot("shareholder")

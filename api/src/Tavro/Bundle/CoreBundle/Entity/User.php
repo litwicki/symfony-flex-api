@@ -25,6 +25,7 @@ use JMS\Serializer\Annotation\MaxDepth;
 
 /**
  * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Tavro\Bundle\CoreBundle\Repository\UserRepository")
  * @Table(name="tavro_user")
  *
  * @XmlRoot("user")

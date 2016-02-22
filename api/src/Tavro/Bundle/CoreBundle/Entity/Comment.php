@@ -19,6 +19,7 @@ use Tavro\Bundle\CoreBundle\Model\EntityInterface;
 
 /**
  * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Tavro\Bundle\CoreBundle\Repository\CommentRepository")
  * @ORM\HasLifecycleCallbacks
  * @Table(name="tavro_comment")
  */

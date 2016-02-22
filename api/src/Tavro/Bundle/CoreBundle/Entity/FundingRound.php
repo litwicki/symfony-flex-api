@@ -20,6 +20,7 @@ use Tavro\Bundle\CoreBundle\Model\EntityInterface;
 
 /**
  * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Tavro\Bundle\CoreBundle\Repository\FundingRoundCommentRepository")
  * @ORM\HasLifecycleCallbacks
  * @ORM\Table(name="tavro_funding_round")
  *

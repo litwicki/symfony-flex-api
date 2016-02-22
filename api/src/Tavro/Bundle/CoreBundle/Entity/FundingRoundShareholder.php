@@ -18,6 +18,7 @@ use Tavro\Bundle\CoreBundle\Model\EntityInterface;
 
 /**
  * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Tavro\Bundle\CoreBundle\Repository\FundingRoundShareholderRepository")
  * @ORM\Table(name="tavro_funding_round_shareholder", indexes={@ORM\Index(name="ORGANIZATION_SHAREHOLDER", columns={"shareholder_id","funding_round_id"})})
  */
 class FundingRoundShareholder extends Entity

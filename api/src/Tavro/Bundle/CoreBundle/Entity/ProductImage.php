@@ -18,6 +18,7 @@ use Tavro\Bundle\CoreBundle\Model\EntityInterface;
 
 /**
  * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Tavro\Bundle\CoreBundle\Repository\ProductImageRepository")
  * @ORM\Table(name="tavro_product_image", indexes={@ORM\Index(name="PRODUCT_IMAGE", columns={"image_id","product_id"})})
  * @ExclusionPolicy("all")
  */

@@ -18,6 +18,7 @@ use Tavro\Bundle\CoreBundle\Model\EntityInterface;
 
 /**
  * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Tavro\Bundle\CoreBundle\Repository\RevenueCommentRepository")
  * @ORM\Table(name="tavro_revenue_comment", indexes={@ORM\Index(name="NODE_COMMENT", columns={"comment_id","revenue_id"})})
  * @ExclusionPolicy("all")
  */
