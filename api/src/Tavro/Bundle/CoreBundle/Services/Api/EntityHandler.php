@@ -39,12 +39,14 @@ class EntityHandler implements HandlerInterface
     public $pageSize;
     public $statusActive;
     public $statusPending;
-    public $staticDisabled;
+    public $statusDisabled;
     public $s3;
     public $amazon_s3_url;
     public $isModerator = false;
     public $isAdmin = false;
     public $user = false;
+
+    protected $container;
 
     public function __construct(Container $container, ObjectManager $om, $entityClass)
     {

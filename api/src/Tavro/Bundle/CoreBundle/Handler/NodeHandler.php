@@ -381,13 +381,15 @@ class NodeHandler extends EntityHandler
     }
 
     /**
+     * @param \Symfony\Component\HttpFoundation\Request $request
      * @param \Tavro\Bundle\CoreBundle\Model\EntityInterface $entity
      * @param array $parameters
      *
-     * @return \Tavro\Bundle\CoreBundle\Model\EntityInterface|mixed
+     * @return mixed|\Tavro\Bundle\CoreBundle\Model\EntityInterface
      * @throws \Exception
+     * @internal param $Request
      */
-    public function put(EntityInterface $entity, array $parameters)
+    public function put(Request $request, EntityInterface $entity, array $parameters)
     {
         try {
 
@@ -398,7 +400,7 @@ class NodeHandler extends EntityHandler
             }
 
             $this->validate($entity, $parameters);
-            return $this->processForm($entity, $parameters, 'PUT');
+            return $this->processForm($request, $entity, $parameters, 'PUT');
 
         }
         catch(ApiAccessDeniedException $e) {

@@ -14,7 +14,6 @@ framework:
     serializer:      { enable_annotations: true }
     templating:
         engines: ['twig']
-        assets_base_url: '%amazon_s3_url%/%asset_bucket%'
     default_locale:  "%locale%"
     trusted_hosts:   ~
     trusted_proxies: ~

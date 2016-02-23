@@ -14,7 +14,7 @@ use JMS\Serializer\Annotation\Groups;
 use Doctrine\ORM\Mapping\Table;
 use JMS\Serializer\Annotation\MaxDepth;
 
-use Tavro\Bundle\CoreBundle\Model\Api\ApiEntity;
+use Tavro\Bundle\CoreBundle\Model\Entity;
 use Tavro\Bundle\CoreBundle\Model\EntityInterface;
 
 /**
@@ -23,7 +23,7 @@ use Tavro\Bundle\CoreBundle\Model\EntityInterface;
  * @ORM\HasLifecycleCallbacks
  * @Table(name="tavro_comment")
  */
-class Comment extends ApiEntity
+class Comment extends Entity
 {
 
     /**

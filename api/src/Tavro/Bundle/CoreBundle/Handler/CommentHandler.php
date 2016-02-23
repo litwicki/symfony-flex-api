@@ -168,6 +168,7 @@ class CommentHandler extends EntityHandler
      * @param array $parameters
      *
      * @return mixed|\Tavro\Bundle\CoreBundle\Model\EntityInterface|void
+     * @throws \Exception
      */
     public function create(Request $request, array $parameters)
     {
@@ -183,7 +184,7 @@ class CommentHandler extends EntityHandler
             throw $e;
         }
         catch(\Exception $e) {
-            throw new ApiException($e->getMessage());
+            throw $e;
         }
     }
 

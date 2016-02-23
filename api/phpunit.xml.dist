@@ -12,7 +12,7 @@
     </php>
 
     <testsuites>
-        <testsuite name="Project Test Suite">
+        <testsuite name="Tavro Test Suite">
             <directory>tests</directory>
         </testsuite>
     </testsuites>

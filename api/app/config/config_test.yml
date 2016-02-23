@@ -4,7 +4,6 @@ imports:
 framework:
     templating:
         engines: ['twig']
-        assets_base_url: '%amazon_s3_url%/%asset_bucket%'
 
 monolog:
     handlers:

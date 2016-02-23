@@ -1,9 +1,0 @@
-services:
-
-    tavro.angular_api_authenticator:
-        class:     Tavro\Bundle\CoreBundle\Security\Api\AngularApiAuthenticator
-        arguments: ["@tavro.user_provider"]
-
-    tavro.api_authenticator:
-        class:     Tavro\Bundle\CoreBundle\Security\Api\ApiAuthenticator
-        arguments: ["@tavro.user_provider"]

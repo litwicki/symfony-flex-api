@@ -52,7 +52,7 @@ security:
             anonymous: ~
             guard:
                 authenticators:
-                    - tavro.token_authenticator
+                    - tavro.api_authenticator
 
     access_control:
         - { path: ^/user, role: IS_AUTHENTICATED_ANONYMOUSLY }

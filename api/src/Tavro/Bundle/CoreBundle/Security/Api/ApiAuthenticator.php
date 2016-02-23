@@ -1,115 +1,97 @@
 <?php namespace Tavro\Bundle\CoreBundle\Security\Api;
 
-use Tavro\Bundle\CoreBundle\Security\UserProvider;
-
-use Symfony\Component\Security\Http\Authentication\SimplePreAuthenticatorInterface;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Security\Guard\AbstractGuardAuthenticator;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
-use Symfony\Component\Security\Core\Authentication\Token\PreAuthenticatedToken;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
-use Symfony\Component\Security\Core\Exception\BadCredentialsException;
-use Symfony\Component\Security\Http\Authentication\AuthenticationFailureHandlerInterface;
+use Tavro\Bundle\CoreBundle\Entity\User;
+use Doctrine\ORM\EntityManager;
 
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
-
-class ApiAuthenticator implements SimplePreAuthenticatorInterface, AuthenticationFailureHandlerInterface
+class ApiAuthenticator extends AbstractGuardAuthenticator
 {
+    private $em;
+
+    public function __construct(EntityManager $em)
+    {
+        $this->em = $em;
+    }
+
     /**
-     * @param \Symfony\Component\HttpFoundation\Request $request
-     * @param $providerKey
-     *
-     * @return \Symfony\Component\Security\Core\Authentication\Token\PreAuthenticatedToken
+     * Called on every request. Return whatever credentials you want,
+     * or null to stop authentication.
      */
-    public function createToken(Request $request, $providerKey)
+    public function getCredentials(Request $request)
     {
         // look for a tavro-api-key header
-        $apiKey = $request->server->get('PHP_AUTH_USER');
-        $apiPassword = $request->server->get('PHP_AUTH_PASSWORD');
+//        $apiKey = $request->server->get('PHP_AUTH_USER');
+//        $apiPassword = $request->server->get('PHP_AUTH_PASSWORD');
 
-        /**
-         * @TODO: something with the api-password with standard http_basic authentication..
-         */
-
-        if (!$apiKey) {
-            //throw new BadCredentialsException('Invalid or missing Api credentials!');
-            return null;
+        if (!$token = $request->headers->get('X-AUTH-TOKEN')) {
+            // no token? Return null and no other methods will be called
+            return;
         }
 
-        return new PreAuthenticatedToken(
-            'anon.',
-            $apiKey,
-            $providerKey
+        // What you return here will be passed to getUser() as $credentials
+        return array(
+            'token' => $token,
         );
     }
 
-    /**
-     * @param \Symfony\Component\Security\Core\Authentication\Token\TokenInterface $token
-     * @param \Tavro\Bundle\CoreBundle\Security\UserProvider $userProvider
-     * @param $providerKey
-     *
-     * @return \Symfony\Component\Security\Core\Authentication\Token\PreAuthenticatedToken
-     * @throws \Exception
-     */
-    public function authenticateToken(TokenInterface $token, UserProviderInterface $userProvider, $providerKey)
+    public function getUser($credentials, UserProviderInterface $userProvider)
     {
+        $apiKey = $credentials['token'];
 
-        try {
-
-            if (!$userProvider instanceof UserProviderInterface) {
-                //'The user provider must be an instance of Symfony\Component\Security\Core\User\UserProviderInterface (%s was given).',
-                throw new \InvalidArgumentException('Invalid User Provider type given!');
-            }
-
-            $apiKey = $token->getCredentials();
-
-            $username = $userProvider->getUsernameForApiKey($apiKey);
-
-            if (!$username) {
-                throw new AuthenticationException(
-                    sprintf('API Key "%s" does not exist.', $apiKey)
-                );
-            }
-
-            $user = $userProvider->loadUserByUsername($username);
-
-            if(!$user->getApiEnabled()) {
-                throw new AuthenticationException('Api Access it not enabled for you at this time.');
-            }
-
-            return new PreAuthenticatedToken(
-                $user,
-                $apiKey,
-                $providerKey,
-                $user->getRoles()
-            );
-
-        }
-        catch(\Exception $e) {
-            throw $e;
-        }
+        // if null, authentication will fail
+        // if a User object, checkCredentials() is called
+        return $this->em->getRepository('TavroCoreBundle:User')
+            ->findOneBy(array('api_key' => User::staticEncrypt($apiKey)));
     }
 
-    /**
-     * @param \Symfony\Component\Security\Core\Authentication\Token\TokenInterface $token
-     * @param $providerKey
-     *
-     * @return bool
-     */
-    public function supportsToken(TokenInterface $token, $providerKey)
+    public function checkCredentials($credentials, UserInterface $user)
     {
-        return $token instanceof PreAuthenticatedToken && $token->getProviderKey() === $providerKey;
+        // check credentials - e.g. make sure the password is valid
+        // no credential check is needed in this case
+
+        // return true to cause authentication success
+        return true;
     }
 
-    /**
-     * @param \Symfony\Component\HttpFoundation\Request $request
-     * @param \Symfony\Component\Security\Core\Exception\AuthenticationException $exception
-     *
-     * @return \Symfony\Component\HttpFoundation\Response
-     */
+    public function onAuthenticationSuccess(Request $request, TokenInterface $token, $providerKey)
+    {
+        // on success, let the request continue
+        return null;
+    }
+
     public function onAuthenticationFailure(Request $request, AuthenticationException $exception)
     {
-        throw $exception;
+        $data = array(
+            'message' => strtr($exception->getMessageKey(), $exception->getMessageData())
+
+            // or to translate this message
+            // $this->translator->trans($exception->getMessageKey(), $exception->getMessageData())
+        );
+
+        return new JsonResponse($data, 403);
     }
 
+    /**
+     * Called when authentication is needed, but it's not sent
+     */
+    public function start(Request $request, AuthenticationException $authException = null)
+    {
+        $data = array(
+            // you might translate this message
+            'message' => 'Authentication Required'
+        );
+
+        return new JsonResponse($data, 401);
+    }
+
+    public function supportsRememberMe()
+    {
+        return false;
+    }
 }

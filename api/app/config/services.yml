@@ -11,7 +11,3 @@ services:
         class: Tavro\Bundle\CoreBundle\Security\Firewall\WsseListener
         arguments: ['@security.token_storage', '@security.authentication.manager']
         public: false
-
-    tavro.token_authenticator:
-        class: Tavro\Bundle\CoreBundle\Security\TokenAuthenticator
-        arguments: ['@doctrine.orm.entity_manager']

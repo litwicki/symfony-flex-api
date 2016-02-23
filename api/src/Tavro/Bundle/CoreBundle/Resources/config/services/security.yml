@@ -4,6 +4,10 @@ services:
 # LISTENERS / AUTHENTICATORS / PROVIDERS
 # =======================================
 
+    tavro.api_authenticator:
+        class: Tavro\Bundle\CoreBundle\Security\Api\ApiAuthenticator
+        arguments: ['@doctrine.orm.entity_manager']
+
     tavro.password_encoder:
         class: Tavro\Bundle\CoreBundle\Services\PasswordEncoder
 

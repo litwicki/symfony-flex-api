@@ -45,4 +45,9 @@ class CommentType extends AbstractType
             'data_class' => 'Tavro\Bundle\CoreBundle\Entity\Comment'
         ));
     }
+
+    public function getName()
+    {
+        return 'comment_type';
+    }
 }

@@ -237,6 +237,7 @@ class DefaultController extends Controller
      * @param $_format
      *
      * @return \Symfony\Component\HttpFoundation\Response
+     * @throws \Exception
      */
     public function postAction(Request $request, $entity, $_format)
     {
@@ -262,7 +263,7 @@ class DefaultController extends Controller
 //            throw new InvalidFormException($error);
         }
         catch(\Exception $e) {
-            throw new ApiException($e->getMessage());
+            throw $e;
         }
     }
 
