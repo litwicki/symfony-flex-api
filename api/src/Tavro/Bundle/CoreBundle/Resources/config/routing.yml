@@ -15,6 +15,6 @@ tavro_nodes_api:
     prefix: /api/v1/nodes
 
 # Keep me last for the override scenarios to be priority
-tavro_api:
+tavro_api_v1:
     resource: "@TavroCoreBundle/Resources/config/routing/api.yml"
     prefix: /api/v1

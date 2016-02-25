@@ -4,25 +4,13 @@ namespace Tavro\Bundle\CoreBundle\Voter;
 
 use Symfony\Component\Security\Core\Authorization\Voter\VoterInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
-use Symfony\Component\DependencyInjection\ContainerAware;
 use Tavro\Bundle\CoreBundle\Entity\User;
-
-use Symfony\Component\DependencyInjection\ContainerAwareInterface;
-use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * Description of UserVoter
  */
-class UserVoter implements VoterInterface, ContainerAwareInterface
+class UserVoter implements VoterInterface
 {
-
-    /**
-     * @param ContainerInterface $container
-     */
-    public function setContainer(ContainerInterface $container = null)
-    {
-        $this->container = $container;
-    }
 
     /**
      * Allows full access to members belonging to the growth cse, view access to outside admins.
@@ -41,7 +29,7 @@ class UserVoter implements VoterInterface, ContainerAwareInterface
             return VoterInterface::ACCESS_GRANTED;
         }
 
-        if($this->container->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
+        if($user->isAdmin()) {
             return VoterInterface::ACCESS_GRANTED;
         }
 

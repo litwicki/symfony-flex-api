@@ -4,29 +4,16 @@ namespace Tavro\Bundle\CoreBundle\Voter;
 
 use Symfony\Component\Security\Core\Authorization\Voter\VoterInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
-use Symfony\Component\DependencyInjection\ContainerAware;
 use Tavro\Bundle\CoreBundle\Entity\Node;
 use Tavro\Bundle\CoreBundle\Entity\User;
-
-use Symfony\Component\DependencyInjection\ContainerAwareInterface;
-use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * Class NodeVoter
  *
  * @package Tavro\Bundle\CoreBundle\Voter
  */
-class NodeVoter implements VoterInterface, ContainerAwareInterface
+class NodeVoter implements VoterInterface
 {
-    private $container;
-
-    /**
-     * @param ContainerInterface $container
-     */
-    public function setContainer(ContainerInterface $container = null)
-    {
-        $this->container = $container;
-    }
 
     /**
      * Allows full access to members belonging to the growth cse, view access to outside admins.
@@ -40,7 +27,7 @@ class NodeVoter implements VoterInterface, ContainerAwareInterface
      */
     public function checkAccess($user, Node $entity, $attribute)
     {
-        if($this->auth()->isGranted('ROLE_ADMIN')) {
+        if($user->isAdmin()) {
             return VoterInterface::ACCESS_GRANTED;
         }
 
@@ -62,7 +49,7 @@ class NodeVoter implements VoterInterface, ContainerAwareInterface
         /**
          * If this User created the Node *or* they're a Moderator, they can only view/edit this Node if the display_date is earlier than "now"
          */
-        if( ($user instanceof User) && ($this->auth()->isGranted('ROLE_MODERATOR') || $entity->getUser()->getId() === $user->getId()) ) {
+        if( ($user instanceof User) && ($user->isAdmin() || $entity->getUser()->getId() === $user->getId()) ) {
             return VoterInterface::ACCESS_GRANTED;
         }
 

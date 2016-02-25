@@ -1,7 +1,6 @@
 <?php
 namespace Tavro\Bundle\CoreBundle\Entity;
 
-use Tavro\Bundle\CoreBundle\Model\ApiEntityInterface;
 use Doctrine\ORM\Mapping AS ORM;
 
 use JMS\Serializer\Annotation\Accessor;
@@ -15,16 +14,17 @@ use JMS\Serializer\Annotation\SerializedName;
 use Doctrine\ORM\Mapping\Table;
 use Symfony\Component\Validator\Constraints as Assert;
 
-use Tavro\Bundle\CoreBundle\Model\ApiEntity;
+use Tavro\Bundle\CoreBundle\Model\Entity;
 use Tavro\Bundle\CoreBundle\Model\EntityInterface;
 
 /**
  * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Tavro\Bundle\CoreBundle\Repository\TagRepository")
  * @ORM\HasLifecycleCallbacks
  * @ORM\Table(name="tavro_tag")
  *
  */
-class Tag extends ApiEntity
+class Tag extends Entity implements EntityInterface
 {
     /**
      * @ORM\Column(type="string", length=500, nullable=false)
@@ -37,12 +37,12 @@ class Tag extends ApiEntity
      * @Groups({"api", "tavro", "simple"})
      */
     protected $body;
-    
+
     /**
-     * @ORM\ManyToOne(targetEntity="Tavro\Bundle\CoreBundle\Entity\Organization", inversedBy="nodes")
+     * @ORM\ManyToOne(targetEntity="Tavro\Bundle\CoreBundle\Entity\Organization", inversedBy="tags")
      * @ORM\JoinColumn(name="organization_id", referencedColumnName="id", nullable=false)
      * @Groups({"api", "tavro", "simple"})
-     * @MaxDepth(3)
+     * @MaxDepth(1)
      */
     protected $organization;
 

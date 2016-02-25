@@ -1,10 +1,10 @@
 # login and logout
 login:
-    path: /user/login
+    path: /login
     defaults: { _controller: "TavroAppBundle:Security:login" }
 
 login_check:
-    path: /user/login/submit
+    path: /login_check
     methods: post
 
 logout:

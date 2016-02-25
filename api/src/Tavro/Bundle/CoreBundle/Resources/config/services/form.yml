@@ -1,56 +1,70 @@
 services:
+
     tavro.form.roles:
         class: Tavro\Bundle\CoreBundle\Form\RoleType
         tags:
          -  { name: form.type, alias: role_type }
+
     tavro.form.users:
         class: Tavro\Bundle\CoreBundle\Form\UserType
         tags:
          -  { name: form.type, alias: user_type }
+
     tavro.form.user_register:
         class: Tavro\Bundle\CoreBundle\Form\UserRegisterType
         tags:
          -  { name: form.type, alias: user_register_type }
+
     tavro.form.comments:
         class: Tavro\Bundle\CoreBundle\Form\CommentType
         tags:
          -  { name: form.type, alias: comment_type }
+
     tavro.form.images:
         class: Tavro\Bundle\CoreBundle\Form\ImageType
         tags:
          -  { name: form.type, alias: image_type }
+
     tavro.form.nodes:
         class: Tavro\Bundle\CoreBundle\Form\NodeType
         tags:
          -  { name: form.type, alias: node_type }
+
     tavro.form.node_tags:
         class: Tavro\Bundle\CoreBundle\Form\NodeTagType
         tags:
          -  { name: form.type, alias: node_tag_type }
+
     tavro.form.variables:
         class: Tavro\Bundle\CoreBundle\Form\VariableType
         tags:
          -  { name: form.type, alias: variable_type }
+
     tavro.form.tags:
         class: Tavro\Bundle\CoreBundle\Form\TagType
         tags:
          -  { name: form.type, alias: tag_type }
+
     tavro.form.organization:
         class: Tavro\Bundle\CoreBundle\Form\OrganizationType
         tags:
          -  { name: form.type, alias: organizaton_type }
+
     tavro.form.customer:
         class: Tavro\Bundle\CoreBundle\Form\CustomerType
         tags:
          -  { name: form.type, alias: customer_type }
+
     tavro.form.customer_comment:
         class: Tavro\Bundle\CoreBundle\Form\CustomerCommentType
         tags:
          -  { name: form.type, alias: customer_comment_type }
+
     tavro.form.revenue_service:
         class: Tavro\Bundle\CoreBundle\Form\RevenueServiceType
         tags:
          -  { name: form.type, alias: revenue_service_type }
+
     tavro.form.revenue_product:
         class: Tavro\Bundle\CoreBundle\Form\RevenueProductType
         tags:

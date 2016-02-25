@@ -1,7 +1,6 @@
 <?php
 namespace Tavro\Bundle\CoreBundle\Entity;
 
-use Tavro\Bundle\CoreBundle\Model\Api\ApiEntityInterface;
 use Doctrine\ORM\Mapping AS ORM;
 
 use JMS\Serializer\Annotation\Accessor;
@@ -15,7 +14,7 @@ use JMS\Serializer\Annotation\SerializedName;
 use Doctrine\ORM\Mapping\Table;
 use Symfony\Component\Validator\Constraints as Assert;
 
-use Tavro\Bundle\CoreBundle\Model\Api\ApiEntity;
+use Tavro\Bundle\CoreBundle\Model\Entity;
 use Tavro\Bundle\CoreBundle\Model\EntityInterface;
 
 /**
@@ -25,7 +24,7 @@ use Tavro\Bundle\CoreBundle\Model\EntityInterface;
  * @ORM\Table(name="tavro_node", indexes={@ORM\Index(name="NODE_TYPE", columns={"type"})})
  *
  */
-class Node extends ApiEntity
+class Node extends Entity implements EntityInterface
 {
 
     /**

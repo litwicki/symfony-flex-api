@@ -1,7 +1,6 @@
 <?php
 namespace Tavro\Bundle\CoreBundle\Entity;
 
-use Tavro\Bundle\CoreBundle\Model\ApiEntityInterface;
 use Doctrine\ORM\Mapping AS ORM;
 
 use JMS\Serializer\Annotation\Accessor;
@@ -20,11 +19,12 @@ use Tavro\Bundle\CoreBundle\Model\EntityInterface;
 
 /**
  * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Tavro\Bundle\CoreBundle\Repository\ExpenseCategoryRepository")
  * @ORM\HasLifecycleCallbacks
  * @ORM\Table(name="tavro_expense_category")
  *
  */
-class ExpenseCategory extends Entity
+class ExpenseCategory extends Entity implements EntityInterface
 {
 
     /**

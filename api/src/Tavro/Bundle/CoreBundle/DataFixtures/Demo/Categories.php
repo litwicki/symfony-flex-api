@@ -84,7 +84,7 @@ class Categories extends AbstractFixture implements OrderedFixtureInterface, Con
         $size = 10;
 
         $organizations = $manager->getRepository('TavroCoreBundle:Organization')->findAll();
-        $users = $manager->getRepository('TavroCoreBundle:User')->findAll();
+        $users = $manager->getRepository('TavroCoreBundle:User')->findAllNonAdmin();
 
         foreach($organizations as $organization) {
 

@@ -22,16 +22,16 @@ use Tavro\Bundle\CoreBundle\Model\UserInterface;
 use Tavro\Bundle\CoreBundle\Model\Entity;
 use Tavro\Bundle\CoreBundle\Model\EntityInterface;
 use JMS\Serializer\Annotation\MaxDepth;
-use Tavro\Bundle\CoreBundle\Model\ApiEntity;
 
 /**
  * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Tavro\Bundle\CoreBundle\Repository\ShareholderRepository")
  * @Table(name="tavro_shareholder")
  *
  * @XmlRoot("shareholder")
  * @XmlNamespace(uri="http://tavro.io/api/shareholders")
  */
-class Shareholder extends Entity
+class Shareholder extends Entity implements EntityInterface
 {
     /**
      * @ORM\Column(type="string", length=255, nullable=false)

@@ -1,7 +1,6 @@
 <?php
 namespace Tavro\Bundle\CoreBundle\Entity;
 
-use Tavro\Bundle\CoreBundle\Model\Api\ApiEntityInterface;
 use Doctrine\ORM\Mapping AS ORM;
 
 use JMS\Serializer\Annotation\Accessor;
@@ -15,7 +14,7 @@ use JMS\Serializer\Annotation\SerializedName;
 use Doctrine\ORM\Mapping\Table;
 use Symfony\Component\Validator\Constraints as Assert;
 
-use Tavro\Bundle\CoreBundle\Model\Api\ApiEntity;
+use Tavro\Bundle\CoreBundle\Model\Entity;
 use Tavro\Bundle\CoreBundle\Model\EntityInterface;
 
 /**
@@ -25,7 +24,7 @@ use Tavro\Bundle\CoreBundle\Model\EntityInterface;
  * @ORM\Table(name="tavro_organization")
  *
  */
-class Organization extends ApiEntity
+class Organization extends Entity implements EntityInterface
 {
     /**
      * @ORM\Column(type="string", length=500, nullable=false)
@@ -663,5 +662,29 @@ class Organization extends ApiEntity
             }
         }
         return $items;
+    }
+
+    /**
+     * Set title
+     *
+     * @param string $title
+     *
+     * @return Organization
+     */
+    public function setTitle($title)
+    {
+        $this->title = $title;
+
+        return $this;
+    }
+
+    /**
+     * Get title
+     *
+     * @return string
+     */
+    public function getTitle()
+    {
+        return $this->title;
     }
 }

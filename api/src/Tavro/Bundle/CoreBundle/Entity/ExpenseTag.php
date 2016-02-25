@@ -22,7 +22,7 @@ use Tavro\Bundle\CoreBundle\Model\EntityInterface;
  * @ORM\Table(name="tavro_expense_tag", indexes={@ORM\Index(name="EXPENSE_TAG", columns={"tag_id","expense_id"})})
  * @ExclusionPolicy("all")
  */
-class ExpenseTag extends Entity
+class ExpenseTag extends Entity implements EntityInterface
 {
     /**
      * @ORM\ManyToOne(targetEntity="Tavro\Bundle\CoreBundle\Entity\Tag", inversedBy="expense_tags")

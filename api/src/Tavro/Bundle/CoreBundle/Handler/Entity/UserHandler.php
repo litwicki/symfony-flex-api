@@ -1,34 +1,32 @@
 <?php
 
-namespace Tavro\Bundle\CoreBundle\Handler;
-
-use Tavro\Bundle\CoreBundle\Exception\Api\ApiException;
-use Tavro\Bundle\CoreBundle\Model\Api\ApiHandlerInterface;
-use Tavro\Bundle\CoreBundle\Services\Api\EntityHandler;
-use Tavro\Bundle\CoreBundle\Exception\Form\InvalidFormException;
-use Tavro\Bundle\CoreBundle\Model\EntityInterface;
-use Tavro\Bundle\CoreBundle\Exception\Api\ApiAccessDeniedException;
-use Tavro\Bundle\CoreBundle\Entity\User;
-use Tavro\Bundle\CoreBundle\Entity\Role;
-use Tavro\Bundle\CoreBundle\Exception\UsernameNotUniqueException;
-use Tavro\Bundle\CoreBundle\Exception\EmailNotUniqueException;
-use Tavro\Bundle\CoreBundle\Model\Api\ApiEntityInterface;
+namespace Tavro\Bundle\CoreBundle\Handler\Entity;
 
 use Rhumsaa\Uuid\Uuid;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 use Symfony\Component\PropertyAccess\Exception\InvalidPropertyPathException;
 use Symfony\Component\Form\Exception\TransformationFailedException;
 use Symfony\Component\Form\Exception\UnexpectedTypeException;
-use Tavro\Bundle\CoreBundle\Exception\InvalidUsernameException;
 use Symfony\Component\Debug\Exception\ContextErrorException;
 use Symfony\Component\HttpFoundation\Request;
+
+
+use Tavro\Bundle\CoreBundle\Exception\InvalidUsernameException;
+use Tavro\Bundle\CoreBundle\Exception\Api\ApiException;
+use Tavro\Bundle\CoreBundle\Services\EntityHandler;
+use Tavro\Bundle\CoreBundle\Exception\Form\InvalidFormException;
+use Tavro\Bundle\CoreBundle\Model\EntityInterface;
+use Tavro\Bundle\CoreBundle\Exception\Api\ApiAccessDeniedException;
+use Tavro\Bundle\CoreBundle\Exception\UsernameNotUniqueException;
+use Tavro\Bundle\CoreBundle\Exception\EmailNotUniqueException;
+use Tavro\Bundle\CoreBundle\Entity\User;
 
 /**
  * Class UserHandler
  *
  * @package Tavro\Bundle\CoreBundle\Handler
  */
-class UserHandler extends EntityHandler implements ApiHandlerInterface
+class UserHandler extends EntityHandler
 {
 
     /**
@@ -36,15 +34,15 @@ class UserHandler extends EntityHandler implements ApiHandlerInterface
      *
      * @param \Tavro\Bundle\CoreBundle\Entity\User $user
      * @param string $firewall
+     *
      * @throws \Exception
      */
     public function reauthenticate(User $user, $firewall = 'main')
     {
         try {
             $token = new UsernamePasswordToken($user, $user->getPassword(), $firewall, $user->getRoles());
-            $this->container->get('security.token_storage')->setToken($token);
-        }
-        catch(\Exception $e) {
+            $this->tokenStorage->setToken($token);
+        } catch (\Exception $e) {
             throw $e;
         }
     }
@@ -65,10 +63,9 @@ class UserHandler extends EntityHandler implements ApiHandlerInterface
             /**
              * If there are no roles defined, default to ROLE_USER
              */
-            if(empty($parameters['roles'])) {
-                $roles = array('ROLE_USER');
-            }
-            else {
+            if (empty($parameters['roles'])) {
+                $roles = ['ROLE_USER'];
+            } else {
                 $roles = $parameters['roles'];
                 unset($parameters['roles']);
             }
@@ -80,26 +77,22 @@ class UserHandler extends EntityHandler implements ApiHandlerInterface
 
             return $entity;
 
-        }
-        catch(ApiAccessDeniedException $e) {
+        } catch (ApiAccessDeniedException $e) {
             throw $e;
-        }
-        catch(TransformationFailedException $e) {
+        } catch (TransformationFailedException $e) {
             throw $e;
-        }
-        catch(UnexpectedTypeException $e) {
+        } catch (UnexpectedTypeException $e) {
             throw $e;
-        }
-        catch(InvalidPropertyPathException $e) {
+        } catch (InvalidPropertyPathException $e) {
             throw $e;
-        }
-        catch(\Exception $e) {
+        } catch (\Exception $e) {
             throw $e;
         }
     }
 
     /**
      * Process the form submission through the specified FormType validation process.
+     *
      * @param \Symfony\Component\HttpFoundation\Request $request
      * @param \Tavro\Bundle\CoreBundle\Model\EntityInterface $entity
      * @param array $parameters
@@ -116,7 +109,7 @@ class UserHandler extends EntityHandler implements ApiHandlerInterface
 
             $formType = $this->mapEntityToForm($this->entityClass);
 
-            $form = $this->formFactory->create($formType, $entity, array('method' => $method));
+            $form = $this->formFactory->create($formType, $entity, ['method' => $method]);
 
             $form->handleRequest($request);
 
@@ -126,7 +119,7 @@ class UserHandler extends EntityHandler implements ApiHandlerInterface
 
                 $class = new \ReflectionClass($entity);
 
-                if(is_object($this->tokenStorage->getToken())) {
+                if (is_object($this->tokenStorage->getToken())) {
                     switch ($method) {
 
                         case 'POST':
@@ -145,12 +138,12 @@ class UserHandler extends EntityHandler implements ApiHandlerInterface
                     }
                 }
 
-                if(isset($parameters['password'])) {
+                if (isset($parameters['password'])) {
 
                     /**
                      * Encode the password correctly when it's passed via $data.
                      */
-                    $encoder = $this->container->get('tavro.password_encoder');
+                    $encoder = $this->encoder;
                     $password = $encoder->encodePassword($parameters['password'], $entity->getSalt());
 
                     $entity->setPassword($password);
@@ -162,8 +155,7 @@ class UserHandler extends EntityHandler implements ApiHandlerInterface
 
                 return $entity;
 
-            }
-            else {
+            } else {
                 /**
                  * @TODO: properly clean this up so it reports a usable error message
                  *      without using the deprecated function(s)
@@ -173,20 +165,15 @@ class UserHandler extends EntityHandler implements ApiHandlerInterface
                 throw new InvalidFormException($errors);
             }
 
-        }
-        catch(TransformationFailedException $e) {
+        } catch (TransformationFailedException $e) {
             throw $e;
-        }
-        catch(ContextErrorException $e) {
+        } catch (ContextErrorException $e) {
             throw $e;
-        }
-        catch(UnexpectedTypeException $e) {
+        } catch (UnexpectedTypeException $e) {
             throw $e;
-        }
-        catch(InvalidPropertyPathException $e) {
+        } catch (InvalidPropertyPathException $e) {
             throw $e;
-        }
-        catch(\Exception $e) {
+        } catch (\Exception $e) {
             throw $e;
         }
     }
@@ -201,14 +188,13 @@ class UserHandler extends EntityHandler implements ApiHandlerInterface
     {
         try {
 
-            $role = $this->om->getRepository('TavroCoreBundle:Role')->findOneBy(array(
-                'role' => $roleName
-            ));
+            $role = $this->om->getRepository('TavroCoreBundle:Role')->findOneBy([
+                'role' => $roleName,
+            ]);
 
             return $role->getUsers();
 
-        }
-        catch(\Exception $e) {
+        } catch (\Exception $e) {
             throw $e;
         }
     }
@@ -226,27 +212,26 @@ class UserHandler extends EntityHandler implements ApiHandlerInterface
         try {
 
             $roles = $this->om->getRepository('TavroCoreBundle:Role')->findAll();
-            $items = array();
+            $items = [];
 
-            foreach($user->getRoles() as $role) {
+            foreach ($user->getRoles() as $role) {
                 $ids[] = $role->getId();
             }
 
-            foreach($roles as $role) {
+            foreach ($roles as $role) {
 
-                $items[] = array(
-                    'id' => $role->getId(),
-                    'role' => $role->getRole(),
-                    'name' => $role->getName(),
-                    'user_has' => in_array($role->getId(), $ids) ? true : false
-                );
+                $items[] = [
+                    'id'       => $role->getId(),
+                    'role'     => $role->getRole(),
+                    'name'     => $role->getName(),
+                    'user_has' => in_array($role->getId(), $ids) ? true : false,
+                ];
 
             }
 
             return $items;
 
-        }
-        catch(\Exception $e) {
+        } catch (\Exception $e) {
             throw $e;
         }
     }
@@ -264,15 +249,15 @@ class UserHandler extends EntityHandler implements ApiHandlerInterface
         try {
 
             $page = isset($params['page']) ? $params['page'] : 1;
-            $size = isset($params['size']) ? $params['size'] : $this->pageSize;
+            $size = isset($params['size']) ? $params['size'] : self::PAGE_SIZE;
 
             $sort = (isset($params['sort'])) ? $params['sort'] : 'desc';
             $orderBy = (isset($params['orderBy'])) ? $params['orderBy'] : 'id';
 
-            $sortOrder = array($orderBy => $sort);
+            $sortOrder = [$orderBy => $sort];
 
-            if(!isset($params['status'])) {
-                $params['status'] = $this->statusActive; //@TODO: Make this a constant fetched from Model\Entity.php
+            if (!isset($params['status'])) {
+                $params['status'] = self::STATUS_ACTIVE; //@TODO: Make this a constant fetched from Model\Entity.php
             }
 
             $offset = ($page - 1) * $size;
@@ -286,10 +271,10 @@ class UserHandler extends EntityHandler implements ApiHandlerInterface
                 $offset
             );
 
-            $items = array();
+            $items = [];
 
-            foreach($entities as $entity) {
-                if($this->auth->isGranted('view', $entity)) {
+            foreach ($entities as $entity) {
+                if ($this->auth->isGranted('view', $entity)) {
                     $items[] = $entity;
                 }
             }
@@ -300,11 +285,9 @@ class UserHandler extends EntityHandler implements ApiHandlerInterface
 
             return $items;
 
-        }
-        catch(ApiAccessDeniedException $e) {
+        } catch (ApiAccessDeniedException $e) {
             throw $e;
-        }
-        catch(\Exception $e) {
+        } catch (\Exception $e) {
             throw new ApiException($e->getMessage());
         }
     }
@@ -317,33 +300,32 @@ class UserHandler extends EntityHandler implements ApiHandlerInterface
      */
     public function setUserRolesById(User $user, array $roles)
     {
-       try {
+        try {
 
-           $repository = $this->om->getRepository('TavroCoreBundle:Role');
+            $repository = $this->om->getRepository('TavroCoreBundle:Role');
 
-           /**
-            * Remove all Roles from the User.
-            */
-           foreach($user->getRoles() as $role) {
-               $user->removeRole($role);
-               $this->om->persist($user);
-           }
+            /**
+             * Remove all Roles from the User.
+             */
+            foreach ($user->getRoles() as $role) {
+                $user->removeRole($role);
+                $this->om->persist($user);
+            }
 
-           /**
-            * Add every role in the assigned array to this User.
-            */
-           foreach($roles as $rid) {
-               $role = $repository->find($rid);
-               $user->addRole($role);
-               $this->om->persist($user);
-           }
+            /**
+             * Add every role in the assigned array to this User.
+             */
+            foreach ($roles as $rid) {
+                $role = $repository->find($rid);
+                $user->addRole($role);
+                $this->om->persist($user);
+            }
 
-           $this->om->flush();
+            $this->om->flush();
 
-       }
-       catch(\Exception $e) {
-           throw $e;
-       }
+        } catch (\Exception $e) {
+            throw $e;
+        }
     }
 
     /**
@@ -358,19 +340,18 @@ class UserHandler extends EntityHandler implements ApiHandlerInterface
     {
         try {
 
-            $parameters = array();
-            $options = array('status', 'username', 'email');
+            $parameters = [];
+            $options = ['status', 'username', 'email'];
 
-            foreach($params as $name => $value) {
-                if(in_array($name, $options)) {
+            foreach ($params as $name => $value) {
+                if (in_array($name, $options)) {
                     $parameters[$name] = $value;
                 }
             }
 
             return $parameters;
 
-        }
-        catch(\Exception $e) {
+        } catch (\Exception $e) {
             throw $e;
         }
     }
@@ -385,29 +366,28 @@ class UserHandler extends EntityHandler implements ApiHandlerInterface
     {
         try {
 
-           /**
-            * Remove all Roles from the User.
-            */
-           foreach($user->getRoles() as $role) {
-               $user->removeRole($role);
-               $this->om->persist($user);
-           }
+            /**
+             * Remove all Roles from the User.
+             */
+            foreach ($user->getRoles() as $role) {
+                $user->removeRole($role);
+                $this->om->persist($user);
+            }
 
-           /**
-            * Add every role in the assigned array to this User.
-            */
-           foreach($roles as $roleName) {
-               $role = $this->findRoleByName($roleName);
-               $user->addRole($role);
-               $this->om->persist($user);
-           }
+            /**
+             * Add every role in the assigned array to this User.
+             */
+            foreach ($roles as $roleName) {
+                $role = $this->findRoleByName($roleName);
+                $user->addRole($role);
+                $this->om->persist($user);
+            }
 
-           $this->om->flush();
+            $this->om->flush();
 
-       }
-       catch(\Exception $e) {
-           throw $e;
-       }
+        } catch (\Exception $e) {
+            throw $e;
+        }
     }
 
     /**
@@ -416,13 +396,14 @@ class UserHandler extends EntityHandler implements ApiHandlerInterface
      */
     public function setUserRoles(User $user, array $roles)
     {
-        foreach($roles as $role) {
-            if(is_numeric($role)) {
+        foreach ($roles as $role) {
+            if (is_numeric($role)) {
                 $this->setUserRolesById($user, $roles);
+
                 return;
-            }
-            else {
+            } else {
                 $this->setUserRolesByName($user, $roles);
+
                 return;
             }
         }
@@ -438,19 +419,17 @@ class UserHandler extends EntityHandler implements ApiHandlerInterface
     {
         try {
 
-            $role = $this->om->getRepository('TavroCoreBundle:Role')->findOneBy(array(
-                'role' => $roleName
-            ));
+            $role = $this->om->getRepository('TavroCoreBundle:Role')->findOneBy([
+                'role' => $roleName,
+            ]);
 
-            if($role instanceof Role) {
+            if ($role instanceof Role) {
                 return $role;
-            }
-            else {
+            } else {
                 throw new \Exception(sprintf('No role found with name %s', $roleName));
             }
 
-        }
-        catch(\Exception $e) {
+        } catch (\Exception $e) {
             throw $e;
         }
     }
@@ -473,8 +452,7 @@ class UserHandler extends EntityHandler implements ApiHandlerInterface
 
             return $user;
 
-        }
-        catch(\Exception $e) {
+        } catch (\Exception $e) {
             throw $e;
         }
     }
@@ -496,35 +474,7 @@ class UserHandler extends EntityHandler implements ApiHandlerInterface
             $this->reauthenticate($user);
 
             return $user;
-        }
-        catch(\Exception $e) {
-            throw $e;
-        }
-    }
-
-    /**
-     *
-     * @param \Tavro\Bundle\CoreBundle\Entity\User $user
-     *
-     * @throws \Exception
-     */
-    public function notifyOfUserDevRequest(User $user)
-    {
-        try {
-
-            $mailer = $this->container->get('tavro.mailer');
-
-            $subject = sprintf('%s is requesting Developer access', $user->__toString());
-
-            $params = array(
-                'subject' => $subject,
-                'message' => sprintf('%s: %s', $subject, $this->container->get('router')->generate('admin_user_dev_request')),
-            );
-
-            $mailer->sendEmail($params);
-
-        }
-        catch(\Exception $e) {
+        } catch (\Exception $e) {
             throw $e;
         }
     }
@@ -539,11 +489,9 @@ class UserHandler extends EntityHandler implements ApiHandlerInterface
     {
         try {
 
-            if(isset($parameters['username'])) {
+            if (isset($parameters['username'])) {
 
-                $em = $this->container->get('doctrine')->getManager();
-
-                $query = $em->createQuery(
+                $query = $this->om->createQuery(
                     'SELECT u FROM TavroCoreBundle:User u WHERE u.username LIKE :username'
                 );
 
@@ -551,26 +499,23 @@ class UserHandler extends EntityHandler implements ApiHandlerInterface
 
                 $entities = $query->getResult();
 
-            }
-            else {
+            } else {
                 $entities = $this->repository->findAll();
             }
 
-            $items = array();
+            $items = [];
 
-            foreach($entities as $entity) {
-                if($this->auth->isGranted('view', $entity)) {
+            foreach ($entities as $entity) {
+                if ($this->auth->isGranted('view', $entity)) {
                     $items[] = $entity;
                 }
             }
 
             return $items;
 
-        }
-        catch(ApiAccessDeniedException $e) {
+        } catch (ApiAccessDeniedException $e) {
             throw $e;
-        }
-        catch(\Exception $e) {
+        } catch (\Exception $e) {
             throw $e;
         }
     }
@@ -580,7 +525,7 @@ class UserHandler extends EntityHandler implements ApiHandlerInterface
      *
      * @throws \Exception
      */
-    public function sendUserPasswordReset(User $user)
+    public function setPasswordToken(User $user)
     {
         try {
 
@@ -588,33 +533,12 @@ class UserHandler extends EntityHandler implements ApiHandlerInterface
             $interval = new \DateInterval('PT60M');
             $expiration = $expiration->add($interval);
 
-            $parameters = array(
-                'password_token' => Uuid::uuid1()->toString(),
-                'password_token_expire' => $expiration
-            );
-
             $user->setPasswordToken(Uuid::uuid1()->toString());
             $user->setPasswordTokenExpire($expiration);
             $this->om->persist($user);
             $this->om->flush();
 
-            /**
-             * @TODO: why is this not working?
-             *      password_token_expire: Error: invalid value
-             */
-            //$user = $this->patch($user, $parameters);
-
-            $params = array(
-                'subject' => 'Reset your password',
-                'recipients' => array($user->getEmail()),
-                'type' => 'password-reset',
-                'user' => $user
-            );
-
-            $this->container->get('tavro.mailer')->sendEmail($params);
-
-        }
-        catch(\Exception $e) {
+        } catch (\Exception $e) {
             throw $e;
         }
     }
@@ -631,16 +555,15 @@ class UserHandler extends EntityHandler implements ApiHandlerInterface
     {
         try {
 
-            $parameters = array(
-                'password_token' => null,
+            $parameters = [
+                'password_token'        => null,
                 'password_token_expire' => null,
-                'password' => $password
-            );
+                'password'              => $password,
+            ];
 
             return $this->patch($request, $user, $parameters);
 
-        }
-        catch(\Exception $e) {
+        } catch (\Exception $e) {
             throw $e;
         }
     }
@@ -657,7 +580,7 @@ class UserHandler extends EntityHandler implements ApiHandlerInterface
     {
         try {
 
-            if(!$this->auth->isGranted('patch', $entity)) {
+            if (!$this->auth->isGranted('patch', $entity)) {
                 $message = sprintf('Unable to properly "patch" %s: %s', get_class($entity), $entity->__toString());
                 throw new ApiAccessDeniedException($message);
             }
@@ -667,8 +590,7 @@ class UserHandler extends EntityHandler implements ApiHandlerInterface
             $this->reauthenticate($user);
 
             return $user;
-        }
-        catch(\Exception $e) {
+        } catch (\Exception $e) {
             throw $e;
         }
     }
@@ -680,11 +602,7 @@ class UserHandler extends EntityHandler implements ApiHandlerInterface
      */
     public function validateUniqueEmail($email)
     {
-        $repository = $this->container->get('doctrine')
-            ->getManager()
-            ->getRepository('TavroCoreBundle:User');
-
-        if ($repository->findOneBy(array('email' => $email))) {
+        if ($this->repository->findOneBy(['email' => $email])) {
             throw new EmailNotUniqueException(
                 sprintf(
                     'User with email (%s) already exists!',
@@ -701,7 +619,7 @@ class UserHandler extends EntityHandler implements ApiHandlerInterface
      *
      * @throws \Exception
      */
-    public function validate(EntityInterface $user, array $parameters = array(), $method = 'POST')
+    public function validate(EntityInterface $user, array $parameters = [], $method = 'POST')
     {
 
         try {
@@ -726,15 +644,14 @@ class UserHandler extends EntityHandler implements ApiHandlerInterface
 
                     case 'password':
 
-                        $this->container->get('tavro.validator')->passwordComplexity($value);
+                        $this->validator->passwordComplexity($value);
 
                         break;
                 }
 
             }
 
-        }
-        catch (\Exception $e) {
+        } catch (\Exception $e) {
             throw $e;
         }
     }
@@ -750,13 +667,12 @@ class UserHandler extends EntityHandler implements ApiHandlerInterface
             /**
              * Validate the complexity of the Password
              */
-            $this->container->get('tavro.validator')->passwordComplexity($password);
+            $this->validator->passwordComplexity($password);
 
             if (!empty($errors)) {
                 throw new InvalidFormException(implode(',', $errors));
             }
-        }
-        catch(\Exception $e) {
+        } catch (\Exception $e) {
             throw $e;
         }
     }
@@ -774,9 +690,9 @@ class UserHandler extends EntityHandler implements ApiHandlerInterface
         try {
 
             $usernameUser = $repository->findOneBy(
-                array(
+                [
                     'username' => $username,
-                )
+                ]
             );
 
             if ($usernameUser instanceof User) {
@@ -791,8 +707,7 @@ class UserHandler extends EntityHandler implements ApiHandlerInterface
             }
 
             return true;
-        }
-        catch (\Exception $e) {
+        } catch (\Exception $e) {
             throw $e;
         }
     }
@@ -808,12 +723,11 @@ class UserHandler extends EntityHandler implements ApiHandlerInterface
     {
         try {
 
-            if(!preg_match('/^[a-zA-Z0-9-_]+$/', $username)) {
+            if (!preg_match('/^[a-zA-Z0-9-_]+$/', $username)) {
                 throw new InvalidUsernameException('Username must be alphanumeric with dashes or underscores only!');
             }
 
-        }
-        catch(\Exception $e) {
+        } catch (\Exception $e) {
             throw $e;
         }
     }
@@ -831,9 +745,9 @@ class UserHandler extends EntityHandler implements ApiHandlerInterface
         try {
 
             $emailUser = $repository->findOneBy(
-                array(
+                [
                     'email' => $email,
-                )
+                ]
             );
 
             if ($emailUser instanceof User) {
@@ -851,64 +765,6 @@ class UserHandler extends EntityHandler implements ApiHandlerInterface
         } catch (\Exception $e) {
             throw $e;
         }
-    }
-
-    /**
-     * @param User $user
-     *
-     * @return User
-     * @throws \Exception
-     */
-    public function setPasswordToken(User $user)
-    {
-
-        try {
-
-            $em = $this->container->get('doctrine')->getManager();
-
-            $user->setPasswordToken(md5(time()));
-
-            $expires = new \DateTime(date('Y-m-d', time() + 3600));
-            $user->setPasswordTokenExpire($expires);
-
-            $em->persist($user);
-            $em->flush();
-
-            try {
-
-                $mailer = $this->container->get('tavro.mailer');
-
-                $host = $this->container->get('router')->getContext()->getHost(
-                );
-                $route = $this->container->get('router')->generate(
-                    'user_password_reset',
-                    array('passwordToken' => $user->getPasswordToken())
-                );
-                $url = 'http://'.$host.$route;
-
-                $params = array(
-                    'type'       => 'password-reset',
-                    'username'   => $user->__toString(),
-                    'recipients' => array($user->getEmail()),
-                    'from'       => array(
-                        $this->container->getParameter(
-                            'email'
-                        ) => $this->container->getParameter('email_name'),
-                    ),
-                    'subject'    => 'Reset Your tavromods Password',
-                    'email'      => $user->getEmail(),
-                    'url'        => $url,
-                );
-
-                $mailer->sendEmail($params);
-            } catch (\Exception $e) {
-                throw $e;
-            }
-        } catch (\Exception $e) {
-            throw $e;
-        }
-
-        return $user;
     }
 
     /**

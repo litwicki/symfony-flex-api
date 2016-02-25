@@ -1,7 +1,6 @@
 <?php
 namespace Tavro\Bundle\CoreBundle\Entity;
 
-use Tavro\Bundle\CoreBundle\Model\Api\ApiEntityInterface;
 use Doctrine\ORM\Mapping AS ORM;
 
 use JMS\Serializer\Annotation\Accessor;
@@ -25,7 +24,7 @@ use Tavro\Bundle\CoreBundle\Model\EntityInterface;
  * @ORM\Table(name="tavro_funding_round")
  *
  */
-class FundingRound extends Entity
+class FundingRound extends Entity implements EntityInterface
 {
     /**
      * @ORM\Column(type="string", length=8000, nullable=true)

@@ -20,7 +20,7 @@ use Tavro\Bundle\CoreBundle\Model\EntityInterface;
  * @ORM\Entity(repositoryClass="Tavro\Bundle\CoreBundle\Repository\VariableRepository")
  * @Table(name="tavro_variable")
  */
-class Variable extends Entity
+class Variable extends Entity implements EntityInterface
 {
     /**
      * @ORM\Column(type="string", length=100, nullable=false)

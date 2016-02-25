@@ -22,7 +22,7 @@ use Tavro\Bundle\CoreBundle\Model\EntityInterface;
  * @ORM\Table(name="tavro_node_tag", indexes={@ORM\Index(name="NODE_TAG", columns={"tag_id","node_id"})})
  * @ExclusionPolicy("all")
  */
-class NodeTag extends Entity
+class NodeTag extends Entity implements EntityInterface
 {
     /**
      * @ORM\ManyToOne(targetEntity="Tavro\Bundle\CoreBundle\Entity\Tag", inversedBy="node_tags")

@@ -22,7 +22,6 @@ use Tavro\Bundle\CoreBundle\Model\UserInterface;
 use Tavro\Bundle\CoreBundle\Model\Entity;
 use Tavro\Bundle\CoreBundle\Model\EntityInterface;
 use JMS\Serializer\Annotation\MaxDepth;
-use Tavro\Bundle\CoreBundle\Model\Api\ApiEntity;
 
 /**
  * @ORM\Entity
@@ -32,7 +31,7 @@ use Tavro\Bundle\CoreBundle\Model\Api\ApiEntity;
  * @XmlRoot("shareholder")
  * @XmlNamespace(uri="http://tavro.io/api/shareholders")
  */
-class Customer extends Entity
+class Customer extends Entity implements EntityInterface
 {
     /**
      * @ORM\Column(type="string", length=255, nullable=false)

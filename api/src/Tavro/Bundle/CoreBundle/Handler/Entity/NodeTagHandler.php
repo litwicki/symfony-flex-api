@@ -1,16 +1,26 @@
 <?php
 
-namespace Tavro\Bundle\CoreBundle\Handler;
+namespace Tavro\Bundle\CoreBundle\Handler\Entity;
 
-use Tavro\Bundle\CoreBundle\Services\Api\EntityHandler;
 use Tavro\Bundle\CoreBundle\Exception\Api\ApiException;
+use Tavro\Bundle\CoreBundle\Services\EntityHandler;
+use Tavro\Bundle\CoreBundle\Exception\Form\InvalidFormException;
+use Tavro\Bundle\CoreBundle\Model\EntityInterface;
 use Tavro\Bundle\CoreBundle\Exception\Api\ApiAccessDeniedException;
-use Tavro\Bundle\CoreBundle\Model\Api\EntityInterface;
-use Tavro\Bundle\CoreBundle\Model\Api\ApiEntityInterface;
+use Tavro\Bundle\CoreBundle\Exception\UsernameNotUniqueException;
+use Tavro\Bundle\CoreBundle\Exception\EmailNotUniqueException;
+
+use Rhumsaa\Uuid\Uuid;
+use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
+use Symfony\Component\PropertyAccess\Exception\InvalidPropertyPathException;
 use Symfony\Component\Form\Exception\TransformationFailedException;
 use Symfony\Component\Form\Exception\UnexpectedTypeException;
-use Symfony\Component\PropertyAccess\Exception\InvalidPropertyPathException;
+use Tavro\Bundle\CoreBundle\Exception\InvalidUsernameException;
+use Symfony\Component\Debug\Exception\ContextErrorException;
 use Symfony\Component\HttpFoundation\Request;
+
+use Tavro\Bundle\CoreBundle\Entity\Tag;
+use Tavro\Bundle\CoreBundle\Entity\NodeTag;
 
 /**
  * Class NodeTagHandler
@@ -62,7 +72,7 @@ class NodeTagHandler extends EntityHandler
         try {
 
             $page = isset($params['page']) ? $params['page'] : 1;
-            $size = isset($params['size']) ? $params['size'] : $this->pageSize;
+            $size = isset($params['size']) ? $params['size'] : self::PAGE_SIZE;
 
             $sort = (isset($params['sort'])) ? $params['sort'] : 'desc';
             $orderBy = (isset($params['orderBy'])) ? $params['orderBy'] : 'id';
@@ -70,7 +80,7 @@ class NodeTagHandler extends EntityHandler
             $sortOrder = array($orderBy => $sort);
 
             if(!isset($params['status'])) {
-                $params['status'] = $this->statusActive; //@TODO: Make this a constant fetched from Model\Entity.php
+                $params['status'] = self::STATUS_ACTIVE;
             }
 
             $offset = ($page - 1) * $size;
@@ -100,40 +110,6 @@ class NodeTagHandler extends EntityHandler
         }
         catch(\Exception $e) {
             throw new ApiException($e->getMessage());
-        }
-    }
-
-    /**
-     * @param \Symfony\Component\HttpFoundation\Request $request
-     * @param array $parameters
-     *
-     * @return object|void
-     * @throws \Exception
-     */
-    public function create(Request $request, array $parameters)
-    {
-        try {
-
-            $entity = $this->createEntity();
-            $entity = $this->processForm($request, $entity, $parameters, 'POST');
-
-            return $entity;
-
-        }
-        catch(ApiAccessDeniedException $e) {
-            throw $e;
-        }
-        catch(TransformationFailedException $e) {
-            throw $e;
-        }
-        catch(UnexpectedTypeException $e) {
-            throw $e;
-        }
-        catch(InvalidPropertyPathException $e) {
-            throw $e;
-        }
-        catch(\Exception $e) {
-            throw $e;
         }
     }
 

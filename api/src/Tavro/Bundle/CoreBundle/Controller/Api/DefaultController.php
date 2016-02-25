@@ -25,6 +25,7 @@ class DefaultController extends Controller
      * @param int $code
      *
      * @return \Symfony\Component\HttpFoundation\Response
+     * @throws \Exception
      */
     public function apiResponse($data, $format = 'json', $code = 200)
     {
@@ -43,7 +44,7 @@ class DefaultController extends Controller
 
         }
         catch(\Exception $e) {
-            throw new ApiException($e->getMessage());
+            throw $e;
         }
 
         return $response;
@@ -123,9 +124,12 @@ class DefaultController extends Controller
      *
      * @param $data
      * @param string $format
-     * @param $string $group
+     * @param string $group
      *
-     * @throws \Tavro\Bundle\CoreBundle\Exception\ApiException
+     * @return
+     * @throws \Exception
+     * @internal param $string $group
+     *
      */
     protected function serialize($data, $format = 'json', $group = 'api')
     {
@@ -134,7 +138,7 @@ class DefaultController extends Controller
             return $serializer->serialize($data, $format, $group);
         }
         catch(\Exception $e) {
-            throw new ApiException($e->getMessage());
+            throw $e;
         }
     }
 
@@ -143,7 +147,8 @@ class DefaultController extends Controller
      *
      * @param $entityName
      *
-     * @returns \Tavro\Bundle\CoreBundle\Handler\
+     * @return \Tavro\Bundle\CoreBundle\Handler\
+     * @throws \Exception
      */
     public function getHandler($entityName)
     {
@@ -153,7 +158,7 @@ class DefaultController extends Controller
             return $handler;
         }
         catch(\Exception $e) {
-            throw new ApiException($e->getMessage());
+            throw $e;
         }
     }
 
@@ -166,6 +171,7 @@ class DefaultController extends Controller
      * @param $_format
      *
      * @return \Symfony\Component\HttpFoundation\Response
+     * @throws \Exception
      */
     public function typeaheadAction(Request $request, $entity, $_format)
     {
@@ -177,7 +183,7 @@ class DefaultController extends Controller
             return $this->apiResponse($data, $_format);
         }
         catch(\Exception $e) {
-            throw new ApiException($e->getMessage());
+            throw $e;
         }
     }
 
@@ -200,7 +206,7 @@ class DefaultController extends Controller
             return $this->apiResponse($data, $_format);
         }
         catch(\Exception $e) {
-            throw new ApiException($e->getMessage());
+            throw $e;
         }
     }
 
@@ -212,6 +218,7 @@ class DefaultController extends Controller
      * @param $_format
      *
      * @return \Symfony\Component\HttpFoundation\Response
+     * @throws \Exception
      */
     public function getAction($entity, $id, $_format)
     {
@@ -225,7 +232,7 @@ class DefaultController extends Controller
             throw $e;
         }
         catch(\Exception $e) {
-            throw new ApiException($e->getMessage());
+            throw $e;
         }
     }
 
@@ -258,9 +265,6 @@ class DefaultController extends Controller
         }
         catch (InvalidFormException $e) {
             throw $e;
-//            $form = $e->getForm();
-//            $error = (string) $form->getErrors(true, false);
-//            throw new InvalidFormException($error);
         }
         catch(\Exception $e) {
             throw $e;
@@ -308,7 +312,6 @@ class DefaultController extends Controller
             throw $e;
         }
         catch(\Exception $e) {
-            //throw new ApiException($e->getMessage());
             throw $e;
         }
     }
@@ -359,6 +362,7 @@ class DefaultController extends Controller
      * @param $_format
      *
      * @return \Symfony\Component\HttpFoundation\Response
+     * @throws \Exception
      */
     public function deleteAction(Request $request, $entity, $id, $_format)
     {
@@ -391,7 +395,7 @@ class DefaultController extends Controller
             throw $e;
         }
         catch (\Exception $e) {
-            throw new ApiException($e->getMessage());
+            throw $e;
         }
     }
 

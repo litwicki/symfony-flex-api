@@ -91,6 +91,10 @@ class Users extends AbstractFixture implements OrderedFixtureInterface, Containe
 
         $genders = array('male', 'female');
 
+        $admin = $manager->getRepository('TavroCoreBundle:Role')->findOneBy(array(
+            'role' => 'ROLE_ADMIN',
+        ));
+
         $userRole = $manager->getRepository('TavroCoreBundle:Role')->findOneBy(array(
             'role' => 'ROLE_USER',
         ));
@@ -124,6 +128,31 @@ class Users extends AbstractFixture implements OrderedFixtureInterface, Containe
             $users[] = $user;
         }
 
+        $manager->flush();
+
+        /**
+         * Add TavroBot
+         */
+        $username = 'tavrobot';
+        $email = 'bot@tavro.dev';
+        $salt = md5($email);
+        $password = 'Password1!';
+        $encoder = $this->container->get('tavro.password_encoder');
+        $password = $encoder->encodePassword($password, $salt);
+
+        $user = new User();
+        $user->setStatus(1);
+        $user->setCreateDate(new \DateTime());
+        $user->setApiEnabled(1);
+        $user->setEmail($email);
+        $user->setUsername($username);
+        $user->setGender($genders[rand(0,1)]);
+        $user->setSalt($salt);
+        $user->setPassword($password);
+
+        $user->addRole($admin);
+
+        $manager->persist($user);
         $manager->flush();
 
     }

@@ -36,261 +36,195 @@ services:
         public:     false
         tags:
             - { name: security.voter }
-        calls:
-            - [ setContainer, [ '@service_container' ] ]
 
     tavro.voter.user:
          class:      Tavro\Bundle\CoreBundle\Voter\UserVoter
          public:     false
          tags:
              - { name: security.voter }
-         calls:
-             - [ setContainer, [ '@service_container' ] ]
 
     tavro.voter.role:
          class:      Tavro\Bundle\CoreBundle\Voter\RoleVoter
          public:     false
          tags:
              - { name: security.voter }
-         calls:
-             - [ setContainer, [ '@service_container' ] ]
 
     tavro.voter.node:
          class:      Tavro\Bundle\CoreBundle\Voter\NodeVoter
          public:     false
          tags:
              - { name: security.voter }
-         calls:
-            - [ setContainer, [ '@service_container' ] ]
 
     tavro.voter.image:
          class:      Tavro\Bundle\CoreBundle\Voter\ImageVoter
          public:     false
          tags:
              - { name: security.voter }
-         calls:
-             - [ setContainer, [ '@service_container' ] ]
 
     tavro.voter.file:
          class:      Tavro\Bundle\CoreBundle\Voter\FileVoter
          public:     false
          tags:
              - { name: security.voter }
-         calls:
-             - [ setContainer, [ '@service_container' ] ]
 
     tavro.voter.tag:
          class:      Tavro\Bundle\CoreBundle\Voter\TagVoter
          public:     false
          tags:
              - { name: security.voter }
-         calls:
-             - [ setContainer, [ '@service_container' ] ]
 
     tavro.voter.node_tag:
          class:      Tavro\Bundle\CoreBundle\Voter\NodeTagVoter
          public:     false
          tags:
              - { name: security.voter }
-         calls:
-             - [ setContainer, [ '@service_container' ] ]
 
     tavro.voter.user_organization:
          class:      Tavro\Bundle\CoreBundle\Voter\UserOrganizationVoter
          public:     false
          tags:
              - { name: security.voter }
-         calls:
-             - [ setContainer, [ '@service_container' ] ]
 
     tavro.voter.organization:
          class:      Tavro\Bundle\CoreBundle\Voter\OrganizationVoter
          public:     false
          tags:
              - { name: security.voter }
-         calls:
-             - [ setContainer, [ '@service_container' ] ]
 
     tavro.voter.customer_comment:
          class:      Tavro\Bundle\CoreBundle\Voter\CustomerCommentVoter
          public:     false
          tags:
              - { name: security.voter }
-         calls:
-             - [ setContainer, [ '@service_container' ] ]
 
     tavro.voter.customer:
          class:      Tavro\Bundle\CoreBundle\Voter\CustomerVoter
          public:     false
          tags:
              - { name: security.voter }
-         calls:
-             - [ setContainer, [ '@service_container' ] ]
 
     tavro.voter.expense_category:
          class:      Tavro\Bundle\CoreBundle\Voter\ExpenseCategoryVoter
          public:     false
          tags:
              - { name: security.voter }
-         calls:
-             - [ setContainer, [ '@service_container' ] ]
 
     tavro.voter.expense_comment:
          class:      Tavro\Bundle\CoreBundle\Voter\ExpenseCommentVoter
          public:     false
          tags:
              - { name: security.voter }
-         calls:
-             - [ setContainer, [ '@service_container' ] ]
 
     tavro.voter.expense_tag:
          class:      Tavro\Bundle\CoreBundle\Voter\ExpenseTagVoter
          public:     false
          tags:
              - { name: security.voter }
-         calls:
-             - [ setContainer, [ '@service_container' ] ]
 
     tavro.voter.expense:
          class:      Tavro\Bundle\CoreBundle\Voter\ExpenseVoter
          public:     false
          tags:
              - { name: security.voter }
-         calls:
-             - [ setContainer, [ '@service_container' ] ]
 
     tavro.voter.funding_round_comment:
          class:      Tavro\Bundle\CoreBundle\Voter\FundingRoundCommentVoter
          public:     false
          tags:
              - { name: security.voter }
-         calls:
-             - [ setContainer, [ '@service_container' ] ]
 
     tavro.voter.funding_round_shareholder:
          class:      Tavro\Bundle\CoreBundle\Voter\FundingRoundShareholderVoter
          public:     false
          tags:
              - { name: security.voter }
-         calls:
-             - [ setContainer, [ '@service_container' ] ]
 
     tavro.voter.funding_round:
          class:      Tavro\Bundle\CoreBundle\Voter\FundingRoundVoter
          public:     false
          tags:
              - { name: security.voter }
-         calls:
-             - [ setContainer, [ '@service_container' ] ]
 
     tavro.voter.node_comment:
          class:      Tavro\Bundle\CoreBundle\Voter\NodeCommentVoter
          public:     false
          tags:
              - { name: security.voter }
-         calls:
-             - [ setContainer, [ '@service_container' ] ]
 
     tavro.voter.node_read:
          class:      Tavro\Bundle\CoreBundle\Voter\NodeReadVoter
          public:     false
          tags:
              - { name: security.voter }
-         calls:
-             - [ setContainer, [ '@service_container' ] ]
 
     tavro.voter.product_category:
          class:      Tavro\Bundle\CoreBundle\Voter\ProductCategoryVoter
          public:     false
          tags:
              - { name: security.voter }
-         calls:
-             - [ setContainer, [ '@service_container' ] ]
 
     tavro.voter.product_image:
          class:      Tavro\Bundle\CoreBundle\Voter\ProductImageVoter
          public:     false
          tags:
              - { name: security.voter }
-         calls:
-             - [ setContainer, [ '@service_container' ] ]
 
     tavro.voter.product:
          class:      Tavro\Bundle\CoreBundle\Voter\ProductVoter
          public:     false
          tags:
              - { name: security.voter }
-         calls:
-             - [ setContainer, [ '@service_container' ] ]
 
     tavro.voter.revenue_category:
          class:      Tavro\Bundle\CoreBundle\Voter\RevenueCategoryVoter
          public:     false
          tags:
              - { name: security.voter }
-         calls:
-             - [ setContainer, [ '@service_container' ] ]
 
     tavro.voter.revenue_comment:
          class:      Tavro\Bundle\CoreBundle\Voter\RevenueCommentVoter
          public:     false
          tags:
              - { name: security.voter }
-         calls:
-             - [ setContainer, [ '@service_container' ] ]
 
     tavro.voter.revenue_product:
          class:      Tavro\Bundle\CoreBundle\Voter\RevenueProductVoter
          public:     false
          tags:
              - { name: security.voter }
-         calls:
-             - [ setContainer, [ '@service_container' ] ]
 
     tavro.voter.revenue_service:
          class:      Tavro\Bundle\CoreBundle\Voter\RevenueServiceVoter
          public:     false
          tags:
              - { name: security.voter }
-         calls:
-             - [ setContainer, [ '@service_container' ] ]
 
     tavro.voter.revenue_tag:
          class:      Tavro\Bundle\CoreBundle\Voter\RevenueTagVoter
          public:     false
          tags:
              - { name: security.voter }
-         calls:
-             - [ setContainer, [ '@service_container' ] ]
 
     tavro.voter.revenue:
          class:      Tavro\Bundle\CoreBundle\Voter\RevenueVoter
          public:     false
          tags:
              - { name: security.voter }
-         calls:
-             - [ setContainer, [ '@service_container' ] ]
 
     tavro.voter.service_category:
          class:      Tavro\Bundle\CoreBundle\Voter\ServiceCategoryVoter
          public:     false
          tags:
              - { name: security.voter }
-         calls:
-             - [ setContainer, [ '@service_container' ] ]
 
     tavro.voter.service:
          class:      Tavro\Bundle\CoreBundle\Voter\ServiceVoter
          public:     false
          tags:
              - { name: security.voter }
-         calls:
-             - [ setContainer, [ '@service_container' ] ]
 
     tavro.voter.user_quickbooks:
          class:      Tavro\Bundle\CoreBundle\Voter\UserQuickbooksVoter
          public:     false
          tags:
              - { name: security.voter }
-         calls:
-             - [ setContainer, [ '@service_container' ] ]

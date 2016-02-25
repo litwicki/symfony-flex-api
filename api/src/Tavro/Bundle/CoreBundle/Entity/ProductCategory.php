@@ -1,7 +1,6 @@
 <?php
 namespace Tavro\Bundle\CoreBundle\Entity;
 
-use Tavro\Bundle\CoreBundle\Model\Api\ApiEntityInterface;
 use Doctrine\ORM\Mapping AS ORM;
 
 use JMS\Serializer\Annotation\Accessor;
@@ -25,7 +24,7 @@ use Tavro\Bundle\CoreBundle\Model\EntityInterface;
  * @ORM\Table(name="tavro_product_category")
  *
  */
-class ProductCategory extends Entity
+class ProductCategory extends Entity implements EntityInterface
 {
     /**
      * @ORM\Column(type="string", length=500, nullable=false)

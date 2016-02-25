@@ -25,19 +25,19 @@ security:
 
         main:
             host: %api_hostname%
-            pattern: ^/docs
+            pattern: ^/
             anonymous: ~
             provider: main
             simple_form:
                 authenticator: tavro.user_authenticator
-                check_path: login_check
-                login_path: login
+                check_path: /login_check
+                login_path: /login
                 remember_me: true
                 always_use_default_target_path: false
                 success_handler: tavro.login_listener
-                failure_path:   /user/login
+                failure_path:   /login
             logout:
-                path: /user/logout
+                path: /logout
                 target: /
                 success_handler: tavro.logout_listener
             remember_me:
@@ -55,7 +55,8 @@ security:
                     - tavro.api_authenticator
 
     access_control:
-        - { path: ^/user, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/login, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/login_check, role: IS_AUTHENTICATED_ANONYMOUSLY }
 
         # Leave last!
 

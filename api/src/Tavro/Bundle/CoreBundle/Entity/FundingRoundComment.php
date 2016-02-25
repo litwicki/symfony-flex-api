@@ -22,7 +22,7 @@ use Tavro\Bundle\CoreBundle\Model\EntityInterface;
  * @ORM\Table(name="tavro_funding_round_comment", indexes={@ORM\Index(name="FUNDING_ROUND_COMMENT", columns={"comment_id","funding_round_id"})})
  * @ExclusionPolicy("all")
  */
-class FundingRoundComment extends Entity
+class FundingRoundComment extends Entity implements EntityInterface
 {
     /**
      * @ORM\ManyToOne(targetEntity="Tavro\Bundle\CoreBundle\Entity\Comment", inversedBy="funding_round_comments")

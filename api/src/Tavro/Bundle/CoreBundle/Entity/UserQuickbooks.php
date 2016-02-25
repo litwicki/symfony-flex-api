@@ -1,7 +1,6 @@
 <?php
 namespace Tavro\Bundle\CoreBundle\Entity;
 
-use Tavro\Bundle\CoreBundle\Model\Api\ApiEntityInterface;
 use Doctrine\ORM\Mapping AS ORM;
 
 use JMS\Serializer\Annotation\Accessor;
@@ -21,10 +20,11 @@ use Tavro\Bundle\CoreBundle\Model\EntityInterface;
 /**
  * @ORM\Entity
  * @ORM\Entity(repositoryClass="Tavro\Bundle\CoreBundle\Repository\UserQuickbooksRepository")
+ * @Table(name="tavro_user_quickbooks")
  * @ORM\HasLifecycleCallbacks
  *
  */
-class UserQuickbooks extends Entity
+class UserQuickbooks extends Entity implements EntityInterface
 {
     
     /**

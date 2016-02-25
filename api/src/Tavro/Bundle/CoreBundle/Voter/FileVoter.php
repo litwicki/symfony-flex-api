@@ -4,30 +4,16 @@ namespace Tavro\Bundle\CoreBundle\Voter;
 
 use Symfony\Component\Security\Core\Authorization\Voter\VoterInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
-use Symfony\Component\DependencyInjection\ContainerAware;
 use Tavro\Bundle\CoreBundle\Entity\File;
 use Tavro\Bundle\CoreBundle\Entity\User;
-
-use Symfony\Component\DependencyInjection\ContainerAwareInterface;
-use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * Class FileVoter
  *
  * @package Tavro\Bundle\CoreBundle\Voter
  */
-class FileVoter implements VoterInterface, ContainerAwareInterface
+class FileVoter implements VoterInterface
 {
-    private $container;
-
-    /**
-     * @param ContainerInterface $container
-     */
-    public function setContainer(ContainerInterface $container = null)
-    {
-        $this->container = $container;
-    }
-
     /**
      * Allows full access to members belonging to the growth cse, view access to outside admins.
      *
@@ -41,7 +27,7 @@ class FileVoter implements VoterInterface, ContainerAwareInterface
     public function checkAccess($user, File $entity, $attribute)
     {
 
-        if($this->container->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
+        if($user->isAdmin()) {
             return VoterInterface::ACCESS_GRANTED;
         }
 

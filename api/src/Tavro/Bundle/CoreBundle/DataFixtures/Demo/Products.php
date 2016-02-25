@@ -86,7 +86,6 @@ class Demo extends AbstractFixture implements OrderedFixtureInterface, Container
 
         $organizations = $manager->getRepository('TavroCoreBundle:Organization')->findAll();
 
-
         foreach($organizations as $organization) {
 
             $productCategories = $organization->getProductCategories()->toArray();

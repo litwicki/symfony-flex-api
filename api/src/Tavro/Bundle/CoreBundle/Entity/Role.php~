@@ -18,6 +18,7 @@ use Doctrine\ORM\Mapping\Table;
 
 /**
  * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Tavro\Bundle\CoreBundle\Repository\RoleRepository")
  * @Table(name="tavro_role")
  *
  */

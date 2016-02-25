@@ -2,7 +2,6 @@
 
 namespace Tavro\Bundle\CoreBundle\Entity;
 
-use Tavro\Bundle\CoreBundle\Model\Api\ApiEntityInterface;
 use Doctrine\ORM\Mapping AS ORM;
 
 use JMS\Serializer\Annotation\Accessor;
@@ -23,7 +22,7 @@ use Tavro\Bundle\CoreBundle\Model\EntityInterface;
  * @ORM\HasLifecycleCallbacks
  * @Table(name="tavro_comment")
  */
-class Comment extends Entity
+class Comment extends Entity implements EntityInterface
 {
 
     /**

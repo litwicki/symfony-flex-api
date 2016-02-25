@@ -1,65 +1,44 @@
 <?php namespace Tests\CoreBundle\Controller;
 
+use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Guzzle\Http\Client;
-use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
+use Symfony\Component\BrowserKit\Cookie;
+use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 
-class DefaultControllerTest extends KernelTestCase
+class CommentTest extends \PHPUnit_Framework_TestCase
 {
 
-    /**
-     * {@inheritDoc}
-     */
-    protected function setUp()
+    public function testComments()
     {
-        self::bootKernel();
-
-        $this->em = static::$kernel->getContainer()
-            ->get('doctrine')
-            ->getManager();
-    }
-
-    public function testCommentPost()
-    {
-
-        $user = $this->em->getRepository('TavroCoreBundle:User')->findOneBy(array('email' => 'user1@tavro.dev'));
-
-        $headers = array(
-            'X-AUTH-TOKEN' => $user->getApiKey()
-        );
-
-        $host = 'http://api.tavro.dev';
-
         // create our http client (Guzzle)
-        $client = new Client($host, array(
+        $client = new Client('http://api.tavro.dev/api/v1/', array(
             'request.options' => array(
                 'exceptions' => false,
-                //'auth' => array($user->getApiKey(), $user->getApiPassword(), 'Basic'),
-                'headers' => $headers
             )
         ));
 
-        $data = array(
-            'user' => $user->getId(),
-            'title' => 'PHPUnit Comment Title',
-            'body' => 'PHPUnit Comment Body'
-        );
-
-        $request = $client->post('/api/v1/nodes', null, json_encode($data));
+        $request = $client->get('/api/v1/comments', null);
         $response = $request->send();
-        $data = json_decode($response->getBody(), true);
-
-        dump($data);die();
-
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    protected function tearDown()
-    {
-        parent::tearDown();
-
-        $this->em->close();
-    }
+//    public function testCommentPost()
+//    {
+//        // create our http client (Guzzle)
+//        $client = new Client('http://localhost:8000', array(
+//            'request.options' => array(
+//                'exceptions' => false,
+//            )
+//        ));
+//
+//        $nickname = 'ObjectOrienter'.rand(0, 999);
+//        $data = array(
+//            'nickname' => $nickname,
+//            'avatarNumber' => 5,
+//            'tagLine' => 'a test dev!'
+//        );
+//
+//        $request = $client->post('/api/programmers', null, json_encode($data));
+//        $response = $request->send();
+//    }
 
 }

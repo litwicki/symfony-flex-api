@@ -85,9 +85,20 @@ class UserOrganizations extends AbstractFixture implements OrderedFixtureInterfa
         $size = 10;
 
         $organizations = $manager->getRepository('TavroCoreBundle:Organization')->findAll();
-        $users = $manager->getRepository('TavroCoreBundle:User')->findAll();
+        $users = $manager->getRepository('TavroCoreBundle:User')->findAllNonAdmin();
 
         foreach($organizations as $organization) {
+
+            /**
+             * Add Tavro Bot
+             */
+            $uo = new UserOrganization();
+            $bot = $manager->getRepository('TavroCoreBundle:User')->findOneBy(array(
+                'email' => 'bot@tavro.dev'
+            ));
+            $uo->setUser($bot);
+            $uo->setOrganization($organization);
+            $manager->persist($uo);
 
             for($i=0;$i<rand(0,$size);$i++) {
                 $user = $users[array_rand($users)];

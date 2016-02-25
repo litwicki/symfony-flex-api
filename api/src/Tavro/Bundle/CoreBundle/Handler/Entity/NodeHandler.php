@@ -1,25 +1,29 @@
 <?php
 
-namespace Tavro\Bundle\CoreBundle\Handler;
+namespace Tavro\Bundle\CoreBundle\Handler\Entity;
 
-use Tavro\Bundle\CoreBundle\Services\Api\OrganizationEntityHandler;
 use Tavro\Bundle\CoreBundle\Exception\Api\ApiException;
-use Tavro\Bundle\CoreBundle\Exception\Api\ApiNotFoundException;
-use Tavro\Bundle\CoreBundle\Exception\Api\ApiAccessDeniedException;
+use Tavro\Bundle\CoreBundle\Services\EntityHandler;
+use Tavro\Bundle\CoreBundle\Exception\Form\InvalidFormException;
 use Tavro\Bundle\CoreBundle\Model\EntityInterface;
-use Tavro\Bundle\CoreBundle\Model\Api\ApiEntityInterface;
+use Tavro\Bundle\CoreBundle\Exception\Api\ApiAccessDeniedException;
+use Tavro\Bundle\CoreBundle\Exception\Api\ApiNotFoundException;
+use Tavro\Bundle\CoreBundle\Exception\UsernameNotUniqueException;
+use Tavro\Bundle\CoreBundle\Exception\EmailNotUniqueException;
+
+use Rhumsaa\Uuid\Uuid;
+use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
+use Symfony\Component\PropertyAccess\Exception\InvalidPropertyPathException;
 use Symfony\Component\Form\Exception\TransformationFailedException;
 use Symfony\Component\Form\Exception\UnexpectedTypeException;
-use Symfony\Component\PropertyAccess\Exception\InvalidPropertyPathException;
+use Tavro\Bundle\CoreBundle\Exception\InvalidUsernameException;
+use Symfony\Component\Debug\Exception\ContextErrorException;
 use Symfony\Component\HttpFoundation\Request;
-use Tavro\Bundle\CoreBundle\Entity\User;
-use Tavro\Bundle\CoreBundle\Entity\Node;
-use Tavro\Bundle\CoreBundle\Entity\NodeRead;
-use Tavro\Bundle\CoreBundle\Entity\NodeTag;
-use Tavro\Bundle\CoreBundle\Entity\Tag;
-use Tavro\Bundle\CoreBundle\Services\Api\EntityHandler;
 
-use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
+use Tavro\Bundle\CoreBundle\Entity\Node;
+use Tavro\Bundle\CoreBundle\Entity\NodeTag;
+use Tavro\Bundle\CoreBundle\Entity\NodeRead;
+use Tavro\Bundle\CoreBundle\Entity\User;
 
 /**
  * Class NodeHandler
@@ -43,10 +47,10 @@ class NodeHandler extends EntityHandler
             if(!isset($parameters['status'])) {
 
                 if($this->isModerator || $this->isAdmin) {
-                    $parameters['status'] = $this->container->getParameter('status_active');
+                    $parameters['status'] = self::STATUS_ACTIVE;
                 }
                 else {
-                    $parameters['status'] = $this->container->getParameter('status_pending');
+                    $parameters['status'] = self::STATUS_PENDING;
                 }
 
             }
@@ -58,17 +62,11 @@ class NodeHandler extends EntityHandler
             $entity = $this->createEntity();
             $entity = $this->processForm($request, $entity, $parameters, 'POST');
 
-            if(isset($parameters['node_tags'])) {
-                $tags = $parameters['node_tags'];
-                unset($parameters['node_tags']);
-                $this->processNodeTags($entity, $tags);
-            }
-
             /**
              * If this is an ApiEntity immediately save so the slug property
              * is updated correctly with the entity Id: {id}-{url-save-title}
              */
-            if($entity instanceof ApiEntityInterface) {
+            if($entity instanceof EntityInterface) {
                 return $this->put($request, $entity, $parameters);
             }
 
@@ -249,7 +247,7 @@ class NodeHandler extends EntityHandler
      * @param \Tavro\Bundle\CoreBundle\Entity\User $user
      *
      * @return mixed|void
-     * @throws \Tavro\Bundle\CoreBundle\Exception\ApiException
+     * @throws \Tavro\Bundle\CoreBundle\Exception\Api\ApiException
      */
     public function findByUser(User $user = null)
     {
@@ -330,7 +328,7 @@ class NodeHandler extends EntityHandler
      *
      * @param array $params
      *
-     * @throws \Tavro\Bundle\CoreBundle\Exception\ApiAccessDeniedException
+     * @throws \Tavro\Bundle\CoreBundle\Exception\Api\ApiAccessDeniedException
      * @throws \Exception
      * @return array|void
      */
@@ -339,16 +337,12 @@ class NodeHandler extends EntityHandler
         try {
 
             $page = isset($params['page']) ? $params['page'] : 1;
-            $size = isset($params['size']) ? $params['size'] : $this->pageSize;
+            $size = isset($params['size']) ? $params['size'] : self::PAGE_SIZE;
 
             $sort = (isset($params['sort'])) ? $params['sort'] : 'desc';
             $orderBy = (isset($params['orderBy'])) ? $params['orderBy'] : 'views';
 
             $sortOrder = array($orderBy => $sort);
-
-//            if(!isset($params['status'])) {
-//                $params['status'] = $this->statusActive; //@TODO: Make this a constant fetched from Model\Entity.php
-//            }
 
             $offset = ($page - 1) * $size;
 
@@ -392,16 +386,8 @@ class NodeHandler extends EntityHandler
     public function put(Request $request, EntityInterface $entity, array $parameters)
     {
         try {
-
-            if(isset($parameters['node_tags'])) {
-                $tags = $parameters['node_tags'];
-                unset($parameters['node_tags']);
-                $this->processNodeTags($entity, $tags);
-            }
-
             $this->validate($entity, $parameters);
             return $this->processForm($request, $entity, $parameters, 'PUT');
-
         }
         catch(ApiAccessDeniedException $e) {
             throw $e;
@@ -409,58 +395,6 @@ class NodeHandler extends EntityHandler
         catch(\Exception $e) {
             throw $e;
         }
-    }
-
-    /**
-     * @param \Tavro\Bundle\CoreBundle\Model\EntityInterface $entity
-     * @param array $tags
-     *
-     * @throws \Exception
-     */
-    public function processNodeTags(EntityInterface $entity, array $tags)
-    {
-
-        try {
-
-            /**
-             * First, delete all existing Node Tags so we can do this super fast.
-             */
-            $query = $this->om->createQuery('DELETE TavroCoreBundle:NodeTag nt WHERE nt.node=:node');
-
-            $query->setParameter('node', $entity->getId());
-            $query->getResult();
-
-            if(!empty($tags)) {
-
-                foreach($tags as $tag) {
-
-                    /**
-                     * If it's a new tag, then we should first fetch the Tag entity by this name, and/or create it.
-                     */
-                    $_tag = $this->om->getRepository('TavroCoreBundle:Tag')->findOneBy(array(
-                        'title' => $tag['title']
-                    ));
-
-                    if(!$_tag instanceof Tag) {
-                        $_tag = $this->container->get('tavro.handler.tags')->create($tag);
-                    }
-
-                    $nt = new NodeTag();
-                    $nt->setNode($entity);
-                    $nt->setTag($_tag);
-                    $this->om->persist($nt);
-
-                }
-
-                $this->om->flush();
-
-            }
-
-        }
-        catch(\Exception $e) {
-            throw $e;
-        }
-
     }
 
 }

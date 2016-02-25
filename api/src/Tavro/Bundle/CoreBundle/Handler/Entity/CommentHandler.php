@@ -1,6 +1,6 @@
 <?php
 
-namespace Tavro\Bundle\CoreBundle\Handler;
+namespace Tavro\Bundle\CoreBundle\Handler\Entity;
 
 use Tavro\Bundle\CoreBundle\Model\EntityInterface;
 use Tavro\Bundle\CoreBundle\Exception\Api\ApiAccessDeniedException;
@@ -10,7 +10,7 @@ use Tavro\Bundle\CoreBundle\Entity\User;
 use Tavro\Bundle\CoreBundle\Entity\Comment;
 use Tavro\Bundle\CoreBundle\Entity\NodeComment;
 use Tavro\Bundle\CoreBundle\Entity\Node;
-use Tavro\Bundle\CoreBundle\Services\Api\EntityHandler;
+use Tavro\Bundle\CoreBundle\Services\EntityHandler;
 
 use Symfony\Component\HttpFoundation\Request;
 
@@ -36,14 +36,6 @@ class CommentHandler extends EntityHandler
             if(!$this->auth->isGranted('patch', $entity)) {
                 $message = sprintf('Unable to properly "patch" %s: %s', get_class($entity), $entity->__toString());
                 throw new ApiAccessDeniedException($message);
-            }
-
-            /**
-             * If the status is being set to 0 (deleted) then also set
-             * the removed_by to the current user.
-             */
-            if($parameters['status'] == 0) {
-                $parameters['removed_by'] = $this->container->get('tavro.handler.users')->find($parameters['removed_by']);
             }
 
             return $this->applyPatch($request, $entity, $parameters);
@@ -96,7 +88,7 @@ class CommentHandler extends EntityHandler
         try {
 
             $page = isset($params['page']) ? $params['page'] : 1;
-            $size = isset($params['size']) ? $params['size'] : $this->pageSize;
+            $size = isset($params['size']) ? $params['size'] : self::PAGE_SIZE;
 
             $sort = (isset($params['sort'])) ? $params['sort'] : 'desc';
             $orderBy = (isset($params['orderBy'])) ? $params['orderBy'] : 'create_date';

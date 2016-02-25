@@ -972,6 +972,16 @@ class User extends Entity implements UserInterface, \Serializable
         return false;
     }
 
+    public function isAdmin()
+    {
+        return $this->getIsAdmin();
+    }
+
+    public function isDeveloper()
+    {
+        return $this->getIsDeveloper();
+    }
+
     /**
      * @VirtualProperty
      * @SerializedName("is_developer")

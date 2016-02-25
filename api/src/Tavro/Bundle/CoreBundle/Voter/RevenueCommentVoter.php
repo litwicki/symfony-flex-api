@@ -7,24 +7,13 @@ use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Tavro\Bundle\CoreBundle\Entity\RevenueComment;
 use Tavro\Bundle\CoreBundle\Entity\User;
 
-use Symfony\Component\DependencyInjection\ContainerAwareInterface;
-use Symfony\Component\DependencyInjection\ContainerInterface;
-
 /**
  * Class RevenueCommentVoter
  *
  * @package Tavro\Bundle\CoreBundle\Voter
  */
-class RevenueCommentVoter implements VoterInterface, ContainerAwareInterface
+class RevenueCommentVoter implements VoterInterface
 {
-
-    /**
-     * @param ContainerInterface $container
-     */
-    public function setContainer(ContainerInterface $container = null)
-    {
-        $this->container = $container;
-    }
 
     /**
      * Allows full access to members belonging to the growth cse, view access to outside admins.
@@ -39,7 +28,7 @@ class RevenueCommentVoter implements VoterInterface, ContainerAwareInterface
     public function checkAccess($user, RevenueComment $entity, $attribute)
     {
 
-        if($this->container->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
+        if($user->isAdmin()) {
             return VoterInterface::ACCESS_GRANTED;
         }
 

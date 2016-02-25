@@ -18,9 +18,10 @@ use Tavro\Bundle\CoreBundle\Model\EntityInterface;
 
 /**
  * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Tavro\Bundle\CoreBundle\Repository\UserOrganizationRepository")
  * @ORM\Table(name="tavro_user_organization", indexes={@ORM\Index(name="USER_ORGANIZATION", columns={"organization_id","user_id"})})
  */
-class UserOrganization extends Entity
+class UserOrganization extends Entity implements EntityInterface
 {
     /**
      * @ORM\ManyToOne(targetEntity="Tavro\Bundle\CoreBundle\Entity\Organization", inversedBy="user_organizations")

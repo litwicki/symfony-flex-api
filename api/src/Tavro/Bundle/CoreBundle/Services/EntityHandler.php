@@ -1,33 +1,36 @@
 <?php
 
-namespace Tavro\Bundle\CoreBundle\Services\Api;
+namespace Tavro\Bundle\CoreBundle\Services;
 
-use Tavro\Bundle\CoreBundle\Exception\Form\InvalidFormException;
-use Tavro\Bundle\CoreBundle\Model\Api\ApiEntityInterface;
+use Symfony\Component\Form\FormFactory;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
+use Symfony\Component\Security\Core\Authorization\AuthorizationChecker;
+use Symfony\Component\Validator\Validator\RecursiveValidator as Validator;
+use Symfony\Component\Security\Core\Encoder\EncoderFactory;
+
 use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\Common\Inflector\Inflector;
-
-use Litwicki\Common\Common;
-
 use Symfony\Component\Debug\Exception\ContextErrorException;
 use Symfony\Component\DependencyInjection\Container;
 use Symfony\Component\Form\Form;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\File\Exception\AccessDeniedException;
+use Symfony\Component\PropertyAccess\Exception\InvalidPropertyPathException;
+use Symfony\Component\Form\Exception\TransformationFailedException;
+use Symfony\Component\Form\Exception\UnexpectedTypeException;
 
+use Litwicki\Common\Common;
+use Tavro\Bundle\CoreBundle\Exception\Form\InvalidFormException;
 use Tavro\Bundle\CoreBundle\Entity\User;
-use Tavro\Bundle\CoreBundle\Model\Api\HandlerInterface;
 use Tavro\Bundle\CoreBundle\Model\EntityInterface;
 use Tavro\Bundle\CoreBundle\Exception\Api\ApiException;
 use Tavro\Bundle\CoreBundle\Exception\Api\ApiNotFoundException;
 use Tavro\Bundle\CoreBundle\Exception\Api\ApiRequestLimitException;
 use Tavro\Bundle\CoreBundle\Exception\Api\ApiAccessDeniedException;
 use Tavro\Bundle\CoreBundle\Exception\Api\ApiRequestSizeException;
-use Symfony\Component\PropertyAccess\Exception\InvalidPropertyPathException;
-use Symfony\Component\Form\Exception\TransformationFailedException;
-use Symfony\Component\Form\Exception\UnexpectedTypeException;
+use Tavro\Bundle\CoreBundle\Services\EntityHandlerInterface;
 
-class EntityHandler implements HandlerInterface
+class EntityHandler implements EntityHandlerInterface
 {
     public $om;
     public $entityClass;
@@ -36,34 +39,33 @@ class EntityHandler implements HandlerInterface
     public $encoder;
     public $tokenStorage;
     public $auth;
-    public $pageSize;
-    public $statusActive;
-    public $statusPending;
-    public $statusDisabled;
+    public $validator;
+
     public $s3;
     public $amazon_s3_url;
-    public $isModerator = false;
-    public $isAdmin = false;
-    public $user = false;
 
-    protected $container;
+    protected $isModerator = false;
+    protected $isAdmin = false;
+    protected $user = false;
 
-    public function __construct(Container $container, ObjectManager $om, $entityClass)
+    const PAGE_SIZE = 25;
+    const STATUS_ACTIVE = 1;
+    const STATUS_PENDING = 2;
+    const STATUS_DISABLED = 0;
+
+    public function __construct(ObjectManager $om, FormFactory $formFactory, Validator $validator, EncoderFactory $encoder, TokenStorage $tokenStorage, AuthorizationChecker $auth, $amazon_s3_url, $entityClass)
     {
-        $this->container = $container;
         $this->om = $om;
         $this->entityClass = $entityClass;
         $this->repository = $this->om->getRepository($this->entityClass);
-        $this->formFactory = $container->get('form.factory');
-        $this->encoder = $container->get('security.encoder_factory');
-        $this->tokenStorage = $container->get('security.token_storage');
-        $this->auth = $container->get('security.authorization_checker');
 
-        $this->pageSize = $this->container->getParameter('page_size');
-        $this->statusPending = $this->container->getparameter('status_pending');
-        $this->statusDisabled = $this->container->getparameter('status_disabled');
-        $this->statusActive = $this->container->getparameter('status_active');
-        $this->amazon_s3_url = $this->container->getParameter('amazon_s3_url');
+        $this->formFactory = $formFactory;
+        $this->validator = $validator;
+        $this->encoder = $encoder;
+        $this->tokenStorage = $tokenStorage;
+        $this->auth = $auth;
+
+        $this->amazon_s3_url = $amazon_s3_url;
 
         $token = $this->tokenStorage->getToken();
 
@@ -75,11 +77,10 @@ class EntityHandler implements HandlerInterface
     }
 
     /**
-     * Get a Entity.
-     *
      * @param mixed $id
      *
-     * @return EntityInterface
+     * @return object
+     * @throws \Exception
      */
     public function find($id)
     {
@@ -548,7 +549,7 @@ class EntityHandler implements HandlerInterface
     {
         try {
 
-            $array = array(
+            $map = array(
                 'Tavro\Bundle\CoreBundle\Entity\Comment'             => 'comment_type',
                 'Tavro\Bundle\CoreBundle\Entity\CustomerComment'     => 'customer_comment_type',
                 'Tavro\Bundle\CoreBundle\Entity\Customer'            => 'customer_type',
@@ -579,13 +580,14 @@ class EntityHandler implements HandlerInterface
                 'Tavro\Bundle\CoreBundle\Entity\Variable'            => 'variable_type',
             );
 
-            if (array_key_exists($entity, $array)) {
-                return $array[$entity];
+            if (array_key_exists($entity, $map)) {
+                return $map[$entity];
             }
 
         }
         catch(\Exception $e) {
-            throw new ApiException(sprintf('Invalid entity type data %s', $entity));
+            $message = sprintf('%s is not a valid entity type', $entity);
+            throw new ApiException($message);
         }
 
     }
@@ -684,51 +686,6 @@ class EntityHandler implements HandlerInterface
         }
 
         return $errors;
-    }
-
-    /**
-     * Based on the directory, build the adapter file system.
-     *
-     * @param $directory
-     *
-     * @return mixed
-     * @throws \Exception
-     */
-    public function getAdapter($directory)
-    {
-        try {
-
-            switch($directory) {
-
-                case 'avatars':
-                    $adapterName    = 'avatars';
-                    $alias          = 'avatars_filesystem';
-                    break;
-
-                case 'tavro';
-                    $adapterName    = 'tavro_images';
-                    $alias          = 'tavro_images_filesystem';
-                    break;
-
-                case 'mods';
-                    $adapterName    = 'mod_images';
-                    $alias          = 'mod_images_filesystem';
-                    break;
-
-                default:
-                    $adapterName    = 'images';
-                    $alias          = 'images_filesystem';
-                    break;
-
-            }
-
-            $adapter = $this->container->get($alias)->getAdapter($adapterName);
-            return $adapter;
-
-        }
-        catch(\Exception $e) {
-            throw $e;
-        }
     }
 
     /**

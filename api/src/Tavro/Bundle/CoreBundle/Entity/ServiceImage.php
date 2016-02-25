@@ -22,7 +22,7 @@ use Tavro\Bundle\CoreBundle\Model\EntityInterface;
  * @ORM\Table(name="tavro_service_image", indexes={@ORM\Index(name="PRODUCT_IMAGE", columns={"image_id","service_id"})})
  * @ExclusionPolicy("all")
  */
-class ServiceImage extends Entity
+class ServiceImage extends Entity implements EntityInterface
 {
     /**
      * @ORM\ManyToOne(targetEntity="Tavro\Bundle\CoreBundle\Entity\Image", inversedBy="service_images")
