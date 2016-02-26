@@ -27,9 +27,3 @@ monolog:
                 VERBOSITY_VERY_VERBOSE: NOTICE
                 VERBOSITY_DEBUG: DEBUG
             channels: ["doctrine"]
-
-services:
-    firewalls:
-        synthetic: true
-        api:
-            http_basic: ~

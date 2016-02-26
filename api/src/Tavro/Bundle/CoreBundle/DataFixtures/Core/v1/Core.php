@@ -76,6 +76,7 @@ class Core extends AbstractFixture implements OrderedFixtureInterface, Container
         }
 
         $manager->flush();
+
     }
 
     /**

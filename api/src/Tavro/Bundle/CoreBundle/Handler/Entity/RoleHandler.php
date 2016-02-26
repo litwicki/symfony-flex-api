@@ -37,17 +37,7 @@ class RoleHandler extends EntityHandler
     {
         try {
 
-            $user = $this->tokenStorage->getToken()->getUser();
-            $items = array();
-
-            foreach($user->getRoles() as $role) {
-                $items[] = array(
-                    'name' => $role->getName(),
-                    'role' => $role->getRole()
-                );
-            }
-
-            return $items;
+            return $this->repository->findAll();
 
         }
         catch(ApiAccessDeniedException $e) {

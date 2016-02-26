@@ -96,20 +96,31 @@ class CommentHandler extends EntityHandler
             $sortOrder = array($orderBy => $sort);
 
             if(!isset($params['status'])) {
-                $params['status'] = $this->statusActive; //@TODO: Make this a constant fetched from Model\Entity.php
+                $params['status'] = self::STATUS_ACTIVE; //@TODO: Make this a constant fetched from Model\Entity.php
             }
 
             $offset = ($page - 1) * $size;
 
             $params = $this->filterParams($params);
+            $plain = false;
 
-            if(isset($params['mod'])) {
-                $repository = $this->om->getRepository('TavroCoreBundle:ModComment');
-            }
-            elseif(isset($params['node'])) {
+            if(isset($params['node'])) {
                 $repository = $this->om->getRepository('TavroCoreBundle:NodeComment');
             }
+            elseif(isset($params['expense'])) {
+                $repository = $this->om->getRepository('TavroCoreBundle:ExpenseComment');
+            }
+            elseif(isset($params['funding'])) {
+                $repository = $this->om->getRepository('TavroCoreBundle:FundingRoundComment');
+            }
+            elseif(isset($params['customer'])) {
+                $repository = $this->om->getRepository('TavroCoreBundle:CustomerComment');
+            }
+            elseif(isset($params['revenue'])) {
+                $repository = $this->om->getRepository('TavroCoreBundle:RevenueComment');
+            }
             else {
+                $plain = true;
                 $repository = $this->om->getRepository('TavroCoreBundle:Comment');
             }
 
@@ -123,9 +134,13 @@ class CommentHandler extends EntityHandler
             $items = array();
 
             foreach($entities as $entity) {
-                $comment = $entity->getComment();
+
+                $comment = ($plain) ? $entity : $entity->getComment();
+
                 if($this->auth->isGranted('view', $comment)) {
+
                     if($comment->getStatus() == 0) {
+
                         $items[] = array(
                             'id' => $comment->getId(),
                             'status' => $comment->getStatus(),
@@ -137,11 +152,14 @@ class CommentHandler extends EntityHandler
                             'create_date' => $comment->getCreateDate(),
                             'update_date' => $comment->getUpdateDate(),
                         );
+
                     }
                     else {
                         $items[] = $comment;
                     }
+
                 }
+
             }
 
             return $items;

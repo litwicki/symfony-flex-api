@@ -4,51 +4,50 @@ namespace Tavro\Bundle\CoreBundle\Voter;
 
 use Symfony\Component\Security\Core\Authorization\Voter\VoterInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
+use Tavro\Bundle\CoreBundle\Model\EntityInterface;
 use Tavro\Bundle\CoreBundle\Entity\Node;
 use Tavro\Bundle\CoreBundle\Entity\User;
+use Tavro\Bundle\CoreBundle\Services\Voter\TavroVoter;
 
 /**
  * Class NodeVoter
  *
  * @package Tavro\Bundle\CoreBundle\Voter
  */
-class NodeVoter implements VoterInterface
+class NodeVoter extends TavroVoter implements VoterInterface
 {
-
     /**
      * Allows full access to members belonging to the growth cse, view access to outside admins.
      *
-     * @param User $user
-     * @param \Tavro\Bundle\CoreBundle\Entity\Node $entity
-     * @param string  $attribute
+     * @param $user
+     * @param \Tavro\Bundle\CoreBundle\Model\EntityInterface $entity
+     * @param $attribute
      *
-     * @throws \Exception
      * @return int
      */
-    public function checkAccess($user, Node $entity, $attribute)
+    public function checkAccess($user, EntityInterface $entity, $attribute)
     {
         if($user->isAdmin()) {
             return VoterInterface::ACCESS_GRANTED;
         }
 
+        $checkOrganization = $this->checkOrganization($entity, $user);
+
         //view a Node
-        if($attribute == self::VIEW) {
+        if($checkOrganization && $attribute == self::VIEW) {
             return VoterInterface::ACCESS_GRANTED;
         }
 
         //create a Node
-        if($attribute == self::CREATE) {
+        if($checkOrganization && $attribute == self::CREATE) {
             return VoterInterface::ACCESS_GRANTED;
         }
 
         //patch (edit) a Node
-        if($attribute == self::PATCH) {
+        if($checkOrganization && $attribute == self::PATCH) {
             return VoterInterface::ACCESS_GRANTED;
         }
 
-        /**
-         * If this User created the Node *or* they're a Moderator, they can only view/edit this Node if the display_date is earlier than "now"
-         */
         if( ($user instanceof User) && ($user->isAdmin() || $entity->getUser()->getId() === $user->getId()) ) {
             return VoterInterface::ACCESS_GRANTED;
         }

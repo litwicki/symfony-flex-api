@@ -6,6 +6,7 @@ use Symfony\Component\Security\Core\Authorization\Voter\VoterInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Tavro\Bundle\CoreBundle\Entity\Comment;
 use Tavro\Bundle\CoreBundle\Entity\User;
+use Tavro\Bundle\CoreBundle\Model\EntityInterface;
 
 /**
  * Class CommentVoter
@@ -16,34 +17,35 @@ class CommentVoter implements VoterInterface
 {
 
     /**
-     * Allows full access to members belonging to the growth cse, view access to outside admins.
+     * @param $user
+     * @param \Tavro\Bundle\CoreBundle\Model\EntityInterface $entity
+     * @param $attribute
      *
-     * @param User $user
-     * @param \Tavro\Bundle\CoreBundle\Entity\Comment $entity
-     * @param string  $attribute
-     *
-     * @throws \Exception
      * @return int
      */
-    public function checkAccess($user, Comment $entity, $attribute)
+    public function checkAccess($user, EntityInterface $entity, $attribute)
     {
 
         if($user->isAdmin()) {
             return VoterInterface::ACCESS_GRANTED;
         }
 
-        if($attribute == self::PATCH) {
-            return VoterInterface::ACCESS_GRANTED;
-        }
+        if($entity->getUser()->getId() === $user->getId()) {
 
-        // Allow all creates
-        if($attribute == self::CREATE) {
-            return VoterInterface::ACCESS_GRANTED;
-        }
+            if($attribute == self::PATCH) {
+                return VoterInterface::ACCESS_GRANTED;
+            }
 
-        // Allow all views
-        if($attribute == self::VIEW) {
-            return VoterInterface::ACCESS_GRANTED;
+            // Allow all creates
+            if($attribute == self::CREATE) {
+                return VoterInterface::ACCESS_GRANTED;
+            }
+
+            // Allow all views
+            if($attribute == self::VIEW) {
+                return VoterInterface::ACCESS_GRANTED;
+            }
+
         }
 
         $modifyDate = $entity->getCreateDate();
@@ -54,7 +56,7 @@ class CommentVoter implements VoterInterface
         /**
          * Only Admins, or the author of the Comment can edit
          */
-        if($attribute == self::EDIT || $attribute == self::PATCH) {
+        if($attribute == self::EDIT) {
 
             if($user->getId() === $entity->getUser()->getId()) {
 
@@ -64,6 +66,7 @@ class CommentVoter implements VoterInterface
                 if($now < $modifyDate) {
                     return VoterInterface::ACCESS_GRANTED;
                 }
+
                 return VoterInterface::ACCESS_GRANTED;
 
             }

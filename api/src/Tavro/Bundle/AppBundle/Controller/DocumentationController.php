@@ -29,10 +29,7 @@ class DocumentationController extends DefaultController
      */
     public function userAction(Request $request)
     {
-        $page = array(
-            'user' => $this->getUser()
-        );
-        return $this->render('TavroAppBundle:Documentation:user.html.twig', $page);
+        return $this->render('TavroAppBundle:Documentation:user.html.twig');
     }
 
     /**
@@ -42,10 +39,7 @@ class DocumentationController extends DefaultController
      */
     public function organizationAction(Request $request)
     {
-        $page = array(
-            'user' => $this->getUser()
-        );
-        return $this->render('TavroAppBundle:Documentation:organization.html.twig', $page);
+        return $this->render('TavroAppBundle:Documentation:organization.html.twig');
     }
 
     /**
@@ -55,10 +49,7 @@ class DocumentationController extends DefaultController
      */
     public function expenseAction(Request $request)
     {
-        $page = array(
-            'user' => $this->getUser()
-        );
-        return $this->render('TavroAppBundle:Documentation:expense.html.twig', $page);
+        return $this->render('TavroAppBundle:Documentation:expense.html.twig');
     }
 
     /**
@@ -68,10 +59,7 @@ class DocumentationController extends DefaultController
      */
     public function fundingAction(Request $request)
     {
-        $page = array(
-            'user' => $this->getUser()
-        );
-        return $this->render('TavroAppBundle:Documentation:funding.html.twig', $page);
+        return $this->render('TavroAppBundle:Documentation:funding.html.twig');
     }
 
     /**
@@ -81,10 +69,7 @@ class DocumentationController extends DefaultController
      */
     public function nodeAction(Request $request)
     {
-        $page = array(
-            'user' => $this->getUser()
-        );
-        return $this->render('TavroAppBundle:Documentation:node.html.twig', $page);
+        return $this->render('TavroAppBundle:Documentation:node.html.twig');
     }
 
     /**
@@ -94,10 +79,7 @@ class DocumentationController extends DefaultController
      */
     public function productAction(Request $request)
     {
-        $page = array(
-            'user' => $this->getUser()
-        );
-        return $this->render('TavroAppBundle:Documentation:product.html.twig', $page);
+        return $this->render('TavroAppBundle:Documentation:product.html.twig');
     }
 
     /**
@@ -107,10 +89,7 @@ class DocumentationController extends DefaultController
      */
     public function revenueAction(Request $request)
     {
-        $page = array(
-            'user' => $this->getUser()
-        );
-        return $this->render('TavroAppBundle:Documentation:revenue.html.twig', $page);
+        return $this->render('TavroAppBundle:Documentation:revenue.html.twig');
     }
 
     /**
@@ -120,10 +99,7 @@ class DocumentationController extends DefaultController
      */
     public function serviceAction(Request $request)
     {
-        $page = array(
-            'user' => $this->getUser()
-        );
-        return $this->render('TavroAppBundle:Documentation:service.html.twig', $page);
+        return $this->render('TavroAppBundle:Documentation:service.html.twig');
     }
 
     /**
@@ -133,10 +109,7 @@ class DocumentationController extends DefaultController
      */
     public function shareholderAction(Request $request)
     {
-        $page = array(
-            'user' => $this->getUser()
-        );
-        return $this->render('TavroAppBundle:Documentation:shareholder.html.twig', $page);
+        return $this->render('TavroAppBundle:Documentation:shareholder.html.twig');
     }
 
     /**
@@ -146,10 +119,7 @@ class DocumentationController extends DefaultController
      */
     public function commentAction(Request $request)
     {
-        $page = array(
-            'user' => $this->getUser()
-        );
-        return $this->render('TavroAppBundle:Documentation:comment.html.twig', $page);
+        return $this->render('TavroAppBundle:Documentation:comment.html.twig');
     }
 
     /**
@@ -159,10 +129,7 @@ class DocumentationController extends DefaultController
      */
     public function tagAction(Request $request)
     {
-        $page = array(
-            'user' => $this->getUser()
-        );
-        return $this->render('TavroAppBundle:Documentation:tag.html.twig', $page);
+        return $this->render('TavroAppBundle:Documentation:tag.html.twig');
     }
 
     /**
@@ -172,10 +139,7 @@ class DocumentationController extends DefaultController
      */
     public function imageAction(Request $request)
     {
-        $page = array(
-            'user' => $this->getUser()
-        );
-        return $this->render('TavroAppBundle:Documentation:image.html.twig', $page);
+        return $this->render('TavroAppBundle:Documentation:image.html.twig');
     }
 
     /**
@@ -185,10 +149,7 @@ class DocumentationController extends DefaultController
      */
     public function customerAction(Request $request)
     {
-        $page = array(
-            'user' => $this->getUser()
-        );
-        return $this->render('TavroAppBundle:Documentation:customer.html.twig', $page);
+        return $this->render('TavroAppBundle:Documentation:customer.html.twig');
     }
 
 }

@@ -90,3 +90,7 @@ If you make any changes, updating the docs for reference is easy:
     $ vagrant ssh
     $ sudo php /var/www/tavro/sami/sami update /var/www/tavro/sami/config.php
     
+## Testing with PHPUnit
+
+    $ cd /var/www/tavro/api
+    $ phpunit

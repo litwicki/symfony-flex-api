@@ -23,29 +23,6 @@ security:
             pattern:  ^/(_(profiler|wdt)|css|images|js)/
             security: false
 
-        main:
-            host: %api_hostname%
-            pattern: ^/
-            anonymous: ~
-            provider: main
-            simple_form:
-                authenticator: tavro.user_authenticator
-                check_path: /login_check
-                login_path: /login
-                remember_me: true
-                always_use_default_target_path: false
-                success_handler: tavro.login_listener
-                failure_path:   /login
-            logout:
-                path: /logout
-                target: /
-                success_handler: tavro.logout_listener
-            remember_me:
-                secret: "%secret%"
-                lifetime: 25920000 # 30 days
-                #lifetime: 31536000 # 365 days
-                path: /
-
         api:
             host: %api_hostname%
             pattern: ^/api
@@ -54,10 +31,10 @@ security:
                 authenticators:
                     - tavro.api_authenticator
 
+        docs:
+            host: %api_hostname%
+            pattern: ^/
+            anonymous: ~
+
     access_control:
-        - { path: ^/login, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/login_check, role: IS_AUTHENTICATED_ANONYMOUSLY }
-
-        # Leave last!
-
-        - { path: ^/, roles: [ROLE_USER] }
+        - { path: ^/api, roles: [ROLE_API] }
