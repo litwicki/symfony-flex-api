@@ -1,0 +1,196 @@
+FORMAT: 1A
+HOST: http://api.tavro.io/api/v1
+
+# tavro.io api
+
+API for working with tavro.io
+
+# Data Structures
+
+## Role (object)
++ id: 1 (number)
++ name: Administrator (string, required)
++ role: ROLE_ADMIN (string, required)
++ body: Administrators do what they want! (string, required)
+
+## User (object)
++ id: 1 (number, required)
+
+## Organization (object)
++ id: 1 (number, required)
+
+## Customer (object)
++ id: 42 (number, required)
++ create_date: `2015-08-05T08:40:51.620Z` (string, required)
++ update_date: `2015-08-05T08:40:51.620Z` (string, optional)
++ status: 1 (number, required)
++ first_name: Jane (string, required)
++ last_name:  Doe (string, required)
++ title:  CEO (string, optional)
++ address: 123 Main St (string, required)
++ address2: null (string, optional)
++ city: Maple Valley (string)
++ state: WA (string, required)
++ zip: 98065 (string, required)
++ email: jane.doe@tavro.io (string, required)
++ phone: 555-867-5309 (string, optional)
++ user (User)
++ organization (Organization)
+
+## Comment (object)
++ id: 13 (number, required)
++ create_date: "2015-08-05T08:40:51.620Z" (datetime)
++ update_date: "2015-08-05T08:40:51.620Z" (datetime)
++ body: Boba Fett
++ status: id (number, required)
++ user (User)
+
+## Expense (object)
++ id
++ body
++ amount
++ expense_date
++ category (ExpenseCategory)
++ user (User)
++ customer (Customer)
+
+## ExpenseCategory (object)
++ id
++ body
++ organization (Organization)
+
+## Comments [/comments]
+
+When creating a comment `parent_type` can be any of the following:
+
+- customers
+- expenses
+- nodes
+- revenues
+
+### Create Comment [POST /PARENT_TYPE/comments]
+
++ Request (application/json)
+
+        {
+            "body": "This is a great app!"
+            "user": 1
+        }
+
++ Response 201 (application/json)
+
+    + Headers
+
+            Location: /customers/1
+
+### Delete Comment [DELETE /comments/{comment_id}]
+
++ Parameters
+    + comment_id (number) - ID of the Comment in the form of an integer
+
++ Response 204 (application/json)
+
+## Customers [/customers]
+
+### List All Customers [GET]
+
++ Response 200 (application/json)
+
+  + Attributes (array[Customer])
+
+### View Customer [GET /customers/{customer_id}]
+
++ Parameters
+    + customer_id (number) - ID of the Customer in the form of an integer
+
++ Response 200 (application/json)
+
+    + Attributes (array[Customer])
+
+### Create Customer [POST]
+
++ Request (application/json)
+
+        {
+            "first_name": "Jane",
+            "last_name": "Doe",
+            "title": "CEO",
+            "address": "123 Main St",
+            "address2": "",
+            "city": "Maple Valley",
+            "state": "WA",
+            "zip": "98065",
+            "email": "jane.doe@gmail.com",
+            "phone": "555-867-5309",
+            "user": 1,
+            "organization": 1
+        }
+
++ Response 201 (application/json)
+
+    + Headers
+
+            Location: /customers/1
+
+### Edit Customer [PATCH]
+
++ Request (application/json)
+
+        {
+            "status": 1
+            "first_name": "Jane",
+            "last_name": "Doe",
+            "title": "CEO",
+            "address": "123 Main St",
+            "address2": "",
+            "city": "Maple Valley",
+            "state": "WA",
+            "zip": "98065",
+            "email": "jane.doe@gmail.com",
+            "phone": "555-867-5309",
+            "user": 1,
+            "organization": 1
+        }
+
++ Response 201 (application/json)
+
+    + Headers
+
+            Location: /customers/1
+
+### Delete Customer [DELETE /customers/{customer_id}]
+
++ Parameters
+    + customer_id (number) - ID of the Customer in the form of an integer
+
++ Response 204 (application/json)
+
+## Expenses [/expenses]
+
+### Create Expense [POST]
+
+`category` must be a valid `ExpenseCategory.id`
+
++ Request (application/json)
+
+        {
+            "body": "Apiary for teams subscription",
+            "amount": 1.00
+            "expense_date": "2009-02-03",
+            "category": 3,
+            "customer": 10
+            "organization": 1
+        }
+
++ Response 201 (application/json)
+
+    + Headers
+
+            Location: /expenses/1
+
+### Delete Expense [DELETE /expenses/{expense_id}]
+
++ Parameters
+    + expense_id (number) - ID of the Expense in the form of an integer
+
++ Response 204 (application/json)
