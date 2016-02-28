@@ -14,8 +14,8 @@ use JMS\Serializer\Annotation\SerializedName;
 use Doctrine\ORM\Mapping\Table;
 use Symfony\Component\Validator\Constraints as Assert;
 
-use Tavro\Bundle\CoreBundle\Model\Entity;
-use Tavro\Bundle\CoreBundle\Model\EntityInterface;
+use Tavro\Bundle\CoreBundle\Model\OrganizationEntity;
+use Tavro\Bundle\CoreBundle\Model\OrganizationEntityInterface;
 
 /**
  * @ORM\Entity
@@ -24,14 +24,8 @@ use Tavro\Bundle\CoreBundle\Model\EntityInterface;
  * @ORM\Table(name="tavro_funding_round")
  *
  */
-class FundingRound extends Entity implements EntityInterface
+class FundingRound extends OrganizationEntity implements OrganizationEntityInterface
 {
-    /**
-     * @ORM\Column(type="string", length=8000, nullable=true)
-     * @Groups({"api", "tavro", "simple"})
-     */
-    protected $body;
-
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      * @Groups({"api", "tavro", "simple"})
@@ -55,14 +49,6 @@ class FundingRound extends Entity implements EntityInterface
      * @Groups({"api", "tavro", "simple"})
      */
     protected $total_shares;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="Tavro\Bundle\CoreBundle\Entity\Organization", inversedBy="funding_rounds")
-     * @ORM\JoinColumn(name="organization_id", referencedColumnName="id", nullable=false)
-     * @Groups({"api", "tavro"})
-     * @MaxDepth(3)
-     */
-    protected $organization;
 
     /**
      * @ORM\OneToMany(targetEntity="Tavro\Bundle\CoreBundle\Entity\FundingRoundShareholder", mappedBy="funding_round", cascade={"remove"})
@@ -110,29 +96,6 @@ class FundingRound extends Entity implements EntityInterface
     public function getBody()
     {
         return $this->body;
-    }
-
-    /**
-     * Set organization
-     *
-     * @param \Tavro\Bundle\CoreBundle\Entity\Organization $organization
-     * @return Service
-     */
-    public function setOrganization(\Tavro\Bundle\CoreBundle\Entity\Organization $organization)
-    {
-        $this->organization = $organization;
-
-        return $this;
-    }
-
-    /**
-     * Get organization
-     *
-     * @return \Tavro\Bundle\CoreBundle\Entity\Organization
-     */
-    public function getOrganization()
-    {
-        return $this->organization;
     }
 
     /**

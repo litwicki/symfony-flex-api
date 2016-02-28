@@ -41,22 +41,6 @@ class Core extends AbstractFixture implements OrderedFixtureInterface, Container
      */
     public function load(ObjectManager $manager)
     {
-        $slugify = new Slugify();
-
-        /**
-         * Create Global Variables
-         */
-        $version = new Variable();
-        $version->setName('Application Version');
-        $version->setSlug('version');
-        $version->setValue(1.0);
-        $manager->persist($version);
-
-        $env = new Variable();
-        $env->setName('Application Environment');
-        $env->setSlug('env');
-        $env->setValue('dev');
-        $manager->persist($env);
 
         $roles = array(
             'ROLE_USER'         => 'User',

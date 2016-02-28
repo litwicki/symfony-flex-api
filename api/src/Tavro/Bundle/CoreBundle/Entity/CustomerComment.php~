@@ -83,4 +83,28 @@ class CustomerComment extends Entity implements EntityInterface
         return $this->customer;
     }
 
+
+    /**
+     * Set body
+     *
+     * @param string $body
+     *
+     * @return CustomerComment
+     */
+    public function setBody($body)
+    {
+        $this->body = $body;
+
+        return $this;
+    }
+
+    /**
+     * Get body
+     *
+     * @return string
+     */
+    public function getBody()
+    {
+        return $this->body;
+    }
 }

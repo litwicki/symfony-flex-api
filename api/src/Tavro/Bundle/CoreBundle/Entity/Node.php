@@ -14,8 +14,8 @@ use JMS\Serializer\Annotation\SerializedName;
 use Doctrine\ORM\Mapping\Table;
 use Symfony\Component\Validator\Constraints as Assert;
 
-use Tavro\Bundle\CoreBundle\Model\Entity;
-use Tavro\Bundle\CoreBundle\Model\EntityInterface;
+use Tavro\Bundle\CoreBundle\Model\OrganizationEntity;
+use Tavro\Bundle\CoreBundle\Model\OrganizationEntityInterface;
 
 /**
  * @ORM\Entity
@@ -24,7 +24,7 @@ use Tavro\Bundle\CoreBundle\Model\EntityInterface;
  * @ORM\Table(name="tavro_node", indexes={@ORM\Index(name="NODE_TYPE", columns={"type"})})
  *
  */
-class Node extends Entity implements EntityInterface
+class Node extends OrganizationEntity implements OrganizationEntityInterface
 {
 
     /**
@@ -77,14 +77,6 @@ class Node extends Entity implements EntityInterface
      * @ORM\OneToMany(targetEntity="Tavro\Bundle\CoreBundle\Entity\NodeRead", mappedBy="node", cascade={"remove"})
      */
     protected $nodes_read;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="Tavro\Bundle\CoreBundle\Entity\Organization", inversedBy="nodes")
-     * @ORM\JoinColumn(name="organization_id", referencedColumnName="id", nullable=false)
-     * @Groups({"api", "tavro", "simple"})
-     * @MaxDepth(3)
-     */
-    protected $organization;
 
     /**
      * Constructor
@@ -175,29 +167,6 @@ class Node extends Entity implements EntityInterface
     public function getUser()
     {
         return $this->user;
-    }
-
-    /**
-     * Set organization
-     *
-     * @param \Tavro\Bundle\CoreBundle\Entity\Organization $organization
-     * @return Node
-     */
-    public function setOrganization(\Tavro\Bundle\CoreBundle\Entity\Organization $organization)
-    {
-        $this->organization = $organization;
-
-        return $this;
-    }
-
-    /**
-     * Get organization
-     *
-     * @return \Tavro\Bundle\CoreBundle\Entity\Organization
-     */
-    public function getOrganization()
-    {
-        return $this->organization;
     }
 
     /**

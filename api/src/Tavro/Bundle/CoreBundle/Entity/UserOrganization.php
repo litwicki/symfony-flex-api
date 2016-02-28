@@ -85,4 +85,28 @@ class UserOrganization extends Entity implements EntityInterface
         return $this->user;
     }
 
+
+    /**
+     * Set body
+     *
+     * @param string $body
+     *
+     * @return UserOrganization
+     */
+    public function setBody($body)
+    {
+        $this->body = $body;
+
+        return $this;
+    }
+
+    /**
+     * Get body
+     *
+     * @return string
+     */
+    public function getBody()
+    {
+        return $this->body;
+    }
 }

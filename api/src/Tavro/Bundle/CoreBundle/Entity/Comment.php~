@@ -24,13 +24,6 @@ use Tavro\Bundle\CoreBundle\Model\EntityInterface;
  */
 class Comment extends Entity implements EntityInterface
 {
-
-    /**
-     * @ORM\Column(type="string", length=8000, nullable=true)
-     * @Groups({"api", "tavro", "simple"})
-     */
-    protected $body;
-
     /**
      * @ORM\OneToMany(targetEntity="Tavro\Bundle\CoreBundle\Entity\NodeComment", mappedBy="comment", cascade={"remove"})
      */

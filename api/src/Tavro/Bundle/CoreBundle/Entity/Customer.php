@@ -19,8 +19,8 @@ use Doctrine\ORM\Mapping\Table;
 use Symfony\Component\Validator\Constraints as Assert;
 
 use Tavro\Bundle\CoreBundle\Model\UserInterface;
-use Tavro\Bundle\CoreBundle\Model\Entity;
-use Tavro\Bundle\CoreBundle\Model\EntityInterface;
+use Tavro\Bundle\CoreBundle\Model\OrganizationEntity;
+use Tavro\Bundle\CoreBundle\Model\OrganizationEntityInterface;
 use JMS\Serializer\Annotation\MaxDepth;
 
 /**
@@ -31,7 +31,7 @@ use JMS\Serializer\Annotation\MaxDepth;
  * @XmlRoot("shareholder")
  * @XmlNamespace(uri="http://tavro.io/api/shareholders")
  */
-class Customer extends Entity implements EntityInterface
+class Customer extends OrganizationEntity implements OrganizationEntityInterface
 {
     /**
      * @ORM\Column(type="string", length=255, nullable=false)
@@ -49,7 +49,7 @@ class Customer extends Entity implements EntityInterface
      * @ORM\Column(type="string", length=255, nullable=true)
      * @Groups({"api", "tavro", "simple", "typeahead"})
      */
-    protected $title;
+    protected $job_title;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=false)
@@ -100,14 +100,6 @@ class Customer extends Entity implements EntityInterface
      * @MaxDepth(1)
      */
     protected $user;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="Tavro\Bundle\CoreBundle\Entity\Organization", inversedBy="nodes")
-     * @ORM\JoinColumn(name="organization_id", referencedColumnName="id", nullable=false)
-     * @Groups({"api", "tavro", "simple"})
-     * @MaxDepth(3)
-     */
-    protected $organization;
 
     /**
      * @ORM\OneToMany(targetEntity="Tavro\Bundle\CoreBundle\Entity\CustomerComment", mappedBy="customer", cascade={"remove"})
@@ -449,27 +441,52 @@ class Customer extends Entity implements EntityInterface
         return $this->customer_comments;
     }
 
+
     /**
-     * Set organization
+     * Set jobTitle
      *
-     * @param \Tavro\Bundle\CoreBundle\Entity\Organization $organization
+     * @param string $jobTitle
      *
      * @return Customer
      */
-    public function setOrganization(\Tavro\Bundle\CoreBundle\Entity\Organization $organization)
+    public function setJobTitle($jobTitle)
     {
-        $this->organization = $organization;
+        $this->job_title = $jobTitle;
 
         return $this;
     }
 
     /**
-     * Get organization
+     * Get jobTitle
      *
-     * @return \Tavro\Bundle\CoreBundle\Entity\Organization
+     * @return string
      */
-    public function getOrganization()
+    public function getJobTitle()
     {
-        return $this->organization;
+        return $this->job_title;
+    }
+
+    /**
+     * Set body
+     *
+     * @param string $body
+     *
+     * @return Customer
+     */
+    public function setBody($body)
+    {
+        $this->body = $body;
+
+        return $this;
+    }
+
+    /**
+     * Get body
+     *
+     * @return string
+     */
+    public function getBody()
+    {
+        return $this->body;
     }
 }

@@ -14,8 +14,8 @@ use JMS\Serializer\Annotation\SerializedName;
 use Doctrine\ORM\Mapping\Table;
 use Symfony\Component\Validator\Constraints as Assert;
 
-use Tavro\Bundle\CoreBundle\Model\Entity;
-use Tavro\Bundle\CoreBundle\Model\EntityInterface;
+use Tavro\Bundle\CoreBundle\Model\OrganizationEntity;
+use Tavro\Bundle\CoreBundle\Model\OrganizationEntityInterface;
 
 /**
  * @ORM\Entity
@@ -24,19 +24,13 @@ use Tavro\Bundle\CoreBundle\Model\EntityInterface;
  * @ORM\Table(name="tavro_tag")
  *
  */
-class Tag extends Entity implements EntityInterface
+class Tag extends OrganizationEntity implements OrganizationEntityInterface
 {
     /**
      * @ORM\Column(type="string", length=500, nullable=false)
      * @Groups({"api", "tavro", "simple", "typeahead"})
      */
-    protected $title;
-
-    /**
-     * @ORM\Column(type="string", length=500, nullable=false)
-     * @Groups({"api", "tavro", "simple"})
-     */
-    protected $body;
+    protected $tag;
 
     /**
      * @ORM\ManyToOne(targetEntity="Tavro\Bundle\CoreBundle\Entity\Organization", inversedBy="tags")
@@ -57,26 +51,26 @@ class Tag extends Entity implements EntityInterface
     protected $expense_tags;
 
     /**
-     * Set title
+     * Set tag
      *
-     * @param string $title
+     * @param string $tag
      * @return Tag
      */
-    public function setTitle($title)
+    public function setTag($tag)
     {
-        $this->title = $title;
+        $this->tag = strtolower($tag);
 
         return $this;
     }
 
     /**
-     * Get title
+     * Get tag
      *
      * @return string 
      */
-    public function getTitle()
+    public function getTag()
     {
-        return $this->title;
+        return $this->tag;
     }
 
     /**
@@ -169,29 +163,5 @@ class Tag extends Entity implements EntityInterface
     public function getExpenseTags()
     {
         return $this->expense_tags;
-    }
-
-    /**
-     * Set organization
-     *
-     * @param \Tavro\Bundle\CoreBundle\Entity\Organization $organization
-     *
-     * @return Tag
-     */
-    public function setOrganization(\Tavro\Bundle\CoreBundle\Entity\Organization $organization)
-    {
-        $this->organization = $organization;
-
-        return $this;
-    }
-
-    /**
-     * Get organization
-     *
-     * @return \Tavro\Bundle\CoreBundle\Entity\Organization
-     */
-    public function getOrganization()
-    {
-        return $this->organization;
     }
 }

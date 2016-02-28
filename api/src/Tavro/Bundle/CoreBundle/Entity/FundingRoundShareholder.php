@@ -13,15 +13,15 @@ use JMS\Serializer\Annotation\Groups;
 use JMS\Serializer\Annotation\MaxDepth;
 use Doctrine\ORM\Mapping\Table;
 
-use Tavro\Bundle\CoreBundle\Model\Entity;
-use Tavro\Bundle\CoreBundle\Model\EntityInterface;
+use Tavro\Bundle\CoreBundle\Model\OrganizationEntity;
+use Tavro\Bundle\CoreBundle\Model\OrganizationEntityInterface;
 
 /**
  * @ORM\Entity
  * @ORM\Entity(repositoryClass="Tavro\Bundle\CoreBundle\Repository\FundingRoundShareholderRepository")
  * @ORM\Table(name="tavro_funding_round_shareholder", indexes={@ORM\Index(name="ORGANIZATION_SHAREHOLDER", columns={"shareholder_id","funding_round_id"})})
  */
-class FundingRoundShareholder extends Entity implements EntityInterface
+class FundingRoundShareholder extends OrganizationEntity implements OrganizationEntityInterface
 {
     /**
      * @ORM\ManyToOne(targetEntity="Tavro\Bundle\CoreBundle\Entity\Shareholder", inversedBy="funding_round_shareholders")
@@ -44,14 +44,6 @@ class FundingRoundShareholder extends Entity implements EntityInterface
      * @Groups({"api", "tavro", "simple"})
      */
     protected $shares;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="Tavro\Bundle\CoreBundle\Entity\Organization", inversedBy="funding_round_shareholders")
-     * @ORM\JoinColumn(name="organization_id", referencedColumnName="id", nullable=false)
-     * @Groups({"api", "tavro"})
-     * @MaxDepth(3)
-     */
-    protected $organization;
 
     /**
      * Set shareholder
@@ -124,27 +116,28 @@ class FundingRoundShareholder extends Entity implements EntityInterface
         return $this->shares;
     }
 
+
     /**
-     * Set organization
+     * Set body
      *
-     * @param \Tavro\Bundle\CoreBundle\Entity\Organization $organization
+     * @param string $body
      *
      * @return FundingRoundShareholder
      */
-    public function setOrganization(\Tavro\Bundle\CoreBundle\Entity\Organization $organization)
+    public function setBody($body)
     {
-        $this->organization = $organization;
+        $this->body = $body;
 
         return $this;
     }
 
     /**
-     * Get organization
+     * Get body
      *
-     * @return \Tavro\Bundle\CoreBundle\Entity\Organization
+     * @return string
      */
-    public function getOrganization()
+    public function getBody()
     {
-        return $this->organization;
+        return $this->body;
     }
 }

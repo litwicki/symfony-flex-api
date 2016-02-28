@@ -34,6 +34,12 @@ class Entity implements EntityInterface
     protected $id;
 
     /**
+     * @ORM\Column(type="string", length=8000, nullable=true)
+     * @Groups({"api", "tavro", "simple"})
+     */
+    protected $body;
+
+    /**
      * @ORM\Column(type="integer", nullable=false)
      * @Groups({"api", "tavro", "simple"})
      */

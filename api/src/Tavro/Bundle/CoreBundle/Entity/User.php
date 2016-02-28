@@ -1141,4 +1141,28 @@ class User extends Entity implements UserInterface, \Serializable
 
         return $this;
     }
+
+    /**
+     * Set body
+     *
+     * @param string $body
+     *
+     * @return User
+     */
+    public function setBody($body)
+    {
+        $this->body = $body;
+
+        return $this;
+    }
+
+    /**
+     * Get body
+     *
+     * @return string
+     */
+    public function getBody()
+    {
+        return $this->body;
+    }
 }

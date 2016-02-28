@@ -70,6 +70,11 @@ class Service extends Entity
     protected $revenue_services;
 
     /**
+     * @ORM\OneToMany(targetEntity="Tavro\Bundle\CoreBundle\Entity\ServiceImage", mappedBy="service", cascade={"remove"})
+     */
+    protected $service_images;
+
+    /**
      * Constructor
      */
     public function __construct()
@@ -237,5 +242,39 @@ class Service extends Entity
     public function getType()
     {
         return $this->type;
+    }
+
+    /**
+     * Add serviceImage
+     *
+     * @param \Tavro\Bundle\CoreBundle\Entity\ServiceImage $serviceImage
+     *
+     * @return Service
+     */
+    public function addServiceImage(\Tavro\Bundle\CoreBundle\Entity\ServiceImage $serviceImage)
+    {
+        $this->service_images[] = $serviceImage;
+
+        return $this;
+    }
+
+    /**
+     * Remove serviceImage
+     *
+     * @param \Tavro\Bundle\CoreBundle\Entity\ServiceImage $serviceImage
+     */
+    public function removeServiceImage(\Tavro\Bundle\CoreBundle\Entity\ServiceImage $serviceImage)
+    {
+        $this->service_images->removeElement($serviceImage);
+    }
+
+    /**
+     * Get serviceImages
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getServiceImages()
+    {
+        return $this->service_images;
     }
 }

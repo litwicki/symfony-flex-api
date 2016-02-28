@@ -12,30 +12,20 @@ use JMS\Serializer\Annotation\MaxDepth;
 use JMS\Serializer\Annotation\Groups;
 use Doctrine\ORM\Mapping\Table;
 
-use Tavro\Bundle\CoreBundle\Model\Entity;
-use Tavro\Bundle\CoreBundle\Model\EntityInterface;
+use Tavro\Bundle\CoreBundle\Model\OrganizationEntity;
+use Tavro\Bundle\CoreBundle\Model\OrganizationEntityInterface;
 
 /**
  * @ORM\Entity
  * @ORM\Entity(repositoryClass="Tavro\Bundle\CoreBundle\Repository\VariableRepository")
  * @Table(name="tavro_variable")
  */
-class Variable extends Entity implements EntityInterface
+class Variable extends OrganizationEntity implements OrganizationEntityInterface
 {
     /**
      * @ORM\Column(type="string", length=100, nullable=false)
      */
     protected $name;
-
-    /**
-     * @ORM\Column(type="string", length=100, unique=true, nullable=false)
-     */
-    protected $slug;
-
-    /**
-     * @ORM\Column(type="string", length=8000, nullable=false)
-     */
-    protected $value;
 
     /**
      * Set name
@@ -60,50 +50,28 @@ class Variable extends Entity implements EntityInterface
         return $this->name;
     }
 
+
     /**
-     * Set slug
+     * Set body
      *
-     * @param string $slug
+     * @param string $body
+     *
      * @return Variable
      */
-    public function setSlug($slug)
+    public function setBody($body)
     {
-        $this->slug = $slug;
+        $this->body = $body;
 
         return $this;
     }
 
     /**
-     * Get slug
+     * Get body
      *
      * @return string
      */
-    public function getSlug()
+    public function getBody()
     {
-        return $this->slug;
+        return $this->body;
     }
-
-    /**
-     * Set value
-     *
-     * @param string $value
-     * @return Variable
-     */
-    public function setValue($value)
-    {
-        $this->value = $value;
-
-        return $this;
-    }
-
-    /**
-     * Get value
-     *
-     * @return string 
-     */
-    public function getValue()
-    {
-        return $this->value;
-    }
-
 }

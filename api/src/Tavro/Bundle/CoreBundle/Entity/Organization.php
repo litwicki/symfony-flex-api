@@ -33,12 +33,6 @@ class Organization extends Entity implements EntityInterface
     protected $title;
 
     /**
-     * @ORM\Column(type="string", length=500, nullable=false)
-     * @Groups({"api", "tavro"})
-     */
-    protected $body;
-
-    /**
      * @ORM\ManyToOne(targetEntity="Tavro\Bundle\CoreBundle\Entity\User", inversedBy="organizations")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id", nullable=false)
      * @Groups({"api", "tavro"})
@@ -129,29 +123,6 @@ class Organization extends Entity implements EntityInterface
      * @ORM\OneToMany(targetEntity="Tavro\Bundle\CoreBundle\Entity\FundingRoundShareholder", mappedBy="organization", cascade={"remove"})
      */
     protected $funding_round_shareholders;
-
-    /**
-     * Set body
-     *
-     * @param string $body
-     * @return Organization
-     */
-    public function setBody($body)
-    {
-        $this->body = $body;
-
-        return $this;
-    }
-
-    /**
-     * Get body
-     *
-     * @return string 
-     */
-    public function getBody()
-    {
-        return $this->body;
-    }
 
     /**
      * Set owner
@@ -686,5 +657,29 @@ class Organization extends Entity implements EntityInterface
     public function getTitle()
     {
         return $this->title;
+    }
+
+    /**
+     * Set body
+     *
+     * @param string $body
+     *
+     * @return Organization
+     */
+    public function setBody($body)
+    {
+        $this->body = $body;
+
+        return $this;
+    }
+
+    /**
+     * Get body
+     *
+     * @return string
+     */
+    public function getBody()
+    {
+        return $this->body;
     }
 }

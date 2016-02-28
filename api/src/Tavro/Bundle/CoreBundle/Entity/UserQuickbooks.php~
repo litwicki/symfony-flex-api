@@ -201,4 +201,28 @@ class UserQuickbooks extends Entity implements EntityInterface
         return $this->user;
     }
 
+
+    /**
+     * Set body
+     *
+     * @param string $body
+     *
+     * @return UserQuickbooks
+     */
+    public function setBody($body)
+    {
+        $this->body = $body;
+
+        return $this;
+    }
+
+    /**
+     * Get body
+     *
+     * @return string
+     */
+    public function getBody()
+    {
+        return $this->body;
+    }
 }

@@ -3,7 +3,7 @@ HOST: http://api.tavro.io/api/v1
 
 # tavro.io api
 
-API for working with tavro.io
+API for working with tavro.io.
 
 # Data Structures
 
@@ -13,19 +13,158 @@ API for working with tavro.io
 + role: ROLE_ADMIN (string, required)
 + body: Administrators do what they want! (string, required)
 
+## Product Image (object)
++ id: 4 (number)
++ aws_url: https://s3.amazonaws.com/s3bucket/images/products/UfjnDUqN2057.jpg (string)
++ bucket: s3-bucket (string)
++ directory: images (string)
++ aws_key: UfjnDUqN2057.jpg (string)
++ original_filename: filename.jpg (string)
++ mime_type: image/jpeg (string)
++ filesize: 3456543 (number)
++ height: 750 (number)
++ width: 750 (number)
+
+## Service Image (object)
++ id: 11 (number)
++ aws_url: https://s3.amazonaws.com/s3bucket/images/services/ZfjnEFqN1257.jpg (string)
++ bucket: s3-bucket (string)
++ directory: images (string)
++ aws_key: ZfjnEFqN1257.jpg (string)
++ original_filename: symfony.jpg (string)
++ mime_type: image/jpeg (string)
++ filesize: 3456543 (number)
++ height: 500 (number)
++ width: 500 (number)
+
+## Avatar (object)
++ id: 3 (number)
++ aws_url: https://s3.amazonaws.com/s3bucket/images/avatars/4GjxlgWh8dfM.jpg (string)
++ bucket: s3-bucket (string)
++ directory: images (string)
++ aws_key: 4GjxlgWh8dfM.jpg (string)
++ original_filename: jake2016.jpg (string)
++ mime_type: image/jpeg (string)
++ filesize: 3456543 (number)
++ height: 250 (number)
++ width: 250 (number)
+
 ## User (object)
 + id: 1 (number, required)
++ username: montoya (string, required)
++ salt (string)
++ email: user@tavro.io
++ signature (string)
++ last_online_date: `2015-08-05T08:40:51.620Z` (string, required)
++ api_key (string)
++ api_enabled (boolean)
++ guid (string)
++ user_ip (string)
++ gender (string)
++ user_agent (string)
++ birthday (string)
++ avatar (Avatar)
+
+## Simple User (object)
++ id: 100
++ username: username
++ email: user@example.com
+
+## Customer User (object)
++ id: 2 (number, required)
++ username: zachary (string, required)
++ salt (string)
++ email: zack@acme.co
++ signature (string)
++ last_online_date: `2015-08-05T08:40:51.620Z` (string, required)
++ api_key (string)
++ api_enabled (boolean)
++ guid (string)
++ user_ip (string)
++ gender (string)
++ user_agent (string)
++ birthday (string)
++ avatar
+
+## Customer2 User (object)
++ id: 20 (number, required)
++ username: zachary (string, required)
++ salt (string)
++ email: aiden@ninja.com
++ signature (string)
++ last_online_date: `2015-08-05T08:40:51.620Z` (string, required)
++ api_key (string)
++ api_enabled (boolean)
++ guid (string)
++ user_ip (string)
++ gender (string)
++ user_agent (string)
++ birthday (string)
++ avatar
 
 ## Organization (object)
 + id: 1 (number, required)
++ status (number)
++ create_date: `2015-08-05T08:40:51.620Z` (string, required)
++ update_date: `2015-08-05T08:40:51.620Z` (string, required)
++ title: Zoadilack (string, required)
++ body: Zoadilack writes beautiful code. (string)
++ owner (User)
++ nodes (array)
++ tags (array)
++ users (array)
++ service_categories (array)
++ expense_categories (array)
++ product_categories (array)
++ revenue_categories (array)
++ services (array)
++ expenses (array)
++ products (array)
++ funding_rounds (array)
++ shareholders (array)
+
+## Marvel Organization (object)
++ id: 2 (number, required)
++ status (number)
++ create_date: `2015-08-05T08:40:51.620Z` (string, required)
++ update_date: `2015-08-05T08:40:51.620Z` (string, required)
++ title: Marvel Entertainment (string, required)
++ body: Spiderman, Spiderman, Does whatever a spider can Spins a web, any size, Catches thieves just like flies Look Out! Here comes the Spiderman. (string)
+
+## DC Comics Organization (object)
++ id: 3 (number, required)
++ status (number)
++ create_date: `2015-08-05T08:40:51.620Z` (string, required)
++ update_date: `2015-08-05T08:40:51.620Z` (string, required)
++ title: DC Comics (string, required)
++ body: Nah-nah nah-nah nah-nah nah-nah... BATMAN! (string)
 
 ## Customer (object)
 + id: 42 (number, required)
 + create_date: `2015-08-05T08:40:51.620Z` (string, required)
 + update_date: `2015-08-05T08:40:51.620Z` (string, optional)
 + status: 1 (number, required)
-+ first_name: Jane (string, required)
-+ last_name:  Doe (string, required)
++ first_name: Zachary (string, required)
++ last_name:  Litwicki (string, required)
++ title:  CEO (string, optional)
++ address: 123 Main St (string, required)
++ address2: null (string, optional)
++ city: Maple Valley (string)
++ state: WA (string, required)
++ zip: 98065 (string, required)
++ email: zachary@tavro.io (string, required)
++ phone: 555-867-5309 (string, optional)
++ user (Customer User)
++ organization (Marvel Organization)
++ comments (array)
+
+## Customer2 (object)
++ id: 50 (number, required)
++ create_date: `2015-08-05T08:40:51.620Z` (string, required)
++ update_date: `2015-08-05T08:40:51.620Z` (string, optional)
++ status: 1 (number, required)
++ first_name: Zoë (string, required)
++ last_name:  Litwicki (string, required)
 + title:  CEO (string, optional)
 + address: 123 Main St (string, required)
 + address2: null (string, optional)
@@ -34,13 +173,52 @@ API for working with tavro.io
 + zip: 98065 (string, required)
 + email: jane.doe@tavro.io (string, required)
 + phone: 555-867-5309 (string, optional)
-+ user (User)
-+ organization (Organization)
++ user
++ organization (Marvel Organization)
++ comments (array)
+
+## Customer3 (object)
++ id: 13 (number, required)
++ create_date: `2015-08-05T08:40:51.620Z` (string, required)
++ update_date: `2015-08-05T08:40:51.620Z` (string, optional)
++ status: 1 (number, required)
++ first_name: Bruce (string, required)
++ last_name:  Wayne (string, required)
++ title:  CEO (string, optional)
++ address: 123 Main St (string, required)
++ address2: null (string, optional)
++ city: Gotham (string)
++ state: New York (string, required)
++ zip: 12345 (string, required)
++ email: batman@tavro.io (string, required)
++ phone: 555-867-5309 (string, optional)
++ user (Simple User)
++ organization (DC Comics Organization)
++ comments (array)
+
+## Customer4 (object)
++ id: 43 (number, required)
++ create_date: `2015-08-05T08:40:51.620Z` (string, required)
++ update_date: `2015-08-05T08:40:51.620Z` (string, optional)
++ status: 1 (number, required)
++ first_name: Peter (string, required)
++ last_name:  Parker (string, required)
++ title:  Spiderman (string, optional)
++ address: 123 Main St (string, required)
++ address2: null (string, optional)
++ city: New York (string)
++ state: NY (string, required)
++ zip: 10001 (string, required)
++ email: spiderman@tavro.io (string, required)
++ phone: 555-867-5309 (string, optional)
++ user (Simple User)
++ organization (Marvel Organization)
++ comments (array)
 
 ## Comment (object)
 + id: 13 (number, required)
-+ create_date: "2015-08-05T08:40:51.620Z" (datetime)
-+ update_date: "2015-08-05T08:40:51.620Z" (datetime)
++ create_date: `2015-08-05T08:40:51.620Z` (string, required)
++ update_date: `2015-08-05T08:40:51.620Z` (string, required)
 + body: Boba Fett
 + status: id (number, required)
 + user (User)
@@ -54,26 +232,166 @@ API for working with tavro.io
 + user (User)
 + customer (Customer)
 
+## FundingRound (object)
++ id (number)
++ status: 1 (number)
++ create_date: `2015-08-05T08:40:51.620Z` (string, required)
++ update_date: `2015-08-05T08:40:51.620Z` (string, required)
++ body: Series A funding round led by Angel Investors Corporation. (string)
++ type: series-a (string)
++ prospectus: /s3-bucket/docs/zoadilack-prospectus.pdf (string)
++ share_price: 43.00 (number)
++ total_shares: 1000000 (number)
++ organization (Organization)
++ shareholders: [] Shareholders on this Funding Round.
++ comments: [] Comments on this FundingRound.
+
+## Node (object)
++ id: 1 (number)
++ status: 1 (number)
++ create_date: `2015-08-05T08:40:51.620Z` (string, required)
++ update_date: `2015-08-05T08:40:51.620Z` (string, required)
++ body: A brief overview of Zoadilack's founding. (string)
++ type: blog (string)
++ display_date: `2016-08-05T08:40:51.620Z` (string)
++ views: 0 (number)
++ user (Simple User)
++ organization (Marvel Organization)
++ comments: [] Comments on this Node.
++ tags: [] Tags on this Node.
++ reads: [] Users who have read this Node.
+
+## Simple Node (object)
++ id: 2 (number)
++ status: 1 (number)
++ create_date: `2015-08-05T08:40:51.620Z` (string, required)
++ update_date: `2015-08-05T08:40:51.620Z` (string, required)
++ body: How to create a new Organization in Tavro. (string)
++ type: article (string)
++ display_date: `2016-08-05T08:40:51.620Z` (string)
++ views: 0 (number)
++ user (Simple User)
+
+## Simple Node2 (object)
++ id: 3 (number)
++ status: 1 (number)
++ create_date: `2015-08-05T08:40:51.620Z` (string, required)
++ update_date: `2015-08-05T08:40:51.620Z` (string, required)
++ body: How one company used Tavro to go public! (string)
++ type: blog (string)
++ display_date: `2016-08-05T08:40:51.620Z` (string)
++ views: 0 (number)
++ user (Simple User)
+
+## Product (object)
++ id (number)
++ status: 1 (number)
++ create_date: `2015-08-05T08:40:51.620Z` (string, required)
++ update_date: `2015-08-05T08:40:51.620Z` (string, required)
++ body: A brief product description. (string)
++ price: 24.99 (number)
++ cost: 35.95 (number)
++ category (ProductCategory)
++ organization (Organization)
++ images: [(Product Image)]
+
+## Revenue (object)
++ id: 1 (number)
++ status: 1 (number)
++ create_date: `2015-08-05T08:40:51.620Z` (string, required)
++ update_date: `2015-08-05T08:40:51.620Z` (string, required)
++ body: Our first big sale! (string)
++ type (string)
++ category (RevenueCategory)
++ user (User)
++ comments: []
++ servics: []
++ products: []
++ tags: []
++ organization (Organization)
+
+## Service (object)
++ id: 1 (number)
++ status: 1 (number)
++ create_date: `2015-08-05T08:40:51.620Z` (string, required)
++ update_date: `2015-08-05T08:40:51.620Z` (string, required)
++ body: Software Development (string)
++ type: hourly (string)
++ price: 150 (number)
++ category (ServiceCategory)
++ organization (Organization)
++ images: [(Service Image)]
+
+## Shareholder (object)
++ id: 1 (number)
++ status: 1 (number)
++ create_date: `2015-08-05T08:40:51.620Z` (string, required)
++ update_date: `2015-08-05T08:40:51.620Z` (string, required)
++ first_name: Jake (string)
++ last_name: Litwicki (string)
++ title: Co-Founder (string)
++ address: 123 Main Street (string)
++ address2: null (string)
++ city: Seattle (string)
++ state: WA (string)
++ zip: 98065 (number)
++ email: jake.litwicki@gmail.com (string)
++ phone: 555-867-5309 (string)
++ notes: Jake purcahsed his shares in pennies! (string)
++ user (User)
+
+## Tag (object)
++ id: 1 (number)
++ status: 1 (number)
++ create_date: `2015-08-05T08:40:51.620Z` (string, required)
++ update_date: `2015-08-05T08:40:51.620Z` (string, required)
++ tag: something (string)
++ body: Software Development (string)
++ organization (Organization)
+
+## Variable (object)
++ id: 1 (number)
++ status: 1 (number)
++ create_date: `2015-08-05T08:40:51.620Z` (string, required)
++ update_date: `2015-08-05T08:40:51.620Z` (string, required)
++ name: variable-name (string)
++ body: The value or somesuch information. (string)
++ organization (Organization)
+
 ## ExpenseCategory (object)
++ id
++ body
++ organization (Organization)
+
+## ProductCategory (object)
++ id
++ body
++ organization (Organization)
+
+## RevenueCategory (object)
++ id
++ body
++ organization (Organization)
+
+## ServiceCategory (object)
 + id
 + body
 + organization (Organization)
 
 ## Comments [/comments]
 
-When creating a comment `parent_type` can be any of the following:
+### Create Comment [POST /{object}/{id}/comments]
 
-- customers
-- expenses
-- nodes
-- revenues
+Comments can be created for `customer`, `expense`, `funding_round`, and `revenue` objects.
 
-### Create Comment [POST /PARENT_TYPE/comments]
++ Parameters
+    + object (string) - The object to attach the comment to: customers, funding_rounds, nodes, revenue
+    + id (number) - ID of the `PARENT OBJECT` in the form of an integer
 
 + Request (application/json)
 
         {
-            "body": "This is a great app!"
+            "body": "This round is ideally for friends and family!",
             "user": 1
         }
 
@@ -81,31 +399,54 @@ When creating a comment `parent_type` can be any of the following:
 
     + Headers
 
-            Location: /customers/1
+            Location: /comments/1
 
-### Delete Comment [DELETE /comments/{comment_id}]
+### Edit Comment [PATCH /comments/{id}]
+
+To "remove" a Comment, pass a `status` of `0`.
 
 + Parameters
-    + comment_id (number) - ID of the Comment in the form of an integer
+    + id (number) - ID of the Comment in the form of an integer
+
++ Request (application/json)
+
+        {
+            "body": "This round of funding is exclusive to friends and family.",
+            "status": 1
+        }
+
++ Response 204 (application/json)
+
+### Delete Comment [DELETE /comments/{id}]
+
+Regardless of what object the comment is attached to, you simply delete it by its `id`.
+
++ Parameters
+    + id (number) - ID of the Comment in the form of an integer
 
 + Response 204 (application/json)
 
 ## Customers [/customers]
 
-### List All Customers [GET]
+### All Customers [GET]
+
+Return all `Customer` objects for all `Organizations`. The response will be keyed by `organization_id`.
 
 + Response 200 (application/json)
 
-  + Attributes (array[Customer])
+    + Attributes (array[Customer2, Customer4])
 
-### View Customer [GET /customers/{customer_id}]
+### View Customer [GET /customers/{id}]
 
 + Parameters
-    + customer_id (number) - ID of the Customer in the form of an integer
+    + id (number) - ID of the Customer in the form of an integer
 
 + Response 200 (application/json)
 
-    + Attributes (array[Customer])
+    + Attributes
+        + data (array) - Response data
+            + (Customer)
+        + message: Customer retrieved successfully.
 
 ### Create Customer [POST]
 
@@ -132,7 +473,10 @@ When creating a comment `parent_type` can be any of the following:
 
             Location: /customers/1
 
-### Edit Customer [PATCH]
+### Edit Customer [PATCH /customers/{id}]
+
++ Parameters
+    + id (number) - ID of the Customer in the form of an integer
 
 + Request (application/json)
 
@@ -158,23 +502,30 @@ When creating a comment `parent_type` can be any of the following:
 
             Location: /customers/1
 
-### Delete Customer [DELETE /customers/{customer_id}]
+### Delete Customer [DELETE /customers/{id}]
 
 + Parameters
-    + customer_id (number) - ID of the Customer in the form of an integer
+    + id (number) - ID of the Customer in the form of an integer
 
 + Response 204 (application/json)
 
 ## Expenses [/expenses]
 
-### Create Expense [POST]
+### View Expense [GET /expenses/{id}]
 
-`category` must be a valid `ExpenseCategory.id`
++ Parameters
+    + id (number) - ID of the Expense in the form of an integer
+
++ Response 200 (application/json)
+
+    + Attributes (array[Expense])
+
+### Create Expense [POST]
 
 + Request (application/json)
 
         {
-            "body": "Apiary for teams subscription",
+            "body": "Apiary for teams",
             "amount": 1.00
             "expense_date": "2009-02-03",
             "category": 3,
@@ -188,9 +539,226 @@ When creating a comment `parent_type` can be any of the following:
 
             Location: /expenses/1
 
-### Delete Expense [DELETE /expenses/{expense_id}]
+### Delete Expense [DELETE /expenses/{id}]
 
 + Parameters
-    + expense_id (number) - ID of the Expense in the form of an integer
+    + id (number) - ID of the Expense in the form of an integer
+
++ Response 204 (application/json)
+
+## ExpenseCategory [/expense_categories]
+
+### View ExpenseCategory [GET /expense_categories/{id}]
+
++ Parameters
+    + id (number) - ID of the ExpenseCategory in the form of an integer
+
++ Response 200 (application/json)
+
+    + Attributes (array[ExpenseCategory])
+
+### Create ExpenseCategory [POST /expense_categories]
+
++ Request (application/json)
+
+        {
+            "body": "Subscriptions",
+            "organization": 1
+        }
+
++ Response 201 (application/json)
+
+    + Headers
+
+            Location: /expenses/1
+
+### Edit ExpenseCategory [PATCH /expense_categories/{id}]
+
++ Parameters
+    + id (number) - ID of the ExpenseCategory in the form of an integer
+
++ Request (application/json)
+
+        {
+            "body": "Subscriptions",
+            "organization": 1
+        }
+
++ Response 201 (application/json)
+
+    + Headers
+
+            Location: /expense_categories/1
+
+### Delete ExpenseCategory [DELETE /expense_categories/{id}]
+
++ Parameters
+    + id (number) - ID of the ExpenseCategory in the form of an integer
+
++ Response 204 (application/json)
+
+## FundingRound [/funding_rounds]
+
+### View FundingRound [GET /funding_rounds/{id}]
+
++ Parameters
+    + id (number) - ID of the FundingRound in the form of an integer
+
++ Response 200 (application/json)
+
+    + Attributes (array[FundingRound])
+
+### Create FundingRound [POST]
+
++ Request (application/json)
+
+        {
+            "type": "angel",
+            "prospectus": "/docs/zoadilack-angel.pdf",
+            "share_price": 9.99,
+            "total_shares": 500000,
+            "organization": 1
+        }
+
++ Response 201 (application/json)
+
+    + Headers
+
+            Location: /funding_rounds/1
+
+### Edit FundingRound [PATCH /funding_rounds/{id}]
+
++ Parameters
+    + id (number) - ID of the FundingRound in the form of an integer
+
++ Request (application/json)
+
+        {
+            "type": "angel",
+            "share_price": 9.99,
+            "total_shares": 600000,
+            "organization": 1
+        }
+
++ Response 201 (application/json)
+
+    + Headers
+
+            Location: /funding_rounds/1
+
+
+### Delete FundingRound [DELETE /funding_rounds/{id}]
+
++ Parameters
+    + id (number) - ID of the FundingRound in the form of an integer
+
++ Response 204 (application/json)
+
+## Image [/images]
+
+### View Image [GET /images/{id}]
+
++ Parameters
+    + id (number) - ID of the Image in the form of an integer
+
++ Response 200 (application/json)
+
+    + Attributes (array[Image])
+
+### Create Image [POST /images]
+
++ Request (multipart/form-data; boundary=---BOUNDARY)
+
+        -----BOUNDARY
+        Content-Disposition: form-data; name="image[file]"; filename="image.jpg"
+        Content-Type: image/jpeg
+        Content-Transfer-Encoding: base64
+
+        /9j/4AAQSkZJRgABAQEAYABgAAD/2wBDAAgGBgcGBQgHBwcJCQgKDBQNDAsLDBkSEw8UHRofHh0a
+        HBwgJC4nICIsIxwcKDcpLDAxNDQ0Hyc5PTgyPC4zNDL/2wBDAQkJCQwLDBgNDRgyIRwhMjIyMjIy
+        MjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjL/wAARCAABAAEDASIA
+        AhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAf/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFAEB
+        AAAAAAAAAAAAAAAAAAAAAP/EABQRAQAAAAAAAAAAAAAAAAAAAAD/2gAMAwEAAhEDEQA/AL+AD//Z
+        -----BOUNDARY
+
++ Response 201 (application/json)
+
+    + Headers
+
+            Location: /images/1
+
+### Delete Image [DELETE /images/{id}]
+
++ Parameters
+    + id (number) - ID of the Image in the form of an integer
+
++ Response 204 (application/json)
+
+## Nodes [/nodes]
+
+Acceptable `type` is `article`, `blog`, `wiki`, or `node`.
+
+### All Nodes [GET /nodes]
+
+Nodes are keyed by `organization` based on what you have access to.
+
++ Response 200 (application/json)
+
+    + Attributes (array[Simple Node, Simple Node2])
+
+### View Node [GET /nodes/{id}]
+
++ Parameters
+    + id (number) - ID of the Node in the form of an integer
+
++ Response 200 (application/json)
+
+    + Attributes (array[Node])
+
+### Create Node [POST]
+
+- `display_date` will be defaulted to `create_date` unless specified, and cannot be a date in the past.
+- `type` will be defaulted to `node` unless specified. Grouping/filtering happens automatically.
+
++ Request (application/json)
+
+        {
+            "title": "My new Node!",
+            "body": "<h1>How cool</h1><p>HTML is allowed here!</p>",
+            "user": 13,
+        }
+
++ Response 201 (application/json)
+
+    + Headers
+
+            Location: /nodes/{id}
+
+### Edit Node [PATCH /nodes/{id}]
+
+You can change the `type` of a node, but it will be recategorized appropriately on the frontend.
+
++ Parameters
+    + id (number) - ID of the FundingRound in the form of an integer
+
++ Request (application/json)
+
+        {
+            "type": "blog",
+            "title": "My New Node",
+            "body": "<h1>How Cool</h1><p>HTML is allowed here!</p>"
+        }
+
++ Response 201 (application/json)
+
+    + Headers
+
+            Location: /nodes/{id}
+
+
+### Delete Node [DELETE /nodes/{id}]
+
++ Parameters
+    + id (number) - ID of the Node in the form of an integer
 
 + Response 204 (application/json)

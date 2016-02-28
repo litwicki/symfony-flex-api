@@ -161,4 +161,28 @@ class Role extends Entity implements RoleInterface, EntityInterface, \Serializab
             $this->role
         ) = \unserialize($serialized);
     }
+
+    /**
+     * Set body
+     *
+     * @param string $body
+     *
+     * @return Role
+     */
+    public function setBody($body)
+    {
+        $this->body = $body;
+
+        return $this;
+    }
+
+    /**
+     * Get body
+     *
+     * @return string
+     */
+    public function getBody()
+    {
+        return $this->body;
+    }
 }

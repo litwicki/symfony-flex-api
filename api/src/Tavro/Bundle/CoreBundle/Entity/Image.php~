@@ -402,4 +402,28 @@ class Image extends Entity implements S3EntityInterface
     {
         return $this->service_images;
     }
+
+    /**
+     * Set body
+     *
+     * @param string $body
+     *
+     * @return Image
+     */
+    public function setBody($body)
+    {
+        $this->body = $body;
+
+        return $this;
+    }
+
+    /**
+     * Get body
+     *
+     * @return string
+     */
+    public function getBody()
+    {
+        return $this->body;
+    }
 }

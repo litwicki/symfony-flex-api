@@ -114,15 +114,6 @@ class Shareholder extends Entity implements EntityInterface
      */
     protected $funding_round_shareholders;
 
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->create_date = new \DateTime();
-        $this->update_date = new \DateTime();
-    }
-
     public function __toString()
     {
         return sprintf('%s, %s', $this->last_name, $this->first_name);
@@ -471,5 +462,29 @@ class Shareholder extends Entity implements EntityInterface
     public function getFundingRoundShareholders()
     {
         return $this->funding_round_shareholders;
+    }
+
+    /**
+     * Set body
+     *
+     * @param string $body
+     *
+     * @return Shareholder
+     */
+    public function setBody($body)
+    {
+        $this->body = $body;
+
+        return $this;
+    }
+
+    /**
+     * Get body
+     *
+     * @return string
+     */
+    public function getBody()
+    {
+        return $this->body;
     }
 }

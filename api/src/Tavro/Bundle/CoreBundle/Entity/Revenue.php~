@@ -14,8 +14,8 @@ use JMS\Serializer\Annotation\SerializedName;
 use Doctrine\ORM\Mapping\Table;
 use Symfony\Component\Validator\Constraints as Assert;
 
-use Tavro\Bundle\CoreBundle\Model\Entity;
-use Tavro\Bundle\CoreBundle\Model\EntityInterface;
+use Tavro\Bundle\CoreBundle\Model\OrganizationEntity;
+use Tavro\Bundle\CoreBundle\Model\OrganizationEntityInterface;
 
 /**
  * @ORM\Entity
@@ -24,14 +24,8 @@ use Tavro\Bundle\CoreBundle\Model\EntityInterface;
  * @ORM\Table(name="tavro_revenue")
  *
  */
-class Revenue extends Entity implements EntityInterface
+class Revenue extends OrganizationEntity implements OrganizationEntityInterface
 {
-
-    /**
-     * @ORM\Column(type="string", length=8000, nullable=true)
-     * @Groups({"api", "tavro", "simple"})
-     */
-    protected $body;
 
     /**
      * @ORM\Column(type="string", nullable=true)
@@ -86,14 +80,6 @@ class Revenue extends Entity implements EntityInterface
      * @ORM\OneToMany(targetEntity="Tavro\Bundle\CoreBundle\Entity\RevenueTag", mappedBy="revenue", cascade={"remove"})
      */
     protected $revenue_tags;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="Tavro\Bundle\CoreBundle\Entity\Organization", inversedBy="revenues")
-     * @ORM\JoinColumn(name="organization_id", referencedColumnName="id", nullable=false)
-     * @Groups({"api", "tavro", "simple"})
-     * @MaxDepth(3)
-     */
-    protected $organization;
 
     /**
      * Constructor
@@ -181,29 +167,6 @@ class Revenue extends Entity implements EntityInterface
     public function getUser()
     {
         return $this->user;
-    }
-
-    /**
-     * Set organization
-     *
-     * @param \Tavro\Bundle\CoreBundle\Entity\Organization $organization
-     * @return Revenue
-     */
-    public function setOrganization(\Tavro\Bundle\CoreBundle\Entity\Organization $organization)
-    {
-        $this->organization = $organization;
-
-        return $this;
-    }
-
-    /**
-     * Get organization
-     *
-     * @return \Tavro\Bundle\CoreBundle\Entity\Organization
-     */
-    public function getOrganization()
-    {
-        return $this->organization;
     }
 
     /**

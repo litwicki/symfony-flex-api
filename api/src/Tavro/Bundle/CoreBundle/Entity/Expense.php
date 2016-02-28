@@ -26,13 +26,6 @@ use Tavro\Bundle\CoreBundle\Model\EntityInterface;
  */
 class Expense extends Entity
 {
-
-    /**
-     * @ORM\Column(type="string", length=8000, nullable=true)
-     * @Groups({"api", "tavro", "simple"})
-     */
-    protected $body;
-
     /**
      * @ORM\Column(type="float", nullable=false)
      * @Groups({"api", "tavro", "simple"})

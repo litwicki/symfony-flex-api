@@ -14,8 +14,8 @@ use JMS\Serializer\Annotation\SerializedName;
 use Doctrine\ORM\Mapping\Table;
 use Symfony\Component\Validator\Constraints as Assert;
 
-use Tavro\Bundle\CoreBundle\Model\Entity;
-use Tavro\Bundle\CoreBundle\Model\EntityInterface;
+use Tavro\Bundle\CoreBundle\Model\OrganizationEntity;
+use Tavro\Bundle\CoreBundle\Model\OrganizationEntityInterface;
 
 /**
  * @ORM\Entity
@@ -24,27 +24,16 @@ use Tavro\Bundle\CoreBundle\Model\EntityInterface;
  * @ORM\Table(name="tavro_product_category")
  *
  */
-class ProductCategory extends Entity implements EntityInterface
+class ProductCategory extends OrganizationEntity implements OrganizationEntityInterface
 {
-    /**
-     * @ORM\Column(type="string", length=500, nullable=false)
-     * @Groups({"api", "tavro", "simple"})
-     */
-    protected $body;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="Tavro\Bundle\CoreBundle\Entity\Organization", inversedBy="product_categories")
-     * @ORM\JoinColumn(name="organization_id", referencedColumnName="id", nullable=false)
-     * @Groups({"api", "tavro", "simple"})
-     * @MaxDepth(3)
-     */
-    protected $organization;
 
     /**
      * Set body
      *
      * @param string $body
-     * @return Tag
+     *
+     * @return ProductCategory
      */
     public function setBody($body)
     {
@@ -62,29 +51,4 @@ class ProductCategory extends Entity implements EntityInterface
     {
         return $this->body;
     }
-
-    /**
-     * Set organization
-     *
-     * @param \Tavro\Bundle\CoreBundle\Entity\Organization $organization
-     * @return Expense
-     */
-    public function setOrganization(\Tavro\Bundle\CoreBundle\Entity\Organization $organization)
-    {
-        $this->organization = $organization;
-
-        return $this;
-    }
-
-    /**
-     * Get organization
-     *
-     * @return \Tavro\Bundle\CoreBundle\Entity\Organization
-     */
-    public function getOrganization()
-    {
-        return $this->organization;
-    }
-
-
 }

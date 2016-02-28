@@ -45,7 +45,7 @@ use Litwicki\Common\Common as Litwicki;
  *
  * @author jake.litwicki@gmail.com
  */
-class Tags extends AbstractFixture implements OrderedFixtureInterface, ContainerAwareInterface
+class Variables extends AbstractFixture implements OrderedFixtureInterface, ContainerAwareInterface
 {
 
     /**
@@ -69,24 +69,21 @@ class Tags extends AbstractFixture implements OrderedFixtureInterface, Container
         $lipsum = $this->container->get('apoutchika.lorem_ipsum');
         $size = 10;
 
-        $tags = array();
-
         $organizations = $manager->getRepository('TavroCoreBundle:Organization')->findAll();
-
-        $types = array('hourly', 'unit', 'retainer');
 
         foreach($organizations as $organization) {
 
-            for($i=0;$i<20;$i++) {
+            for($i=0;$i<$size;$i++) {
 
-                $tag = new Tag();
-                $tag->setOrganization($organization);
-                $tag->setTag($lipsum->getWords(1));
-                $tag->setBody($lipsum->getSentences(1));
-                $tag->setCreateDate(new \DateTime());
-                $tag->setStatus(1);
-                $manager->persist($tag);
-                $tags[] = $tag;
+                /**
+                 * Create Global Variables
+                 */
+                $variable = new Variable();
+                $variable->setName($lipsum->getWords(rand(1,3)));
+                $variable->setBody($lipsum->getSentences(rand(1,3)));
+                $variable->setOrganization($organization);
+                $manager->persist($variable);
+                $variables[] = $variable;
 
             }
 
