@@ -739,7 +739,7 @@ Nodes are keyed by `organization` based on what you have access to.
 You can change the `type` of a node, but it will be recategorized appropriately on the frontend.
 
 + Parameters
-    + id (number) - ID of the FundingRound in the form of an integer
+    + id (number) - ID of the Node in the form of an integer
 
 + Request (application/json)
 
@@ -760,5 +760,75 @@ You can change the `type` of a node, but it will be recategorized appropriately 
 
 + Parameters
     + id (number) - ID of the Node in the form of an integer
+
++ Response 204 (application/json)
+
+## Organizations [/organizations]
+
+### All Organizations [GET /organizations]
+
++ Response 200 (application/json)
+
+    + Attributes (array[Marvel Organization, DC Comics Organization])
+
+### View Organization [GET /organizations/{id}]
+
+Viewing a single Organization will return it and **all** of its associated objects.
+
++ Parameters
+    + id (number) - ID of the Organization in the form of an integer
+
++ Response 200 (application/json)
+
+    + Attributes (array[Organization])
+
+### Create Organization [POST]
+
+An `array` of User `id` can be passed to add Users to an Organization.
+
++ Request (application/json)
+
+        {
+            "title": "Spawn Comics",
+            "owner": 13,
+            "users": [1,43]
+        }
+
++ Response 201 (application/json)
+
+    + Headers
+
+            Location: /organizations/{id}
+
+### Edit Organization [PATCH /organizations/{id}]
+
+- Changing the status of an Organization to `0 (disabled)` will disallow the creation of all content on that Organization.
+- Passing an array of User `ids` can manage the assigned Users.
+
++ Parameters
+    + id (number) - ID of the Organization in the form of an integer
+
++ Request (application/json)
+
+        {
+            "title": "Spawn Comics",
+            "owner": 43,
+            "status": 1,
+            "users": [43]
+        }
+
++ Response 201 (application/json)
+
+    + Headers
+
+            Location: /organizations/{id}
+
+
+### Delete Organization [DELETE /organizations/{id}]
+
+Deleting an Organization will remove it and all of the associated objects. This can only be done by the Owner (User) of the Organization.
+
++ Parameters
+    + id (number) - ID of the Organization in the form of an integer
 
 + Response 204 (application/json)
