@@ -173,7 +173,7 @@ API for working with tavro.io.
 + zip: 98065 (string, required)
 + email: jane.doe@tavro.io (string, required)
 + phone: 555-867-5309 (string, optional)
-+ user
++ user 
 + organization (Marvel Organization)
 + comments (array)
 
@@ -228,11 +228,11 @@ API for working with tavro.io.
 + body
 + amount
 + expense_date
-+ category (ExpenseCategory)
++ category (Expense Category)
 + user (User)
 + customer (Customer)
 
-## FundingRound (object)
+## Funding Round (object)
 + id (number)
 + status: 1 (number)
 + create_date: `2015-08-05T08:40:51.620Z` (string, required)
@@ -244,7 +244,7 @@ API for working with tavro.io.
 + total_shares: 1000000 (number)
 + organization (Organization)
 + shareholders: [] Shareholders on this Funding Round.
-+ comments: [] Comments on this FundingRound.
++ comments: [] Comments on this Funding Round.
 
 ## Node (object)
 + id: 1 (number)
@@ -358,7 +358,7 @@ API for working with tavro.io.
 + body: The value or somesuch information. (string)
 + organization (Organization)
 
-## ExpenseCategory (object)
+## Expense Category (object)
 + id
 + body
 + organization (Organization)
@@ -378,7 +378,7 @@ API for working with tavro.io.
 + body
 + organization (Organization)
 
-## Comments [/comments]
+## Comment [/comments]
 
 ### Create Comment [POST /{object}/{id}/comments]
 
@@ -426,7 +426,7 @@ Regardless of what object the comment is attached to, you simply delete it by it
 
 + Response 204 (application/json)
 
-## Customers [/customers]
+## Customer [/customers]
 
 ### All Customers [GET]
 
@@ -509,7 +509,7 @@ Return all `Customer` objects for all `Organizations`. The response will be keye
 
 + Response 204 (application/json)
 
-## Expenses [/expenses]
+## Expense [/expenses]
 
 ### View Expense [GET /expenses/{id}]
 
@@ -546,18 +546,20 @@ Return all `Customer` objects for all `Organizations`. The response will be keye
 
 + Response 204 (application/json)
 
-## ExpenseCategory [/expense_categories]
+## Expense Category [/expense_categories]
 
-### View ExpenseCategory [GET /expense_categories/{id}]
+`Expense Category` objects live in isolate by `Organization` and can only be associated to an `Expense`.
+
+### View Expense Category [GET /expense_categories/{id}]
 
 + Parameters
-    + id (number) - ID of the ExpenseCategory in the form of an integer
+    + id (number) - ID of the Expense Category in the form of an integer
 
 + Response 200 (application/json)
 
-    + Attributes (array[ExpenseCategory])
+    + Attributes (array[Expense Category])
 
-### Create ExpenseCategory [POST /expense_categories]
+### Create Expense Category [POST /expense_categories]
 
 + Request (application/json)
 
@@ -572,10 +574,10 @@ Return all `Customer` objects for all `Organizations`. The response will be keye
 
             Location: /expenses/1
 
-### Edit ExpenseCategory [PATCH /expense_categories/{id}]
+### Edit Expense Category [PATCH /expense_categories/{id}]
 
 + Parameters
-    + id (number) - ID of the ExpenseCategory in the form of an integer
+    + id (number) - ID of the Expense Category in the form of an integer
 
 + Request (application/json)
 
@@ -590,31 +592,32 @@ Return all `Customer` objects for all `Organizations`. The response will be keye
 
             Location: /expense_categories/1
 
-### Delete ExpenseCategory [DELETE /expense_categories/{id}]
+### Delete Expense Category [DELETE /expense_categories/{id}]
 
 + Parameters
-    + id (number) - ID of the ExpenseCategory in the form of an integer
+    + id (number) - ID of the Expense Category in the form of an integer
 
 + Response 204 (application/json)
 
-## FundingRound [/funding_rounds]
+## Funding Round [/funding_rounds]
 
-### View FundingRound [GET /funding_rounds/{id}]
+An `Organization` can have multiple `Funding Rounds`, each with their own `Shareholders` of whom can be participants in one or more `Funding Rounds` themselves.
+
+### View Funding Round [GET /funding_rounds/{id}]
 
 + Parameters
-    + id (number) - ID of the FundingRound in the form of an integer
+    + id (number) - ID of the Funding Round in the form of an integer
 
 + Response 200 (application/json)
 
-    + Attributes (array[FundingRound])
+    + Attributes (array[Funding Round])
 
-### Create FundingRound [POST]
+### Create Funding Round [POST]
 
 + Request (application/json)
 
         {
             "type": "angel",
-            "prospectus": "/docs/zoadilack-angel.pdf",
             "share_price": 9.99,
             "total_shares": 500000,
             "organization": 1
@@ -626,10 +629,10 @@ Return all `Customer` objects for all `Organizations`. The response will be keye
 
             Location: /funding_rounds/1
 
-### Edit FundingRound [PATCH /funding_rounds/{id}]
+### Edit Funding Round [PATCH /funding_rounds/{id}]
 
 + Parameters
-    + id (number) - ID of the FundingRound in the form of an integer
+    + id (number) - ID of the Funding Round in the form of an integer
 
 + Request (application/json)
 
@@ -647,10 +650,34 @@ Return all `Customer` objects for all `Organizations`. The response will be keye
             Location: /funding_rounds/1
 
 
-### Delete FundingRound [DELETE /funding_rounds/{id}]
+### Add File [POST /funding_rounds/{id}/files]
+
+Images are uploaded and stored as a separate object that can be viewed separately as `/images/{id}`
+
++ Request (multipart/form-data; boundary=---BOUNDARY)
+
+        -----BOUNDARY
+        Content-Disposition: form-data; name="files[file]"; filename="document.pdf"
+        Content-Type: applicationpdf
+        Content-Transfer-Encoding: base64
+
+        /9j/4AAQSkZJRgABAQEAYABgAAD/2wBDAAgGBgcGBQgHBwcJCQgKDBQNDAsLDBkSEw8UHRofHh0a
+        HBwgJC4nICIsIxwcKDcpLDAxNDQ0Hyc5PTgyPC4zNDL/2wBDAQkJCQwLDBgNDRgyIRwhMjIyMjIy
+        MjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjL/wAARCAABAAEDASIA
+        AhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAf/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFAEB
+        AAAAAAAAAAAAAAAAAAAAAP/EABQRAQAAAAAAAAAAAAAAAAAAAAD/2gAMAwEAAhEDEQA/AL+AD//Z
+        -----BOUNDARY
+
++ Response 201 (application/json)
+
+    + Headers
+
+            Location: /images/{id}
+
+### Delete Funding Round [DELETE /funding_rounds/{id}]
 
 + Parameters
-    + id (number) - ID of the FundingRound in the form of an integer
+    + id (number) - ID of the Funding Round in the form of an integer
 
 + Response 204 (application/json)
 
@@ -665,28 +692,6 @@ Return all `Customer` objects for all `Organizations`. The response will be keye
 
     + Attributes (array[Image])
 
-### Create Image [POST /images]
-
-+ Request (multipart/form-data; boundary=---BOUNDARY)
-
-        -----BOUNDARY
-        Content-Disposition: form-data; name="image[file]"; filename="image.jpg"
-        Content-Type: image/jpeg
-        Content-Transfer-Encoding: base64
-
-        /9j/4AAQSkZJRgABAQEAYABgAAD/2wBDAAgGBgcGBQgHBwcJCQgKDBQNDAsLDBkSEw8UHRofHh0a
-        HBwgJC4nICIsIxwcKDcpLDAxNDQ0Hyc5PTgyPC4zNDL/2wBDAQkJCQwLDBgNDRgyIRwhMjIyMjIy
-        MjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjL/wAARCAABAAEDASIA
-        AhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAf/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFAEB
-        AAAAAAAAAAAAAAAAAAAAAP/EABQRAQAAAAAAAAAAAAAAAAAAAAD/2gAMAwEAAhEDEQA/AL+AD//Z
-        -----BOUNDARY
-
-+ Response 201 (application/json)
-
-    + Headers
-
-            Location: /images/1
-
 ### Delete Image [DELETE /images/{id}]
 
 + Parameters
@@ -694,7 +699,7 @@ Return all `Customer` objects for all `Organizations`. The response will be keye
 
 + Response 204 (application/json)
 
-## Nodes [/nodes]
+## Node [/nodes]
 
 Acceptable `type` is `article`, `blog`, `wiki`, or `node`.
 
@@ -763,7 +768,7 @@ You can change the `type` of a node, but it will be recategorized appropriately 
 
 + Response 204 (application/json)
 
-## Organizations [/organizations]
+## Organization [/organizations]
 
 ### All Organizations [GET /organizations]
 
@@ -830,5 +835,521 @@ Deleting an Organization will remove it and all of the associated objects. This 
 
 + Parameters
     + id (number) - ID of the Organization in the form of an integer
+
++ Response 204 (application/json)
+
+## Product [/products]
+
+### All Products [GET]
+
+Products are keyed by `Organization` you have access to, and given a limited serialization data set.
+
++ Response 200 (application/json)
+
+    + Attributes (array[Product])
+
+### View Product [GET /products/{id}]
+
+Viewing a single `Product` yields a full serialized data set.
+
++ Parameters
+    + id (number) - ID of the Organization in the form of an integer
+
++ Response 200 (application/json)
+
+    + Attributes (array[Product])
+
+### Create Product [POST /products]
+
+Category must be the `id` of a `ProductCategory`
+
++ Request (application/json)
+
+        {
+            "title": "Product name",
+            "body": "This product is amazing",
+            "price": 79.99,
+            "cost": 99.99,
+            "category": 2
+        }
+
++ Response 201 (application/json)
+
+    + Headers
+
+            Location: /products/{id}
+
+### Edit Product [PATCH /products/{id}]
+
+A `status` of `0` will result in the Product no longer being available for association.
+
++ Request (application/json)
+
+        {
+            "title": "Product Name",
+            "body": "",
+            "price": 79.99,
+            "cost": 99.99,
+            "category": 2,
+            "status": 1,
+
+        }
+
++ Response 201 (application/json)
+
+    + Headers
+
+            Location: /products/{id}
+
+### Add Image [POST /products/{id}/images]
+
+Images are uploaded and stored as a separate object that can be viewed separately as `/images/{id}`
+
++ Request (multipart/form-data; boundary=---BOUNDARY)
+
+        -----BOUNDARY
+        Content-Disposition: form-data; name="image[file]"; filename="image.jpg"
+        Content-Type: image/jpeg
+        Content-Transfer-Encoding: base64
+
+        /9j/4AAQSkZJRgABAQEAYABgAAD/2wBDAAgGBgcGBQgHBwcJCQgKDBQNDAsLDBkSEw8UHRofHh0a
+        HBwgJC4nICIsIxwcKDcpLDAxNDQ0Hyc5PTgyPC4zNDL/2wBDAQkJCQwLDBgNDRgyIRwhMjIyMjIy
+        MjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjL/wAARCAABAAEDASIA
+        AhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAf/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFAEB
+        AAAAAAAAAAAAAAAAAAAAAP/EABQRAQAAAAAAAAAAAAAAAAAAAAD/2gAMAwEAAhEDEQA/AL+AD//Z
+        -----BOUNDARY
+
++ Response 201 (application/json)
+
+    + Headers
+
+            Location: /images/{id}
+
+### Delete Product [DELETE /products/{id}]
+
+You can only `DELETE` a product that has not been associated with any `Revenue` objects.
+
++ Parameters
+    + id (number) - ID of the Product in the form of an integer
+
++ Response 204 (application/json)
+
+## Product Category [/product_categories]
+
+`Product Category` objects live in isolate by `Organization` and can only be associated to an `Product`.
+
+### All Product Categories [GET]
+
++ Response 200 (application/json)
+
+    + Attributes (array[Product Category])
+
+### View Product Category [GET /product_categories/{id}]
+
++ Parameters
+    + id (number) - ID of the Product Category in the form of an integer
+
++ Response 200 (application/json)
+
+    + Attributes (array[Expense Category])
+
+### Create Product Category [POST /product_categories]
+
++ Request (application/json)
+
+        {
+            "body": "Printed Material",
+            "organization": 1
+        }
+
++ Response 201 (application/json)
+
+    + Headers
+
+            Location: /product_categories/{id}
+
+### Edit Product Category [PATCH /product_categories/{id}]
+
++ Parameters
+    + id (number) - ID of the Product Category in the form of an integer
+
++ Request (application/json)
+
+        {
+            "body": "Prints",
+            "organization": 1
+        }
+
++ Response 201 (application/json)
+
+    + Headers
+
+            Location: /product_categories/{id}
+
+### Delete Product Category [DELETE /product_categories/{id}]
+
++ Parameters
+    + id (number) - ID of the Product Category in the form of an integer
+
++ Response 204 (application/json)
+
+## Revenue [/revenue]
+
+### All Revenue [GET]
+
+Revenues are keyed by `Organization` you have access to, and given a limited serialization data set.
+
++ Response 200 (application/json)
+
+    + Attributes (array[Revenue])
+
+### View Revenue [GET /revenue/{id}]
+
+View a `Revenue` object, and all the associated `Revenue Project` and `Revenue Service` objects.
+
++ Parameters
+    + id (number) - ID of the Revenue in the form of an integer
+
++ Response 200 (application/json)
+
+    + Attributes (array[Revenue])
+
+### Create Revenue [POST /revenue]
+
+To create a `Revenue` you must also include the associated `Product` and `Service` objects on this `Revenue` object to calculate its total value.
+
++ Request (application/json)
+
+        {
+            "title": "Our first sale!",
+            "body": "This is our first official product sale as a new business!",
+            "category": 1,
+            "organization": 1,
+            "customer": 13,
+            "user": 43
+        }
+
++ Response 201 (application/json)
+
+    + Headers
+
+            Location: /revenue/{id}
+
+### Edit Revenue [PATCH /revenue/{id}]
+
+Editing a `Revenue` object only edits the core data of that object, not its associated objects.
+
++ Parameters
+    + id (number) - ID of the Revenue in the form of an integer
+
++ Request (application/json)
+
+        {
+            "title": "Our first sale!",
+            "body": "This is our first official product sale as a new business!",
+            "category": 1,
+            "organization": 1,
+            "customer": 13,
+            "user": 43
+        }
+
++ Response 201 (application/json)
+
+    + Headers
+
+            Location: /revenue/1
+
+### Delete Revenue [DELETE /revenue/{id}]
+
++ Parameters
+    + id (number) - ID of the Revenue in the form of an integer
+
++ Response 204 (application/json)
+
+## Revenue Category [/revenue_categories]
+
+`Revenue Category` objects live in isolate by `Organization` and can only be associated to an `Revenue`.
+
+### All Revenue Categories [GET]
+
++ Response 200 (application/json)
+
+    + Attributes (array[Product Category])
+
+### View Revenue Category [GET /revenue_categories/{id}]
+
++ Parameters
+    + id (number) - ID of the Revenue Category in the form of an integer
+
++ Response 200 (application/json)
+
+    + Attributes (array[Revenue Category])
+
+### Create Revenue Category [POST /revenue_categories]
+
++ Request (application/json)
+
+        {
+            "body": "Revenue type",
+            "organization": 1
+        }
+
++ Response 201 (application/json)
+
+    + Headers
+
+            Location: /revenue_categories/{id}
+
+### Edit Revenue Category [PATCH /revenue_categories/{id}]
+
++ Parameters
+    + id (number) - ID of the Revenue Category in the form of an integer
+
++ Request (application/json)
+
+        {
+            "body": "Revenue type",
+            "organization": 1
+        }
+
++ Response 201 (application/json)
+
+    + Headers
+
+            Location: /revenue_categories/{id}
+
+### Delete Product Category [DELETE /revenue_categories/{id}]
+
++ Parameters
+    + id (number) - ID of the Product Category in the form of an integer
+
++ Response 204 (application/json)
+
+## Service [/services]
+
+Services are keyed by `Organization` you have access to, and given a limited serialization data set.
+
+### All Services [GET]
+
++ Response 200 (application/json)
+
+    + Attributes (array[Service])
+
+### View Service [GET /services/{id}]
+
++ Parameters
+    + id (number) - ID of the Service in the form of an integer
+
++ Response 200 (application/json)
+
+    + Attributes (array[Service])
+
+### Create Service [POST /services]
+
++ Request (application/json)
+
+        {
+            "title": "Service name",
+            "body": "Service description",
+            "price": 24.99,
+            "type": "service type",
+            "category": 1,
+            "organization": 1
+        }
+
++ Response 201 (application/json)
+
+    + Headers
+
+            Location: /services/{id}
+
+### Add Image [POST /services/{id}/images]
+
+Images are uploaded and stored as a separate object that can be viewed separately as `/images/{id}`
+
++ Request (multipart/form-data; boundary=---BOUNDARY)
+
+        -----BOUNDARY
+        Content-Disposition: form-data; name="image[file]"; filename="image.jpg"
+        Content-Type: image/jpeg
+        Content-Transfer-Encoding: base64
+
+        /9j/4AAQSkZJRgABAQEAYABgAAD/2wBDAAgGBgcGBQgHBwcJCQgKDBQNDAsLDBkSEw8UHRofHh0a
+        HBwgJC4nICIsIxwcKDcpLDAxNDQ0Hyc5PTgyPC4zNDL/2wBDAQkJCQwLDBgNDRgyIRwhMjIyMjIy
+        MjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjL/wAARCAABAAEDASIA
+        AhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAf/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFAEB
+        AAAAAAAAAAAAAAAAAAAAAP/EABQRAQAAAAAAAAAAAAAAAAAAAAD/2gAMAwEAAhEDEQA/AL+AD//Z
+        -----BOUNDARY
+
++ Response 201 (application/json)
+
+    + Headers
+
+            Location: /images/{id}
+
+### Edit Service [PATCH /services/{id}]
+
++ Parameters
+    + id (number) - ID of the Service in the form of an integer
+
++ Request (application/json)
+
+        {
+            "body": "Revenue type",
+            "organization": 1
+        }
+
++ Response 201 (application/json)
+
+    + Headers
+
+            Location: /services/{id}
+
+### Delete Service [DELETE /services/{id}]
+
++ Parameters
+    + id (number) - ID of the Service in the form of an integer
+
++ Response 204 (application/json)
+
+## Shareholder [/shareholders]
+
+Shareholders are keyed by `Organization` you have access to, and given a limited serialization data set.
+
+### All Shareholders [GET]
+
++ Response 200 (application/json)
+
+    + Attributes (array[Shareholder])
+
+### View Shareholder [GET /shareholders/{id}]
+
++ Parameters
+    + id (number) - ID of the Shareholder in the form of an integer
+
++ Response 200 (application/json)
+
+    + Attributes (array[Shareholder])
+
+### Create Shareholder [POST /shareholders]
+
+Creating a `Shareholder` requires all personal data, as well as the `funding_round_id`.
+
++ Request (application/json)
+
+        {
+            "first_name": "Jane",
+            "last_name": "Doe",
+            "title": "Semi Retired",
+            "address": "123 Main St",
+            "city": "Seattle",
+            "state": "WA",
+            "zip": 98065,
+            "email": "jane.doe@company.com",
+            "phone": "555-222-9595",
+            "notes": "",
+            "shares": 100,
+            "funding_round": 2
+        }
+
++ Response 201 (application/json)
+
+    + Headers
+
+            Location: /shareholders/{id}
+
+### Edit Shareholder [PATCH /shareholders/{id}]
+
++ Parameters
+    + id (number) - ID of the Shareholder in the form of an integer
+
++ Request (application/json)
+
+        {
+            "first_name": "Jane",
+            "last_name": "Doe",
+            "title": "Venture Capitalist",
+            "address": "1212 Main St",
+            "city": "Seattle",
+            "state": "WA",
+            "zip": 98101,
+            "email": "jane.doe@company.com",
+            "phone": "555-222-9595",
+            "notes": "Paid by check in person on Tuesday",
+            "shares": 1000
+        }
+
++ Response 201 (application/json)
+
+    + Headers
+
+            Location: /shareholders/{id}
+
+### Delete Shareholder [DELETE /shareholders/{id}]
+
++ Parameters
+    + id (number) - ID of the Shareholder in the form of an integer
+
++ Response 204 (application/json)
+
+## Tag [/tags]
+
+### Create Tag [POST /{object}/{id}/tags]
+
+Comments can be created for `expense`, `node` and `revenue` objects.
+
++ Parameters
+    + object (string) - The object to attach the comment to: customers, funding_rounds, nodes, revenue
+    + id (number) - ID of the `PARENT OBJECT` in the form of an integer
+
++ Request (application/json)
+
+        {
+            "tag": "tags are always lowercased"
+        }
+
++ Response 201 (application/json)
+
+    + Headers
+
+            Location: /tags/1
+
+### Edit Tag [PATCH /tags/{id}]
+
++ Parameters
+    + id (number) - ID of the Comment in the form of an integer
+
++ Request (application/json)
+
+        {
+            "tag": "tags are always lowercased",
+            "body": "Some tags may require a description, who knows?!"
+        }
+
++ Response 204 (application/json)
+
+### Delete Tag [DELETE /tags/{id}]
+
+Regardless of what object the `Tag` is attached to, you simply delete it by its `id`.
+
++ Parameters
+    + id (number) - ID of the Tag in the form of an integer
+
++ Response 204 (application/json)
+
+## Variable [/variables]
+
+Variables cannot be created or deleted, and only their `body` updated.
+
+### Edit Variable [PATCH /variables/{id}]
+
++ Parameters
+    + id (number) - ID of the Variable in the form of an integer
+
++ Request (application/json)
+
+        {
+            "body": "The body or value"
+        }
 
 + Response 204 (application/json)
