@@ -82,7 +82,7 @@ class Shareholder extends Entity implements EntityInterface
     protected $zip;
 
     /**
-     * @ORM\Column(type="string", unique=true length=255, nullable=false)
+     * @ORM\Column(type="string", unique=true, nullable=false)
      * @Groups({"api", "tavro", "simple", "typeahead"})
      */
     protected $email;
