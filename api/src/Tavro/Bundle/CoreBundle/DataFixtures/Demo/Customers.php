@@ -85,13 +85,14 @@ class Customers extends AbstractFixture implements OrderedFixtureInterface, Cont
         $size = 10;
 
         $organizations = $manager->getRepository('TavroCoreBundle:Organization')->findAll();
+        $tlds = array('dev', 'net', 'com', 'org');
 
         foreach($organizations as $organization) {
 
             for($i=0;$i<$size;$i++) {
 
                 $name = $lipsum->getWords(1);
-                $email = sprintf('%s@tavro-customer.dev', $name);
+                $email = sprintf('%s@%s.com', $name, $lipsum->getWords(1), $tlds[array_rand($tlds)]);
 
                 $cities = $this->getCities('WA');
 

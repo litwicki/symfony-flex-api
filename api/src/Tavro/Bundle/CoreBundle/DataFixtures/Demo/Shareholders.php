@@ -85,10 +85,11 @@ class Shareholders extends AbstractFixture implements OrderedFixtureInterface, C
         $size = 10;
 
         $shareholders = array();
+        $tlds = array('dev', 'net', 'com', 'org');
 
         for($i=0;$i<50;$i++) {
 
-            $email = sprintf('shareholder-%s@shareholders.tavro.dev', $lipsum->getWords(1));
+            $email = sprintf('%s@%s.%s', $lipsum->getWords(1),$lipsum->getWords(1),$tlds[array_rand($tlds)]);
             $cities = $this->getCities('WA');
 
             $shareholder = new Shareholder();

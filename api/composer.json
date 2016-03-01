@@ -1,5 +1,6 @@
 {
     "name": "zoadilack/tavro",
+    "description": "",
     "license": "proprietary",
     "type": "project",
     "autoload": {
@@ -49,7 +50,8 @@
         "phpunit/phpunit": "5.0.*",
         "symfony/phpunit-bridge": "^2.7",
         "symfony/var-dumper": "^3.0",
-        "apoutchika/loremipsum-bundle": "^1.0"
+        "apoutchika/loremipsum-bundle": "^1.0",
+        "api/vendor/ddelnano/dredd-hooks-php": "^1.1"
     },
     "scripts": {
         "post-install-cmd": [

@@ -233,7 +233,7 @@ API for working with tavro.io.
 + customer (Customer)
 
 ## Funding Round (object)
-+ id (number)
++ id: `1` (number, required)
 + status: 1 (number)
 + create_date: `2015-08-05T08:40:51.620Z` (string, required)
 + update_date: `2015-08-05T08:40:51.620Z` (string, required)
@@ -284,7 +284,7 @@ API for working with tavro.io.
 + user (Simple User)
 
 ## Product (object)
-+ id (number)
++ id: `1` (number, required)
 + status: 1 (number)
 + create_date: `2015-08-05T08:40:51.620Z` (string, required)
 + update_date: `2015-08-05T08:40:51.620Z` (string, required)
@@ -382,11 +382,11 @@ API for working with tavro.io.
 
 ### Create Comment [POST /{object}/{id}/comments]
 
-Comments can be created for `customer`, `expense`, `funding_round`, and `revenue` objects.
+Comments can be created for `customer`, `expense`, `funding_round`, `node`, and `revenue` objects.
 
 + Parameters
-    + object (string) - The object to attach the comment to: customers, funding_rounds, nodes, revenue
-    + id (number) - ID of the `PARENT OBJECT` in the form of an integer
+    + object: `node` (string, required) - The object to attach the comment to: customers, funding_rounds, nodes, revenue
+    + id: `1` (number, required) - ID of the `PARENT OBJECT` in the form of an integer
 
 + Request (application/json)
 
@@ -406,7 +406,7 @@ Comments can be created for `customer`, `expense`, `funding_round`, and `revenue
 To "remove" a Comment, pass a `status` of `0`.
 
 + Parameters
-    + id (number) - ID of the Comment in the form of an integer
+    + id: `1` (number, required) - ID of the Comment in the form of an integer
 
 + Request (application/json)
 
@@ -422,7 +422,7 @@ To "remove" a Comment, pass a `status` of `0`.
 Regardless of what object the comment is attached to, you simply delete it by its `id`.
 
 + Parameters
-    + id (number) - ID of the Comment in the form of an integer
+    + id: `1` (number, required) - ID of the Comment in the form of an integer
 
 + Response 204 (application/json)
 
@@ -439,7 +439,7 @@ Return all `Customer` objects for all `Organizations`. The response will be keye
 ### View Customer [GET /customers/{id}]
 
 + Parameters
-    + id (number) - ID of the Customer in the form of an integer
+    + id: `1` (number, required) - ID of the Customer in the form of an integer
 
 + Response 200 (application/json)
 
@@ -476,7 +476,7 @@ Return all `Customer` objects for all `Organizations`. The response will be keye
 ### Edit Customer [PATCH /customers/{id}]
 
 + Parameters
-    + id (number) - ID of the Customer in the form of an integer
+    + id: `1` (number, required) - ID of the Customer in the form of an integer
 
 + Request (application/json)
 
@@ -505,7 +505,7 @@ Return all `Customer` objects for all `Organizations`. The response will be keye
 ### Delete Customer [DELETE /customers/{id}]
 
 + Parameters
-    + id (number) - ID of the Customer in the form of an integer
+    + id: `1` (number, required) - ID of the Customer in the form of an integer
 
 + Response 204 (application/json)
 
@@ -514,7 +514,7 @@ Return all `Customer` objects for all `Organizations`. The response will be keye
 ### View Expense [GET /expenses/{id}]
 
 + Parameters
-    + id (number) - ID of the Expense in the form of an integer
+    + id: `1` (number, required) - ID of the Expense in the form of an integer
 
 + Response 200 (application/json)
 
@@ -542,7 +542,7 @@ Return all `Customer` objects for all `Organizations`. The response will be keye
 ### Delete Expense [DELETE /expenses/{id}]
 
 + Parameters
-    + id (number) - ID of the Expense in the form of an integer
+    + id: `1` (number, required) - ID of the Expense in the form of an integer
 
 + Response 204 (application/json)
 
@@ -553,7 +553,7 @@ Return all `Customer` objects for all `Organizations`. The response will be keye
 ### View Expense Category [GET /expense_categories/{id}]
 
 + Parameters
-    + id (number) - ID of the Expense Category in the form of an integer
+    + id: `1` (number, required) - ID of the Expense Category in the form of an integer
 
 + Response 200 (application/json)
 
@@ -577,7 +577,7 @@ Return all `Customer` objects for all `Organizations`. The response will be keye
 ### Edit Expense Category [PATCH /expense_categories/{id}]
 
 + Parameters
-    + id (number) - ID of the Expense Category in the form of an integer
+    + id: `1` (number, required) - ID of the Expense Category in the form of an integer
 
 + Request (application/json)
 
@@ -595,7 +595,7 @@ Return all `Customer` objects for all `Organizations`. The response will be keye
 ### Delete Expense Category [DELETE /expense_categories/{id}]
 
 + Parameters
-    + id (number) - ID of the Expense Category in the form of an integer
+    + id: `1` (number, required) - ID of the Expense Category in the form of an integer
 
 + Response 204 (application/json)
 
@@ -606,7 +606,7 @@ An `Organization` can have multiple `Funding Rounds`, each with their own `Share
 ### View Funding Round [GET /funding_rounds/{id}]
 
 + Parameters
-    + id (number) - ID of the Funding Round in the form of an integer
+    + id: `1` (number, required) - ID of the Funding Round in the form of an integer
 
 + Response 200 (application/json)
 
@@ -632,7 +632,7 @@ An `Organization` can have multiple `Funding Rounds`, each with their own `Share
 ### Edit Funding Round [PATCH /funding_rounds/{id}]
 
 + Parameters
-    + id (number) - ID of the Funding Round in the form of an integer
+    + id: `1` (number, required) - ID of the Funding Round in the form of an integer
 
 + Request (application/json)
 
@@ -653,6 +653,9 @@ An `Organization` can have multiple `Funding Rounds`, each with their own `Share
 ### Add File [POST /funding_rounds/{id}/files]
 
 Images are uploaded and stored as a separate object that can be viewed separately as `/images/{id}`
+
++ Parameters
+    + id: `1` (number, required) - ID of the Funding Round in the form of an integer
 
 + Request (multipart/form-data; boundary=---BOUNDARY)
 
@@ -677,7 +680,7 @@ Images are uploaded and stored as a separate object that can be viewed separatel
 ### Delete Funding Round [DELETE /funding_rounds/{id}]
 
 + Parameters
-    + id (number) - ID of the Funding Round in the form of an integer
+    + id: `1` (number, required) - ID of the Funding Round in the form of an integer
 
 + Response 204 (application/json)
 
@@ -686,7 +689,7 @@ Images are uploaded and stored as a separate object that can be viewed separatel
 ### View Image [GET /images/{id}]
 
 + Parameters
-    + id (number) - ID of the Image in the form of an integer
+    + id: `1` (number, required) - ID of the Image in the form of an integer
 
 + Response 200 (application/json)
 
@@ -695,7 +698,7 @@ Images are uploaded and stored as a separate object that can be viewed separatel
 ### Delete Image [DELETE /images/{id}]
 
 + Parameters
-    + id (number) - ID of the Image in the form of an integer
+    + id: `1` (number, required) - ID of the Image in the form of an integer
 
 + Response 204 (application/json)
 
@@ -714,7 +717,7 @@ Nodes are keyed by `organization` based on what you have access to.
 ### View Node [GET /nodes/{id}]
 
 + Parameters
-    + id (number) - ID of the Node in the form of an integer
+    + id: `1` (number, required) - ID of the Node in the form of an integer
 
 + Response 200 (application/json)
 
@@ -744,7 +747,7 @@ Nodes are keyed by `organization` based on what you have access to.
 You can change the `type` of a node, but it will be recategorized appropriately on the frontend.
 
 + Parameters
-    + id (number) - ID of the Node in the form of an integer
+    + id: `1` (number, required) - ID of the Node in the form of an integer
 
 + Request (application/json)
 
@@ -764,7 +767,7 @@ You can change the `type` of a node, but it will be recategorized appropriately 
 ### Delete Node [DELETE /nodes/{id}]
 
 + Parameters
-    + id (number) - ID of the Node in the form of an integer
+    + id: `1` (number, required) - ID of the Node in the form of an integer
 
 + Response 204 (application/json)
 
@@ -781,7 +784,7 @@ You can change the `type` of a node, but it will be recategorized appropriately 
 Viewing a single Organization will return it and **all** of its associated objects.
 
 + Parameters
-    + id (number) - ID of the Organization in the form of an integer
+    + id: `1` (number, required) - ID of the Organization in the form of an integer
 
 + Response 200 (application/json)
 
@@ -811,7 +814,7 @@ An `array` of User `id` can be passed to add Users to an Organization.
 - Passing an array of User `ids` can manage the assigned Users.
 
 + Parameters
-    + id (number) - ID of the Organization in the form of an integer
+    + id: `1` (number, required) - ID of the Organization in the form of an integer
 
 + Request (application/json)
 
@@ -834,7 +837,7 @@ An `array` of User `id` can be passed to add Users to an Organization.
 Deleting an Organization will remove it and all of the associated objects. This can only be done by the Owner (User) of the Organization.
 
 + Parameters
-    + id (number) - ID of the Organization in the form of an integer
+    + id: `1` (number, required) - ID of the Organization in the form of an integer
 
 + Response 204 (application/json)
 
@@ -853,7 +856,7 @@ Products are keyed by `Organization` you have access to, and given a limited ser
 Viewing a single `Product` yields a full serialized data set.
 
 + Parameters
-    + id (number) - ID of the Organization in the form of an integer
+    + id: `1` (number, required) - ID of the Organization in the form of an integer
 
 + Response 200 (application/json)
 
@@ -883,6 +886,9 @@ Category must be the `id` of a `ProductCategory`
 
 A `status` of `0` will result in the Product no longer being available for association.
 
++ Parameters
+    + id: `1` (number, required) - ID of the Product in the form of an integer
+
 + Request (application/json)
 
         {
@@ -904,6 +910,9 @@ A `status` of `0` will result in the Product no longer being available for assoc
 ### Add Image [POST /products/{id}/images]
 
 Images are uploaded and stored as a separate object that can be viewed separately as `/images/{id}`
+
++ Parameters
+    + id: `1` (number, required) - ID of the Product in the form of an integer
 
 + Request (multipart/form-data; boundary=---BOUNDARY)
 
@@ -930,7 +939,7 @@ Images are uploaded and stored as a separate object that can be viewed separatel
 You can only `DELETE` a product that has not been associated with any `Revenue` objects.
 
 + Parameters
-    + id (number) - ID of the Product in the form of an integer
+    + id: `1` (number, required) - ID of the Product in the form of an integer
 
 + Response 204 (application/json)
 
@@ -947,7 +956,7 @@ You can only `DELETE` a product that has not been associated with any `Revenue` 
 ### View Product Category [GET /product_categories/{id}]
 
 + Parameters
-    + id (number) - ID of the Product Category in the form of an integer
+    + id: `1` (number, required) - ID of the Product Category in the form of an integer
 
 + Response 200 (application/json)
 
@@ -971,7 +980,7 @@ You can only `DELETE` a product that has not been associated with any `Revenue` 
 ### Edit Product Category [PATCH /product_categories/{id}]
 
 + Parameters
-    + id (number) - ID of the Product Category in the form of an integer
+    + id: `1` (number, required) - ID of the Product Category in the form of an integer
 
 + Request (application/json)
 
@@ -989,7 +998,7 @@ You can only `DELETE` a product that has not been associated with any `Revenue` 
 ### Delete Product Category [DELETE /product_categories/{id}]
 
 + Parameters
-    + id (number) - ID of the Product Category in the form of an integer
+    + id: `1` (number, required) - ID of the Product Category in the form of an integer
 
 + Response 204 (application/json)
 
@@ -1008,7 +1017,7 @@ Revenues are keyed by `Organization` you have access to, and given a limited ser
 View a `Revenue` object, and all the associated `Revenue Project` and `Revenue Service` objects.
 
 + Parameters
-    + id (number) - ID of the Revenue in the form of an integer
+    + id: `1` (number, required) - ID of the Revenue in the form of an integer
 
 + Response 200 (application/json)
 
@@ -1040,7 +1049,7 @@ To create a `Revenue` you must also include the associated `Product` and `Servic
 Editing a `Revenue` object only edits the core data of that object, not its associated objects.
 
 + Parameters
-    + id (number) - ID of the Revenue in the form of an integer
+    + id: `1` (number, required) - ID of the Revenue in the form of an integer
 
 + Request (application/json)
 
@@ -1062,7 +1071,7 @@ Editing a `Revenue` object only edits the core data of that object, not its asso
 ### Delete Revenue [DELETE /revenue/{id}]
 
 + Parameters
-    + id (number) - ID of the Revenue in the form of an integer
+    + id: `1` (number, required) - ID of the Revenue in the form of an integer
 
 + Response 204 (application/json)
 
@@ -1079,7 +1088,7 @@ Editing a `Revenue` object only edits the core data of that object, not its asso
 ### View Revenue Category [GET /revenue_categories/{id}]
 
 + Parameters
-    + id (number) - ID of the Revenue Category in the form of an integer
+    + id: `1` (number, required) - ID of the Revenue Category in the form of an integer
 
 + Response 200 (application/json)
 
@@ -1103,7 +1112,7 @@ Editing a `Revenue` object only edits the core data of that object, not its asso
 ### Edit Revenue Category [PATCH /revenue_categories/{id}]
 
 + Parameters
-    + id (number) - ID of the Revenue Category in the form of an integer
+    + id: `1` (number, required) - ID of the Revenue Category in the form of an integer
 
 + Request (application/json)
 
@@ -1121,7 +1130,7 @@ Editing a `Revenue` object only edits the core data of that object, not its asso
 ### Delete Product Category [DELETE /revenue_categories/{id}]
 
 + Parameters
-    + id (number) - ID of the Product Category in the form of an integer
+    + id: `1` (number, required) - ID of the Product Category in the form of an integer
 
 + Response 204 (application/json)
 
@@ -1138,7 +1147,7 @@ Services are keyed by `Organization` you have access to, and given a limited ser
 ### View Service [GET /services/{id}]
 
 + Parameters
-    + id (number) - ID of the Service in the form of an integer
+    + id: `1` (number, required) - ID of the Service in the form of an integer
 
 + Response 200 (application/json)
 
@@ -1167,6 +1176,9 @@ Services are keyed by `Organization` you have access to, and given a limited ser
 
 Images are uploaded and stored as a separate object that can be viewed separately as `/images/{id}`
 
++ Parameters
+    + id: `1` (number, required) - ID of the Service in the form of an integer
+
 + Request (multipart/form-data; boundary=---BOUNDARY)
 
         -----BOUNDARY
@@ -1190,7 +1202,7 @@ Images are uploaded and stored as a separate object that can be viewed separatel
 ### Edit Service [PATCH /services/{id}]
 
 + Parameters
-    + id (number) - ID of the Service in the form of an integer
+    + id: `1` (number, required) - ID of the Service in the form of an integer
 
 + Request (application/json)
 
@@ -1208,7 +1220,7 @@ Images are uploaded and stored as a separate object that can be viewed separatel
 ### Delete Service [DELETE /services/{id}]
 
 + Parameters
-    + id (number) - ID of the Service in the form of an integer
+    + id: `1` (number, required) - ID of the Service in the form of an integer
 
 + Response 204 (application/json)
 
@@ -1225,7 +1237,7 @@ Shareholders are keyed by `Organization` you have access to, and given a limited
 ### View Shareholder [GET /shareholders/{id}]
 
 + Parameters
-    + id (number) - ID of the Shareholder in the form of an integer
+    + id: `1` (number, required) - ID of the Shareholder in the form of an integer
 
 + Response 200 (application/json)
 
@@ -1261,7 +1273,7 @@ Creating a `Shareholder` requires all personal data, as well as the `funding_rou
 ### Edit Shareholder [PATCH /shareholders/{id}]
 
 + Parameters
-    + id (number) - ID of the Shareholder in the form of an integer
+    + id: `1` (number, required) - ID of the Shareholder in the form of an integer
 
 + Request (application/json)
 
@@ -1288,7 +1300,7 @@ Creating a `Shareholder` requires all personal data, as well as the `funding_rou
 ### Delete Shareholder [DELETE /shareholders/{id}]
 
 + Parameters
-    + id (number) - ID of the Shareholder in the form of an integer
+    + id: `1` (number, required) - ID of the Shareholder in the form of an integer
 
 + Response 204 (application/json)
 
@@ -1299,8 +1311,8 @@ Creating a `Shareholder` requires all personal data, as well as the `funding_rou
 Comments can be created for `expense`, `node` and `revenue` objects.
 
 + Parameters
-    + object (string) - The object to attach the comment to: customers, funding_rounds, nodes, revenue
-    + id (number) - ID of the `PARENT OBJECT` in the form of an integer
+    + object: `node` (string, required) - The object to attach the comment to: customers, funding_rounds, nodes, revenue
+    + id: `1` (number, required) - ID of the `PARENT OBJECT` in the form of an integer
 
 + Request (application/json)
 
@@ -1317,7 +1329,7 @@ Comments can be created for `expense`, `node` and `revenue` objects.
 ### Edit Tag [PATCH /tags/{id}]
 
 + Parameters
-    + id (number) - ID of the Comment in the form of an integer
+    + id: `1` (number, required) - ID of the Comment in the form of an integer
 
 + Request (application/json)
 
@@ -1333,7 +1345,7 @@ Comments can be created for `expense`, `node` and `revenue` objects.
 Regardless of what object the `Tag` is attached to, you simply delete it by its `id`.
 
 + Parameters
-    + id (number) - ID of the Tag in the form of an integer
+    + id: `1` (number, required) - ID of the Tag in the form of an integer
 
 + Response 204 (application/json)
 
@@ -1344,7 +1356,7 @@ Variables cannot be created or deleted, and only their `body` updated.
 ### Edit Variable [PATCH /variables/{id}]
 
 + Parameters
-    + id (number) - ID of the Variable in the form of an integer
+    + id: `1` (number, required) - ID of the Variable in the form of an integer
 
 + Request (application/json)
 
