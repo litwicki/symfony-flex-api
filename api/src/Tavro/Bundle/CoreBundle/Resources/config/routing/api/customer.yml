@@ -1,0 +1,84 @@
+api_get_customer:
+    path: /customers/{id}.{_format}
+    defaults: { _controller: TavroCoreBundle:Api/Customer:get, _format: json }
+    methods: GET
+    requirements:
+        id: \d+
+        _format:  json|xml
+
+api_get_all_customers:
+    path:  /customers.{_format}
+    defaults: { _controller: TavroCoreBundle:Api/Customer:getAll, _format: json }
+    methods: GET
+    requirements:
+        _format:  json|xml
+
+api_post_customer:
+    path:  /customers.{_format}
+    defaults: { _controller: TavroCoreBundle:Api/Customer:post, _format: json }
+    methods: POST
+    requirements:
+        _format:  json|xml
+
+api_patch_customer:
+    path:  /customers/{id}.{_format}
+    defaults: { _controller: TavroCoreBundle:Api/Customer:patch, _format: json }
+    methods: PATCH
+    requirements:
+        id: \d+
+        _format:  json|xml
+
+api_put_customer:
+    path:  /customers/{id}.{_format}
+    defaults: { _controller: TavroCoreBundle:Api/Customer:put, _format: json }
+    methods: PUT
+    requirements:
+        id: \d+
+        _format:  json|xml
+
+api_delete_customer:
+    path:  /customers/{id}.{_format}
+    defaults: { _controller: TavroCoreBundle:Api/Customer:delete, _format: json }
+    methods: DELETE
+    requirements:
+        id: \d+
+        _format:  json|xml
+
+api_typeahead_customers:
+    path:  /typeahead/customers.{_format}
+    defaults: { _controller: TavroCoreBundle:Api/Customer:typeahead, _format: json }
+    methods: GET
+    requirements:
+        _format:  json|xml
+        
+api_customer_tags:
+    path: /customers/{customer}/tags.{_format}
+    defaults: { _controller: TavroCoreBundle:Api/Customer:tags, _format: json}
+    methods: GET
+    requirements:
+        organization: \d+
+        _format: json|xml
+
+api_new_customer_tag:
+    path: /customers/{customer}/tags.{_format}
+    defaults: { _controller: TavroCoreBundle:Api/Customer:newTag, _format: json}
+    methods: POST
+    requirements:
+        organization: \d+
+        _format: json|xml
+
+api_customer_comments:
+    path: /customers/{customer}/comments.{_format}
+    defaults: { _controller: TavroCoreBundle:Api/Customer:comments, _format: json}
+    methods: GET
+    requirements:
+        organization: \d+
+        _format: json|xml
+
+api_new_customer_comment:
+    path: /customers/{customer}/comments.{_format}
+    defaults: { _controller: TavroCoreBundle:Api/Customer:newComment, _format: json}
+    methods: POST
+    requirements:
+        organization: \d+
+        _format: json|xml

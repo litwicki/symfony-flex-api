@@ -1,0 +1,84 @@
+api_get_revenue:
+    path: /revenues/{id}.{_format}
+    defaults: { _controller: TavroCoreBundle:Api/Revenue:get, _format: json }
+    methods: GET
+    requirements:
+        id: \d+
+        _format:  json|xml
+
+api_get_all_revenues:
+    path:  /revenues.{_format}
+    defaults: { _controller: TavroCoreBundle:Api/Revenue:getAll, _format: json }
+    methods: GET
+    requirements:
+        _format:  json|xml
+
+api_post_revenue:
+    path:  /revenues.{_format}
+    defaults: { _controller: TavroCoreBundle:Api/Revenue:post, _format: json }
+    methods: POST
+    requirements:
+        _format:  json|xml
+
+api_patch_revenue:
+    path:  /revenues/{id}.{_format}
+    defaults: { _controller: TavroCoreBundle:Api/Revenue:patch, _format: json }
+    methods: PATCH
+    requirements:
+        id: \d+
+        _format:  json|xml
+
+api_put_revenue:
+    path:  /revenues/{id}.{_format}
+    defaults: { _controller: TavroCoreBundle:Api/Revenue:put, _format: json }
+    methods: PUT
+    requirements:
+        id: \d+
+        _format:  json|xml
+
+api_delete_revenue:
+    path:  /revenues/{id}.{_format}
+    defaults: { _controller: TavroCoreBundle:Api/Revenue:delete, _format: json }
+    methods: DELETE
+    requirements:
+        id: \d+
+        _format:  json|xml
+
+api_typeahead_revenues:
+    path:  /typeahead/revenues.{_format}
+    defaults: { _controller: TavroCoreBundle:Api/Revenue:typeahead, _format: json }
+    methods: GET
+    requirements:
+        _format:  json|xml
+        
+api_revenue_tags:
+    path: /revenues/{revenue}/tags.{_format}
+    defaults: { _controller: TavroCoreBundle:Api/Revenue:tags, _format: json}
+    methods: GET
+    requirements:
+        organization: \d+
+        _format: json|xml
+
+api_new_revenue_tag:
+    path: /revenues/{revenue}/tags.{_format}
+    defaults: { _controller: TavroCoreBundle:Api/Revenue:newTag, _format: json}
+    methods: POST
+    requirements:
+        organization: \d+
+        _format: json|xml
+
+api_revenue_comments:
+    path: /revenues/{revenue}/comments.{_format}
+    defaults: { _controller: TavroCoreBundle:Api/Revenue:comments, _format: json}
+    methods: GET
+    requirements:
+        organization: \d+
+        _format: json|xml
+
+api_new_revenue_comment:
+    path: /revenues/{revenue}/comments.{_format}
+    defaults: { _controller: TavroCoreBundle:Api/Revenue:newComment, _format: json}
+    methods: POST
+    requirements:
+        organization: \d+
+        _format: json|xml

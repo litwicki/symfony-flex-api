@@ -1,3 +1,89 @@
+api_get_organization:
+    path: /organizations/{id}.{_format}
+    defaults: { _controller: TavroCoreBundle:Api/Organization:get, _format: json }
+    methods: GET
+    requirements:
+        id: \d+
+        _format:  json|xml
+
+api_get_all_organizations:
+    path:  /organizations.{_format}
+    defaults: { _controller: TavroCoreBundle:Api/Organization:getAll, _format: json }
+    methods: GET
+    requirements:
+        _format:  json|xml
+
+api_post_organization:
+    path:  /organizations.{_format}
+    defaults: { _controller: TavroCoreBundle:Api/Organization:post, _format: json }
+    methods: POST
+    requirements:
+        _format:  json|xml
+
+api_patch_organization:
+    path:  /organizations/{id}.{_format}
+    defaults: { _controller: TavroCoreBundle:Api/Organization:patch, _format: json }
+    methods: PATCH
+    requirements:
+        id: \d+
+        _format:  json|xml
+
+api_put_organization:
+    path:  /organizations/{id}.{_format}
+    defaults: { _controller: TavroCoreBundle:Api/Organization:put, _format: json }
+    methods: PUT
+    requirements:
+        id: \d+
+        _format:  json|xml
+
+api_delete_organization:
+    path:  /organizations/{id}.{_format}
+    defaults: { _controller: TavroCoreBundle:Api/Organization:delete, _format: json }
+    methods: DELETE
+    requirements:
+        id: \d+
+        _format:  json|xml
+
+api_typeahead_organizations:
+    path:  /typeahead/organizations.{_format}
+    defaults: { _controller: TavroCoreBundle:Api/Organization:typeahead, _format: json }
+    methods: GET
+    requirements:
+        _format:  json|xml
+        
+api_organization_tags:
+    path: /organizations/{organization}/tags.{_format}
+    defaults: { _controller: TavroCoreBundle:Api/Organization:tags, _format: json}
+    methods: GET
+    requirements:
+        organization: \d+
+        _format: json|xml
+
+api_new_organization_tag:
+    path: /organizations/{organization}/tags.{_format}
+    defaults: { _controller: TavroCoreBundle:Api/Organization:newTag, _format: json}
+    methods: POST
+    requirements:
+        organization: \d+
+        _format: json|xml
+
+api_organization_comments:
+    path: /organizations/{organization}/comments.{_format}
+    defaults: { _controller: TavroCoreBundle:Api/Organization:comments, _format: json}
+    methods: GET
+    requirements:
+        organization: \d+
+        _format: json|xml
+
+api_new_organization_comment:
+    path: /organizations/{organization}/comments.{_format}
+    defaults: { _controller: TavroCoreBundle:Api/Organization:newComment, _format: json}
+    methods: POST
+    requirements:
+        organization: \d+
+        _format: json|xml
+
+
 api_organization_users:
     path: /{organization}/users.{_format}
     defaults: { _controller: TavroCoreBundle:Api/Organization:users, _format: json}
@@ -63,7 +149,7 @@ api_organization_revenues:
         _format: json|xml
 
 api_organization_nodes:
-    path: /{organization}/services.{_format}
+    path: /{organization}/nodes.{_format}
     defaults: { _controller: TavroCoreBundle:Api/Organization:nodes, _format: json}
     methods: GET
     requirements:

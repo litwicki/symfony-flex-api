@@ -1,0 +1,52 @@
+api_get_service:
+    path: /services/{id}.{_format}
+    defaults: { _controller: TavroCoreBundle:Api/Service:get, _format: json }
+    methods: GET
+    requirements:
+        id: \d+
+        _format:  json|xml
+
+api_get_all_services:
+    path:  /services.{_format}
+    defaults: { _controller: TavroCoreBundle:Api/Service:getAll, _format: json }
+    methods: GET
+    requirements:
+        _format:  json|xml
+
+api_post_service:
+    path:  /services.{_format}
+    defaults: { _controller: TavroCoreBundle:Api/Service:post, _format: json }
+    methods: POST
+    requirements:
+        _format:  json|xml
+
+api_patch_service:
+    path:  /services/{id}.{_format}
+    defaults: { _controller: TavroCoreBundle:Api/Service:patch, _format: json }
+    methods: PATCH
+    requirements:
+        id: \d+
+        _format:  json|xml
+
+api_put_service:
+    path:  /services/{id}.{_format}
+    defaults: { _controller: TavroCoreBundle:Api/Service:put, _format: json }
+    methods: PUT
+    requirements:
+        id: \d+
+        _format:  json|xml
+
+api_delete_service:
+    path:  /services/{id}.{_format}
+    defaults: { _controller: TavroCoreBundle:Api/Service:delete, _format: json }
+    methods: DELETE
+    requirements:
+        id: \d+
+        _format:  json|xml
+
+api_typeahead_services:
+    path:  /typeahead/services.{_format}
+    defaults: { _controller: TavroCoreBundle:Api/Service:typeahead, _format: json }
+    methods: GET
+    requirements:
+        _format:  json|xml

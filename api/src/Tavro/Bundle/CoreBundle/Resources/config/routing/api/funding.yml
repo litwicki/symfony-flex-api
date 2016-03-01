@@ -1,0 +1,84 @@
+api_get_funding:
+    path: /fundings/{id}.{_format}
+    defaults: { _controller: TavroCoreBundle:Api/Funding:get, _format: json }
+    methods: GET
+    requirements:
+        id: \d+
+        _format:  json|xml
+
+api_get_all_fundings:
+    path:  /fundings.{_format}
+    defaults: { _controller: TavroCoreBundle:Api/Funding:getAll, _format: json }
+    methods: GET
+    requirements:
+        _format:  json|xml
+
+api_post_funding:
+    path:  /fundings.{_format}
+    defaults: { _controller: TavroCoreBundle:Api/Funding:post, _format: json }
+    methods: POST
+    requirements:
+        _format:  json|xml
+
+api_patch_funding:
+    path:  /fundings/{id}.{_format}
+    defaults: { _controller: TavroCoreBundle:Api/Funding:patch, _format: json }
+    methods: PATCH
+    requirements:
+        id: \d+
+        _format:  json|xml
+
+api_put_funding:
+    path:  /fundings/{id}.{_format}
+    defaults: { _controller: TavroCoreBundle:Api/Funding:put, _format: json }
+    methods: PUT
+    requirements:
+        id: \d+
+        _format:  json|xml
+
+api_delete_funding:
+    path:  /fundings/{id}.{_format}
+    defaults: { _controller: TavroCoreBundle:Api/Funding:delete, _format: json }
+    methods: DELETE
+    requirements:
+        id: \d+
+        _format:  json|xml
+
+api_typeahead_fundings:
+    path:  /typeahead/fundings.{_format}
+    defaults: { _controller: TavroCoreBundle:Api/Funding:typeahead, _format: json }
+    methods: GET
+    requirements:
+        _format:  json|xml
+        
+api_funding_tags:
+    path: /fundings/{funding}/tags.{_format}
+    defaults: { _controller: TavroCoreBundle:Api/Funding:tags, _format: json}
+    methods: GET
+    requirements:
+        organization: \d+
+        _format: json|xml
+
+api_new_funding_tag:
+    path: /fundings/{funding}/tags.{_format}
+    defaults: { _controller: TavroCoreBundle:Api/Funding:newTag, _format: json}
+    methods: POST
+    requirements:
+        organization: \d+
+        _format: json|xml
+
+api_funding_comments:
+    path: /fundings/{funding}/comments.{_format}
+    defaults: { _controller: TavroCoreBundle:Api/Funding:comments, _format: json}
+    methods: GET
+    requirements:
+        organization: \d+
+        _format: json|xml
+
+api_new_funding_comment:
+    path: /fundings/{funding}/comments.{_format}
+    defaults: { _controller: TavroCoreBundle:Api/Funding:newComment, _format: json}
+    methods: POST
+    requirements:
+        organization: \d+
+        _format: json|xml
