@@ -13,6 +13,20 @@ api_get_all_services:
     requirements:
         _format:  json|xml
 
+api_get_all_service_images:
+    path:  /services/{id}/images.{_format}
+    defaults: { _controller: TavroCoreBundle:Api/Service:getImages, _format: json }
+    methods: GET
+    requirements:
+        _format:  json|xml
+
+api_post_service_image:
+    path:  /services/{service}/images.{_format}
+    defaults: { _controller: TavroCoreBundle:Api/Service:newImage, _format: json }
+    methods: POST
+    requirements:
+        _format:  json|xml
+
 api_post_service:
     path:  /services.{_format}
     defaults: { _controller: TavroCoreBundle:Api/Service:post, _format: json }

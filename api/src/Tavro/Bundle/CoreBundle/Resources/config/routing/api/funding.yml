@@ -1,84 +1,98 @@
-api_get_funding:
-    path: /fundings/{id}.{_format}
+api_get_funding_round:
+    path: /funding_rounds/{id}.{_format}
     defaults: { _controller: TavroCoreBundle:Api/Funding:get, _format: json }
     methods: GET
     requirements:
         id: \d+
         _format:  json|xml
 
-api_get_all_fundings:
-    path:  /fundings.{_format}
+api_get_all_funding_rounds:
+    path:  /funding_rounds.{_format}
     defaults: { _controller: TavroCoreBundle:Api/Funding:getAll, _format: json }
     methods: GET
     requirements:
         _format:  json|xml
 
-api_post_funding:
-    path:  /fundings.{_format}
+api_post_funding_round:
+    path:  /funding_rounds.{_format}
     defaults: { _controller: TavroCoreBundle:Api/Funding:post, _format: json }
     methods: POST
     requirements:
         _format:  json|xml
 
-api_patch_funding:
-    path:  /fundings/{id}.{_format}
+api_patch_funding_round:
+    path:  /funding_rounds/{id}.{_format}
     defaults: { _controller: TavroCoreBundle:Api/Funding:patch, _format: json }
     methods: PATCH
     requirements:
         id: \d+
         _format:  json|xml
 
-api_put_funding:
-    path:  /fundings/{id}.{_format}
+api_put_funding_round:
+    path:  /funding_rounds/{id}.{_format}
     defaults: { _controller: TavroCoreBundle:Api/Funding:put, _format: json }
     methods: PUT
     requirements:
         id: \d+
         _format:  json|xml
 
-api_delete_funding:
-    path:  /fundings/{id}.{_format}
+api_delete_funding_round:
+    path:  /funding_rounds/{id}.{_format}
     defaults: { _controller: TavroCoreBundle:Api/Funding:delete, _format: json }
     methods: DELETE
     requirements:
         id: \d+
         _format:  json|xml
 
-api_typeahead_fundings:
-    path:  /typeahead/fundings.{_format}
+api_typeahead_funding_round:
+    path:  /typeahead/funding_rounds.{_format}
     defaults: { _controller: TavroCoreBundle:Api/Funding:typeahead, _format: json }
     methods: GET
     requirements:
         _format:  json|xml
         
-api_funding_tags:
-    path: /fundings/{funding}/tags.{_format}
+api_funding_round_tags:
+    path: /funding_rounds/{funding_round}/tags.{_format}
     defaults: { _controller: TavroCoreBundle:Api/Funding:tags, _format: json}
     methods: GET
     requirements:
         organization: \d+
         _format: json|xml
 
-api_new_funding_tag:
-    path: /fundings/{funding}/tags.{_format}
+api_new_funding_round_tag:
+    path: /funding_rounds/{funding_round}/tags.{_format}
     defaults: { _controller: TavroCoreBundle:Api/Funding:newTag, _format: json}
     methods: POST
     requirements:
         organization: \d+
         _format: json|xml
 
-api_funding_comments:
-    path: /fundings/{funding}/comments.{_format}
+api_funding_round_comments:
+    path: /funding_rounds/{funding_round}/comments.{_format}
     defaults: { _controller: TavroCoreBundle:Api/Funding:comments, _format: json}
     methods: GET
     requirements:
         organization: \d+
         _format: json|xml
 
-api_new_funding_comment:
-    path: /fundings/{funding}/comments.{_format}
+api_new_funding_round_comment:
+    path: /funding_rounds/{funding_round}/comments.{_format}
     defaults: { _controller: TavroCoreBundle:Api/Funding:newComment, _format: json}
     methods: POST
     requirements:
         organization: \d+
         _format: json|xml
+
+api_get_all_funding_round_shareholders:
+    path:  /funding_rounds/{funding_round}/shareholders.{_format}
+    defaults: { _controller: TavroCoreBundle:Api/Funding:getShareholders, _format: json }
+    methods: GET
+    requirements:
+        _format:  json|xml
+
+api_new_funding_round_shareholder:
+    path:  /funding_rounds/{funding_round}/shareholders.{_format}
+    defaults: { _controller: TavroCoreBundle:Api/Funding:newShareholder, _format: json }
+    methods: POST
+    requirements:
+        _format:  json|xml

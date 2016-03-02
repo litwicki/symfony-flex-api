@@ -20,6 +20,20 @@ api_post_revenue:
     requirements:
         _format:  json|xml
 
+api_post_revenue_service:
+    path:  /revenues.{_format}
+    defaults: { _controller: TavroCoreBundle:Api/Revenue:newService, _format: json }
+    methods: POST
+    requirements:
+        _format:  json|xml
+
+api_post_revenue_product:
+    path:  /revenues.{_format}
+    defaults: { _controller: TavroCoreBundle:Api/Revenue:newProduct, _format: json }
+    methods: POST
+    requirements:
+        _format:  json|xml
+
 api_patch_revenue:
     path:  /revenues/{id}.{_format}
     defaults: { _controller: TavroCoreBundle:Api/Revenue:patch, _format: json }

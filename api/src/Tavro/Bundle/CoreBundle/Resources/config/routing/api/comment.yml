@@ -6,20 +6,6 @@ api_get_entity:
         id: \d+
         _format:  json|xml
 
-api_get_all_entities:
-    path:  /{entity}.{_format}
-    defaults: { _controller: TavroCoreBundle:Api/Default:getAll, _format: json }
-    methods: GET
-    requirements:
-        _format:  json|xml
-
-api_post_entity:
-    path:  /{entity}.{_format}
-    defaults: { _controller: TavroCoreBundle:Api/Default:post, _format: json }
-    methods: POST
-    requirements:
-        _format:  json|xml
-
 api_patch_entity:
     path:  /{entity}/{id}.{_format}
     defaults: { _controller: TavroCoreBundle:Api/Default:patch, _format: json }

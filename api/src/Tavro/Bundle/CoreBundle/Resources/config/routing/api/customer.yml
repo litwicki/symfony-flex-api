@@ -50,22 +50,6 @@ api_typeahead_customers:
     methods: GET
     requirements:
         _format:  json|xml
-        
-api_customer_tags:
-    path: /customers/{customer}/tags.{_format}
-    defaults: { _controller: TavroCoreBundle:Api/Customer:tags, _format: json}
-    methods: GET
-    requirements:
-        organization: \d+
-        _format: json|xml
-
-api_new_customer_tag:
-    path: /customers/{customer}/tags.{_format}
-    defaults: { _controller: TavroCoreBundle:Api/Customer:newTag, _format: json}
-    methods: POST
-    requirements:
-        organization: \d+
-        _format: json|xml
 
 api_customer_comments:
     path: /customers/{customer}/comments.{_format}
