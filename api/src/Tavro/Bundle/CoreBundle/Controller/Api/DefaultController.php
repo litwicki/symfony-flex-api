@@ -131,7 +131,7 @@ class DefaultController extends Controller
      * @internal param $string $group
      *
      */
-    protected function serialize($data, $format = 'json', $group = 'api')
+    public function serialize($data, $format = 'json', $group = 'api')
     {
         try {
             $serializer = $this->container->get('tavro_serializer');
