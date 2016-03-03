@@ -58,6 +58,13 @@ class FundingRound extends OrganizationEntity implements OrganizationEntityInter
     protected $funding_round_shareholders;
 
     /**
+     * @ORM\OneToMany(targetEntity="Tavro\Bundle\CoreBundle\Entity\FundingRoundComment", mappedBy="funding_round", cascade={"remove"})
+     * @Groups({"tavro"})
+     * @MaxDepth(3)
+     */
+    protected $funding_round_comments;
+
+    /**
      * Constructor
      */
     public function __construct()

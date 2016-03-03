@@ -58,6 +58,13 @@ class FundingRound extends OrganizationEntity implements OrganizationEntityInter
     protected $funding_round_shareholders;
 
     /**
+     * @ORM\OneToMany(targetEntity="Tavro\Bundle\CoreBundle\Entity\FundingRoundComment", mappedBy="funding_round", cascade={"remove"})
+     * @Groups({"tavro"})
+     * @MaxDepth(3)
+     */
+    protected $funding_round_comments;
+
+    /**
      * Constructor
      */
     public function __construct()
@@ -235,5 +242,39 @@ class FundingRound extends OrganizationEntity implements OrganizationEntityInter
             $items[] = $entity->getShareholder();
         }
         return $items;
+    }
+
+    /**
+     * Add fundingRoundComment
+     *
+     * @param \Tavro\Bundle\CoreBundle\Entity\FundingRoundComment $fundingRoundComment
+     *
+     * @return FundingRound
+     */
+    public function addFundingRoundComment(\Tavro\Bundle\CoreBundle\Entity\FundingRoundComment $fundingRoundComment)
+    {
+        $this->funding_round_comments[] = $fundingRoundComment;
+
+        return $this;
+    }
+
+    /**
+     * Remove fundingRoundComment
+     *
+     * @param \Tavro\Bundle\CoreBundle\Entity\FundingRoundComment $fundingRoundComment
+     */
+    public function removeFundingRoundComment(\Tavro\Bundle\CoreBundle\Entity\FundingRoundComment $fundingRoundComment)
+    {
+        $this->funding_round_comments->removeElement($fundingRoundComment);
+    }
+
+    /**
+     * Get fundingRoundComments
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getFundingRoundComments()
+    {
+        return $this->funding_round_comments;
     }
 }

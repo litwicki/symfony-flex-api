@@ -89,7 +89,7 @@ class CustomerController extends ApiController
                 'format'  => $_format,
             );
 
-            return $this->forward('TavroCoreBundle:Default:get', $routeOptions);
+            return $this->get($routeOptions);
 
         }
         catch(\Exception $e) {

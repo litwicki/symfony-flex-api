@@ -93,7 +93,7 @@ class ExpenseController extends ApiController
                 'format'  => $_format,
             );
 
-            return $this->forward('TavroCoreBundle:Default:get', $routeOptions);
+            return $this->get($routeOptions);
         }
     }
 
@@ -166,7 +166,7 @@ class ExpenseController extends ApiController
                 'format'  => $_format,
             );
 
-            return $this->forward('TavroCoreBundle:Default:get', $routeOptions);
+            return $this->get($routeOptions);
         }
     }
 
