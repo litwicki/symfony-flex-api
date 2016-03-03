@@ -1,59 +1,44 @@
 tavro_comment_api:
     resource: "@TavroCoreBundle/Resources/config/routing/api/comment.yml"
-    prefix: /api/v1/comments
 
 tavro_customer_api:
     resource: "@TavroCoreBundle/Resources/config/routing/api/customer.yml"
-    prefix: /api/v1/customers
 
 tavro_expense_api:
     resource: "@TavroCoreBundle/Resources/config/routing/api/expense.yml"
-    prefix: /api/v1/expenses
 
 tavro_expense_category_api:
     resource: "@TavroCoreBundle/Resources/config/routing/api/expense_category.yml"
-    prefix: /api/v1/expense_categories
 
 tavro_funding_api:
     resource: "@TavroCoreBundle/Resources/config/routing/api/funding.yml"
-    prefix: /api/v1/funding
 
 tavro_node_api:
     resource: "@TavroCoreBundle/Resources/config/routing/api/node.yml"
-    prefix: /api/v1/nodes
 
 tavro_organization_api:
     resource: "@TavroCoreBundle/Resources/config/routing/api/organization.yml"
-    prefix: /api/v1/organizations
 
 tavro_product_api:
     resource: "@TavroCoreBundle/Resources/config/routing/api/product.yml"
-    prefix: /api/v1/products
 
 tavro_product_category_api:
     resource: "@TavroCoreBundle/Resources/config/routing/api/product_category.yml"
-    prefix: /api/v1/product_categories
 
 tavro_revenue_api:
     resource: "@TavroCoreBundle/Resources/config/routing/api/revenue.yml"
-    prefix: /api/v1/revenue
 
 tavro_revenue_category_api:
     resource: "@TavroCoreBundle/Resources/config/routing/api/revenue_category.yml"
-    prefix: /api/v1/revenue_categories
 
 tavro_service_api:
     resource: "@TavroCoreBundle/Resources/config/routing/api/service.yml"
-    prefix: /api/v1/services
 
 tavro_service_category_api:
     resource: "@TavroCoreBundle/Resources/config/routing/api/service_category.yml"
-    prefix: /api/v1/service_categories
 
 tavro_shareholder_api:
     resource: "@TavroCoreBundle/Resources/config/routing/api/shareholder.yml"
-    prefix: /api/v1/shareholders
 
 tavro_user_api:
     resource: "@TavroCoreBundle/Resources/config/routing/api/user.yml"
-    prefix: /api/v1/users

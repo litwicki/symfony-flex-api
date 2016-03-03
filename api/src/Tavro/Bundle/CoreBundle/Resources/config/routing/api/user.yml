@@ -1,8 +1,51 @@
-# ==============
-# UNIQUE ROUTES
-# ==============
+api_get_user:
+    path: /users/{id}.{_format}
+    defaults: { _controller: TavroCoreBundle:Api/User:get, _format: json }
+    methods: GET
+    requirements:
+        id: \d+
+        _format:  json|xml
+
+api_get_all_users:
+    path:  /users.{_format}
+    defaults: { _controller: TavroCoreBundle:Api/User:getAll, _format: json }
+    methods: GET
+    requirements:
+        _format:  json|xml
+
+api_post_user:
+    path:  /users.{_format}
+    defaults: { _controller: TavroCoreBundle:Api/User:post, _format: json }
+    methods: POST
+    requirements:
+        _format:  json|xml
+
+api_patch_user:
+    path:  /users/{id}.{_format}
+    defaults: { _controller: TavroCoreBundle:Api/User:patch, _format: json }
+    methods: PATCH
+    requirements:
+        id: \d+
+        _format:  json|xml
+
+api_put_user:
+    path:  /users/{id}.{_format}
+    defaults: { _controller: TavroCoreBundle:Api/User:put, _format: json }
+    methods: PUT
+    requirements:
+        id: \d+
+        _format:  json|xml
+
+api_delete_user:
+    path:  /users/{id}.{_format}
+    defaults: { _controller: TavroCoreBundle:Api/User:delete, _format: json }
+    methods: DELETE
+    requirements:
+        id: \d+
+        _format:  json|xml
+        
 api_user_regenerate_api_key:
-    path: /{user}/reset/api-key.{_format}
+    path: /users/{user}/reset/api-key.{_format}
     defaults: { _controller: TavroCoreBundle:Api/User:resetApiKey, _format: json}
     methods: POST
     requirements:
@@ -10,7 +53,7 @@ api_user_regenerate_api_key:
         _format: json|xml
 
 api_user_regenerate_api_password:
-    path: /{user}/reset/api-password.{_format}
+    path: /users/{user}/reset/api-password.{_format}
     defaults: { _controller: TavroCoreBundle:Api/User:resetApiPassword, _format: json}
     methods: POST
     requirements:
@@ -18,7 +61,7 @@ api_user_regenerate_api_password:
         _format: json|xml
 
 api_user_nodes:
-    path: /{user}/nodes.{_format}
+    path: /users/{user}/nodes.{_format}
     defaults: { _controller: TavroCoreBundle:Api/User:nodes, _format: json}
     methods: GET
     requirements:
@@ -26,7 +69,7 @@ api_user_nodes:
         _format: json|xml
 
 api_user_organizations:
-    path: /{user}/organizations.{_format}
+    path: /users/{user}/organizations.{_format}
     defaults: { _controller: TavroCoreBundle:Api/User:organizations, _format: json}
     methods: GET
     requirements:

@@ -16,6 +16,7 @@ tavro_api:
         api_host: ^(api_hostname%|api.localhost)$
     defaults:
         api_host: %api_hostname%
+    prefix: /api/v1
 
 # =======================
 # CONTRIB BUNDLE ROUTING
