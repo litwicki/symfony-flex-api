@@ -40,6 +40,12 @@ This is the core application for tavro.io
 ### Install Compass (used by Gulp)
 
     $ sudo gem install compass
+    
+### Install `aglio`
+
+For more information on `aglio` check the [aglio github repository](https://github.com/danielgtaylor/aglio)
+
+    $ npm install -g aglio
 
 ### Ansible Extras
 
@@ -84,11 +90,9 @@ These scripts all require you first login to the VM via SSH:
     
 ### Documentation
 
-If you make any changes, updating the docs for reference is easy:
+Regenerate API Blueprint and API phpDocs:
 
-    $ cd /path/to/tavro
-    $ vagrant ssh
-    $ sudo php /var/www/tavro/sami/sami update /var/www/tavro/sami/config.php
+    $ sudo bash /var/www/tavro/scripts/regenerate-docs.sh
     
 ## Testing with PHPUnit
 
