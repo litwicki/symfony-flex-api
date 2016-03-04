@@ -33,7 +33,7 @@ class DefaultController extends Controller
      */
     public function indexAction(Request $request)
     {
-        return $this->redirectToRoute('api_doc_index');
+        return $this->render('TavroAppBundle:Layouts:blueprint.html.twig');
     }
 
 }
