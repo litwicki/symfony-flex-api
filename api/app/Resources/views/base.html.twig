@@ -47,9 +47,9 @@
 <script>hljs.initHighlightingOnLoad();</script>
 
 {% if app.environment == 'prod' %}
-<link rel="stylesheet" href="{{ amazon_s3_url }}/{{ asset_bucket }}/assets/js/tavro.js"/>
+<script type="text/javascript" href="{{ amazon_s3_url }}/{{ asset_bucket }}/assets/js/tavro.js"/>
 {% else %}
-<link rel="stylesheet" href="/assets/js/tavro.js"/>
+<script type="text/javascript" href="/assets/js/tavro.js"/>
 {% endif %}
 
 {% if app.environment == 'prod' %}

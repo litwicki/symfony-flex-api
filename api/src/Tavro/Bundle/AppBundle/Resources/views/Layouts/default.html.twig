@@ -1,0 +1,28 @@
+{% extends '::base.html.twig' %}
+
+{% block body_classes %}tavro-api-docs{% endblock %}
+
+{% block body %}
+<div id="page-body">
+
+    <div class="container">
+        <div class="page-header">
+            <h1>TAVRO API Documentation</h1>
+        </div>
+
+        <div class="list-group">
+            <a target="_blank" class="list-group-item" href="http://docs.tavro.apiary.io/">
+                <i class="pull-left fa fa-fw fa-3x fa-laptop"></i>
+                <h4 class="list-group-item-heading">API Blueprint @ Apiary.io</h4>
+                <p class="list-group-item-text">Fully interactive API Blueprint powered by apiary.io allows the testing and verification of documented endpoints.</p>
+            </a>
+            <a target="_blank" class="list-group-item" href="http://docs.tavro.dev/">
+                <i class="pull-left fa fa-fw fa-3x fa-file-code-o"></i>
+                <h4 class="list-group-item-heading">phpDoc Application Documentation</h4>
+                <p class="list-group-item-text">Full unrestricted code documentation for TavroCoreBundle and TavroAppBundle within the API namespace.</p>
+            </a>
+        </div>
+    </div>
+
+</div>
+{% endblock %}

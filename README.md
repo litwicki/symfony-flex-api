@@ -2,7 +2,7 @@
 
 This is the core application for tavro.io
 
-## Setup
+## Required Workstation Software
 
 * [Vagrant](http://vagrantup.com/downloads) 1.7.4+
 * [VirtualBox](https://www.virtualbox.org/wiki/Downloads)
@@ -40,12 +40,6 @@ This is the core application for tavro.io
 ### Install Compass (used by Gulp)
 
     $ sudo gem install compass
-    
-### Install `aglio`
-
-For more information on `aglio` check the [aglio github repository](https://github.com/danielgtaylor/aglio)
-
-    $ npm install -g aglio
 
 ### Ansible Extras
 

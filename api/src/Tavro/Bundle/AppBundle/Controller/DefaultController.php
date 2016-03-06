@@ -33,7 +33,7 @@ class DefaultController extends Controller
      */
     public function indexAction(Request $request)
     {
-        return $this->render('TavroAppBundle:Layouts:blueprint.html.twig');
+        return $this->render('TavroAppBundle:Layouts:default.html.twig');
     }
 
 }
