@@ -25,7 +25,7 @@ services:
 
     tavro.login_listener:
         class: Tavro\Bundle\CoreBundle\EventListener\LoginListener
-        arguments: ["@security.authorization_checker", "@router"]
+        arguments: ["@security.authorization_checker", "@router", "@doctrine.orm.entity_manager"]
 
 # ==============
 # ENTITY VOTERS

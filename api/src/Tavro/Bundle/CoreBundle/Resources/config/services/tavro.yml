@@ -61,8 +61,3 @@ services:
         class: Tavro\Bundle\CoreBundle\Twig\Extension\ImageCleanupExtension
         tags:
             - { name: twig.extension }
-
-    tavro.doctrine_listener.pre_update:
-        class: Tavro\Bundle\CoreBundle\EventListener\Doctrine\PreUpdateListener
-        tags:
-            - { name: doctrine.event_listener, event: preUpdate }

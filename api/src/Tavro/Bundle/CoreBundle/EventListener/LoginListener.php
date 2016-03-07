@@ -16,11 +16,13 @@ class LoginListener implements AuthenticationSuccessHandlerInterface
 {
     private $auth;
     private $router;
+    private $em;
 
-    public function __construct($auth, $router)
+    public function __construct($auth, $router, $em)
     {
         $this->auth = $auth;
         $this->router = $router;
+        $this->em = $em;
     }
 
     /**
@@ -31,20 +33,24 @@ class LoginListener implements AuthenticationSuccessHandlerInterface
      */
     public function onAuthenticationSuccess(Request $request, TokenInterface $token)
     {
+        if($this->auth->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
+            die(__METHOD__);
+        }
+
         if ($this->auth->isGranted('ROLE_USER')) {
 
             $user = $token->getUser();
+
+            $user->setUserIp($request->getClientIp());
+            $user->setUserAgent($request->headers->get('User-Agent'));
+            $this->em->persist($user);
+            $this->em->flush();
 
             $url = $this->router->generate('index');
             $response = new RedirectResponse($url);
 
             $cookie = new Cookie('api_key', $user->getApiKey(), 0, '/', NULL, false, false);
             $response->headers->setCookie($cookie);
-
-            if($user->getApiEnabled()) {
-                $cookie = new Cookie('api_password', $user->getApiPassword(), 0, '/', NULL, false, false);
-                $response->headers->setCookie($cookie);
-            }
 
             unset($cookie);
 

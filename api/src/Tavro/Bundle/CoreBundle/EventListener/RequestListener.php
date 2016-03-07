@@ -63,11 +63,10 @@ class RequestListener extends Controller implements ContainerAwareInterface
                     $response = new RedirectResponse($this->container->get('router')->generate('login'));
 
                     $response->headers->clearCookie('api_key');
-                    $response->headers->clearCookie('api_password');
 
                     $this->container->get('session')->getFlashBag()->add(
                         'warning',
-                        'We are terribly sorry, but your session had become corrupted, so you must reauthenticate.'
+                        'We are terribly sorry, but your session had become corrupted, You must reauthenticate.'
                     );
 
                     $event->setResponse($response);
@@ -75,35 +74,6 @@ class RequestListener extends Controller implements ContainerAwareInterface
 
                 }
 
-            }
-            else {
-
-                /**
-                 * If the cookie was somehow reset or deleted manually, we need to reset it!
-                 */
-                $api_key = $user->getApiKey();
-                $response = new RedirectResponse($this->container->get('router')->generate('index'));
-                $cookie = new Cookie('api_key', $user->getApiKey(), 0, '/', NULL, false, false);
-                $response->headers->setCookie($cookie);
-                $event->setResponse($response);
-                return;
-
-            }
-
-        }
-        else {
-
-            /**
-             * If the User has a "stale" API cookie, invalidate it and force them to reauthenticate their session(s)
-             * or at the very least clear their old cookies if they're simply an anonymous user now.
-             */
-
-            if($cookies->has('api_key') && $token instanceof AnonymousToken) {
-                $response = new RedirectResponse('/');
-                $response->headers->clearCookie('api_key');
-                $response->headers->clearCookie('api_password');
-                $event->setResponse($response);
-                return;
             }
 
         }

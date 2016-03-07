@@ -84,7 +84,7 @@ These scripts all require you first login to the VM via SSH:
     
 ### Documentation
 
-Regenerate API Blueprint and API phpDocs:
+Regenerate API Documentation:
 
     $ sudo bash /var/www/tavro/scripts/regenerate-docs.sh
     

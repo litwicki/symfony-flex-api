@@ -23,7 +23,6 @@ class LogoutListener implements LogoutSuccessHandlerInterface
     {
         $response = new RedirectResponse('/');
         $response->headers->clearCookie('api_key');
-        $response->headers->clearCookie('api_password');
         return $response;
     }
 

@@ -67,14 +67,14 @@ class ApiAuthenticator extends AbstractGuardAuthenticator
 
     public function onAuthenticationFailure(Request $request, AuthenticationException $exception)
     {
-        $data = array(
-            'message' => strtr($exception->getMessageKey(), $exception->getMessageData())
+        $code = 403;
 
-            // or to translate this message
-            // $this->translator->trans($exception->getMessageKey(), $exception->getMessageData())
+        $data = array(
+            'code' => $code,
+            'message' => strtr($exception->getMessageKey(), $exception->getMessageData())
         );
 
-        return new JsonResponse($data, 403);
+        return new JsonResponse($data, $code);
     }
 
     /**
@@ -82,12 +82,15 @@ class ApiAuthenticator extends AbstractGuardAuthenticator
      */
     public function start(Request $request, AuthenticationException $authException = null)
     {
+        $code = 401;
+
         $data = array(
             // you might translate this message
+            'code' => $code,
             'message' => 'Authentication Required'
         );
 
-        return new JsonResponse($data, 401);
+        return new JsonResponse($data, $code);
     }
 
     public function supportsRememberMe()
