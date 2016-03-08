@@ -10,7 +10,6 @@ use Symfony\Component\Form\Exception\UnexpectedTypeException;
 use Symfony\Component\Debug\Exception\ContextErrorException;
 use Symfony\Component\HttpFoundation\Request;
 
-
 use Tavro\Bundle\CoreBundle\Exception\InvalidUsernameException;
 use Tavro\Bundle\CoreBundle\Exception\Api\ApiException;
 use Tavro\Bundle\CoreBundle\Services\EntityHandler;
@@ -20,6 +19,7 @@ use Tavro\Bundle\CoreBundle\Exception\Api\ApiAccessDeniedException;
 use Tavro\Bundle\CoreBundle\Exception\UsernameNotUniqueException;
 use Tavro\Bundle\CoreBundle\Exception\EmailNotUniqueException;
 use Tavro\Bundle\CoreBundle\Entity\User;
+use Tavro\Bundle\CoreBundle\Entity\Role;
 
 /**
  * Class UserHandler
@@ -50,13 +50,12 @@ class UserHandler extends EntityHandler
     /**
      * Create a new User.
      *
-     * @param \Symfony\Component\HttpFoundation\Request $request
      * @param array $parameters
      *
      * @return object|void
      * @throws \Exception
      */
-    public function create(Request $request, array $parameters)
+    public function create(array $parameters)
     {
         try {
 
@@ -71,7 +70,7 @@ class UserHandler extends EntityHandler
             }
 
             $entity = $this->createEntity();
-            $entity = $this->processForm($request, $entity, $parameters, 'POST');
+            $entity = $this->processForm($entity, $parameters, 'POST');
 
             $this->setUserRoles($entity, $roles);
 
@@ -93,7 +92,6 @@ class UserHandler extends EntityHandler
     /**
      * Process the form submission through the specified FormType validation process.
      *
-     * @param \Symfony\Component\HttpFoundation\Request $request
      * @param \Tavro\Bundle\CoreBundle\Model\EntityInterface $entity
      * @param array $parameters
      * @param string $method
@@ -101,7 +99,7 @@ class UserHandler extends EntityHandler
      * @throws \Exception
      * @throws \Symfony\Component\Debug\Exception\ContextErrorException
      */
-    public function processForm(Request $request, EntityInterface $entity, array $parameters, $method = 'PUT')
+    public function processForm(EntityInterface $entity, array $parameters, $method = 'PUT')
     {
         try {
 
@@ -111,7 +109,7 @@ class UserHandler extends EntityHandler
 
             $form = $this->formFactory->create($formType, $entity, ['method' => $method]);
 
-            $form->handleRequest($request);
+            $form->submit($parameters, ($method == 'PATCH' ? false : true));
 
             if ($form->isValid()) {
 
@@ -156,13 +154,8 @@ class UserHandler extends EntityHandler
                 return $entity;
 
             } else {
-                /**
-                 * @TODO: properly clean this up so it reports a usable error message
-                 *      without using the deprecated function(s)
-                 */
-                //$errors = (string) $form->getErrors(true, false);
-                $errors = $form->getErrorsAsString();
-                throw new InvalidFormException($errors);
+                $error = (string) $form->getErrors(true, false);
+                throw new \Exception($error);
             }
 
         } catch (TransformationFailedException $e) {
@@ -544,14 +537,13 @@ class UserHandler extends EntityHandler
     }
 
     /**
-     * @param \Symfony\Component\HttpFoundation\Request $request
      * @param \Tavro\Bundle\CoreBundle\Entity\User $user
      * @param $password
      *
      * @return \Tavro\Bundle\CoreBundle\Entity\User
      * @throws \Exception
      */
-    public function resetPassword(Request $request, User $user, $password)
+    public function resetPassword(User $user, $password)
     {
         try {
 
@@ -561,7 +553,7 @@ class UserHandler extends EntityHandler
                 'password'              => $password,
             ];
 
-            return $this->patch($request, $user, $parameters);
+            return $this->patch($user, $parameters);
 
         } catch (\Exception $e) {
             throw $e;
@@ -569,14 +561,13 @@ class UserHandler extends EntityHandler
     }
 
     /**
-     * @param \Symfony\Component\HttpFoundation\Request $request
      * @param \Tavro\Bundle\CoreBundle\Model\EntityInterface $entity
      * @param array $parameters
      *
      * @return \Tavro\Bundle\CoreBundle\Model\EntityInterface
      * @throws \Exception
      */
-    public function patch(Request $request, EntityInterface $entity, array $parameters)
+    public function patch(EntityInterface $entity, array $parameters)
     {
         try {
 
@@ -585,7 +576,7 @@ class UserHandler extends EntityHandler
                 throw new ApiAccessDeniedException($message);
             }
 
-            $user = $this->applyPatch($request, $entity, $parameters);
+            $user = $this->applyPatch($entity, $parameters);
 
             $this->reauthenticate($user);
 

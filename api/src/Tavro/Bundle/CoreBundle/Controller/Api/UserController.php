@@ -22,14 +22,6 @@ use Tavro\Bundle\CoreBundle\Controller\Api\DefaultController as ApiController;
 
 class UserController extends ApiController
 {
-    protected $entity;
-
-    public function __construct()
-    {
-        parent::__construct();
-        $this->entity = 'users';
-    }
-
     /**
      * @param Request $request
      * @param User $user

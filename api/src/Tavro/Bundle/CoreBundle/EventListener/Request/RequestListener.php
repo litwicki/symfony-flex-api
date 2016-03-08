@@ -1,6 +1,6 @@
 <?php
 
-namespace Tavro\Bundle\CoreBundle\EventListener;
+namespace Tavro\Bundle\CoreBundle\EventListener\Request;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\RedirectResponse;

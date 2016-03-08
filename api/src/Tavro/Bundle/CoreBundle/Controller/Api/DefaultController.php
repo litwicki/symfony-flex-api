@@ -12,7 +12,6 @@ use Tavro\Bundle\CoreBundle\Exception\Api\ApiNotFoundException;
 use Tavro\Bundle\CoreBundle\Exception\Api\ApiRequestLimitException;
 use Tavro\Bundle\CoreBundle\Exception\Api\ApiAccessDeniedException;
 use Tavro\Bundle\CoreBundle\Exception\Form\InvalidFormException;
-use Tavro\Bundle\CoreBundle\Model\EntityInterface;
 
 use Doctrine\Common\Inflector\Inflector;
 
@@ -20,16 +19,6 @@ use Litwicki\Common\Common;
 
 class DefaultController extends Controller
 {
-
-    protected $entity;
-    protected $serializationGroup;
-
-    public function __construct()
-    {
-        $this->entity = false;
-        $this->serializationGroup = 'tavro';
-    }
-
     /**
      * @param $data
      * @param string $format
@@ -116,13 +105,14 @@ class DefaultController extends Controller
     }
 
     /**
+     * @param $entity
      * @param $id
      *
      * @return mixed
      */
-    protected function findOr404($id)
+    protected function findOr404($entity, $id)
     {
-        if (!($entity = $this->container->get('tavro.handler.' . $this->entity)->get($id))) {
+        if (!($entity = $this->container->get('tavro.handler.' . $entity)->get($id))) {
             throw new ApiNotFoundException(sprintf('The resource \'%s\' was not found.', $id));
         }
 
@@ -141,10 +131,9 @@ class DefaultController extends Controller
      * @internal param $string $group
      *
      */
-    public function serialize($data, $format = 'json', $group = null)
+    public function serialize($data, $format = 'json', $group = 'api')
     {
         try {
-            $group = is_null($group) ? $this->serializationGroup : $group;
             $serializer = $this->container->get('tavro_serializer');
             return $serializer->serialize($data, $format, $group);
         }
@@ -154,13 +143,17 @@ class DefaultController extends Controller
     }
 
     /**
-     * @return object
+     * Fetch the proper handler for an entity by its route name.
+     *
+     * @param $entityName
+     *
+     * @return \Tavro\Bundle\CoreBundle\Handler\
      * @throws \Exception
      */
-    public function getHandler()
+    public function getHandler($entityName)
     {
         try {
-            $service = sprintf('tavro.handler.%s', $this->entity);
+            $service = sprintf('tavro.handler.%s', $entityName);
             $handler = $this->container->get($service);
             return $handler;
         }
@@ -174,16 +167,17 @@ class DefaultController extends Controller
      * in a typeahead autocomplete widget.
      *
      * @param \Symfony\Component\HttpFoundation\Request $request
+     * @param $entity
      * @param $_format
      *
      * @return \Symfony\Component\HttpFoundation\Response
      * @throws \Exception
      */
-    public function typeaheadAction(Request $request, $_format)
+    public function typeaheadAction(Request $request, $entity, $_format)
     {
         try {
             $params = $request->query->all();
-            $handler = $this->getHandler($this->entity);
+            $handler = $this->getHandler($entity);
             $items = $handler->typeahead($params);
             $data = $this->serialize($items, $_format, 'typeahead');
             return $this->apiResponse($data, $_format);
@@ -195,17 +189,18 @@ class DefaultController extends Controller
 
     /**
      * @param \Symfony\Component\HttpFoundation\Request $request
+     * @param $entity
      * @param $_format
      *
      * @return \Symfony\Component\HttpFoundation\Response
      * @throws \Exception
      */
-    public function getAllAction(Request $request, $_format)
+    public function getAllAction(Request $request, $entity, $_format)
     {
         try {
 
             $params = $request->query->all();
-            $handler = $this->getHandler($this->entity);
+            $handler = $this->getHandler($entity);
             $items = $handler->findAll($params);
             $data = $this->serialize($items, $_format);
             return $this->apiResponse($data, $_format);
@@ -218,16 +213,17 @@ class DefaultController extends Controller
     /**
      * Get (find) an entity by Id.
      *
+     * @param $entity
      * @param $id
      * @param $_format
      *
      * @return \Symfony\Component\HttpFoundation\Response
      * @throws \Exception
      */
-    public function getAction($id, $_format)
+    public function getAction($entity, $id, $_format)
     {
         try {
-            $handler = $this->getHandler($this->entity);
+            $handler = $this->getHandler($entity);
             $item = $handler->find($id);
             $data = $this->serialize($item, $_format);
             return $this->apiResponse($data, $_format);
@@ -244,21 +240,23 @@ class DefaultController extends Controller
      * Post (create) a new Entity
      *
      * @param \Symfony\Component\HttpFoundation\Request $request
+     * @param $entity
      * @param $_format
      *
      * @return \Symfony\Component\HttpFoundation\Response
      * @throws \Exception
      */
-    public function postAction(Request $request, $_format)
+    public function postAction(Request $request, $entity, $_format)
     {
         try {
 
             $data = json_decode($request->getContent(), true);
 
-            $handler = $this->getHandler($this->entity);
-            $newEntity = $handler->post($request, $data);
+            $handler = $this->getHandler($entity);
+            $newEntity = $handler->post($data);
 
             $routeOptions = array(
+                'entity'  => $entity,
                 'id'      => $newEntity->getId(),
                 'format'  => $_format,
             );
@@ -277,28 +275,30 @@ class DefaultController extends Controller
      * CREATE a new Entity if $id does not exist, otherwise PUT (update) existing Entity.
      *
      * @param \Symfony\Component\HttpFoundation\Request $request
+     * @param $entity
      * @param $id
      * @param $_format
      *
      * @return \Symfony\Component\HttpFoundation\Response
      * @throws \Exception
      */
-    public function putAction(Request $request, $id, $_format)
+    public function putAction(Request $request, $entity, $id, $_format)
     {
         try {
 
             $post = json_decode($request->getContent(), true);
 
-            $handler = $this->getHandler($this->entity);
+            $handler = $this->getHandler($entity);
 
             if (!($item = $handler->find($id))) {
-                $item = $handler->post($request, $item, $post);
+                $item = $handler->post($item, $post);
             }
             else {
-                $item = $handler->put($request, $item, $post);
+                $item = $handler->put($item, $post);
             }
 
             $routeOptions = array(
+                'entity'  => $entity,
                 'id'      => $item->getId(),
                 '_format'  => $_format,
             );
@@ -322,21 +322,22 @@ class DefaultController extends Controller
      * the permission sets used to apply the PATCH.
      *
      * @param \Symfony\Component\HttpFoundation\Request $request
+     * @param $entity
      * @param $id
      * @param $_format
      *
      * @return \Symfony\Component\HttpFoundation\Response
      * @throws \Exception
      */
-    public function patchAction(Request $request, $id, $_format)
+    public function patchAction(Request $request, $entity, $id, $_format)
     {
         try {
 
             $patch = json_decode($request->getContent(), true);
-            $handler = $this->getHandler($this->entity);
+            $handler = $this->getHandler($entity);
             $object = $handler->find($id);
 
-            $handler->patch($request, $object, $patch);
+            $handler->patch($object, $patch);
 
             $mod = $handler->find($id);
             $data = $this->serialize($mod, 'json');
@@ -356,19 +357,20 @@ class DefaultController extends Controller
 
     /**
      * @param \Symfony\Component\HttpFoundation\Request $request
+     * @param $entity
      * @param $id
      * @param $_format
      *
      * @return \Symfony\Component\HttpFoundation\Response
      * @throws \Exception
      */
-    public function deleteAction(Request $request, $id, $_format)
+    public function deleteAction(Request $request, $entity, $id, $_format)
     {
         try {
 
-            $handler = $this->getHandler($this->entity);
+            $handler = $this->getHandler($entity);
 
-            $class = Inflector::singularize($this->entity);
+            $class = Inflector::singularize($entity);
             $class = Inflector::classify($class);
 
             if ($data = $handler->find($id)) {

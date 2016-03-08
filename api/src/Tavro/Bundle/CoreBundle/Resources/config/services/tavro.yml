@@ -34,11 +34,16 @@ services:
         arguments: ["@serializer"]
 
     tavro.request_listener:
-        class: Tavro\Bundle\CoreBundle\EventListener\RequestListener
+        class: Tavro\Bundle\CoreBundle\EventListener\Request\RequestListener
         calls:
             - [ setContainer, [ '@service_container' ] ]
         tags:
             - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest, priority: 2 }
+
+    tavro.subscriber.exception:
+        class: Tavro\Bundle\CoreBundle\EventSubcriber\Exception\ExceptionSubscriber
+        tags:
+            - { name: kernel.event_subscriber }
 
     # Twig
     twig.listener.date:

@@ -10,11 +10,6 @@ services:
         tags:
          -  { name: form.type, alias: user_type }
 
-    tavro.form.user_register:
-        class: Tavro\Bundle\CoreBundle\Form\UserRegisterType
-        tags:
-         -  { name: form.type, alias: user_register_type }
-
     tavro.form.comments:
         class: Tavro\Bundle\CoreBundle\Form\CommentType
         tags:

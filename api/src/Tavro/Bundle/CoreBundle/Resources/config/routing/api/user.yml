@@ -5,6 +5,7 @@ api_get_user:
     requirements:
         id: \d+
         _format:  json|xml
+        entity: "users"
 
 api_get_all_users:
     path:  /users.{_format}
@@ -12,6 +13,7 @@ api_get_all_users:
     methods: GET
     requirements:
         _format:  json|xml
+        entity: "users"
 
 api_post_user:
     path:  /users.{_format}
@@ -19,6 +21,7 @@ api_post_user:
     methods: POST
     requirements:
         _format:  json|xml
+        entity: "users"
 
 api_patch_user:
     path:  /users/{id}.{_format}
@@ -27,6 +30,7 @@ api_patch_user:
     requirements:
         id: \d+
         _format:  json|xml
+        entity: "users"
 
 api_put_user:
     path:  /users/{id}.{_format}
@@ -35,6 +39,7 @@ api_put_user:
     requirements:
         id: \d+
         _format:  json|xml
+        entity: "users"
 
 api_delete_user:
     path:  /users/{id}.{_format}
@@ -43,6 +48,7 @@ api_delete_user:
     requirements:
         id: \d+
         _format:  json|xml
+        entity: "users"
         
 api_user_regenerate_api_key:
     path: /users/{user}/reset/api-key.{_format}

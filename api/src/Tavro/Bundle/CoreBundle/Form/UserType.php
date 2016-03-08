@@ -21,7 +21,6 @@ class UserType extends AbstractType
     {
         $builder
             ->add('username')
-            ->add('github_username')
             ->add('password', PasswordType::class)
             ->add('password_token')
             ->add('password_token_expire', DateTimeType::class)
@@ -36,7 +35,7 @@ class UserType extends AbstractType
             ->add('user_ip')
             ->add('gender')
             ->add('user_agent')
-            ->add('birthday', 'date')
+            ->add('birthday', DateTimeType::class)
             ->add('status')
             ->add('create_date', DateTimeType::class)
             ->add('update_date', DateTimeType::class)
@@ -55,7 +54,9 @@ class UserType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Tavro\Bundle\CoreBundle\Entity\User'
+            'data_class' => 'Tavro\Bundle\CoreBundle\Entity\User',
+            'csrf_protection'   => false,
         ));
     }
+
 }

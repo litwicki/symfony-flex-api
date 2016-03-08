@@ -20,11 +20,11 @@ services:
         arguments: ["@tavro.password_encoder", "@tavro.user_provider"]
 
     tavro.logout_listener:
-        class:  Tavro\Bundle\CoreBundle\EventListener\LogoutListener
+        class:  Tavro\Bundle\CoreBundle\EventListener\Security\LogoutListener
         arguments:  ["@security.token_storage"]
 
     tavro.login_listener:
-        class: Tavro\Bundle\CoreBundle\EventListener\LoginListener
+        class: Tavro\Bundle\CoreBundle\EventListener\Security\LoginListener
         arguments: ["@security.authorization_checker", "@router", "@doctrine.orm.entity_manager"]
 
 # ==============

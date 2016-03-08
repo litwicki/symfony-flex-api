@@ -254,16 +254,15 @@ class EntityHandler implements EntityHandlerInterface
     /**
      * Submit a new Entity.
      *
-     * @param \Symfony\Component\HttpFoundation\Request $request
      * @param array $parameters
      *
      * @return \Tavro\Bundle\CoreBundle\Model\EntityInterface|void
      * @throws \Exception
      */
-    public function post(Request $request, array $parameters)
+    public function post(array $parameters)
     {
         try {
-            return $this->create($request, $parameters);
+            return $this->create($parameters);
         }
         catch(ApiAccessDeniedException $e) {
             throw $e;
@@ -283,19 +282,18 @@ class EntityHandler implements EntityHandlerInterface
     }
 
     /**
-     * @param \Symfony\Component\HttpFoundation\Request $request
      * @param array $parameters
      *
      * @return object|\Tavro\Bundle\CoreBundle\Model\EntityInterface|void
      * @throws \Exception
      */
-    public function create(Request $request, array $parameters)
+    public function create(array $parameters)
     {
         try {
 
             $entity = $this->createEntity();
             $this->validate($entity, $parameters);
-            $entity = $this->processForm($request, $entity, $parameters, 'POST');
+            $entity = $this->processForm($entity, $parameters, 'POST');
 
             /**
              * If this is an ApiEntity immediately save so the slug property
@@ -328,16 +326,15 @@ class EntityHandler implements EntityHandlerInterface
     /**
      * Edit an Interface.
      *
-     * @param \Symfony\Component\HttpFoundation\Request $request
      * @param \Tavro\Bundle\CoreBundle\Model\EntityInterface $entity
      * @param array $parameters
      *
      * @return \Tavro\Bundle\CoreBundle\Model\EntityInterface|void
      */
-    public function put(Request $request, EntityInterface $entity, array $parameters)
+    public function put(EntityInterface $entity, array $parameters)
     {
         try {
-            return $this->processForm($request, $entity, $parameters, 'PUT');
+            return $this->processForm($entity, $parameters, 'PUT');
         }
         catch(ApiAccessDeniedException $e) {
             throw $e;
@@ -393,14 +390,13 @@ class EntityHandler implements EntityHandlerInterface
     }
 
     /**
-     * @param \Symfony\Component\HttpFoundation\Request $request
      * @param \Tavro\Bundle\CoreBundle\Model\EntityInterface $entity
      * @param array $parameters
      *
      * @return \Tavro\Bundle\CoreBundle\Model\EntityInterface
      * @throws \Exception
      */
-    public function patch(Request $request, EntityInterface $entity, array $parameters)
+    public function patch(EntityInterface $entity, array $parameters)
     {
         try {
 
@@ -409,7 +405,7 @@ class EntityHandler implements EntityHandlerInterface
                 throw new ApiAccessDeniedException($message);
             }
 
-            return $this->applyPatch($request, $entity, $parameters);
+            return $this->applyPatch($entity, $parameters);
 
         }
         catch(\Exception $e) {
@@ -421,7 +417,6 @@ class EntityHandler implements EntityHandlerInterface
      * Separate the actual application of the patch parameters, so we can override
      * in individual entities without replicating this code repeatedly.
      *
-     * @param \Symfony\Component\HttpFoundation\Request $request
      * @param \Tavro\Bundle\CoreBundle\Model\EntityInterface $entity
      * @param array $parameters
      *
@@ -429,10 +424,10 @@ class EntityHandler implements EntityHandlerInterface
      * @throws \Exception
      * @internal param $Request
      */
-    public function applyPatch(Request $request, EntityInterface $entity, array $parameters)
+    public function applyPatch(EntityInterface $entity, array $parameters)
     {
         try {
-            $entity = $this->processForm($request, $entity, $parameters, 'PATCH');
+            $entity = $this->processForm($entity, $parameters, 'PATCH');
             return $entity;
         }
         catch(\Exception $e) {
@@ -443,7 +438,6 @@ class EntityHandler implements EntityHandlerInterface
     /**
      * Process the form submission through the specified FormType validation process.
      *
-     * @param \Symfony\Component\HttpFoundation\Request $request
      * @param \Tavro\Bundle\CoreBundle\Model\EntityInterface $entity
      * @param array $parameters
      * @param string $method
@@ -451,7 +445,7 @@ class EntityHandler implements EntityHandlerInterface
      * @throws \Exception
      * @throws \Symfony\Component\Debug\Exception\ContextErrorException
      */
-    public function processForm(Request $request, EntityInterface $entity, array $parameters, $method = 'PUT')
+    public function processForm(EntityInterface $entity, array $parameters, $method = 'PUT')
     {
         try {
 
@@ -576,7 +570,7 @@ class EntityHandler implements EntityHandlerInterface
                 'Tavro\Bundle\CoreBundle\Entity\Service'             => 'service_type',
                 'Tavro\Bundle\CoreBundle\Entity\Shareholder'         => 'shareholder_type',
                 'Tavro\Bundle\CoreBundle\Entity\UserOrganization'    => 'user_organization_type',
-                'Tavro\Bundle\CoreBundle\Entity\User'                => 'user_type',
+                'Tavro\Bundle\CoreBundle\Entity\User'                => 'Tavro\Bundle\CoreBundle\Form\UserType',
                 'Tavro\Bundle\CoreBundle\Entity\Variable'            => 'variable_type',
             );
 

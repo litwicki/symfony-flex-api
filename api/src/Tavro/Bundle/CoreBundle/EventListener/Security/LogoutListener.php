@@ -1,6 +1,6 @@
 <?php
 
-namespace Tavro\Bundle\CoreBundle\EventListener;
+namespace Tavro\Bundle\CoreBundle\EventListener\Security;
 
 use Symfony\Component\Security\Http\Logout\LogoutSuccessHandlerInterface;
 use Symfony\Component\HttpFoundation\Request;
