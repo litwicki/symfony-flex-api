@@ -23,14 +23,28 @@ class ExceptionSubscriber implements EventSubscriberInterface
 
     public function processException(GetResponseForExceptionEvent $event)
     {
+
         $exception = $event->getException();
+
+        switch($exception->getCode()) {
+
+//            case 0:
+//                $message = 'That resource is not available.';
+//                break;
+            default:
+                $message = $exception->getMessage();
+
+        }
+
         $message = array(
             'code' => $exception->getCode(),
-            'message' => $exception->getMessage()
+            'message' => $message,
         );
+
         $message = json_encode($message);
         $response = new Response($message);
         $event->setResponse($response);
+
     }
 
     public function logException(GetResponseForExceptionEvent $event)

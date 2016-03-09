@@ -22,14 +22,13 @@ use Symfony\Component\HttpFoundation\Request;
 class CommentHandler extends EntityHandler
 {
     /**
-     * @param \Symfony\Component\HttpFoundation\Request $request
      * @param \Tavro\Bundle\CoreBundle\Model\EntityInterface $entity
      * @param array $parameters
      *
      * @return \Tavro\Bundle\CoreBundle\Model\EntityInterface
      * @throws \Exception
      */
-    public function patch(Request $request, EntityInterface $entity, array $parameters)
+    public function patch(EntityInterface $entity, array $parameters)
     {
         try {
 
@@ -38,7 +37,7 @@ class CommentHandler extends EntityHandler
                 throw new ApiAccessDeniedException($message);
             }
 
-            return $this->applyPatch($request, $entity, $parameters);
+            return $this->applyPatch($entity, $parameters);
 
         }
         catch(\Exception $e) {
@@ -174,18 +173,17 @@ class CommentHandler extends EntityHandler
     }
 
     /**
-     * @param \Symfony\Component\HttpFoundation\Request $request
      * @param array $parameters
      *
      * @return mixed|\Tavro\Bundle\CoreBundle\Model\EntityInterface|void
      * @throws \Exception
      */
-    public function create(Request $request, array $parameters)
+    public function create(array $parameters)
     {
         try {
 
             $entity = $this->createEntity();
-            $comment = $this->processForm($request, $entity, $parameters, 'POST');
+            $comment = $this->processForm($entity, $parameters, 'POST');
 
             return $comment;
 

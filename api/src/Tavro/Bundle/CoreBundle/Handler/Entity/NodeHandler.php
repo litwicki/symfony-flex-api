@@ -19,6 +19,7 @@ use Symfony\Component\Form\Exception\UnexpectedTypeException;
 use Tavro\Bundle\CoreBundle\Exception\InvalidUsernameException;
 use Symfony\Component\Debug\Exception\ContextErrorException;
 use Symfony\Component\HttpFoundation\Request;
+use Doctrine\ORM\Tools\Pagination\Paginator;
 
 use Tavro\Bundle\CoreBundle\Entity\Node;
 use Tavro\Bundle\CoreBundle\Entity\NodeTag;
@@ -304,7 +305,7 @@ class NodeHandler extends EntityHandler
         try {
 
             $parameters = array();
-            $options = array('status', 'slug', 'type');
+            $options = array('status', 'type');
 
             foreach($params as $name => $value) {
                 if(in_array($name, $options)) {
@@ -330,9 +331,11 @@ class NodeHandler extends EntityHandler
      * @throws \Exception
      * @return array|void
      */
-    public function findAll(array $params = null)
+    public function findAll(array $params = array())
     {
         try {
+
+            $organizations = $this->getMyOrganizations();
 
             $page = isset($params['page']) ? $params['page'] : 1;
             $size = isset($params['size']) ? $params['size'] : self::PAGE_SIZE;
@@ -346,22 +349,28 @@ class NodeHandler extends EntityHandler
 
             $params = $this->filterParams($params);
 
-            $entities = $this->repository->findBy(
-                $params,
-                $sortOrder,
-                $size,
-                $offset
-            );
+            //default the status to ACTIVE
+            if(!isset($params['status'])) {
+                $params['status'] = self::STATUS_ACTIVE;
+            }
+
+            $entities = $this->repository->findAllByOrganization($organizations, $size, $offset, $params);
 
             $items = array();
+            $count = 0;
 
             foreach($entities as $entity) {
                 if($this->auth->isGranted('view', $entity)) {
-                    $items[] = $entity;
+                    $id = $entity->getOrganization()->getId();
+                    $items[$id][] = $entity;
+                    $count++;
                 }
             }
 
-            return $items;
+            return array(
+                'data' => $items,
+                'message' => sprintf('%s Nodes retrieved.', $count),
+            );
 
         }
         catch(ApiAccessDeniedException $e) {

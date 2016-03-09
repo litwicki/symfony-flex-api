@@ -5,6 +5,7 @@ namespace Tavro\Bundle\CoreBundle\Controller\Api;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Tavro\Bundle\CoreBundle\Exception\Api\ApiException;
 use Tavro\Bundle\CoreBundle\Exception\Api\ApiNotFoundException;
 use Tavro\Bundle\CoreBundle\Exception\Api\ApiRequestLimitException;
@@ -22,6 +23,34 @@ use Tavro\Bundle\CoreBundle\Controller\Api\DefaultController as ApiController;
 
 class UserController extends ApiController
 {
+    /**
+     * @param \Symfony\Component\HttpFoundation\Request $request
+     * @param $entity
+     * @param $_format
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     * @throws \Exception
+     */
+    public function getAllAction(Request $request, $entity, $_format)
+    {
+
+        if(!$this->isGranted('ROLE_ADMIN')) {
+            throw new AccessDeniedException('You do not have permission to perform this action!');
+        }
+
+        try {
+
+            $params = $request->query->all();
+            $handler = $this->getHandler($entity);
+            $items = $handler->findAll($params);
+            $data = $this->serialize($items, $_format);
+            return $this->apiResponse($data, $_format);
+        }
+        catch(\Exception $e) {
+            throw $e;
+        }
+    }
+
     /**
      * @param Request $request
      * @param User $user

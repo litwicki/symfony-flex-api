@@ -77,6 +77,34 @@ class EntityHandler implements EntityHandlerInterface
     }
 
     /**
+     * Get an array of all Organizations this User should have access to.
+     * This includes Organizations they "own" as well as ones they are mere Users of.
+     *
+     */
+    public function getMyOrganizations()
+    {
+        try {
+
+            $organizations = array();
+
+            foreach($this->user->getOrganizations() as $entity) {
+                $organizations[$entity->getId()] = $entity;
+            }
+
+            foreach($this->user->getUserOrganizations() as $entity) {
+                $organizations[$entity->getOrganization()->getId()] = $entity->getOrganization();
+            }
+
+            return $organizations;
+
+        }
+        catch(\Exception $e) {
+            throw $e;
+        }
+
+    }
+
+    /**
      * @param mixed $id
      *
      * @return object

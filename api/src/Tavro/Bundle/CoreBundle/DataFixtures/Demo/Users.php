@@ -118,6 +118,7 @@ class Users extends AbstractFixture implements OrderedFixtureInterface, Containe
             $user->setUsername($username);
             $user->setGender($genders[rand(0,1)]);
             $user->setSalt($salt);
+            $user->setApiKey($email); //only for test users!!
             $user->setPassword($password);
             $user->addRole($roles[array_rand($roles)]);
             $manager->persist($user);

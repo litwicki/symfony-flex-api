@@ -1,54 +1,48 @@
 api_get_user:
     path: /users/{id}.{_format}
-    defaults: { _controller: TavroCoreBundle:Api/User:get, _format: json }
+    defaults: { _controller: TavroCoreBundle:Api/User:get, _format: json, entity: "users" }
     methods: GET
     requirements:
         id: \d+
         _format:  json|xml
-        entity: "users"
 
 api_get_all_users:
     path:  /users.{_format}
-    defaults: { _controller: TavroCoreBundle:Api/User:getAll, _format: json }
+    defaults: { _controller: TavroCoreBundle:Api/User:getAll, _format: json, entity: "users" }
     methods: GET
     requirements:
         _format:  json|xml
-        entity: "users"
 
 api_post_user:
     path:  /users.{_format}
-    defaults: { _controller: TavroCoreBundle:Api/User:post, _format: json }
+    defaults: { _controller: TavroCoreBundle:Api/User:post, _format: json, entity: "users" }
     methods: POST
     requirements:
         _format:  json|xml
-        entity: "users"
 
 api_patch_user:
     path:  /users/{id}.{_format}
-    defaults: { _controller: TavroCoreBundle:Api/User:patch, _format: json }
+    defaults: { _controller: TavroCoreBundle:Api/User:patch, _format: json, entity: "users" }
     methods: PATCH
     requirements:
         id: \d+
         _format:  json|xml
-        entity: "users"
 
 api_put_user:
     path:  /users/{id}.{_format}
-    defaults: { _controller: TavroCoreBundle:Api/User:put, _format: json }
+    defaults: { _controller: TavroCoreBundle:Api/User:put, _format: json, entity: "users" }
     methods: PUT
     requirements:
         id: \d+
         _format:  json|xml
-        entity: "users"
 
 api_delete_user:
     path:  /users/{id}.{_format}
-    defaults: { _controller: TavroCoreBundle:Api/User:delete, _format: json }
+    defaults: { _controller: TavroCoreBundle:Api/User:delete, _format: json, entity: "users" }
     methods: DELETE
     requirements:
         id: \d+
         _format:  json|xml
-        entity: "users"
         
 api_user_regenerate_api_key:
     path: /users/{user}/reset/api-key.{_format}

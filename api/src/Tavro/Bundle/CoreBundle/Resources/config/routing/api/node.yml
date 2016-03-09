@@ -1,6 +1,6 @@
 api_get_node:
     path: /nodes/{id}.{_format}
-    defaults: { _controller: TavroCoreBundle:Api/Node:get, _format: json }
+    defaults: { _controller: TavroCoreBundle:Api/Node:get, _format: json, entity: "nodes" }
     methods: GET
     requirements:
         id: \d+
@@ -8,21 +8,21 @@ api_get_node:
 
 api_get_all_nodes:
     path:  /nodes.{_format}
-    defaults: { _controller: TavroCoreBundle:Api/Node:getAll, _format: json }
+    defaults: { _controller: TavroCoreBundle:Api/Node:getAll, _format: json, entity: "nodes" }
     methods: GET
     requirements:
         _format:  json|xml
 
 api_post_node:
     path:  /nodes.{_format}
-    defaults: { _controller: TavroCoreBundle:Api/Node:post, _format: json }
+    defaults: { _controller: TavroCoreBundle:Api/Node:post, _format: json, entity: "nodes" }
     methods: POST
     requirements:
         _format:  json|xml
 
 api_patch_node:
     path:  /nodes/{id}.{_format}
-    defaults: { _controller: TavroCoreBundle:Api/Node:patch, _format: json }
+    defaults: { _controller: TavroCoreBundle:Api/Node:patch, _format: json, entity: "nodes" }
     methods: PATCH
     requirements:
         id: \d+
@@ -30,7 +30,7 @@ api_patch_node:
 
 api_put_node:
     path:  /nodes/{id}.{_format}
-    defaults: { _controller: TavroCoreBundle:Api/Node:put, _format: json }
+    defaults: { _controller: TavroCoreBundle:Api/Node:put, _format: json, entity: "nodes" }
     methods: PUT
     requirements:
         id: \d+
@@ -38,7 +38,7 @@ api_put_node:
 
 api_delete_node:
     path:  /nodes/{id}.{_format}
-    defaults: { _controller: TavroCoreBundle:Api/Node:delete, _format: json }
+    defaults: { _controller: TavroCoreBundle:Api/Node:delete, _format: json, entity: "nodes" }
     methods: DELETE
     requirements:
         id: \d+

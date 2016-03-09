@@ -53,7 +53,7 @@ class Comment extends Entity implements EntityInterface
      * @ORM\ManyToOne(targetEntity="Tavro\Bundle\CoreBundle\Entity\User", inversedBy="comments")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      * @Groups({"api", "tavro", "simple"})
-     * @MaxDepth(2)
+     * @MaxDepth(1)
      */
     protected $user;
 
