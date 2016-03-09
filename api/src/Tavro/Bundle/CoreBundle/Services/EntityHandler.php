@@ -299,7 +299,7 @@ class EntityHandler implements EntityHandlerInterface
              * If this is an ApiEntity immediately save so the slug property
              * is updated correctly with the entity Id: {id}-{url-save-title}
              */
-            if($entity instanceof ApiEntityInterface) {
+            if($entity instanceof EntityInterface) {
                 return $this->put($entity, $parameters);
             }
 
@@ -544,34 +544,34 @@ class EntityHandler implements EntityHandlerInterface
         try {
 
             $map = array(
-                'Tavro\Bundle\CoreBundle\Entity\Comment'             => 'comment_type',
-                'Tavro\Bundle\CoreBundle\Entity\CustomerComment'     => 'customer_comment_type',
-                'Tavro\Bundle\CoreBundle\Entity\Customer'            => 'customer_type',
-                'Tavro\Bundle\CoreBundle\Entity\ExpenseCategory'     => 'expense_category_type',
-                'Tavro\Bundle\CoreBundle\Entity\ExpenseComment'      => 'expense_comment_type',
-                'Tavro\Bundle\CoreBundle\Entity\ExpenseTag'          => 'expense_tag_type',
-                'Tavro\Bundle\CoreBundle\Entity\Expense'             => 'expense_type',
-                'Tavro\Bundle\CoreBundle\Entity\FundingRoundComment' => 'funding_round_comment_type',
-                'Tavro\Bundle\CoreBundle\Entity\FundingRound'        => 'funding_round_type',
-                'Tavro\Bundle\CoreBundle\Entity\Image'               => 'image_type',
-                'Tavro\Bundle\CoreBundle\Entity\NodeComment'         => 'node_comment_type',
-                'Tavro\Bundle\CoreBundle\Entity\NodeTag'             => 'node_tag_type',
-                'Tavro\Bundle\CoreBundle\Entity\Node'                => 'node_type',
-                'Tavro\Bundle\CoreBundle\Entity\OrganizationType'    => 'organization_type',
-                'Tavro\Bundle\CoreBundle\Entity\ProductCategory'     => 'product_category_type',
-                'Tavro\Bundle\CoreBundle\Entity\Product'             => 'product_type',
-                'Tavro\Bundle\CoreBundle\Entity\RevenueCategory'     => 'revenue_category_type',
-                'Tavro\Bundle\CoreBundle\Entity\RevenueComment'      => 'revenue_comment_type',
-                'Tavro\Bundle\CoreBundle\Entity\RevenueProduct'      => 'revenue_product_type',
-                'Tavro\Bundle\CoreBundle\Entity\RevenueService'      => 'revenue_service_type',
-                'Tavro\Bundle\CoreBundle\Entity\Revenue'             => 'revenue_type',
-                'Tavro\Bundle\CoreBundle\Entity\Role'                => 'role_type',
-                'Tavro\Bundle\CoreBundle\Entity\ServiceCategory'     => 'service_category_type',
-                'Tavro\Bundle\CoreBundle\Entity\Service'             => 'service_type',
-                'Tavro\Bundle\CoreBundle\Entity\Shareholder'         => 'shareholder_type',
-                'Tavro\Bundle\CoreBundle\Entity\UserOrganization'    => 'user_organization_type',
+                'Tavro\Bundle\CoreBundle\Entity\Comment'             => 'Tavro\Bundle\CoreBundle\Form\CommentType',
+                'Tavro\Bundle\CoreBundle\Entity\CustomerComment'     => 'Tavro\Bundle\CoreBundle\Form\CustomerCommentType',
+                'Tavro\Bundle\CoreBundle\Entity\Customer'            => 'Tavro\Bundle\CoreBundle\Form\CustomerType',
+                'Tavro\Bundle\CoreBundle\Entity\ExpenseCategory'     => 'Tavro\Bundle\CoreBundle\Form\ExpenseCategoryType',
+                'Tavro\Bundle\CoreBundle\Entity\ExpenseComment'      => 'Tavro\Bundle\CoreBundle\Form\ExpenseCommentType',
+                'Tavro\Bundle\CoreBundle\Entity\ExpenseTag'          => 'Tavro\Bundle\CoreBundle\Form\ExpenseTagType',
+                'Tavro\Bundle\CoreBundle\Entity\Expense'             => 'Tavro\Bundle\CoreBundle\Form\ExpenseType',
+                'Tavro\Bundle\CoreBundle\Entity\FundingRoundComment' => 'Tavro\Bundle\CoreBundle\Form\FundingRoundCommentType',
+                'Tavro\Bundle\CoreBundle\Entity\FundingRound'        => 'Tavro\Bundle\CoreBundle\Form\FundingRoundType',
+                'Tavro\Bundle\CoreBundle\Entity\Image'               => 'Tavro\Bundle\CoreBundle\Form\ImageType',
+                'Tavro\Bundle\CoreBundle\Entity\NodeComment'         => 'Tavro\Bundle\CoreBundle\Form\NodeCommentType',
+                'Tavro\Bundle\CoreBundle\Entity\NodeTag'             => 'Tavro\Bundle\CoreBundle\Form\NodeTagType',
+                'Tavro\Bundle\CoreBundle\Entity\Node'                => 'Tavro\Bundle\CoreBundle\Form\NodeType',
+                'Tavro\Bundle\CoreBundle\Entity\OrganizationType'    => 'Tavro\Bundle\CoreBundle\Form\OrganizationType',
+                'Tavro\Bundle\CoreBundle\Entity\ProductCategory'     => 'Tavro\Bundle\CoreBundle\Form\ProductCategoryType',
+                'Tavro\Bundle\CoreBundle\Entity\Product'             => 'Tavro\Bundle\CoreBundle\Form\ProductType',
+                'Tavro\Bundle\CoreBundle\Entity\RevenueCategory'     => 'Tavro\Bundle\CoreBundle\Form\RevenueCategoryType',
+                'Tavro\Bundle\CoreBundle\Entity\RevenueComment'      => 'Tavro\Bundle\CoreBundle\Form\RevenueCommentType',
+                'Tavro\Bundle\CoreBundle\Entity\RevenueProduct'      => 'Tavro\Bundle\CoreBundle\Form\RevenueProductType',
+                'Tavro\Bundle\CoreBundle\Entity\RevenueService'      => 'Tavro\Bundle\CoreBundle\Form\RevenueServiceType',
+                'Tavro\Bundle\CoreBundle\Entity\Revenue'             => 'Tavro\Bundle\CoreBundle\Form\RevenueType',
+                'Tavro\Bundle\CoreBundle\Entity\Role'                => 'Tavro\Bundle\CoreBundle\Form\RoleType',
+                'Tavro\Bundle\CoreBundle\Entity\ServiceCategory'     => 'Tavro\Bundle\CoreBundle\Form\ServiceCategoryType',
+                'Tavro\Bundle\CoreBundle\Entity\Service'             => 'Tavro\Bundle\CoreBundle\Form\ServiceType',
+                'Tavro\Bundle\CoreBundle\Entity\Shareholder'         => 'Tavro\Bundle\CoreBundle\Form\ShareholderType',
+                'Tavro\Bundle\CoreBundle\Entity\UserOrganization'    => 'Tavro\Bundle\CoreBundle\Form\UserOrganizationTyp',
                 'Tavro\Bundle\CoreBundle\Entity\User'                => 'Tavro\Bundle\CoreBundle\Form\UserType',
-                'Tavro\Bundle\CoreBundle\Entity\Variable'            => 'variable_type',
+                'Tavro\Bundle\CoreBundle\Entity\Variable'            => 'Tavro\Bundle\CoreBundle\Form\VariableType',
             );
 
             if (array_key_exists($entity, $map)) {

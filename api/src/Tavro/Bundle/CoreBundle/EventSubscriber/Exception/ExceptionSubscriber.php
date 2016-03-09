@@ -1,4 +1,6 @@
-<?php namespace Tavro\Bundle\CoreBundle\EventSubcriber\Exception;
+<?php
+
+namespace Tavro\Bundle\CoreBundle\EventSubscriber\Exception;
 
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\Response;
@@ -21,7 +23,14 @@ class ExceptionSubscriber implements EventSubscriberInterface
 
     public function processException(GetResponseForExceptionEvent $event)
     {
-        die(__METHOD__);
+        $exception = $event->getException();
+        $message = array(
+            'code' => $exception->getCode(),
+            'message' => $exception->getMessage()
+        );
+        $message = json_encode($message);
+        $response = new Response($message);
+        $event->setResponse($response);
     }
 
     public function logException(GetResponseForExceptionEvent $event)

@@ -28,6 +28,12 @@ class Node extends OrganizationEntity implements OrganizationEntityInterface
 {
 
     /**
+     * @ORM\Column(type="string", length=255, nullable=false)
+     * @Groups({"api", "tavro", "simple"})
+     */
+    protected $title;
+
+    /**
      * @ORM\Column(type="string", nullable=true)
      * @Assert\Choice(
      *      choices = { "guide", "node", "page", "article", "wiki"},
@@ -400,4 +406,28 @@ class Node extends OrganizationEntity implements OrganizationEntityInterface
         return $this->node_tags;
     }
 
+
+    /**
+     * Set title
+     *
+     * @param string $title
+     *
+     * @return Node
+     */
+    public function setTitle($title)
+    {
+        $this->title = $title;
+
+        return $this;
+    }
+
+    /**
+     * Get title
+     *
+     * @return string
+     */
+    public function getTitle()
+    {
+        return $this->title;
+    }
 }

@@ -6,7 +6,7 @@ server:
     locale: en_US.UTF-8
 vagrant_local:
     install: '1'
-    vm: { base_box: trusty64, hostname: tavro.dev, ip: 192.168.50.13, memory: '1024', sharedfolder: ./, useVagrantCloud: '1', syncType: nfs }
+    vm: { base_box: trusty64, hostname: tavro.dev, ip: 192.168.50.33, memory: '1024', sharedfolder: ./, useVagrantCloud: '1', syncType: nfs }
 mysql:
     install: '1'
     root_password: tavro

@@ -33,7 +33,7 @@ services:
         class: Tavro\Bundle\CoreBundle\Services\Serializer
         arguments: ["@serializer"]
 
-    tavro.request_listener:
+    tavro.listener.request:
         class: Tavro\Bundle\CoreBundle\EventListener\Request\RequestListener
         calls:
             - [ setContainer, [ '@service_container' ] ]
@@ -41,28 +41,6 @@ services:
             - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest, priority: 2 }
 
     tavro.subscriber.exception:
-        class: Tavro\Bundle\CoreBundle\EventSubcriber\Exception\ExceptionSubscriber
+        class: Tavro\Bundle\CoreBundle\EventSubscriber\Exception\ExceptionSubscriber
         tags:
             - { name: kernel.event_subscriber }
-
-    # Twig
-    twig.listener.date:
-        class: Tavro\Bundle\CoreBundle\Twig\DateListener
-        arguments: ["@twig"]
-        tags:
-            - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest }
-
-    twig.extension.time_ago:
-        class: Tavro\Bundle\CoreBundle\Twig\Extension\TimeAgoExtension
-        tags:
-            - { name: twig.extension }
-
-    twig.extension.url_autolink:
-        class: Tavro\Bundle\CoreBundle\Twig\Extension\UrlAutolinkExtension
-        tags:
-            - { name: twig.extension }
-
-    twig.extension.img_cleanup:
-        class: Tavro\Bundle\CoreBundle\Twig\Extension\ImageCleanupExtension
-        tags:
-            - { name: twig.extension }

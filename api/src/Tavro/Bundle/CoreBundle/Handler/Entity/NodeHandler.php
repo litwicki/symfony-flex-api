@@ -34,13 +34,12 @@ class NodeHandler extends EntityHandler
 {
 
     /**
-     * @param \Symfony\Component\HttpFoundation\Request $request
      * @param array $parameters
      *
      * @return object|void
      * @throws \Exception
      */
-    public function create(Request $request, array $parameters)
+    public function create(array $parameters)
     {
         try {
 
@@ -60,14 +59,14 @@ class NodeHandler extends EntityHandler
             }
 
             $entity = $this->createEntity();
-            $entity = $this->processForm($request, $entity, $parameters, 'POST');
+            $entity = $this->processForm($entity, $parameters, 'POST');
 
             /**
              * If this is an ApiEntity immediately save so the slug property
              * is updated correctly with the entity Id: {id}-{url-save-title}
              */
             if($entity instanceof EntityInterface) {
-                return $this->put($request, $entity, $parameters);
+                return $this->put($entity, $parameters);
             }
 
             return $entity;
@@ -143,14 +142,13 @@ class NodeHandler extends EntityHandler
     }
 
     /**
-     * @param \Symfony\Component\HttpFoundation\Request $request
      * @param \Tavro\Bundle\CoreBundle\Model\EntityInterface $entity
      * @param array $parameters
      *
      * @return \Tavro\Bundle\CoreBundle\Model\EntityInterface|void
      * @throws \Exception
      */
-    public function patch(Request $request, EntityInterface $entity, array $parameters)
+    public function patch(EntityInterface $entity, array $parameters)
     {
         try {
 
@@ -159,7 +157,7 @@ class NodeHandler extends EntityHandler
                 throw new ApiAccessDeniedException($message);
             }
 
-            $node = $this->applyPatch($request, $entity, $parameters);
+            $node = $this->applyPatch($entity, $parameters);
 
             $token = $this->tokenStorage->getToken();
 
@@ -375,7 +373,6 @@ class NodeHandler extends EntityHandler
     }
 
     /**
-     * @param \Symfony\Component\HttpFoundation\Request $request
      * @param \Tavro\Bundle\CoreBundle\Model\EntityInterface $entity
      * @param array $parameters
      *
@@ -383,11 +380,11 @@ class NodeHandler extends EntityHandler
      * @throws \Exception
      * @internal param $Request
      */
-    public function put(Request $request, EntityInterface $entity, array $parameters)
+    public function put(EntityInterface $entity, array $parameters)
     {
         try {
             $this->validate($entity, $parameters);
-            return $this->processForm($request, $entity, $parameters, 'PUT');
+            return $this->processForm($entity, $parameters, 'PUT');
         }
         catch(ApiAccessDeniedException $e) {
             throw $e;

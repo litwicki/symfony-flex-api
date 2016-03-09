@@ -28,6 +28,12 @@ class Node extends OrganizationEntity implements OrganizationEntityInterface
 {
 
     /**
+     * @ORM\Column(type="string", length=255, nullable=false)
+     * @Groups({"api", "tavro", "simple"})
+     */
+    protected $title;
+
+    /**
      * @ORM\Column(type="string", nullable=true)
      * @Assert\Choice(
      *      choices = { "guide", "node", "page", "article", "wiki"},

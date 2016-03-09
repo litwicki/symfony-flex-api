@@ -36,7 +36,7 @@ class NodeType extends AbstractType
                 'choice_label' => 'Organization'
             ))
             ->add('updated_by', EntityType::class, array(
-                'class' => 'TavroCoreBundle:ComUserment',
+                'class' => 'TavroCoreBundle:User',
                 'choice_label' => 'User'
             ))
             ->add('submit', SubmitType::class)

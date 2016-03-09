@@ -91,7 +91,7 @@ class Customers extends AbstractFixture implements OrderedFixtureInterface, Cont
 
             for($i=0;$i<$size;$i++) {
 
-                $name = $lipsum->getWords(1);
+                $name = str_replace(' ', '_', $lipsum->getWords(rand(1,2)));
                 $email = sprintf('%s@%s.com', $name, $lipsum->getWords(1), $tlds[array_rand($tlds)]);
 
                 $cities = $this->getCities('WA');
