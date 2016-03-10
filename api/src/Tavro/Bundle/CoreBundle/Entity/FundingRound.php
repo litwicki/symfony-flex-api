@@ -19,7 +19,7 @@ use Tavro\Bundle\CoreBundle\Model\OrganizationEntityInterface;
 
 /**
  * @ORM\Entity
- * @ORM\Entity(repositoryClass="Tavro\Bundle\CoreBundle\Repository\FundingRoundCommentRepository")
+ * @ORM\Entity(repositoryClass="Tavro\Bundle\CoreBundle\Repository\FundingRoundRepository")
  * @ORM\HasLifecycleCallbacks
  * @ORM\Table(name="tavro_funding_round")
  *
@@ -53,14 +53,12 @@ class FundingRound extends OrganizationEntity implements OrganizationEntityInter
     /**
      * @ORM\OneToMany(targetEntity="Tavro\Bundle\CoreBundle\Entity\FundingRoundShareholder", mappedBy="funding_round", cascade={"remove"})
      * @Groups({"tavro"})
-     * @MaxDepth(3)
+     * @MaxDepth(1)
      */
     protected $funding_round_shareholders;
 
     /**
      * @ORM\OneToMany(targetEntity="Tavro\Bundle\CoreBundle\Entity\FundingRoundComment", mappedBy="funding_round", cascade={"remove"})
-     * @Groups({"tavro"})
-     * @MaxDepth(3)
      */
     protected $funding_round_comments;
 
@@ -235,15 +233,6 @@ class FundingRound extends OrganizationEntity implements OrganizationEntityInter
         return $this->funding_round_shareholders;
     }
 
-    public function getShareholders()
-    {
-        $items = array();
-        foreach($this->funding_round_shareholders as $entity) {
-            $items[] = $entity->getShareholder();
-        }
-        return $items;
-    }
-
     /**
      * Add fundingRoundComment
      *
@@ -276,5 +265,20 @@ class FundingRound extends OrganizationEntity implements OrganizationEntityInter
     public function getFundingRoundComments()
     {
         return $this->funding_round_comments;
+    }
+
+    /**
+     * @VirtualProperty
+     * @SerializedName("shareholders")
+     * @Groups({"api", "tavro"})
+     * @MaxDepth(2)
+     */
+    public function getShareholders()
+    {
+        $items = new \Doctrine\Common\Collections\ArrayCollection();
+        foreach($this->funding_round_shareholders as $entity) {
+            $items->add($entity->getShareholder());
+        }
+        return $items;
     }
 }

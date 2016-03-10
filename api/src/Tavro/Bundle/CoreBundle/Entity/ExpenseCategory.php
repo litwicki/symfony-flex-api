@@ -27,7 +27,6 @@ use Tavro\Bundle\CoreBundle\Model\OrganizationEntityInterface;
 class ExpenseCategory extends OrganizationEntity implements OrganizationEntityInterface
 {
 
-
     /**
      * Set body
      *
@@ -51,4 +50,5 @@ class ExpenseCategory extends OrganizationEntity implements OrganizationEntityIn
     {
         return $this->body;
     }
+
 }

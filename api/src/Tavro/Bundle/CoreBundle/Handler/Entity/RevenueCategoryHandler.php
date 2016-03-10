@@ -7,6 +7,8 @@ use Tavro\Bundle\CoreBundle\Services\EntityHandler;
 use Tavro\Bundle\CoreBundle\Exception\Form\InvalidFormException;
 use Tavro\Bundle\CoreBundle\Model\EntityInterface;
 use Tavro\Bundle\CoreBundle\Exception\Api\ApiAccessDeniedException;
+use Tavro\Bundle\CoreBundle\Entity\User;
+use Tavro\Bundle\CoreBundle\Entity\Role;
 use Tavro\Bundle\CoreBundle\Exception\UsernameNotUniqueException;
 use Tavro\Bundle\CoreBundle\Exception\EmailNotUniqueException;
 
@@ -20,11 +22,11 @@ use Symfony\Component\Debug\Exception\ContextErrorException;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
- * Class RevenueHandler
+ * Class RevenueCategoryHandler
  *
  * @package Tavro\Bundle\CoreBundle\Handler
  */
-class RevenueHandler extends EntityHandler
+class RevenueCategoryHandler extends EntityHandler
 {
     /**
      * Find all Entities (limit the response size)
@@ -74,7 +76,7 @@ class RevenueHandler extends EntityHandler
 
             return array(
                 'data' => $items,
-                'message' => sprintf('%s Revenues retrieved.', $count),
+                'message' => sprintf('%s Revenue Categories retrieved.', $count),
             );
 
         }

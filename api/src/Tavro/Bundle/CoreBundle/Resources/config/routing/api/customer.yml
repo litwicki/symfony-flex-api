@@ -1,6 +1,6 @@
 api_get_customer:
     path: /customers/{id}.{_format}
-    defaults: { _controller: TavroCoreBundle:Api/Customer:get, _format: json }
+    defaults: { _controller: TavroCoreBundle:Api/Customer:get, _format: json, entity: "customers" }
     methods: GET
     requirements:
         id: \d+
@@ -8,21 +8,21 @@ api_get_customer:
 
 api_get_all_customers:
     path:  /customers.{_format}
-    defaults: { _controller: TavroCoreBundle:Api/Customer:getAll, _format: json }
+    defaults: { _controller: TavroCoreBundle:Api/Customer:getAll, _format: json, entity: "customers" }
     methods: GET
     requirements:
         _format:  json|xml
 
 api_post_customer:
     path:  /customers.{_format}
-    defaults: { _controller: TavroCoreBundle:Api/Customer:post, _format: json }
+    defaults: { _controller: TavroCoreBundle:Api/Customer:post, _format: json, entity: "customers" }
     methods: POST
     requirements:
         _format:  json|xml
 
 api_patch_customer:
     path:  /customers/{id}.{_format}
-    defaults: { _controller: TavroCoreBundle:Api/Customer:patch, _format: json }
+    defaults: { _controller: TavroCoreBundle:Api/Customer:patch, _format: json, entity: "customers" }
     methods: PATCH
     requirements:
         id: \d+
@@ -30,7 +30,7 @@ api_patch_customer:
 
 api_put_customer:
     path:  /customers/{id}.{_format}
-    defaults: { _controller: TavroCoreBundle:Api/Customer:put, _format: json }
+    defaults: { _controller: TavroCoreBundle:Api/Customer:put, _format: json, entity: "customers" }
     methods: PUT
     requirements:
         id: \d+
@@ -38,7 +38,7 @@ api_put_customer:
 
 api_delete_customer:
     path:  /customers/{id}.{_format}
-    defaults: { _controller: TavroCoreBundle:Api/Customer:delete, _format: json }
+    defaults: { _controller: TavroCoreBundle:Api/Customer:delete, _format: json, entity: "customers" }
     methods: DELETE
     requirements:
         id: \d+
