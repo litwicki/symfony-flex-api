@@ -1,11 +1,8 @@
 <?php namespace Tavro\Bundle\CoreBundle\Repository;
 
-use Doctrine\ORM\EntityRepository;
+use Tavro\Bundle\CoreBundle\Services\Repository\TavroRepository;
 
-class ExpenseTagRepository extends EntityRepository
+class ExpenseTagRepository extends TavroRepository
 {
-    public function findAllByOrganization()
-    {
 
-    }
 }

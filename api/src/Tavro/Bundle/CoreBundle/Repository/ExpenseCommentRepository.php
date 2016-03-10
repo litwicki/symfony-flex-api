@@ -4,8 +4,5 @@ use Doctrine\ORM\EntityRepository;
 
 class ExpenseCommentRepository extends EntityRepository
 {
-    public function findAllByOrganization()
-    {
 
-    }
 }

@@ -4,8 +4,5 @@ use Doctrine\ORM\EntityRepository;
 
 class FundingRoundCommentRepository extends EntityRepository
 {
-    public function findAllByOrganization()
-    {
 
-    }
 }

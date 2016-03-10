@@ -214,7 +214,7 @@ class EntityHandler implements EntityHandlerInterface
         try {
 
             $page = isset($params['page']) ? $params['page'] : 1;
-            $size = isset($params['size']) ? $params['size'] : $this->pageSize;
+            $size = isset($params['size']) ? $params['size'] : self::PAGE_SIZE;
 
             $sort = (isset($params['sort'])) ? $params['sort'] : 'desc';
             $orderBy = (isset($params['orderBy'])) ? $params['orderBy'] : 'id';
@@ -222,7 +222,7 @@ class EntityHandler implements EntityHandlerInterface
             $sortOrder = array($orderBy => $sort);
 
             if(!isset($params['status'])) {
-                $params['status'] = $this->statusActive; //@TODO: Make this a constant fetched from Model\Entity.php
+                $params['status'] = self::STATUS_ACTIVE; //@TODO: Make this a constant fetched from Model\Entity.php
             }
 
             $offset = ($page - 1) * $size;
