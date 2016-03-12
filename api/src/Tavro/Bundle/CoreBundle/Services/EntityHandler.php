@@ -244,7 +244,13 @@ class EntityHandler implements EntityHandlerInterface
                 }
             }
 
-            return $items;
+            return array(
+                'data' => $items,
+                'message' => sprintf('%s %s retrieved.',
+                    count($items),
+                    str_replace('Tavro\\Bundle\\CoreBundle\\Entity\\', '', Inflector::pluralize($this->entityClass))
+                )
+            );
 
         }
         catch(ApiAccessDeniedException $e) {
@@ -346,7 +352,7 @@ class EntityHandler implements EntityHandlerInterface
         catch(InvalidPropertyPathException $e) {
             throw $e;
         }
-        catch(\Exception $e) {
+        catch(\Symfony\Component\Security\Core\Exception\AccessDeniedException $e) {
             throw $e;
         }
     }

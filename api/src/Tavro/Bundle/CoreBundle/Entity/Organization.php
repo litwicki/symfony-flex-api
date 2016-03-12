@@ -36,7 +36,7 @@ class Organization extends Entity implements EntityInterface
      * @ORM\ManyToOne(targetEntity="Tavro\Bundle\CoreBundle\Entity\User", inversedBy="organizations")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id", nullable=false)
      * @Groups({"api", "tavro"})
-     * @MaxDepth(1)
+     * @MaxDepth(2)
      */
     protected $owner;
 

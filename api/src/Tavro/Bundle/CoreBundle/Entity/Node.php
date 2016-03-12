@@ -325,7 +325,7 @@ class Node extends OrganizationEntity implements OrganizationEntityInterface
      * @VirtualProperty
      * @SerializedName("node_comments")
      * @Groups({"api", "tavro","detail"})
-     * @MaxDepth(2)
+     * @MaxDepth(1)
      */
     public function getComments()
     {

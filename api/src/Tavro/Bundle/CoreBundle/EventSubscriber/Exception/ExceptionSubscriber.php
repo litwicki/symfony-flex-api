@@ -23,7 +23,6 @@ class ExceptionSubscriber implements EventSubscriberInterface
 
     public function processException(GetResponseForExceptionEvent $event)
     {
-        return;
         $exception = $event->getException();
 
         switch($exception->getCode()) {
@@ -38,6 +37,7 @@ class ExceptionSubscriber implements EventSubscriberInterface
 
         $message = array(
             'code' => $exception->getCode(),
+            'class' => get_class($exception),
             'message' => $message,
         );
 

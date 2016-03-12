@@ -16,7 +16,7 @@ class ApiAccessDeniedException extends HttpException
      * @param \Exception $previous The previous exception
      * @param int $code            The internal exception code
      */
-    public function __construct($message = NULL, \Exception $previous = NULL, $code = 0)
+    public function __construct($message = NULL, \Exception $previous = NULL, $code = 403)
     {
         parent::__construct(403, $message, $previous, array(), $code);
     }

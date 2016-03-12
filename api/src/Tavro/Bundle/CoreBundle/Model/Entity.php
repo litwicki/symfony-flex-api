@@ -40,7 +40,7 @@ class Entity implements EntityInterface
     protected $body;
 
     /**
-     * @ORM\Column(type="integer", nullable=false)
+     * @ORM\Column(type="integer", nullable=false, options={"default" = 1})
      * @Groups({"api", "tavro", "simple"})
      */
     protected $status = self::STATUS_ENABLED;

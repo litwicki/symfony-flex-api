@@ -6,38 +6,40 @@ use Symfony\Component\Security\Core\Authorization\Voter\VoterInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Tavro\Bundle\CoreBundle\Entity\NodeComment;
 use Tavro\Bundle\CoreBundle\Entity\User;
+use Tavro\Bundle\CoreBundle\Services\Voter\TavroVoter;
+use Tavro\Bundle\CoreBundle\Model\EntityInterface;
 
 /**
  * Class NodeCommentVoter
  *
  * @package Tavro\Bundle\CoreBundle\Voter
  */
-class NodeCommentVoter implements VoterInterface
+class NodeCommentVoter extends TavroVoter implements VoterInterface
 {
 
     /**
      * Allows full access to members belonging to the growth cse, view access to outside admins.
      *
      * @param User $user
-     * @param \Tavro\Bundle\CoreBundle\Entity\NodeComment $entity
      * @param string  $attribute
      *
      * @throws \Exception
      * @return int
      */
-    public function checkAccess($user, NodeComment $entity, $attribute)
+    public function checkAccess($user, EntityInterface $entity, $attribute)
     {
+        $organization = $entity->getNode()->getOrganization();
+        $checkOrganization = $this->checkOrganization($organization, $user);
 
         if($user->isAdmin()) {
             return VoterInterface::ACCESS_GRANTED;
         }
 
-        if($attribute == self::PATCH) {
+        if($checkOrganization && $attribute == self::PATCH) {
             return VoterInterface::ACCESS_GRANTED;
         }
 
-        // Allow all creates
-        if($attribute == self::CREATE) {
+        if($checkOrganization && $attribute == self::CREATE) {
             return VoterInterface::ACCESS_GRANTED;
         }
 
@@ -46,46 +48,13 @@ class NodeCommentVoter implements VoterInterface
             return VoterInterface::ACCESS_GRANTED;
         }
 
-        $modifyDate = $entity->getCreateDate();
-        $modifyDate->modify("+30 minutes");
-
-        $now = new \DateTime();
-
-        /**
-         * Only Admins, or the author of the NodeComment can edit
-         */
-        if($attribute == self::EDIT || $attribute == self::PATCH) {
-
-            if($user->getId() === $entity->getUser()->getId()) {
-
-                /**
-                 * Only allow the "author" to edit their NodeComment within 30 minutes of NodeCommenting
-                 */
-                if($now < $modifyDate) {
-                    return VoterInterface::ACCESS_GRANTED;
-                }
-                return VoterInterface::ACCESS_GRANTED;
-
-            }
-
-        }
-
         /**
          *  Only ROLE_ADMIN or the owner can delete
          */
-        if($attribute == self::DELETE || $attribute == self::REMOVE) {
-
+        if($checkOrganization && ($attribute == self::DELETE || $attribute == self::REMOVE)) {
             if($user->getId() === $entity->getUser()->getId()) {
-
-                /**
-                 * Only allow the "author" to edit their NodeComment within 30 minutes of NodeCommenting
-                 */
-                if($now < $modifyDate) {
-                    return VoterInterface::ACCESS_GRANTED;
-                }
-
+                return VoterInterface::ACCESS_GRANTED;
             }
-
         }
 
         // Deny all other requests

@@ -43,7 +43,8 @@ class OrganizationType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Tavro\Bundle\CoreBundle\Entity\Organization'
+            'data_class' => 'Tavro\Bundle\CoreBundle\Entity\Organization',
+            'csrf_protection'   => false,
         ));
     }
 }

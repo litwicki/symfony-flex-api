@@ -39,7 +39,8 @@ class NodeCommentType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Tavro\Bundle\CoreBundle\Entity\NodeComment'
+            'data_class' => 'Tavro\Bundle\CoreBundle\Entity\NodeComment',
+            'csrf_protection' => false
         ));
     }
 }

@@ -107,6 +107,18 @@ services:
             - '%amazon_s3_url%'
             - 'Tavro\Bundle\CoreBundle\Entity\NodeTag'
 
+    tavro.handler.node_comments:
+        class: Tavro\Bundle\CoreBundle\Handler\Entity\NodeCommentHandler
+        arguments:
+            - '@doctrine.orm.main_entity_manager'
+            - '@form.factory'
+            - '@validator'
+            - '@security.encoder_factory.generic'
+            - '@security.token_storage'
+            - '@security.authorization_checker'
+            - '%amazon_s3_url%'
+            - 'Tavro\Bundle\CoreBundle\Entity\NodeComment'
+
     tavro.handler.organizations:
         class: Tavro\Bundle\CoreBundle\Handler\Entity\OrganizationHandler
         arguments:

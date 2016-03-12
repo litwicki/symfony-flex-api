@@ -341,7 +341,7 @@ class NodeHandler extends EntityHandler
             $size = isset($params['size']) ? $params['size'] : self::PAGE_SIZE;
 
             $sort = (isset($params['sort'])) ? $params['sort'] : 'desc';
-            $orderBy = (isset($params['orderBy'])) ? $params['orderBy'] : 'views';
+            $orderBy = (isset($params['orderBy'])) ? $params['orderBy'] : 'id';
 
             $sortOrder = array($orderBy => $sort);
 

@@ -71,30 +71,30 @@ class NodeController extends ApiController
 
             $data = json_decode($request->getContent(), true);
 
-            $handler = $this->getHandler('comment');
-            $comment = $handler->post($request, $data);
+            $handler = $this->getHandler('comments');
+            $comment = $handler->post($data);
 
             /**
              * Attach the Comment to the Node
              */
-            $this->getHandler('node_comment')->post($request, array(
+            $this->getHandler('node_comments')->post(array(
                 'comment' => $comment->getId(),
                 'node' => $node->getId()
             ));
 
-        }
-        catch(\Exception $e) {
-            throw $e;
-        }
-        finally {
             $routeOptions = array(
-                'entity'  => 'comment',
+                'entity'  => 'comments',
                 'id'      => $comment->getId(),
                 'format'  => $_format,
             );
 
             return $this->forward('TavroCoreBundle:Default:get', $routeOptions);
+
         }
+        catch(\Exception $e) {
+            throw $e;
+        }
+
     }
 
     /**
@@ -145,12 +145,12 @@ class NodeController extends ApiController
             $data = json_decode($request->getContent(), true);
 
             $handler = $this->getHandler('tags');
-            $tag = $handler->post($request, $data);
+            $tag = $handler->post($data);
 
             /**
              * Attach the Comment to the Node
              */
-            $this->getHandler('node_tag')->post($request, array(
+            $this->getHandler('node_tags')->post($request, array(
                 'comment' => $tag->getId(),
                 'node' => $node->getId()
             ));

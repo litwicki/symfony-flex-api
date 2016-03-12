@@ -25,7 +25,7 @@ class ApiAuthenticator extends AbstractGuardAuthenticator
      */
     public function getCredentials(Request $request)
     {
-        // look for a tavro-api-key header
+
 //        $apiKey = $request->server->get('PHP_AUTH_USER');
 //        $apiPassword = $request->server->get('PHP_AUTH_PASSWORD');
 
@@ -46,8 +46,7 @@ class ApiAuthenticator extends AbstractGuardAuthenticator
 
         // if null, authentication will fail
         // if a User object, checkCredentials() is called
-        return $this->em->getRepository('TavroCoreBundle:User')
-            ->findOneBy(array('api_key' => User::staticEncrypt($apiKey)));
+        return $this->em->getRepository('TavroCoreBundle:User')->findOneBy(array('api_key' => User::staticEncrypt($apiKey)));
     }
 
     public function checkCredentials($credentials, UserInterface $user)

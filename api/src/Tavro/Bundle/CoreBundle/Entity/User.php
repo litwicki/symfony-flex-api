@@ -66,20 +66,20 @@ class User extends Entity implements UserInterface, \Serializable
 
     /**
      * @ORM\Column(type="string", length=500, nullable=true)
-     * @Groups({"api", "tavro"})
+     * @Groups({"tavro"})
      */
     protected $signature;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
-     * @Groups({"api", "tavro", "simple"})
+     * @Groups({"tavro"})
      * @MaxDepth(1)
      */
     protected $last_online_date;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=false)
-     * @Groups({"api", "tavro"})
+     * @Groups({"tavro"})
      * @Accessor(getter="getApiKey", setter="setApiKey")
      * @MaxDepth(1)
      */
@@ -87,7 +87,7 @@ class User extends Entity implements UserInterface, \Serializable
 
     /**
      * @ORM\Column(type="string", length=255, nullable=false)
-     * @Groups({"api", "tavro"})
+     * @Groups({"tavro"})
      * @Accessor(getter="getApiPassword", setter="setApiPassword")
      * @MaxDepth(1)
      */
@@ -95,21 +95,20 @@ class User extends Entity implements UserInterface, \Serializable
 
     /**
      * @ORM\Column(type="boolean", nullable=false)
-     * @Groups({"api", "tavro"})
      * @MaxDepth(1)
      */
     protected $api_enabled;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=false)
-     * @Groups({"api", "tavro"})
+     * @Groups({"tavro"})
      * @Accessor(getter="getGuid", setter="setGuid")
      */
     protected $guid;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @Groups({"api", "tavro"})
+     * @Groups({"tavro"})
      * @MaxDepth(1)
      */
     protected $user_ip;
@@ -128,14 +127,14 @@ class User extends Entity implements UserInterface, \Serializable
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @Groups({"api", "tavro"})
+     * @Groups({"tavro"})
      * @MaxDepth(1)
      */
     protected $user_agent;
 
     /**
      * @ORM\Column(type="date", length=255, nullable=true)
-     * @Groups({"api", "tavro"})
+     * @Groups({"tavro"})
      * @MaxDepth(1)
      */
     protected $birthday;
@@ -167,7 +166,7 @@ class User extends Entity implements UserInterface, \Serializable
      * )
      * @Type("array<string>")
      * @Accessor(getter="getSerializedRoles")
-     * @Groups({"api", "tavro"})
+     * @Groups({"tavro"})
      * @MaxDepth(3)
      */
     protected $roles;
@@ -193,7 +192,7 @@ class User extends Entity implements UserInterface, \Serializable
     /**
      * @ORM\OneToOne(targetEntity="Tavro\Bundle\CoreBundle\Entity\UserQuickbooks")
      * @ORM\JoinColumn(name="user_quickbooks_id", referencedColumnName="id", nullable=true)
-     * @Groups({"api", "tavro"})
+     * @Groups({"tavro"})
      * @MaxDepth(1)
      */
     protected $user_quickbooks;
@@ -1002,7 +1001,7 @@ class User extends Entity implements UserInterface, \Serializable
     /**
      * @VirtualProperty
      * @SerializedName("node_count")
-     * @Groups({"api", "tavro"})
+     * @Groups({"tavro"})
      *
      */
     public function nodeCount()

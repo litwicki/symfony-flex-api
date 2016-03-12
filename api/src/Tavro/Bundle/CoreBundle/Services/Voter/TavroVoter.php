@@ -5,6 +5,7 @@ namespace Tavro\Bundle\CoreBundle\Services\Voter;
 use Symfony\Component\Security\Core\Authorization\Voter\VoterInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Tavro\Bundle\CoreBundle\Entity\User;
+use Tavro\Bundle\CoreBundle\Entity\Organization;
 use Tavro\Bundle\CoreBundle\Model\EntityInterface;
 
 /**
@@ -18,12 +19,12 @@ class TavroVoter implements VoterInterface
      * Validate that the entity being manipulated is within the ecosystem
      * of Organizations this User belongs to.
      *
-     * @param \Tavro\Bundle\CoreBundle\Model\EntityInterface $entity
+     * @param \Tavro\Bundle\CoreBundle\Entity\Organization $organization
      * @param \Tavro\Bundle\CoreBundle\Entity\User $user
      *
-     * @return boolean
+     * @return bool
      */
-    public function checkOrganization(EntityInterface $entity, User $user)
+    public function checkOrganization(Organization $organization, User $user)
     {
         $items = $user->getUserOrganizations();
         $organizations = array();
@@ -33,7 +34,7 @@ class TavroVoter implements VoterInterface
             $organizations[$org->getId()] = $org;
         }
 
-        $id = $entity->getOrganization()->getId();
+        $id = $organization->getId();
 
         if(in_array($id, array_keys($organizations))) {
             return true;
