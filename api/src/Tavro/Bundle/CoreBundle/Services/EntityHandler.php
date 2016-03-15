@@ -44,7 +44,6 @@ class EntityHandler implements EntityHandlerInterface
     public $s3;
     public $amazon_s3_url;
 
-    protected $isModerator = false;
     protected $isAdmin = false;
     protected $user = false;
 
@@ -52,6 +51,8 @@ class EntityHandler implements EntityHandlerInterface
     const STATUS_ACTIVE = 1;
     const STATUS_PENDING = 2;
     const STATUS_DISABLED = 0;
+
+    const ACCESS_DENIED_MESSAGE = 'You are not authorized to perform this action!';
 
     public function __construct(ObjectManager $om, FormFactory $formFactory, Validator $validator, EncoderFactory $encoder, TokenStorage $tokenStorage, AuthorizationChecker $auth, $amazon_s3_url, $entityClass)
     {
@@ -71,7 +72,6 @@ class EntityHandler implements EntityHandlerInterface
 
         if(!is_null($token)) {
             $this->user = $token->getUser();
-            $this->isModerator = $this->auth->isGranted('ROLE_MODERATOR');
             $this->isAdmin = $this->auth->isGranted('ROLE_ADMIN');
         }
     }
@@ -214,7 +214,7 @@ class EntityHandler implements EntityHandlerInterface
         try {
 
             $page = isset($params['page']) ? $params['page'] : 1;
-            $size = isset($params['size']) ? $params['size'] : self::PAGE_SIZE;
+            $size = isset($params['size']) ? $params['size'] : $this::PAGE_SIZE;
 
             $sort = (isset($params['sort'])) ? $params['sort'] : 'desc';
             $orderBy = (isset($params['orderBy'])) ? $params['orderBy'] : 'id';
@@ -222,7 +222,7 @@ class EntityHandler implements EntityHandlerInterface
             $sortOrder = array($orderBy => $sort);
 
             if(!isset($params['status'])) {
-                $params['status'] = self::STATUS_ACTIVE; //@TODO: Make this a constant fetched from Model\Entity.php
+                $params['status'] = $this::STATUS_ACTIVE; //@TODO: Make this a constant fetched from Model\Entity.php
             }
 
             $offset = ($page - 1) * $size;
@@ -325,6 +325,10 @@ class EntityHandler implements EntityHandlerInterface
     {
         try {
 
+            if(!isset($parameters['status'])) {
+                $parameters['status'] = $this::STATUS_ACTIVE;
+            }
+
             $entity = $this->createEntity();
             $this->validate($entity, $parameters);
             $entity = $this->processForm($entity, $parameters, 'POST');
@@ -341,7 +345,7 @@ class EntityHandler implements EntityHandlerInterface
 
         }
         catch(ApiAccessDeniedException $e) {
-            throw $e;
+            throw new ApiAccessDeniedException($this::ACCESS_DENIED_MESSAGE);
         }
         catch(TransformationFailedException $e) {
             throw $e;
@@ -353,7 +357,7 @@ class EntityHandler implements EntityHandlerInterface
             throw $e;
         }
         catch(\Symfony\Component\Security\Core\Exception\AccessDeniedException $e) {
-            throw $e;
+            throw new ApiAccessDeniedException($this::ACCESS_DENIED_MESSAGE);
         }
     }
 

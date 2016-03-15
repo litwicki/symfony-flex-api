@@ -6,6 +6,7 @@ use Symfony\Component\Security\Core\Authorization\Voter\VoterInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Tavro\Bundle\CoreBundle\Entity\NodeTag;
 use Tavro\Bundle\CoreBundle\Entity\User;
+use Tavro\Bundle\CoreBundle\Model\EntityInterface;
 
 /**
  * Class NodeTagVoter
@@ -16,16 +17,13 @@ class NodeTagVoter implements VoterInterface
 {
 
     /**
-     * Allows full access to members belonging to the growth cse, view access to outside admins.
+     * @param $user
+     * @param \Tavro\Bundle\CoreBundle\Model\EntityInterface $entity
+     * @param $attribute
      *
-     * @param User $user
-     * @param \Tavro\Bundle\CoreBundle\Entity\NodeTag $entity
-     * @param string  $attribute
-     *
-     * @throws \Exception
      * @return int
      */
-    public function checkAccess($user, NodeTag $entity, $attribute)
+    public function checkAccess($user, EntityInterface $entity, $attribute)
     {
         if($user->isAdmin()) {
             return VoterInterface::ACCESS_GRANTED;
@@ -33,6 +31,14 @@ class NodeTagVoter implements VoterInterface
 
         if($attribute == self::VIEW) {
             return VoterInterface::ACCESS_GRANTED;
+        }
+
+        if($attribute == self::DELETE) {
+
+            if($entity->getNode()->getUser()->getId() === $user->getId()) {
+                return VoterInterface::ACCESS_GRANTED;
+            }
+
         }
 
         // Deny all other requests

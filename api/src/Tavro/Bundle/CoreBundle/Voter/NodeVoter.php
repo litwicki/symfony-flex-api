@@ -17,7 +17,7 @@ use Tavro\Bundle\CoreBundle\Services\Voter\TavroVoter;
 class NodeVoter extends TavroVoter implements VoterInterface
 {
     /**
-     * Allows full access to members belonging to the growth cse, view access to outside admins.
+     * Allows full access to members belonging to the entity, view access to outside admins.
      *
      * @param $user
      * @param \Tavro\Bundle\CoreBundle\Model\EntityInterface $entity
@@ -31,7 +31,7 @@ class NodeVoter extends TavroVoter implements VoterInterface
             return VoterInterface::ACCESS_GRANTED;
         }
 
-        $checkOrganization = $this->checkOrganization($entity, $user);
+        $checkOrganization = $this->checkOrganization($entity->getOrganization(), $user);
 
         //view a Node
         if($checkOrganization && $attribute == self::VIEW) {

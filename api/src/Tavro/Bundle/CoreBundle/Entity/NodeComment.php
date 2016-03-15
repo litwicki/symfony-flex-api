@@ -37,6 +37,12 @@ class NodeComment extends Entity implements EntityInterface
      */
     protected $node;
 
+    public function __construct()
+    {
+        parent::__construct();
+        $this->create_date = new \DateTime();
+    }
+
     /**
      * Set comment
      *

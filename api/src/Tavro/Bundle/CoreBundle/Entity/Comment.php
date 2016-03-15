@@ -62,6 +62,7 @@ class Comment extends Entity implements EntityInterface
      */
     public function __construct()
     {
+        parent::__construct();
         $this->node_comments = new \Doctrine\Common\Collections\ArrayCollection();
         $this->expense_comments = new \Doctrine\Common\Collections\ArrayCollection();
         $this->revenue_comments = new \Doctrine\Common\Collections\ArrayCollection();

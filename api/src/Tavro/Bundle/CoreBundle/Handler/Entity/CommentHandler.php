@@ -182,6 +182,10 @@ class CommentHandler extends EntityHandler
     {
         try {
 
+            if(!isset($parameters['status'])) {
+                $parameters['status'] = $this::STATUS_ACTIVE;
+            }
+
             $entity = $this->createEntity();
             $comment = $this->processForm($entity, $parameters, 'POST');
 

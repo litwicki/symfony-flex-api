@@ -17,7 +17,7 @@ class ProductImageVoter implements VoterInterface
 {
 
     /**
-     * Allows full access to members belonging to the growth cse, view access to outside admins.
+     * Allows full access to members belonging to the entity, view access to outside admins.
      *
      * @param User $user
      * @param \Tavro\Bundle\CoreBundle\Entity\ProductImage $entity

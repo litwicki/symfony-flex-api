@@ -35,8 +35,6 @@ class Tag extends OrganizationEntity implements OrganizationEntityInterface
     /**
      * @ORM\ManyToOne(targetEntity="Tavro\Bundle\CoreBundle\Entity\Organization", inversedBy="tags")
      * @ORM\JoinColumn(name="organization_id", referencedColumnName="id", nullable=false)
-     * @Groups({"api", "tavro", "simple"})
-     * @MaxDepth(1)
      */
     protected $organization;
 

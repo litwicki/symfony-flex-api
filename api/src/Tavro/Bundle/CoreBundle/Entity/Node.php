@@ -97,7 +97,6 @@ class Node extends OrganizationEntity implements OrganizationEntityInterface
         $now->setTimezone($tz);
         $this->create_date = $now;
         $this->views = 0;
-
         $this->display_date = new \DateTime();
     }
 
@@ -323,9 +322,7 @@ class Node extends OrganizationEntity implements OrganizationEntityInterface
 
     /**
      * @VirtualProperty
-     * @SerializedName("node_comments")
-     * @Groups({"api", "tavro","detail"})
-     * @MaxDepth(1)
+     * @SerializedName("comments")
      */
     public function getComments()
     {
@@ -360,7 +357,7 @@ class Node extends OrganizationEntity implements OrganizationEntityInterface
 
     /**
      * @VirtualProperty
-     * @SerializedName("node_tags")
+     * @SerializedName("tags")
      * @Groups({"api", "tavro","detail"})
      * @MaxDepth(2)
      */

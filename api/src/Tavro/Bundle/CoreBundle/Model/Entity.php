@@ -41,19 +41,19 @@ class Entity implements EntityInterface
 
     /**
      * @ORM\Column(type="integer", nullable=false, options={"default" = 1})
-     * @Groups({"api", "tavro", "simple"})
+     * @Groups({"api", "tavro"})
      */
     protected $status = self::STATUS_ENABLED;
 
     /**
      * @ORM\Column(type="datetime", length=1000, nullable=false)
-     * @Groups({"api", "tavro", "simple"})
+     * @Groups({"api", "tavro"})
      */
     protected $create_date;
 
     /**
      * @ORM\Column(type="datetime", length=1000, nullable=true)
-     * @Groups({"api", "tavro", "simple"})
+     * @Groups({"api", "tavro"})
      */
     protected $update_date;
 
@@ -64,8 +64,8 @@ class Entity implements EntityInterface
 
     public function __construct()
     {
-        $this->create_date = new \DateTime('now');
-        $this->update_date = new \DateTime('now');
+        $this->create_date = new \DateTime();
+        $this->update_date = new \DateTime();
     }
 
     /**

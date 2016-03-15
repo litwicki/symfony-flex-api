@@ -44,6 +44,14 @@ api_delete_node:
         id: \d+
         _format:  json|xml
 
+api_delete_node_tag:
+    path:  /nodes/{node}/tags/{tag}.{_format}
+    defaults: { _controller: TavroCoreBundle:Api/Node:deleteTag, _format: json }
+    methods: DELETE
+    requirements:
+        id: \d+
+        _format:  json|xml
+
 api_typeahead_nodes:
     path:  /typeahead/nodes.{_format}
     defaults: { _controller: TavroCoreBundle:Api/Node:typeahead, _format: json }

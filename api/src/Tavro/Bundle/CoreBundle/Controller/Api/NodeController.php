@@ -15,6 +15,8 @@ use Doctrine\Common\Inflector\Inflector;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 
 use Tavro\Bundle\CoreBundle\Entity\Node;
+use Tavro\Bundle\CoreBundle\Entity\Tag;
+use Tavro\Bundle\CoreBundle\Entity\NodeTag;
 use Tavro\Bundle\CoreBundle\Entity\NodeComment;
 use Symfony\Component\HttpFoundation\Cookie;
 
@@ -160,13 +162,39 @@ class NodeController extends ApiController
             throw $e;
         }
         finally {
-            $routeOptions = array(
-                'entity'  => 'comment',
-                'id'      => $tag->getId(),
-                'format'  => $_format,
-            );
+            return $this->delete($request, 'tags', $tag->getId(), $_format);
+        }
+    }
 
-            return $this->forward('TavroCoreBundle:Default:get', $routeOptions);
+    /**
+     * Delete a Tag from a Node, but not physically itself.
+     *
+     * @param \Symfony\Component\HttpFoundation\Request $request
+     * @param \Tavro\Bundle\CoreBundle\Entity\Node $node
+     * @param $_format
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     * @throws \Exception
+     */
+    public function deleteTagAction(Request $request, Node $node, Tag $tag, $_format)
+    {
+        try {
+
+            $entity = $this->getDoctrine()->getManager()->getRepository('TavroCoreBundle:NodeTag')->findOneBy(array(
+                'node' => $node,
+                'tag' => $tag,
+            ));
+
+            if(!$entity instanceof NodeTag) {
+                throw new ApiException('There is no Tag to delete for this Node.');
+            }
+
+        }
+        catch(\Exception $e) {
+            throw $e;
+        }
+        finally {
+            return $this->deleteAction($request, 'node_tags', $entity->getId(), $_format);
         }
     }
 

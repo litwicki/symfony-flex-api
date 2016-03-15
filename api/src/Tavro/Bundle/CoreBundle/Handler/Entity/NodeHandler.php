@@ -45,14 +45,7 @@ class NodeHandler extends EntityHandler
         try {
 
             if(!isset($parameters['status'])) {
-
-                if($this->isModerator || $this->isAdmin) {
-                    $parameters['status'] = self::STATUS_ACTIVE;
-                }
-                else {
-                    $parameters['status'] = self::STATUS_PENDING;
-                }
-
+                $parameters['status'] = self::STATUS_ACTIVE;
             }
 
             if(!isset($parameters['display_date'])) {

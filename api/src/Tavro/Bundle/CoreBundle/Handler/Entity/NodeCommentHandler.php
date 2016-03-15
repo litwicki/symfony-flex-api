@@ -27,4 +27,6 @@ use Symfony\Component\HttpFoundation\Request;
 class NodeCommentHandler extends EntityHandler
 {
 
+    const ACCESS_DENIED_MESSAGE = 'You are not authorized to comment on this Node!';
+
 }
