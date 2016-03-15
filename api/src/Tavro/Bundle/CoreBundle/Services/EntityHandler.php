@@ -404,7 +404,8 @@ class EntityHandler implements EntityHandlerInterface
             throw $e;
         }
         catch(\Exception $e) {
-            throw new ApiException($e->getMessage());
+            throw $e;
+            //throw new ApiException($e->getMessage());
         }
     }
 

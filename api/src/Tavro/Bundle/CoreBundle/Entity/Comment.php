@@ -74,7 +74,7 @@ class Comment extends Entity implements EntityInterface
 
     public function __toString()
     {
-        return $this->title;
+        return sprintf('Comment %s', $this->id);
     }
 
     /**
