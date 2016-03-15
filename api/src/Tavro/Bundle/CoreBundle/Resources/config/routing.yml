@@ -42,3 +42,9 @@ tavro_shareholder_api:
 
 tavro_user_api:
     resource: "@TavroCoreBundle/Resources/config/routing/api/user.yml"
+
+tavro_user_quickbooks_api:
+    resource: "@TavroCoreBundle/Resources/config/routing/api/user_quickbooks.yml"
+
+tavro_user_freshbooks_api:
+    resource: "@TavroCoreBundle/Resources/config/routing/api/user_freshbooks.yml"
