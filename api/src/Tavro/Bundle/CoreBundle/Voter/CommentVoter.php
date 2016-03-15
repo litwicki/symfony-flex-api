@@ -83,9 +83,9 @@ class CommentVoter implements VoterInterface
                 /**
                  * Only allow the "author" to edit their Comment within 30 minutes of Commenting
                  */
-                //if($now < $modifyDate) {
+                if($now < $modifyDate) {
                     return VoterInterface::ACCESS_GRANTED;
-                //}
+                }
 
             }
 
