@@ -7,19 +7,20 @@ use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Tavro\Bundle\CoreBundle\Entity\Comment;
 use Tavro\Bundle\CoreBundle\Entity\User;
 use Tavro\Bundle\CoreBundle\Model\EntityInterface;
+use Tavro\Bundle\CoreBundle\Services\Voter\TavroVoter;
 
 /**
  * Class CommentVoter
  *
  * @package Tavro\Bundle\CoreBundle\Voter
  */
-class CommentVoter implements VoterInterface
+class CommentVoter extends TavroVoter implements VoterInterface
 {
 
     /**
-     * @param $user
-     * @param \Tavro\Bundle\CoreBundle\Model\EntityInterface $entity
-     * @param $attribute
+     * @param User $user
+     * @param EntityInterface $entity
+     * @param string $attribute
      *
      * @return int
      */
@@ -30,7 +31,9 @@ class CommentVoter implements VoterInterface
             return VoterInterface::ACCESS_GRANTED;
         }
 
-        if($entity->getUser()->getId() === $user->getId()) {
+        $checkOrganization = $this->checkOrganization($entity->getOrganization(), $user);
+
+        if($checkOrganization && $entity->getUser()->getId() === $user->getId()) {
 
             if($attribute == self::PATCH) {
                 return VoterInterface::ACCESS_GRANTED;
@@ -56,7 +59,7 @@ class CommentVoter implements VoterInterface
         /**
          * Only Admins, or the author of the Comment can edit
          */
-        if($attribute == self::EDIT) {
+        if($checkOrganization && $attribute == self::EDIT) {
 
             if($user->getId() === $entity->getUser()->getId()) {
 
@@ -76,7 +79,7 @@ class CommentVoter implements VoterInterface
         /**
          *  Only ROLE_ADMIN or the owner can delete
          */
-        if($attribute == self::DELETE || $attribute == self::REMOVE) {
+        if($checkOrganization && ($attribute == self::DELETE || $attribute == self::REMOVE)) {
 
             if($user->getId() === $entity->getUser()->getId()) {
 

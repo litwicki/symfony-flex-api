@@ -42,7 +42,7 @@ class Expense extends Entity
      * @ORM\ManyToOne(targetEntity="Tavro\Bundle\CoreBundle\Entity\ExpenseCategory", inversedBy="expenses")
      * @ORM\JoinColumn(name="category_id", referencedColumnName="id", nullable=false)
      * @Groups({"api", "tavro", "simple"})
-     * @MaxDepth(3)
+     * @MaxDepth(1)
      */
     protected $category;
 
@@ -50,7 +50,7 @@ class Expense extends Entity
      * @ORM\ManyToOne(targetEntity="Tavro\Bundle\CoreBundle\Entity\User", inversedBy="expenses")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id", nullable=false)
      * @Groups({"api", "tavro", "simple"})
-     * @MaxDepth(3)
+     * @MaxDepth(1)
      */
     protected $user;
 
@@ -68,7 +68,7 @@ class Expense extends Entity
      * @ORM\ManyToOne(targetEntity="Tavro\Bundle\CoreBundle\Entity\Organization", inversedBy="expenses")
      * @ORM\JoinColumn(name="organization_id", referencedColumnName="id", nullable=false)
      * @Groups({"api", "tavro", "simple"})
-     * @MaxDepth(3)
+     * @MaxDepth(1)
      */
     protected $organization;
 
@@ -76,7 +76,7 @@ class Expense extends Entity
      * @ORM\ManyToOne(targetEntity="Tavro\Bundle\CoreBundle\Entity\Organization", inversedBy="expenses")
      * @ORM\JoinColumn(name="customer_id", referencedColumnName="id", nullable=true)
      * @Groups({"api", "tavro", "simple"})
-     * @MaxDepth(3)
+     * @MaxDepth(1)
      */
     protected $customer;
 

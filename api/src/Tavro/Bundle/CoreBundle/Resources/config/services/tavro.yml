@@ -12,6 +12,18 @@ services:
         calls:
             - [ setContainer, [ '@service_container' ] ]
 
+    tavro.quickbooks:
+        class: Tavro\Bundle\CoreBundle\Handler\Quickbookshandler
+        arguments: ["@mailer", "@templating"]
+        calls:
+            - [ setContainer, [ '@service_container' ] ]
+
+    tavro.freshbooks:
+        class: Tavro\Bundle\CoreBundle\Handler\FreshbooksHandler
+        arguments: ["@mailer", "@templating"]
+        calls:
+            - [ setContainer, [ '@service_container' ] ]
+
     tavro.validator:
         class: Tavro\Bundle\CoreBundle\Services\TavroValidator
         calls:

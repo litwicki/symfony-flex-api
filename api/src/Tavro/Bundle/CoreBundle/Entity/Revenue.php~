@@ -41,7 +41,7 @@ class Revenue extends OrganizationEntity implements OrganizationEntityInterface
      * @ORM\ManyToOne(targetEntity="Tavro\Bundle\CoreBundle\Entity\RevenueCategory", inversedBy="revenues")
      * @ORM\JoinColumn(name="category_id", referencedColumnName="id", nullable=false)
      * @Groups({"api", "tavro", "simple"})
-     * @MaxDepth(3)
+     * @MaxDepth(1)
      */
     protected $category;
 
@@ -49,7 +49,7 @@ class Revenue extends OrganizationEntity implements OrganizationEntityInterface
      * @ORM\ManyToOne(targetEntity="Tavro\Bundle\CoreBundle\Entity\User", inversedBy="revenues")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id", nullable=false)
      * @Groups({"api", "tavro", "simple"})
-     * @MaxDepth(3)
+     * @MaxDepth(1)
      */
     protected $user;
 
@@ -57,7 +57,7 @@ class Revenue extends OrganizationEntity implements OrganizationEntityInterface
      * @ORM\ManyToOne(targetEntity="Tavro\Bundle\CoreBundle\Entity\Customer", inversedBy="revenues")
      * @ORM\JoinColumn(name="customer_id", referencedColumnName="id", nullable=true)
      * @Groups({"api", "tavro", "simple"})
-     * @MaxDepth(3)
+     * @MaxDepth(1)
      */
     protected $customer;
 
@@ -204,9 +204,9 @@ class Revenue extends OrganizationEntity implements OrganizationEntityInterface
 
     /**
      * @VirtualProperty
-     * @SerializedName("revenue_comments")
+     * @SerializedName("comments")
      * @Groups({"api", "tavro","detail"})
-     * @MaxDepth(2)
+     * @MaxDepth(1)
      */
     public function getComments()
     {
@@ -229,9 +229,9 @@ class Revenue extends OrganizationEntity implements OrganizationEntityInterface
 
     /**
      * @VirtualProperty
-     * @SerializedName("revenue_tags")
+     * @SerializedName("tags")
      * @Groups({"api", "tavro","detail"})
-     * @MaxDepth(2)
+     * @MaxDepth(1)
      */
     public function getTags()
     {
@@ -390,5 +390,35 @@ class Revenue extends OrganizationEntity implements OrganizationEntityInterface
     public function getRevenueProducts()
     {
         return $this->revenue_products;
+    }
+
+    /**
+     * @VirtualProperty
+     * @SerializedName("services")
+     * @Groups({"api", "tavro","detail"})
+     * @MaxDepth(2)
+     */
+    public function getServices()
+    {
+        $items = new \Doctrine\Common\Collections\ArrayCollection();
+        foreach($this->revenue_services as $entity) {
+            $items->add($entity->getService());
+        }
+        return $items;
+    }
+
+    /**
+     * @VirtualProperty
+     * @SerializedName("products")
+     * @Groups({"api", "tavro","detail"})
+     * @MaxDepth(2)
+     */
+    public function getProducts()
+    {
+        $items = new \Doctrine\Common\Collections\ArrayCollection();
+        foreach($this->revenue_products as $entity) {
+            $items->add($entity->getProduct());
+        }
+        return $items;
     }
 }

@@ -6,43 +6,47 @@ use Symfony\Component\Security\Core\Authorization\Voter\VoterInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Tavro\Bundle\CoreBundle\Entity\CustomerComment;
 use Tavro\Bundle\CoreBundle\Entity\User;
+use Tavro\Bundle\CoreBundle\Services\Voter\TavroVoter;
+use Tavro\Bundle\CoreBundle\Model\EntityInterface;
 
 /**
  * Class CustomerCommentVoter
  *
  * @package Tavro\Bundle\CoreBundle\Voter
  */
-class CustomerCommentVoter implements VoterInterface
+class CustomerCommentVoter extends TavroVoter implements VoterInterface
 {
 
     /**
      * Allows full access to members belonging to the entity, view access to outside admins.
      *
      * @param User $user
-     * @param \Tavro\Bundle\CoreBundle\Entity\CustomerComment $entity
-     * @param string  $attribute
+     * @param EntityInterface $entity
+     * @param string $attribute
      *
      * @throws \Exception
      * @return int
      */
-    public function checkAccess($user, CustomerComment $entity, $attribute)
+    public function checkAccess($user, EntityInterface $entity, $attribute)
     {
 
         if($user->isAdmin()) {
             return VoterInterface::ACCESS_GRANTED;
         }
 
-        if($attribute == self::PATCH) {
+        $checkOrganization = $this->checkOrganization($entity->getCustomer()->getOrganization(), $user);
+
+        if($checkOrganization && $attribute == self::PATCH) {
             return VoterInterface::ACCESS_GRANTED;
         }
 
         // Allow all creates
-        if($attribute == self::CREATE) {
+        if($checkOrganization && $attribute == self::CREATE) {
             return VoterInterface::ACCESS_GRANTED;
         }
 
         // Allow all views
-        if($attribute == self::VIEW) {
+        if($checkOrganization && $attribute == self::VIEW) {
             return VoterInterface::ACCESS_GRANTED;
         }
 
@@ -54,18 +58,10 @@ class CustomerCommentVoter implements VoterInterface
         /**
          * Only Admins, or the author of the CustomerComment can edit
          */
-        if($attribute == self::EDIT || $attribute == self::PATCH) {
+        if($checkOrganization && ($attribute == self::EDIT || $attribute == self::PATCH)) {
 
             if($user->getId() === $entity->getUser()->getId()) {
-
-                /**
-                 * Only allow the "author" to edit their CustomerComment within 30 minutes of CustomerCommenting
-                 */
-                if($now < $modifyDate) {
-                    return VoterInterface::ACCESS_GRANTED;
-                }
                 return VoterInterface::ACCESS_GRANTED;
-
             }
 
         }
@@ -73,17 +69,10 @@ class CustomerCommentVoter implements VoterInterface
         /**
          *  Only ROLE_ADMIN or the owner can delete
          */
-        if($attribute == self::DELETE || $attribute == self::REMOVE) {
+        if($checkOrganization && ($attribute == self::DELETE || $attribute == self::REMOVE)) {
 
             if($user->getId() === $entity->getUser()->getId()) {
-
-                /**
-                 * Only allow the "author" to edit their CustomerComment within 30 minutes of CustomerCommenting
-                 */
-                if($now < $modifyDate) {
-                    return VoterInterface::ACCESS_GRANTED;
-                }
-
+                return VoterInterface::ACCESS_GRANTED;
             }
 
         }

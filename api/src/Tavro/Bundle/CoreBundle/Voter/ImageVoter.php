@@ -32,11 +32,13 @@ class ImageVoter implements VoterInterface
             return VoterInterface::ACCESS_GRANTED;
         }
 
-        if($attribute == self::CREATE) {
+        $checkOrganization = $this->checkOrganization($entity->getOrganization(), $user);
+
+        if($checkOrganization && $attribute == self::CREATE) {
             return VoterInterface::ACCESS_GRANTED;
         }
         
-        if($attribute == self::EDIT || $attribute == self::DELETE) {
+        if($checkOrganization && $attribute == self::EDIT || $attribute == self::DELETE) {
             if($entity->getUser()->getId() === $user->getId()) {
                 return VoterInterface::ACCESS_GRANTED;
             }

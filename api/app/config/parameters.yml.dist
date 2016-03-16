@@ -8,6 +8,7 @@ parameters:
 
     dynamodb_table_name: 'tavro_session'
 
+    app_name: Tavro
     app_version: 0.1-BETA
     app_email: info@tavro.dev
     app_email_name: Tavro

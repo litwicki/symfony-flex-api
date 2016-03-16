@@ -44,7 +44,7 @@ class NodeCommentVoter extends TavroVoter implements VoterInterface
         }
 
         // Allow all views
-        if($attribute == self::VIEW) {
+        if($checkOrganization && $attribute == self::VIEW) {
             return VoterInterface::ACCESS_GRANTED;
         }
 

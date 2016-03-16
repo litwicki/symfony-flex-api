@@ -31,17 +31,19 @@ class FundingRoundShareholderVoter implements VoterInterface
             return VoterInterface::ACCESS_GRANTED;
         }
 
-        if($attribute == self::PATCH) {
+        $checkOrganization = $this->checkOrganization($entity->getFundingRound()->getOrganization(), $user);
+
+        if($checkOrganization && $attribute == self::PATCH) {
             return VoterInterface::ACCESS_GRANTED;
         }
 
         // Allow all creates
-        if($attribute == self::CREATE) {
+        if($checkOrganization && $attribute == self::CREATE) {
             return VoterInterface::ACCESS_GRANTED;
         }
 
         // Allow all views
-        if($attribute == self::VIEW) {
+        if($checkOrganization && $attribute == self::VIEW) {
             return VoterInterface::ACCESS_GRANTED;
         }
 
@@ -56,15 +58,7 @@ class FundingRoundShareholderVoter implements VoterInterface
         if($attribute == self::EDIT || $attribute == self::PATCH) {
 
             if($user->getId() === $entity->getUser()->getId()) {
-
-                /**
-                 * Only allow the "author" to edit their FundingRoundShareholder within 30 minutes of FundingRoundShareholdering
-                 */
-                if($now < $modifyDate) {
-                    return VoterInterface::ACCESS_GRANTED;
-                }
                 return VoterInterface::ACCESS_GRANTED;
-
             }
 
         }
@@ -75,14 +69,7 @@ class FundingRoundShareholderVoter implements VoterInterface
         if($attribute == self::DELETE || $attribute == self::REMOVE) {
 
             if($user->getId() === $entity->getUser()->getId()) {
-
-                /**
-                 * Only allow the "author" to edit their FundingRoundShareholder within 30 minutes of FundingRoundShareholdering
-                 */
-                if($now < $modifyDate) {
-                    return VoterInterface::ACCESS_GRANTED;
-                }
-
+                return VoterInterface::ACCESS_GRANTED;
             }
 
         }

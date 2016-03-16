@@ -2,6 +2,7 @@
 
 namespace Tavro\Bundle\CoreBundle\Services;
 
+use Tavro\Bundle\CoreBundle\Entity\User;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -44,7 +45,7 @@ class TavroMailer implements ContainerAwareInterface
      *  @throws \Exception
      *  @return boolean
      */
-    public function sendEmail(array $params)
+    public function send(array $params)
     {
 
         try {
@@ -70,20 +71,10 @@ class TavroMailer implements ContainerAwareInterface
             $body = $this->templating->render($template, $params);
 
             /**
-             * If email format is plain text, remove any tags from the message.
+             * If email format is plain text, remove any tags from the message body.
              */
             if ($fileType == 'txt') {
                 $body = strip_tags($body);
-            }
-
-            if(isset($params['from'])) {
-                $from = $params['from'];
-            }
-            else {
-                $from = array(
-                    'email' => $this->container->getParameter('app_email'),
-                    'name'  => $this->container->getParameter('app_email_name')
-                );
             }
 
             $subject = sprintf('%s: %s',
@@ -93,7 +84,10 @@ class TavroMailer implements ContainerAwareInterface
 
             $message = \Swift_Message::newInstance()
                 ->setSubject($subject)
-                ->setFrom($from)
+                ->setFrom(array(
+                    'email' => $this->container->getParameter('app_email'),
+                    'name'  => $this->container->getParameter('app_email_name')
+                ))
                 ->setTo($params['recipients'])
                 ->setBody($body, $contentType);
 
@@ -104,6 +98,48 @@ class TavroMailer implements ContainerAwareInterface
             throw $e;
         }
 
+    }
+
+    /**
+     * @param \Tavro\Bundle\CoreBundle\Entity\User $user
+     * @param bool $html
+     *
+     * @throws \Exception
+     */
+    public function sendWelcome(User $user, $html = true)
+    {
+        try {
+            $this->send([
+                'type' => 'welcome',
+                'html' => $html,
+                'subject' => sprintf('Welcome to %s', $this->container->getParameter('app_name')),
+                'recipients' => [$user->getEmail()]
+            ]);
+        }
+        catch(\Exception $e) {
+            throw $e;
+        }
+    }
+
+    /**
+     * @param \Tavro\Bundle\CoreBundle\Entity\User $user
+     * @param bool $html
+     *
+     * @throws \Exception
+     */
+    public function sendPasswordReset(User $user, $html = true)
+    {
+        try {
+            $this->send([
+                'type' => 'password-reset',
+                'html' => $html,
+                'subject' => '',
+                'recipients' => [$user->getEmail()]
+            ]);
+        }
+        catch(\Exception $e) {
+            throw $e;
+        }
     }
 
 }

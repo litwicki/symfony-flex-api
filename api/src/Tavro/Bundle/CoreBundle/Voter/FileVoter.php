@@ -6,6 +6,7 @@ use Symfony\Component\Security\Core\Authorization\Voter\VoterInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Tavro\Bundle\CoreBundle\Entity\File;
 use Tavro\Bundle\CoreBundle\Entity\User;
+use Tavro\Bundle\CoreBundle\Model\EntityInterface;
 
 /**
  * Class FileVoter
@@ -18,13 +19,13 @@ class FileVoter implements VoterInterface
      * Allows full access to members belonging to the entity, view access to outside admins.
      *
      * @param User $user
-     * @param \Tavro\Bundle\CoreBundle\Entity\File $entity
+     * @param EntityInterface $entity
      * @param string  $attribute
      *
      * @throws \Exception
      * @return int
      */
-    public function checkAccess($user, File $entity, $attribute)
+    public function checkAccess($user, EntityInterface $entity, $attribute)
     {
 
         if($user->isAdmin()) {

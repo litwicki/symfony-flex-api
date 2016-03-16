@@ -40,6 +40,12 @@ class UserOrganization extends Entity implements EntityInterface
     protected $user;
 
     /**
+     * @ORM\Column(type="string", length=255, nullable=false)
+     * @Groups({"api", "tavro", "simple"})
+     */
+    protected $org_title;
+
+    /**
      * Set organization
      *
      * @param \Tavro\Bundle\CoreBundle\Entity\Organization $organization
@@ -108,5 +114,30 @@ class UserOrganization extends Entity implements EntityInterface
     public function getBody()
     {
         return $this->body;
+    }
+    
+
+    /**
+     * Set orgTitle
+     *
+     * @param string $orgTitle
+     *
+     * @return UserOrganization
+     */
+    public function setOrgTitle($orgTitle)
+    {
+        $this->org_title = $orgTitle;
+
+        return $this;
+    }
+
+    /**
+     * Get orgTitle
+     *
+     * @return string
+     */
+    public function getOrgTitle()
+    {
+        return $this->org_title;
     }
 }
