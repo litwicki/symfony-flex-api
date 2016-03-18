@@ -14,7 +14,6 @@ use Tavro\Bundle\CoreBundle\Entity\User;
  */
 class TagVoter implements VoterInterface
 {
-
     /**
      * Allows full access to members belonging to the entity, view access to outside admins.
      *
@@ -27,12 +26,48 @@ class TagVoter implements VoterInterface
      */
     public function checkAccess($user, Tag $entity, $attribute)
     {
+
         if($user->isAdmin()) {
             return VoterInterface::ACCESS_GRANTED;
         }
 
-        if($attribute == self::VIEW) {
+        $checkOrganization = $this->checkOrganization($entity->getOrganization(), $user);
+
+        if($checkOrganization && $attribute == self::PATCH) {
             return VoterInterface::ACCESS_GRANTED;
+        }
+
+        // Allow all creates
+        if($checkOrganization && $attribute == self::CREATE) {
+            return VoterInterface::ACCESS_GRANTED;
+        }
+
+        // Allow all views
+        if($checkOrganization && $attribute == self::VIEW) {
+            return VoterInterface::ACCESS_GRANTED;
+        }
+
+        $modifyDate = $entity->getCreateDate();
+        $modifyDate->modify("+30 minutes");
+
+        $now = new \DateTime();
+
+        /**
+         * Only Admins, or the author of the Tag can edit
+         */
+        if($checkOrganization && $attribute == self::EDIT || $attribute == self::PATCH) {
+            if($user->getId() === $entity->getUser()->getId()) {
+                return VoterInterface::ACCESS_GRANTED;
+            }
+        }
+
+        /**
+         *  Only ROLE_ADMIN or the owner can delete
+         */
+        if(($user instanceof User && $user->isAdmin()) || ($checkOrganization && $attribute == self::DELETE || $attribute == self::REMOVE)) {
+            if($user->getId() === $entity->getUser()->getId()) {
+                return VoterInterface::ACCESS_GRANTED;
+            }
         }
 
         // Deny all other requests
@@ -43,6 +78,8 @@ class TagVoter implements VoterInterface
     const VIEW = 'view';
     const EDIT = 'edit';
     const DELETE = 'delete';
+    const PATCH = 'patch';
+    const REMOVE = 'remove';
 
     /**
      * Returns true if the attribute matches known attributes.
@@ -52,7 +89,7 @@ class TagVoter implements VoterInterface
      * @return bool
      */
     public function supportsAttribute($attribute) {
-        return in_array($attribute, array(self::CREATE, self::VIEW, self::EDIT, self::DELETE));
+        return in_array($attribute, array(self::PATCH, self::REMOVE, self::CREATE, self::VIEW, self::EDIT, self::DELETE));
     }
 
     /**

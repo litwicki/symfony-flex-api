@@ -40,7 +40,7 @@ class UserOrganization extends Entity implements EntityInterface
     protected $user;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=false)
+     * @ORM\Column(type="string", length=255, nullable=true)
      * @Groups({"api", "tavro", "simple"})
      */
     protected $org_title;

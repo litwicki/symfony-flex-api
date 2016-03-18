@@ -31,17 +31,19 @@ class RevenueServiceVoter implements VoterInterface
             return VoterInterface::ACCESS_GRANTED;
         }
 
-        if($attribute == self::PATCH) {
+        $checkOrganization = $this->checkOrganization($entity->getRevenue()->getOrganization(), $user);
+
+        if($checkOrganization && $attribute == self::PATCH) {
             return VoterInterface::ACCESS_GRANTED;
         }
 
         // Allow all creates
-        if($attribute == self::CREATE) {
+        if($checkOrganization && $attribute == self::CREATE) {
             return VoterInterface::ACCESS_GRANTED;
         }
 
         // Allow all views
-        if($attribute == self::VIEW) {
+        if($checkOrganization && $attribute == self::VIEW) {
             return VoterInterface::ACCESS_GRANTED;
         }
 
@@ -53,38 +55,19 @@ class RevenueServiceVoter implements VoterInterface
         /**
          * Only Admins, or the author of the RevenueService can edit
          */
-        if($attribute == self::EDIT || $attribute == self::PATCH) {
-
+        if($checkOrganization && $attribute == self::EDIT || $attribute == self::PATCH) {
             if($user->getId() === $entity->getUser()->getId()) {
-
-                /**
-                 * Only allow the "author" to edit their RevenueService within 30 minutes of RevenueServiceing
-                 */
-                if($now < $modifyDate) {
-                    return VoterInterface::ACCESS_GRANTED;
-                }
                 return VoterInterface::ACCESS_GRANTED;
-
             }
-
         }
 
         /**
          *  Only ROLE_ADMIN or the owner can delete
          */
-        if($attribute == self::DELETE || $attribute == self::REMOVE) {
-
+        if(($user instanceof User && $user->isAdmin()) || ($checkOrganization && $attribute == self::DELETE || $attribute == self::REMOVE)) {
             if($user->getId() === $entity->getUser()->getId()) {
-
-                /**
-                 * Only allow the "author" to edit their RevenueService within 30 minutes of RevenueServiceing
-                 */
-                if($now < $modifyDate) {
-                    return VoterInterface::ACCESS_GRANTED;
-                }
-
+                return VoterInterface::ACCESS_GRANTED;
             }
-
         }
 
         // Deny all other requests
