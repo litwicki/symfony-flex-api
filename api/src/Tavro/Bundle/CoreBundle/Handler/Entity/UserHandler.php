@@ -12,7 +12,7 @@ use Symfony\Component\HttpFoundation\Request;
 
 use Tavro\Bundle\CoreBundle\Exception\InvalidUsernameException;
 use Tavro\Bundle\CoreBundle\Exception\Api\ApiException;
-use Tavro\Bundle\CoreBundle\Services\EntityHandler;
+use Tavro\Bundle\CoreBundle\Model\EntityHandler;
 use Tavro\Bundle\CoreBundle\Exception\Form\InvalidFormException;
 use Tavro\Bundle\CoreBundle\Model\EntityInterface;
 use Tavro\Bundle\CoreBundle\Exception\Api\ApiAccessDeniedException;

@@ -31,7 +31,7 @@ use Tavro\Bundle\CoreBundle\Exception\Api\ApiNotFoundException;
 use Tavro\Bundle\CoreBundle\Exception\Api\ApiRequestLimitException;
 use Tavro\Bundle\CoreBundle\Exception\Api\ApiAccessDeniedException;
 use Tavro\Bundle\CoreBundle\Exception\Api\ApiRequestSizeException;
-use Tavro\Bundle\CoreBundle\Services\EntityHandlerInterface;
+use Tavro\Bundle\CoreBundle\Model\EntityHandlerInterface;
 
 class QuickbooksHandler implements ContainerAwareInterface
 {

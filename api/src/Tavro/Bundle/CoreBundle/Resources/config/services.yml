@@ -5,4 +5,4 @@ imports:
     - { resource: services/handler.yml }
 
 parameters:
-    jms_serializer.json_serialization_visitor.class: Tavro\Bundle\CoreBundle\Services\JsonSerializationVisitor
+    jms_serializer.json_serialization_visitor.class: Tavro\Bundle\CoreBundle\Services\Serializer\Visitor\JsonSerializationVisitor

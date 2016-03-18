@@ -34,7 +34,7 @@ class LoginListener implements AuthenticationSuccessHandlerInterface
     public function onAuthenticationSuccess(Request $request, TokenInterface $token)
     {
         if($this->auth->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
-            die(__METHOD__);
+            //@TODO: something
         }
 
         if ($this->auth->isGranted('ROLE_USER')) {

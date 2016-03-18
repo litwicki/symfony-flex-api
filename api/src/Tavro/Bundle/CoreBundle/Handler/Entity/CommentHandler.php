@@ -10,7 +10,7 @@ use Tavro\Bundle\CoreBundle\Entity\User;
 use Tavro\Bundle\CoreBundle\Entity\Comment;
 use Tavro\Bundle\CoreBundle\Entity\NodeComment;
 use Tavro\Bundle\CoreBundle\Entity\Node;
-use Tavro\Bundle\CoreBundle\Services\EntityHandler;
+use Tavro\Bundle\CoreBundle\Model\EntityHandler;
 
 use Symfony\Component\HttpFoundation\Request;
 

@@ -1,13 +1,7 @@
 services:
 
-    tavro.user_activity_listener:
-          class: Tavro\Bundle\CoreBundle\EventListener\UserActivityListener
-          arguments: ["@security.token_storage", "@doctrine.orm.main_entity_manager"]
-          tags:
-              - { name: kernel.event_listener, event: kernel.controller, method: onCoreController }
-
     tavro.mailer:
-        class: Tavro\Bundle\CoreBundle\Services\TavroMailer
+        class: Tavro\Bundle\CoreBundle\Mail\TavroMailer
         arguments: ["@mailer", "@templating"]
         calls:
             - [ setContainer, [ '@service_container' ] ]
@@ -24,25 +18,20 @@ services:
         calls:
             - [ setContainer, [ '@service_container' ] ]
 
-    tavro.validator:
-        class: Tavro\Bundle\CoreBundle\Services\TavroValidator
-        calls:
-            - [ setContainer, [ '@service_container' ] ]
-
     tavro.file_manager:
-        class: Tavro\Bundle\CoreBundle\Services\FileManager
+        class: Tavro\Bundle\CoreBundle\Aws\S3\FileManager
         arguments: ["%aws_access_key_id%", "%aws_secret_access_key%", %aws_s3_region% ]
         calls:
             - [ setContainer, [ '@service_container' ] ]
 
     tavro.dbal:
-        class: Tavro\Bundle\CoreBundle\Services\Dbal
+        class: Tavro\Bundle\CoreBundle\Doctrine\Dbal\Dbal
         arguments: []
         calls:
             - [ setContainer, [ '@service_container' ] ]
 
     tavro_serializer:
-        class: Tavro\Bundle\CoreBundle\Services\Serializer
+        class: Tavro\Bundle\CoreBundle\Serializer\Serializer
         arguments: ["@serializer"]
 
     tavro.listener.request:
