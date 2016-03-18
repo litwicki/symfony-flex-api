@@ -64,3 +64,8 @@ services:
         class: Tavro\Bundle\CoreBundle\Form\RevenueProductType
         tags:
          -  { name: form.type, alias: revenue_product_type }
+
+    tavro.validator.password_complexity_validator:
+        class: Tavro\Bundle\CoreBundle\Validator\Constraints\PasswordComplexityValidator
+        tags:
+            - { name: validator.constraint_validator, alias: tavro_password_complexity_validator }

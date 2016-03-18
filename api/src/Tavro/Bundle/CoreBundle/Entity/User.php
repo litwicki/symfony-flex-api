@@ -21,6 +21,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Tavro\Bundle\CoreBundle\Model\UserInterface;
 use Tavro\Bundle\CoreBundle\Model\Entity;
 use Tavro\Bundle\CoreBundle\Model\EntityInterface;
+use Tavro\Bundle\CoreBundle\Component\Validator\Constraints as TavroAssert;
 use JMS\Serializer\Annotation\MaxDepth;
 
 /**
@@ -40,6 +41,7 @@ class User extends Entity implements UserInterface, \Serializable
 
     /**
      * @ORM\Column(type="string", length=255, nullable=false)
+     * @TavroAssert\PasswordComplexity
      */
     protected $password;
 
