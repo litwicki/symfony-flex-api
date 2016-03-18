@@ -14,7 +14,7 @@ use Tavro\Bundle\CoreBundle\Services\Voter\TavroVoter;
  *
  * @package Tavro\Bundle\CoreBundle\Voter
  */
-class NodeVoter extends TavroVoter implements VoterInterface
+class NodeVoter extends TavroVoter  implements VoterInterface
 {
     /**
      * Allows full access to members belonging to the entity, view access to outside admins.

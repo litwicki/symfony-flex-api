@@ -9,7 +9,7 @@ use Tavro\Bundle\CoreBundle\Entity\User;
 /**
  * Description of UserVoter
  */
-class UserVoter implements VoterInterface
+class UserVoter extends TavroVoter implements VoterInterface
 {
 
     /**

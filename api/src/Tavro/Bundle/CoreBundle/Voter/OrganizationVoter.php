@@ -12,7 +12,7 @@ use Tavro\Bundle\CoreBundle\Entity\User;
  *
  * @package Tavro\Bundle\CoreBundle\Voter
  */
-class OrganizationVoter implements VoterInterface
+class OrganizationVoter extends TavroVoter implements VoterInterface
 {
 
     /**
@@ -32,6 +32,10 @@ class OrganizationVoter implements VoterInterface
         }
 
         if($attribute == self::VIEW) {
+            return VoterInterface::ACCESS_GRANTED;
+        }
+
+        if($entity->getOwner()->getId() === $user->getId()) {
             return VoterInterface::ACCESS_GRANTED;
         }
 

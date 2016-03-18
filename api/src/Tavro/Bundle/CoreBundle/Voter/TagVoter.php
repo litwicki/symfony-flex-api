@@ -12,7 +12,7 @@ use Tavro\Bundle\CoreBundle\Entity\User;
  *
  * @package Tavro\Bundle\CoreBundle\Voter
  */
-class TagVoter implements VoterInterface
+class TagVoter extends TavroVoter implements VoterInterface
 {
     /**
      * Allows full access to members belonging to the entity, view access to outside admins.

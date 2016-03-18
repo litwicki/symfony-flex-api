@@ -12,7 +12,7 @@ use Tavro\Bundle\CoreBundle\Entity\User;
  *
  * @package Tavro\Bundle\CoreBundle\Voter
  */
-class VariableVoter implements VoterInterface
+class VariableVoter extends TavroVoter implements VoterInterface
 {
 
     /**

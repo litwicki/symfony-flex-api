@@ -6,8 +6,6 @@ use Symfony\Component\Security\Core\Authorization\Voter\VoterInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Tavro\Bundle\CoreBundle\Entity\Customer;
 use Tavro\Bundle\CoreBundle\Entity\User;
-use Tavro\Bundle\CoreBundle\Services\Voter\TavroVoter;
-use Tavro\Bundle\CoreBundle\Model\EntityInterface;
 
 /**
  * Class CustomerVoter
@@ -20,12 +18,13 @@ class CustomerVoter extends TavroVoter implements VoterInterface
      * Allows full access to members belonging to the entity, view access to outside admins.
      *
      * @param User $user
-     * @param EntityInterface $entity
-     * @param string $attribute
+     * @param \Tavro\Bundle\CoreBundle\Entity\Customer $entity
+     * @param string  $attribute
      *
+     * @throws \Exception
      * @return int
      */
-    public function checkAccess($user, EntityInterface $entity, $attribute)
+    public function checkAccess($user, Customer $entity, $attribute)
     {
 
         if($user->isAdmin()) {
@@ -56,8 +55,7 @@ class CustomerVoter extends TavroVoter implements VoterInterface
         /**
          * Only Admins, or the author of the Customer can edit
          */
-        if($checkOrganization && ($attribute == self::EDIT || $attribute == self::PATCH)) {
-
+        if($checkOrganization && $attribute == self::EDIT || $attribute == self::PATCH) {
             if($user->getId() === $entity->getUser()->getId()) {
                 return VoterInterface::ACCESS_GRANTED;
             }
@@ -66,12 +64,10 @@ class CustomerVoter extends TavroVoter implements VoterInterface
         /**
          *  Only ROLE_ADMIN or the owner can delete
          */
-        if($checkOrganization && ($attribute == self::DELETE || $attribute == self::REMOVE)) {
-
+        if(($user instanceof User && $user->isAdmin()) || ($checkOrganization && $attribute == self::DELETE || $attribute == self::REMOVE)) {
             if($user->getId() === $entity->getUser()->getId()) {
                 return VoterInterface::ACCESS_GRANTED;
             }
-
         }
 
         // Deny all other requests

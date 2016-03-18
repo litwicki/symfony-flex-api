@@ -6,20 +6,19 @@ use Symfony\Component\Security\Core\Authorization\Voter\VoterInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Tavro\Bundle\CoreBundle\Entity\Expense;
 use Tavro\Bundle\CoreBundle\Entity\User;
-use Tavro\Bundle\CoreBundle\Model\EntityInterface;
 
 /**
  * Class ExpenseVoter
  *
  * @package Tavro\Bundle\CoreBundle\Voter
  */
-class ExpenseVoter implements VoterInterface
+class ExpenseVoter extends TavroVoter implements VoterInterface
 {
     /**
      * Allows full access to members belonging to the entity, view access to outside admins.
      *
      * @param User $user
-     * @param Expense $entity
+     * @param \Tavro\Bundle\CoreBundle\Entity\Expense $entity
      * @param string  $attribute
      *
      * @throws \Exception
@@ -56,23 +55,19 @@ class ExpenseVoter implements VoterInterface
         /**
          * Only Admins, or the author of the Expense can edit
          */
-        if($checkOrganization && ($attribute == self::EDIT || $attribute == self::PATCH)) {
-
+        if($checkOrganization && $attribute == self::EDIT || $attribute == self::PATCH) {
             if($user->getId() === $entity->getUser()->getId()) {
                 return VoterInterface::ACCESS_GRANTED;
             }
-
         }
 
         /**
          *  Only ROLE_ADMIN or the owner can delete
          */
-        if($checkOrganization && ($attribute == self::DELETE || $attribute == self::REMOVE)) {
-
+        if(($user instanceof User && $user->isAdmin()) || ($checkOrganization && $attribute == self::DELETE || $attribute == self::REMOVE)) {
             if($user->getId() === $entity->getUser()->getId()) {
                 return VoterInterface::ACCESS_GRANTED;
             }
-
         }
 
         // Deny all other requests

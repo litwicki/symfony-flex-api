@@ -13,7 +13,7 @@ use Tavro\Bundle\CoreBundle\Model\EntityInterface;
  *
  * @package Tavro\Bundle\CoreBundle\Voter
  */
-class NodeTagVoter implements VoterInterface
+class NodeTagVoter extends TavroVoter implements VoterInterface
 {
 
     /**

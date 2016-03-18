@@ -13,7 +13,7 @@ use Tavro\Bundle\CoreBundle\Model\EntityInterface;
  *
  * @package Tavro\Bundle\CoreBundle\Voter
  */
-class FileVoter implements VoterInterface
+class FileVoter extends TavroVoter implements VoterInterface
 {
     /**
      * Allows full access to members belonging to the entity, view access to outside admins.
