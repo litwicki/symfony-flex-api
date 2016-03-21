@@ -7,6 +7,7 @@ use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Tavro\Bundle\CoreBundle\Entity\UserQuickbooks;
 use Tavro\Bundle\CoreBundle\Entity\User;
 use Tavro\Bundle\CoreBundle\Security\Voter\TavroVoter;
+use Tavro\Bundle\CoreBundle\Model\EntityInterface;
 
 /**
  * Class UserQuickbooksVoter
@@ -19,13 +20,12 @@ class UserQuickbooksVoter extends TavroVoter implements VoterInterface
      * Allows full access to members belonging to the entity, view access to outside admins.
      *
      * @param User $user
-     * @param \Tavro\Bundle\CoreBundle\Entity\UserQuickbooks $entity
-     * @param string  $attribute
+     * @param \Tavro\Bundle\CoreBundle\Model\EntityInterface $entity
+     * @param string $attribute
      *
-     * @throws \Exception
      * @return int
      */
-    public function checkAccess($user, UserQuickbooks $entity, $attribute)
+    public function checkAccess($user, EntityInterface $entity, $attribute)
     {
 
         if($user->isAdmin()) {

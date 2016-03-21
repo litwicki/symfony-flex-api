@@ -43,18 +43,6 @@ class TavroVoter implements VoterInterface
         return false;
     }
 
-    /**
-     * @param $user
-     * @param \Tavro\Bundle\CoreBundle\Model\EntityInterface $entity
-     * @param $attribute
-     *
-     * @return int
-     */
-    public function checkAccess($user, EntityInterface $entity, $attribute)
-    {
-        return VoterInterface::ACCESS_GRANTED;
-    }
-
     const CREATE = 'create';
     const VIEW = 'view';
     const EDIT = 'edit';

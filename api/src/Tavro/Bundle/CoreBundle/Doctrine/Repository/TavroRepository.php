@@ -1,4 +1,4 @@
-<?php namespace Tavro\Bundle\CoreBundle\Services\Repository;
+<?php namespace Tavro\Bundle\CoreBundle\Doctrine\Repository;
 
 use Doctrine\ORM\EntityRepository;
 

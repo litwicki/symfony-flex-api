@@ -5,14 +5,14 @@ services:
 # =======================================
 
     tavro.api_authenticator:
-        class: Tavro\Bundle\CoreBundle\Security\Api\ApiAuthenticator
+        class: Tavro\Bundle\CoreBundle\Security\Authentication\Authenticator\ApiAuthenticator
         arguments: ['@doctrine.orm.entity_manager']
 
     tavro.password_encoder:
         class: Tavro\Bundle\CoreBundle\Security\Encoder\PasswordEncoder
 
     tavro.user_provider:
-        class: Tavro\Bundle\CoreBundle\Security\Authentication\ProviderUserProvider
+        class: Tavro\Bundle\CoreBundle\Security\Authentication\Provider\UserProvider
         arguments: ["@doctrine.orm.main_entity_manager"]
 
     tavro.user_authenticator:

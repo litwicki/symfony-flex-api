@@ -1,6 +1,6 @@
 <?php
 
-namespace Tavro\Bundle\CoreBundle\Security\Authentication\Authenticator;
+namespace Tavro\Bundle\CoreBundle\Security\Authentication\Provider;
 
 use Doctrine\ORM\NoResultException;
 use Doctrine\ORM\EntityManager;

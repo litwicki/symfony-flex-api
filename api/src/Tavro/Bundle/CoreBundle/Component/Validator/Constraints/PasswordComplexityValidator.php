@@ -1,5 +1,6 @@
 <?php
-namespace Tavro\Bundle\CoreBundle\Component\Validators;
+
+namespace Tavro\Bundle\CoreBundle\Component\Validator\Constraints;
 
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;

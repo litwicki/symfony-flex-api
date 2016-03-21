@@ -1,6 +1,6 @@
 <?php
 
-namespace Tavro\Bundle\CoreBundle\Services;
+namespace Tavro\Bundle\CoreBundle\Serializer\Visitor;
 
 /**
  * Class JsonSerializationVisitor

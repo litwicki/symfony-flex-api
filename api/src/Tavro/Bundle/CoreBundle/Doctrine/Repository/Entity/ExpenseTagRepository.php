@@ -1,6 +1,6 @@
 <?php namespace Tavro\Bundle\CoreBundle\Doctrine\Repository\Entity;
 
-use Tavro\Bundle\CoreBundle\Services\Repository\TavroRepository;
+use Tavro\Bundle\CoreBundle\Doctrine\Repository\TavroRepository;
 
 class ExpenseTagRepository extends TavroRepository
 {

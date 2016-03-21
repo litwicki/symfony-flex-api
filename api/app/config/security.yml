@@ -41,12 +41,12 @@ security:
                 login_path: login
                 remember_me: true
                 always_use_default_target_path: false
-                success_handler: tavro.login_listener
+                success_handler: tavro.listener.login
                 failure_path:   /login
             logout:
                 path: /logout
                 target: /
-                success_handler: tavro.logout_listener
+                success_handler: tavro.listener.logout
             remember_me:
                 secret: "%secret%"
                 lifetime: 25920000 # 30 days
