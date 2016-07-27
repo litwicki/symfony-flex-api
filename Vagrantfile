@@ -53,7 +53,7 @@ Vagrant.configure(2) do |config|
 
   config.vm.provision "ansible" do |ansible|
       # Provision Wordpress submodule as www.{{hostname}}
-      ansible.playbook = "ansible/playbook.yml"
+      ansible.playbook = "ansible/provision.yml"
       ansible.extra_vars = {
           hostname: hostname,
           appname: appname
