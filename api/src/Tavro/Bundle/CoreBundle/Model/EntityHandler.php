@@ -118,7 +118,7 @@ class EntityHandler implements EntityHandlerInterface
                 return $entity;
             }
             else {
-                $message = sprintf('You are not authorized to this view %s.', $this->entityClass, $id);
+                $message = sprintf('You are not authorized to view this %s.', $this->entityClass, $id);
                 throw new ApiAccessDeniedException($message);
             }
         }

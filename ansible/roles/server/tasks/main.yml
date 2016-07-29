@@ -23,7 +23,7 @@
     - pkg-config
 
 - name: Add repository for php7
-  shell: DEBIAN_FRONTEND=noninteractive sudo add-apt-repository -y ppa:ondrej/php-7.0
+  shell: DEBIAN_FRONTEND=noninteractive sudo add-apt-repository -y ppa:ondrej/php
 
 - name: Update apt
   sudo: yes
@@ -44,7 +44,6 @@
     - php7.0-opcache
     - php7.0-mysql
     - php7.0-phpdbg
-    - php7.0-dbg
     - php7.0-gd
     - php7.0-imap
     - php7.0-ldap
