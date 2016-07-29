@@ -4,10 +4,10 @@
   shell: sudo curl -sS https://getcomposer.org/installer | sudo php -- --install-dir=/usr/local/bin --filename=composer
 
 - name: Setup Local SSH Keys for JWT
-  file: path=/var/www/tavro/api/var/jwt state=directory mode=0755
+  file: path=/var/www/{{ appname }}/api/var/jwt state=directory mode=0755
 
 - name: create private key
-  shell: openssl genrsa -out /var/www/tavro/api/var/jwt/private.pem -passout pass:tavro -aes256 4096
+  shell: openssl genrsa -out /var/www/{{ appname }}/api/var/jwt/private.pem -passout pass:{{ appname }} -aes256 4096
 
 - name: create public key
-  shell: openssl rsa -pubout -in /var/www/tavro/api/var/jwt/private.pem -out /var/www/tavro/api/var/jwt/public.pem
+  shell: openssl rsa -pubout -in /var/www/{{ appname }}/api/var/jwt/private.pem -out /var/www/{{ appname }}/api/var/jwt/public.pem
