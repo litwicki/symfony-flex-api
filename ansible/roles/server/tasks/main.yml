@@ -3,11 +3,9 @@
   shell: sudo echo "nameserver 8.8.8.8" | sudo tee /etc/resolv.conf > /dev/null
 
 - name: Update apt
-  sudo: yes
-  apt: update_cache=yes
+  apt: update_cache=yes cache_valid_time=36000
 
 - name: Install System Packages
-  sudo: yes
   apt: pkg={{ item }} state=latest
   with_items:
     - curl
@@ -17,23 +15,25 @@
     - python-software-properties
     - python-pip
     - python-dev
-    - opensssl
     - libssl-dev
     - libcurl4-openssl-dev
     - pkg-config
+    - openssl
 
 - name: Add repository for php7
   shell: DEBIAN_FRONTEND=noninteractive sudo add-apt-repository -y ppa:ondrej/php
 
 - name: Update apt
-  sudo: yes
-  apt: update_cache=yes
+  apt: update_cache=yes cache_valid_time=36000
 
 - name: Purge php5 stuff
-  shell: apt-get purge php5-fpm && sudo apt-get -y --purge autoremove
+  apt: pkg={{ item }} state=absent autoremove=yes
+  with_items:
+    - php5-fpm
+    - php5
+    - apache
 
 - name: Install php7 Packages
-  sudo: yes
   apt: pkg={{ item }} state=latest
   with_items:
     - php7.0-fpm
@@ -54,34 +54,22 @@
     - php7.0-tidy
     - php7.0-dev
     - php7.0-intl
-    - php7.0-gd
+    - php7.0-mbstring
+    - php7.0-bcmath
 
 - name: Install Extra Packages
-  sudo: yes
   apt: pkg={{ item }} state=latest
   with_items: server.packages
   when: server.packages is defined
 
 - name: Install OAUTH PHP package
-  sudo: yes
-  shell: pecl install oauth
+  pear: name=pecl/oauth state=present
 
 - name: Configure the timezone
-  sudo: yes
   template: src=timezone.tpl dest=/etc/timezone
 
 - name: More Configure the timezone
-  sudo: yes
   file: src=/usr/share/zoneinfo/{{server.timezone}} dest=/etc/localtime state=link force=yes backup=yes
 
 - name: Set default system language pack
   shell: locale-gen {{server.locale}}
-  sudo: yes
-
-- name: Install PHPUNIT
-  shell: composer global require "phpunit/phpunit=4.1.*"
-  sudo: yes
-
-- name: Install PHPUNIT Invoker
-  shell: composer global require "phpunit/php-invoker=~1.1."
-  sudo: yes

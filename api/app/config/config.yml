@@ -180,3 +180,9 @@ services:
 #    dynamodb_session_handler:
 #        class: Tavro\Bundle\CoreBundle\Services\Session\DynamoDbSessionHandler
 #        arguments: [ "@tavro.aws_dynamodb", { table_name: '%dynamodb_table_name%' } ]
+
+lexik_jwt_authentication:
+    pass_phrase: 'IUhpMIgAlA1eXy1aWdaH471EiSQeaB2E'
+    token_ttl: %jwt_token_ttl%
+    public_key_path: '%kernel.root_dir%/var/jwt/public.pem'
+    private_key_path: '%kernel.root_dir%/var/jwt/private.pem'
