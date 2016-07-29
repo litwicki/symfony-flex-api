@@ -1,0 +1,5 @@
+---
+- hosts: production
+  sudo: true
+  vars_files:
+    - vars/all.yml

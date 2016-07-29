@@ -1,0 +1,13 @@
+image: php:7.0-cli
+
+pipelines:
+  branches:
+    master:
+      - step:
+          script:
+            - sudo apt-get install software-properties-common
+            - sudo apt-add-repository ppa:ansible/ansible
+            - sudo apt-get update
+            - sudo apt-get install ansible zip -y
+            - zip -r app /tmp/app-{date}.zip * # package up the application for deployment
+            - ansible-playbook ansible/deploy.yml
