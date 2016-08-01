@@ -2,13 +2,17 @@
 - name: fix proxy for Ubuntu
   shell: sudo echo "nameserver 8.8.8.8" | sudo tee /etc/resolv.conf > /dev/null
 
+- name: Add repository for Ansible
+  apt_repository: repo="ppa:ansible/ansible" state=present
+
 - name: Update apt
-  apt: update_cache=yes cache_valid_time=36000
+  apt: update_cache=yes cache_valid_time=3600
 
 - name: Install System Packages
   apt: pkg={{ item }} state=latest
   with_items:
     - curl
+    - unzip
     - wget
     - snmp
     - build-essential
@@ -19,12 +23,13 @@
     - libcurl4-openssl-dev
     - pkg-config
     - openssl
+    - ansible
 
 - name: Add repository for php7
-  shell: DEBIAN_FRONTEND=noninteractive sudo add-apt-repository -y ppa:ondrej/php
+  apt_repository: repo="ppa:ondrej/php" state=present
 
 - name: Update apt
-  apt: update_cache=yes cache_valid_time=36000
+  apt: update_cache=yes cache_valid_time=3600
 
 - name: Purge php5 stuff
   apt: pkg={{ item }} state=absent autoremove=yes

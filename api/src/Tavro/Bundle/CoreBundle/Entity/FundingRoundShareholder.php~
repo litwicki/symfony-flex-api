@@ -18,7 +18,7 @@ use Tavro\Bundle\CoreBundle\Model\OrganizationEntityInterface;
 
 /**
  * @ORM\Entity
- * @ORM\Entity(repositoryClass="Tavro\Bundle\CoreBundle\Repository\FundingRoundShareholderRepository")
+ * @ORM\Entity(repositoryClass="Tavro\Bundle\CoreBundle\Doctrine\Repository\Entity\FundingRoundShareholderRepository")
  * @ORM\Table(name="tavro_funding_round_shareholder", indexes={@ORM\Index(name="ORGANIZATION_SHAREHOLDER", columns={"shareholder_id","funding_round_id"})})
  */
 class FundingRoundShareholder extends OrganizationEntity implements OrganizationEntityInterface

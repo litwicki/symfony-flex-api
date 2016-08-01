@@ -51,7 +51,8 @@
         "phpunit/phpunit": "5.0.*",
         "symfony/phpunit-bridge": "^2.7",
         "symfony/var-dumper": "^3.0",
-        "apoutchika/loremipsum-bundle": "^1.0"
+        "apoutchika/loremipsum-bundle": "^1.0",
+        "fzaninotto/faker": "^1.6"
     },
     "scripts": {
         "post-install-cmd": [

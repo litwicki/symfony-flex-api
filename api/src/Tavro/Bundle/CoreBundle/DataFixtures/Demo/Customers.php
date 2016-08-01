@@ -38,6 +38,7 @@ use Tavro\Bundle\CoreBundle\Entity\FundingRoundShareholder;
 
 use Cocur\Slugify\Slugify;
 use Litwicki\Common\Common as Litwicki;
+use Tavro\Bundle\CoreBundle\Entity\Person;
 
 /**
  * Defines all predefined installed types created during install.
@@ -60,22 +61,6 @@ class Customers extends AbstractFixture implements OrderedFixtureInterface, Cont
         $this->container = $container;
     }
 
-    public function getCities($state)
-    {
-        $json = file_get_contents(sprintf('http://api.sba.gov/geodata/city_links_for_state_of/%s.json', $state));
-        $data = json_decode($json, true);
-        $cities = array();
-        foreach($data as $item) {
-            $cities[] = $item['name'];
-        }
-        return $cities;
-    }
-
-    public function getStates()
-    {
-        return Litwicki::getStateSelectChoices();
-    }
-
     /**
      * {@inheritDoc}
      */
@@ -86,36 +71,48 @@ class Customers extends AbstractFixture implements OrderedFixtureInterface, Cont
 
         $organizations = $manager->getRepository('TavroCoreBundle:Organization')->findAll();
         $tlds = array('dev', 'net', 'com', 'org');
+        $genders = array('male', 'female');
+
+        $faker = \Faker\Factory::create('en_EN');
+
+        $people = array();
 
         foreach($organizations as $organization) {
 
             for($i=0;$i<$size;$i++) {
 
-                $name = str_replace(' ', '_', $lipsum->getWords(rand(1,2)));
-                $email = sprintf('%s@%s.com', $name, $lipsum->getWords(1), $tlds[array_rand($tlds)]);
-
-                $cities = $this->getCities('WA');
-
-                $customer = new Customer();
-                $customer->setEmail($email);
-                $customer->setFirstName(ucfirst($name));
-                $customer->setLastName(ucfirst($lipsum->getWords(1)));
-                $customer->setStatus(rand(0,1));
-                $customer->setCreateDate(new \DateTime());
-                $customer->setAddress(ucwords($lipsum->getWords(rand(1,3))));
-                $customer->setCity($cities[array_rand($cities)]);
-                $customer->setState('WA');
-                $customer->setZip(rand(11111,99999));
-                $customer->setOrganization($organization);
-                $customer->setPhone(sprintf('(%s) %s-%s', rand(111,999), rand(111,999), rand(1111,9999)));
-                $manager->persist($customer);
-                $customers[] = $customer;
+                $person = new Person();
+                $person->setFirstName($faker->firstName);
+                $person->setLastName($faker->lastName);
+                $person->setAddress($faker->streetAddress);
+                $person->setCity($faker->city);
+                $person->setState($faker->state);
+                $person->setZip($faker->postcode);
+                $person->setEmail($faker->safeEmail);
+                $person->setPhone($faker->phoneNumber);
+                $person->setBirthday($faker->dateTimeThisCentury);
+                $person->setGender($genders[rand(0,1)]);
+                $manager->persist($person);
+                $people[] = $person;
 
             }
 
             $manager->flush();
 
+            foreach($people as $person) {
+                $customer = new Customer();
+                $customer->setStatus(rand(0,1));
+                $customer->setCreateDate(new \DateTime());
+                $customer->setOrganization($organization);
+                $customer->setPerson($person);
+                $manager->persist($customer);
+                $customers[] = $customer;
+                $manager->persist($customer);
+            }
+
         }
+
+        $manager->flush();
 
     }
 
