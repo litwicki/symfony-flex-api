@@ -23,3 +23,11 @@ tavro_api:
 # =======================
 _liip_imagine:
     resource: "@LiipImagineBundle/Resources/config/routing.xml"
+
+api_login_check:
+    host: %api_hostname%
+    requirements:
+        api_host: ^(api_hostname%|api.localhost)$
+    defaults:
+        api_host: %api_hostname%
+    path: /api/login_check

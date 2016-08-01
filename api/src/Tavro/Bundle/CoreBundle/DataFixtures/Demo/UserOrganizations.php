@@ -60,22 +60,6 @@ class UserOrganizations extends AbstractFixture implements OrderedFixtureInterfa
         $this->container = $container;
     }
 
-    public function getCities($state)
-    {
-        $json = file_get_contents(sprintf('http://api.sba.gov/geodata/city_links_for_state_of/%s.json', $state));
-        $data = json_decode($json, true);
-        $cities = array();
-        foreach($data as $item) {
-            $cities[] = $item['name'];
-        }
-        return $cities;
-    }
-
-    public function getStates()
-    {
-        return Litwicki::getStateSelectChoices();
-    }
-
     /**
      * {@inheritDoc}
      */
@@ -93,9 +77,11 @@ class UserOrganizations extends AbstractFixture implements OrderedFixtureInterfa
              * Add Tavro Bot
              */
             $uo = new UserOrganization();
+
             $bot = $manager->getRepository('TavroCoreBundle:User')->findOneBy(array(
-                'email' => 'bot@tavro.dev'
+                'username' => 'tavrobot'
             ));
+
             $uo->setUser($bot);
             $uo->setOrganization($organization);
             $manager->persist($uo);

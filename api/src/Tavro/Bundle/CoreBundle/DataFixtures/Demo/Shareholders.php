@@ -35,9 +35,9 @@ use Tavro\Bundle\CoreBundle\Entity\ServiceCategory;
 use Tavro\Bundle\CoreBundle\Entity\Customer;
 use Tavro\Bundle\CoreBundle\Entity\CustomerComment;
 use Tavro\Bundle\CoreBundle\Entity\FundingRoundShareholder;
+use Tavro\Bundle\CoreBundle\Entity\Person;
 
 use Cocur\Slugify\Slugify;
-use Litwicki\Common\Common as Litwicki;
 
 /**
  * Defines all predefined installed types created during install.
@@ -60,49 +60,41 @@ class Shareholders extends AbstractFixture implements OrderedFixtureInterface, C
         $this->container = $container;
     }
 
-    public function getCities($state)
-    {
-        $json = file_get_contents(sprintf('http://api.sba.gov/geodata/city_links_for_state_of/%s.json', $state));
-        $data = json_decode($json, true);
-        $cities = array();
-        foreach($data as $item) {
-            $cities[] = $item['name'];
-        }
-        return $cities;
-    }
-
-    public function getStates()
-    {
-        return Litwicki::getStateSelectChoices();
-    }
-
     /**
      * {@inheritDoc}
      */
     public function load(ObjectManager $manager)
     {
-        $lipsum = $this->container->get('apoutchika.lorem_ipsum');
-        $size = 10;
 
         $shareholders = array();
-        $tlds = array('dev', 'net', 'com', 'org');
+        $people = array();
+
+        $faker = \Faker\Factory::create('en_EN');
+        $genders = array('male', 'female');
 
         for($i=0;$i<50;$i++) {
+            $person = new Person();
+            $person->setFirstName($faker->firstName);
+            $person->setLastName($faker->lastName);
+            $person->setAddress($faker->streetAddress);
+            $person->setCity($faker->city);
+            $person->setState($faker->state);
+            $person->setZip($faker->postcode);
+            $person->setEmail($faker->safeEmail);
+            $person->setPhone($faker->phoneNumber);
+            $person->setBirthday($faker->dateTimeThisCentury);
+            $person->setGender($genders[rand(0,1)]);
+            $manager->persist($person);
+            $people[] = $person;
+        }
 
-            $email = sprintf('%s@%s.%s', $lipsum->getWords(1),$lipsum->getWords(1),$tlds[array_rand($tlds)]);
-            $cities = $this->getCities('WA');
+        $manager->flush();
 
+        foreach($people as $person) {
             $shareholder = new Shareholder();
-            $shareholder->setTitle($lipsum->getSentences(1));
+            $shareholder->setTitle($faker->jobTitle);
             $shareholder->setCreateDate(new \DateTime());
-            $shareholder->setFirstName(ucfirst($lipsum->getWords(1)));
-            $shareholder->setLastName(ucfirst($lipsum->getWords(1)));
-            $shareholder->setAddress(ucwords($lipsum->getWords(rand(1,3))));
-            $shareholder->setCity($cities[array_rand($cities)]);
-            $shareholder->setState('WA');
-            $shareholder->setZip(rand(11111,99999));
-            $shareholder->setEmail($email);
-            $shareholder->setPhone(sprintf('(%s) %s-%s', rand(111,999), rand(111,999), rand(1111,9999)));
+            $shareholder->setPerson($person);
             $manager->persist($shareholder);
             $shareholders[] = $shareholder;
         }

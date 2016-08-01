@@ -25,7 +25,7 @@ use JMS\Serializer\Annotation\MaxDepth;
 
 /**
  * @ORM\Entity
- * @ORM\Entity(repositoryClass="Tavro\Bundle\CoreBundle\Repository\ShareholderRepository")
+ * @ORM\Entity(repositoryClass="Tavro\Bundle\CoreBundle\Doctrine\Repository\Entity\ShareholderRepository")
  * @Table(name="tavro_shareholder")
  *
  * @XmlRoot("shareholder")
@@ -33,65 +33,14 @@ use JMS\Serializer\Annotation\MaxDepth;
  */
 class Shareholder extends Entity implements EntityInterface
 {
-    /**
-     * @ORM\Column(type="string", length=255, nullable=false)
-     * @Groups({"api", "tavro", "simple", "typeahead"})
-     */
-    protected $first_name;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=false)
-     * @Groups({"api", "tavro", "simple", "typeahead"})
-     */
-    protected $last_name;
-
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     * @Groups({"api", "tavro", "simple", "typeahead"})
-     */
-    protected $title;
-
-    /**
-     * @ORM\Column(type="string", length=255, nullable=false)
+     * @ORM\ManyToOne(targetEntity="Tavro\Bundle\CoreBundle\Entity\Person")
+     * @ORM\JoinColumn(name="person_id", referencedColumnName="id", nullable=true)
      * @Groups({"api", "tavro", "simple"})
+     * @MaxDepth(1)
      */
-    protected $address;
-
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     * @Groups({"api", "tavro", "simple"})
-     */
-    protected $address2;
-
-    /**
-     * @ORM\Column(type="string", length=255, nullable=false)
-     * @Groups({"api", "tavro", "simple"})
-     */
-    protected $city;
-
-    /**
-     * @ORM\Column(type="string", length=255, nullable=false)
-     * @Groups({"api", "tavro", "simple"})
-     */
-    protected $state;
-
-    /**
-     * @ORM\Column(type="string", length=255, nullable=false)
-     * @Groups({"api", "tavro", "simple"})
-     */
-    protected $zip;
-
-    /**
-     * @ORM\Column(type="string", unique=true, nullable=false)
-     * @Groups({"api", "tavro", "simple", "typeahead"})
-     */
-    protected $email;
-
-    /**
-     * @ORM\Column(type="string", length=255, nullable=false)
-     * @Groups({"api", "tavro", "simple", "typeahead"})
-     */
-    protected $phone;
+    protected $person;
 
     /**
      * @ORM\ManyToOne(targetEntity="Tavro\Bundle\CoreBundle\Entity\User", inversedBy="shareholders")
@@ -116,14 +65,17 @@ class Shareholder extends Entity implements EntityInterface
 
     public function __toString()
     {
-        return sprintf('%s, %s', $this->last_name, $this->first_name);
+        return sprintf('%s, %s', $this->getPerson()->getLastName(), $this->getPerson()->getFirstName());
     }
+
+
 
     /**
      * Set notes
      *
      * @param string $notes
-     * @return Node
+     *
+     * @return Shareholder
      */
     public function setNotes($notes)
     {
@@ -143,252 +95,61 @@ class Shareholder extends Entity implements EntityInterface
     }
 
     /**
-     * Set firstName
+     * Set body
      *
-     * @param string $firstName
+     * @param string $body
      *
      * @return Shareholder
      */
-    public function setFirstName($firstName)
+    public function setBody($body)
     {
-        $this->first_name = $firstName;
+        $this->body = $body;
 
         return $this;
     }
 
     /**
-     * Get firstName
+     * Get body
      *
      * @return string
      */
-    public function getFirstName()
+    public function getBody()
     {
-        return $this->first_name;
+        return $this->body;
     }
 
     /**
-     * Set lastName
+     * Set person
      *
-     * @param string $lastName
+     * @param \Tavro\Bundle\CoreBundle\Entity\Person $person
      *
      * @return Shareholder
      */
-    public function setLastName($lastName)
+    public function setPerson(\Tavro\Bundle\CoreBundle\Entity\Person $person = null)
     {
-        $this->last_name = $lastName;
+        $this->person = $person;
 
         return $this;
     }
 
     /**
-     * Get lastName
+     * Get person
      *
-     * @return string
+     * @return \Tavro\Bundle\CoreBundle\Entity\Person
      */
-    public function getLastName()
+    public function getPerson()
     {
-        return $this->last_name;
-    }
-
-    /**
-     * Set title
-     *
-     * @param string $title
-     *
-     * @return Shareholder
-     */
-    public function setTitle($title)
-    {
-        $this->title = $title;
-
-        return $this;
-    }
-
-    /**
-     * Get title
-     *
-     * @return string
-     */
-    public function getTitle()
-    {
-        return $this->title;
-    }
-
-    /**
-     * Set address
-     *
-     * @param string $address
-     *
-     * @return Shareholder
-     */
-    public function setAddress($address)
-    {
-        $this->address = $address;
-
-        return $this;
-    }
-
-    /**
-     * Get address
-     *
-     * @return string
-     */
-    public function getAddress()
-    {
-        return $this->address;
-    }
-
-    /**
-     * Set address2
-     *
-     * @param string $address2
-     *
-     * @return Shareholder
-     */
-    public function setAddress2($address2)
-    {
-        $this->address2 = $address2;
-
-        return $this;
-    }
-
-    /**
-     * Get address2
-     *
-     * @return string
-     */
-    public function getAddress2()
-    {
-        return $this->address2;
-    }
-
-    /**
-     * Set city
-     *
-     * @param string $city
-     *
-     * @return Shareholder
-     */
-    public function setCity($city)
-    {
-        $this->city = $city;
-
-        return $this;
-    }
-
-    /**
-     * Get city
-     *
-     * @return string
-     */
-    public function getCity()
-    {
-        return $this->city;
-    }
-
-    /**
-     * Set state
-     *
-     * @param string $state
-     *
-     * @return Shareholder
-     */
-    public function setState($state)
-    {
-        $this->state = $state;
-
-        return $this;
-    }
-
-    /**
-     * Get state
-     *
-     * @return string
-     */
-    public function getState()
-    {
-        return $this->state;
-    }
-
-    /**
-     * Set zip
-     *
-     * @param string $zip
-     *
-     * @return Shareholder
-     */
-    public function setZip($zip)
-    {
-        $this->zip = $zip;
-
-        return $this;
-    }
-
-    /**
-     * Get zip
-     *
-     * @return string
-     */
-    public function getZip()
-    {
-        return $this->zip;
-    }
-
-    /**
-     * Set email
-     *
-     * @param string $email
-     *
-     * @return Shareholder
-     */
-    public function setEmail($email)
-    {
-        $this->email = $email;
-
-        return $this;
-    }
-
-    /**
-     * Get email
-     *
-     * @return string
-     */
-    public function getEmail()
-    {
-        return $this->email;
-    }
-
-    /**
-     * Set shares
-     *
-     * @param string $shares
-     *
-     * @return Shareholder
-     */
-    public function setShares($shares)
-    {
-        $this->shares = $shares;
-
-        return $this;
-    }
-
-    /**
-     * Get shares
-     *
-     * @return string
-     */
-    public function getShares()
-    {
-        return $this->shares;
+        return $this->person;
     }
 
     /**
      * Set user
      *
      * @param \Tavro\Bundle\CoreBundle\Entity\User $user
-     * @return Node
+     *
+     * @return Shareholder
      */
-    public function setUser(\Tavro\Bundle\CoreBundle\Entity\User $user)
+    public function setUser(\Tavro\Bundle\CoreBundle\Entity\User $user = null)
     {
         $this->user = $user;
 
@@ -404,31 +165,6 @@ class Shareholder extends Entity implements EntityInterface
     {
         return $this->user;
     }
-
-    /**
-     * Set phone
-     *
-     * @param string $phone
-     *
-     * @return Shareholder
-     */
-    public function setPhone($phone)
-    {
-        $this->phone = $phone;
-
-        return $this;
-    }
-
-    /**
-     * Get phone
-     *
-     * @return string
-     */
-    public function getPhone()
-    {
-        return $this->phone;
-    }
-
 
     /**
      * Add fundingRoundShareholder
@@ -462,29 +198,5 @@ class Shareholder extends Entity implements EntityInterface
     public function getFundingRoundShareholders()
     {
         return $this->funding_round_shareholders;
-    }
-
-    /**
-     * Set body
-     *
-     * @param string $body
-     *
-     * @return Shareholder
-     */
-    public function setBody($body)
-    {
-        $this->body = $body;
-
-        return $this;
-    }
-
-    /**
-     * Get body
-     *
-     * @return string
-     */
-    public function getBody()
-    {
-        return $this->body;
     }
 }

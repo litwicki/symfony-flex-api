@@ -19,7 +19,7 @@ use Tavro\Bundle\CoreBundle\Model\EntityInterface;
 
 /**
  * @ORM\Entity
- * @ORM\Entity(repositoryClass="Tavro\Bundle\CoreBundle\Repository\OrganizationRepository")
+ * @ORM\Entity(repositoryClass="Tavro\Bundle\CoreBundle\Doctrine\Repository\Entity\OrganizationRepository")
  * @ORM\HasLifecycleCallbacks
  * @ORM\Table(name="tavro_organization")
  *

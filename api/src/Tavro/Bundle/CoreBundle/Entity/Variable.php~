@@ -17,7 +17,7 @@ use Tavro\Bundle\CoreBundle\Model\OrganizationEntityInterface;
 
 /**
  * @ORM\Entity
- * @ORM\Entity(repositoryClass="Tavro\Bundle\CoreBundle\Repository\VariableRepository")
+ * @ORM\Entity(repositoryClass="Tavro\Bundle\CoreBundle\Doctrine\Repository\Entity\VariableRepository")
  * @Table(name="tavro_variable")
  */
 class Variable extends OrganizationEntity implements OrganizationEntityInterface

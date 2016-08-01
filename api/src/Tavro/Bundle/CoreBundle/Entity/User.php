@@ -60,12 +60,6 @@ class User extends Entity implements UserInterface, \Serializable
     protected $salt;
 
     /**
-     * @ORM\Column(type="string", unique=true, length=255, nullable=false)
-     * @Groups({"api", "tavro", "simple", "typeahead"})
-     */
-    protected $email;
-
-    /**
      * @ORM\Column(type="string", length=500, nullable=true)
      * @Groups({"tavro"})
      */
@@ -134,13 +128,6 @@ class User extends Entity implements UserInterface, \Serializable
     protected $user_agent;
 
     /**
-     * @ORM\Column(type="date", length=255, nullable=true)
-     * @Groups({"tavro"})
-     * @MaxDepth(1)
-     */
-    protected $birthday;
-
-    /**
      * @ORM\OneToMany(targetEntity="Tavro\Bundle\CoreBundle\Entity\Node", mappedBy="user")
      * @ORM\OrderBy({"id" = "DESC"})
      */
@@ -197,6 +184,14 @@ class User extends Entity implements UserInterface, \Serializable
      * @MaxDepth(1)
      */
     protected $user_quickbooks;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Tavro\Bundle\CoreBundle\Entity\Person")
+     * @ORM\JoinColumn(name="person_id", referencedColumnName="id", nullable=true)
+     * @Groups({"api", "tavro", "simple"})
+     * @MaxDepth(1)
+     */
+    protected $person;
 
     /**
      * Constructor
@@ -762,29 +757,6 @@ class User extends Entity implements UserInterface, \Serializable
     }
 
     /**
-     * Set birthday
-     *
-     * @param \DateTime $birthday
-     * @return User
-     */
-    public function setBirthday($birthday)
-    {
-        $this->birthday = $birthday;
-
-        return $this;
-    }
-
-    /**
-     * Get birthday
-     *
-     * @return \DateTime 
-     */
-    public function getBirthday()
-    {
-        return $this->birthday;
-    }
-
-    /**
      * Add nodes_read
      *
      * @param \Tavro\Bundle\CoreBundle\Entity\NodeRead $nodesRead
@@ -1164,5 +1136,29 @@ class User extends Entity implements UserInterface, \Serializable
     public function getBody()
     {
         return $this->body;
+    }
+
+    /**
+     * Set person
+     *
+     * @param \Tavro\Bundle\CoreBundle\Entity\Person $person
+     *
+     * @return User
+     */
+    public function setPerson(\Tavro\Bundle\CoreBundle\Entity\Person $person = null)
+    {
+        $this->person = $person;
+
+        return $this;
+    }
+
+    /**
+     * Get person
+     *
+     * @return \Tavro\Bundle\CoreBundle\Entity\Person
+     */
+    public function getPerson()
+    {
+        return $this->person;
     }
 }

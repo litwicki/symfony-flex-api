@@ -36,6 +36,7 @@ use Tavro\Bundle\CoreBundle\Entity\CustomerComment;
 use Tavro\Bundle\CoreBundle\Entity\FundingRoundShareholder;
 use Tavro\Bundle\CoreBundle\Entity\RevenueService;
 use Tavro\Bundle\CoreBundle\Entity\RevenueProduct;
+use Tavro\Bundle\CoreBundle\Entity\Person;
 
 use Cocur\Slugify\Slugify;
 use Litwicki\Common\Common as Litwicki;
@@ -61,35 +62,18 @@ class Users extends AbstractFixture implements OrderedFixtureInterface, Containe
         $this->container = $container;
     }
 
-    public function getCities($state)
-    {
-        $json = file_get_contents(sprintf('http://api.sba.gov/geodata/city_links_for_state_of/%s.json', $state));
-        $data = json_decode($json, true);
-        $cities = [];
-        foreach ($data as $item) {
-            $cities[] = $item['name'];
-        }
-
-        return $cities;
-    }
-
-    public function getStates()
-    {
-        return Litwicki::getStateSelectChoices();
-    }
-
     /**
      * {@inheritDoc}
      */
     public function load(ObjectManager $manager)
     {
-        $lipsum = $this->container->get('apoutchika.lorem_ipsum');
         $size = 10;
 
         $organizations = [];
         $users = [];
 
         $genders = array('male', 'female');
+        $faker = \Faker\Factory::create('en_EN');
 
         $userRole = $manager->getRepository('TavroCoreBundle:Role')->findOneBy(array(
             'role' => 'ROLE_USER',
@@ -101,31 +85,51 @@ class Users extends AbstractFixture implements OrderedFixtureInterface, Containe
 
         $roles = array($userRole, $developerRole);
 
-        for($i=1;$i<$size;$i++) {
+        $people = array();
 
-            $username = sprintf('user%s', $i);
-            $email = sprintf('%s@tavro.dev', $username);
-            $salt = md5($email);
+        for($i=1;$i<$size;$i++) {
+            $email = $faker->safeEmail;
+            $person = new Person();
+            $gender = $genders[rand(0,1)];
+            $person->setFirstName($faker->firstName);
+            $person->setLastName($faker->lastName);
+            $person->setTitle($faker->title($gender));
+            $person->setSuffix($faker->suffix);
+            $person->setEmail($email);
+            $person->setGender($gender);
+            $person->setBirthday($faker->dateTimeThisCentury);
+            $manager->persist($person);
+            $people[] = $person;
+        }
+
+        $manager->flush();
+
+        foreach($people as $person) {
+            $salt = md5($person->getEmail());
             $password = 'Password1!';
             $encoder = $this->container->get('tavro.password_encoder');
             $password = $encoder->encodePassword($password, $salt);
 
             $user = new User();
+            $user->setPerson($person);
             $user->setStatus(rand(0,1));
             $user->setCreateDate(new \DateTime());
             $user->setApiEnabled(rand(0,1));
-            $user->setEmail($email);
-            $user->setUsername($username);
-            $user->setGender($genders[rand(0,1)]);
+            $user->setUsername($faker->userName);
+            $user->setUserAgent($faker->userAgent);
             $user->setSalt($salt);
-            $user->setApiKey($email); //only for test users!!
+
+            /**
+             * Only do this for test Users!!!
+             */
+            $user->setApiKey($person->getEmail());
+
             $user->setPassword($password);
+            $user->setPerson($person);
             $user->addRole($roles[array_rand($roles)]);
             $manager->persist($user);
             $users[] = $user;
         }
-
-        $manager->flush();
 
         $admin = $manager->getRepository('TavroCoreBundle:Role')->findOneBy(array(
             'role' => 'ROLE_ADMIN',
@@ -141,14 +145,25 @@ class Users extends AbstractFixture implements OrderedFixtureInterface, Containe
         $encoder = $this->container->get('tavro.password_encoder');
         $password = $encoder->encodePassword($password, $salt);
 
+        $person = new Person();
+        $gender = 'robot';
+        $person->setFirstName($faker->firstName);
+        $person->setLastName($faker->lastName);
+        $person->setTitle($faker->title($gender));
+        $person->setSuffix($faker->suffix);
+        $person->setEmail('bot@tavro.dev');
+        $person->setGender($gender);
+        $person->setBirthday($faker->dateTimeThisCentury);
+        $manager->persist($person);
+        $manager->flush();
+
         $user = new User();
+        $user->setPerson($person);
         $user->setStatus(1);
         $user->setCreateDate(new \DateTime());
         $user->setApiEnabled(1);
         $user->setApiKey('tavrobot-api-key');
-        $user->setEmail($email);
         $user->setUsername($username);
-        $user->setGender('robot');
         $user->setSalt($salt);
         $user->setPassword($password);
 
