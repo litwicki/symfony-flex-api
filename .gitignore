@@ -4,6 +4,8 @@
 
 *.iml
 *.box
+composer.lock
+*~
 
 ## Directory-based project format:
 .idea/
