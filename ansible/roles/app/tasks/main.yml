@@ -1,13 +1,18 @@
 ---
-# application tasks to be customized and to run after the main provision
-- name: Install Composer
-  shell: sudo curl -sS https://getcomposer.org/installer | sudo php -- --install-dir=/usr/local/bin --filename=composer
-
 - name: Setup Local SSH Keys for JWT
-  file: path=/var/www/{{ appname }}/api/var/jwt state=directory mode=0755
+  file: path=/var/www/{{ appname }}/api/app/keys state=directory mode=0755
 
-- name: create private key
-  shell: openssl genrsa -out /var/www/{{ appname }}/api/var/jwt/private.pem -passout pass:{{ appname }} -aes256 4096
+- name: remove key if exists already
+  file: path=/var/www/{{ appname }}/api/app/keys/{{appname}} state=absent
 
-- name: create public key
-  shell: openssl rsa -pubout -in /var/www/{{ appname }}/api/var/jwt/private.pem -out /var/www/{{ appname }}/api/var/jwt/public.pem
+- name: remove public key if they exist already
+  file: path=/var/www/{{ appname }}/api/app/keys/{{appname}}.pub state=absent
+
+- name: create ssh keys
+  command: ssh-keygen -t rsa -f /var/www/{{appname}}/api/app/keys/{{appname}} -q -P ""
+
+- name: regenerate docs
+  command: bash /var/www/{{appname}}/scripts/regenerate-docs.sh
+
+- name: setup clean database
+  command: bash /var/www/{{appname}}/scripts/reset-dev.sh

@@ -1,17 +1,21 @@
 ---
 server:
     install: '1'
-    packages: [vim, git, nodejs, npm]
+    packages: [curl,unzip,wget,snmp,build-essential,python-software-properties,python-pip,python-dev,libssl-dev,libcurl4-openssl-dev,pkg-config,openssl,ansible,vim,git,nodejs,npm,mysql-server,mysql-client,python-mysqldb]
+    remove_packages: [apache]
     timezone: UTC
     locale: en_US.UTF-8
+    php7_packages: [php7.0-fpm,php7.0-cli,php7.0-curl,php7.0-common,php7.0-json,php7.0-opcache,php7.0-mysql,php7.0-phpdbg,php7.0-gd,php7.0-imap,php7.0-ldap,php7.0-pgsql,php7.0-pspell,php7.0-recode,php7.0-snmp,php7.0-tidy,php7.0-dev,php7.0-intl,php7.0-mbstring,php7.0-bcmath]
 vagrant_local:
     install: '1'
-    vm: { base_box: trusty64, hostname: tavro.dev, ip: 192.168.50.33, memory: '1024', sharedfolder: ./, useVagrantCloud: '1', syncType: nfs }
-mysql:
-    install: '1'
-    root_password: tavro
-    database: tavro
-    user: root
-    password: 'tavro'
-php7_configure_string: --prefix=/usr/local/php7 --enable-bcmath --with-bz2 --enable-calendar --enable-exif --enable-dba --enable-fpm --enable-ftp --with-gettext --with-gd --enable-mbstring --with-mcrypt --with-mhash --enable-mysqlnd --with-mysql=mysqlnd --with-mysqli=mysqlnd --with-pdo-mysql=mysqlnd --with-openssl --enable-pcntl --with-pspell --enable-shmop --enable-soap --enable-sockets --enable-sysvmsg --enable-sysvsem --enable-sysvshm --enable-wddx --with-zlib --enable-zip --with-readline --with-curl
-php7_cli_configure_string: --with-config-file-path=/etc/php7/cli --with-config-file-scan-dir=/etc/php7/cli/conf.d
+    vm: { base_box: xenial64, hostname: tavro.dev, ip: 192.168.50.33, memory: '1024', sharedfolder: ./, useVagrantCloud: '1', syncType: nfs }
+mysql_root_password: "{{ mysql_root_password }}"
+mysql_databases:
+  - name: "{{ appname }}"
+    encoding: latin1
+    collation: latin1_general_ci
+mysql_users:
+  - name: "{{ appname }}"
+    host: "%"
+    password: "{{ appname }}"
+    priv: "{{ appname }}.*:ALL"

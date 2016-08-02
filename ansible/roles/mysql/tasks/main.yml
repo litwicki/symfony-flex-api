@@ -1,36 +1,42 @@
 ---
-# Retrieve the current hostname, because {{ ansible_hostname }} still contains the old name
-- shell: hostname
-  register: current_hostname
+# Variable configuration.
+- name: Include OS-specific variables.
+  include_vars: "{{ ansible_os_family }}.yml"
+  when: ansible_os_family != "RedHat"
 
-- name: mysql | Install MySQL Packages
-  sudo: yes
-  apt: pkg={{ item }} state=latest
-  with_items:
-    - mysql-server
-    - mysql-client
-    - python-mysqldb
+- name: Include OS-specific variables (RedHat).
+  include_vars: "{{ ansible_os_family }}-{{ ansible_distribution_major_version }}.yml"
+  when: ansible_os_family == "RedHat"
 
-- name: mysql | Update root password for all root accounts
-  mysql_user: name=root host={{ item }} check_implicit_admin=yes password={{ mysql.root_password }} login_user={{ mysql.user }} login_password={{ mysql.password }}
-  with_items:
-    - "{{ current_hostname.stdout | lower }}"
-    - 127.0.0.1
-    - ::1
-    - localhost
+- name: Define mysql_packages.
+  set_fact:
+    mysql_packages: "{{ __mysql_packages | list }}"
+  when: mysql_packages is not defined
 
-- name: mysql | Create databases
-  mysql_db: name={{ mysql.database }} state=present login_user=root login_password={{ mysql.root_password }}
+- name: Define mysql_daemon.
+  set_fact:
+    mysql_daemon: "{{ __mysql_daemon }}"
+  when: mysql_daemon is not defined
 
-#- name: mysql | Import dump
-#  mysql_db: name={{ mysql.database }} state=import login_user=root login_password={{ mysql.root_password }} target=/vagrant/{{ mysql.dump }}
-#  when: mysql.dump
+- name: Define mysql_slow_query_log_file.
+  set_fact:
+    mysql_slow_query_log_file: "{{ __mysql_slow_query_log_file }}"
+  when: mysql_slow_query_log_file is not defined
 
-- name: mysql | Ensure anonymous users are not in the database
-  mysql_user: name='' host={{ item }} state=absent login_user=root login_password={{ mysql.root_password }}
-  with_items:
-    - localhost
-    - "{{ current_hostname.stdout | lower }}"
+# Setup/install tasks.
+- include: setup-RedHat.yml
+  when: ansible_os_family == 'RedHat'
 
-- name: mysql | Create users
-  mysql_user: name={{ mysql.user }} password={{ mysql.password }} priv={{ mysql.database }}.*:ALL state=present login_user=root login_password={{ mysql.root_password }}
+- include: setup-Debian.yml
+  when: ansible_os_family == 'Debian'
+
+- name: Check if MySQL packages were installed.
+  set_fact:
+    mysql_install_packages: "{{ (rh_mysql_install_packages is defined and rh_mysql_install_packages.changed) or (deb_mysql_install_packages is defined and deb_mysql_install_packages.changed) }}"
+
+# Configure MySQL.
+- include: configure.yml
+- include: secure-installation.yml
+- include: databases.yml
+- include: users.yml
+- include: replication.yml
