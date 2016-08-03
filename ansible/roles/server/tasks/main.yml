@@ -28,3 +28,18 @@
 
 - name: Set default system language pack
   shell: locale-gen {{server.locale}}
+
+- name: setup swap file
+  become: true
+  become_user: root
+  command: dd if=/dev/zero of=/swapfile bs=1024 count=512k
+
+- name: make swapfile
+  become: true
+  become_user: root
+  command: mkswap /swapfile
+
+- name: swapon
+  become: true
+  become_user: root
+  command: swapon /swapfile
