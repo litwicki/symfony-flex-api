@@ -88,7 +88,7 @@ class Customers extends AbstractFixture implements OrderedFixtureInterface, Cont
                 $person->setCity($faker->city);
                 $person->setState($faker->state);
                 $person->setZip($faker->postcode);
-                $person->setEmail($faker->safeEmail);
+                $person->setEmail($faker->email);
                 $person->setPhone($faker->phoneNumber);
                 $person->setBirthday($faker->dateTimeThisCentury);
                 $person->setGender($genders[rand(0,1)]);

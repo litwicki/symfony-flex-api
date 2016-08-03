@@ -33,13 +33,19 @@
   become: true
   become_user: root
   command: dd if=/dev/zero of=/swapfile bs=1024 count=512k
+  args:
+    creates: /swapfile
 
 - name: make swapfile
   become: true
   become_user: root
   command: mkswap /swapfile
+  args:
+    creates: /swapfile
 
 - name: swapon
   become: true
   become_user: root
   command: swapon /swapfile
+  args:
+    creates: /swapfile

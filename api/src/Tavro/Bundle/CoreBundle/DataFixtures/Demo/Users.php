@@ -88,7 +88,7 @@ class Users extends AbstractFixture implements OrderedFixtureInterface, Containe
         $people = array();
 
         for($i=1;$i<$size;$i++) {
-            $email = $faker->safeEmail;
+            $email = $faker->email;
             $person = new Person();
             $gender = $genders[rand(0,1)];
             $person->setFirstName($faker->firstName);
