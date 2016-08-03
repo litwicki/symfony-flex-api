@@ -2,49 +2,12 @@
 
 This is the core application for tavro.io
 
-## Required Workstation Software
+## Required Stuff
 
-* [Vagrant](http://vagrantup.com/downloads) 1.7.4+
-* [VirtualBox](https://www.virtualbox.org/wiki/Downloads)
-* [Composer](https://getcomposer.org/doc/00-intro.md)
-* [Ansible](http://docs.ansible.com/ansible/intro_installation.html)
+Clone the Zoadilack dev repo and run the OSX Developer script to install (or update) everything you need.
 
-### Install Homebrew
-
-    $ /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-
-### Install NodeJS + NPM
-
-    $ brew update
-    $ brew doctor
-    $ export PATH="/usr/local/bin:$PATH"
-    $ brew install node
-    
-#### Install NVM for managing nodejs modules and version dependencies
-
-    $ curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.31.0/install.sh | bash
-    
-#### Other useful Homebrew packages, if you're so inclined..
-
-    $ brew install python python3 git vim rbenv ruby-build 
-
-### Install Composer
-
-    $ curl -sS https://getcomposer.org/installer | php
-    $ sudo mv composer.phar /usr/local/bin/
-
-### Install Gulp
-
-    $ npm install -g gulp
-
-### Install Compass (used by Gulp)
-
-    $ sudo gem install compass
-
-### Ansible Extras
-
-    $ vagrant plugin install ansible
-    $ vagrant plugin install landrush
+    $ git clone git@bitbucket.org:zoadilack/zoadilack-scripts.git /usr/public/zoadilack-scripts
+    $ sudo bash /usr/public/zoadilack-scripts/osx-dev.sh
 
 ### Your Hosts File
 
@@ -67,6 +30,20 @@ You can now access your dev machine at [https://tavro.dev](https://tavro.dev)
 
 Workflow and useful 'stuff' for developing in Tavro.
 
+### Install Gulp + Dependencies etc.
+
+    $ npm install --global gulp-cli
+    $ npm install --save-dev gulp gulp-sass gulp-concat gulp-minify-css fs gulp-s3 gulp-image gulp-util
+
+    
+### Testing with PHPUnit
+
+    $ cd /var/www/tavro/api && phpunit
+    
+### Testing JWT Token
+
+    $ curl -X POST http://api.tavro.dev/api/login_check -d _username=tavrobot -d _password=Password1!
+
 ### Scripts
 
 These scripts all require you first login to the VM via SSH:
@@ -87,11 +64,3 @@ These scripts all require you first login to the VM via SSH:
 Regenerate API Documentation:
 
     $ sudo bash /var/www/tavro/scripts/regenerate-docs.sh
-    
-## Testing with PHPUnit
-
-    $ cd /var/www/tavro/api && phpunit
-    
-## Testing JWT Token
-
-    $ curl -X POST http://api.tavro.dev/api/login_check -d _username=tavrobot -d _password=Password1!
