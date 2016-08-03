@@ -5,8 +5,8 @@
   vars_files:
     - vars/all.yml
   roles:
-    - role: composer
     - role: server
+    - role: composer
     - role: nginx
     - role: mysql
     - role: phpunit
