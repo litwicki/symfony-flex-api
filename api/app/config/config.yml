@@ -184,5 +184,5 @@ services:
 lexik_jwt_authentication:
     pass_phrase: %jwt_token_passphrase%
     token_ttl: %jwt_token_ttl%
-    public_key_path: '%kernel.root_dir%/var/jwt/public.pem'
-    private_key_path: '%kernel.root_dir%/var/jwt/private.pem'
+    public_key_path: ~
+    private_key_path: ~

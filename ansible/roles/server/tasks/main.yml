@@ -29,6 +29,11 @@
 - name: Set default system language pack
   shell: locale-gen {{server.locale}}
 
+# ########################################################################
+#  There may be a better way of doing this, but it dramatically helps
+#  with memory intensive tasks like running a `composer install`
+# ########################################################################
+
 - name: setup swap file
   become: true
   become_user: root

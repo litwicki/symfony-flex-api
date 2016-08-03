@@ -90,5 +90,8 @@ Regenerate API Documentation:
     
 ## Testing with PHPUnit
 
-    $ cd /var/www/tavro/api
-    $ phpunit
+    $ cd /var/www/tavro/api && phpunit
+    
+## Testing JWT Token
+
+    $ curl -X POST http://api.tavro.dev/api/login_check -d _username=tavrobot -d _password=Password1!
