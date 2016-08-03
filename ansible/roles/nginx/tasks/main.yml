@@ -53,7 +53,7 @@
   lineinfile: dest=/etc/nginx/nginx.conf
               regexp='^include\s\/etc\/nginx\/conf.d\/\*.conf;'
               insertafter='include\s\/etc\/nginx\/conf.d\/\*.conf;'
-              line='\tinclude /etc/nginx/sites-enabled/*;'
+              line='\s\s\s\sinclude /etc/nginx/sites-enabled/*;'
               state=present
 
 - name: update fpm port
