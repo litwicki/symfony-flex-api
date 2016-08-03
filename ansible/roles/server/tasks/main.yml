@@ -1,71 +1,21 @@
 ---
 - name: fix proxy for Ubuntu
-  shell: sudo echo "nameserver 8.8.8.8" | sudo tee /etc/resolv.conf > /dev/null
+  shell: echo "nameserver 8.8.8.8" | sudo tee /etc/resolv.conf > /dev/null
 
 - name: Add repository for Ansible
-  apt_repository: repo="ppa:ansible/ansible" state=present
-
-- name: Update apt
-  apt: update_cache=yes cache_valid_time=3600
+  apt_repository: repo="ppa:ansible/ansible" state=present update_cache=yes
 
 - name: Install System Packages
   apt: pkg={{ item }} state=latest
-  with_items:
-    - curl
-    - unzip
-    - wget
-    - snmp
-    - build-essential
-    - python-software-properties
-    - python-pip
-    - python-dev
-    - libssl-dev
-    - libcurl4-openssl-dev
-    - pkg-config
-    - openssl
-    - ansible
+  with_items: "{{ server.packages }}"
 
-- name: Add repository for php7
-  apt_repository: repo="ppa:ondrej/php" state=present
-
-- name: Update apt
-  apt: update_cache=yes cache_valid_time=3600
-
-- name: Purge php5 stuff
+- name: Purge stuff
   apt: pkg={{ item }} state=absent autoremove=yes
-  with_items:
-    - php5-fpm
-    - php5
-    - apache
+  with_items: "{{ server.remove_packages }}"
 
 - name: Install php7 Packages
   apt: pkg={{ item }} state=latest
-  with_items:
-    - php7.0-fpm
-    - php7.0-cli
-    - php7.0-curl
-    - php7.0-common
-    - php7.0-json
-    - php7.0-opcache
-    - php7.0-mysql
-    - php7.0-phpdbg
-    - php7.0-gd
-    - php7.0-imap
-    - php7.0-ldap
-    - php7.0-pgsql
-    - php7.0-pspell
-    - php7.0-recode
-    - php7.0-snmp
-    - php7.0-tidy
-    - php7.0-dev
-    - php7.0-intl
-    - php7.0-mbstring
-    - php7.0-bcmath
-
-- name: Install Extra Packages
-  apt: pkg={{ item }} state=latest
-  with_items: server.packages
-  when: server.packages is defined
+  with_items: "{{ server.php7_packages }}"
 
 - name: Install OAUTH PHP package
   pear: name=pecl/oauth state=present

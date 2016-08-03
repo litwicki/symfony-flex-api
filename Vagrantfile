@@ -1,15 +1,9 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
-# ========================================================================
-# IF YOU CHANGE VALUES HERE PLEASE ALSO CHANGE IN: /provisioning/config
-# I promise that's the only replication!
-# ========================================================================
-
 ip_address = "192.168.50.33"
 appname = "tavro"
 hostname = appname + ".dev"
-
 
 # ========================================================================
 
@@ -19,7 +13,7 @@ Vagrant.configure(2) do |config|
 
   Vagrant.require_version ">= 1.6.0"
 
-  config.vm.box = "ubuntu/trusty64"
+  config.vm.box = "ubuntu/xenial64"
   config.vm.network "private_network", ip: ip_address
 
   # Landrush: https://github.com/phinze/landrush
@@ -56,11 +50,9 @@ Vagrant.configure(2) do |config|
       ansible.playbook = "ansible/provision.yml"
       ansible.extra_vars = {
           hostname: hostname,
-          appname: appname
+          appname: appname,
+          mysql_root_password: appname
       }
   end
-
-  # Auto build the docs
-  config.vm.provision :shell, inline: "php /var/www/tavro/sami/sami update /var/www/tavro/sami/config.php -v", run: "always"
 
 end

@@ -4,6 +4,9 @@
 
 *.iml
 *.box
+composer.lock
+*~
+
 
 ## Directory-based project format:
 .idea/
@@ -67,6 +70,8 @@ crashlytics-build.properties
 sftp-config.json
 
 .vagrant
+*.log
+/api/app/keys/*
 /api/web/bundles
 /api/web/css
 /api/web/js
