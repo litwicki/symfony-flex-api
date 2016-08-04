@@ -50,6 +50,15 @@ class DefaultController extends Controller
         return $response;
     }
 
+    /**
+     * Convert object to array.
+     *
+     * @param $object
+     * @param string $format
+     * @param string $group
+     *
+     * @return mixed
+     */
     public function toArray($object, $format = 'json', $group = 'api')
     {
 
@@ -85,6 +94,8 @@ class DefaultController extends Controller
     }
 
     /**
+     * Convert an array to an XML object.
+     *
      * @param \SimpleXMLElement $object
      * @param array $data
      *
