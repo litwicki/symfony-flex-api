@@ -1,0 +1,50 @@
+tavro_comment_api:
+    resource: "@TavroApiBundle/Resources/config/routing/comment.yml"
+
+tavro_customer_api:
+    resource: "@TavroApiBundle/Resources/config/routing/customer.yml"
+
+tavro_expense_api:
+    resource: "@TavroApiBundle/Resources/config/routing/expense.yml"
+
+tavro_expense_category_api:
+    resource: "@TavroApiBundle/Resources/config/routing/expense_category.yml"
+
+tavro_funding_api:
+    resource: "@TavroApiBundle/Resources/config/routing/funding.yml"
+
+tavro_node_api:
+    resource: "@TavroApiBundle/Resources/config/routing/node.yml"
+
+tavro_organization_api:
+    resource: "@TavroApiBundle/Resources/config/routing/organization.yml"
+
+tavro_product_api:
+    resource: "@TavroApiBundle/Resources/config/routing/product.yml"
+
+tavro_product_category_api:
+    resource: "@TavroApiBundle/Resources/config/routing/product_category.yml"
+
+tavro_revenue_api:
+    resource: "@TavroApiBundle/Resources/config/routing/revenue.yml"
+
+tavro_revenue_category_api:
+    resource: "@TavroApiBundle/Resources/config/routing/revenue_category.yml"
+
+tavro_service_api:
+    resource: "@TavroApiBundle/Resources/config/routing/service.yml"
+
+tavro_service_category_api:
+    resource: "@TavroApiBundle/Resources/config/routing/service_category.yml"
+
+tavro_shareholder_api:
+    resource: "@TavroApiBundle/Resources/config/routing/shareholder.yml"
+
+tavro_user_api:
+    resource: "@TavroApiBundle/Resources/config/routing/user.yml"
+
+tavro_user_quickbooks_api:
+    resource: "@TavroApiBundle/Resources/config/routing/user_quickbooks.yml"
+
+tavro_user_freshbooks_api:
+    resource: "@TavroApiBundle/Resources/config/routing/user_freshbooks.yml"

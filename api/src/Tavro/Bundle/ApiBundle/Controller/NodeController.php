@@ -1,6 +1,6 @@
 <?php
 
-namespace Tavro\Bundle\CoreBundle\Controller\Api;
+namespace Tavro\Bundle\ApiBundle\Controller\Api;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -21,7 +21,7 @@ use Tavro\Bundle\CoreBundle\Entity\NodeComment;
 use Symfony\Component\HttpFoundation\Cookie;
 
 use Litwicki\Common\Common;
-use Tavro\Bundle\CoreBundle\Controller\Api\DefaultController as ApiController;
+use Tavro\Bundle\ApiBundle\Controller\DefaultController as ApiController;
 
 class NodeController extends ApiController
 {

@@ -28,6 +28,7 @@ class AppKernel extends Kernel
         $tavro = array(
             new Tavro\Bundle\CoreBundle\TavroCoreBundle(),
             new Tavro\Bundle\AppBundle\TavroAppBundle(),
+            new Tavro\Bundle\ApiBundle\TavroApiBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
