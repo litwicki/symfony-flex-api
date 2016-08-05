@@ -105,6 +105,7 @@ class Customers extends AbstractFixture implements OrderedFixtureInterface, Cont
                 $customer->setCreateDate(new \DateTime());
                 $customer->setOrganization($organization);
                 $customer->setPerson($person);
+                $customer->setJobTitle($faker->jobTitle);
                 $manager->persist($customer);
                 $customers[] = $customer;
                 $manager->persist($customer);

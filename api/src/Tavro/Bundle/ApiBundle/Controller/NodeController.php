@@ -90,7 +90,7 @@ class NodeController extends ApiController
                 'format'  => $_format,
             );
 
-            return $this->forward('TavroCoreBundle:Default:get', $routeOptions);
+            return $this->forward('TavroApiBundle:Default:get', $routeOptions);
 
         }
         catch(\Exception $e) {
@@ -180,7 +180,7 @@ class NodeController extends ApiController
     {
         try {
 
-            $entity = $this->getDoctrine()->getManager()->getRepository('TavroCoreBundle:NodeTag')->findOneBy(array(
+            $entity = $this->getDoctrine()->getManager()->getRepository('TavroApiBundle:NodeTag')->findOneBy(array(
                 'node' => $node,
                 'tag' => $tag,
             ));

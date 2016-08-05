@@ -120,7 +120,7 @@ class UserController extends ApiController
          * Cross Reference every Organization this User owns but may not be
          * a "User" of..
          */
-        $entities = $this->getDoctrine()->getManager()->getRepository('TavroCoreBundle:Organization')->findBy(array(
+        $entities = $this->getDoctrine()->getManager()->getRepository('TavroApiBundle:Organization')->findBy(array(
             'user' => $user
         ));
 

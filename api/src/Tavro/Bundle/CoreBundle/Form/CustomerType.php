@@ -18,23 +18,21 @@ class CustomerType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('first_name')
-            ->add('last_name')
-            ->add('title')
-            ->add('address')
-            ->add('address2')
-            ->add('city')
-            ->add('state')
-            ->add('zip')
-            ->add('email')
-            ->add('phone')
-            ->add('shares')
+            ->add('job_title')
             ->add('status')
-            ->add('create_date', DateTimeType::class)
-            ->add('update_date', DateTimeType::class)
             ->add('user', EntityType::class, array(
                 'class' => 'TavroCoreBundle:User',
-                'choice_label' => 'Owner'
+                'choice_label' => 'User'
+            ))
+            ->add('person', EntityType::class, array(
+                'class' => 'TavroCoreBundle:Person',
+                'choice_label' => 'Person',
+                'required' => true
+            ))
+            ->add('organization', EntityType::class, array(
+                'class' => 'TavroCoreBundle:Organization',
+                'choice_label' => 'Organization',
+                'required' => true
             ))
             ->add('submit', SubmitType::class)
         ;
@@ -46,7 +44,8 @@ class CustomerType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Tavro\Bundle\CoreBundle\Entity\Customer'
+            'data_class' => 'Tavro\Bundle\CoreBundle\Entity\Customer',
+            'csrf_protection' => false,
         ));
     }
 }

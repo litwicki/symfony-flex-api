@@ -272,7 +272,7 @@ class DefaultController extends Controller
                 'format'  => $_format,
             );
 
-            return $this->forward('TavroCoreBundle:Default:get', $routeOptions);
+            return $this->forward('TavroApiBundle:Default:get', $routeOptions);
         }
         catch (InvalidFormException $e) {
             throw $e;
@@ -314,7 +314,7 @@ class DefaultController extends Controller
                 '_format'  => $_format,
             );
 
-            return $this->forward('TavroCoreBundle:Default:get', $routeOptions);
+            return $this->forward('TavroApiBundle:Default:get', $routeOptions);
         }
         catch (InvalidFormException $e) {
             throw $e;
