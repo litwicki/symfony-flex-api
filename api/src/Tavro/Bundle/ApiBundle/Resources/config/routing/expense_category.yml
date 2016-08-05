@@ -1,6 +1,6 @@
 api_get_expense_category:
     path: /expense_categories/{id}.{_format}
-    defaults: { _controller: TavroCoreBundle:Api/ExpenseCategory:get, _format: json, entity: "expense_categories" }
+    defaults: { _controller: TavroApiBundle:ExpenseCategory:get, _format: json, entity: "expense_categories" }
     methods: GET
     requirements:
         id: \d+
@@ -8,21 +8,21 @@ api_get_expense_category:
 
 api_get_all_expense_categories:
     path:  /expense_categories.{_format}
-    defaults: { _controller: TavroCoreBundle:Api/ExpenseCategory:getAll, _format: json, entity: "expense_categories" }
+    defaults: { _controller: TavroApiBundle:ExpenseCategory:getAll, _format: json, entity: "expense_categories" }
     methods: GET
     requirements:
         _format:  json|xml
 
 api_post_expense_category:
     path:  /expense_categories.{_format}
-    defaults: { _controller: TavroCoreBundle:Api/ExpenseCategory:post, _format: json, entity: "expense_categories" }
+    defaults: { _controller: TavroApiBundle:ExpenseCategory:post, _format: json, entity: "expense_categories" }
     methods: POST
     requirements:
         _format:  json|xml
 
 api_patch_expense_category:
     path:  /expense_categories/{id}.{_format}
-    defaults: { _controller: TavroCoreBundle:Api/ExpenseCategory:patch, _format: json, entity: "expense_categories" }
+    defaults: { _controller: TavroApiBundle:ExpenseCategory:patch, _format: json, entity: "expense_categories" }
     methods: PATCH
     requirements:
         id: \d+
@@ -30,7 +30,7 @@ api_patch_expense_category:
 
 api_put_expense_category:
     path:  /expense_categories/{id}.{_format}
-    defaults: { _controller: TavroCoreBundle:Api/ExpenseCategory:put, _format: json, entity: "expense_categories" }
+    defaults: { _controller: TavroApiBundle:ExpenseCategory:put, _format: json, entity: "expense_categories" }
     methods: PUT
     requirements:
         id: \d+
@@ -38,7 +38,7 @@ api_put_expense_category:
 
 api_delete_expense_category:
     path:  /expense_categories/{id}.{_format}
-    defaults: { _controller: TavroCoreBundle:Api/ExpenseCategory:delete, _format: json, entity: "expense_categories" }
+    defaults: { _controller: TavroApiBundle:ExpenseCategory:delete, _format: json, entity: "expense_categories" }
     methods: DELETE
     requirements:
         id: \d+

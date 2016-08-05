@@ -30,4 +30,4 @@ api_login_check:
         api_host: ^(api_hostname%|api.localhost)$
     defaults:
         api_host: %api_hostname%
-    path: /api/login_check
+    path: /api/v1/login_check

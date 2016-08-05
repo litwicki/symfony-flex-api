@@ -21,25 +21,31 @@ class ExceptionSubscriber implements EventSubscriberInterface
         );
     }
 
+    /**
+     * Process an Exception message.
+     *
+     * @param \Symfony\Component\HttpKernel\Event\GetResponseForExceptionEvent $event
+     */
     public function processException(GetResponseForExceptionEvent $event)
     {
 
         $exception = $event->getException();
 
-        switch($exception->getCode()) {
+        /**
+         * If the Exception code is 0 then we need to be notified
+         * because something in the Matrix has failed and we need
+         * Agent Smith to come fix it..
+         */
+        if($exception->getCode() === 0) {
 
-//            case 0:
-//                $message = 'That resource is not available.';
-//                break;
-            default:
-                $message = $exception->getMessage();
+            //log the error code here so we can fix it!
 
         }
 
         $message = array(
             'code' => $exception->getCode(),
             'class' => get_class($exception),
-            'message' => $message,
+            'message' => $exception->getMessage(),
         );
 
         $message = json_encode($message);

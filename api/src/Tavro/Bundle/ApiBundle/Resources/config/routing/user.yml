@@ -1,6 +1,6 @@
 api_get_user:
     path: /users/{id}.{_format}
-    defaults: { _controller: TavroCoreBundle:Api/User:get, _format: json, entity: "users" }
+    defaults: { _controller: TavroApiBundle:User:get, _format: json, entity: "users" }
     methods: GET
     requirements:
         id: \d+
@@ -8,21 +8,21 @@ api_get_user:
 
 api_get_all_users:
     path:  /users.{_format}
-    defaults: { _controller: TavroCoreBundle:Api/User:getAll, _format: json, entity: "users" }
+    defaults: { _controller: TavroApiBundle:User:getAll, _format: json, entity: "users" }
     methods: GET
     requirements:
         _format:  json|xml
 
 api_post_user:
     path:  /users.{_format}
-    defaults: { _controller: TavroCoreBundle:Api/User:post, _format: json, entity: "users" }
+    defaults: { _controller: TavroApiBundle:User:post, _format: json, entity: "users" }
     methods: POST
     requirements:
         _format:  json|xml
 
 api_patch_user:
     path:  /users/{id}.{_format}
-    defaults: { _controller: TavroCoreBundle:Api/User:patch, _format: json, entity: "users" }
+    defaults: { _controller: TavroApiBundle:User:patch, _format: json, entity: "users" }
     methods: PATCH
     requirements:
         id: \d+
@@ -30,7 +30,7 @@ api_patch_user:
 
 api_put_user:
     path:  /users/{id}.{_format}
-    defaults: { _controller: TavroCoreBundle:Api/User:put, _format: json, entity: "users" }
+    defaults: { _controller: TavroApiBundle:User:put, _format: json, entity: "users" }
     methods: PUT
     requirements:
         id: \d+
@@ -38,7 +38,7 @@ api_put_user:
 
 api_delete_user:
     path:  /users/{id}.{_format}
-    defaults: { _controller: TavroCoreBundle:Api/User:delete, _format: json, entity: "users" }
+    defaults: { _controller: TavroApiBundle:User:delete, _format: json, entity: "users" }
     methods: DELETE
     requirements:
         id: \d+
@@ -46,7 +46,7 @@ api_delete_user:
         
 api_user_regenerate_api_key:
     path: /users/{user}/reset/api-key.{_format}
-    defaults: { _controller: TavroCoreBundle:Api/User:resetApiKey, _format: json}
+    defaults: { _controller: TavroApiBundle:User:resetApiKey, _format: json}
     methods: POST
     requirements:
         user: \d+
@@ -54,7 +54,7 @@ api_user_regenerate_api_key:
 
 api_user_regenerate_api_password:
     path: /users/{user}/reset/api-password.{_format}
-    defaults: { _controller: TavroCoreBundle:Api/User:resetApiPassword, _format: json}
+    defaults: { _controller: TavroApiBundle:User:resetApiPassword, _format: json}
     methods: POST
     requirements:
         user: \d+
@@ -62,7 +62,7 @@ api_user_regenerate_api_password:
 
 api_user_nodes:
     path: /users/{user}/nodes.{_format}
-    defaults: { _controller: TavroCoreBundle:Api/User:nodes, _format: json}
+    defaults: { _controller: TavroApiBundle:User:nodes, _format: json}
     methods: GET
     requirements:
         user: \d+
@@ -70,7 +70,7 @@ api_user_nodes:
 
 api_user_organizations:
     path: /users/{user}/organizations.{_format}
-    defaults: { _controller: TavroCoreBundle:Api/User:organizations, _format: json}
+    defaults: { _controller: TavroApiBundle:User:organizations, _format: json}
     methods: GET
     requirements:
         user: \d+

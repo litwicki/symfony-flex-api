@@ -26,6 +26,15 @@ You can now access your dev machine at [https://tavro.dev](https://tavro.dev)
     $ git clone git@bitbucket.org:zoadilack/tavro.git /path/to/tavro
     $ vagrant up
 
+### Setup Keys for JWT Authorization
+
+**IMPORTANT** 
+Whatever you set the passphrase to you will need to also set in `app/config.parameters.yml` for your `jwt_passphrase` value!
+
+    $ mkdir -p /var/www/tavro/api/app/keys
+    $ openssl genrsa -out /var/www/tavro/api/app/keys/private.pem -aes256 4096
+    $ openssl rsa -pubout -in /var/www/tavro/api/app/keys/private.pem -out /var/www/tavro/api/app/keys/public.pem
+
 ## Development
 
 Workflow and useful 'stuff' for developing in Tavro.
@@ -35,14 +44,13 @@ Workflow and useful 'stuff' for developing in Tavro.
     $ npm install --global gulp-cli
     $ npm install --save-dev gulp gulp-sass gulp-concat gulp-minify-css fs gulp-s3 gulp-image gulp-util
 
-    
 ### Testing with PHPUnit
 
     $ cd /var/www/tavro/api && phpunit
     
 ### Testing JWT Token
 
-    $ curl -X POST http://api.tavro.dev/api/login_check -d _username=tavrobot -d _password=Password1!
+    $ curl -X POST http://api.tavro.dev/api/v1/login_check -d _username=tavrobot -d _password=Password1!
 
 ### Scripts
 

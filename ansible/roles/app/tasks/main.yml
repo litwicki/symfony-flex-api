@@ -1,15 +1,3 @@
 ---
-- name: Setup Local SSH Keys for JWT
-  file: path=/var/www/{{ appname }}/api/app/keys state=directory mode=0755
-
-- name: remove key if exists already
-  file: path=/var/www/{{ appname }}/api/app/keys/{{appname}} state=absent
-
-- name: remove public key if they exist already
-  file: path=/var/www/{{ appname }}/api/app/keys/{{appname}}.pub state=absent
-
-- name: create ssh keys
-  command: ssh-keygen -t rsa -f /var/www/{{appname}}/api/app/keys/{{appname}} -q -P ""
-
 - name: regenerate docs
   command: bash /var/www/{{appname}}/scripts/regenerate-docs.sh

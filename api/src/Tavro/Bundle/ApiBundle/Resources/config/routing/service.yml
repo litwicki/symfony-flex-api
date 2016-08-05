@@ -1,6 +1,6 @@
 api_get_service:
     path: /services/{id}.{_format}
-    defaults: { _controller: TavroCoreBundle:Api/Service:get, _format: json }
+    defaults: { _controller: TavroApiBundle:Service:get, _format: json }
     methods: GET
     requirements:
         id: \d+
@@ -8,35 +8,35 @@ api_get_service:
 
 api_get_all_services:
     path:  /services.{_format}
-    defaults: { _controller: TavroCoreBundle:Api/Service:getAll, _format: json }
+    defaults: { _controller: TavroApiBundle:Service:getAll, _format: json }
     methods: GET
     requirements:
         _format:  json|xml
 
 api_get_all_service_images:
     path:  /services/{id}/images.{_format}
-    defaults: { _controller: TavroCoreBundle:Api/Service:getImages, _format: json }
+    defaults: { _controller: TavroApiBundle:Service:getImages, _format: json }
     methods: GET
     requirements:
         _format:  json|xml
 
 api_post_service_image:
     path:  /services/{service}/images.{_format}
-    defaults: { _controller: TavroCoreBundle:Api/Service:newImage, _format: json }
+    defaults: { _controller: TavroApiBundle:Service:newImage, _format: json }
     methods: POST
     requirements:
         _format:  json|xml
 
 api_post_service:
     path:  /services.{_format}
-    defaults: { _controller: TavroCoreBundle:Api/Service:post, _format: json }
+    defaults: { _controller: TavroApiBundle:Service:post, _format: json }
     methods: POST
     requirements:
         _format:  json|xml
 
 api_patch_service:
     path:  /services/{id}.{_format}
-    defaults: { _controller: TavroCoreBundle:Api/Service:patch, _format: json }
+    defaults: { _controller: TavroApiBundle:Service:patch, _format: json }
     methods: PATCH
     requirements:
         id: \d+
@@ -44,7 +44,7 @@ api_patch_service:
 
 api_put_service:
     path:  /services/{id}.{_format}
-    defaults: { _controller: TavroCoreBundle:Api/Service:put, _format: json }
+    defaults: { _controller: TavroApiBundle:Service:put, _format: json }
     methods: PUT
     requirements:
         id: \d+
@@ -52,7 +52,7 @@ api_put_service:
 
 api_delete_service:
     path:  /services/{id}.{_format}
-    defaults: { _controller: TavroCoreBundle:Api/Service:delete, _format: json }
+    defaults: { _controller: TavroApiBundle:Service:delete, _format: json }
     methods: DELETE
     requirements:
         id: \d+
@@ -60,7 +60,7 @@ api_delete_service:
 
 api_typeahead_services:
     path:  /typeahead/services.{_format}
-    defaults: { _controller: TavroCoreBundle:Api/Service:typeahead, _format: json }
+    defaults: { _controller: TavroApiBundle:Service:typeahead, _format: json }
     methods: GET
     requirements:
         _format:  json|xml

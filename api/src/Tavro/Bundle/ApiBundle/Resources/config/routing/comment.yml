@@ -1,6 +1,6 @@
 api_get_entity:
     path: /{entity}/{id}.{_format}
-    defaults: { _controller: TavroCoreBundle:Api/Default:get, _format: json }
+    defaults: { _controller: TavroApiBundle:Default:get, _format: json }
     methods: GET
     requirements:
         id: \d+
@@ -8,7 +8,7 @@ api_get_entity:
 
 api_patch_entity:
     path:  /{entity}/{id}.{_format}
-    defaults: { _controller: TavroCoreBundle:Api/Default:patch, _format: json }
+    defaults: { _controller: TavroApiBundle:Default:patch, _format: json }
     methods: PATCH
     requirements:
         id: \d+
@@ -16,7 +16,7 @@ api_patch_entity:
 
 api_put_entity:
     path:  /{entity}/{id}.{_format}
-    defaults: { _controller: TavroCoreBundle:Api/Default:put, _format: json }
+    defaults: { _controller: TavroApiBundle:Default:put, _format: json }
     methods: PUT
     requirements:
         id: \d+
@@ -24,7 +24,7 @@ api_put_entity:
 
 api_delete_entity:
     path:  /{entity}/{id}.{_format}
-    defaults: { _controller: TavroCoreBundle:Api/Default:delete, _format: json }
+    defaults: { _controller: TavroApiBundle:Default:delete, _format: json }
     methods: DELETE
     requirements:
         id: \d+
@@ -32,7 +32,7 @@ api_delete_entity:
 
 api_typeahead_entities:
     path:  /typeahead/{entity}.{_format}
-    defaults: { _controller: TavroCoreBundle:Api/Default:typeahead, _format: json }
+    defaults: { _controller: TavroApiBundle:Default:typeahead, _format: json }
     methods: GET
     requirements:
         _format:  json|xml
