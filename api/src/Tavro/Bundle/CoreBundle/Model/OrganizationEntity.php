@@ -12,6 +12,7 @@ use JMS\Serializer\Annotation\Type;
 use JMS\Serializer\Annotation\VirtualProperty;
 use JMS\Serializer\Annotation\Groups;
 
+use Tavro\Bundle\CoreBundle\Entity\Organization;
 use Tavro\Bundle\CoreBundle\Entity\User;
 use Tavro\Bundle\CoreBundle\Model\Entity;
 
@@ -35,7 +36,7 @@ class OrganizationEntity extends Entity implements EntityInterface
      *
      * @param \Tavro\Bundle\CoreBundle\Entity\Organization $organization
      *
-     * @return Tag
+     * @return Organization
      */
     public function setOrganization(\Tavro\Bundle\CoreBundle\Entity\Organization $organization)
     {

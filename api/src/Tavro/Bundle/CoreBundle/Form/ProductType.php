@@ -20,10 +20,9 @@ class ProductType extends AbstractType
         $builder
             ->add('body')
             ->add('title')
-            ->add('slug')
             ->add('status')
-            ->add('create_date', DateTimeType::class)
-            ->add('update_date', DateTimeType::class)
+            ->add('cost')
+            ->add('price')
             ->add('category', EntityType::class, array(
                 'class' => 'TavroCoreBundle:ProductCategory',
                 'choice_label' => 'Category'
@@ -31,10 +30,6 @@ class ProductType extends AbstractType
             ->add('organization', EntityType::class, array(
                 'class' => 'TavroCoreBundle:Organization',
                 'choice_label' => 'Organization'
-            ))
-            ->add('updated_by', EntityType::class, array(
-                'class' => 'TavroCoreBundle:User',
-                'choice_label' => 'User'
             ))
             ->add('submit', SubmitType::class)
         ;
@@ -46,7 +41,8 @@ class ProductType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Tavro\Bundle\CoreBundle\Entity\Product'
+            'data_class' => 'Tavro\Bundle\CoreBundle\Entity\Product',
+            'csrf_protection' => false,
         ));
     }
 }

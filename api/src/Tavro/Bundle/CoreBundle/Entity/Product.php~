@@ -28,6 +28,12 @@ class Product extends OrganizationEntity implements OrganizationEntityInterface
 {
 
     /**
+     * @ORM\Column(type="string", length=255, nullable=false)
+     * @Groups({"api", "tavro", "simple"})
+     */
+    protected $title;
+
+    /**
      * @ORM\Column(type="float", nullable=false, options={"default" = 0})
      * @Groups({"api", "tavro", "simple"})
      */
@@ -73,6 +79,7 @@ class Product extends OrganizationEntity implements OrganizationEntityInterface
     {
         return $this->title;
     }
+
     /**
      * Set body
      *
@@ -94,6 +101,29 @@ class Product extends OrganizationEntity implements OrganizationEntityInterface
     public function getBody()
     {
         return $this->body;
+    }
+
+    /**
+     * Set title
+     *
+     * @param string $title
+     * @return Product
+     */
+    public function setTitle($title)
+    {
+        $this->title = $title;
+
+        return $this;
+    }
+
+    /**
+     * Get title
+     *
+     * @return string
+     */
+    public function getTitle()
+    {
+        return $this->title;
     }
 
     /**
