@@ -596,7 +596,7 @@ class EntityHandler implements EntityHandlerInterface
                 'Tavro\Bundle\CoreBundle\Entity\NodeComment'         => 'Tavro\Bundle\CoreBundle\Form\NodeCommentType',
                 'Tavro\Bundle\CoreBundle\Entity\NodeTag'             => 'Tavro\Bundle\CoreBundle\Form\NodeTagType',
                 'Tavro\Bundle\CoreBundle\Entity\Node'                => 'Tavro\Bundle\CoreBundle\Form\NodeType',
-                'Tavro\Bundle\CoreBundle\Entity\OrganizationType'    => 'Tavro\Bundle\CoreBundle\Form\OrganizationType',
+                'Tavro\Bundle\CoreBundle\Entity\Organization'        => 'Tavro\Bundle\CoreBundle\Form\OrganizationType',
                 'Tavro\Bundle\CoreBundle\Entity\ProductCategory'     => 'Tavro\Bundle\CoreBundle\Form\ProductCategoryType',
                 'Tavro\Bundle\CoreBundle\Entity\Product'             => 'Tavro\Bundle\CoreBundle\Form\ProductType',
                 'Tavro\Bundle\CoreBundle\Entity\RevenueCategory'     => 'Tavro\Bundle\CoreBundle\Form\RevenueCategoryType',

@@ -21,17 +21,10 @@ class OrganizationType extends AbstractType
         $builder
             ->add('title')
             ->add('body')
-            ->add('slug')
             ->add('status')
-            ->add('create_date', DateTimeType::class)
-            ->add('update_date', DateTimeType::class)
             ->add('owner', EntityType::class, array(
                 'class' => 'TavroCoreBundle:User',
                 'choice_label' => 'Owner'
-            ))
-            ->add('updated_by', EntityType::class, array(
-                'class' => 'TavroCoreBundle:User',
-                'choice_label' => 'Updated By'
             ))
             ->add('submit', SubmitType::class)
         ;

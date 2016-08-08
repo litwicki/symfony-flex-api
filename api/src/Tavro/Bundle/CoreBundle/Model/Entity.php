@@ -85,12 +85,10 @@ class Entity implements EntityInterface
         elseif(property_exists($className, 'slug')) {
             return $this->slug;
         }
+        else {
+            return sprintf('%s %s', $class->getShortName(), $this->id);
+        }
 
-        /**
-         * Last resort...
-         */
-        $string = sprintf('%s %s', $class->getShortName(), $this->id);
-        return $string;
     }
 
     /**

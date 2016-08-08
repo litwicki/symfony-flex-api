@@ -46,6 +46,7 @@ class ExceptionSubscriber implements EventSubscriberInterface
             'code' => $exception->getCode(),
             'class' => get_class($exception),
             'message' => $exception->getMessage(),
+            'trace' => $exception->getTraceAsString(),
         );
 
         $message = json_encode($message);

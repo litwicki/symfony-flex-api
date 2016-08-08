@@ -24,7 +24,7 @@ class OrganizationEntity extends Entity implements EntityInterface
 {
 
     /**
-     * @ORM\ManyToOne(targetEntity="Tavro\Bundle\CoreBundle\Entity\Organization", inversedBy="tags")
+     * @ORM\ManyToOne(targetEntity="Tavro\Bundle\CoreBundle\Entity\Organization", inversedBy="organizations")
      * @ORM\JoinColumn(name="organization_id", referencedColumnName="id", nullable=false)
      * @Groups({"api", "tavro", "simple"})
      * @MaxDepth(1)
@@ -42,7 +42,7 @@ class OrganizationEntity extends Entity implements EntityInterface
     {
         $this->organization = $organization;
 
-        return $this;
+        return $this->organization;
     }
 
     /**

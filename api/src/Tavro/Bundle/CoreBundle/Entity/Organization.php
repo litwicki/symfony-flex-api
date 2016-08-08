@@ -125,10 +125,9 @@ class Organization extends Entity implements EntityInterface
     protected $funding_round_shareholders;
 
     /**
-     * Set owner
-     *
      * @param \Tavro\Bundle\CoreBundle\Entity\User $owner
-     * @return User
+     *
+     * @return $this
      */
     public function setOwner(\Tavro\Bundle\CoreBundle\Entity\User $owner)
     {
