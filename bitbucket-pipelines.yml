@@ -5,6 +5,9 @@ pipelines:
     master:
       - step:
           script:
+            - ansible-playbook ansible/tests.yml
+      - step:
+          script:
             - sudo apt-get install software-properties-common
             - sudo apt-add-repository ppa:ansible/ansible
             - sudo apt-get update

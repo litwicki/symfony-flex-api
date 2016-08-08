@@ -4,6 +4,7 @@ namespace Tavro\Bundle\CoreBundle\Handler\Entity;
 
 use Rhumsaa\Uuid\Uuid;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
+use Tavro\Bundle\CoreBundle\Exception\Password\PasswordLengthException;
 use Symfony\Component\PropertyAccess\Exception\InvalidPropertyPathException;
 use Symfony\Component\Form\Exception\TransformationFailedException;
 use Symfony\Component\Form\Exception\UnexpectedTypeException;
@@ -538,19 +539,27 @@ class UserHandler extends EntityHandler
 
     /**
      * @param \Tavro\Bundle\CoreBundle\Entity\User $user
-     * @param $password
+     * @param $parameters
      *
-     * @return \Tavro\Bundle\CoreBundle\Entity\User
+     * @return \Tavro\Bundle\CoreBundle\Model\EntityInterface
      * @throws \Exception
      */
-    public function resetPassword(User $user, $password)
+    public function resetPassword(User $user, $parameters)
     {
         try {
+
+            if(!isset($parameters['password'])) {
+                throw new PasswordLengthException('Password not found');
+            }
+
+            if(!isset($parameters['password_confirm']) || !isset($parameters['new_password'])) {
+                throw new \Exception('New password not defined and/or matched!');
+            }
 
             $parameters = [
                 'password_token'        => null,
                 'password_token_expire' => null,
-                'password'              => $password,
+                'password'              => $parameters['password'],
             ];
 
             return $this->patch($user, $parameters);
@@ -800,6 +809,34 @@ class UserHandler extends EntityHandler
         }
 
         return $this->hasRole($user, $role);
+    }
+
+    /**
+     * If a User has forgotten their password, set a password token and a time by
+     * which that token will expire to give them an opportunity to reset their password.
+     * 
+     * @param \Tavro\Bundle\CoreBundle\Entity\User $user
+     *
+     * @throws \Exception
+     */
+    public function forgotPassword(User $user)
+    {
+        try {
+
+            $dt = new \DateTime();
+            $dt->modify("+30 minutes");
+
+            $parameters = [
+                'password_token_expire' => $dt,
+                'password_token' => Uuid::uuid4()
+            ];
+
+            $this->patch($user, $parameters);
+
+        }
+        catch (\Exception $e) {
+            throw $e;
+        }
     }
 
 }

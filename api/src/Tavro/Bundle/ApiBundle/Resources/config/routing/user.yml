@@ -43,7 +43,7 @@ api_delete_user:
     requirements:
         id: \d+
         _format:  json|xml
-        
+
 api_user_regenerate_api_key:
     path: /users/{user}/reset/api-key.{_format}
     defaults: { _controller: TavroApiBundle:User:resetApiKey, _format: json}
