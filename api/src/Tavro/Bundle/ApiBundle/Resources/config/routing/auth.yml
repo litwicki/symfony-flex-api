@@ -1,0 +1,24 @@
+auth_reset_password:
+    path: /auth/reset.{format}
+    defaults: { _controller: TavroApiBundle:Auth:reset, _format: json }
+    methods: POST
+    requirements:
+        id: \d+
+        _format:  json|xml
+
+
+auth_forgot_password:
+    path: /auth/forgot.{format}
+    defaults: { _controller: TavroApiBundle:Auth:forgot, _format: json }
+    methods: POST
+    requirements:
+        id: \d+
+        _format:  json|xml
+
+auth_confirm_email:
+    path: /auth/confirm.{format}
+    defaults: { _controller: TavroApiBundle:Auth:confirm, _format: json }
+    methods: POST
+    requirements:
+        id: \d+
+        _format:  json|xml
