@@ -6,7 +6,6 @@ auth_reset_password:
         id: \d+
         _format:  json|xml
 
-
 auth_forgot_password:
     path: /auth/forgot.{format}
     defaults: { _controller: TavroApiBundle:Auth:forgot, _format: json }
