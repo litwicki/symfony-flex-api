@@ -60,9 +60,15 @@ class AuthController extends ApiController
     public function forgotAction(Request $request, $format)
     {
         try {
+
+            //set the password tokens etc.
             $handler = $this->container->get('tavro.handler.users');
             $user = $this->getUser();
             $handler->forgotPassword($user);
+
+            //email the user the link to reset their password
+            $this->getContainer()->get('mailer')->sendPasswordReset($user);
+
         }
         catch(ApiAccessDeniedException $e) {
             throw $e;
