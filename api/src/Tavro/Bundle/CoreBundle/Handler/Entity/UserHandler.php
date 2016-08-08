@@ -814,7 +814,7 @@ class UserHandler extends EntityHandler
     /**
      * If a User has forgotten their password, set a password token and a time by
      * which that token will expire to give them an opportunity to reset their password.
-     * 
+     *
      * @param \Tavro\Bundle\CoreBundle\Entity\User $user
      *
      * @throws \Exception

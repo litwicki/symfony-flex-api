@@ -5,7 +5,7 @@ use Tavro\Bundle\CoreBundle\Entity\User;
 
 class UserRegisterEvent extends Event
 {
-    const NAME = 'user.registered';
+    const NAME = 'tavro.user_registered';
 
     protected $user;
 
