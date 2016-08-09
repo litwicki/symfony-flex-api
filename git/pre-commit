@@ -2,10 +2,11 @@
 
 <?php
 
-    printf("%s Running pre-commit git hook%1\$s", PHP_EOL);
+    printf("%s Running pre-commit hook(s)\n%1\$s", PHP_EOL);
 
     $projectName = basename(getcwd());
 
+    printf("Execute PHPUnit tests\n");
     exec('cd api && phpunit', $output, $returnCode);
 
     if ($returnCode !== 0) {
@@ -15,5 +16,7 @@
         printf("ABORTING COMMIT!\n");
         exit(1);
     }
+
+    printf("Done\n");
 
 exit(0);
