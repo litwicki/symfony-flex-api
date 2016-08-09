@@ -55,4 +55,6 @@ Vagrant.configure(2) do |config|
       }
   end
 
+  # Install the pre-commit hook
+
 end
