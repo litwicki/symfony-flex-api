@@ -56,5 +56,6 @@ Vagrant.configure(2) do |config|
   end
 
   # Install the pre-commit hook
+  config.vm.provision "shell", inline: "sudo cp git/pre-commit .git/hooks/pre-commit && sudo chmod 0777 .git/hooks/pre-commit"
 
 end
