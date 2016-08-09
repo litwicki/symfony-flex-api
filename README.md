@@ -46,6 +46,8 @@ Workflow and useful 'stuff' for developing in Tavro.
 
 ### Testing with PHPUnit
 
+**NOTE** Tests will be run before every commit regardless!
+
     $ cd /var/www/tavro/api && phpunit
     
 ### Testing JWT Token
