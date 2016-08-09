@@ -29,6 +29,7 @@ You can now access your dev machine at [https://tavro.dev](https://tavro.dev)
 ### Setup Keys for JWT Authorization
 
 **IMPORTANT** 
+
 Whatever you set the passphrase to you will need to also set in `app/config.parameters.yml` for your `jwt_passphrase` value!
 
     $ mkdir -p /var/www/tavro/api/app/keys
