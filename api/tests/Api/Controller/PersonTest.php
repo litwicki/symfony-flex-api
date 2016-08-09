@@ -2,10 +2,10 @@
 
 use Guzzle\Http\Client;
 
-class CustomerTest extends \PHPUnit_Framework_TestCase
+class PersonTest extends \PHPUnit_Framework_TestCase
 {
 
-    public function testCustomerRoute()
+    public function testPersonRoute()
     {
         $client = new Client('http://api.tavro.dev/api/v1', array(
             'request.options' => array(
@@ -26,19 +26,20 @@ class CustomerTest extends \PHPUnit_Framework_TestCase
         $body = json_decode($json, true);
         $token = $body['token'];
 
-        $url = 'http://api.tavro.dev/api/v1/customers';
+        $url = 'http://api.tavro.dev/api/v1/people';
 
         $request = $client->get($url);
         $request->addHeader('Authorization', sprintf('Bearer %s', $token));
         $response = $request->send();
 
         $json = $response->getBody(true);
+        die($json);
 
         $this->assertEquals(200, $response->getStatusCode());
 
     }
 
-    public function testCustomerCreate()
+    public function testPersonCreate()
     {
         // create our http client (Guzzle)
         $client = new Client('http://api.tavro.dev/api/v1', array(
@@ -60,13 +61,22 @@ class CustomerTest extends \PHPUnit_Framework_TestCase
         $body = json_decode($json, true);
         $token = $body['token'];
 
-        $data = array(
-            'job_title' => 'Wizard',
-            'person' => 1,
-            'organization' => 1
-        );
+        $faker = \Faker\Factory::create('en_EN');
+        $genders = array('male', 'female');
 
-        $url = 'http://api.tavro.dev/api/v1/customers';
+        $gender = $genders[rand(0,1)];
+
+        $data = [
+            'first_name' => $faker->firstName,
+            'last_name' => $faker->lastName,
+            'title' => $faker->title($gender),
+            'suffix' => $faker->suffix,
+            'email' => $faker->email,
+            'gender' => $gender,
+            'birthday' => $faker->dateTimeThisCentury
+        ];
+
+        $url = 'http://api.tavro.dev/api/v1/people';
 
         $client = new Client($url, array(
             'request.options' => array(

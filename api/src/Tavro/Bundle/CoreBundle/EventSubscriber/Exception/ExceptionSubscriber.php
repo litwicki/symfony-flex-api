@@ -4,11 +4,22 @@ namespace Tavro\Bundle\CoreBundle\EventSubscriber\Exception;
 
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpKernel\Event\GetResponseForExceptionEvent;
 use Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
+use Symfony\Component\Security\Core\Exception\AuthenticationCredentialsNotFoundException;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class ExceptionSubscriber implements EventSubscriberInterface
 {
+    protected $env;
+
+    public function __construct($env)
+    {
+        $this->env = $env;
+    }
+
     public static function getSubscribedEvents()
     {
         // return the subscribed events, their methods and priorities
@@ -28,31 +39,31 @@ class ExceptionSubscriber implements EventSubscriberInterface
      */
     public function processException(GetResponseForExceptionEvent $event)
     {
-
         $exception = $event->getException();
+        $code = $exception->getCode() == 0 ? 500 : $exception->getCode();
 
-        /**
-         * If the Exception code is 0 then we need to be notified
-         * because something in the Matrix has failed and we need
-         * Agent Smith to come fix it..
-         */
-        if($exception->getCode() === 0) {
+        $message = $exception->getMessage();
 
-            //log the error code here so we can fix it!
-
+        if($exception instanceof AuthenticationCredentialsNotFoundException) {
+            $message = 'You must be authorized to access this resource.';
+            $code = 401;
         }
 
-        $message = array(
-            'code' => $exception->getCode(),
+        if($exception instanceof NotFoundHttpException) {
+            $message = 'The resource you were looking for could not be found in the great abyss.';
+            $code = 404;
+        }
+
+        $data = [
+            'code' => $code,
             'class' => get_class($exception),
-            'message' => $exception->getMessage(),
-            'trace' => $exception->getTraceAsString(),
-        );
+            'message' => $message,
+        ];
 
-        $message = json_encode($message);
-        $response = new Response($message);
+        $response = new JsonResponse();
+        $response->setStatusCode($code);
+        $response->setData($data);
         $event->setResponse($response);
-
     }
 
     public function logException(GetResponseForExceptionEvent $event)

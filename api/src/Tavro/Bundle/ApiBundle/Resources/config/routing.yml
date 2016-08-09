@@ -19,6 +19,9 @@ tavro_node_api:
 tavro_organization_api:
     resource: "@TavroApiBundle/Resources/config/routing/organization.yml"
 
+tavro_person_api:
+    resource: "@TavroApiBundle/Resources/config/routing/person.yml"
+
 tavro_product_api:
     resource: "@TavroApiBundle/Resources/config/routing/product.yml"
 
