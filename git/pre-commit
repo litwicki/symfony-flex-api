@@ -2,11 +2,11 @@
 
 <?php
 
-    printf("%s Running pre-commit hook(s)\n%1\$s", PHP_EOL);
+    printf("Execute `pre-commit` hook(s)\n", PHP_EOL);
 
     $projectName = basename(getcwd());
 
-    printf("Execute PHPUnit tests\n");
+    printf("Running PHPUnit tests\n");
     exec('cd api && phpunit', $output, $returnCode);
 
     if ($returnCode !== 0) {
