@@ -9,7 +9,7 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 
-class FundingType extends AbstractType
+class FundingRoundType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
@@ -19,15 +19,11 @@ class FundingType extends AbstractType
     {
         $builder
             ->add('body')
-            ->add('title')
+            ->add('type')
             ->add('status')
             ->add('organization', EntityType::class, array(
                 'class' => 'TavroCoreBundle:Organization',
                 'choice_label' => 'Organization'
-            ))
-            ->add('updated_by', EntityType::class, array(
-                'class' => 'TavroCoreBundle:User',
-                'choice_label' => 'User'
             ))
             ->add('submit', SubmitType::class)
         ;
@@ -39,7 +35,7 @@ class FundingType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Tavro\Bundle\CoreBundle\Entity\Funding',
+            'data_class' => 'Tavro\Bundle\CoreBundle\Entity\FundingRound',
             'csrf_protection'   => false,
         ));
     }

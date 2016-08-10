@@ -57,5 +57,6 @@ Vagrant.configure(2) do |config|
 
   # Install the pre-commit hook
   config.vm.provision "shell", inline: "sudo cp git/pre-commit .git/hooks/pre-commit && sudo chmod 0777 .git/hooks/pre-commit"
+  config.vm.provision "shell", inline: "sudo cp api/phpunix.xml.dist api/phpunix.xml"
 
 end

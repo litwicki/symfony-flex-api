@@ -84,7 +84,8 @@ class FundingRound extends OrganizationEntity implements OrganizationEntityInter
      * Set body
      *
      * @param string $body
-     * @return Service
+     *
+     * @return $this
      */
     public function setBody($body)
     {
