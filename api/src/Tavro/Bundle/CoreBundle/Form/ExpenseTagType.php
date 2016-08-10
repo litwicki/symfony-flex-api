@@ -19,8 +19,6 @@ class ExpenseTagType extends AbstractType
     {
         $builder
             ->add('status')
-            ->add('create_date', DateTimeType::class)
-            ->add('update_date', DateTimeType::class)
             ->add('tag', EntityType::class, array(
                 'class' => 'TavroCoreBundle:Tag',
                 'choice_label' => 'Tag'
@@ -39,7 +37,8 @@ class ExpenseTagType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Tavro\Bundle\CoreBundle\Entity\ExpenseTag'
+            'data_class' => 'Tavro\Bundle\CoreBundle\Entity\ExpenseTag',
+            'csrf_protection'   => false,
         ));
     }
 }

@@ -19,8 +19,6 @@ class ExpenseCommentType extends AbstractType
     {
         $builder
             ->add('status')
-            ->add('create_date', DateTimeType::class)
-            ->add('update_date', DateTimeType::class)
             ->add('comment', EntityType::class, array(
                 'class' => 'TavroCoreBundle:Comment',
                 'choice_label' => 'User'
@@ -39,7 +37,8 @@ class ExpenseCommentType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Tavro\Bundle\CoreBundle\Entity\ExpenseComment'
+            'data_class' => 'Tavro\Bundle\CoreBundle\Entity\ExpenseComment',
+            'csrf_protection'   => false,
         ));
     }
 }

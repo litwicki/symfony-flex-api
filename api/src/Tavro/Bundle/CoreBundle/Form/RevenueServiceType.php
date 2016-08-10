@@ -19,8 +19,6 @@ class RevenueServiceType extends AbstractType
     {
         $builder
             ->add('status')
-            ->add('create_date', DateTimeType::class)
-            ->add('update_date', DateTimeType::class)
             ->add('service', EntityType::class, array(
                 'class' => 'TavroCoreBundle:Service',
                 'choice_label' => 'Service'
@@ -39,7 +37,8 @@ class RevenueServiceType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Tavro\Bundle\CoreBundle\Entity\RevenueService'
+            'data_class' => 'Tavro\Bundle\CoreBundle\Entity\RevenueService',
+            'csrf_protection'   => false,
         ));
     }
 }

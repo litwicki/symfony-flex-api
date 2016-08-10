@@ -20,10 +20,7 @@ class ServiceType extends AbstractType
         $builder
             ->add('body')
             ->add('title')
-            ->add('slug')
             ->add('status')
-            ->add('create_date', DateTimeType::class)
-            ->add('update_date', DateTimeType::class)
             ->add('category', EntityType::class, array(
                 'class' => 'TavroCoreBundle:ServiceCategory',
                 'choice_label' => 'Category'
@@ -46,7 +43,8 @@ class ServiceType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Tavro\Bundle\CoreBundle\Entity\Service'
+            'data_class' => 'Tavro\Bundle\CoreBundle\Entity\Service',
+            'csrf_protection'   => false,
         ));
     }
 }

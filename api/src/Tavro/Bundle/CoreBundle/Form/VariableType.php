@@ -19,11 +19,8 @@ class VariableType extends AbstractType
     {
         $builder
             ->add('name')
-            ->add('slug')
             ->add('value')
             ->add('status')
-            ->add('create_date', DateTimeType::class)
-            ->add('update_date', DateTimeType::class)
             ->add('submit', SubmitType::class)
         ;
     }
@@ -34,7 +31,8 @@ class VariableType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Tavro\Bundle\CoreBundle\Entity\Variable'
+            'data_class' => 'Tavro\Bundle\CoreBundle\Entity\Variable',
+            'csrf_protection'   => false,
         ));
     }
 }

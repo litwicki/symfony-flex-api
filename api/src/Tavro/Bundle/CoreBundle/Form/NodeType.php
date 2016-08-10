@@ -23,10 +23,7 @@ class NodeType extends AbstractType
             ->add('display_date', DateTimeType::class)
             ->add('views')
             ->add('title')
-            ->add('slug')
             ->add('status')
-            ->add('create_date', DateTimeType::class)
-            ->add('update_date', DateTimeType::class)
             ->add('user', EntityType::class, array(
                 'class' => 'TavroCoreBundle:User',
                 'choice_label' => 'User'
@@ -49,7 +46,8 @@ class NodeType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Tavro\Bundle\CoreBundle\Entity\Node'
+            'data_class' => 'Tavro\Bundle\CoreBundle\Entity\Node',
+            'csrf_protection'   => false,
         ));
     }
 }

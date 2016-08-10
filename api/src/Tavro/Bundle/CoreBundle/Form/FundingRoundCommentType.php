@@ -19,8 +19,6 @@ class FundingCommentType extends AbstractType
     {
         $builder
             ->add('status')
-            ->add('create_date', DateTimeType::class)
-            ->add('update_date', DateTimeType::class)
             ->add('comment', EntityType::class, array(
                 'class' => 'TavroCoreBundle:Comment',
                 'choice_label' => 'Comment'
@@ -39,7 +37,8 @@ class FundingCommentType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Tavro\Bundle\CoreBundle\Entity\FundingComment'
+            'data_class' => 'Tavro\Bundle\CoreBundle\Entity\FundingComment',
+            'csrf_protection'   => false,
         ));
     }
 }

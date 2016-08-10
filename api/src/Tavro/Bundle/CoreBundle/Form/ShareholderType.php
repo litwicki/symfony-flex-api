@@ -18,13 +18,6 @@ class ShareholderType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('first_name')
-            ->add('last_name')
-            ->add('address')
-            ->add('address2')
-            ->add('city')
-            ->add('state')
-            ->add('zip')
             ->add('email')
             ->add('shares')
             ->add('phone')
@@ -34,8 +27,6 @@ class ShareholderType extends AbstractType
                 'class' => 'TavroCoreBundle:User',
                 'choice_label' => 'User'
             ))
-            ->add('create_date', DateTimeType::class)
-            ->add('update_date', DateTimeType::class)
             ->add('submit', SubmitType::class)
         ;
     }
@@ -46,7 +37,8 @@ class ShareholderType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Tavro\Bundle\CoreBundle\Entity\Shareholder'
+            'data_class' => 'Tavro\Bundle\CoreBundle\Entity\Shareholder',
+            'csrf_protection'   => false,
         ));
     }
 }

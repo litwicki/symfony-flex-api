@@ -18,10 +18,50 @@ use Tavro\Bundle\CoreBundle\Entity\Expense;
 use Tavro\Bundle\CoreBundle\Entity\ExpenseComment;
 use Symfony\Component\HttpFoundation\Cookie;
 
+use Tavro\Bundle\CoreBundle\Entity\Revenue;
+
 use Litwicki\Common\Common;
 use Tavro\Bundle\ApiBundle\Controller\DefaultController as ApiController;
 
 class RevenueController extends ApiController
 {
+    
+    /**
+     * @param \Symfony\Component\HttpFoundation\Request $request
+     * @param \Tavro\Bundle\CoreBundle\Entity\Revenue $revenue
+     * @param $_format
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     * @throws \Exception
+     */
+    public function newCommentAction(Request $request, Revenue $revenue, $_format)
+    {
+        try {
 
+            $data = json_decode($request->getContent(), true);
+
+            $handler = $this->getHandler('comments');
+            $comment = $handler->post($data);
+
+            /**
+             * Attach the Comment to the Revenue
+             */
+            $this->getHandler('revenue_comment')->post(array(
+                'comment' => $comment->getId(),
+                'revenue' => $revenue->getId()
+            ));
+
+            $routeOptions = array(
+                'entity'  => 'comment',
+                'id'      => $comment->getId(),
+                'format'  => $_format,
+            );
+
+            return $this->get($routeOptions);
+
+        }
+        catch(\Exception $e) {
+            throw $e;
+        }
+    }
 }

@@ -20,10 +20,7 @@ class ExpenseType extends AbstractType
         $builder
             ->add('body')
             ->add('title')
-            ->add('slug')
             ->add('status')
-            ->add('create_date', DateTimeType::class)
-            ->add('update_date', DateTimeType::class)
             ->add('category', EntityType::class, array(
                 'class' => 'TavroCoreBundle:ExpenseCategory',
                 'choice_label' => 'Category'
@@ -50,7 +47,8 @@ class ExpenseType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Tavro\Bundle\CoreBundle\Entity\Expense'
+            'data_class' => 'Tavro\Bundle\CoreBundle\Entity\Expense',
+            'csrf_protection'   => false,
         ));
     }
 }

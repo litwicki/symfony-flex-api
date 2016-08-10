@@ -19,8 +19,6 @@ class CustomerCommentType extends AbstractType
     {
         $builder
             ->add('status')
-            ->add('create_date', 'datetime')
-            ->add('update_date', 'datetime')
             ->add('comment', EntityType::class, array(
                 'class' => 'TavroCoreBundle:Comment',
                 'choice_label' => 'Comment'
@@ -39,7 +37,8 @@ class CustomerCommentType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Tavro\Bundle\CoreBundle\Entity\CustomerComment'
+            'data_class' => 'Tavro\Bundle\CoreBundle\Entity\CustomerComment',
+            'csrf_protection'   => false,
         ));
     }
 }

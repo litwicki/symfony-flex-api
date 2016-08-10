@@ -28,8 +28,6 @@ class ImageType extends AbstractType
             ->add('height')
             ->add('width')
             ->add('status')
-            ->add('create_date', DateTimeType::class)
-            ->add('update_date', DateTimeType::class)
             ->add('submit', SubmitType::class)
         ;
     }
@@ -40,7 +38,8 @@ class ImageType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Tavro\Bundle\CoreBundle\Entity\Image'
+            'data_class' => 'Tavro\Bundle\CoreBundle\Entity\Image',
+            'csrf_protection'   => false,
         ));
     }
 }

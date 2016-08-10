@@ -19,8 +19,6 @@ class UserOrganizationType extends AbstractType
     {
         $builder
             ->add('status')
-            ->add('create_date', DateTimeType::class)
-            ->add('update_date', DateTimeType::class)
             ->add('organization', EntityType::class, array(
                 'class' => 'TavroCoreBundle:Organization',
                 'choice_label' => 'Organization'
@@ -39,7 +37,8 @@ class UserOrganizationType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Tavro\Bundle\CoreBundle\Entity\UserOrganization'
+            'data_class' => 'Tavro\Bundle\CoreBundle\Entity\UserOrganization',
+            'csrf_protection'   => false,
         ));
     }
 }

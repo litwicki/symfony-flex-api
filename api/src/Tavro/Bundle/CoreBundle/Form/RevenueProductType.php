@@ -20,8 +20,6 @@ class RevenueProductType extends AbstractType
     {
         $builder
             ->add('status')
-            ->add('create_date', DateTimeType::class)
-            ->add('update_date', DateTimeType::class)
             ->add('product', EntityType::class, array(
                 'class' => 'TavroCoreBundle:Product',
                 'choice_label' => 'Product'
@@ -40,7 +38,8 @@ class RevenueProductType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Tavro\Bundle\CoreBundle\Entity\RevenueProduct'
+            'data_class' => 'Tavro\Bundle\CoreBundle\Entity\RevenueProduct',
+            'csrf_protection'   => false,
         ));
     }
 }

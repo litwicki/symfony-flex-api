@@ -19,8 +19,6 @@ class NodeCommentType extends AbstractType
     {
         $builder
             ->add('status')
-            ->add('create_date', DateTimeType::class)
-            ->add('update_date', DateTimeType::class)
             ->add('comment', EntityType::class, array(
                 'class' => 'TavroCoreBundle:Comment',
                 'choice_label' => 'Comment'

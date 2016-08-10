@@ -20,10 +20,7 @@ class TagType extends AbstractType
         $builder
             ->add('title')
             ->add('body')
-            ->add('slug')
             ->add('status')
-            ->add('create_date', DateTimeType::class)
-            ->add('update_date', DateTimeType::class)
             ->add('updated_by', EntityType::class, array(
                 'class' => 'TavroCoreBundle:User',
                 'choice_label' => 'User'
@@ -38,7 +35,8 @@ class TagType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Tavro\Bundle\CoreBundle\Entity\Tag'
+            'data_class' => 'Tavro\Bundle\CoreBundle\Entity\Tag',
+            'csrf_protection'   => false,
         ));
     }
 }

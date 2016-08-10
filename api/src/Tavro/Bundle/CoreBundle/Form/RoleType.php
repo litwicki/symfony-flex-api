@@ -21,8 +21,6 @@ class RoleType extends AbstractType
             ->add('name')
             ->add('role')
             ->add('status')
-            ->add('create_date', DateTimeType::class)
-            ->add('update_date', DateTimeType::class)
             ->add('users', EntityType::class, array(
                 'class' => 'TavroCoreBundle:User',
                 'choice_label' => 'User'
@@ -37,7 +35,8 @@ class RoleType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Tavro\Bundle\CoreBundle\Entity\Role'
+            'data_class' => 'Tavro\Bundle\CoreBundle\Entity\Role',
+            'csrf_protection'   => false,
         ));
     }
 }

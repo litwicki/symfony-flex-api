@@ -20,10 +20,7 @@ class RevenueCategoryType extends AbstractType
         $builder
             ->add('body')
             ->add('title')
-            ->add('slug')
             ->add('status')
-            ->add('create_date', DateTimeType::class)
-            ->add('update_date', DateTimeType::class)
             ->add('organization', EntityType::class, array(
                 'class' => 'TavroCoreBundle:Organization',
                 'choice_label' => 'Organization'
@@ -41,7 +38,8 @@ class RevenueCategoryType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Tavro\Bundle\CoreBundle\Entity\RevenueCategory'
+            'data_class' => 'Tavro\Bundle\CoreBundle\Entity\RevenueCategory',
+            'csrf_protection'   => false,
         ));
     }
 }
