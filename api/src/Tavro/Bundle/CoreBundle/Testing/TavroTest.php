@@ -1,11 +1,10 @@
-<?php namespace Tests\Api\Controller;
+<?php namespace Tavro\Bundle\CoreBundle\Testing;
 
 use Guzzle\Http\Client;
 
-class VariableTest extends \PHPUnit_Framework_TestCase
+class TavroTest extends \PHPUnit_Framework_TestCase
 {
-
-    public function testVariableRoute()
+    public function authorize()
     {
         $client = new Client('http://api.tavro.dev/api/v1', array(
             'request.options' => array(
@@ -26,17 +25,6 @@ class VariableTest extends \PHPUnit_Framework_TestCase
         $body = json_decode($json, true);
         $token = $body['token'];
 
-        $url = 'http://api.tavro.dev/api/v1/variables';
-
-        $request = $client->get($url);
-        $request->addHeader('Authorization', sprintf('Bearer %s', $token));
-        $response = $request->send();
-
-        $json = $response->getBody(true);
-        $body = json_decode($json, true);
-
-        $this->assertEquals(200, $response->getStatusCode());
-
+        return $token;
     }
-
 }

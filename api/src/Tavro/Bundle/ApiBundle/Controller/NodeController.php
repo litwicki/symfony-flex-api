@@ -74,16 +74,21 @@ class NodeController extends ApiController
             $data = json_decode($request->getContent(), true);
 
             $handler = $this->getHandler('comments');
-            $comment = $handler->post($data);
+            $comment = $handler->post($request, $data);
 
             /**
              * Attach the Comment to the Node
              */
-            $this->getHandler('node_comments')->post(array(
+            $this->getHandler('node_comments')->post($request, array(
                 'comment' => $comment->getId(),
                 'node' => $node->getId()
             ));
 
+        }
+        catch(\Exception $e) {
+            throw $e;
+        }
+        finally {
             $routeOptions = array(
                 'entity'  => 'comments',
                 'id'      => $comment->getId(),
@@ -91,10 +96,6 @@ class NodeController extends ApiController
             );
 
             return $this->forward('TavroApiBundle:Default:get', $routeOptions);
-
-        }
-        catch(\Exception $e) {
-            throw $e;
         }
 
     }
@@ -147,7 +148,7 @@ class NodeController extends ApiController
             $data = json_decode($request->getContent(), true);
 
             $handler = $this->getHandler('tags');
-            $tag = $handler->post($data);
+            $tag = $handler->post($request, $data);
 
             /**
              * Attach the Comment to the Node
@@ -189,13 +190,13 @@ class NodeController extends ApiController
                 throw new ApiException('There is no Tag to delete for this Node.');
             }
 
+            return $this->deleteAction($request, 'node_tags', $entity->getId(), $_format);
+
         }
         catch(\Exception $e) {
             throw $e;
         }
-        finally {
-            return $this->deleteAction($request, 'node_tags', $entity->getId(), $_format);
-        }
+
     }
 
 }

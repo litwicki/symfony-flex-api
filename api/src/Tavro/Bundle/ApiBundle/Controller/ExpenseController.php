@@ -82,19 +82,19 @@ class ExpenseController extends ApiController
                 'expense' => $expense->getId()
             ));
 
-        }
-        catch(\Exception $e) {
-            throw $e;
-        }
-        finally {
             $routeOptions = array(
-                'entity'  => 'comment',
+                'entity'  => 'comments',
                 'id'      => $comment->getId(),
                 'format'  => $_format,
             );
 
-            return $this->get($routeOptions);
+            return $this->forward('TavroApiBundle:Default:get', $routeOptions);
+
         }
+        catch(\Exception $e) {
+            throw $e;
+        }
+
     }
 
     /**
@@ -151,7 +151,7 @@ class ExpenseController extends ApiController
              * Attach the Comment to the Expense
              */
             $this->getHandler('expense_tags')->post($request, array(
-                'comment' => $tag->getId(),
+                'tag' => $tag->getId(),
                 'expense' => $expense->getId()
             ));
 
@@ -161,7 +161,7 @@ class ExpenseController extends ApiController
         }
         finally {
             $routeOptions = array(
-                'entity'  => 'comment',
+                'entity'  => 'tags',
                 'id'      => $tag->getId(),
                 'format'  => $_format,
             );

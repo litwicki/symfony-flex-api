@@ -11,7 +11,7 @@ services:
             - '%amazon_s3_url%'
             - 'Tavro\Bundle\CoreBundle\Entity\Comment'
 
-    tavro.handler.revenue_comment:
+    tavro.handler.revenue_comments:
         class: Tavro\Bundle\CoreBundle\Handler\Entity\RevenueCommentHandler
         arguments:
             - '@doctrine.orm.main_entity_manager'
@@ -23,7 +23,7 @@ services:
             - '%amazon_s3_url%'
             - 'Tavro\Bundle\CoreBundle\Entity\RevenueComment'
 
-    tavro.handler.customer_comment:
+    tavro.handler.customer_comments:
         class: Tavro\Bundle\CoreBundle\Handler\Entity\CustomerCommentHandler
         arguments:
             - '@doctrine.orm.main_entity_manager'
@@ -35,7 +35,7 @@ services:
             - '%amazon_s3_url%'
             - 'Tavro\Bundle\CoreBundle\Entity\CustomerComment'
 
-    tavro.handler.expense_comment:
+    tavro.handler.expense_comments:
         class: Tavro\Bundle\CoreBundle\Handler\Entity\ExpenseCommentHandler
         arguments:
             - '@doctrine.orm.main_entity_manager'
@@ -47,7 +47,7 @@ services:
             - '%amazon_s3_url%'
             - 'Tavro\Bundle\CoreBundle\Entity\ExpenseComment'
 
-    tavro.handler.node_comment:
+    tavro.handler.node_comments:
         class: Tavro\Bundle\CoreBundle\Handler\Entity\NodeCommentHandler
         arguments:
             - '@doctrine.orm.main_entity_manager'

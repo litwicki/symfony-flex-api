@@ -55,6 +55,10 @@ Workflow and useful 'stuff' for developing in Tavro.
 
     $ curl -X POST http://api.tavro.dev/api/v1/login_check -d _username=tavrobot -d _password=Password1!
 
+### Testing CURL Api Request
+
+    $ curl -X POST http://api.tavro.dev/api/v1/revenues/1/comments -d '{"body":"test", "user":1}' --header "Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXUyJ9.eyJleHAiOjE0NzA5NDA1MTAsInVzZXJuYW1lIjoidGF2cm9ib3QiLCJpYXQiOiIxNDcwODU0MTEwIn0.LR1gLFrOLGFojWC0EVpGkzQqJ95ukf29FyVSyDJJFAtvEJ039P5MxDs0th0KYrxhhZc379V177ch86mOLPcNuCH0oJ6VGQ2sWTiEQ7Buvkefp3klFhR7XSON0b-1i8lJzpkxvSdYHU5OEivtg7VowwHORhRE95hzindmst9XLRZtkF3kBhksGLhMVKVC1ps3e_Tf1gs1T0vrBjqSGXhaVEq8muekVCywqdyuF5o9Ogm5dF3IMw8vsk3dYJPzndqG0n_u-EJoTYtvqAubODvESGTSn_U_STKCX-LtqRXD4YEkA4teFp1WREDCBUcKxb-3wlfRcDhSijuSffxHAtZFh_AMQRQjBBoE7RhjgTtnBf6voSW6W4eO3cCV3K21XVZ4F9uiD8t0Q5ZBQOG9xOKoTWRv49WuaT3yYhGZ9CaENMtB93LE00iYjxeLqFw-s569osHhwKMv5dC11ZYjKpWoBOOR6ySl-F6-Mnhvmsx3c9iNQ36Yi6yuv78kjy5TT1UgYzz-CjNx-3vHHgADhBleyi9ogIxuxVxGzpwH6xm2ag6Y6WAWGpKtEmLeZi1qfo9cmkETEjhGaWEaAueZDv8yCmFBhPWZdIjYCYv7lpwUCDPU8oqEVRVGiSCpO4--PX2JvXih7cUBUfSFRVxhFyQsbkzEA8IsIQ_VV_ofc47lL9Y"
+
 ### Scripts
 
 These scripts all require you first login to the VM via SSH:

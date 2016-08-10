@@ -52,6 +52,11 @@ class EntityHandler implements EntityHandlerInterface
     const STATUS_PENDING = 2;
     const STATUS_DISABLED = 0;
 
+    const HTTP_METHOD_PUT = 'PUT';
+    const HTTP_METHOD_POST = 'POST';
+    const HTTP_METHOD_PATCH = 'PATCH';
+    const HTTP_METHOD_DELETE = 'DELETE';
+
     const ACCESS_DENIED_MESSAGE = 'You are not authorized to perform this action!';
 
     public function __construct(ObjectManager $om, FormFactory $formFactory, Validator $validator, EncoderFactory $encoder, TokenStorage $tokenStorage, AuthorizationChecker $auth, $amazon_s3_url, $entityClass)
@@ -286,17 +291,18 @@ class EntityHandler implements EntityHandlerInterface
     }
 
     /**
-     * Submit a new Entity.
+     * POST to an Endpoint.
      *
+     * @param \Symfony\Component\HttpFoundation\Request $request
      * @param array $parameters
      *
-     * @return \Tavro\Bundle\CoreBundle\Model\EntityInterface|void
+     * @return object|\Tavro\Bundle\CoreBundle\Model\EntityInterface|void
      * @throws \Exception
      */
-    public function post(array $parameters)
+    public function post(Request $request, array $parameters)
     {
         try {
-            return $this->create($parameters);
+            return $this->create($request, $parameters);
         }
         catch(ApiAccessDeniedException $e) {
             throw $e;
@@ -316,12 +322,14 @@ class EntityHandler implements EntityHandlerInterface
     }
 
     /**
+     * Create a new Entity.
+     *
+     * @param \Symfony\Component\HttpFoundation\Request $request
      * @param array $parameters
      *
      * @return object|\Tavro\Bundle\CoreBundle\Model\EntityInterface|void
-     * @throws \Exception
      */
-    public function create(array $parameters)
+    public function create(Request $request, array $parameters)
     {
         try {
 
@@ -331,14 +339,14 @@ class EntityHandler implements EntityHandlerInterface
 
             $entity = $this->createEntity();
             $this->validate($entity, $parameters);
-            $entity = $this->processForm($entity, $parameters, 'POST');
+            $entity = $this->processForm($request, $entity, $parameters);
 
             /**
              * If this is an ApiEntity immediately save so the slug property
              * is updated correctly with the entity Id: {id}-{url-save-title}
              */
             if($entity instanceof EntityInterface) {
-                return $this->put($entity, $parameters);
+                return $this->patch($request, $entity, $parameters, self::HTTP_METHOD_PATCH);
             }
 
             return $entity;
@@ -362,17 +370,16 @@ class EntityHandler implements EntityHandlerInterface
     }
 
     /**
-     * Edit an Interface.
+     * Edit an Entity.
      *
+     * @param \Symfony\Component\HttpFoundation\Request $request
      * @param \Tavro\Bundle\CoreBundle\Model\EntityInterface $entity
      * @param array $parameters
-     *
-     * @return \Tavro\Bundle\CoreBundle\Model\EntityInterface|void
      */
-    public function put(EntityInterface $entity, array $parameters)
+    public function put(Request $request, EntityInterface $entity, array $parameters)
     {
         try {
-            return $this->processForm($entity, $parameters, 'PUT');
+            return $this->processForm($request, $entity, $parameters, self::HTTP_METHOD_PUT);
         }
         catch(ApiAccessDeniedException $e) {
             throw $e;
@@ -383,11 +390,14 @@ class EntityHandler implements EntityHandlerInterface
     }
 
     /**
+     * Delete an Entity.
+     *
+     * @param \Symfony\Component\HttpFoundation\Request $request
      * @param \Tavro\Bundle\CoreBundle\Model\EntityInterface $entity
      *
-     * @return \Tavro\Bundle\CoreBundle\Model\EntityInterface|void
+     * @throws \Exception
      */
-    public function delete(EntityInterface $entity)
+    public function delete(Request $request, EntityInterface $entity)
     {
         try {
 
@@ -419,9 +429,16 @@ class EntityHandler implements EntityHandlerInterface
     public function remove(EntityInterface $entity)
     {
         try {
-            $entity->setStatus(0);
-            $this->om->persist($entity);
-            $this->om->flush();
+
+            if(property_exists(get_class($entity), 'status')) {
+                $entity->setStatus(0);
+                $this->om->persist($entity);
+                $this->om->flush();
+            }
+            else {
+                throw new \Exception('%s does not have a status property.', get_class($entity));
+            }
+
         }
         catch(\Exception $e) {
             throw new ApiException($e->getMessage());
@@ -429,13 +446,14 @@ class EntityHandler implements EntityHandlerInterface
     }
 
     /**
+     * @param \Symfony\Component\HttpFoundation\Request $request
      * @param \Tavro\Bundle\CoreBundle\Model\EntityInterface $entity
      * @param array $parameters
      *
      * @return \Tavro\Bundle\CoreBundle\Model\EntityInterface
      * @throws \Exception
      */
-    public function patch(EntityInterface $entity, array $parameters)
+    public function patch(Request $request, EntityInterface $entity, array $parameters)
     {
         try {
 
@@ -456,17 +474,17 @@ class EntityHandler implements EntityHandlerInterface
      * Separate the actual application of the patch parameters, so we can override
      * in individual entities without replicating this code repeatedly.
      *
+     * @param \Symfony\Component\HttpFoundation\Request $request
      * @param \Tavro\Bundle\CoreBundle\Model\EntityInterface $entity
      * @param array $parameters
      *
-     * @return \Tavro\Bundle\CoreBundle\Model\EntityInterface
+     * @return \Tavro\Bundle\CoreBundle\Model\EntityInterface|void
      * @throws \Exception
-     * @internal param $Request
      */
-    public function applyPatch(EntityInterface $entity, array $parameters)
+    public function applyPatch(Request $request, EntityInterface $entity, array $parameters)
     {
         try {
-            $entity = $this->processForm($entity, $parameters, 'PATCH');
+            $entity = $this->processForm($request, $entity, $parameters, self::HTTP_METHOD_PATCH);
             return $entity;
         }
         catch(\Exception $e) {
@@ -475,8 +493,7 @@ class EntityHandler implements EntityHandlerInterface
     }
 
     /**
-     * Process the form submission through the specified FormType validation process.
-     *
+     * @param \Symfony\Component\HttpFoundation\Request $request
      * @param \Tavro\Bundle\CoreBundle\Model\EntityInterface $entity
      * @param array $parameters
      * @param string $method
@@ -484,17 +501,25 @@ class EntityHandler implements EntityHandlerInterface
      * @throws \Exception
      * @throws \Symfony\Component\Debug\Exception\ContextErrorException
      */
-    public function processForm(EntityInterface $entity, array $parameters, $method = 'PUT')
+    public function processForm(Request $request, EntityInterface $entity, array $parameters, $method = self::HTTP_METHOD_POST)
     {
         try {
 
-            $this->validate($entity, $parameters, $method);
+            $this->validate($entity, $parameters);
 
             $formType = $this->mapEntityToForm($this->entityClass);
 
-            $form = $this->formFactory->create($formType, $entity, array('method' => $method));
+            $form = $this->formFactory->create($formType, $entity, ['method' => $method]);
 
-            $form->submit($parameters, ($method == 'PATCH' ? false : true));
+            /**
+             * @reference: http://symfony.com/doc/current/form/direct_submit.html
+             *           docs say this is required, but wtf?
+             *
+             *           $form->handleRequest($request);
+             *
+             */
+
+            $form->submit($parameters);
 
             if ($form->isValid()) {
 
@@ -523,15 +548,11 @@ class EntityHandler implements EntityHandlerInterface
                 $this->om->flush();
 
                 return $entity;
+
             }
             else {
-                /**
-                 * @TODO: properly clean this up so it reports a usable error message
-                 *      without using the deprecated function(s)
-                 */
-                $errors = (string) $form->getErrors(true, false);
-                //$errors = $form->getErrorsAsString();
-                throw new InvalidFormException($errors);
+
+
             }
 
         }
@@ -575,11 +596,12 @@ class EntityHandler implements EntityHandlerInterface
 
     /**
      * @param $entity
-     * @return
-     * @throws ApiException
+     *
+     * @return mixed
      */
     public function mapEntityToForm($entity)
     {
+
         try {
 
             $map = array(
@@ -702,22 +724,26 @@ class EntityHandler implements EntityHandlerInterface
         }
     }
 
-    /**
-     * @param \Symfony\Component\Form\Form $form
-     *
-     * @return array
-     */
-    public function getFormErrors(Form $form)
+    private function getErrorMessages(\Symfony\Component\Form\Form $form)
     {
-
         $errors = array();
+        foreach ($form->getErrors() as $key => $error) {
+            $template = $error->getMessageTemplate();
+            $parameters = $error->getMessageParameters();
 
-        foreach($form->getErrors() as $error) {
+            foreach ($parameters as $var => $value) {
+                $template = str_replace($var, $value, $template);
+            }
 
-            $errors[] = $error->getMessage();
-
+            $errors[$key] = $template;
         }
-
+        if ($form->count()) {
+            foreach ($form as $child) {
+                if (!$child->isValid()) {
+                    $errors[$child->getName()] = $this->getErrorMessages($child);
+                }
+            }
+        }
         return $errors;
     }
 
@@ -750,6 +776,34 @@ class EntityHandler implements EntityHandlerInterface
         catch(\Exception $e) {
             throw $e;
         }
+    }
+
+    /**
+     * List all errors of a given bound form.
+     *
+     * @param Form $form
+     *
+     * @return array
+     */
+    protected function getFormErrors(Form $form)
+    {
+        $errors = array();
+
+        // Global
+        foreach ($form->getErrors() as $error) {
+            $errors[$form->getName()][] = $error->getMessage();
+        }
+
+        // Fields
+        foreach ($form as $child /** @var Form $child */) {
+            if (!$child->isValid()) {
+                foreach ($child->getErrors() as $error) {
+                    $errors[$child->getName()][] = $error->getMessage();
+                }
+            }
+        }
+
+        return $errors;
     }
 
 

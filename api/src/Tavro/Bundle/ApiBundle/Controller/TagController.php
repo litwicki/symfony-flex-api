@@ -44,7 +44,7 @@ class TagController extends ApiController
 
             $tag = $handler->findByTag($data['tag']);
 
-            $newEntity = $handler->post($data);
+            $newEntity = $handler->post($request, $data);
 
             $routeOptions = array(
                 'entity'  => $entity,

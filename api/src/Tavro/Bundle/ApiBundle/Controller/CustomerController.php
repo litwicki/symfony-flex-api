@@ -84,12 +84,12 @@ class CustomerController extends ApiController
             ));
 
             $routeOptions = array(
-                'entity'  => 'comment',
+                'entity'  => 'comments',
                 'id'      => $comment->getId(),
                 'format'  => $_format,
             );
 
-            return $this->get($routeOptions);
+            return $this->forward('TavroApiBundle:Default:get', $routeOptions);
 
         }
         catch(\Exception $e) {

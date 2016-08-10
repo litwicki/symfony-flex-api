@@ -71,7 +71,7 @@ class UserHandler extends EntityHandler
             }
 
             $entity = $this->createEntity();
-            $entity = $this->processForm($entity, $parameters, 'POST');
+            $entity = $this->processForm($entity, $parameters, $this::HTTP_METHOD_POST);
 
             $this->setUserRoles($entity, $roles);
 
@@ -91,8 +91,7 @@ class UserHandler extends EntityHandler
     }
 
     /**
-     * Process the form submission through the specified FormType validation process.
-     *
+     * @param \Symfony\Component\HttpFoundation\Request $request
      * @param \Tavro\Bundle\CoreBundle\Model\EntityInterface $entity
      * @param array $parameters
      * @param string $method
@@ -100,7 +99,7 @@ class UserHandler extends EntityHandler
      * @throws \Exception
      * @throws \Symfony\Component\Debug\Exception\ContextErrorException
      */
-    public function processForm(EntityInterface $entity, array $parameters, $method = 'PUT')
+    public function processForm(Request $request, EntityInterface $entity, array $parameters, $method = self::HTTP_METHOD_POST)
     {
         try {
 
@@ -110,7 +109,11 @@ class UserHandler extends EntityHandler
 
             $form = $this->formFactory->create($formType, $entity, ['method' => $method]);
 
-            $form->submit($parameters, ($method == 'PATCH' ? false : true));
+            $form->handleRequest($request);
+
+            /**
+             * @reference: http://symfony.com/doc/current/form/direct_submit.html
+             */
 
             if ($form->isValid()) {
 
@@ -538,13 +541,14 @@ class UserHandler extends EntityHandler
     }
 
     /**
+     * @param \Symfony\Component\HttpFoundation\Request $request
      * @param \Tavro\Bundle\CoreBundle\Entity\User $user
      * @param $parameters
      *
      * @return \Tavro\Bundle\CoreBundle\Model\EntityInterface
      * @throws \Exception
      */
-    public function resetPassword(User $user, $parameters)
+    public function resetPassword(Request $request, User $user, $parameters)
     {
         try {
 
@@ -562,7 +566,7 @@ class UserHandler extends EntityHandler
                 'password'              => $parameters['password'],
             ];
 
-            return $this->patch($user, $parameters);
+            return $this->patch($request, $user, $parameters);
 
         } catch (\Exception $e) {
             throw $e;
@@ -570,13 +574,14 @@ class UserHandler extends EntityHandler
     }
 
     /**
+     * @param \Symfony\Component\HttpFoundation\Request $request
      * @param \Tavro\Bundle\CoreBundle\Model\EntityInterface $entity
      * @param array $parameters
      *
-     * @return \Tavro\Bundle\CoreBundle\Model\EntityInterface
+     * @return \Tavro\Bundle\CoreBundle\Model\EntityInterface|void
      * @throws \Exception
      */
-    public function patch(EntityInterface $entity, array $parameters)
+    public function patch(Request $request, EntityInterface $entity, array $parameters)
     {
         try {
 
@@ -585,7 +590,7 @@ class UserHandler extends EntityHandler
                 throw new ApiAccessDeniedException($message);
             }
 
-            $user = $this->applyPatch($entity, $parameters);
+            $user = $this->applyPatch($request, $entity, $parameters);
 
             $this->reauthenticate($user);
 
@@ -815,11 +820,12 @@ class UserHandler extends EntityHandler
      * If a User has forgotten their password, set a password token and a time by
      * which that token will expire to give them an opportunity to reset their password.
      *
+     * @param \Symfony\Component\HttpFoundation\Request $request
      * @param \Tavro\Bundle\CoreBundle\Entity\User $user
      *
      * @throws \Exception
      */
-    public function forgotPassword(User $user)
+    public function forgotPassword(Request $request, User $user)
     {
         try {
 
@@ -831,7 +837,7 @@ class UserHandler extends EntityHandler
                 'password_token' => Uuid::uuid4()
             ];
 
-            $this->patch($user, $parameters);
+            $this->patch($request, $user, $parameters);
 
         }
         catch (\Exception $e) {

@@ -21,7 +21,7 @@ class ExpenseCommentType extends AbstractType
             ->add('status')
             ->add('comment', EntityType::class, array(
                 'class' => 'TavroCoreBundle:Comment',
-                'choice_label' => 'User'
+                'choice_label' => 'Comment'
             ))
             ->add('expense', EntityType::class, array(
                 'class' => 'TavroCoreBundle:Expense',

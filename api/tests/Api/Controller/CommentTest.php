@@ -1,32 +1,22 @@
 <?php namespace Tests\Api\Controller;
 
 use Guzzle\Http\Client;
+use Tavro\Bundle\CoreBundle\Testing\TavroTest;
 
-class CommentTest extends \PHPUnit_Framework_TestCase
+class CommentTest extends TavroTest
 {
 
     public function testCommentRoute()
     {
+        $url = 'http://api.tavro.dev/api/v1/comments/1';
+
+        $token = $this->authorize();
+
         $client = new Client('http://api.tavro.dev/api/v1', array(
             'request.options' => array(
                 'exceptions' => false,
             )
         ));
-
-        $data = array(
-            '_username' => 'tavrobot',
-            '_password' => 'Password1!'
-        );
-
-        $request = $client->post('http://api.tavro.dev/api/v1/login_check', null, $data);
-        $response = $request->send();
-
-        $json = $response->getBody(true);
-
-        $body = json_decode($json, true);
-        $token = $body['token'];
-
-        $url = 'http://api.tavro.dev/api/v1/comments/1';
 
         $request = $client->get($url);
         $request->addHeader('Authorization', sprintf('Bearer %s', $token));
@@ -41,72 +31,42 @@ class CommentTest extends \PHPUnit_Framework_TestCase
 
     public function testCommentCreateRevenueComment()
     {
-        // create our http client (Guzzle)
-        $client = new Client('http://api.tavro.dev/api/v1', array(
-            'request.options' => array(
-                'exceptions' => false,
-            )
-        ));
+        try {
 
-        $data = [
-            '_username' => 'tavrobot',
-            '_password' => 'Password1!'
-        ];
+            $token = $this->authorize();
 
-        $request = $client->post('http://api.tavro.dev/api/v1/login_check', null, $data);
-        $response = $request->send();
+            $data = [
+                'body' => 'Body text..',
+                'user' => 1
+            ];
 
-        $json = $response->getBody(true);
+            $url = 'http://api.tavro.dev/api/v1/revenues/1/comments';
 
-        $body = json_decode($json, true);
-        $token = $body['token'];
+            $client = new Client($url, array(
+                'request.options' => array(
+                    'exceptions' => false,
+                )
+            ));
 
-        $data = [
-            'body' => 'Body text..',
-            'user' => 1
-        ];
+            $request = $client->post($url, NULL, json_encode($data));
+            $request->addHeader('Authorization', sprintf('Bearer %s', $token));
+            $response = $request->send();
 
-        $url = 'http://api.tavro.dev/api/v1/revenues/1/comments';
+            $json = $response->getBody(true);
+            $body = json_decode($json, true);
 
-        $client = new Client($url, array(
-            'request.options' => array(
-                'exceptions' => false,
-            )
-        ));
+            $this->assertEquals(200, $response->getStatusCode());
 
-        $request = $client->post($url, null, json_encode($data));
-        $request->addHeader('Authorization', sprintf('Bearer %s', $token));
-        $response = $request->send();
-
-        $json = $response->getBody(true);
-        $body = json_decode($json, true);
-        var_dump($body);
-
-        $this->assertEquals(200, $response->getStatusCode());
+        }
+        catch(\Exception $e) {
+            throw $e;
+        }
 
     }
 
     public function testCommentCreateNodeComment()
     {
-        // create our http client (Guzzle)
-        $client = new Client('http://api.tavro.dev/api/v1', array(
-            'request.options' => array(
-                'exceptions' => false,
-            )
-        ));
-
-        $data = array(
-            '_username' => 'tavrobot',
-            '_password' => 'Password1!'
-        );
-
-        $request = $client->post('http://api.tavro.dev/api/v1/login_check', null, $data);
-        $response = $request->send();
-
-        $json = $response->getBody(true);
-
-        $body = json_decode($json, true);
-        $token = $body['token'];
+        $token = $this->authorize();
 
         $data = array(
             'body' => 'Body text..',
@@ -134,25 +94,7 @@ class CommentTest extends \PHPUnit_Framework_TestCase
 
     public function testCommentCreateExpenseComment()
     {
-        // create our http client (Guzzle)
-        $client = new Client('http://api.tavro.dev/api/v1', array(
-            'request.options' => array(
-                'exceptions' => false,
-            )
-        ));
-
-        $data = array(
-            '_username' => 'tavrobot',
-            '_password' => 'Password1!'
-        );
-
-        $request = $client->post('http://api.tavro.dev/api/v1/login_check', null, $data);
-        $response = $request->send();
-
-        $json = $response->getBody(true);
-
-        $body = json_decode($json, true);
-        $token = $body['token'];
+        $token = $this->authorize();
 
         $data = array(
             'body' => 'Body text..',
@@ -173,6 +115,7 @@ class CommentTest extends \PHPUnit_Framework_TestCase
 
         $json = $response->getBody(true);
         $body = json_decode($json, true);
+        var_dump($body);die();
 
         $this->assertEquals(200, $response->getStatusCode());
 
@@ -180,25 +123,7 @@ class CommentTest extends \PHPUnit_Framework_TestCase
 
     public function testCommentCreateCustomerComment()
     {
-        // create our http client (Guzzle)
-        $client = new Client('http://api.tavro.dev/api/v1', array(
-            'request.options' => array(
-                'exceptions' => false,
-            )
-        ));
-
-        $data = array(
-            '_username' => 'tavrobot',
-            '_password' => 'Password1!'
-        );
-
-        $request = $client->post('http://api.tavro.dev/api/v1/login_check', null, $data);
-        $response = $request->send();
-
-        $json = $response->getBody(true);
-
-        $body = json_decode($json, true);
-        $token = $body['token'];
+        $token = $this->authorize();
 
         $data = array(
             'body' => 'Body text..',

@@ -22,13 +22,14 @@ use Symfony\Component\HttpFoundation\Request;
 class CommentHandler extends EntityHandler
 {
     /**
+     * @param \Symfony\Component\HttpFoundation\Request $request
      * @param \Tavro\Bundle\CoreBundle\Model\EntityInterface $entity
      * @param array $parameters
      *
-     * @return \Tavro\Bundle\CoreBundle\Model\EntityInterface
+     * @return \Tavro\Bundle\CoreBundle\Model\EntityInterface|void
      * @throws \Exception
      */
-    public function patch(EntityInterface $entity, array $parameters)
+    public function patch(Request $request, EntityInterface $entity, array $parameters)
     {
         try {
 
@@ -37,7 +38,7 @@ class CommentHandler extends EntityHandler
                 throw new ApiAccessDeniedException($message);
             }
 
-            return $this->applyPatch($entity, $parameters);
+            return $this->applyPatch($request, $entity, $parameters);
 
         }
         catch(\Exception $e) {
@@ -173,12 +174,13 @@ class CommentHandler extends EntityHandler
     }
 
     /**
+     * @param \Symfony\Component\HttpFoundation\Request $request
      * @param array $parameters
      *
-     * @return mixed|\Tavro\Bundle\CoreBundle\Model\EntityInterface|void
+     * @return object|\Tavro\Bundle\CoreBundle\Model\EntityInterface|void
      * @throws \Exception
      */
-    public function create(array $parameters)
+    public function create(Request $request, array $parameters)
     {
         try {
 
@@ -187,7 +189,7 @@ class CommentHandler extends EntityHandler
             }
 
             $entity = $this->createEntity();
-            $comment = $this->processForm($entity, $parameters, 'POST');
+            $comment = $this->processForm($request, $entity, $parameters);
 
             return $comment;
 

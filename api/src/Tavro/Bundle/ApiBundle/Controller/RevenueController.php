@@ -25,7 +25,7 @@ use Tavro\Bundle\ApiBundle\Controller\DefaultController as ApiController;
 
 class RevenueController extends ApiController
 {
-    
+
     /**
      * @param \Symfony\Component\HttpFoundation\Request $request
      * @param \Tavro\Bundle\CoreBundle\Entity\Revenue $revenue
@@ -41,23 +41,23 @@ class RevenueController extends ApiController
             $data = json_decode($request->getContent(), true);
 
             $handler = $this->getHandler('comments');
-            $comment = $handler->post($data);
+            $comment = $handler->post($request, $data);
 
             /**
              * Attach the Comment to the Revenue
              */
-            $this->getHandler('revenue_comment')->post(array(
+            $this->getHandler('revenue_comments')->post($request, array(
                 'comment' => $comment->getId(),
                 'revenue' => $revenue->getId()
             ));
 
             $routeOptions = array(
-                'entity'  => 'comment',
+                'entity'  => 'comments',
                 'id'      => $comment->getId(),
                 'format'  => $_format,
             );
 
-            return $this->get($routeOptions);
+            return $this->forward('TavroApiBundle:Default:get', $routeOptions);
 
         }
         catch(\Exception $e) {

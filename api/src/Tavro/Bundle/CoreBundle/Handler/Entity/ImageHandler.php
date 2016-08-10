@@ -204,12 +204,12 @@ class ImageHandler extends EntityHandler
     /**
      * @param \Tavro\Bundle\CoreBundle\Model\EntityInterface $entity
      * @param array $parameters
-     * @param string $method
+     * @param array|string $method
      *
-     * @return \Tavro\Bundle\CoreBundle\Model\EntityInterface
+     * @return mixed|\Tavro\Bundle\CoreBundle\Model\EntityInterface
      * @throws \Exception
      */
-    public function processForm(EntityInterface $entity, array $parameters, $method = 'PUT')
+    public function processForm(EntityInterface $entity, array $parameters, $method = self::HTTP_METHOD_POST)
     {
         try {
 

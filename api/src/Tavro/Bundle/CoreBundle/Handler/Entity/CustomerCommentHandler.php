@@ -28,5 +28,32 @@ use Symfony\Component\HttpFoundation\Request;
  */
 class CustomerCommentHandler extends EntityHandler
 {
+    /**
+     * @param \Symfony\Component\HttpFoundation\Request $request
+     * @param array $parameters
+     *
+     * @return object|\Tavro\Bundle\CoreBundle\Model\EntityInterface|void
+     * @throws \Exception
+     */
+    public function create(Request $request, array $parameters)
+    {
+        try {
 
+            if(!isset($parameters['status'])) {
+                $parameters['status'] = $this::STATUS_ACTIVE;
+            }
+
+            $entity = $this->createEntity();
+            $comment = $this->processForm($request, $entity, $parameters, $this::HTTP_METHOD_POST);
+
+            return $comment;
+
+        }
+        catch(ApiAccessDeniedException $e) {
+            throw $e;
+        }
+        catch(\Exception $e) {
+            throw $e;
+        }
+    }
 }
