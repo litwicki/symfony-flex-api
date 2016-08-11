@@ -34,11 +34,13 @@ class ExpenseTest extends TavroTest
 
         $token = $this->authorize();
 
+        $date = new \DateTime();
+
         $data = array(
             'body' => 'Expense body description.',
             'user' => 1,
             'organization' => 1,
-            'expense_date' => new \DateTime(),
+            'expense_date' => $date->format('Y-m-d h:i:s'),
             'amount' => 100
         );
 
@@ -56,7 +58,7 @@ class ExpenseTest extends TavroTest
 
         $json = $response->getBody(true);
         $body = json_decode($json, true);
-        var_dump($body);
+
 
         $this->assertEquals(200, $response->getStatusCode());
 

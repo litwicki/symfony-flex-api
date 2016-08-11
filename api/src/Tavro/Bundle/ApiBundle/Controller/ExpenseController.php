@@ -46,15 +46,15 @@ class ExpenseController extends ApiController
                 $items[] = $entity->getComment();
             }
 
+            $data = $this->serialize($items, $_format, $group = 'simple');
+            $response = $this->apiResponse($data, $_format);
+            return $response;
+
         }
         catch(\Exception $e) {
             throw $e;
         }
-        finally {
-            $data = $this->serialize($items, $_format, $group = 'simple');
-            $response = $this->apiResponse($data, $_format);
-            return $response;
-        }
+
     }
 
     /**

@@ -277,6 +277,9 @@ class DefaultController extends Controller
         catch (InvalidFormException $e) {
             throw $e;
         }
+        catch (ApiAccessDeniedException $e) {
+            throw $e;
+        }
         catch(\Exception $e) {
             throw $e;
         }

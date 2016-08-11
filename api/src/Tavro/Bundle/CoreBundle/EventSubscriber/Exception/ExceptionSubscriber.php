@@ -13,11 +13,11 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class ExceptionSubscriber implements EventSubscriberInterface
 {
-    protected $env;
+    protected $debug;
 
-    public function __construct($env)
+    public function __construct($debug)
     {
-        $this->env = $env;
+        $this->debug = $debug;
     }
 
     public static function getSubscribedEvents()
@@ -58,8 +58,12 @@ class ExceptionSubscriber implements EventSubscriberInterface
             'code' => $code,
             'class' => get_class($exception),
             'message' => $message,
-            'trace' => $exception->getTraceAsString(),
         ];
+
+        if($this->debug) {
+            $data['trace'] = $exception->getTraceAsString();
+            $data['message'] = sprintf('%s - %s:%s', $message, $exception->getFile(), $exception->getLine());
+        }
 
         $response = new JsonResponse();
         $response->setStatusCode($code);

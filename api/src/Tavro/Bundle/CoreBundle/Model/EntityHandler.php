@@ -2,6 +2,8 @@
 
 namespace Tavro\Bundle\CoreBundle\Model;
 
+use Symfony\Component\Form\FormError;
+use Symfony\Component\Form\FormErrorIterator;
 use Symfony\Component\Form\FormFactory;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
 use Symfony\Component\Security\Core\Authorization\AuthorizationChecker;
@@ -29,6 +31,7 @@ use Tavro\Bundle\CoreBundle\Exception\Api\ApiRequestLimitException;
 use Tavro\Bundle\CoreBundle\Exception\Api\ApiAccessDeniedException;
 use Tavro\Bundle\CoreBundle\Exception\Api\ApiRequestSizeException;
 use Tavro\Bundle\CoreBundle\Model\EntityHandlerInterface;
+use Tavro\Bundle\CoreBundle\Component\Form\FormErrors;
 
 class EntityHandler implements EntityHandlerInterface
 {
@@ -519,7 +522,7 @@ class EntityHandler implements EntityHandlerInterface
              *
              */
 
-            $form->submit($parameters);
+            $form->submit($parameters, $clearMissing = false);
 
             if ($form->isValid()) {
 
@@ -551,8 +554,9 @@ class EntityHandler implements EntityHandlerInterface
 
             }
             else {
-
-
+                $formErrors = new FormErrors();
+                $errors = $formErrors->getArray($form);
+                throw new InvalidFormException(implode($errors, ','));
             }
 
         }
@@ -777,34 +781,5 @@ class EntityHandler implements EntityHandlerInterface
             throw $e;
         }
     }
-
-    /**
-     * List all errors of a given bound form.
-     *
-     * @param Form $form
-     *
-     * @return array
-     */
-    protected function getFormErrors(Form $form)
-    {
-        $errors = array();
-
-        // Global
-        foreach ($form->getErrors() as $error) {
-            $errors[$form->getName()][] = $error->getMessage();
-        }
-
-        // Fields
-        foreach ($form as $child /** @var Form $child */) {
-            if (!$child->isValid()) {
-                foreach ($child->getErrors() as $error) {
-                    $errors[$child->getName()][] = $error->getMessage();
-                }
-            }
-        }
-
-        return $errors;
-    }
-
 
 }
