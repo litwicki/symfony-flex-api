@@ -32,10 +32,6 @@ class ExpenseType extends AbstractType
                 'class' => 'TavroCoreBundle:Organization',
                 'choice_label' => 'Organization'
             ))
-            ->add('updated_by', EntityType::class, array(
-                'class' => 'TavroCoreBundle:User',
-                'choice_label' => 'User'
-            ))
             ->add('submit', SubmitType::class)
         ;
     }
