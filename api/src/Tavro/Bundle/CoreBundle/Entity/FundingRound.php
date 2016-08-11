@@ -72,7 +72,7 @@ class FundingRound extends OrganizationEntity implements OrganizationEntityInter
         $tz = new \DateTimeZone('America/New_York');
         $now->setTimezone($tz);
         $this->create_date = $now;
-        $this->shareholders = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->funding_round_shareholders = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     public function __toString()

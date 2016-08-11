@@ -19,7 +19,6 @@ class ExpenseType extends AbstractType
     {
         $builder
             ->add('body')
-            ->add('title')
             ->add('status')
             ->add('category', EntityType::class, array(
                 'class' => 'TavroCoreBundle:ExpenseCategory',

@@ -72,13 +72,13 @@ class CustomerController extends ApiController
 
             $data = json_decode($request->getContent(), true);
 
-            $handler = $this->getHandler('comment');
+            $handler = $this->getHandler('comments');
             $comment = $handler->post($request, $data);
 
             /**
              * Attach the Comment to the Customer
              */
-            $this->getHandler('customer_comment')->post($request, array(
+            $this->getHandler('customer_comments')->post($request, array(
                 'comment' => $comment->getId(),
                 'customer' => $customer->getId()
             ));

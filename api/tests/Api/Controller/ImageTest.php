@@ -1,8 +1,9 @@
 <?php namespace Tests\Api\Controller;
 
 use Guzzle\Http\Client;
+use Tavro\Bundle\CoreBundle\Testing\TavroTest;
 
-class ImageTest extends \PHPUnit_Framework_TestCase
+class ImageTest extends TavroTest
 {
 
     public function testImageRoute()
@@ -13,18 +14,7 @@ class ImageTest extends \PHPUnit_Framework_TestCase
             )
         ));
 
-        $data = array(
-            '_username' => 'tavrobot',
-            '_password' => 'Password1!'
-        );
-
-        $request = $client->post('http://api.tavro.dev/api/v1/login_check', null, $data);
-        $response = $request->send();
-
-        $json = $response->getBody(true);
-
-        $body = json_decode($json, true);
-        $token = $body['token'];
+        $token = $this->authorize();
 
         $url = 'http://api.tavro.dev/api/v1/images';
 
@@ -48,18 +38,7 @@ class ImageTest extends \PHPUnit_Framework_TestCase
             )
         ));
 
-        $data = array(
-            '_username' => 'tavrobot',
-            '_password' => 'Password1!'
-        );
-
-        $request = $client->post('http://api.tavro.dev/api/v1/login_check', null, $data);
-        $response = $request->send();
-
-        $json = $response->getBody(true);
-
-        $body = json_decode($json, true);
-        $token = $body['token'];
+        $token = $this->authorize();
 
         $data = array(
             'title' => 'Image Name',

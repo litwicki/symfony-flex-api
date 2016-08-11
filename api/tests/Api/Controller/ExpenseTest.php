@@ -1,8 +1,9 @@
 <?php namespace Tests\Api\Controller;
 
 use Guzzle\Http\Client;
+use Tavro\Bundle\CoreBundle\Testing\TavroTest;
 
-class ExpenseTest extends \PHPUnit_Framework_TestCase
+class ExpenseTest extends TavroTest
 {
 
     public function testExpenseRoute()
@@ -13,18 +14,7 @@ class ExpenseTest extends \PHPUnit_Framework_TestCase
             )
         ));
 
-        $data = array(
-            '_username' => 'tavrobot',
-            '_password' => 'Password1!'
-        );
-
-        $request = $client->post('http://api.tavro.dev/api/v1/login_check', null, $data);
-        $response = $request->send();
-
-        $json = $response->getBody(true);
-
-        $body = json_decode($json, true);
-        $token = $body['token'];
+        $token = $this->authorize();
 
         $url = 'http://api.tavro.dev/api/v1/expenses';
 
@@ -41,34 +31,18 @@ class ExpenseTest extends \PHPUnit_Framework_TestCase
 
     public function testExpenseCreate()
     {
-        // create our http client (Guzzle)
-        $client = new Client('http://api.tavro.dev/api/v1', array(
-            'request.options' => array(
-                'exceptions' => false,
-            )
-        ));
+
+        $token = $this->authorize();
 
         $data = array(
-            '_username' => 'tavrobot',
-            '_password' => 'Password1!'
-        );
-
-        $request = $client->post('http://api.tavro.dev/api/v1/login_check', null, $data);
-        $response = $request->send();
-
-        $json = $response->getBody(true);
-
-        $body = json_decode($json, true);
-        $token = $body['token'];
-
-        $data = array(
-            'title' => 'Expense title..',
             'body' => 'Expense body description.',
             'user' => 1,
-            'organization' => 1
+            'organization' => 1,
+            'expense_date' => new \DateTime(),
+            'amount' => 100
         );
 
-        $url = 'http://api.tavro.dev/api/v1/Expenses';
+        $url = 'http://api.tavro.dev/api/v1/expenses';
 
         $client = new Client($url, array(
             'request.options' => array(
@@ -82,6 +56,7 @@ class ExpenseTest extends \PHPUnit_Framework_TestCase
 
         $json = $response->getBody(true);
         $body = json_decode($json, true);
+        var_dump($body);
 
         $this->assertEquals(200, $response->getStatusCode());
 

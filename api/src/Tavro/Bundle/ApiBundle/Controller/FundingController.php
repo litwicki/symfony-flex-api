@@ -70,13 +70,13 @@ class FundingController extends ApiController
 
             $data = json_decode($request->getContent(), true);
 
-            $handler = $this->getHandler('comment');
+            $handler = $this->getHandler('comments');
             $comment = $handler->post($request, $data);
 
             /**
              * Attach the Comment to the FundingRound
              */
-            $this->getHandler('funding_round_comment')->post($request, array(
+            $this->getHandler('funding_round_comments')->post($request, array(
                 'comment' => $comment->getId(),
                 'funding_round' => $funding_round->getId()
             ));
@@ -87,7 +87,7 @@ class FundingController extends ApiController
                 'format'  => $_format,
             );
 
-            return $this->get($routeOptions);
+            return $this->forward('TavroApiBundle:Default:get', $routeOptions);
 
         }
         catch(\Exception $e) {
@@ -141,13 +141,13 @@ class FundingController extends ApiController
 
             $data = json_decode($request->getContent(), true);
 
-            $handler = $this->getHandler('shareholder');
+            $handler = $this->getHandler('shareholders');
             $shareholder = $handler->create(array_merge($data, array(
                'funding_round' => $funding_round,
             )));
 
             $routeOptions = array(
-                'entity'  => 'shareholder',
+                'entity'  => 'shareholders',
                 'id'      => $shareholder->getId(),
                 'format'  => $_format,
             );

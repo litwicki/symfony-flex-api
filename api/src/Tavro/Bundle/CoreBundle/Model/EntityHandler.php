@@ -462,7 +462,7 @@ class EntityHandler implements EntityHandlerInterface
                 throw new ApiAccessDeniedException($message);
             }
 
-            return $this->applyPatch($entity, $parameters);
+            return $this->applyPatch($request, $entity, $parameters);
 
         }
         catch(\Exception $e) {
