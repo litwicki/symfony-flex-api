@@ -83,7 +83,7 @@ class NodeTest extends TavroTest
             'body' => 'Node body description.',
             'type' => 'node',
             'views' => 1,
-            'display_date' => $faker->dateTimeThisCentury,
+            'display_date' => $faker->dateTimeThisMonth->format('Y-m-d h:i:s'),
             'user' => 1,
             'organization' => -1
         );
@@ -103,7 +103,8 @@ class NodeTest extends TavroTest
         $json = $response->getBody(true);
         $body = json_decode($json, true);
 
-        $this->assertEquals(200, $response->getStatusCode());
+        $this->assertEquals(500, $response->getStatusCode());
+        $this->assertTrue(preg_match('/Please enter a valid Organization/', $body['message']));
 
     }
 
