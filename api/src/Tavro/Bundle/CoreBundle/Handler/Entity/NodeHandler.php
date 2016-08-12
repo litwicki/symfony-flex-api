@@ -61,7 +61,7 @@ class NodeHandler extends EntityHandler
              * is updated correctly with the entity Id: {id}-{url-save-title}
              */
             if($entity instanceof EntityInterface) {
-                return $this->put($entity, $parameters);
+                return $this->put($request, $entity, $parameters);
             }
 
             return $entity;

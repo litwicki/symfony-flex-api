@@ -91,6 +91,7 @@ class Node extends OrganizationEntity implements OrganizationEntityInterface
     {
         $this->node_tags = new \Doctrine\Common\Collections\ArrayCollection();
         $this->node_comments = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->nodes_read = new \Doctrine\Common\Collections\ArrayCollection();
         $this->status = 1;
         $now = new \DateTime();
         $tz = new \DateTimeZone('America/New_York');

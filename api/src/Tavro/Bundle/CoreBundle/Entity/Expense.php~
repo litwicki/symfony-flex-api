@@ -39,7 +39,7 @@ class Expense extends Entity
     protected $amount;
 
     /**
-     * @ORM\Column(type="datetime", length=1000, nullable=false)
+     * @ORM\Column(type="datetime", nullable=false)
      * @Groups({"api", "tavro", "simple"})
      */
     protected $expense_date;
@@ -91,13 +91,11 @@ class Expense extends Entity
      */
     public function __construct()
     {
+        parent::__construct();
         $this->expense_tags = new \Doctrine\Common\Collections\ArrayCollection();;
         $this->expense_comments = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->expense_date = new \DateTime();
         $this->status = 1;
-        $now = new \DateTime();
-        $tz = new \DateTimeZone('America/New_York');
-        $now->setTimezone($tz);
-        $this->create_date = $now;
     }
 
     /**

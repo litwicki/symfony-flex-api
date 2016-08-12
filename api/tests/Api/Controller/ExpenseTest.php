@@ -34,14 +34,15 @@ class ExpenseTest extends TavroTest
 
         $token = $this->authorize();
 
-        $date = new \DateTime();
+        $faker = \Faker\Factory::create('en_EN');
 
         $data = array(
             'body' => 'Expense body description.',
+            'amount' => 100,
+            'expense_date' => $faker->dateTimeThisMonth->format('Y-m-d h:i:s'),
             'user' => 1,
             'organization' => 1,
-            'expense_date' => $date->format('Y-m-d h:i:s'),
-            'amount' => 100
+            'category' => 1,
         );
 
         $url = 'http://api.tavro.dev/api/v1/expenses';
@@ -58,7 +59,6 @@ class ExpenseTest extends TavroTest
 
         $json = $response->getBody(true);
         $body = json_decode($json, true);
-
 
         $this->assertEquals(200, $response->getStatusCode());
 

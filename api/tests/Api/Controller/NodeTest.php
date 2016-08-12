@@ -31,12 +31,6 @@ class NodeTest extends TavroTest
 
     public function testNodeCreate()
     {
-        // create our http client (Guzzle)
-        $client = new Client('http://api.tavro.dev/api/v1', array(
-            'request.options' => array(
-                'exceptions' => false,
-            )
-        ));
 
         $token = $this->authorize();
 
@@ -47,7 +41,7 @@ class NodeTest extends TavroTest
             'body' => 'Node body description.',
             'type' => 'node',
             'views' => 1,
-            'display_date' => $faker->dateTimeThisCentury,
+            'display_date' => $faker->dateTimeThisMonth->format('Y-m-d h:i:s'),
             'user' => 1,
             'organization' => 1
         );

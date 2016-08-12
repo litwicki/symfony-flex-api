@@ -30,19 +30,30 @@ class FormErrors
         $errors = array();
         if ($baseForm instanceof \Symfony\Component\Form\Form) {
             foreach($baseForm->getErrors() as $error) {
-                $errors[] = array(
-                    "error"      => $error->getMessage(),
-                    "field"       => $baseFormName
-                );
+                $errors[] = $error->getMessage();
             }
 
             foreach ($baseForm->all() as $key => $child) {
                 if(($child instanceof \Symfony\Component\Form\Form)) {
-                    $cErrors = $this->getErrors($child, $baseFormName . "_" . $child->getName());
+                    $cErrors = $this->getErrors($child, $child->getName());
                     $errors = array_merge($errors, $cErrors);
                 }
             }
         }
         return $errors;
+    }
+
+    /**
+     * @param $errors
+     *
+     * @return string
+     */
+    public function getErrorsAsString($errors)
+    {
+        $messages = array();
+        foreach($errors as $error) {
+            $messages[] = $error;
+        }
+        return implode($messages, ' ');
     }
 }

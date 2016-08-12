@@ -20,7 +20,11 @@ class NodeType extends AbstractType
         $builder
             ->add('type')
             ->add('body')
-            ->add('display_date', DateTimeType::class)
+            ->add('display_date', DateTimeType::class, array(
+                'invalid_message' => 'Please enter a valid date with time for display date: Y-m-d h:i:s',
+                'widget' => 'single_text',
+                'format' => 'Y-m-d h:i:s',
+            ))
             ->add('views')
             ->add('title')
             ->add('status')
@@ -31,10 +35,6 @@ class NodeType extends AbstractType
             ->add('organization', EntityType::class, array(
                 'class' => 'TavroCoreBundle:Organization',
                 'choice_label' => 'Organization'
-            ))
-            ->add('updated_by', EntityType::class, array(
-                'class' => 'TavroCoreBundle:User',
-                'choice_label' => 'User'
             ))
             ->add('submit', SubmitType::class)
         ;

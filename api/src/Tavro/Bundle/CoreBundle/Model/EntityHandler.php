@@ -522,7 +522,7 @@ class EntityHandler implements EntityHandlerInterface
              *
              */
 
-            $form->submit($parameters, $clearMissing = false);
+            $form->submit($parameters, ($method == 'PATCH' ? false : true));
 
             if ($form->isValid()) {
 
@@ -556,7 +556,8 @@ class EntityHandler implements EntityHandlerInterface
             else {
                 $formErrors = new FormErrors();
                 $errors = $formErrors->getArray($form);
-                throw new InvalidFormException(implode($errors, ','));
+                $exception = $formErrors->getErrorsAsString($errors);
+                throw new InvalidFormException($exception);
             }
 
         }

@@ -262,7 +262,6 @@ class DefaultController extends Controller
         try {
 
             $data = json_decode($request->getContent(), true);
-
             $handler = $this->getHandler($entity);
             $newEntity = $handler->post($request, $data);
 

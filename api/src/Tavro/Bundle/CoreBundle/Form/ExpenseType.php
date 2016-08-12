@@ -21,7 +21,11 @@ class ExpenseType extends AbstractType
             ->add('body')
             ->add('amount')
             ->add('status')
-            ->add('expense_date', DateTimeType::class)
+            ->add('expense_date', DateTimeType::class, array(
+                'invalid_message' => 'Please enter a valid date with time for expense date:  Y-m-d h:i:s',
+                'widget' => 'single_text',
+                'format' => 'Y-m-d h:i:s',
+            ))
             ->add('category', EntityType::class, array(
                 'class' => 'TavroCoreBundle:ExpenseCategory',
                 'choice_label' => 'Category'
