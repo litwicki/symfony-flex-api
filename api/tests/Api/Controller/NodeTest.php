@@ -104,7 +104,7 @@ class NodeTest extends TavroTest
         $body = json_decode($json, true);
 
         $this->assertEquals(500, $response->getStatusCode());
-        $this->assertTrue(preg_match('/Please enter a valid Organization/', $body['message']));
+        $this->assertEquals(1, preg_match('/Please enter a valid Organization/', $body['message']));
 
     }
 
@@ -146,7 +146,8 @@ class NodeTest extends TavroTest
         $json = $response->getBody(true);
         $body = json_decode($json, true);
 
-        $this->assertEquals(200, $response->getStatusCode());
+        $this->assertEquals(500, $response->getStatusCode());
+        $this->assertEquals(1, preg_match('/Please enter a valid User/', $body['message']));
 
     }
 

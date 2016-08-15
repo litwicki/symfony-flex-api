@@ -29,16 +29,42 @@ class OrganizationTest extends TavroTest
 
     }
 
-    public function testOrganizationCreate()
+    public function testOrganizationCreateWithNoPermission()
     {
-        // create our http client (Guzzle)
-        $client = new Client('http://api.tavro.dev/api/v1', array(
+
+        $token = $this->authorize();
+
+        $data = array(
+            'title' => 'Organization Name',
+            'body' => 'Product body..',
+            'owner' => 1,
+        );
+
+        $url = 'http://api.tavro.dev/api/v1/organizations';
+
+        $client = new Client($url, array(
             'request.options' => array(
                 'exceptions' => false,
             )
         ));
 
-        $token = $this->authorize();
+        $request = $client->post($url, null, json_encode($data));
+        $request->addHeader('Authorization', sprintf('Bearer %s', $token));
+
+        $response = $request->send();
+
+        $json = $response->getBody(true);
+        $body = json_decode($json, true);
+
+        $this->assertEquals(403, $response->getStatusCode());
+        $this->assertEquals(1, preg_match('/You are not authorized/', $body['message']));
+
+    }
+
+    public function testOrganizationCreate()
+    {
+
+        $token = $this->authorize('tavrobotadmin', 'Password1!');
 
         $data = array(
             'title' => 'Organization Name',
