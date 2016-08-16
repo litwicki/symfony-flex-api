@@ -29,7 +29,7 @@ class OrganizationTest extends TavroTest
 
     }
 
-    public function testOrganizationCreateWithNoPermission()
+    public function testOrganizationCreate()
     {
 
         $token = $this->authorize();
@@ -61,10 +61,10 @@ class OrganizationTest extends TavroTest
 
     }
 
-    public function testOrganizationCreate()
+    public function testOrganizationCreateWithNoPermission()
     {
 
-        $token = $this->authorize('tavrobotadmin', 'Password1!');
+        $token = $this->authorize('fembot', 'Password1!');
 
         $data = array(
             'title' => 'Organization Name',
