@@ -1,5 +1,6 @@
 security:
     role_hierarchy:
+        ROLE_API_USER: [ROLE_USER]
         ROLE_DEVELOPER: [ROLE_USER]
         ROLE_ADMIN: [ROLE_DEVELOPER]
         ROLE_SUPERUSER: [ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
@@ -22,30 +23,16 @@ security:
             pattern:  ^/(_(profiler|wdt)|css|images|js)/
             security: false
 
-        v1_login:
-            pattern:  ^/api/v1/login
-            stateless: true
-            anonymous: true
-            form_login:
-                check_path:               /api/v1/login_check
-                username_parameter:       _username
-                password_parameter:       _password
-                success_handler:          lexik_jwt_authentication.handler.authentication_success
-                failure_handler:          lexik_jwt_authentication.handler.authentication_failure
-                require_previous_session: false
-
         api:
-            pattern:   ^/api
+            pattern:   ^/api/v1/(?!auth)
             stateless: true
-            lexik_jwt:
-                authorization_header: # check token in Authorization Header
-                    enabled: true
-                    prefix:  Bearer
-                throw_exceptions:        false     # When an authentication failure occurs, return a 401 response immediately
-                create_entry_point:      true      # When no authentication details are provided, create a default entry point that returns a 401 response
-                authentication_provider: lexik_jwt_authentication.security.authentication.provider
+            guard:
+                authenticators:
+                    - tavro.jwt_token_authenticator
 
     access_control:
-        - { path: ^/api/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/api/v1, roles: IS_AUTHENTICATED_FULLY }
+        - { path: ^/api/v1/auth, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/api/v1, roles: [ROLE_USER, ROLE_API_USER] }
+        - { path: ^/(css|js), roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/(_wdt|_profiler), roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/, roles: [ROLE_USER] }

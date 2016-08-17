@@ -943,8 +943,7 @@ class User extends Entity implements UserInterface, \Serializable
      */
     public function getIsAdmin()
     {
-        $roles = $this->getRoles();
-        foreach($roles as $role) {
+        foreach($this->roles as $role) {
             if($role->getRole() === 'ROLE_ADMIN') {
                 return true;
             }
@@ -970,8 +969,7 @@ class User extends Entity implements UserInterface, \Serializable
      */
     public function getIsDeveloper()
     {
-        $roles = $this->getRoles();
-        foreach($roles as $role) {
+        foreach($this->roles as $role) {
             if($role->getRole() === 'ROLE_DEVELOPER') {
                 return true;
             }

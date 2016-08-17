@@ -4,6 +4,7 @@ namespace Tavro\Bundle\ApiBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Tavro\Bundle\CoreBundle\Exception\Api\ApiException;
@@ -23,6 +24,35 @@ use Tavro\Bundle\ApiBundle\Controller\DefaultController as ApiController;
 
 class AuthController extends ApiController
 {
+
+    /**
+     * @param \Symfony\Component\HttpFoundation\Request $request
+     *
+     * @return \Symfony\Component\HttpFoundation\JsonResponse
+     */
+    public function tokenAuthenticateAction(Request $request)
+    {
+        $username = $request->request->get('username');
+        $password = $request->request->get('password');
+
+        $user = $this->getDoctrine()->getRepository('TavroCoreBundle:User')->findOneBy(['username' => $username]);
+
+        if(!$user) {
+            throw $this->createNotFoundException();
+        }
+
+        // password check
+        if(!$this->get('security.password_encoder')->isPasswordValid($user, $password)) {
+            throw $this->createAccessDeniedException();
+        }
+
+        // Use LexikJWTAuthenticationBundle to create JWT token that hold only information about user name
+        $token = $this->get('lexik_jwt_authentication.encoder')
+            ->encode(['username' => $user->getUsername()]);
+
+        // Return genereted tocken
+        return new JsonResponse(['token' => $token]);
+    }
 
     /**
      * By design, only allow the current user to do this for his/her self.

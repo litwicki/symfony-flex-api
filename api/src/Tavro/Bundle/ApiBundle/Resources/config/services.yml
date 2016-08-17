@@ -4,3 +4,7 @@ services:
         class: Tavro\Bundle\ApiBundle\EventListener\Security\JwtAuthenticationSuccessListener
         tags:
             - { name: kernel.event_listener, event: lexik_jwt_authentication.on_authentication_success, method: onAuthenticationSuccessResponse }
+
+    tavro.jwt_token_authenticator:
+        class: Tavro\Bundle\ApiBundle\Security\Authentication\Authenticator\JwtAuthenticator
+        arguments: ['@doctrine.orm.entity_manager', '@lexik_jwt_authentication.encoder']

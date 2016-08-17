@@ -53,7 +53,7 @@ Workflow and useful 'stuff' for developing in Tavro.
     
 ### Testing JWT Token
 
-    $ curl -X POST http://api.tavro.dev/api/v1/login_check -d _username=tavrobot -d _password=Password1!
+    $ curl -X POST http://api.tavro.dev/api/v1/auth -d username=tavrobot -d password=Password1!
 
 ### Testing CURL Api Request
 

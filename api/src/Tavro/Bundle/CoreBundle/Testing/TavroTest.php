@@ -13,11 +13,11 @@ class TavroTest extends \PHPUnit_Framework_TestCase
         ));
 
         $data = array(
-            '_username' => 'tavrobot',
-            '_password' => 'Password1!'
+            'username' => 'tavrobot',
+            'password' => 'Password1!'
         );
 
-        $request = $client->post('http://api.tavro.dev/api/v1/login_check', null, $data);
+        $request = $client->post('http://api.tavro.dev/api/v1/auth', null, $data);
         $response = $request->send();
 
         $json = $response->getBody(true);
