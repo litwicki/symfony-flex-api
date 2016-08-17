@@ -55,9 +55,9 @@ class OrganizationTest extends TavroTest
 
         $json = $response->getBody(true);
         $body = json_decode($json, true);
+        var_dump($body);die();
 
-        $this->assertEquals(403, $response->getStatusCode());
-        $this->assertEquals(1, preg_match('/You are not authorized/', $body['message']));
+        $this->assertEquals(200, $response->getStatusCode());
 
     }
 
@@ -65,6 +65,8 @@ class OrganizationTest extends TavroTest
     {
 
         $token = $this->authorize('fembot', 'Password1!');
+
+        $this->assertTrue(!empty($token));
 
         $data = array(
             'title' => 'Organization Name',
@@ -88,7 +90,8 @@ class OrganizationTest extends TavroTest
         $json = $response->getBody(true);
         $body = json_decode($json, true);
 
-        $this->assertEquals(200, $response->getStatusCode());
+        $this->assertEquals(403, $response->getStatusCode());
+        $this->assertEquals(1, preg_match('/You are not authorized/', $body['message']));
 
     }
 

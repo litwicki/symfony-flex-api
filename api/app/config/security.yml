@@ -28,6 +28,8 @@ security:
             anonymous: true
             form_login:
                 check_path:               /api/v1/login_check
+                username_parameter:       _username
+                password_parameter:       _password
                 success_handler:          lexik_jwt_authentication.handler.authentication_success
                 failure_handler:          lexik_jwt_authentication.handler.authentication_failure
                 require_previous_session: false
@@ -35,9 +37,15 @@ security:
         api:
             pattern:   ^/api
             stateless: true
-            lexik_jwt: ~
+            lexik_jwt:
+                authorization_header: # check token in Authorization Header
+                    enabled: true
+                    prefix:  Bearer
+                throw_exceptions:        false     # When an authentication failure occurs, return a 401 response immediately
+                create_entry_point:      true      # When no authentication details are provided, create a default entry point that returns a 401 response
+                authentication_provider: lexik_jwt_authentication.security.authentication.provider
 
     access_control:
         - { path: ^/api/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/api,       roles: IS_AUTHENTICATED_FULLY }
+        - { path: ^/api/v1, roles: IS_AUTHENTICATED_FULLY }
         - { path: ^/, roles: [ROLE_USER] }

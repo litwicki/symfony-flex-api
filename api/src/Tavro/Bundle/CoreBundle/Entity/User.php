@@ -756,6 +756,14 @@ class User extends Entity implements UserInterface, \Serializable
         return $this->roles;
     }
 
+    public function getRoleNames() {
+        $roles = [];
+        foreach($this->roles as $role) {
+            $roles[] = $role->getRole();
+        }
+        return $roles;
+    }
+
     /**
      * Add nodes_read
      *

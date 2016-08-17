@@ -16,11 +16,11 @@ class JwtAuthenticationSuccessListener
             return;
         }
 
-        // $data['token'] contains the JWT
-
-        $data['data'] = array(
-            'roles' => $user->getRoles(),
-        );
+        /**
+         * Do NOT use getRoles() as that is a serialized
+         * response for standard simple_form authentication.
+         */
+        $data['roles'] = $user->getRoleNames();
 
         $event->setData($data);
     }
