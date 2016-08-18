@@ -198,6 +198,7 @@ class User extends Entity implements UserInterface, \Serializable
      */
     public function __construct()
     {
+        parent::__construct();
         $this->create_date = new \DateTime();
         $this->update_date = new \DateTime();
         $this->nodes = new \Doctrine\Common\Collections\ArrayCollection();
@@ -354,29 +355,6 @@ class User extends Entity implements UserInterface, \Serializable
     }
 
     /**
-     * Set github_username
-     *
-     * @param string $github_username
-     * @return User
-     */
-    public function setGithubUsername($github_username)
-    {
-        $this->github_username = $github_username;
-
-        return $this;
-    }
-
-    /**
-     * Get github_username
-     *
-     * @return string
-     */
-    public function getGithubUsername()
-    {
-        return $this->github_username;
-    }
-
-    /**
      * Set and encode the password string.
      *
      * @param string $password
@@ -488,29 +466,6 @@ class User extends Entity implements UserInterface, \Serializable
     public function getSignature()
     {
         return $this->signature;
-    }
-
-    /**
-     * Set email
-     *
-     * @param string $email
-     * @return User
-     */
-    public function setEmail($email)
-    {
-        $this->email = $email;
-
-        return $this;
-    }
-
-    /**
-     * Get email
-     *
-     * @return string 
-     */
-    public function getEmail()
-    {
-        return $this->email;
     }
 
     /**
@@ -798,10 +753,9 @@ class User extends Entity implements UserInterface, \Serializable
     }
 
     /**
-     * Add user_organization
-     *
      * @param \Tavro\Bundle\CoreBundle\Entity\UserOrganization $user_organization
-     * @return UserOrganization
+     *
+     * @return $this
      */
     public function addUserOrganizations(\Tavro\Bundle\CoreBundle\Entity\UserOrganization $user_organization)
     {
@@ -828,29 +782,6 @@ class User extends Entity implements UserInterface, \Serializable
     public function getUserOrganizations()
     {
         return $this->user_organizations;
-    }
-
-    /**
-     * Set billing_id
-     *
-     * @param integer $billing_id
-     * @return User
-     */
-    public function setBillingId($billing_id)
-    {
-        $this->billing_id = $billing_id;
-
-        return $this;
-    }
-
-    /**
-     * Get billing_id
-     *
-     * @return integer 
-     */
-    public function getBillingId()
-    {
-        return $this->billing_id;
     }
 
     /**

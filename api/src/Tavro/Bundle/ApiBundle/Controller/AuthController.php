@@ -47,8 +47,7 @@ class AuthController extends ApiController
         }
 
         // Use LexikJWTAuthenticationBundle to create JWT token that hold only information about user name
-        $token = $this->get('lexik_jwt_authentication.encoder')
-            ->encode(['username' => $user->getUsername()]);
+        $token = $this->get('lexik_jwt_authentication.encoder')->encode(['username' => $user->getUsername()]);
 
         // Return genereted tocken
         return new JsonResponse(['token' => $token]);
