@@ -7,8 +7,9 @@ use Tavro\Bundle\CoreBundle\Entity\Organization;
 use Tavro\Bundle\CoreBundle\Entity\User;
 use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 use Symfony\Component\Security\Core\Authorization\AccessDecisionManagerInterface;
+use Tavro\Bundle\CoreBundle\Security\Voter\TavroVoter;
 
-class OrganizationVoter extends Voter
+class OrganizationVoter extends TavroVoter
 {
     // these strings are just invented: you can use anything
     const VIEW = 'view';
@@ -16,13 +17,12 @@ class OrganizationVoter extends Voter
     const CREATE = 'create';
     const PATCH = 'patch';
 
-    private $decisionManager;
-
-    public function __construct(AccessDecisionManagerInterface $decisionManager)
-    {
-        $this->decisionManager = $decisionManager;
-    }
-
+    /**
+     * @param string $attribute
+     * @param mixed $subject
+     *
+     * @return bool
+     */
     protected function supports($attribute, $subject)
     {
         // if the attribute isn't one we support, return false
@@ -38,6 +38,13 @@ class OrganizationVoter extends Voter
         return true;
     }
 
+    /**
+     * @param string $attribute
+     * @param mixed $subject
+     * @param \Symfony\Component\Security\Core\Authentication\Token\TokenInterface $token
+     *
+     * @return bool
+     */
     protected function voteOnAttribute($attribute, $subject, TokenInterface $token)
     {
         $user = $token->getUser();
@@ -49,20 +56,20 @@ class OrganizationVoter extends Voter
 
         $organization = $subject;
 
+        /**
+         * If the User is an Administrator, let them proceed as they desire.
+         */
         if ($this->decisionManager->decide($token, array('ROLE_ADMIN'))) {
             return true;
         }
-        else {
-
-            if($organization->getOwner()->getId() !== $user->getId()) {
-                return false;
-            }
-
-        }
 
         switch ($attribute) {
+            case self::CREATE:
+                return $this->canCreate($organization, $user);
             case self::VIEW:
                 return $this->canView($organization, $user);
+            case self::PATCH:
+                return $this->canPatch($organization, $user);
             case self::EDIT:
                 return $this->canEdit($organization, $user);
         }
@@ -70,20 +77,52 @@ class OrganizationVoter extends Voter
         throw new \LogicException('This code should not be reached!');
     }
 
+    /**
+     * @param \Tavro\Bundle\CoreBundle\Entity\Organization $organization
+     * @param \Tavro\Bundle\CoreBundle\Entity\User $user
+     *
+     * @return bool
+     */
     private function canView(Organization $organization, User $user)
     {
+        return $this->checkOrganization($organization, $user);
+    }
+
+    /**
+     * @param \Tavro\Bundle\CoreBundle\Entity\Organization $organization
+     * @param \Tavro\Bundle\CoreBundle\Entity\User $user
+     *
+     * @return bool
+     */
+    private function canCreate(Organization $organization, User $user)
+    {
+        if($organization->getOwner()->getId() !== $user->getId()) {
+            return false;
+        }
+
         return true;
     }
 
+    /**
+     * @param \Tavro\Bundle\CoreBundle\Entity\Organization $organization
+     * @param \Tavro\Bundle\CoreBundle\Entity\User $user
+     *
+     * @return bool
+     */
     private function canEdit(Organization $organization, User $user)
     {
-        if($organization->getOwner()->getId() === $user->getId()) {
-            return true;
-        }
+        return $this->checkOrganization($organization, $user);
+    }
 
-        if($user->isAdmin()) {
-            return true;
-        }
+    /**
+     * @param \Tavro\Bundle\CoreBundle\Entity\Organization $organization
+     * @param \Tavro\Bundle\CoreBundle\Entity\User $user
+     *
+     * @return bool
+     */
+    private function canPatch(Organization $organization, User $user)
+    {
+        return $this->checkOrganization($organization, $user);
     }
 
 }
