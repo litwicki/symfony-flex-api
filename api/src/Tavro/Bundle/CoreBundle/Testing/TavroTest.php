@@ -4,8 +4,15 @@ use Guzzle\Http\Client;
 
 class TavroTest extends \PHPUnit_Framework_TestCase
 {
-    public function authorize()
+    public function authorize($username = 'tavrobot', $password = 'Password1!')
     {
+
+//        $cookieName = 'tavro_phpunit_jwt';
+//
+//        if(isset($_COOKIE[$cookieName])) {
+//           return $_COOKIE[$cookieName];
+//        }
+
         $client = new Client('http://api.tavro.dev/api/v1', array(
             'request.options' => array(
                 'exceptions' => false,
@@ -13,8 +20,8 @@ class TavroTest extends \PHPUnit_Framework_TestCase
         ));
 
         $data = array(
-            'username' => 'tavrobot',
-            'password' => 'Password1!'
+            'username' => $username,
+            'password' => $password
         );
 
         $request = $client->post('http://api.tavro.dev/api/v1/auth', null, $data);
@@ -23,8 +30,13 @@ class TavroTest extends \PHPUnit_Framework_TestCase
         $json = $response->getBody(true);
 
         $body = json_decode($json, true);
-        $token = $body['token'];
 
-        return $token;
+        if(isset($body['token'])) {
+            $token = $body['token'];
+            //setcookie($cookieName, $token, 360, '/', 'api.tavro.dev', false, true);
+            return $token;
+        }
+
+        return false;
     }
 }

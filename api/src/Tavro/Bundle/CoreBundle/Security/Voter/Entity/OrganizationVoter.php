@@ -14,6 +14,7 @@ class OrganizationVoter extends Voter
     const VIEW = 'view';
     const EDIT = 'edit';
     const CREATE = 'create';
+    const PATCH = 'patch';
 
     private $decisionManager;
 
@@ -24,9 +25,8 @@ class OrganizationVoter extends Voter
 
     protected function supports($attribute, $subject)
     {
-        die($attribute);
         // if the attribute isn't one we support, return false
-        if (!in_array($attribute, array(self::VIEW, self::EDIT, self::CREATE))) {
+        if (!in_array($attribute, array(self::VIEW, self::EDIT, self::CREATE, self::PATCH))) {
             return false;
         }
 
@@ -47,15 +47,20 @@ class OrganizationVoter extends Voter
             return false;
         }
 
+        $organization = $subject;
+
         if ($this->decisionManager->decide($token, array('ROLE_ADMIN'))) {
             return true;
         }
+        else {
 
-        $organization = $subject;
+            if($organization->getOwner()->getId() !== $user->getId()) {
+                return false;
+            }
+
+        }
 
         switch ($attribute) {
-            case self::CREATE:
-                return $this->canCreate($organization, $user);
             case self::VIEW:
                 return $this->canView($organization, $user);
             case self::EDIT:
@@ -72,11 +77,13 @@ class OrganizationVoter extends Voter
 
     private function canEdit(Organization $organization, User $user)
     {
-        return true;
+        if($organization->getOwner()->getId() === $user->getId()) {
+            return true;
+        }
+
+        if($user->isAdmin()) {
+            return true;
+        }
     }
 
-    private function canCreate(Organization $organization, User $user)
-    {
-        return true;
-    }
 }

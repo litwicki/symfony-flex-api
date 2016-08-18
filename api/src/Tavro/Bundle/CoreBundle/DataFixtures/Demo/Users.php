@@ -170,6 +170,43 @@ class Users extends AbstractFixture implements OrderedFixtureInterface, Containe
         $user->addRole($admin);
 
         $manager->persist($user);
+
+        /**
+         * Add Fembot
+         */
+        $username = 'fembot';
+        $email = 'fembot@tavro.dev';
+        $salt = md5($email);
+        $password = 'Password1!';
+        $encoder = $this->container->get('tavro.password_encoder');
+        $password = $encoder->encodePassword($password, $salt);
+
+        $person = new Person();
+        $gender = 'robot';
+        $person->setFirstName($faker->firstName);
+        $person->setLastName($faker->lastName);
+        $person->setTitle($faker->title($gender));
+        $person->setSuffix($faker->suffix);
+        $person->setEmail('fembot@tavro.dev');
+        $person->setGender($gender);
+        $person->setBirthday($faker->dateTimeThisCentury);
+        $manager->persist($person);
+        $manager->flush();
+
+        $user = new User();
+        $user->setPerson($person);
+        $user->setStatus(1);
+        $user->setCreateDate(new \DateTime());
+        $user->setApiEnabled(1);
+        $user->setApiKey('tavrobot-api-key');
+        $user->setUsername($username);
+        $user->setSalt($salt);
+        $user->setPassword($password);
+
+        $user->addRole($admin);
+
+        $manager->persist($user);
+
         $manager->flush();
 
     }
