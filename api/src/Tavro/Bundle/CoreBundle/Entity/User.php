@@ -111,7 +111,7 @@ class User extends Entity implements UserInterface, \Serializable
     /**
      * @ORM\Column(type="string", length=32, nullable=true)
      * @Assert\Choice(
-     *      choices = { "male", "female", "other" },
+     *      choices = { "male", "female", "other", "robot" },
      *      message = "Choose a valid gender."
      * )
      * @Groups({"api", "tavro", "simple"})

@@ -56,12 +56,10 @@ class ExceptionSubscriber implements EventSubscriberInterface
 
         $data = [
             'code' => $code,
-            'class' => get_class($exception),
             'message' => $message,
         ];
 
         if($this->debug) {
-            $data['trace'] = $exception->getTraceAsString();
             $data['message'] = sprintf('%s - %s:%s', $message, $exception->getFile(), $exception->getLine());
         }
 

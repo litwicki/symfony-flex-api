@@ -123,6 +123,7 @@ class Person extends Entity implements EntityInterface
      */
     public function __construct()
     {
+        parent::__construct();
         $this->create_date = new \DateTime();
         $this->update_date = new \DateTime();
     }
