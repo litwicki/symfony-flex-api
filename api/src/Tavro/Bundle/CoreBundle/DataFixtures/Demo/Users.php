@@ -203,7 +203,7 @@ class Users extends AbstractFixture implements OrderedFixtureInterface, Containe
         $user->setSalt($salt);
         $user->setPassword($password);
 
-        $user->addRole($admin);
+        $user->addRole($userRole);
 
         $manager->persist($user);
 
