@@ -53,11 +53,11 @@ Workflow and useful 'stuff' for developing in Tavro.
     
 ### Testing JWT Token
 
-    $ curl -X POST http://api.tavro.dev/api/v1/login_check -d _username=tavrobot -d _password=Password1!
+    $ curl -X POST http://api.tavro.dev/api/v1/auth -d username=tavrobot -d password=Password1!
 
 ### Testing CURL Api Request
 
-    $ curl -X POST http://api.tavro.dev/api/v1/expenses -d '{"body":"test", "user":1, "amount":100, "organization": 1, "expense_date": "2016-08-12 01:01:01"}' --header "Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXUyJ9.eyJleHAiOjE0NzExMDg3MTAsInVzZXJuYW1lIjoidGF2cm9ib3QiLCJpYXQiOiIxNDcxMDIyMzEwIn0.NwjMZkfIZvU5XeAXB3ooW_7gSm1o3p3VjL98Tc6qEAZC0dUout3UYZ8O-T6eR0N6bTpDzxRyPtiYx0hr9aqE0J6tBmw5TvN0o6XtxIgknvZgkKddmcQlwYZ_KEh1Pi5daxxZk1xLTzGXzocLOEfTVVHjNZ_sBt6IbWSKkGpygYoIq5hAiuEuUhKRBd-m7baStIjyErP1dHEDuXLmkjxgk_aS_jPjg-0Tm0Vpy8p-iRAmc90UpxsOAIhX9S_8aNED_eq9xyiQhkggq8zHdr_knCctCsKOacZcSdGJy0xcts2oSOmJdW5z2YexjSeToxhaNfMa6PvqkOs2K3S5t9xJNUpTxu69zr2SmE9bSoYA7c1_V0YmwP5vyF4CDlhJrTD68B2tTyDcOw0XUHsZK4rJne9Ddz9FxcImEQ9Y54-TfIYfEDLhm4W97Y4yKufU7goOgrPhBeSwPKlec8yaLnZ4_u1Nb96wgUz6prX5pzL38YrM8y9tXLNQmZkW-MKdD9r1EqnW2WpELpoiYXeWFQJFS_hjlQuZmC-DRjb31YW-Z8Sr2AaBytrxbeRfuQfVE3cbT_x3DzYJzTSw1GPz6Q1hZJym8qBAHFeltF8CRlPIZw4jTN0G_tLGPkQSPUKN6dgaxNodGAz8JQtVtHkV46M7HYc6DDKmr_hvhCgKL_x9u6E"
+    $ curl -X POST http://api.tavro.dev/api/v1/organizations -d '{"title":"title", "body":"body", "owner": 1}' --header "Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXUyJ9.eyJ1c2VybmFtZSI6InRhdnJaWF0IjoiMTQ3MTUzNTE5NiJ9.LIDdxnx8g9f5SfXf6r3--WsfeneDsJg0FfV7EXPvQBQnIsowqHmjF4pes5CDsWximtG3KxiTmv5FGGEzS4MKK1kFgDgSWyx3AgoQBRxlEYCmdHsSQKqDOM8SEQ0FJb3ahoG5TA-Qj3hhZ06YD-T52VX5NtOOKubj_n5m5RM7XHbJm2bvpGZge3mSwS6X2tBYZr-ca7_mdLt0SV73orMjHFMTB4NuJt_B5KB4p6t_IZ6A8ZwXHEWqljZWEV12ZLlZlddoMlAWPDq9UIzHZqAlHtfeNaarKm4muQyygMxnxAuW0Kv2Qot9BeiyOYinfRKGwZXmdY3XHdoFqmO2RNoemqpH6CInRllHBcPT_lIIO6vD3I5BXcdhKogwurAXB-pIjjZHmyE8oXHeezbOfcjRc6byLiFl6i8MW60Q3ZVcb3l9lJ2HtwuOphL9D7G4CqQ8apJAspHvqtDV8EfzNJR99hSfagPgg14tv9Sl25iTM-5R2rJmfHUO1206VN3HqFLf_HglN-S65I0q8nuzg8lHobCeQl8Yl6Y-d8MYLoATnRMj4BRA9J_4Owu7L2YdFov4jcKXlKiqNkUNaGwIwbZy87FpOMXRyWkxQQD2o03wTtJ8B8jigACYBPqDO0RdFgDxEtcm2ETdXgO7059DMbkrs9RnDzq-3RuH1I7q2s7kZYk"
 
 ### Scripts
 

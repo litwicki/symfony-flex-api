@@ -2,105 +2,88 @@
 
 namespace Tavro\Bundle\CoreBundle\Security\Voter\Entity;
 
-use Symfony\Component\Security\Core\Authorization\Voter\VoterInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Tavro\Bundle\CoreBundle\Entity\Organization;
 use Tavro\Bundle\CoreBundle\Entity\User;
-use Tavro\Bundle\CoreBundle\Security\Voter\TavroVoter;
+use Symfony\Component\Security\Core\Authorization\Voter\Voter;
+use Symfony\Component\Security\Core\Authorization\AccessDecisionManagerInterface;
 
-/**
- * Class OrganizationVoter
- *
- * @package Tavro\Bundle\CoreBundle\Voter
- */
-class OrganizationVoter extends TavroVoter implements VoterInterface
+class OrganizationVoter extends Voter
 {
-
-    /**
-     * Allows full access to members belonging to the entity, view access to outside admins.
-     *
-     * @param User $user
-     * @param \Tavro\Bundle\CoreBundle\Entity\Organization $entity
-     * @param string  $attribute
-     *
-     * @throws \Exception
-     * @return int
-     */
-    public function checkAccess($user, Organization $entity, $attribute)
-    {
-        if($user->isAdmin()) {
-            return VoterInterface::ACCESS_GRANTED;
-        }
-
-        if($attribute == self::VIEW) {
-            return VoterInterface::ACCESS_GRANTED;
-        }
-
-        if($entity->getOwner()->getId() === $user->getId()) {
-            return VoterInterface::ACCESS_GRANTED;
-        }
-
-        // Deny all other requests
-        return VoterInterface::ACCESS_DENIED;
-    }
-
-    const CREATE = 'create';
+    // these strings are just invented: you can use anything
     const VIEW = 'view';
     const EDIT = 'edit';
-    const DELETE = 'delete';
+    const CREATE = 'create';
+    const PATCH = 'patch';
 
-    /**
-     * Returns true if the attribute matches known attributes.
-     *
-     * @param string $attribute
-     *
-     * @return bool
-     */
-    public function supportsAttribute($attribute) {
-        return in_array($attribute, array(self::CREATE, self::VIEW, self::EDIT, self::DELETE));
+    private $decisionManager;
+
+    public function __construct(AccessDecisionManagerInterface $decisionManager)
+    {
+        $this->decisionManager = $decisionManager;
     }
 
-    /**
-     * Returns true if object is an instance of GrowthCase.
-     *
-     * @param object $class
-     *
-     * @return bool
-     */
-    public function supportsClass($class) {
-        return $class instanceof Organization;
+    protected function supports($attribute, $subject)
+    {
+        // if the attribute isn't one we support, return false
+        if (!in_array($attribute, array(self::VIEW, self::EDIT, self::CREATE, self::PATCH))) {
+            return false;
+        }
+
+        // only vote on Organization objects inside this voter
+        if (!$subject instanceof Organization) {
+            return false;
+        }
+
+        return true;
     }
 
-    /**
-     * Returns if the user should have access to the entity.
-     *
-     * @param TokenInterface $token
-     * @param object $entity
-     * @param array $attributes
-     *
-     * @return int
-     */
-    public function vote(TokenInterface $token, $entity, array $attributes) {
-        //throw new \Symfony\Component\Security\Acl\Exception\Exception('ERORR');
-        //return VoterInterface::ACCESS_GRANTED;
-        if (!$this->supportsClass($entity)) {
-            return VoterInterface::ACCESS_ABSTAIN;
-        }
-
-        if (1 !== count($attributes)) {
-            return VoterInterface::ACCESS_ABSTAIN;
-        }
-
-        $attribute = $attributes[0];
-
-        if(!$this->supportsAttribute($attribute)) {
-            return VoterInterface::ACCESS_ABSTAIN;
-        }
-
+    protected function voteOnAttribute($attribute, $subject, TokenInterface $token)
+    {
         $user = $token->getUser();
 
-        return $this->checkAccess($user, $entity, $attribute);
+        if (!$user instanceof User) {
+            // the user must be logged in; if not, deny access
+            return false;
+        }
 
+        $organization = $subject;
+
+        if ($this->decisionManager->decide($token, array('ROLE_ADMIN'))) {
+            return true;
+        }
+        else {
+
+            if($organization->getOwner()->getId() !== $user->getId()) {
+                return false;
+            }
+
+        }
+
+        switch ($attribute) {
+            case self::VIEW:
+                return $this->canView($organization, $user);
+            case self::EDIT:
+                return $this->canEdit($organization, $user);
+        }
+
+        throw new \LogicException('This code should not be reached!');
+    }
+
+    private function canView(Organization $organization, User $user)
+    {
+        return true;
+    }
+
+    private function canEdit(Organization $organization, User $user)
+    {
+        if($organization->getOwner()->getId() === $user->getId()) {
+            return true;
+        }
+
+        if($user->isAdmin()) {
+            return true;
+        }
     }
 
 }

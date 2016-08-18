@@ -49,14 +49,13 @@ class UserHandler extends EntityHandler
     }
 
     /**
-     * Create a new User.
-     *
+     * @param \Symfony\Component\HttpFoundation\Request $request
      * @param array $parameters
      *
      * @return object|void
      * @throws \Exception
      */
-    public function create(array $parameters)
+    public function create(Request $request, array $parameters)
     {
         try {
 
@@ -71,7 +70,7 @@ class UserHandler extends EntityHandler
             }
 
             $entity = $this->createEntity();
-            $entity = $this->processForm($entity, $parameters, $this::HTTP_METHOD_POST);
+            $entity = $this->processForm($request, $entity, $parameters, $this::HTTP_METHOD_POST);
 
             $this->setUserRoles($entity, $roles);
 
