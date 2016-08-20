@@ -109,18 +109,6 @@ class User extends Entity implements UserInterface, \Serializable
     protected $user_ip;
 
     /**
-     * @ORM\Column(type="string", length=32, nullable=true)
-     * @Assert\Choice(
-     *      choices = { "male", "female", "other" },
-     *      message = "Choose a valid gender."
-     * )
-     * @Groups({"api", "tavro", "simple"})
-     * @Accessor(getter="getGender", setter="setGuid")
-     * @MaxDepth(1)
-     */
-    protected $gender;
-
-    /**
      * @ORM\Column(type="string", length=255, nullable=true)
      * @Groups({"tavro"})
      * @MaxDepth(1)
@@ -829,29 +817,6 @@ class User extends Entity implements UserInterface, \Serializable
     public function getComments()
     {
         return $this->comments;
-    }
-
-    /**
-     * Set gender
-     *
-     * @param string $gender
-     * @return User
-     */
-    public function setGender($gender)
-    {
-        $this->gender = $gender;
-
-        return $this;
-    }
-
-    /**
-     * Get gender
-     *
-     * @return string
-     */
-    public function getGender()
-    {
-        return is_null($this->gender) ? '' : $this->gender;
     }
 
     /**
