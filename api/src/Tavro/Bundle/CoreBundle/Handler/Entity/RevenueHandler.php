@@ -23,6 +23,8 @@ use Tavro\Bundle\CoreBundle\Entity\RevenueService;
 use Tavro\Bundle\CoreBundle\Entity\RevenueProduct;
 use Tavro\Bundle\CoreBundle\Entity\RevenueCategory;
 
+use Tavro\Bundle\CoreBundle\Component\Form\FormErrors;
+
 /**
  * Class RevenueHandler
  *
@@ -30,6 +32,102 @@ use Tavro\Bundle\CoreBundle\Entity\RevenueCategory;
  */
 class RevenueHandler extends EntityHandler
 {
+
+    /**
+     * @param \Symfony\Component\HttpFoundation\Request $request
+     * @param \Tavro\Bundle\CoreBundle\Model\EntityInterface $entity
+     * @param array $parameters
+     * @param string $method
+     *
+     * @throws \Exception
+     * @throws \Symfony\Component\Debug\Exception\ContextErrorException
+     */
+    public function processForm(Request $request, EntityInterface $entity, array $parameters, $method = self::HTTP_METHOD_POST)
+    {
+        try {
+
+            $services = [];
+            $products = [];
+
+            if(isset($parameters['services'])) {
+                $services = $parameters['services'];
+                unset($parameters['services']);
+            }
+
+            if(isset($parameters['products'])) {
+                $products = $parameters['products'];
+                unset($parameters['products']);
+            }
+
+            $this->validate($entity, $parameters);
+
+            $formType = $this->mapEntityToForm($this->entityClass);
+
+            $form = $this->formFactory->create($formType, $entity, ['method' => $method]);
+
+            /**
+             * @reference: http://symfony.com/doc/current/form/direct_submit.html
+             *           docs say this is required, but wtf?
+             *
+             *           $form->handleRequest($request);
+             *
+             */
+
+            $form->submit($parameters, ($method == 'PATCH' ? false : true));
+
+            if ($form->isValid()) {
+
+                $entity = $form->getData();
+                $class = new \ReflectionClass($entity);
+
+                switch($method) {
+
+                    case 'POST':
+                        if(!($this->auth->isGranted('create', $entity))) {
+                            $message = sprintf('You are not authorized to create a new %s.', $class->getShortName());
+                            throw new ApiAccessDeniedException($message);
+                        }
+                        break;
+
+                    case 'PUT':
+                        if(!($this->auth->isGranted('edit', $entity))) {
+                            $message = sprintf('You are not authorized to edit %s "%s"', $class->getShortName(), $entity->__toString());
+                            throw new ApiAccessDeniedException($message);
+                        }
+                        break;
+
+                }
+
+                $this->om->persist($entity);
+                $this->om->flush();
+
+                return $entity;
+
+            }
+            else {
+                $formErrors = new FormErrors();
+                $errors = $formErrors->getArray($form);
+                $exception = $formErrors->getErrorsAsString($errors);
+                throw new InvalidFormException($exception);
+            }
+
+        }
+        catch(TransformationFailedException $e) {
+            throw $e;
+        }
+        catch(ContextErrorException $e) {
+            throw $e;
+        }
+        catch(UnexpectedTypeException $e) {
+            throw $e;
+        }
+        catch(InvalidPropertyPathException $e) {
+            throw $e;
+        }
+        catch(\Exception $e) {
+            throw $e;
+        }
+    }
 
     /**
      * Find all Entities (limit the response size)
@@ -92,53 +190,9 @@ class RevenueHandler extends EntityHandler
     }
 
     /**
-     * Create a new Entity.
-     *
-     * @param \Symfony\Component\HttpFoundation\Request $request
-     * @param array $parameters
-     *
-     * @return object|\Tavro\Bundle\CoreBundle\Model\EntityInterface|void
+     * @param \Tavro\Bundle\CoreBundle\Entity\Revenue $revenue
+     * @param array $services
      */
-    public function create(Request $request, array $parameters)
-    {
-        try {
-
-            if(!isset($parameters['status'])) {
-                $parameters['status'] = $this::STATUS_ACTIVE;
-            }
-
-            $entity = $this->createEntity();
-            $this->validate($entity, $parameters);
-            $entity = $this->processForm($request, $entity, $parameters);
-
-            /**
-             * If this is an ApiEntity immediately save so the slug property
-             * is updated correctly with the entity Id: {id}-{url-save-title}
-             */
-            if($entity instanceof EntityInterface) {
-                return $this->patch($request, $entity, $parameters, self::HTTP_METHOD_PATCH);
-            }
-
-            return $entity;
-
-        }
-        catch(ApiAccessDeniedException $e) {
-            throw new ApiAccessDeniedException($this::ACCESS_DENIED_MESSAGE);
-        }
-        catch(TransformationFailedException $e) {
-            throw $e;
-        }
-        catch(UnexpectedTypeException $e) {
-            throw $e;
-        }
-        catch(InvalidPropertyPathException $e) {
-            throw $e;
-        }
-        catch(\Symfony\Component\Security\Core\Exception\AccessDeniedException $e) {
-            throw new ApiAccessDeniedException($this::ACCESS_DENIED_MESSAGE);
-        }
-    }
-
     public function setRevenueServices(Revenue $revenue, array $services)
     {
 
@@ -166,6 +220,10 @@ class RevenueHandler extends EntityHandler
 
     }
 
+    /**
+     * @param \Tavro\Bundle\CoreBundle\Entity\Revenue $revenue
+     * @param array $products
+     */
     public function setRevenueProducts(Revenue $revenue, array $products)
     {
 
@@ -178,7 +236,7 @@ class RevenueHandler extends EntityHandler
         /**
          * Remove all Services so we can add the new batch.
          */
-        $this->removeProducts($products);
+        $this->removeProducts($revenue);
 
         foreach($products as $id) {
             $items[] = $this->om->getRepository('TavroCoreBundle:RevenueProduct')->find($id);
