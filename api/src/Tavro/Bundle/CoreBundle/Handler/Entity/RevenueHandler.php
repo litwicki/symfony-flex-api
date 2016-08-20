@@ -154,12 +154,42 @@ class RevenueHandler extends EntityHandler
         $this->removeServices($revenue);
 
         foreach($services as $id) {
-            $items[] = $this->serviceHandler->find($id);
+            $items[] = $this->om->getRepository('TavroCoreBundle:RevenueService')->find($id);
         }
 
         foreach($items as $service) {
             $revenue->addRevenueService($service);
         }
+
+        $this->om->persist($revenue);
+        $this->om->flush();
+
+    }
+
+    public function setRevenueProducts(Revenue $revenue, array $products)
+    {
+
+        $items = [];
+
+        if(empty($products)) {
+            return;
+        }
+
+        /**
+         * Remove all Services so we can add the new batch.
+         */
+        $this->removeProducts($products);
+
+        foreach($products as $id) {
+            $items[] = $this->om->getRepository('TavroCoreBundle:RevenueProduct')->find($id);
+        }
+
+        foreach($items as $product) {
+            $revenue->addRevenueProduct($product);
+        }
+
+        $this->om->persist($revenue);
+        $this->om->flush();
 
     }
 
