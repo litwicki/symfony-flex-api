@@ -18,9 +18,8 @@ class RevenueType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('body')
-            ->add('title')
             ->add('status')
+            ->add('type')
             ->add('category', EntityType::class, array(
                 'class' => 'TavroCoreBundle:RevenueCategory',
                 'choice_label' => 'Category'
@@ -29,13 +28,25 @@ class RevenueType extends AbstractType
                 'class' => 'TavroCoreBundle:User',
                 'choice_label' => 'User'
             ))
+            ->add('customer', EntityType::class, array(
+                'class' => 'TavroCoreBundle:Customer',
+                'choice_label' => 'Customer'
+            ))
             ->add('organization', EntityType::class, array(
                 'class' => 'TavroCoreBundle:Organization',
                 'choice_label' => 'Organization'
             ))
-            ->add('updated_by', EntityType::class, array(
-                'class' => 'TavroCoreBundle:User',
-                'choice_label' => 'User'
+            ->add('services', EntityType::class, array(
+                'class' => 'TavroCoreBundle:Service',
+                'choice_label' => 'Services',
+                'multiple' => true,
+                'mapped' => false
+            ))
+            ->add('products', EntityType::class, array(
+                'class' => 'TavroCoreBundle:Product',
+                'choice_label' => 'Products',
+                'multiple' => true,
+                'mapped' => false
             ))
             ->add('submit', SubmitType::class)
         ;

@@ -87,8 +87,10 @@ class Revenue extends OrganizationEntity implements OrganizationEntityInterface
     public function __construct()
     {
         parent::__construct();
-        $this->revenue_tags = new \Doctrine\Common\Collections\ArrayCollection();;
+        $this->revenue_tags = new \Doctrine\Common\Collections\ArrayCollection();
         $this->revenue_comments = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->revenue_services = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->revenue_products = new \Doctrine\Common\Collections\ArrayCollection();
         $this->status = 1;
         $now = new \DateTime();
         $tz = new \DateTimeZone('America/New_York');

@@ -101,6 +101,14 @@ class RevenueHandler extends EntityHandler
                 $this->om->persist($entity);
                 $this->om->flush();
 
+                if(!empty($products)) {
+                    $this->setRevenueProducts($entity, $products);
+                }
+
+                if(!empty($services)) {
+                    $this->setRevenueServices($entity, $services);
+                }
+
                 return $entity;
 
             }

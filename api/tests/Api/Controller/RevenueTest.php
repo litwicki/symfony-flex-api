@@ -36,11 +36,11 @@ class RevenueTest extends TavroTest
 
         $data = array(
             'type' => 'service',
-            'body' => 'Revenue body description.',
             'category' => 1,
             'user' => 1,
             'customer' => 1,
-            'services' => array(1,2,3)
+            'services' => array(1,2,3),
+            'organization' => 1
         );
 
         $url = 'http://api.tavro.dev/api/v1/revenues';
@@ -57,7 +57,6 @@ class RevenueTest extends TavroTest
 
         $json = $response->getBody(true);
         $body = json_decode($json, true);
-        var_dump($body);die(__METHOD__);
 
         $this->assertEquals(200, $response->getStatusCode());
 
@@ -69,12 +68,12 @@ class RevenueTest extends TavroTest
         $token = $this->authorize();
 
         $data = array(
-            'type' => 'sale',
-            'body' => 'Revenue body description.',
+            'type' => 'service',
             'category' => 1,
             'user' => 1,
             'customer' => 1,
-            'products' => array(1,2,3)
+            'products' => array(1,2,3),
+            'organization' => 1
         );
 
         $url = 'http://api.tavro.dev/api/v1/revenues';
@@ -91,7 +90,6 @@ class RevenueTest extends TavroTest
 
         $json = $response->getBody(true);
         $body = json_decode($json, true);
-        var_dump($body);die(__METHOD__);
 
         $this->assertEquals(200, $response->getStatusCode());
 
