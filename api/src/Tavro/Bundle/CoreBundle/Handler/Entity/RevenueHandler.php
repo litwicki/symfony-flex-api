@@ -18,6 +18,10 @@ use Symfony\Component\Form\Exception\UnexpectedTypeException;
 use Tavro\Bundle\CoreBundle\Exception\InvalidUsernameException;
 use Symfony\Component\Debug\Exception\ContextErrorException;
 use Symfony\Component\HttpFoundation\Request;
+use Tavro\Bundle\CoreBundle\Entity\Revenue;
+use Tavro\Bundle\CoreBundle\Entity\RevenueService;
+use Tavro\Bundle\CoreBundle\Entity\RevenueProduct;
+use Tavro\Bundle\CoreBundle\Entity\RevenueCategory;
 
 /**
  * Class RevenueHandler
@@ -26,6 +30,7 @@ use Symfony\Component\HttpFoundation\Request;
  */
 class RevenueHandler extends EntityHandler
 {
+
     /**
      * Find all Entities (limit the response size)
      * Optionally page the result set by LIMIT and OFFSET.
@@ -85,4 +90,125 @@ class RevenueHandler extends EntityHandler
             throw new ApiException($e->getMessage());
         }
     }
+
+    /**
+     * Create a new Entity.
+     *
+     * @param \Symfony\Component\HttpFoundation\Request $request
+     * @param array $parameters
+     *
+     * @return object|\Tavro\Bundle\CoreBundle\Model\EntityInterface|void
+     */
+    public function create(Request $request, array $parameters)
+    {
+        try {
+
+            if(!isset($parameters['status'])) {
+                $parameters['status'] = $this::STATUS_ACTIVE;
+            }
+
+            $entity = $this->createEntity();
+            $this->validate($entity, $parameters);
+            $entity = $this->processForm($request, $entity, $parameters);
+
+            /**
+             * If this is an ApiEntity immediately save so the slug property
+             * is updated correctly with the entity Id: {id}-{url-save-title}
+             */
+            if($entity instanceof EntityInterface) {
+                return $this->patch($request, $entity, $parameters, self::HTTP_METHOD_PATCH);
+            }
+
+            return $entity;
+
+        }
+        catch(ApiAccessDeniedException $e) {
+            throw new ApiAccessDeniedException($this::ACCESS_DENIED_MESSAGE);
+        }
+        catch(TransformationFailedException $e) {
+            throw $e;
+        }
+        catch(UnexpectedTypeException $e) {
+            throw $e;
+        }
+        catch(InvalidPropertyPathException $e) {
+            throw $e;
+        }
+        catch(\Symfony\Component\Security\Core\Exception\AccessDeniedException $e) {
+            throw new ApiAccessDeniedException($this::ACCESS_DENIED_MESSAGE);
+        }
+    }
+
+    public function setRevenueServices(Revenue $revenue, array $services)
+    {
+
+        $items = [];
+
+        if(empty($services)) {
+            return;
+        }
+
+        /**
+         * Remove all Services so we can add the new batch.
+         */
+        $this->removeServices($revenue);
+
+        foreach($services as $id) {
+            $items[] = $this->serviceHandler->find($id);
+        }
+
+        foreach($items as $service) {
+            $revenue->addRevenueService($service);
+        }
+
+    }
+
+    /**
+     * Remove All Services from a Revenue record.
+     *
+     * @param \Tavro\Bundle\CoreBundle\Entity\Revenue $revenue
+     *
+     * @throws \Exception
+     */
+    public function removeServices(Revenue $revenue)
+    {
+        try {
+
+            foreach($revenue->getRevenueServices() as $rs) {
+                $revenue->removeRevenueService($rs);
+            }
+
+            $this->om->persist($revenue);
+            $this->om->flush();
+
+        }
+        catch(\Exception $e) {
+            throw $e;
+        }
+    }
+
+    /**
+     * Remove All Products from a Revenue record.
+     *
+     * @param \Tavro\Bundle\CoreBundle\Entity\Revenue $revenue
+     *
+     * @throws \Exception
+     */
+    public function removeProducts(Revenue $revenue)
+    {
+        try {
+
+            foreach($revenue->getRevenueProducts() as $rp) {
+                $revenue->removeRevenueProduct($rp);
+            }
+
+            $this->om->persist($revenue);
+            $this->om->flush();
+
+        }
+        catch(\Exception $e) {
+            throw $e;
+        }
+    }
+
 }

@@ -28,10 +28,10 @@ class Revenue extends OrganizationEntity implements OrganizationEntityInterface
 {
 
     /**
-     * @ORM\Column(type="string", nullable=true)
+     * @ORM\Column(type="string", nullable=false)
      * @Assert\Choice(
-     *      choices = { "guide", "node", "page", "article", "wiki"},
-     *      message = "Choose a valid node type."
+     *      choices = { "sale", "service", "other"},
+     *      message = "Choose a valid Revenue type."
      * )
      * @Groups({"api", "tavro", "simple"})
      */
@@ -86,6 +86,7 @@ class Revenue extends OrganizationEntity implements OrganizationEntityInterface
      */
     public function __construct()
     {
+        parent::__construct();
         $this->revenue_tags = new \Doctrine\Common\Collections\ArrayCollection();;
         $this->revenue_comments = new \Doctrine\Common\Collections\ArrayCollection();
         $this->status = 1;

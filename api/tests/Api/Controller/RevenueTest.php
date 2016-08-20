@@ -29,25 +29,18 @@ class RevenueTest extends TavroTest
 
     }
 
-    public function testRevenueCreate()
+    public function testRevenueCreateRevenueWithServices()
     {
-        // create our http client (Guzzle)
-        $client = new Client('http://api.tavro.dev/api/v1', array(
-            'request.options' => array(
-                'exceptions' => false,
-            )
-        ));
 
         $token = $this->authorize();
 
         $data = array(
-            'title' => 'Revenue Name',
+            'type' => 'service',
             'body' => 'Revenue body description.',
-            'price' => 100,
-            'cost' => 75,
-            'status' => 1,
             'category' => 1,
-            'organization' => 1
+            'user' => 1,
+            'customer' => 1,
+            'services' => array(1,2,3)
         );
 
         $url = 'http://api.tavro.dev/api/v1/revenues';
@@ -64,6 +57,41 @@ class RevenueTest extends TavroTest
 
         $json = $response->getBody(true);
         $body = json_decode($json, true);
+        var_dump($body);die(__METHOD__);
+
+        $this->assertEquals(200, $response->getStatusCode());
+
+    }
+
+    public function testRevenueCreateRevenueWithProducts()
+    {
+
+        $token = $this->authorize();
+
+        $data = array(
+            'type' => 'sale',
+            'body' => 'Revenue body description.',
+            'category' => 1,
+            'user' => 1,
+            'customer' => 1,
+            'products' => array(1,2,3)
+        );
+
+        $url = 'http://api.tavro.dev/api/v1/revenues';
+
+        $client = new Client($url, array(
+            'request.options' => array(
+                'exceptions' => false,
+            )
+        ));
+
+        $request = $client->post($url, null, json_encode($data));
+        $request->addHeader('Authorization', sprintf('Bearer %s', $token));
+        $response = $request->send();
+
+        $json = $response->getBody(true);
+        $body = json_decode($json, true);
+        var_dump($body);die(__METHOD__);
 
         $this->assertEquals(200, $response->getStatusCode());
 

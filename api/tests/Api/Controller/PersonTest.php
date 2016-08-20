@@ -49,8 +49,6 @@ class PersonTest extends TavroTest
             'city' => $faker->city,
             'state' => $faker->state,
             'zip' => $faker->postcode,
-            'country' => $faker->countryCode,
-            'birthday' => $faker->date('Y-m-d')
         ];
 
         $url = 'http://api.tavro.dev/api/v1/people';
@@ -67,7 +65,6 @@ class PersonTest extends TavroTest
 
         $json = $response->getBody(true);
         $body = json_decode($json, true);
-        var_dump($body);die();
 
         $this->assertEquals(200, $response->getStatusCode());
 
@@ -91,8 +88,6 @@ class PersonTest extends TavroTest
             'city' => $faker->city,
             'state' => $faker->state,
             'zip' => $faker->postcode,
-            'country' => $faker->countryCode,
-            'birthday' => $faker->date('Y-m-d')
         ];
 
         $url = 'http://api.tavro.dev/api/v1/people';
@@ -111,7 +106,7 @@ class PersonTest extends TavroTest
         $body = json_decode($json, true);
 
 
-        $this->assertTrue(preg_match('/Choose a valid gender/', $body['message']));
+        $this->assertEquals(1, preg_match('/Choose a valid gender/', $body['message']));
 
     }
 
