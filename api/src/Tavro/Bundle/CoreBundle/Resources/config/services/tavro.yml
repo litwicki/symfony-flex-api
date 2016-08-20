@@ -45,4 +45,4 @@ services:
         class: Tavro\Bundle\CoreBundle\EventSubscriber\Exception\ExceptionSubscriber
         tags:
             - { name: kernel.event_subscriber }
-        arguments: ["%kernel.debug%"]
+        arguments: ["%kernel.debug%", "@serializer"]

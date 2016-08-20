@@ -64,15 +64,20 @@ class Person extends Entity implements EntityInterface
     protected $suffix;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="string", length=32, nullable=true)
+     * @Assert\Choice(
+     *      choices = { "male", "female", "other", "robot" },
+     *      message = "Choose a valid gender."
+     * )
      * @Groups({"api", "tavro", "simple"})
+     * @Accessor(getter="getGender", setter="setGender")
+     * @MaxDepth(1)
      */
     protected $gender;
 
     /**
      * @ORM\Column(type="date", length=255, nullable=true)
      * @Groups({"tavro"})
-     * @MaxDepth(1)
      */
     protected $birthday;
 
