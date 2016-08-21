@@ -31,13 +31,6 @@ class ProductTest extends TavroTest
 
     public function testProductCreate()
     {
-        // create our http client (Guzzle)
-        $client = new Client('http://api.tavro.dev/api/v1', array(
-            'request.options' => array(
-                'exceptions' => false,
-            )
-        ));
-
         $token = $this->authorize();
 
         $data = array(

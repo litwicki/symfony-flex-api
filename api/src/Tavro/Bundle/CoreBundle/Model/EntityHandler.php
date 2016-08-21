@@ -18,6 +18,7 @@ use Symfony\Component\Form\Form;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\File\Exception\AccessDeniedException;
 use Symfony\Component\PropertyAccess\Exception\InvalidPropertyPathException;
+use Doctrine\DBAL\Exception\NotNullConstraintViolationException;
 use Symfony\Component\Form\Exception\TransformationFailedException;
 use Symfony\Component\Form\Exception\UnexpectedTypeException;
 
@@ -560,6 +561,9 @@ class EntityHandler implements EntityHandlerInterface
                 throw new InvalidFormException($exception);
             }
 
+        }
+        catch(NotNullConstraintViolationException $e) {
+            throw $e;
         }
         catch(TransformationFailedException $e) {
             throw $e;

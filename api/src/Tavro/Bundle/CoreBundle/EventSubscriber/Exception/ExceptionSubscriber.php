@@ -62,7 +62,7 @@ class ExceptionSubscriber implements EventSubscriberInterface
         ];
 
         if($this->debug) {
-            $data['debug'] = sprintf('%s: %s', $exception->getFile(), $exception->getLine());
+            $data['debug'] = get_class($exception);
         }
 
         $format = preg_match('/\.xml$/', $event->getRequest()->getUri()) ? 'xml' : 'json';
