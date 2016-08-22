@@ -60,6 +60,10 @@ class UserHandler extends EntityHandler
     {
         try {
 
+            if(!isset($parameters['status'])) {
+                $parameters['status'] = self::STATUS_PENDING;
+            }
+
             /**
              * If there are no roles defined, default to ROLE_USER
              */
@@ -156,7 +160,7 @@ class UserHandler extends EntityHandler
                 }
 
                 if (isset($parameters['password'])) {
-                    $password = $this->encoder->encodePassword($parameters['password'], $entity->getSalt());
+                    $password = $this->encoderFactory->getEncoder($entity)->encodePassword($parameters['password'], $entity->getSalt());
                     $entity->setPassword($password);
                 }
 

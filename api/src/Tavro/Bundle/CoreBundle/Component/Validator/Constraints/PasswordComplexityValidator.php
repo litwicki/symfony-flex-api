@@ -14,21 +14,20 @@ class PasswordComplexityValidator extends ConstraintValidator
      */
     public function validate($value, Constraint $constraint)
     {
-
-        $specials = '/[!@#$%^&*()\-_=+]/';  // whatever you mean by 'special char'
-        $digits = '/[0-9]/';  //numbers
+        $specials = '/[!@#$%^&*()\-_=+]/';
+        $digits = '/[0-9]/';
         $letters = '/[a-zA-Z]/';
-        $errors = array();
+        $errors = [];
 
-        if (preg_match_all($specials, $value, $o) < 1) {
+        if (!preg_match($specials, $value)) {
             $errors[] = 'The password does not contain at least one of the following special characters (!@#$%^&*()\-_=+).';
         }
 
-        if (preg_match_all($digits, $value, $o) < 1) {
+        if (!preg_match($digits, $value)) {
             $errors[] = 'The password does not contain at least one digit.';
         }
 
-        if (preg_match_all($letters, $value, $o) < 1) {
+        if (!preg_match($letters, $value)) {
             $errors[] = 'The password does not contain at least one letter.';
         }
 
@@ -40,8 +39,7 @@ class PasswordComplexityValidator extends ConstraintValidator
             $errors[] = 'The password cannot contain any spaces.';
         }
         
-        if(!empty($errors))
-        {
+        if(!empty($errors)) {
             $this->context->buildViolation(implode($errors, ' '))
                 ->setParameter('%string%', $value)
                 ->addViolation();

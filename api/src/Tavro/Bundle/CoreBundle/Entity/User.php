@@ -188,6 +188,7 @@ class User extends Entity implements UserInterface, \Serializable
     public function __construct()
     {
         parent::__construct();
+
         $this->create_date = new \DateTime();
         $this->update_date = new \DateTime();
         $this->nodes = new \Doctrine\Common\Collections\ArrayCollection();
@@ -203,6 +204,7 @@ class User extends Entity implements UserInterface, \Serializable
         $this->resetApiPassword();
 
         $this->api_enabled = false;
+        $this->status = self::STATUS_PENDING;
 
     }
 

@@ -75,6 +75,8 @@ class UserController extends ApiController
                 'username' => isset($data['username']) ? $data['username'] : null,
                 'api_enabled' => isset($data['api_enabled']) ? $data['api_enabled'] : false,
                 'signature' => isset($data['signature']) ? $data['signature'] : null,
+                'password' => isset($data['password']) ? $data['password'] : null,
+                'status' => isset($data['status']) ? $data['status'] : null,
             ];
 
             $newUser = $userHandler->post($request, $userData);
