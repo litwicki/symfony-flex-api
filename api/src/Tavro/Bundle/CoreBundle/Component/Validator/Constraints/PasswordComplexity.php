@@ -6,7 +6,8 @@ use Symfony\Component\Validator\Constraint;
 /**
  * @Annotation
  */
-class PasswordComplexityConstraint extends Constraint
+class PasswordComplexity extends Constraint
 {
     public $message = 'This password does not meet the minimum complexity requirements!';
+
 }

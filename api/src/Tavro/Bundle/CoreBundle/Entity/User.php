@@ -40,6 +40,7 @@ class User extends Entity implements UserInterface, \Serializable
     protected $username;
 
     /**
+     * @TavroAssert\PasswordComplexity
      * @ORM\Column(type="string", length=255, nullable=false)
      */
     protected $password;

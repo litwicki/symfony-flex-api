@@ -37,24 +37,13 @@ class UserTest extends TavroTest
 
         $faker = \Faker\Factory::create('en_EN');
 
-        $guid = Uuid::uuid4();
-
         $data = array(
-            'person' => 1,
-            'salt' => md5(time()),
-            'signature' => 'signature',
+            'first_name' => $faker->firstName,
+            'last_name' => $faker->lastName,
+            'email' => $faker->email,
             'username' => md5(time()),
-            'password' => 'Password1!',
-            'api_enabled' => true,
-            'api_key' => Uuid::uuid5(Uuid::NAMESPACE_DNS, $guid),
-            'api_password' => bin2hex(openssl_random_pseudo_bytes(12)),
-            'status' => 1,
-            'guid' => Uuid::uuid5(Uuid::NAMESPACE_DNS, $guid),
-            'user_ip' => '192.168.50.1',
-            'user_agent' => 'Mozilla blahbidy blah',
-            'last_online_date' => $faker->dateTimeThisMonth->format('Y-m-d h:i:s'),
-            'body' => $faker->text(500),
-
+            'signature' => $faker->text(100),
+            'password' => $faker->password(8)
         );
 
         $url = 'http://api.tavro.dev/api/v1/users';

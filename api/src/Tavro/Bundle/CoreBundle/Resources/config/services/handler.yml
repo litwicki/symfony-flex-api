@@ -274,6 +274,7 @@ services:
             - '@security.authorization_checker'
             - '%amazon_s3_url%'
             - 'Tavro\Bundle\CoreBundle\Entity\User'
+            - '@tavro.handler.people'
 
     tavro.handler.user_quickbooks:
         class: Tavro\Bundle\CoreBundle\Handler\Entity\UserQuickbooksHandler

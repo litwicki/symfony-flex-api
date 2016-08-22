@@ -23,6 +23,77 @@ use Tavro\Bundle\ApiBundle\Controller\DefaultController as ApiController;
 
 class UserController extends ApiController
 {
+
+    /**
+     * Post (create) a new User
+     *
+     * @param \Symfony\Component\HttpFoundation\Request $request
+     * @param $entity
+     * @param $_format
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     * @throws \Exception
+     */
+    public function postAction(Request $request, $entity, $_format)
+    {
+        try {
+
+            $data = json_decode($request->getContent(), true);
+            $userHandler = $this->getHandler('users');
+            $personHandler = $this->getHandler('people');
+
+            $personData = [
+                'first_name' => isset($data['first_name']) ? $data['first_name'] : null,
+                'middle_name' => isset($data['middle_name']) ? $data['middle_name'] : null,
+                'last_name' => isset($data['last_name']) ? $data['last_name'] : null,
+                'email' => isset($data['email']) ? $data['email'] : null,
+                'gender' => isset($data['gender']) ? $data['gender'] : null,
+                'title' => isset($data['title']) ? $data['title'] : null,
+                'suffix' => isset($data['suffix']) ? $data['suffix'] : null,
+                'birthday' => isset($data['birthday']) ? $data['birthday'] : null,
+                'address' => isset($data['address']) ? $data['address'] : null,
+                'address2' => isset($data['address2']) ? $data['address2'] : null,
+                'city' => isset($data['city']) ? $data['city'] : null,
+                'state' => isset($data['state']) ? $data['state'] : null,
+                'zip' => isset($data['zip']) ? $data['zip'] : null,
+                'phone' => isset($data['phone']) ? $data['phone'] : null,
+                'body' => isset($data['body']) ? $data['body'] : null,
+                'status' => isset($data['status']) ? $data['status'] : null,
+            ];
+
+            /**
+             * Separate the `Person` and `User` data to the separate requests.
+             */
+            $newPerson = $personHandler->post($request, $personData);
+
+            $userData = [
+                'person' => $newPerson->getId(),
+                'username' => isset($data['username']) ? $data['username'] : $newPerson->getEmail(),
+                'api_enabled' => isset($data['api_enabled']) ? $data['api_enabled'] : false,
+                'signature' => isset($data['signature']) ? $data['signature'] : null,
+            ];
+
+            $newUser = $userHandler->post($request, $userData);
+
+            $routeOptions = array(
+                'entity'  => $entity,
+                'id'      => $newUser->getId(),
+                'format'  => $_format,
+            );
+
+            return $this->forward('TavroApiBundle:Default:get', $routeOptions);
+        }
+        catch (InvalidFormException $e) {
+            throw $e;
+        }
+        catch (ApiAccessDeniedException $e) {
+            throw $e;
+        }
+        catch(\Exception $e) {
+            throw $e;
+        }
+    }
+
     /**
      * @param \Symfony\Component\HttpFoundation\Request $request
      * @param $entity
@@ -33,7 +104,6 @@ class UserController extends ApiController
      */
     public function getAllAction(Request $request, $entity, $_format)
     {
-
         if(!$this->isGranted('ROLE_ADMIN')) {
             throw new AccessDeniedException('You do not have permission to perform this action!');
         }

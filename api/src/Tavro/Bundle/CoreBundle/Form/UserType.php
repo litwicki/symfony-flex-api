@@ -19,20 +19,12 @@ class UserType extends AbstractType
         $builder
             ->add('username')
             ->add('password')
-            ->add('password_token')
-            ->add('password_token_expire', DateTimeType::class)
-            ->add('salt')
             ->add('signature')
-            ->add('last_online_date', DateTimeType::class)
-            ->add('api_key')
-            ->add('api_password')
             ->add('api_enabled')
-            ->add('guid')
-            ->add('user_ip')
-            ->add('user_agent')
             ->add('body')
             ->add('status')
             ->add('roles', EntityType::class, array(
+                'multiple' => true,
                 'class' => 'TavroCoreBundle:Role',
                 'choice_label' => 'Role',
                 'invalid_message' => 'Please enter a valid Role',
@@ -61,7 +53,8 @@ class UserType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Tavro\Bundle\CoreBundle\Entity\User'
+            'data_class' => 'Tavro\Bundle\CoreBundle\Entity\User',
+            'csrf_protection' => false
         ));
     }
 }

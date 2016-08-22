@@ -4,18 +4,15 @@ namespace Tavro\Bundle\CoreBundle\Component\Validator\Constraints;
 
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
-use Tavro\Bundle\CoreBundle\Component\Validator\Constraints\PasswordComplexityConstraint;
 
 class ContainsAlphanumericValidator extends ConstraintValidator
 {
-    
+
     /**
-     * Validate and enforce the complexity of a Password string.
-     * 
      * @param mixed $value
-     * @param \Tavro\Bundle\CoreBundle\Component\Validator\Constraints\PasswordComplexityConstraint $constraint
+     * @param \Symfony\Component\Validator\Constraint $constraint
      */
-    public function validate($value, PasswordComplexityConstraint $constraint)
+    public function validate($value, Constraint $constraint)
     {
 
         $specials = '/[!@#$%^&*()\-_=+]/';  // whatever you mean by 'special char'
@@ -56,6 +53,6 @@ class ContainsAlphanumericValidator extends ConstraintValidator
 
     public function validatedBy()
     {
-        return 'tavro_password_complexity_validator';
+        return get_class($this).'Validator';
     }
 }

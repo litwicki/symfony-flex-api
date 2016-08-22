@@ -539,9 +539,23 @@ class EntityHandler implements EntityHandlerInterface
                         }
                         break;
 
+                    case 'PATCH':
+                        if(!($this->auth->isGranted('edit', $entity))) {
+                            $message = sprintf('You are not authorized to update %s "%s"', $class->getShortName(), $entity->__toString());
+                            throw new ApiAccessDeniedException($message);
+                        }
+                        break;
+
                     case 'PUT':
                         if(!($this->auth->isGranted('edit', $entity))) {
                             $message = sprintf('You are not authorized to edit %s "%s"', $class->getShortName(), $entity->__toString());
+                            throw new ApiAccessDeniedException($message);
+                        }
+                        break;
+
+                    case 'DELETE':
+                        if (!($this->auth->isGranted('delete', $entity))) {
+                            $message = sprintf('You are not authorized to delete %s "%s"', $class->getShortName(), $entity->__toString());
                             throw new ApiAccessDeniedException($message);
                         }
                         break;

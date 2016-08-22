@@ -21,6 +21,7 @@ use Tavro\Bundle\CoreBundle\Exception\UsernameNotUniqueException;
 use Tavro\Bundle\CoreBundle\Exception\EmailNotUniqueException;
 use Tavro\Bundle\CoreBundle\Entity\User;
 use Tavro\Bundle\CoreBundle\Entity\Role;
+use Tavro\Bundle\CoreBundle\Component\Form\FormErrors;
 
 /**
  * Class UserHandler
@@ -64,7 +65,8 @@ class UserHandler extends EntityHandler
              */
             if (empty($parameters['roles'])) {
                 $roles = ['ROLE_USER'];
-            } else {
+            }
+            else {
                 $roles = $parameters['roles'];
                 unset($parameters['roles']);
             }
@@ -76,15 +78,23 @@ class UserHandler extends EntityHandler
 
             return $entity;
 
-        } catch (ApiAccessDeniedException $e) {
+        }
+        catch (InvalidFormException $e) {
             throw $e;
-        } catch (TransformationFailedException $e) {
+        }
+        catch (ApiAccessDeniedException $e) {
             throw $e;
-        } catch (UnexpectedTypeException $e) {
+        }
+        catch (TransformationFailedException $e) {
             throw $e;
-        } catch (InvalidPropertyPathException $e) {
+        }
+        catch (UnexpectedTypeException $e) {
             throw $e;
-        } catch (\Exception $e) {
+        }
+        catch (InvalidPropertyPathException $e) {
+            throw $e;
+        }
+        catch (\Exception $e) {
             throw $e;
         }
     }
@@ -118,37 +128,33 @@ class UserHandler extends EntityHandler
 
                 $entity = $form->getData();
 
-                $class = new \ReflectionClass($entity);
-
                 if (is_object($this->tokenStorage->getToken())) {
                     switch ($method) {
 
                         case 'POST':
                             if (!($this->auth->isGranted('create', $entity))) {
-                                $message = sprintf('You are not authorized to create a new %s.', $class->getShortName());
-                                throw new ApiAccessDeniedException($message);
+                                throw new ApiAccessDeniedException('You are not authorized to create a new User!');
                             }
                             break;
 
                         case 'PUT':
                             if (!($this->auth->isGranted('edit', $entity))) {
-                                $message = sprintf('You are not authorized to edit %s "%s"', $class->getShortName(), $entity->__toString());
-                                throw new ApiAccessDeniedException($message);
+                                throw new ApiAccessDeniedException('You are not authorized to edit this User.');
                             }
                             break;
+
+                        case 'DELETE':
+                            if (!($this->auth->isGranted('delete', $entity))) {
+                                throw new ApiAccessDeniedException('You are not authorized to remove this User!');
+                            }
+                            break;
+
                     }
                 }
 
                 if (isset($parameters['password'])) {
-
-                    /**
-                     * Encode the password correctly when it's passed via $data.
-                     */
-                    $encoder = $this->encoder;
-                    $password = $encoder->encodePassword($parameters['password'], $entity->getSalt());
-
+                    $password = $this->encoder->encodePassword($parameters['password'], $entity->getSalt());
                     $entity->setPassword($password);
-
                 }
 
                 $this->om->persist($entity);
@@ -156,20 +162,28 @@ class UserHandler extends EntityHandler
 
                 return $entity;
 
-            } else {
-                $error = (string) $form->getErrors(true, false);
-                throw new \Exception($error);
+            }
+            else {
+                $formErrors = new FormErrors();
+                $errors = $formErrors->getArray($form);
+                $exception = $formErrors->getErrorsAsString($errors);
+                throw new InvalidFormException($exception);
             }
 
-        } catch (TransformationFailedException $e) {
+        }
+        catch (TransformationFailedException $e) {
             throw $e;
-        } catch (ContextErrorException $e) {
+        }
+        catch (ContextErrorException $e) {
             throw $e;
-        } catch (UnexpectedTypeException $e) {
+        }
+        catch (UnexpectedTypeException $e) {
             throw $e;
-        } catch (InvalidPropertyPathException $e) {
+        }
+        catch (InvalidPropertyPathException $e) {
             throw $e;
-        } catch (\Exception $e) {
+        }
+        catch (\Exception $e) {
             throw $e;
         }
     }
@@ -645,37 +659,10 @@ class UserHandler extends EntityHandler
                         $this->validateUsername($user, $value, $this->repository);
 
                         break;
-
-                    case 'password':
-
-                        $this->validator->passwordComplexity($value);
-
-                        break;
                 }
 
             }
 
-        } catch (\Exception $e) {
-            throw $e;
-        }
-    }
-
-    /**
-     * @param $password
-     *
-     * @throws \Exception
-     */
-    public function validatePasswordComplexity($password)
-    {
-        try {
-            /**
-             * Validate the complexity of the Password
-             */
-            $this->validator->passwordComplexity($password);
-
-            if (!empty($errors)) {
-                throw new InvalidFormException(implode(',', $errors));
-            }
         } catch (\Exception $e) {
             throw $e;
         }

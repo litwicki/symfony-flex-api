@@ -63,6 +63,7 @@ class ExceptionSubscriber implements EventSubscriberInterface
 
         if($this->debug) {
             $data['debug'] = get_class($exception);
+            $data['trace'] = $exception->getTraceAsString();
         }
 
         $format = preg_match('/\.xml$/', $event->getRequest()->getUri()) ? 'xml' : 'json';
