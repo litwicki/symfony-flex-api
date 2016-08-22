@@ -7,6 +7,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 class UserType extends AbstractType
 {
@@ -29,21 +30,12 @@ class UserType extends AbstractType
                 'choice_label' => 'Role',
                 'invalid_message' => 'Please enter a valid Role',
             ))
-            ->add('avatar', EntityType::class, array(
-                'class' => 'TavroCoreBundle:Image',
-                'choice_label' => 'Avatar',
-                'invalid_message' => 'Please enter a valid Image',
-            ))
-            ->add('user_quickbooks', EntityType::class, array(
-                'class' => 'TavroCoreBundle:UserQuickbooks',
-                'choice_label' => 'Quickbooks User',
-                'invalid_message' => 'Please enter a valid Quickbooks User',
-            ))
             ->add('person', EntityType::class, array(
                 'class' => 'TavroCoreBundle:Person',
                 'choice_label' => 'Person',
                 'invalid_message' => 'Please enter a valid Person',
             ))
+            ->add('submit', SubmitType::class)
         ;
     }
     

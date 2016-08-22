@@ -8,6 +8,6 @@ use Symfony\Component\Validator\Constraint;
  */
 class PasswordComplexity extends Constraint
 {
-    public $message = 'This password does not meet the minimum complexity requirements!';
+    public $message = 'User `password` must be at least 8 characters with at least one digit (0-9) and special character (!@#$%^&*()\-_=+), and contain no spaces.';
 
 }

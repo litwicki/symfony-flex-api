@@ -5,7 +5,7 @@ namespace Tavro\Bundle\CoreBundle\Component\Validator\Constraints;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 
-class ContainsAlphanumericValidator extends ConstraintValidator
+class PasswordComplexityValidator extends ConstraintValidator
 {
 
     /**

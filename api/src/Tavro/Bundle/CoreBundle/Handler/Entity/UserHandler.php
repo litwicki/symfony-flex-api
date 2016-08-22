@@ -71,8 +71,7 @@ class UserHandler extends EntityHandler
                 unset($parameters['roles']);
             }
 
-            $entity = $this->createEntity();
-            $entity = $this->processForm($request, $entity, $parameters, $this::HTTP_METHOD_POST);
+            $entity = $this->processForm($request, $this->createEntity(), $parameters, self::HTTP_METHOD_POST);
 
             $this->setUserRoles($entity, $roles);
 
@@ -118,11 +117,15 @@ class UserHandler extends EntityHandler
 
             $form = $this->formFactory->create($formType, $entity, ['method' => $method]);
 
-            $form->handleRequest($request);
-
             /**
              * @reference: http://symfony.com/doc/current/form/direct_submit.html
+             *           docs say this is required, but wtf?
+             *
+             *           $form->handleRequest($request);
+             *
              */
+
+            $form->submit($parameters, ($method == 'PATCH' ? false : true));
 
             if ($form->isValid()) {
 

@@ -338,7 +338,7 @@ class EntityHandler implements EntityHandlerInterface
         try {
 
             if(!isset($parameters['status'])) {
-                $parameters['status'] = $this::STATUS_ACTIVE;
+                $parameters['status'] = self::STATUS_ACTIVE;
             }
 
             $entity = $this->createEntity();
