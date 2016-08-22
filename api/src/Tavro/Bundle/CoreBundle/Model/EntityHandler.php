@@ -507,7 +507,10 @@ class EntityHandler implements EntityHandlerInterface
      */
     public function processForm(Request $request, EntityInterface $entity, array $parameters, $method = self::HTTP_METHOD_POST)
     {
+
         try {
+
+            $this->om->getConnection()->beginTransaction();
 
             $this->validate($entity, $parameters);
 

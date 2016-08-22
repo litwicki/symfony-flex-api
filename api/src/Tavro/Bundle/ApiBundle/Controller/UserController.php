@@ -36,7 +36,11 @@ class UserController extends ApiController
      */
     public function postAction(Request $request, $entity, $_format)
     {
+        $em = $this->getDoctrine()->getEntityManager();
+
         try {
+
+            $em->getConnection()->beginTransaction();
 
             $data = json_decode($request->getContent(), true);
             $userHandler = $this->getHandler('users');
@@ -68,7 +72,7 @@ class UserController extends ApiController
 
             $userData = [
                 'person' => $newPerson->getId(),
-                'username' => isset($data['username']) ? $data['username'] : $newPerson->getEmail(),
+                'username' => isset($data['username']) ? $data['username'] : null,
                 'api_enabled' => isset($data['api_enabled']) ? $data['api_enabled'] : false,
                 'signature' => isset($data['signature']) ? $data['signature'] : null,
             ];
@@ -81,15 +85,12 @@ class UserController extends ApiController
                 'format'  => $_format,
             );
 
+            $em->commit();
+
             return $this->forward('TavroApiBundle:Default:get', $routeOptions);
         }
-        catch (InvalidFormException $e) {
-            throw $e;
-        }
-        catch (ApiAccessDeniedException $e) {
-            throw $e;
-        }
         catch(\Exception $e) {
+            $em->getConnection()->rollBack();
             throw $e;
         }
     }

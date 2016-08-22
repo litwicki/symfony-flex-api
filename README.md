@@ -57,7 +57,7 @@ Workflow and useful 'stuff' for developing in Tavro.
 
 ### Testing CURL Api Request
 
-    $ curl -X POST http://api.tavro.dev/api/v1/people -d '{"first_name": "John", "last_name": "Doe", "email": "johndoe@example.com"}' --header "Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXUyJ9.eyJ1c2VybmFtZSI6InRhdnJvYm90IiwiaWF0IjoiMTQ3MTYyNjQwNyJ9.GXpnUrnCu_cFZpoKgNRkgQJjY-lyZGL9i3Ck6R68ne6QHmYyvAtOETNf2n_NzsbQPzHiRJwEp2FyIDDo2Wt-ZrwFlKYDwS6G94y9Lwd0-PGrROYwvNem8ix0dKxPltk0ZQuj5WYGrRHMZSQpoyrkkQTH3dpQOPuF4ogICfC6aCS_f2DKkszsKq4xtHZcFWwxLdg0kxHVDj1UzRayrQl-M7IMZidZU-4A9vKWv80qEVJ0vKw6IC0tH2_dHFAdWlAohzBXvXDc38hpaRhVOkFDyV_x8d5-8ll3tdknuERnrA_NFxUkPkGlqelbJWwBhfFWH78ErkwWk8KjzvH0XF_Xf4vgp-JpyVp7SFy7_MY6nE8tDBXpnToibNn5bv4C4pYCZR4BavX4YmBdFCPdX323v3SUs866IPNOpYpd3fTZgEVywXXPixC_AavWMdJ_KhLj4MvaVuqkiCMZkgx8IQMCZinCAL5AEtTLvPWz5wB7MIyFsT38acRpaj6_HRyWO2A0QMM-SRRbpBBglBhtUbUctAMyl4bJYMr_9Wt-AAVotHu1LylLdhB0vwm86LPTXLo6rpDgM0zpg7PCIgT717ApMo4E3cu890g9gZI2YNxgmEKgqNXvC--vP7py97g-9flHziNzHiEPXALtnXrr2ZQ4UEKHb7batLKsGmOTgGbFEK8"
+    $ curl -X POST http://api.tavro.dev/api/v1/users -d '{"first_name": "John", "last_name": "Doe", "email": "johndoe@example.com"}' --header "Authorization: Bearer {JWT_TOKEN_PAYLOAD}"
 
 ### Scripts
 
