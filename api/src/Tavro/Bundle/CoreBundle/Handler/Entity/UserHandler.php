@@ -4,6 +4,7 @@ namespace Tavro\Bundle\CoreBundle\Handler\Entity;
 
 use Rhumsaa\Uuid\Uuid;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
+use Tavro\Bundle\CoreBundle\Event\UserRegisterEvent;
 use Tavro\Bundle\CoreBundle\Exception\Password\PasswordLengthException;
 use Symfony\Component\PropertyAccess\Exception\InvalidPropertyPathException;
 use Symfony\Component\Form\Exception\TransformationFailedException;

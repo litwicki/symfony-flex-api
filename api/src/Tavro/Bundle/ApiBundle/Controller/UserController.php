@@ -11,6 +11,7 @@ use Tavro\Bundle\CoreBundle\Exception\Api\ApiNotFoundException;
 use Tavro\Bundle\CoreBundle\Exception\Api\ApiRequestLimitException;
 use Tavro\Bundle\CoreBundle\Exception\Api\ApiAccessDeniedException;
 use Tavro\Bundle\CoreBundle\Exception\Form\InvalidFormException;
+use Symfony\Component\EventDispatcher\EventDispatcher;
 
 use Doctrine\Common\Inflector\Inflector;
 use Doctrine\ORM\Tools\Pagination\Paginator;
@@ -88,6 +89,10 @@ class UserController extends ApiController
             );
 
             $em->commit();
+
+            /**
+             * Finally, fire the UserRegisterEvent to handle post-signup logic
+             */
 
             return $this->forward('TavroApiBundle:Default:get', $routeOptions);
         }
