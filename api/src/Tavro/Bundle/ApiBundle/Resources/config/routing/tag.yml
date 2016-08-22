@@ -1,0 +1,52 @@
+api_get_tag:
+    path: /tags/{id}.{_format}
+    defaults: { _controller: TavroApiBundle:Tag:get, _format: json, entity: 'tags' }
+    methods: GET
+    requirements:
+        id: \d+
+        _format:  json|xml
+
+api_get_all_tags:
+    path:  /tags.{_format}
+    defaults: { _controller: TavroApiBundle:Tag:getAll, _format: json, entity: 'tags' }
+    methods: GET
+    requirements:
+        _format:  json|xml
+
+api_post_tag:
+    path:  /tags.{_format}
+    defaults: { _controller: TavroApiBundle:Tag:post, _format: json, entity: 'tags' }
+    methods: POST
+    requirements:
+        _format:  json|xml
+
+api_patch_tag:
+    path:  /tags/{id}.{_format}
+    defaults: { _controller: TavroApiBundle:Tag:patch, _format: json, entity: 'tags' }
+    methods: PATCH
+    requirements:
+        id: \d+
+        _format:  json|xml
+
+api_put_tag:
+    path:  /tags/{id}.{_format}
+    defaults: { _controller: TavroApiBundle:Tag:put, _format: json, entity: 'tags' }
+    methods: PUT
+    requirements:
+        id: \d+
+        _format:  json|xml
+
+api_delete_tag:
+    path:  /tags/{id}.{_format}
+    defaults: { _controller: TavroApiBundle:Tag:delete, _format: json, entity: 'tags' }
+    methods: DELETE
+    requirements:
+        id: \d+
+        _format:  json|xml
+
+api_typeahead_tags:
+    path:  /typeahead/tags.{_format}
+    defaults: { _controller: TavroApiBundle:Tag:typeahead, _format: json }
+    methods: GET
+    requirements:
+        _format:  json|xml

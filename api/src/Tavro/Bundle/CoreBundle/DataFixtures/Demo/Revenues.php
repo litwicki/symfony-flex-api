@@ -79,12 +79,14 @@ class Revenues extends AbstractFixture implements OrderedFixtureInterface, Conta
             $products = $organization->getProducts()->toArray();
 
             $revenues = array();
+            $revenueTypes = array('sale', 'service', 'other');
 
             for($i=0;$i<$size;$i++) {
 
                 $revenue = new Revenue();
                 $revenue->setOrganization($organization);
                 $revenue->setStatus(rand(0,1));
+                $revenue->setType($revenueTypes[rand(0,2)]);
                 $revenue->setCreateDate(new \DateTime());
                 $revenue->setUser($users[array_rand($users)]);
                 $revenue->setTitle(ucwords($lipsum->getWords(rand(1,5))));

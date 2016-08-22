@@ -109,18 +109,6 @@ class User extends Entity implements UserInterface, \Serializable
     protected $user_ip;
 
     /**
-     * @ORM\Column(type="string", length=32, nullable=true)
-     * @Assert\Choice(
-     *      choices = { "male", "female", "other" },
-     *      message = "Choose a valid gender."
-     * )
-     * @Groups({"api", "tavro", "simple"})
-     * @Accessor(getter="getGender", setter="setGuid")
-     * @MaxDepth(1)
-     */
-    protected $gender;
-
-    /**
      * @ORM\Column(type="string", length=255, nullable=true)
      * @Groups({"tavro"})
      * @MaxDepth(1)
@@ -198,6 +186,7 @@ class User extends Entity implements UserInterface, \Serializable
      */
     public function __construct()
     {
+        parent::__construct();
         $this->create_date = new \DateTime();
         $this->update_date = new \DateTime();
         $this->nodes = new \Doctrine\Common\Collections\ArrayCollection();
@@ -354,29 +343,6 @@ class User extends Entity implements UserInterface, \Serializable
     }
 
     /**
-     * Set github_username
-     *
-     * @param string $github_username
-     * @return User
-     */
-    public function setGithubUsername($github_username)
-    {
-        $this->github_username = $github_username;
-
-        return $this;
-    }
-
-    /**
-     * Get github_username
-     *
-     * @return string
-     */
-    public function getGithubUsername()
-    {
-        return $this->github_username;
-    }
-
-    /**
      * Set and encode the password string.
      *
      * @param string $password
@@ -488,29 +454,6 @@ class User extends Entity implements UserInterface, \Serializable
     public function getSignature()
     {
         return $this->signature;
-    }
-
-    /**
-     * Set email
-     *
-     * @param string $email
-     * @return User
-     */
-    public function setEmail($email)
-    {
-        $this->email = $email;
-
-        return $this;
-    }
-
-    /**
-     * Get email
-     *
-     * @return string 
-     */
-    public function getEmail()
-    {
-        return $this->email;
     }
 
     /**
@@ -756,6 +699,14 @@ class User extends Entity implements UserInterface, \Serializable
         return $this->roles;
     }
 
+    public function getRoleNames() {
+        $roles = [];
+        foreach($this->roles as $role) {
+            $roles[] = $role->getRole();
+        }
+        return $roles;
+    }
+
     /**
      * Add nodes_read
      *
@@ -790,10 +741,9 @@ class User extends Entity implements UserInterface, \Serializable
     }
 
     /**
-     * Add user_organization
-     *
      * @param \Tavro\Bundle\CoreBundle\Entity\UserOrganization $user_organization
-     * @return UserOrganization
+     *
+     * @return $this
      */
     public function addUserOrganizations(\Tavro\Bundle\CoreBundle\Entity\UserOrganization $user_organization)
     {
@@ -820,29 +770,6 @@ class User extends Entity implements UserInterface, \Serializable
     public function getUserOrganizations()
     {
         return $this->user_organizations;
-    }
-
-    /**
-     * Set billing_id
-     *
-     * @param integer $billing_id
-     * @return User
-     */
-    public function setBillingId($billing_id)
-    {
-        $this->billing_id = $billing_id;
-
-        return $this;
-    }
-
-    /**
-     * Get billing_id
-     *
-     * @return integer 
-     */
-    public function getBillingId()
-    {
-        return $this->billing_id;
     }
 
     /**
@@ -893,29 +820,6 @@ class User extends Entity implements UserInterface, \Serializable
     }
 
     /**
-     * Set gender
-     *
-     * @param string $gender
-     * @return User
-     */
-    public function setGender($gender)
-    {
-        $this->gender = $gender;
-
-        return $this;
-    }
-
-    /**
-     * Get gender
-     *
-     * @return string
-     */
-    public function getGender()
-    {
-        return is_null($this->gender) ? '' : $this->gender;
-    }
-
-    /**
      * @return array
      */
     public function getSerializedRoles()
@@ -935,8 +839,7 @@ class User extends Entity implements UserInterface, \Serializable
      */
     public function getIsAdmin()
     {
-        $roles = $this->getRoles();
-        foreach($roles as $role) {
+        foreach($this->roles as $role) {
             if($role->getRole() === 'ROLE_ADMIN') {
                 return true;
             }
@@ -962,8 +865,7 @@ class User extends Entity implements UserInterface, \Serializable
      */
     public function getIsDeveloper()
     {
-        $roles = $this->getRoles();
-        foreach($roles as $role) {
+        foreach($this->roles as $role) {
             if($role->getRole() === 'ROLE_DEVELOPER') {
                 return true;
             }

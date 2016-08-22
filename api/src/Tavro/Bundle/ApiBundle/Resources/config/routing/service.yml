@@ -36,7 +36,7 @@ api_put_service:
         id: \d+
         _format:  json|xml
 
-api_delete_rservice:
+api_delete_service:
     path:  /services/{id}.{_format}
     defaults: { _controller: TavroApiBundle:Service:delete, _format: json, entity: 'services' }
     methods: DELETE

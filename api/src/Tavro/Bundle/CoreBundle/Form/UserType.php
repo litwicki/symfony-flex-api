@@ -6,10 +6,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
-use Symfony\Component\Form\Extension\Core\Type\FileType;
-use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 
 class UserType extends AbstractType
 {
@@ -21,11 +18,10 @@ class UserType extends AbstractType
     {
         $builder
             ->add('username')
-            ->add('password', PasswordType::class)
+            ->add('password')
             ->add('password_token')
             ->add('password_token_expire', DateTimeType::class)
             ->add('salt')
-            ->add('email')
             ->add('signature')
             ->add('last_online_date', DateTimeType::class)
             ->add('api_key')
@@ -33,18 +29,29 @@ class UserType extends AbstractType
             ->add('api_enabled')
             ->add('guid')
             ->add('user_ip')
-            ->add('gender')
             ->add('user_agent')
-            ->add('birthday', DateTimeType::class)
+            ->add('body')
             ->add('status')
-            ->add('create_date', DateTimeType::class)
-            ->add('update_date', DateTimeType::class)
             ->add('roles', EntityType::class, array(
                 'class' => 'TavroCoreBundle:Role',
-                'choice_label' => 'Role(s)'
+                'choice_label' => 'Role',
+                'invalid_message' => 'Please enter a valid Role',
             ))
-            ->add('avatar', FileType::class)
-            ->add('submit', SubmitType::class)
+            ->add('avatar', EntityType::class, array(
+                'class' => 'TavroCoreBundle:Image',
+                'choice_label' => 'Avatar',
+                'invalid_message' => 'Please enter a valid Image',
+            ))
+            ->add('user_quickbooks', EntityType::class, array(
+                'class' => 'TavroCoreBundle:UserQuickbooks',
+                'choice_label' => 'Quickbooks User',
+                'invalid_message' => 'Please enter a valid Quickbooks User',
+            ))
+            ->add('person', EntityType::class, array(
+                'class' => 'TavroCoreBundle:Person',
+                'choice_label' => 'Person',
+                'invalid_message' => 'Please enter a valid Person',
+            ))
         ;
     }
     
@@ -54,9 +61,7 @@ class UserType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Tavro\Bundle\CoreBundle\Entity\User',
-            'csrf_protection'   => false,
+            'data_class' => 'Tavro\Bundle\CoreBundle\Entity\User'
         ));
     }
-
 }

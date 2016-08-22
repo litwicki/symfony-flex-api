@@ -18,12 +18,11 @@ class TagType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('title')
-            ->add('body')
+            ->add('tag')
             ->add('status')
-            ->add('updated_by', EntityType::class, array(
-                'class' => 'TavroCoreBundle:User',
-                'choice_label' => 'User'
+            ->add('organization', EntityType::class, array(
+                'class' => 'TavroCoreBundle:Organization',
+                'choice_label' => 'Organization'
             ))
             ->add('submit', SubmitType::class)
         ;

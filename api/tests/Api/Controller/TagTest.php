@@ -31,26 +31,17 @@ class TagTest extends TavroTest
 
     public function testTagCreate()
     {
-        // create our http client (Guzzle)
-        $client = new Client('http://api.tavro.dev/api/v1', array(
-            'request.options' => array(
-                'exceptions' => false,
-            )
-        ));
 
         $token = $this->authorize();
 
+        $faker = \Faker\Factory::create('en_EN');
+
         $data = array(
-            'title' => 'Tag Name',
-            'body' => 'Tag body description.',
-            'price' => 100,
-            'cost' => 75,
-            'status' => 1,
-            'category' => 1,
+            'tag' => $faker->text(5),
             'organization' => 1
         );
 
-        $url = 'http://api.tavro.dev/api/v1/Tags';
+        $url = 'http://api.tavro.dev/api/v1/tags';
 
         $client = new Client($url, array(
             'request.options' => array(

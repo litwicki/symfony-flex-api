@@ -638,6 +638,7 @@ class EntityHandler implements EntityHandlerInterface
             'Tavro\Bundle\CoreBundle\Entity\ServiceCategory'     => 'Tavro\Bundle\CoreBundle\Form\ServiceCategoryType',
             'Tavro\Bundle\CoreBundle\Entity\Service'             => 'Tavro\Bundle\CoreBundle\Form\ServiceType',
             'Tavro\Bundle\CoreBundle\Entity\Shareholder'         => 'Tavro\Bundle\CoreBundle\Form\ShareholderType',
+            'Tavro\Bundle\CoreBundle\Entity\Tag'                 => 'Tavro\Bundle\CoreBundle\Form\TagType',
             'Tavro\Bundle\CoreBundle\Entity\UserOrganization'    => 'Tavro\Bundle\CoreBundle\Form\UserOrganizationTyp',
             'Tavro\Bundle\CoreBundle\Entity\User'                => 'Tavro\Bundle\CoreBundle\Form\UserType',
             'Tavro\Bundle\CoreBundle\Entity\Variable'            => 'Tavro\Bundle\CoreBundle\Form\VariableType',

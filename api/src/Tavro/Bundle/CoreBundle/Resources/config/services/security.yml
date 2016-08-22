@@ -262,6 +262,13 @@ services:
         tags:
             - { name: security.voter }
 
+    tavro.voter.shareholder:
+        class: Tavro\Bundle\CoreBundle\Security\Voter\Entity\ShareholderVoter
+        public: false
+        arguments: ['@security.access.decision_manager']
+        tags:
+            - { name: security.voter }
+
     tavro.voter.user_quickbooks:
         class: Tavro\Bundle\CoreBundle\Security\Voter\Entity\UserQuickbooksVoter
         public: false

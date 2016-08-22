@@ -36,25 +36,11 @@ class Shareholder extends Entity implements EntityInterface
 
     /**
      * @ORM\ManyToOne(targetEntity="Tavro\Bundle\CoreBundle\Entity\Person")
-     * @ORM\JoinColumn(name="person_id", referencedColumnName="id", nullable=true)
+     * @ORM\JoinColumn(name="person_id", referencedColumnName="id", nullable=false)
      * @Groups({"api", "tavro", "simple"})
      * @MaxDepth(1)
      */
     protected $person;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="Tavro\Bundle\CoreBundle\Entity\User", inversedBy="shareholders")
-     * @ORM\JoinColumn(name="user_id", referencedColumnName="id", nullable=true)
-     * @Groups({"api", "tavro", "simple"})
-     * @MaxDepth(1)
-     */
-    protected $user;
-
-    /**
-     * @ORM\Column(type="string", length=8000, nullable=true)
-     * @Groups({"api", "tavro", "simple"})
-     */
-    protected $notes;
 
     /**
      * @ORM\OneToMany(targetEntity="Tavro\Bundle\CoreBundle\Entity\FundingRoundShareholder", mappedBy="shareholder", cascade={"remove"})
@@ -63,36 +49,6 @@ class Shareholder extends Entity implements EntityInterface
      */
     protected $funding_round_shareholders;
 
-    public function __toString()
-    {
-        return sprintf('%s, %s', $this->getPerson()->getLastName(), $this->getPerson()->getFirstName());
-    }
-
-
-
-    /**
-     * Set notes
-     *
-     * @param string $notes
-     *
-     * @return Shareholder
-     */
-    public function setNotes($notes)
-    {
-        $this->notes = $notes;
-
-        return $this;
-    }
-
-    /**
-     * Get notes
-     *
-     * @return string
-     */
-    public function getNotes()
-    {
-        return $this->notes;
-    }
 
     /**
      * Set body
@@ -125,7 +81,7 @@ class Shareholder extends Entity implements EntityInterface
      *
      * @return Shareholder
      */
-    public function setPerson(\Tavro\Bundle\CoreBundle\Entity\Person $person = null)
+    public function setPerson(\Tavro\Bundle\CoreBundle\Entity\Person $person)
     {
         $this->person = $person;
 
@@ -140,30 +96,6 @@ class Shareholder extends Entity implements EntityInterface
     public function getPerson()
     {
         return $this->person;
-    }
-
-    /**
-     * Set user
-     *
-     * @param \Tavro\Bundle\CoreBundle\Entity\User $user
-     *
-     * @return Shareholder
-     */
-    public function setUser(\Tavro\Bundle\CoreBundle\Entity\User $user = null)
-    {
-        $this->user = $user;
-
-        return $this;
-    }
-
-    /**
-     * Get user
-     *
-     * @return \Tavro\Bundle\CoreBundle\Entity\User
-     */
-    public function getUser()
-    {
-        return $this->user;
     }
 
     /**

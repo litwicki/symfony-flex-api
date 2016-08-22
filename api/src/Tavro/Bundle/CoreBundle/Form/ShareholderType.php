@@ -5,8 +5,6 @@ namespace Tavro\Bundle\CoreBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
 class ShareholderType extends AbstractType
@@ -18,16 +16,12 @@ class ShareholderType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('email')
-            ->add('shares')
-            ->add('phone')
-            ->add('notes')
+            ->add('body')
             ->add('status')
-            ->add('user', EntityType::class, array(
-                'class' => 'TavroCoreBundle:User',
-                'choice_label' => 'User'
+            ->add('person', EntityType::class, array(
+                'class' => 'TavroCoreBundle:Person',
+                'choice_label' => 'Person'
             ))
-            ->add('submit', SubmitType::class)
         ;
     }
     
@@ -38,7 +32,7 @@ class ShareholderType extends AbstractType
     {
         $resolver->setDefaults(array(
             'data_class' => 'Tavro\Bundle\CoreBundle\Entity\Shareholder',
-            'csrf_protection'   => false,
+            'csrf_protection' => false
         ));
     }
 }

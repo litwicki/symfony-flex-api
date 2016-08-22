@@ -91,4 +91,26 @@ class TagHandler extends EntityHandler
         }
     }
 
+    /**
+     * @param $tag
+     *
+     * @return object
+     * @throws \Exception
+     */
+    public function findByTag($tag)
+    {
+        try {
+
+            $tag = $this->repository->findOneBy(array(
+                'tag' => $tag,
+            ));
+
+            return $tag;
+
+        }
+        catch(\Exception $e) {
+            throw $e;
+        }
+    }
+
 }

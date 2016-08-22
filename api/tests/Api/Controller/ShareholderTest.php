@@ -31,26 +31,16 @@ class ShareholderTest extends TavroTest
 
     public function testShareholderCreate()
     {
-        // create our http client (Guzzle)
-        $client = new Client('http://api.tavro.dev/api/v1', array(
-            'request.options' => array(
-                'exceptions' => false,
-            )
-        ));
 
         $token = $this->authorize();
+        $faker = \Faker\Factory::create('en_EN');
 
         $data = array(
-            'title' => 'Shareholder Name',
-            'body' => 'Shareholder body description.',
-            'price' => 100,
-            'cost' => 75,
-            'status' => 1,
-            'category' => 1,
-            'organization' => 1
+            'person' => 1,
+            'body' => $faker->text(500),
         );
 
-        $url = 'http://api.tavro.dev/api/v1/Shareholders';
+        $url = 'http://api.tavro.dev/api/v1/shareholders';
 
         $client = new Client($url, array(
             'request.options' => array(

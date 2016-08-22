@@ -67,6 +67,7 @@ class FundingRound extends OrganizationEntity implements OrganizationEntityInter
      */
     public function __construct()
     {
+        parent::__construct();
         $this->status = 1;
         $now = new \DateTime();
         $tz = new \DateTimeZone('America/New_York');

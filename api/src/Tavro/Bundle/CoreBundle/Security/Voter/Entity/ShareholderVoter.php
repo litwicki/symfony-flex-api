@@ -2,138 +2,128 @@
 
 namespace Tavro\Bundle\CoreBundle\Security\Voter\Entity;
 
-use Symfony\Component\Security\Core\Authorization\Voter\VoterInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Tavro\Bundle\CoreBundle\Entity\Shareholder;
 use Tavro\Bundle\CoreBundle\Entity\User;
+use Symfony\Component\Security\Core\Authorization\Voter\Voter;
+use Symfony\Component\Security\Core\Authorization\AccessDecisionManagerInterface;
 use Tavro\Bundle\CoreBundle\Security\Voter\TavroVoter;
 
-/**
- * Class ShareholderVoter
- *
- * @package Tavro\Bundle\CoreBundle\Voter
- */
-class ShareholderVoter extends TavroVoter implements VoterInterface
+class ShareholderVoter extends TavroVoter
 {
-    /**
-     * Allows full access to members belonging to the entity, view access to outside admins.
-     *
-     * @param User $user
-     * @param \Tavro\Bundle\CoreBundle\Entity\Shareholder $entity
-     * @param string  $attribute
-     *
-     * @throws \Exception
-     * @return int
-     */
-    public function checkAccess($user, Shareholder $entity, $attribute)
-    {
-
-        if($user->isAdmin()) {
-            return VoterInterface::ACCESS_GRANTED;
-        }
-
-        $checkOrganization = $this->checkOrganization($entity->getOrganization(), $user);
-
-        if($checkOrganization && $attribute == self::PATCH) {
-            return VoterInterface::ACCESS_GRANTED;
-        }
-
-        // Allow all creates
-        if($checkOrganization && $attribute == self::CREATE) {
-            return VoterInterface::ACCESS_GRANTED;
-        }
-
-        // Allow all views
-        if($checkOrganization && $attribute == self::VIEW) {
-            return VoterInterface::ACCESS_GRANTED;
-        }
-
-        $modifyDate = $entity->getCreateDate();
-        $modifyDate->modify("+30 minutes");
-
-        $now = new \DateTime();
-
-        /**
-         * Only Admins, or the author of the Shareholder can edit
-         */
-        if($checkOrganization && $attribute == self::EDIT || $attribute == self::PATCH) {
-            if($user->getId() === $entity->getUser()->getId()) {
-                return VoterInterface::ACCESS_GRANTED;
-            }
-        }
-
-        /**
-         *  Only ROLE_ADMIN or the owner can delete
-         */
-        if(($user instanceof User && $user->isAdmin()) || ($checkOrganization && $attribute == self::DELETE || $attribute == self::REMOVE)) {
-            if($user->getId() === $entity->getUser()->getId()) {
-                return VoterInterface::ACCESS_GRANTED;
-            }
-        }
-
-        // Deny all other requests
-        return VoterInterface::ACCESS_DENIED;
-    }
-
-    const CREATE = 'create';
+    // these strings are just invented: you can use anything
     const VIEW = 'view';
     const EDIT = 'edit';
-    const DELETE = 'delete';
+    const CREATE = 'create';
     const PATCH = 'patch';
-    const REMOVE = 'remove';
 
     /**
-     * Returns true if the attribute matches known attributes.
-     *
      * @param string $attribute
+     * @param mixed $subject
      *
      * @return bool
      */
-    public function supportsAttribute($attribute) {
-        return in_array($attribute, array(self::PATCH, self::REMOVE, self::CREATE, self::VIEW, self::EDIT, self::DELETE));
+    protected function supports($attribute, $subject)
+    {
+        // if the attribute isn't one we support, return false
+        if (!in_array($attribute, array(self::VIEW, self::EDIT, self::CREATE, self::PATCH))) {
+            return false;
+        }
+
+        // only vote on Shareholder objects inside this voter
+        if (!$subject instanceof Shareholder) {
+            return false;
+        }
+
+        return true;
     }
 
     /**
-     * Returns true if object is an instance of GrowthCase.
-     *
-     * @param object $class
+     * @param string $attribute
+     * @param mixed $subject
+     * @param \Symfony\Component\Security\Core\Authentication\Token\TokenInterface $token
      *
      * @return bool
      */
-    public function supportsClass($class) {
-        return $class instanceof Shareholder;
-    }
-
-    /**
-     * Returns if the user should have access to the entity.
-     *
-     * @param TokenInterface $token
-     * @param object $entity
-     * @param array $attributes
-     *
-     * @return int
-     */
-    public function vote(TokenInterface $token, $entity, array $attributes) {
-        //throw new \Symfony\Component\Security\Acl\Exception\Exception('ERORR');
-        //return VoterInterface::ACCESS_GRANTED;
-        if (!$this->supportsClass($entity)) {
-            return VoterInterface::ACCESS_ABSTAIN;
-        }
-
-        if (1 !== count($attributes)) {
-            return VoterInterface::ACCESS_ABSTAIN;
-        }
-
-        $attribute = $attributes[0];
-
-        if(!$this->supportsAttribute($attribute)) {
-            return VoterInterface::ACCESS_ABSTAIN;
-        }
-
+    protected function voteOnAttribute($attribute, $subject, TokenInterface $token)
+    {
         $user = $token->getUser();
 
-        return $this->checkAccess($user, $entity, $attribute);
+        if (!$user instanceof User) {
+            // the user must be logged in; if not, deny access
+            return false;
+        }
 
+        $shareholder = $subject;
+
+        /**
+         * If the User is an Administrator, let them proceed as they desire.
+         */
+        if ($this->decisionManager->decide($token, array('ROLE_ADMIN'))) {
+            return true;
+        }
+
+        switch ($attribute) {
+            case self::CREATE:
+                return $this->canCreate($shareholder, $user);
+            case self::VIEW:
+                return $this->canView($shareholder, $user);
+            case self::PATCH:
+                return $this->canPatch($shareholder, $user);
+            case self::EDIT:
+                return $this->canEdit($shareholder, $user);
+        }
+
+        throw new \LogicException('This code should not be reached!');
+    }
+
+    /**
+     * @param \Tavro\Bundle\CoreBundle\Entity\Shareholder $shareholder
+     * @param \Tavro\Bundle\CoreBundle\Entity\User $user
+     *
+     * @return bool
+     */
+    private function canView(Shareholder $shareholder, User $user)
+    {
+        $frs = $shareholder->getFundingRoundShareholders()->first();
+        $organization = $frs->getFundingRound()->getOrganization();
+        return $this->checkOrganization($organization, $user);
+    }
+
+    /**
+     * @param \Tavro\Bundle\CoreBundle\Entity\Shareholder $shareholder
+     * @param \Tavro\Bundle\CoreBundle\Entity\User $user
+     *
+     * @return bool
+     */
+    private function canCreate(Shareholder $shareholder, User $user)
+    {
+        /**
+         * For now.... only Admins can create new Shareholders.
+         */
+        return $user->isAdmin();
+    }
+
+    /**
+     * @param \Tavro\Bundle\CoreBundle\Entity\Shareholder $shareholder
+     * @param \Tavro\Bundle\CoreBundle\Entity\User $user
+     *
+     * @return bool
+     */
+    private function canEdit(Shareholder $shareholder, User $user)
+    {
+        return $this->checkShareholder($shareholder, $user);
+    }
+
+    /**
+     * @param \Tavro\Bundle\CoreBundle\Entity\Shareholder $shareholder
+     * @param \Tavro\Bundle\CoreBundle\Entity\User $user
+     *
+     * @return bool
+     */
+    private function canPatch(Shareholder $shareholder, User $user)
+    {
+        return $this->checkShareholder($shareholder, $user);
     }
 
 }

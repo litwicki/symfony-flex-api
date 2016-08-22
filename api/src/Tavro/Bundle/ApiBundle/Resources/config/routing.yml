@@ -46,6 +46,9 @@ tavro_service_category_api:
 tavro_shareholder_api:
     resource: "@TavroApiBundle/Resources/config/routing/shareholder.yml"
 
+tavro_tag_api:
+    resource: "@TavroApiBundle/Resources/config/routing/tag.yml"
+
 tavro_user_api:
     resource: "@TavroApiBundle/Resources/config/routing/user.yml"
 
