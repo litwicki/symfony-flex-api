@@ -43,7 +43,7 @@ class UserTest extends TavroTest
             'email' => $faker->email,
             'username' => md5(time()),
             'signature' => $faker->text(100),
-            'password' => $faker->password(8)
+            'password' => 'Password1!'
         );
 
         $url = 'http://api.tavro.dev/api/v1/users';
@@ -60,7 +60,7 @@ class UserTest extends TavroTest
 
         $json = $response->getBody(true);
         $body = json_decode($json, true);
-        var_dump($body);die();
+        var_dump($body);
 
         $this->assertEquals(200, $response->getStatusCode());
 

@@ -16,35 +16,33 @@ class PasswordComplexityValidator extends ConstraintValidator
     {
 
         $specials = '/[!@#$%^&*()\-_=+]/';  // whatever you mean by 'special char'
-        $numbers = '/[0-9]/';  //numbers
+        $digits = '/[0-9]/';  //numbers
+        $letters = '/[a-zA-Z]/';
         $errors = array();
 
         if (preg_match_all($specials, $value, $o) < 1) {
-            $errors[] = sprintf(
-                'Password "%s" does not contain at least one special character: %s',
-                $value,
-                str_replace('/', '', $specials)
-            );
+            $errors[] = 'The password does not contain at least one of the following special characters (!@#$%^&*()\-_=+).';
         }
 
-        if (preg_match_all($numbers, $value, $o) < 1) {
-            $errors[] = sprintf(
-                'Password "%s" does not contain a number.',
-                $value
-            );
+        if (preg_match_all($digits, $value, $o) < 1) {
+            $errors[] = 'The password does not contain at least one digit.';
+        }
+
+        if (preg_match_all($letters, $value, $o) < 1) {
+            $errors[] = 'The password does not contain at least one letter.';
         }
 
         if (strlen($value) < 8) {
-            $errors[] = sprintf('Your password must be at least 8 characters long.');
+            $errors[] = 'The password must be at least 8 characters long.';
         }
 
         if (preg_match("/\\s/", $value)) {
-            $errors[] = sprintf('Your password cannot contain spaces.');
+            $errors[] = 'The password cannot contain any spaces.';
         }
         
         if(!empty($errors))
         {
-            $this->context->buildViolation($constraint->message)
+            $this->context->buildViolation(implode($errors, ' '))
                 ->setParameter('%string%', $value)
                 ->addViolation();
         }
