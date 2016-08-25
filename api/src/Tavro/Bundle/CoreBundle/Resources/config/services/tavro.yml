@@ -46,3 +46,9 @@ services:
         tags:
             - { name: kernel.event_subscriber }
         arguments: ["%kernel.debug%", "@serializer"]
+
+    tavro.subscriber.user:
+        class: Tavro\Bundle\CoreBundle\EventSubscriber\TavroUser\UserSubscriber
+        tags:
+            - { name: kernel.event_subscriber }
+        arguments: ["@tavro.mailer"]

@@ -106,34 +106,13 @@ class TavroMailer implements ContainerAwareInterface
      *
      * @throws \Exception
      */
-    public function sendWelcome(User $user, $html = true)
+    public function sendActivation(User $user, $html = true)
     {
         try {
             $this->send([
-                'type' => 'welcome',
+                'type' => 'activation',
                 'html' => $html,
                 'subject' => sprintf('Welcome to %s', $this->container->getParameter('app_name')),
-                'recipients' => [$user->getEmail()]
-            ]);
-        }
-        catch(\Exception $e) {
-            throw $e;
-        }
-    }
-
-    /**
-     * @param \Tavro\Bundle\CoreBundle\Entity\User $user
-     * @param bool $html
-     *
-     * @throws \Exception
-     */
-    public function sendPasswordReset(User $user, $html = true)
-    {
-        try {
-            $this->send([
-                'type' => 'password-reset',
-                'html' => $html,
-                'subject' => '',
                 'recipients' => [$user->getEmail()]
             ]);
         }

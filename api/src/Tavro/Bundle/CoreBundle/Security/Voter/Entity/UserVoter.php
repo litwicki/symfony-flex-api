@@ -2,126 +2,139 @@
 
 namespace Tavro\Bundle\CoreBundle\Security\Voter\Entity;
 
-use Symfony\Component\Security\Core\Authorization\Voter\VoterInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Tavro\Bundle\CoreBundle\Entity\User;
+use Symfony\Component\Security\Core\Authorization\Voter\Voter;
+use Symfony\Component\Security\Core\Authorization\AccessDecisionManagerInterface;
 use Tavro\Bundle\CoreBundle\Security\Voter\TavroVoter;
 
-/**
- * Description of UserVoter
- */
-class UserVoter extends TavroVoter implements VoterInterface
+class UserVoter extends TavroVoter
 {
-
-    /**
-     * Allows full access to members belonging to the entity, view access to outside admins.
-     *
-     * @param User $user
-     * @param \Tavro\Bundle\CoreBundle\Entity\User $entity
-     * @param string  $attribute
-     *
-     * @throws \Exception
-     * @return int
-     */
-    public function checkAccess($user, User $entity, $attribute)
-    {
-
-        if($attribute == self::PATCH) {
-            return VoterInterface::ACCESS_GRANTED;
-        }
-
-        if($user->isAdmin()) {
-            return VoterInterface::ACCESS_GRANTED;
-        }
-
-        // Allow all creates
-        if($attribute == self::CREATE) {
-            return VoterInterface::ACCESS_GRANTED;
-        }
-
-        /**
-         * Except for SELF, only Admins can view Users.
-         */
-        if($attribute == self::VIEW && ($user->getId() === $entity->getId())) {
-            return VoterInterface::ACCESS_GRANTED;
-        }
-
-        /**
-         * Only Admins, or *the* User can edit
-         */
-        if($user instanceof User && $attribute == self::EDIT && ($user->getId() === $entity->getId())) {
-            return VoterInterface::ACCESS_GRANTED;
-        }
-
-        /**
-         * Only Admins can delete, but not themselves!
-         */
-        if($user instanceof User && $attribute == self::DELETE && ($user->getId() != $entity->getId())) {
-            return VoterInterface::ACCESS_GRANTED;
-        }
-
-        // Deny all other requests
-        return VoterInterface::ACCESS_DENIED;
-    }
-
-    const CREATE = 'create';
+    // these strings are just invented: you can use anything
     const VIEW = 'view';
     const EDIT = 'edit';
+    const CREATE = 'create';
     const PATCH = 'patch';
-    const DELETE = 'delete';
 
     /**
-     * Returns true if the attribute matches known attributes.
-     *
      * @param string $attribute
+     * @param mixed $subject
      *
      * @return bool
      */
-    public function supportsAttribute($attribute) {
-        return in_array($attribute, array(self::PATCH, self::CREATE, self::VIEW, self::EDIT, self::DELETE));
+    protected function supports($attribute, $subject)
+    {
+        // if the attribute isn't one we support, return false
+        if (!in_array($attribute, array(self::VIEW, self::EDIT, self::CREATE, self::PATCH))) {
+            return false;
+        }
+
+        // only vote on User objects inside this voter
+        if (!$subject instanceof User) {
+            return false;
+        }
+
+        return true;
     }
 
     /**
-     * Returns true if object is an instance of GrowthCase.
-     *
-     * @param object $class
+     * @param string $attribute
+     * @param mixed $subject
+     * @param \Symfony\Component\Security\Core\Authentication\Token\TokenInterface $token
      *
      * @return bool
      */
-    public function supportsClass($class) {
-        return $class instanceof User;
-    }
-
-    /**
-     * Returns if the user should have access to the entity.
-     *
-     * @param TokenInterface $token
-     * @param object $entity
-     * @param array $attributes
-     *
-     * @return int
-     */
-    public function vote(TokenInterface $token, $entity, array $attributes) {
-        //throw new \Symfony\Component\Security\Acl\Exception\Exception('ERORR');
-        //return VoterInterface::ACCESS_GRANTED;
-        if (!$this->supportsClass($entity)) {
-            return VoterInterface::ACCESS_ABSTAIN;
-        }
-
-        if (1 !== count($attributes)) {
-            return VoterInterface::ACCESS_ABSTAIN;
-        }
-
-        $attribute = $attributes[0];
-
-        if(!$this->supportsAttribute($attribute)) {
-            return VoterInterface::ACCESS_ABSTAIN;
-        }
-
+    protected function voteOnAttribute($attribute, $subject, TokenInterface $token)
+    {
         $user = $token->getUser();
 
-        return $this->checkAccess($user, $entity, $attribute);
+        if (!$user instanceof User) {
+            // the user must be logged in; if not, deny access
+            return false;
+        }
 
+        /**
+         * If the User is an Administrator, let them proceed as they desire.
+         */
+        if ($this->decisionManager->decide($token, array('ROLE_ADMIN'))) {
+            return true;
+        }
+
+        switch ($attribute) {
+            case self::CREATE:
+                return $this->canCreate($subject, $user);
+            case self::VIEW:
+                return $this->canView($subject, $user);
+            case self::PATCH:
+                return $this->canPatch($subject, $user);
+            case self::EDIT:
+                return $this->canEdit($subject, $user);
+        }
+
+        throw new \LogicException('This code should not be reached!');
+    }
+
+    /**
+     * @param \Tavro\Bundle\CoreBundle\Entity\User $newUser
+     * @param \Tavro\Bundle\CoreBundle\Entity\User $user
+     *
+     * @return bool
+     */
+    private function canView(User $newUser, User $user)
+    {
+        return $this->checkUser($newUser, $user);
+    }
+
+    /**
+     * @param \Tavro\Bundle\CoreBundle\Entity\User $newUser
+     * @param \Tavro\Bundle\CoreBundle\Entity\User $user
+     *
+     * @return bool
+     */
+    private function canCreate(User $newUser, User $user)
+    {
+        return true;
+    }
+
+    /**
+     * @param \Tavro\Bundle\CoreBundle\Entity\User $newUser
+     * @param \Tavro\Bundle\CoreBundle\Entity\User $user
+     *
+     * @return bool
+     */
+    private function canEdit(User $newUser, User $user)
+    {
+        return $this->checkUser($newUser, $user);
+    }
+
+    /**
+     * @param \Tavro\Bundle\CoreBundle\Entity\User $newUser
+     * @param \Tavro\Bundle\CoreBundle\Entity\User $user
+     *
+     * @return bool
+     */
+    private function canPatch(User $newUser, User $user)
+    {
+        return $this->checkUser($newUser, $user);
+    }
+
+    /**
+     * @param \Tavro\Bundle\CoreBundle\Entity\User $newUser
+     * @param \Tavro\Bundle\CoreBundle\Entity\User $user
+     *
+     * @return bool
+     */
+    public function checkUser(User $newUser, User $user)
+    {
+        if($user->isAdmin()) {
+            return true;
+        }
+        elseif($user->getId() === $newUser->getId()) {
+            return true;
+        }
+        else {
+            return false;
+        }
     }
 
 }

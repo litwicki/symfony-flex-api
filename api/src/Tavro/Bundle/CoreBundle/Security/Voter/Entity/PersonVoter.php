@@ -3,8 +3,8 @@
 namespace Tavro\Bundle\CoreBundle\Security\Voter\Entity;
 
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
-use Tavro\Bundle\CoreBundle\Entity\Person;
 use Tavro\Bundle\CoreBundle\Entity\User;
+use Tavro\Bundle\CoreBundle\Entity\Person;
 use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 use Symfony\Component\Security\Core\Authorization\AccessDecisionManagerInterface;
 use Tavro\Bundle\CoreBundle\Security\Voter\TavroVoter;
@@ -49,13 +49,6 @@ class PersonVoter extends TavroVoter
     {
         $user = $token->getUser();
 
-        if (!$user instanceof User) {
-            // the user must be logged in; if not, deny access
-            return false;
-        }
-
-        $Person = $subject;
-
         /**
          * If the User is an Administrator, let them proceed as they desire.
          */
@@ -65,13 +58,13 @@ class PersonVoter extends TavroVoter
 
         switch ($attribute) {
             case self::CREATE:
-                return $this->canCreate($Person, $user);
+                return $this->canCreate($subject, $user);
             case self::VIEW:
-                return $this->canView($Person, $user);
+                return $this->canView($subject, $user);
             case self::PATCH:
-                return $this->canPatch($Person, $user);
+                return $this->canPatch($subject, $user);
             case self::EDIT:
-                return $this->canEdit($Person, $user);
+                return $this->canEdit($subject, $user);
         }
 
         throw new \LogicException('This code should not be reached!');
@@ -85,7 +78,7 @@ class PersonVoter extends TavroVoter
      */
     private function canView(Person $person, User $user)
     {
-        return $user->getId() === $person->getUser()->getId();
+        return $this->checkUser($person->getUser(), $user);
     }
 
     /**
@@ -96,7 +89,7 @@ class PersonVoter extends TavroVoter
      */
     private function canCreate(Person $person, User $user)
     {
-        return $user->isAdmin();
+        return true;
     }
 
     /**
@@ -107,7 +100,7 @@ class PersonVoter extends TavroVoter
      */
     private function canEdit(Person $person, User $user)
     {
-        return $user->getId() === $person->getUser()->getId();
+        return $this->checkUser($person->getUser(), $user);
     }
 
     /**
@@ -118,7 +111,7 @@ class PersonVoter extends TavroVoter
      */
     private function canPatch(Person $person, User $user)
     {
-        return $user->getId() === $person->getUser()->getId();
+        return $this->checkUser($person->getUser(), $user);
     }
 
 }

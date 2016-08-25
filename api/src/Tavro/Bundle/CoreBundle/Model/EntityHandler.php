@@ -40,7 +40,7 @@ class EntityHandler implements EntityHandlerInterface
     public $entityClass;
     public $repository;
     public $formFactory;
-    public $encoderFactory;
+    public $encoder;
     public $tokenStorage;
     public $auth;
     public $validator;
@@ -63,7 +63,7 @@ class EntityHandler implements EntityHandlerInterface
 
     const ACCESS_DENIED_MESSAGE = 'You are not authorized to perform this action!';
 
-    public function __construct(ObjectManager $om, FormFactory $formFactory, Validator $validator, EncoderFactory $encoderFactory, TokenStorage $tokenStorage, AuthorizationChecker $auth, $amazon_s3_url, $entityClass)
+    public function __construct(ObjectManager $om, FormFactory $formFactory, Validator $validator, EncoderFactory $encoder, TokenStorage $tokenStorage, AuthorizationChecker $auth, $amazon_s3_url, $entityClass)
     {
         $this->om = $om;
         $this->entityClass = $entityClass;
@@ -71,7 +71,7 @@ class EntityHandler implements EntityHandlerInterface
 
         $this->formFactory = $formFactory;
         $this->validator = $validator;
-        $this->encoderFactory = $encoderFactory;
+        $this->encoder = $encoder;
         $this->tokenStorage = $tokenStorage;
         $this->auth = $auth;
 
@@ -87,8 +87,7 @@ class EntityHandler implements EntityHandlerInterface
 
     /**
      * Get an array of all Organizations this User should have access to.
-     * This includes Organizations they "own" as well as ones they are mere Users of.
-     *
+     * This includes Organizations they "own" as well as ones they are mere Users of
      */
     public function getMyOrganizations()
     {
@@ -461,11 +460,7 @@ class EntityHandler implements EntityHandlerInterface
     {
         try {
 
-            if(!$this->auth->isGranted('patch', $entity)) {
-                $message = sprintf('Unable to properly "patch" %s: %s', get_class($entity), $entity->__toString());
-                throw new ApiAccessDeniedException($message);
-            }
-
+            $this->auth->isGranted('patch', $entity);
             return $this->applyPatch($request, $entity, $parameters);
 
         }
@@ -507,10 +502,7 @@ class EntityHandler implements EntityHandlerInterface
      */
     public function processForm(Request $request, EntityInterface $entity, array $parameters, $method = self::HTTP_METHOD_POST)
     {
-
         try {
-
-            $this->om->getConnection()->beginTransaction();
 
             $this->validate($entity, $parameters);
 
@@ -531,36 +523,23 @@ class EntityHandler implements EntityHandlerInterface
             if ($form->isValid()) {
 
                 $entity = $form->getData();
-                $class = new \ReflectionClass($entity);
 
                 switch($method) {
 
                     case 'POST':
-                        if(!($this->auth->isGranted('create', $entity))) {
-                            $message = sprintf('You are not authorized to create a new %s.', $class->getShortName());
-                            throw new ApiAccessDeniedException($message);
-                        }
-                        break;
-
-                    case 'PATCH':
-                        if(!($this->auth->isGranted('edit', $entity))) {
-                            $message = sprintf('You are not authorized to update %s "%s"', $class->getShortName(), $entity->__toString());
-                            throw new ApiAccessDeniedException($message);
-                        }
+                        $this->auth->isGranted('create', $entity);
                         break;
 
                     case 'PUT':
-                        if(!($this->auth->isGranted('edit', $entity))) {
-                            $message = sprintf('You are not authorized to edit %s "%s"', $class->getShortName(), $entity->__toString());
-                            throw new ApiAccessDeniedException($message);
-                        }
+                        $this->auth->isGranted('edit', $entity);
+                        break;
+
+                    case 'PATCH':
+                        $this->auth->isGranted('patch', $entity);
                         break;
 
                     case 'DELETE':
-                        if (!($this->auth->isGranted('delete', $entity))) {
-                            $message = sprintf('You are not authorized to delete %s "%s"', $class->getShortName(), $entity->__toString());
-                            throw new ApiAccessDeniedException($message);
-                        }
+                        $this->auth->isGranted('delete', $entity);
                         break;
 
                 }

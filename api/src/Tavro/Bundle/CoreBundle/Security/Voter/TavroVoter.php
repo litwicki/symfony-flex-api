@@ -32,11 +32,6 @@ class TavroVoter extends Voter
             return false;
         }
 
-        // only vote on Organization objects inside this voter
-        if (!$subject instanceof Organization) {
-            return false;
-        }
-
         return true;
     }
 
@@ -91,6 +86,25 @@ class TavroVoter extends Voter
         }
 
         return false;
+    }
+
+    /**
+     * @param \Tavro\Bundle\CoreBundle\Entity\User $newUser
+     * @param \Tavro\Bundle\CoreBundle\Entity\User $user
+     *
+     * @return bool
+     */
+    public function checkUser(User $newUser, User $user)
+    {
+        if($user->isAdmin()) {
+            return true;
+        }
+        elseif($user->getId() === $newUser->getId()) {
+            return true;
+        }
+        else {
+            return false;
+        }
     }
 
 }

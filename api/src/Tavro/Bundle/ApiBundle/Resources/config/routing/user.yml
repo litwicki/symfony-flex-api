@@ -13,8 +13,8 @@ api_get_all_users:
     requirements:
         _format:  json|xml
 
-api_post_user:
-    path:  /users.{_format}
+api_user_signup:
+    path:  /signup.{_format}
     defaults: { _controller: TavroApiBundle:User:post, _format: json, entity: "users" }
     methods: POST
     requirements:

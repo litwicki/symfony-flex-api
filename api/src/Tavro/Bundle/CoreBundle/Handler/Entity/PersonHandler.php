@@ -26,5 +26,5 @@ use Symfony\Component\HttpFoundation\Request;
  */
 class PersonHandler extends EntityHandler
 {
-
+    const ACCESS_DENIED_MESSAGE = 'You are not authorized to manage this Person.';
 }

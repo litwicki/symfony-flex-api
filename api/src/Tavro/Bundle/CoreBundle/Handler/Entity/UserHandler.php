@@ -3,7 +3,9 @@
 namespace Tavro\Bundle\CoreBundle\Handler\Entity;
 
 use Rhumsaa\Uuid\Uuid;
+use Symfony\Component\EventDispatcher\EventDispatcher;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
+use Tavro\Bundle\CoreBundle\Event\TavroUser\UserSignupEvent;
 use Tavro\Bundle\CoreBundle\Event\UserRegisterEvent;
 use Tavro\Bundle\CoreBundle\Exception\Password\PasswordLengthException;
 use Symfony\Component\PropertyAccess\Exception\InvalidPropertyPathException;
@@ -79,6 +81,10 @@ class UserHandler extends EntityHandler
             $entity = $this->processForm($request, $this->createEntity(), $parameters, self::HTTP_METHOD_POST);
 
             $this->setUserRoles($entity, $roles);
+
+            $event = new UserSignupEvent($entity);
+            $dispatcher = new EventDispatcher();
+            $dispatcher->dispatch(UserSignupEvent::NAME, $event);
 
             return $entity;
 
@@ -671,7 +677,8 @@ class UserHandler extends EntityHandler
 
             }
 
-        } catch (\Exception $e) {
+        }
+        catch (\Exception $e) {
             throw $e;
         }
     }
