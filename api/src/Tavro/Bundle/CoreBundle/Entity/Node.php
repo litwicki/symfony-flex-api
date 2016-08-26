@@ -28,13 +28,13 @@ class Node extends OrganizationEntity implements OrganizationEntityInterface
 {
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=false)
+     * @ORM\Column(type="string", length=255, nullable=FALSE)
      * @Groups({"api", "tavro", "simple"})
      */
     protected $title;
 
     /**
-     * @ORM\Column(type="string", nullable=true)
+     * @ORM\Column(type="string", nullable=TRUE)
      * @Assert\Choice(
      *      choices = { "guide", "node", "page", "article", "wiki"},
      *      message = "Choose a valid node type."
@@ -44,26 +44,26 @@ class Node extends OrganizationEntity implements OrganizationEntityInterface
     protected $type;
 
     /**
-     * @ORM\Column(type="string", length=8000, nullable=true)
+     * @ORM\Column(type="string", length=8000, nullable=TRUE)
      * @Groups({"api", "tavro", "simple"})
      */
     protected $body;
 
     /**
-     * @ORM\Column(type="datetime", length=1000, nullable=true)
+     * @ORM\Column(type="datetime", length=1000, nullable=TRUE)
      * @Groups({"api", "tavro", "simple"})
      */
     protected $display_date;
 
     /**
-     * @ORM\Column(type="integer", nullable=true, options={"default" = 0})
+     * @ORM\Column(type="integer", nullable=TRUE, options={"default" = 0})
      * @Groups({"api", "tavro", "simple"})
      */
     protected $views;
 
     /**
      * @ORM\ManyToOne(targetEntity="Tavro\Bundle\CoreBundle\Entity\User", inversedBy="nodes")
-     * @ORM\JoinColumn(name="user_id", referencedColumnName="id", nullable=false)
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id", nullable=FALSE)
      * @Groups({"api", "tavro", "simple"})
      * @MaxDepth(1)
      */

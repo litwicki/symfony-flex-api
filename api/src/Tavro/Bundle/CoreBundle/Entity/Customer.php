@@ -35,14 +35,14 @@ class Customer extends OrganizationEntity implements OrganizationEntityInterface
 {
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="string", length=255, nullable=TRUE)
      * @Groups({"api", "tavro", "simple", "typeahead"})
      */
     protected $job_title;
 
     /**
      * @ORM\ManyToOne(targetEntity="Tavro\Bundle\CoreBundle\Entity\User")
-     * @ORM\JoinColumn(name="user_id", referencedColumnName="id", nullable=true)
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id", nullable=TRUE)
      * @Groups({"api", "tavro", "simple"})
      * @MaxDepth(1)
      */
@@ -50,7 +50,7 @@ class Customer extends OrganizationEntity implements OrganizationEntityInterface
 
     /**
      * @ORM\ManyToOne(targetEntity="Tavro\Bundle\CoreBundle\Entity\Person")
-     * @ORM\JoinColumn(name="person_id", referencedColumnName="id", nullable=false)
+     * @ORM\JoinColumn(name="person_id", referencedColumnName="id", nullable=FALSE)
      * @Groups({"api", "tavro", "simple"})
      * @MaxDepth(1)
      */

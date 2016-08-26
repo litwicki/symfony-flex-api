@@ -25,17 +25,17 @@ class OrganizationVoter extends TavroVoter
      */
     protected function supports($attribute, $subject)
     {
-        // if the attribute isn't one we support, return false
+        // if the attribute isn't one we support, return FALSE
         if (!in_array($attribute, array(self::VIEW, self::EDIT, self::CREATE, self::PATCH))) {
-            return false;
+            return FALSE;
         }
 
         // only vote on Organization objects inside this voter
         if (!$subject instanceof Organization) {
-            return false;
+            return FALSE;
         }
 
-        return true;
+        return TRUE;
     }
 
     /**
@@ -51,7 +51,7 @@ class OrganizationVoter extends TavroVoter
 
         if (!$user instanceof User) {
             // the user must be logged in; if not, deny access
-            return false;
+            return FALSE;
         }
 
         $organization = $subject;
@@ -60,7 +60,7 @@ class OrganizationVoter extends TavroVoter
          * If the User is an Administrator, let them proceed as they desire.
          */
         if ($this->decisionManager->decide($token, array('ROLE_ADMIN'))) {
-            return true;
+            return TRUE;
         }
 
         switch ($attribute) {

@@ -26,14 +26,14 @@ class NodeComment extends Entity implements EntityInterface
 {
     /**
      * @ORM\ManyToOne(targetEntity="Tavro\Bundle\CoreBundle\Entity\Comment", inversedBy="node_comments")
-     * @ORM\JoinColumn(name="comment_id", referencedColumnName="id", nullable=false)
+     * @ORM\JoinColumn(name="comment_id", referencedColumnName="id", nullable=FALSE)
      * @Groups({"api", "tavro"})
      */
     protected $comment;
 
     /**
      * @ORM\ManyToOne(targetEntity="Tavro\Bundle\CoreBundle\Entity\Node", inversedBy="node_comments")
-     * @ORM\JoinColumn(name="node_id", referencedColumnName="id", nullable=false)
+     * @ORM\JoinColumn(name="node_id", referencedColumnName="id", nullable=FALSE)
      */
     protected $node;
 

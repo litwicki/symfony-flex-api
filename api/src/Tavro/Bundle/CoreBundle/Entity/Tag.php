@@ -27,14 +27,14 @@ use Tavro\Bundle\CoreBundle\Model\OrganizationEntityInterface;
 class Tag extends OrganizationEntity implements OrganizationEntityInterface
 {
     /**
-     * @ORM\Column(type="string", length=500, nullable=false)
+     * @ORM\Column(type="string", length=500, nullable=FALSE)
      * @Groups({"api", "tavro", "simple", "typeahead"})
      */
     protected $tag;
 
     /**
      * @ORM\ManyToOne(targetEntity="Tavro\Bundle\CoreBundle\Entity\Organization", inversedBy="tags")
-     * @ORM\JoinColumn(name="organization_id", referencedColumnName="id", nullable=false)
+     * @ORM\JoinColumn(name="organization_id", referencedColumnName="id", nullable=FALSE)
      */
     protected $organization;
 

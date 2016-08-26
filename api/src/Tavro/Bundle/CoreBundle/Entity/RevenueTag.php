@@ -26,14 +26,14 @@ class RevenueTag extends Entity implements EntityInterface
 {
     /**
      * @ORM\ManyToOne(targetEntity="Tavro\Bundle\CoreBundle\Entity\Tag", inversedBy="revenue_tags")
-     * @ORM\JoinColumn(name="tag_id", referencedColumnName="id", nullable=false)
+     * @ORM\JoinColumn(name="tag_id", referencedColumnName="id", nullable=FALSE)
      * @Groups({"api", "tavro"})
      */
     protected $tag;
 
     /**
      * @ORM\ManyToOne(targetEntity="Tavro\Bundle\CoreBundle\Entity\Revenue", inversedBy="revenue_tags")
-     * @ORM\JoinColumn(name="revenue_id", referencedColumnName="id", nullable=false)
+     * @ORM\JoinColumn(name="revenue_id", referencedColumnName="id", nullable=FALSE)
      */
     protected $revenue;
 

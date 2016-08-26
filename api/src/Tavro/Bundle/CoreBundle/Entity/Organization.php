@@ -27,14 +27,14 @@ use Tavro\Bundle\CoreBundle\Model\EntityInterface;
 class Organization extends Entity implements EntityInterface
 {
     /**
-     * @ORM\Column(type="string", length=500, nullable=false)
+     * @ORM\Column(type="string", length=500, nullable=FALSE)
      * @Groups({"api", "tavro", "typeahead"})
      */
     protected $title;
 
     /**
      * @ORM\ManyToOne(targetEntity="Tavro\Bundle\CoreBundle\Entity\User", inversedBy="organizations")
-     * @ORM\JoinColumn(name="user_id", referencedColumnName="id", nullable=false)
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id", nullable=FALSE)
      * @Groups({"api", "tavro"})
      * @MaxDepth(2)
      */

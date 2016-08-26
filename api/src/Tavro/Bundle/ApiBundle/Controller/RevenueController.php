@@ -38,7 +38,7 @@ class RevenueController extends ApiController
     {
         try {
 
-            $data = json_decode($request->getContent(), true);
+            $data = json_decode($request->getContent(), TRUE);
 
             $handler = $this->getHandler('comments');
             $comment = $handler->post($request, $data);

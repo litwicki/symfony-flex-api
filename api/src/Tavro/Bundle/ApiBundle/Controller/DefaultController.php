@@ -65,11 +65,11 @@ class DefaultController extends Controller
         switch($format) {
             case 'xml':
                 $string = $this->get('tavro_serializer')->serialize($object, $format, $group);
-                return json_decode(json_encode((array) simplexml_load_string($string)), true);
+                return json_decode(json_encode((array) simplexml_load_string($string)), TRUE);
                 break;
             case 'json':
             default:
-                return json_decode($this->get('tavro_serializer')->serialize($object, $format, $group), true);
+                return json_decode($this->get('tavro_serializer')->serialize($object, $format, $group), TRUE);
                 break;
         }
 
@@ -261,7 +261,7 @@ class DefaultController extends Controller
     {
         try {
 
-            $data = json_decode($request->getContent(), true);
+            $data = json_decode($request->getContent(), TRUE);
             $handler = $this->getHandler($entity);
             $newEntity = $handler->post($request, $data);
 
@@ -299,7 +299,7 @@ class DefaultController extends Controller
     {
         try {
 
-            $post = json_decode($request->getContent(), true);
+            $post = json_decode($request->getContent(), TRUE);
 
             $handler = $this->getHandler($entity);
 
@@ -346,7 +346,7 @@ class DefaultController extends Controller
     {
         try {
 
-            $patch = json_decode($request->getContent(), true);
+            $patch = json_decode($request->getContent(), TRUE);
             $handler = $this->getHandler($entity);
             $object = $handler->find($id);
 

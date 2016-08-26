@@ -23,7 +23,7 @@ use Tavro\Bundle\CoreBundle\Model\OrganizationEntityInterface;
 class Variable extends OrganizationEntity implements OrganizationEntityInterface
 {
     /**
-     * @ORM\Column(type="string", length=100, nullable=false)
+     * @ORM\Column(type="string", length=100, nullable=FALSE)
      */
     protected $name;
 

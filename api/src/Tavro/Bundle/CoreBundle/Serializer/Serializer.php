@@ -43,7 +43,7 @@ class Serializer
             $format,
             SerializationContext::create()
                 ->setGroups(array($group))
-                ->setSerializeNull(true)
+                ->setSerializeNull(TRUE)
                 ->enableMaxDepthChecks()
             );
 

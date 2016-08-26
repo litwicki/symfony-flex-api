@@ -34,47 +34,47 @@ use JMS\Serializer\Annotation\MaxDepth;
 class User extends Entity implements UserInterface, \Serializable
 {
     /**
-     * @ORM\Column(type="string", length=255, unique=true, nullable=false)
+     * @ORM\Column(type="string", length=255, unique=TRUE, nullable=FALSE)
      * @Groups({"api", "tavro", "simple", "typeahead"})
      */
     protected $username;
 
     /**
      * @TavroAssert\PasswordComplexity
-     * @ORM\Column(type="string", length=255, nullable=false)
+     * @ORM\Column(type="string", length=255, nullable=FALSE)
      */
     protected $password;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="string", length=255, nullable=TRUE)
      */
     protected $password_token;
 
     /**
-     * @ORM\Column(type="datetime", nullable=true)
+     * @ORM\Column(type="datetime", nullable=TRUE)
      */
     protected $password_token_expire;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=false)
+     * @ORM\Column(type="string", length=255, nullable=FALSE)
      */
     protected $salt;
 
     /**
-     * @ORM\Column(type="string", length=500, nullable=true)
+     * @ORM\Column(type="string", length=500, nullable=TRUE)
      * @Groups({"tavro"})
      */
     protected $signature;
 
     /**
-     * @ORM\Column(type="datetime", nullable=true)
+     * @ORM\Column(type="datetime", nullable=TRUE)
      * @Groups({"tavro"})
      * @MaxDepth(1)
      */
     protected $last_online_date;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=false)
+     * @ORM\Column(type="string", length=255, nullable=FALSE)
      * @Groups({"tavro"})
      * @Accessor(getter="getApiKey", setter="setApiKey")
      * @MaxDepth(1)
@@ -82,7 +82,7 @@ class User extends Entity implements UserInterface, \Serializable
     protected $api_key;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=false)
+     * @ORM\Column(type="string", length=255, nullable=FALSE)
      * @Groups({"tavro"})
      * @Accessor(getter="getApiPassword", setter="setApiPassword")
      * @MaxDepth(1)
@@ -90,27 +90,27 @@ class User extends Entity implements UserInterface, \Serializable
     protected $api_password;
 
     /**
-     * @ORM\Column(type="boolean", nullable=false)
+     * @ORM\Column(type="boolean", nullable=FALSE)
      * @MaxDepth(1)
      */
     protected $api_enabled;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=false)
+     * @ORM\Column(type="string", length=255, nullable=FALSE)
      * @Groups({"tavro"})
      * @Accessor(getter="getGuid", setter="setGuid")
      */
     protected $guid;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="string", length=255, nullable=TRUE)
      * @Groups({"tavro"})
      * @MaxDepth(1)
      */
     protected $user_ip;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="string", length=255, nullable=TRUE)
      * @Groups({"tavro"})
      * @MaxDepth(1)
      */
@@ -138,8 +138,8 @@ class User extends Entity implements UserInterface, \Serializable
      * @ORM\ManyToMany(targetEntity="Tavro\Bundle\CoreBundle\Entity\Role", inversedBy="users")
      * @ORM\JoinTable(
      *     name="tavro_user_role",
-     *     joinColumns={@ORM\JoinColumn(name="user_id", referencedColumnName="id", nullable=false)},
-     *     inverseJoinColumns={@ORM\JoinColumn(name="role_id", referencedColumnName="id", nullable=false)}
+     *     joinColumns={@ORM\JoinColumn(name="user_id", referencedColumnName="id", nullable=FALSE)},
+     *     inverseJoinColumns={@ORM\JoinColumn(name="role_id", referencedColumnName="id", nullable=FALSE)}
      * )
      * @Type("array<string>")
      * @Accessor(getter="getSerializedRoles")
@@ -160,7 +160,7 @@ class User extends Entity implements UserInterface, \Serializable
 
     /**
      * @ORM\ManyToOne(targetEntity="Tavro\Bundle\CoreBundle\Entity\Image")
-     * @ORM\JoinColumn(name="avatar_image_id", referencedColumnName="id", nullable=true)
+     * @ORM\JoinColumn(name="avatar_image_id", referencedColumnName="id", nullable=TRUE)
      * @Groups({"api", "tavro", "simple"})
      * @MaxDepth(1)
      */
@@ -168,7 +168,7 @@ class User extends Entity implements UserInterface, \Serializable
 
     /**
      * @ORM\OneToOne(targetEntity="Tavro\Bundle\CoreBundle\Entity\UserQuickbooks")
-     * @ORM\JoinColumn(name="user_quickbooks_id", referencedColumnName="id", nullable=true)
+     * @ORM\JoinColumn(name="user_quickbooks_id", referencedColumnName="id", nullable=TRUE)
      * @Groups({"tavro"})
      * @MaxDepth(1)
      */
@@ -176,7 +176,7 @@ class User extends Entity implements UserInterface, \Serializable
 
     /**
      * @ORM\ManyToOne(targetEntity="Tavro\Bundle\CoreBundle\Entity\Person")
-     * @ORM\JoinColumn(name="person_id", referencedColumnName="id", nullable=true)
+     * @ORM\JoinColumn(name="person_id", referencedColumnName="id", nullable=TRUE)
      * @Groups({"api", "tavro", "simple"})
      * @MaxDepth(1)
      */
@@ -203,7 +203,7 @@ class User extends Entity implements UserInterface, \Serializable
         $this->resetApiKey();
         $this->resetApiPassword();
 
-        $this->api_enabled = false;
+        $this->api_enabled = FALSE;
         $this->status = self::STATUS_PENDING;
 
     }
@@ -782,10 +782,10 @@ class User extends Entity implements UserInterface, \Serializable
     public function passwordTokenExpired() {
 
         if( $this->getPasswordTokenExpire() < new \DateTime(date('Y-m-d', time())) ) {
-            return true;
+            return TRUE;
         }
 
-        return false;
+        return FALSE;
 
     }
 
@@ -844,10 +844,10 @@ class User extends Entity implements UserInterface, \Serializable
     {
         foreach($this->roles as $role) {
             if($role->getRole() === 'ROLE_ADMIN') {
-                return true;
+                return TRUE;
             }
         }
-        return false;
+        return FALSE;
     }
 
     public function isAdmin()
@@ -870,10 +870,10 @@ class User extends Entity implements UserInterface, \Serializable
     {
         foreach($this->roles as $role) {
             if($role->getRole() === 'ROLE_DEVELOPER') {
-                return true;
+                return TRUE;
             }
         }
-        return false;
+        return FALSE;
     }
 
     /**

@@ -24,17 +24,17 @@ class UserVoter extends TavroVoter
      */
     protected function supports($attribute, $subject)
     {
-        // if the attribute isn't one we support, return false
+        // if the attribute isn't one we support, return FALSE
         if (!in_array($attribute, array(self::VIEW, self::EDIT, self::CREATE, self::PATCH))) {
-            return false;
+            return FALSE;
         }
 
         // only vote on User objects inside this voter
         if (!$subject instanceof User) {
-            return false;
+            return FALSE;
         }
 
-        return true;
+        return TRUE;
     }
 
     /**
@@ -50,14 +50,14 @@ class UserVoter extends TavroVoter
 
         if (!$user instanceof User) {
             // the user must be logged in; if not, deny access
-            return false;
+            return FALSE;
         }
 
         /**
          * If the User is an Administrator, let them proceed as they desire.
          */
         if ($this->decisionManager->decide($token, array('ROLE_ADMIN'))) {
-            return true;
+            return TRUE;
         }
 
         switch ($attribute) {
@@ -76,64 +76,59 @@ class UserVoter extends TavroVoter
 
     /**
      * @param \Tavro\Bundle\CoreBundle\Entity\User $newUser
-     * @param \Tavro\Bundle\CoreBundle\Entity\User $user
-     *
+     * @param \Symfony\Component\Security\Core\Authentication\Token\TokenInterface $token
      * @return bool
      */
-    private function canView(User $newUser, User $user)
+    private function canView(User $newUser, TokenInterface $token)
     {
-        return $this->checkUser($newUser, $user);
+        return $this->checkUser($newUser, $token);
     }
 
     /**
      * @param \Tavro\Bundle\CoreBundle\Entity\User $newUser
-     * @param \Tavro\Bundle\CoreBundle\Entity\User $user
-     *
+     * @param \Symfony\Component\Security\Core\Authentication\Token\TokenInterface $token
      * @return bool
      */
-    private function canCreate(User $newUser, User $user)
+    private function canCreate(User $newUser, TokenInterface $token)
     {
-        return true;
+        return TRUE;
     }
 
     /**
      * @param \Tavro\Bundle\CoreBundle\Entity\User $newUser
-     * @param \Tavro\Bundle\CoreBundle\Entity\User $user
-     *
+     * @param \Symfony\Component\Security\Core\Authentication\Token\TokenInterface $token
      * @return bool
      */
-    private function canEdit(User $newUser, User $user)
+    private function canEdit(User $newUser, TokenInterface $token)
     {
-        return $this->checkUser($newUser, $user);
+        return $this->checkUser($newUser, $token);
     }
 
     /**
      * @param \Tavro\Bundle\CoreBundle\Entity\User $newUser
-     * @param \Tavro\Bundle\CoreBundle\Entity\User $user
-     *
+     * @param \Symfony\Component\Security\Core\Authentication\Token\TokenInterface $token
      * @return bool
      */
-    private function canPatch(User $newUser, User $user)
+    private function canPatch(User $newUser, TokenInterface $token)
     {
-        return $this->checkUser($newUser, $user);
+        return $this->checkUser($newUser, $token);
     }
 
     /**
      * @param \Tavro\Bundle\CoreBundle\Entity\User $newUser
-     * @param \Tavro\Bundle\CoreBundle\Entity\User $user
-     *
+     * @param \Symfony\Component\Security\Core\Authentication\Token\TokenInterface $token
      * @return bool
      */
-    public function checkUser(User $newUser, User $user)
+    public function checkUser(User $newUser, TokenInterface $token)
     {
-        if($user->isAdmin()) {
-            return true;
+        if ($this->decisionManager->decide($token, array('ROLE_ADMIN'))) {
+            return TRUE;
         }
-        elseif($user->getId() === $newUser->getId()) {
-            return true;
+        elseif($token->getUser()->getId() === $newUser->getId()) {
+            return TRUE;
         }
         else {
-            return false;
+            return FALSE;
         }
     }
 

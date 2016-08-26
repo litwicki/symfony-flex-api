@@ -64,7 +64,7 @@ class Nodes extends AbstractFixture implements OrderedFixtureInterface, Containe
     public function getCities($state)
     {
         $json = file_get_contents(sprintf('http://api.sba.gov/geodata/city_links_for_state_of/%s.json', $state));
-        $data = json_decode($json, true);
+        $data = json_decode($json, TRUE);
         $cities = array();
         foreach($data as $item) {
             $cities[] = $item['name'];

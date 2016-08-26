@@ -25,13 +25,13 @@ class NodeRead extends Entity implements EntityInterface
 
     /**
      * @ORM\ManyToOne(targetEntity="Tavro\Bundle\CoreBundle\Entity\User", inversedBy="nodes_read")
-     * @ORM\JoinColumn(name="user_id", referencedColumnName="id", nullable=false)
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id", nullable=FALSE)
      */
     protected $user;
 
     /**
      * @ORM\ManyToOne(targetEntity="Tavro\Bundle\CoreBundle\Entity\Node", inversedBy="nodes_read",)
-     * @ORM\JoinColumn(name="node_id", referencedColumnName="id", nullable=false)
+     * @ORM\JoinColumn(name="node_id", referencedColumnName="id", nullable=FALSE)
      */
     protected $node;
 

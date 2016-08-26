@@ -73,7 +73,7 @@ class JwtAuthenticator extends AbstractGuardAuthenticator
 
     public function checkCredentials($credentials, UserInterface $user)
     {
-        return true;
+        return TRUE;
     }
 
     public function onAuthenticationFailure(Request $request, AuthenticationException $exception)
@@ -88,7 +88,7 @@ class JwtAuthenticator extends AbstractGuardAuthenticator
 
     public function supportsRememberMe()
     {
-        return false;
+        return FALSE;
     }
 
 }

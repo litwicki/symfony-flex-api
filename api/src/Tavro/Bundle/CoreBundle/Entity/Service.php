@@ -27,19 +27,19 @@ use Tavro\Bundle\CoreBundle\Model\EntityInterface;
 class Service extends Entity
 {
     /**
-     * @ORM\Column(type="string", length=8000, nullable=true)
+     * @ORM\Column(type="string", length=8000, nullable=TRUE)
      * @Groups({"api", "tavro", "simple"})
      */
     protected $body;
 
     /**
-     * @ORM\Column(type="float", nullable=false, options={"default" = 0})
+     * @ORM\Column(type="float", nullable=FALSE, options={"default" = 0})
      * @Groups({"api", "tavro", "simple"})
      */
     protected $price;
 
     /**
-     * @ORM\Column(type="string", nullable=false)
+     * @ORM\Column(type="string", nullable=FALSE)
      * @Assert\Choice(
      *      choices = {"hour", "unit", "retainer"},
      *      message = "Choose a valid service type."
@@ -50,7 +50,7 @@ class Service extends Entity
 
     /**
      * @ORM\ManyToOne(targetEntity="Tavro\Bundle\CoreBundle\Entity\ServiceCategory", inversedBy="services")
-     * @ORM\JoinColumn(name="category_id", referencedColumnName="id", nullable=false)
+     * @ORM\JoinColumn(name="category_id", referencedColumnName="id", nullable=FALSE)
      * @Groups({"api", "tavro", "simple"})
      * @MaxDepth(3)
      */
@@ -58,7 +58,7 @@ class Service extends Entity
 
     /**
      * @ORM\ManyToOne(targetEntity="Tavro\Bundle\CoreBundle\Entity\Organization", inversedBy="services")
-     * @ORM\JoinColumn(name="organization_id", referencedColumnName="id", nullable=false)
+     * @ORM\JoinColumn(name="organization_id", referencedColumnName="id", nullable=FALSE)
      * @Groups({"api", "tavro", "simple"})
      * @MaxDepth(3)
      */

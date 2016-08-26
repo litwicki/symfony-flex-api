@@ -40,7 +40,7 @@ class TavroMailer implements ContainerAwareInterface
      *          name string
      *          url string
      *          email string
-     *          html true|false
+     *          html true|FALSE
      *
      *  @throws \Exception
      *  @return boolean

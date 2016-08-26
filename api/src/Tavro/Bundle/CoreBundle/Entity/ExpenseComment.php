@@ -26,14 +26,14 @@ class ExpenseComment extends Entity implements EntityInterface
 {
     /**
      * @ORM\ManyToOne(targetEntity="Tavro\Bundle\CoreBundle\Entity\Comment", inversedBy="expense_comments")
-     * @ORM\JoinColumn(name="comment_id", referencedColumnName="id", nullable=false)
+     * @ORM\JoinColumn(name="comment_id", referencedColumnName="id", nullable=FALSE)
      * @Groups({"api", "tavro"})
      */
     protected $comment;
 
     /**
      * @ORM\ManyToOne(targetEntity="Tavro\Bundle\CoreBundle\Entity\Expense", inversedBy="expense_comments")
-     * @ORM\JoinColumn(name="expense_id", referencedColumnName="id", nullable=false)
+     * @ORM\JoinColumn(name="expense_id", referencedColumnName="id", nullable=FALSE)
      */
     protected $expense;
 

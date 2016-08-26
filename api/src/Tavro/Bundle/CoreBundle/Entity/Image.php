@@ -28,55 +28,55 @@ use Tavro\Bundle\CoreBundle\Model\S3EntityInterface;
 class Image extends Entity implements S3EntityInterface
 {
     /**
-     * @ORM\Column(type="string", length=500, nullable=false)
+     * @ORM\Column(type="string", length=500, nullable=FALSE)
      * @Groups({"api", "tavro"})
      */
     protected $aws_url;
 
     /**
-     * @ORM\Column(type="string", length=32, nullable=false)
+     * @ORM\Column(type="string", length=32, nullable=FALSE)
      * @Groups({"tavro"})
      */
     protected $bucket;
 
     /**
-     * @ORM\Column(type="string", length=32, nullable=false)
+     * @ORM\Column(type="string", length=32, nullable=FALSE)
      * @Groups({"tavro"})
      */
     protected $directory;
 
     /**
-     * @ORM\Column(type="string", length=500, nullable=false)
+     * @ORM\Column(type="string", length=500, nullable=FALSE)
      * @Groups({"api", "tavro", "simple"})
      */
     protected $aws_key;
 
     /**
-     * @ORM\Column(type="string", length=500, nullable=false)
+     * @ORM\Column(type="string", length=500, nullable=FALSE)
      * @Groups({"api", "tavro", "simple"})
      */
     protected $original_filename;
 
     /**
-     * @ORM\Column(type="string", length=500, nullable=false)
+     * @ORM\Column(type="string", length=500, nullable=FALSE)
      * @Groups({"api", "tavro"})
      */
     protected $mime_type;
 
     /**
-     * @ORM\Column(type="integer", nullable=false)
+     * @ORM\Column(type="integer", nullable=FALSE)
      * @Groups({"api", "tavro"})
      */
     protected $filesize;
 
     /**
-     * @ORM\Column(type="integer", nullable=false)
+     * @ORM\Column(type="integer", nullable=FALSE)
      * @Groups({"api", "tavro"})
      */
     protected $height;
 
     /**
-     * @ORM\Column(type="integer", nullable=false)
+     * @ORM\Column(type="integer", nullable=FALSE)
      * @Groups({"api", "tavro"})
      */
     protected $width;

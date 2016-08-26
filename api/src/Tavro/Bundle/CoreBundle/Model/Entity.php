@@ -40,13 +40,13 @@ class Entity implements EntityInterface
     protected $body;
 
     /**
-     * @ORM\Column(type="integer", nullable=false, options={"default" = 1})
+     * @ORM\Column(type="integer", nullable=FALSE, options={"default" = 1})
      * @Groups({"api", "tavro"})
      */
     protected $status = self::STATUS_ENABLED;
 
     /**
-     * @ORM\Column(type="datetime", length=1000, nullable=false)
+     * @ORM\Column(type="datetime", length=1000, nullable=FALSE)
      * @Groups({"api", "tavro"})
      */
     protected $create_date;

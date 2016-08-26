@@ -25,17 +25,17 @@ class PersonVoter extends TavroVoter
      */
     protected function supports($attribute, $subject)
     {
-        // if the attribute isn't one we support, return false
+        // if the attribute isn't one we support, return FALSE
         if (!in_array($attribute, array(self::VIEW, self::EDIT, self::CREATE, self::PATCH))) {
-            return false;
+            return FALSE;
         }
 
         // only vote on Person objects inside this voter
         if (!$subject instanceof Person) {
-            return false;
+            return FALSE;
         }
 
-        return true;
+        return TRUE;
     }
 
     /**
@@ -53,7 +53,7 @@ class PersonVoter extends TavroVoter
          * If the User is an Administrator, let them proceed as they desire.
          */
         if ($this->decisionManager->decide($token, array('ROLE_ADMIN'))) {
-            return true;
+            return TRUE;
         }
 
         switch ($attribute) {
@@ -89,7 +89,7 @@ class PersonVoter extends TavroVoter
      */
     private function canCreate(Person $person, User $user)
     {
-        return true;
+        return TRUE;
     }
 
     /**
