@@ -161,10 +161,8 @@ class CommentVoter extends TavroVoter
         $nodeComments = $comment->getNodeComments();
         if($nodeComments->isEmpty()) {
             foreach($nodeComments as $nc) {
-                foreach($userOrganizations as $org) {
-                    if($this->checkOrganization($nc->getNode()->getOrganization(), $org)) {
-                        return TRUE;
-                    }
+                if($this->checkOrganization($nc->getNode()->getOrganization(), $token->getUser())) {
+                    return TRUE;
                 }
             }
         }
@@ -172,13 +170,11 @@ class CommentVoter extends TavroVoter
         /**
          * Is this an Expense Comment?
          */
-        $expenseComments = $comment->getNodeComments();
+        $expenseComments = $comment->getExpenseComments();
         if($expenseComments->isEmpty()) {
-            foreach($expenseComments as $ec) {
-                foreach($userOrganizations as $org) {
-                    if($this->checkOrganization($ec->getExpense()->getOrganization(), $org)) {
-                        return TRUE;
-                    }
+            foreach($nodeComments as $nc) {
+                if($this->checkOrganization($nc->getExpense()->getOrganization(), $token->getUser())) {
+                    return TRUE;
                 }
             }
         }
@@ -186,12 +182,12 @@ class CommentVoter extends TavroVoter
         /**
          * Is this a Revenue Comment?
          */
-        $revenueComments = $comment->getNodeComments();
+        $revenueComments = $comment->getRevenueComments();
         if($revenueComments->isEmpty()) {
             foreach($revenueComments as $rc) {
-                foreach($userOrganizations as $org) {
-                    if($this->checkOrganization($rc->getRevenue()->getOrganization(), $org)) {
-                        return true;
+                foreach($nodeComments as $nc) {
+                    if($this->checkOrganization($nc->getRevenue()->getOrganization(), $token->getUser())) {
+                        return TRUE;
                     }
                 }
             }
@@ -200,27 +196,23 @@ class CommentVoter extends TavroVoter
         /**
          * Is this a Customer Comment?
          */
-        $customerComments = $comment->getNodeComments();
+        $customerComments = $comment->getCustomerComments();
         if($customerComments->isEmpty()) {
-            foreach($customerComments as $cc) {
-                foreach($userOrganizations as $org) {
-                    if($this->checkOrganization($cc->getCustomer()->getOrganization(), $org)) {
-                        return TRUE;
-                    }
+            foreach($customerComments as $nc) {
+                if($this->checkOrganization($nc->getCustomer()->getOrganization(), $token->getUser())) {
+                    return TRUE;
                 }
             }
         }
 
         /**
-         * Is this a Customer Comment?
+         * Is this a FundingRound Comment?
          */
-        $fundingRoundComments = $comment->getNodeComments();
+        $fundingRoundComments = $comment->getFundingRoundComments();
         if($fundingRoundComments->isEmpty()) {
-            foreach($fundingRoundComments as $fc) {
-                foreach($userOrganizations as $org) {
-                    if($this->checkOrganization($fc->getFundingRound()->getOrganization(), $org)) {
-                        return TRUE;
-                    }
+            foreach($fundingRoundComments as $nc) {
+                if($this->checkOrganization($nc->getFundingRound()->getOrganization(), $token->getUser())) {
+                    return TRUE;
                 }
             }
         }

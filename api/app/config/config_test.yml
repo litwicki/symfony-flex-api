@@ -6,6 +6,10 @@ framework:
         engines: ['twig']
     test: ~
 
+swiftmailer:
+    disable_delivery: false
+    delivery_address: jake.litwicki@gmail.com
+
 monolog:
     handlers:
         main:

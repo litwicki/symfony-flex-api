@@ -62,13 +62,13 @@ class UserVoter extends TavroVoter
 
         switch ($attribute) {
             case self::CREATE:
-                return $this->canCreate($subject, $user);
+                return $this->canCreate($subject, $token);
             case self::VIEW:
-                return $this->canView($subject, $user);
+                return $this->canView($subject, $token);
             case self::PATCH:
-                return $this->canPatch($subject, $user);
+                return $this->canPatch($subject, $token);
             case self::EDIT:
-                return $this->canEdit($subject, $user);
+                return $this->canEdit($subject, $token);
         }
 
         throw new \LogicException('This code should not be reached!');
