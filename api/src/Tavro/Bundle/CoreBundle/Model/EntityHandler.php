@@ -40,7 +40,7 @@ class EntityHandler implements EntityHandlerInterface
     public $entityClass;
     public $repository;
     public $formFactory;
-    public $encoder;
+    public $encoderFactory;
     public $tokenStorage;
     public $auth;
     public $validator;
@@ -63,7 +63,7 @@ class EntityHandler implements EntityHandlerInterface
 
     const ACCESS_DENIED_MESSAGE = 'You are not authorized to perform this action!';
 
-    public function __construct(ObjectManager $om, FormFactory $formFactory, Validator $validator, EncoderFactory $encoder, TokenStorage $tokenStorage, AuthorizationChecker $auth, $amazon_s3_url, $entityClass)
+    public function __construct(ObjectManager $om, FormFactory $formFactory, Validator $validator, EncoderFactory $encoderFactory, TokenStorage $tokenStorage, AuthorizationChecker $auth, $amazon_s3_url, $entityClass)
     {
         $this->om = $om;
         $this->entityClass = $entityClass;
@@ -71,7 +71,7 @@ class EntityHandler implements EntityHandlerInterface
 
         $this->formFactory = $formFactory;
         $this->validator = $validator;
-        $this->encoder = $encoder;
+        $this->encoderFactory = $encoderFactory;
         $this->tokenStorage = $tokenStorage;
         $this->auth = $auth;
 

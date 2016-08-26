@@ -18,6 +18,7 @@ use Doctrine\ORM\Tools\Pagination\Paginator;
 
 use Tavro\Bundle\CoreBundle\Entity\User;
 use Symfony\Component\HttpFoundation\Cookie;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 use Litwicki\Common\Common;
 use Tavro\Bundle\ApiBundle\Controller\DefaultController as ApiController;
@@ -82,19 +83,23 @@ class UserController extends ApiController
 
             $newUser = $userHandler->post($request, $userData);
 
-            $routeOptions = array(
-                'entity'  => $entity,
-                'id'      => $newUser->getId(),
-                'format'  => $_format,
-            );
-
             $em->commit();
 
             /**
-             * Finally, fire the UserRegisterEvent to handle post-signup logic
+             * New User created, send a generic message notifying them.
              */
+            $response = new JsonResponse();
+            $response->setData([
+                'code' => '200',
+                'message' => sprintf('Welcome to %s! User `%s` must be activated by email at `%s` to login.',
+                  $this->getContainer()->getParameter('app_name'),
+                  $newUser->__toString(),
+                  $newUser->getPerson()->getEmail()
+                )
+            ]);
 
-            return $this->forward('TavroApiBundle:Default:get', $routeOptions);
+            return $response;
+
         }
         catch(\Exception $e) {
             $em->getConnection()->rollBack();

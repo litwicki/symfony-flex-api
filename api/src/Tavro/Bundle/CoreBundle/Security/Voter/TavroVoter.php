@@ -90,12 +90,13 @@ class TavroVoter extends Voter
 
     /**
      * @param \Tavro\Bundle\CoreBundle\Entity\User $newUser
-     * @param \Tavro\Bundle\CoreBundle\Entity\User $user
-     *
+     * @param \Symfony\Component\Security\Core\Authentication\Token\TokenInterface $token
      * @return bool
      */
-    public function checkUser(User $newUser, User $user)
+    public function checkUser(User $newUser, TokenInterface $token)
     {
+        $user = $token->getUser();
+
         if($user->isAdmin()) {
             return TRUE;
         }

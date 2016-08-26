@@ -114,22 +114,4 @@ class UserVoter extends TavroVoter
         return $this->checkUser($newUser, $token);
     }
 
-    /**
-     * @param \Tavro\Bundle\CoreBundle\Entity\User $newUser
-     * @param \Symfony\Component\Security\Core\Authentication\Token\TokenInterface $token
-     * @return bool
-     */
-    public function checkUser(User $newUser, TokenInterface $token)
-    {
-        if ($this->decisionManager->decide($token, array('ROLE_ADMIN'))) {
-            return TRUE;
-        }
-        elseif($token->getUser()->getId() === $newUser->getId()) {
-            return TRUE;
-        }
-        else {
-            return FALSE;
-        }
-    }
-
 }
