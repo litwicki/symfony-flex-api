@@ -83,22 +83,16 @@ class UserController extends ApiController
 
             $newUser = $userHandler->post($request, $userData);
 
-            $em->commit();
-
             /**
              * New User created, send a generic message notifying them.
              */
-            $response = new JsonResponse();
-            $response->setData([
-                'code' => '200',
-                'message' => sprintf('Welcome to %s! User `%s` must be activated by email at `%s` to login.',
-                  $this->getContainer()->getParameter('app_name'),
-                  $newUser->__toString(),
-                  $newUser->getPerson()->getEmail()
-                )
-            ]);
+            $this->container->get('tavro.mailer')->sendActivation($newUser);
 
-            return $response;
+            $em->commit();
+
+            //send the response
+            $data = $this->serialize($newUser, $_format);
+            return $this->apiResponse($data, $_format);
 
         }
         catch(\Exception $e) {

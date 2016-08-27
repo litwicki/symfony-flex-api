@@ -110,10 +110,11 @@ class TavroMailer implements ContainerAwareInterface
     {
         try {
             $this->send([
-                'type' => 'activation',
+                'type' => 'welcome',
                 'html' => $html,
                 'subject' => sprintf('Welcome to %s', $this->container->getParameter('app_name')),
-                'recipients' => [$user->getEmail()]
+                'recipients' => [$user->getEmail()],
+                'user' => $user
             ]);
         }
         catch(\Exception $e) {
