@@ -29,6 +29,7 @@ Vagrant.configure(2) do |config|
   config.ssh.forward_agent = true
   # Configuration options for the VirtualBox provider.
   config.vm.provider :virtualbox do |v|
+    v.customize ["modifyvm", :id, "--name", appname + "-ubuntu-xenial64"]
     v.customize ["modifyvm", :id, "--memory", 1024]
     v.customize ["modifyvm", :id, "--cpus", 2]
     v.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
