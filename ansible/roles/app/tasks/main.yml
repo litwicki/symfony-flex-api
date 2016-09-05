@@ -1,3 +1,0 @@
----
-- name: regenerate docs
-  command: bash /var/www/{{appname}}/scripts/regenerate-docs.sh

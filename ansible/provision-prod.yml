@@ -6,7 +6,9 @@
     - vars/all.yml
   roles:
     - role: server
+    - role: composer
     - role: nginx
     - role: mysql
-    - role: app
     - role: phpunit
+    - role: vagrant_local
+    - role: tavro
