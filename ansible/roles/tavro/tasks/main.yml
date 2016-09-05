@@ -2,7 +2,7 @@
 - name: regenerate docs
   command: bash /var/www/{{appname}}/scripts/regenerate-docs.sh
 
-- name: Copy AWS json config..
+- name: Copy AWS json API config..
   template: src=aws.json.j2 dest=/var/www/{{appname}}/api/aws.json
 
 - name: Copy PHPUNIT config..

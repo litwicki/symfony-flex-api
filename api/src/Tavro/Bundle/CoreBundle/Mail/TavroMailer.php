@@ -1,6 +1,6 @@
 <?php
 
-namespace Tavro\Bundle\CoreBundle\Services;
+namespace Tavro\Bundle\CoreBundle\Mail;
 
 use Tavro\Bundle\CoreBundle\Entity\User;
 use Symfony\Component\HttpFoundation\Response;
