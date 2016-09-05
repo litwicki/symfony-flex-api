@@ -29,6 +29,7 @@ Vagrant.configure(2) do |config|
   config.ssh.forward_agent = true
   # Configuration options for the VirtualBox provider.
   config.vm.provider :virtualbox do |v|
+    v.customize ["modifyvm", :id, "--name", appname + "-ubuntu-xenial64"]
     v.customize ["modifyvm", :id, "--memory", 1024]
     v.customize ["modifyvm", :id, "--cpus", 2]
     v.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
@@ -54,9 +55,5 @@ Vagrant.configure(2) do |config|
           mysql_root_password: appname
       }
   end
-
-  # Install the pre-commit hook
-  config.vm.provision "shell", inline: "sudo cp git/pre-commit .git/hooks/pre-commit && sudo chmod 0777 .git/hooks/pre-commit"
-  config.vm.provision "shell", inline: "sudo cp api/phpunix.xml.dist api/phpunix.xml"
 
 end

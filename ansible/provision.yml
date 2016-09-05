@@ -11,4 +11,4 @@
     - role: mysql
     - role: phpunit
     - role: vagrant_local
-    - role: app
+    - role: tavro

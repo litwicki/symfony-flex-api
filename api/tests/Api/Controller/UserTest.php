@@ -46,7 +46,7 @@ class UserTest extends TavroTest
             'password' => 'Password1!'
         );
 
-        $url = 'http://api.tavro.dev/api/v1/users';
+        $url = 'http://api.tavro.dev/api/v1/signup';
 
         $client = new Client($url, array(
             'request.options' => array(
