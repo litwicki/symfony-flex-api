@@ -42,12 +42,12 @@ class WsseProvider implements AuthenticationProviderInterface
     {
         // Check created time is not in the future
         if (strtotime($created) > time()) {
-            return false;
+            return FALSE;
         }
 
         // Expire timestamp after 5 minutes
         if (time() - strtotime($created) > 300) {
-            return false;
+            return FALSE;
         }
 
         // Validate that the nonce is *not* used in the last 5 minutes
@@ -60,12 +60,12 @@ class WsseProvider implements AuthenticationProviderInterface
         }
         // If cache directory does not exist we create it
         if (!is_dir($this->cacheDir)) {
-            mkdir($this->cacheDir, 0777, true);
+            mkdir($this->cacheDir, 0777, TRUE);
         }
         file_put_contents($this->cacheDir.'/'.md5($nonce), time());
 
         // Validate Secret
-        $expected = base64_encode(sha1(base64_decode($nonce).$created.$secret, true));
+        $expected = base64_encode(sha1(base64_decode($nonce).$created.$secret, TRUE));
 
         return hash_equals($expected, $digest);
     }

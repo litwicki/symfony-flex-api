@@ -24,7 +24,7 @@ security:
             security: false
 
         api:
-            pattern:   ^/api/v1/(?!auth|signup)
+            pattern:   ^/api/v1/(?!signup)
             stateless: true
             guard:
                 authenticators:

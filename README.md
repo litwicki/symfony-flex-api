@@ -51,6 +51,12 @@ Workflow and useful 'stuff' for developing in Tavro.
 
     $ cd /var/www/tavro/api && phpunit
     
+### Setting up Keys for JWT
+
+    $ mkdir -p app/keys
+    $ openssl genrsa -out app/keys/private.pem -aes256 4096
+    $ openssl rsa -pubout -in app/keys/private.pem -out app/keys/public.pem
+    
 ### Testing JWT Token
 
     $ curl -X POST http://api.tavro.dev/api/v1/auth -d username=tavrobot -d password=Password1!

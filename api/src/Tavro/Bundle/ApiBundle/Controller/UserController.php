@@ -18,6 +18,7 @@ use Doctrine\ORM\Tools\Pagination\Paginator;
 
 use Tavro\Bundle\CoreBundle\Entity\User;
 use Symfony\Component\HttpFoundation\Cookie;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 use Litwicki\Common\Common;
 use Tavro\Bundle\ApiBundle\Controller\DefaultController as ApiController;
@@ -74,7 +75,7 @@ class UserController extends ApiController
             $userData = [
                 'person' => $newPerson->getId(),
                 'username' => isset($data['username']) ? $data['username'] : null,
-                'api_enabled' => isset($data['api_enabled']) ? $data['api_enabled'] : false,
+                'api_enabled' => isset($data['api_enabled']) ? $data['api_enabled'] : FALSE,
                 'signature' => isset($data['signature']) ? $data['signature'] : null,
                 'password' => isset($data['password']) ? $data['password'] : null,
                 'status' => isset($data['status']) ? $data['status'] : null,
@@ -82,19 +83,17 @@ class UserController extends ApiController
 
             $newUser = $userHandler->post($request, $userData);
 
-            $routeOptions = array(
-                'entity'  => $entity,
-                'id'      => $newUser->getId(),
-                'format'  => $_format,
-            );
+            /**
+             * New User created, send a generic message notifying them.
+             */
+            $this->container->get('tavro.mailer')->sendActivation($newUser);
 
             $em->commit();
 
-            /**
-             * Finally, fire the UserRegisterEvent to handle post-signup logic
-             */
+            //send the response
+            $data = $this->serialize($newUser, $_format);
+            return $this->apiResponse($data, $_format);
 
-            return $this->forward('TavroApiBundle:Default:get', $routeOptions);
         }
         catch(\Exception $e) {
             $em->getConnection()->rollBack();
@@ -140,7 +139,7 @@ class UserController extends ApiController
         try {
             $handler = $this->container->get('tavro.handler.users');
             $handler->resetApiKey($user);
-            $cookie = new Cookie('api_key', $user->getApiKey(), 0, '/', NULL, false, false);
+            $cookie = new Cookie('api_key', $user->getApiKey(), 0, '/', NULL, FALSE, FALSE);
             $data = $this->serialize($user, $_format);
             $response = $this->apiResponse($data, $_format);
             $response->headers->setCookie($cookie);
@@ -163,7 +162,7 @@ class UserController extends ApiController
         try {
             $handler = $this->container->get('tavro.handler.users');
             $handler->resetApiPassword($user);
-            $cookie = new Cookie('api_password', $user->getApiPassword(), 0, '/', NULL, false, false);
+            $cookie = new Cookie('api_password', $user->getApiPassword(), 0, '/', NULL, FALSE, FALSE);
             $data = $this->serialize($user, $_format);
             $response = $this->apiResponse($data, $_format);
             $response->headers->setCookie($cookie);

@@ -26,14 +26,14 @@ class RevenueComment extends Entity implements EntityInterface
 {
     /**
      * @ORM\ManyToOne(targetEntity="Tavro\Bundle\CoreBundle\Entity\Comment", inversedBy="revenue_comments")
-     * @ORM\JoinColumn(name="comment_id", referencedColumnName="id", nullable=false)
+     * @ORM\JoinColumn(name="comment_id", referencedColumnName="id", nullable=FALSE)
      * @Groups({"api", "tavro"})
      */
     protected $comment;
 
     /**
      * @ORM\ManyToOne(targetEntity="Tavro\Bundle\CoreBundle\Entity\Revenue", inversedBy="revenue_comments")
-     * @ORM\JoinColumn(name="revenue_id", referencedColumnName="id", nullable=false)
+     * @ORM\JoinColumn(name="revenue_id", referencedColumnName="id", nullable=FALSE)
      */
     protected $revenue;
 

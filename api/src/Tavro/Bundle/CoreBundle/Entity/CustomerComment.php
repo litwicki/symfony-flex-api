@@ -26,14 +26,14 @@ class CustomerComment extends Entity implements EntityInterface
 {
     /**
      * @ORM\ManyToOne(targetEntity="Tavro\Bundle\CoreBundle\Entity\Comment", inversedBy="customer_comments")
-     * @ORM\JoinColumn(name="comment_id", referencedColumnName="id", nullable=false)
+     * @ORM\JoinColumn(name="comment_id", referencedColumnName="id", nullable=FALSE)
      * @Groups({"api", "tavro"})
      */
     protected $comment;
 
     /**
      * @ORM\ManyToOne(targetEntity="Tavro\Bundle\CoreBundle\Entity\Customer", inversedBy="customer_comments")
-     * @ORM\JoinColumn(name="customer_id", referencedColumnName="id", nullable=false)
+     * @ORM\JoinColumn(name="customer_id", referencedColumnName="id", nullable=FALSE)
      */
     protected $customer;
 

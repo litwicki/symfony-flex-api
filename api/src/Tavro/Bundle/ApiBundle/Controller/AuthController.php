@@ -66,7 +66,7 @@ class AuthController extends ApiController
         try {
             $handler = $this->container->get('tavro.handler.users');
             $user = $this->getUser();
-            $data = json_decode($request->getContent(), true);
+            $data = json_decode($request->getContent(), TRUE);
             $handler->resetPassword($user, $data);
         }
         catch(ApiAccessDeniedException $e) {

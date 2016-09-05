@@ -68,7 +68,7 @@ class FundingController extends ApiController
     {
         try {
 
-            $data = json_decode($request->getContent(), true);
+            $data = json_decode($request->getContent(), TRUE);
 
             $handler = $this->getHandler('comments');
             $comment = $handler->post($request, $data);
@@ -139,7 +139,7 @@ class FundingController extends ApiController
     {
         try {
 
-            $data = json_decode($request->getContent(), true);
+            $data = json_decode($request->getContent(), TRUE);
 
             $handler = $this->getHandler('shareholders');
             $shareholder = $handler->create(array_merge($data, array(

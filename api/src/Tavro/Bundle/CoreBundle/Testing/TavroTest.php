@@ -15,7 +15,7 @@ class TavroTest extends \PHPUnit_Framework_TestCase
 
         $client = new Client('http://api.tavro.dev/api/v1', array(
             'request.options' => array(
-                'exceptions' => false,
+                'exceptions' => FALSE,
             )
         ));
 
@@ -27,16 +27,16 @@ class TavroTest extends \PHPUnit_Framework_TestCase
         $request = $client->post('http://api.tavro.dev/api/v1/auth', null, $data);
         $response = $request->send();
 
-        $json = $response->getBody(true);
+        $json = $response->getBody(TRUE);
 
-        $body = json_decode($json, true);
+        $body = json_decode($json, TRUE);
 
         if(isset($body['token'])) {
             $token = $body['token'];
-            //setcookie($cookieName, $token, 360, '/', 'api.tavro.dev', false, true);
+            //setcookie($cookieName, $token, 360, '/', 'api.tavro.dev', FALSE, TRUE);
             return $token;
         }
 
-        return false;
+        return FALSE;
     }
 }

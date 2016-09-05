@@ -34,37 +34,37 @@ use JMS\Serializer\Annotation\MaxDepth;
 class Person extends Entity implements EntityInterface
 {
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="string", length=255, nullable=TRUE)
      * @Groups({"api", "tavro", "simple", "typeahead"})
      */
     protected $first_name;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="string", length=255, nullable=TRUE)
      * @Groups({"api", "tavro", "simple"})
      */
     protected $middle_name;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="string", length=255, nullable=TRUE)
      * @Groups({"api", "tavro", "simple", "typeahead"})
      */
     protected $last_name;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="string", length=255, nullable=TRUE)
      * @Groups({"api", "tavro", "simple"})
      */
     protected $title;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="string", length=255, nullable=TRUE)
      * @Groups({"api", "tavro", "simple"})
      */
     protected $suffix;
 
     /**
-     * @ORM\Column(type="string", length=32, nullable=true)
+     * @ORM\Column(type="string", length=32, nullable=TRUE)
      * @Assert\Choice(
      *      choices = { "male", "female", "other", "robot" },
      *      message = "Choose a valid gender."
@@ -76,49 +76,49 @@ class Person extends Entity implements EntityInterface
     protected $gender;
 
     /**
-     * @ORM\Column(type="date", length=255, nullable=true)
+     * @ORM\Column(type="date", length=255, nullable=TRUE)
      * @Groups({"tavro"})
      */
     protected $birthday;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="string", length=255, nullable=TRUE)
      * @Groups({"api", "tavro", "simple"})
      */
     protected $address;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="string", length=255, nullable=TRUE)
      * @Groups({"api", "tavro", "simple"})
      */
     protected $address2;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="string", length=255, nullable=TRUE)
      * @Groups({"api", "tavro", "simple"})
      */
     protected $city;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="string", length=255, nullable=TRUE)
      * @Groups({"api", "tavro", "simple"})
      */
     protected $state;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="string", length=255, nullable=TRUE)
      * @Groups({"api", "tavro", "simple"})
      */
     protected $zip;
 
     /**
-     * @ORM\Column(type="string", unique=true, nullable=true)
+     * @ORM\Column(type="string", unique=TRUE, nullable=TRUE)
      * @Groups({"api", "tavro", "simple", "typeahead"})
      */
     protected $email;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="string", length=255, nullable=TRUE)
      * @Groups({"api", "tavro", "simple", "typeahead"})
      */
     protected $phone;

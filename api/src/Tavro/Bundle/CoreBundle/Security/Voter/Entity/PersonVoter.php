@@ -25,17 +25,17 @@ class PersonVoter extends TavroVoter
      */
     protected function supports($attribute, $subject)
     {
-        // if the attribute isn't one we support, return false
+        // if the attribute isn't one we support, return FALSE
         if (!in_array($attribute, array(self::VIEW, self::EDIT, self::CREATE, self::PATCH))) {
-            return false;
+            return FALSE;
         }
 
         // only vote on Person objects inside this voter
         if (!$subject instanceof Person) {
-            return false;
+            return FALSE;
         }
 
-        return true;
+        return TRUE;
     }
 
     /**
@@ -47,24 +47,22 @@ class PersonVoter extends TavroVoter
      */
     protected function voteOnAttribute($attribute, $subject, TokenInterface $token)
     {
-        $user = $token->getUser();
-
         /**
          * If the User is an Administrator, let them proceed as they desire.
          */
         if ($this->decisionManager->decide($token, array('ROLE_ADMIN'))) {
-            return true;
+            return TRUE;
         }
 
         switch ($attribute) {
             case self::CREATE:
-                return $this->canCreate($subject, $user);
+                return $this->canCreate($subject, $token);
             case self::VIEW:
-                return $this->canView($subject, $user);
+                return $this->canView($subject, $token);
             case self::PATCH:
-                return $this->canPatch($subject, $user);
+                return $this->canPatch($subject, $token);
             case self::EDIT:
-                return $this->canEdit($subject, $user);
+                return $this->canEdit($subject, $token);
         }
 
         throw new \LogicException('This code should not be reached!');
@@ -72,46 +70,45 @@ class PersonVoter extends TavroVoter
 
     /**
      * @param \Tavro\Bundle\CoreBundle\Entity\Person $person
-     * @param \Tavro\Bundle\CoreBundle\Entity\User $user
-     *
+     * @param \Symfony\Component\Security\Core\Authentication\Token\TokenInterface $token
      * @return bool
      */
-    private function canView(Person $person, User $user)
+    private function canView(Person $person, TokenInterface $token)
     {
-        return $this->checkUser($person->getUser(), $user);
+        return $this->checkUser($person->getUser(), $token);
     }
 
     /**
      * @param \Tavro\Bundle\CoreBundle\Entity\Person $person
-     * @param \Tavro\Bundle\CoreBundle\Entity\User $user
+     * @param \Symfony\Component\Security\Core\Authentication\Token\TokenInterface $token
      *
      * @return bool
      */
-    private function canCreate(Person $person, User $user)
+    private function canCreate(Person $person, TokenInterface $token)
     {
-        return true;
+        return TRUE;
     }
 
     /**
      * @param \Tavro\Bundle\CoreBundle\Entity\Person $person
-     * @param \Tavro\Bundle\CoreBundle\Entity\User $user
+     * @param \Symfony\Component\Security\Core\Authentication\Token\TokenInterface $token
      *
      * @return bool
      */
-    private function canEdit(Person $person, User $user)
+    private function canEdit(Person $person, TokenInterface $token)
     {
-        return $this->checkUser($person->getUser(), $user);
+        return $this->checkUser($person->getUser(), $token);
     }
 
     /**
      * @param \Tavro\Bundle\CoreBundle\Entity\Person $person
-     * @param \Tavro\Bundle\CoreBundle\Entity\User $user
+     * @param \Symfony\Component\Security\Core\Authentication\Token\TokenInterface $token
      *
      * @return bool
      */
-    private function canPatch(Person $person, User $user)
+    private function canPatch(Person $person, TokenInterface $token)
     {
-        return $this->checkUser($person->getUser(), $user);
+        return TRUE;
     }
 
 }

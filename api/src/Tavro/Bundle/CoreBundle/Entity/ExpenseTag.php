@@ -26,14 +26,14 @@ class ExpenseTag extends Entity implements EntityInterface
 {
     /**
      * @ORM\ManyToOne(targetEntity="Tavro\Bundle\CoreBundle\Entity\Tag", inversedBy="expense_tags")
-     * @ORM\JoinColumn(name="tag_id", referencedColumnName="id", nullable=false)
+     * @ORM\JoinColumn(name="tag_id", referencedColumnName="id", nullable=FALSE)
      * @Groups({"api", "tavro"})
      */
     protected $tag;
 
     /**
      * @ORM\ManyToOne(targetEntity="Tavro\Bundle\CoreBundle\Entity\Expense", inversedBy="expense_tags")
-     * @ORM\JoinColumn(name="expense_id", referencedColumnName="id", nullable=false)
+     * @ORM\JoinColumn(name="expense_id", referencedColumnName="id", nullable=FALSE)
      */
     protected $expense;
 

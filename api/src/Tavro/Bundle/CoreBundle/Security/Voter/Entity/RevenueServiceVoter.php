@@ -83,7 +83,7 @@ class RevenueServiceVoter extends TavroVoter implements VoterInterface
     const REMOVE = 'remove';
 
     /**
-     * Returns true if the attribute matches known attributes.
+     * Returns TRUE if the attribute matches known attributes.
      *
      * @param string $attribute
      *
@@ -94,7 +94,7 @@ class RevenueServiceVoter extends TavroVoter implements VoterInterface
     }
 
     /**
-     * Returns true if object is an instance of GrowthCase.
+     * Returns TRUE if object is an instance of GrowthCase.
      *
      * @param object $class
      *

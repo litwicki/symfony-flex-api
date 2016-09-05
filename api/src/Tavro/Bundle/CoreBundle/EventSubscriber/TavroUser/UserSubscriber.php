@@ -9,7 +9,6 @@ use Tavro\Bundle\CoreBundle\Event\TavroUser\UserSignupEvent;
 
 class UserSubscriber implements EventSubscriberInterface
 {
-
     protected $mailer;
 
     public function __construct($mailer)

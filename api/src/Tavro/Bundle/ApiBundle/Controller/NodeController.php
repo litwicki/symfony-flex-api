@@ -71,7 +71,7 @@ class NodeController extends ApiController
     {
         try {
 
-            $data = json_decode($request->getContent(), true);
+            $data = json_decode($request->getContent(), TRUE);
 
             $handler = $this->getHandler('comments');
             $comment = $handler->post($request, $data);
@@ -145,7 +145,7 @@ class NodeController extends ApiController
     {
         try {
 
-            $data = json_decode($request->getContent(), true);
+            $data = json_decode($request->getContent(), TRUE);
 
             $handler = $this->getHandler('tags');
             $tag = $handler->post($request, $data);

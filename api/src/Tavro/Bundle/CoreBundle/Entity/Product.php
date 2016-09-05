@@ -28,26 +28,26 @@ class Product extends OrganizationEntity implements OrganizationEntityInterface
 {
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=false)
+     * @ORM\Column(type="string", length=255, nullable=FALSE)
      * @Groups({"api", "tavro", "simple"})
      */
     protected $title;
 
     /**
-     * @ORM\Column(type="float", nullable=false, options={"default" = 0})
+     * @ORM\Column(type="float", nullable=FALSE, options={"default" = 0})
      * @Groups({"api", "tavro", "simple"})
      */
     protected $price;
 
     /**
-     * @ORM\Column(type="float", nullable=true, options={"default" = 0})
+     * @ORM\Column(type="float", nullable=TRUE, options={"default" = 0})
      * @Groups({"api", "tavro", "simple"})
      */
     protected $cost;
 
     /**
      * @ORM\ManyToOne(targetEntity="Tavro\Bundle\CoreBundle\Entity\ProductCategory", inversedBy="products")
-     * @ORM\JoinColumn(name="category_id", referencedColumnName="id", nullable=false)
+     * @ORM\JoinColumn(name="category_id", referencedColumnName="id", nullable=FALSE)
      * @Groups({"api", "tavro", "simple"})
      * @MaxDepth(3)
      */

@@ -24,17 +24,17 @@ class UserVoter extends TavroVoter
      */
     protected function supports($attribute, $subject)
     {
-        // if the attribute isn't one we support, return false
+        // if the attribute isn't one we support, return FALSE
         if (!in_array($attribute, array(self::VIEW, self::EDIT, self::CREATE, self::PATCH))) {
-            return false;
+            return FALSE;
         }
 
         // only vote on User objects inside this voter
         if (!$subject instanceof User) {
-            return false;
+            return FALSE;
         }
 
-        return true;
+        return TRUE;
     }
 
     /**
@@ -50,25 +50,25 @@ class UserVoter extends TavroVoter
 
         if (!$user instanceof User) {
             // the user must be logged in; if not, deny access
-            return false;
+            return FALSE;
         }
 
         /**
          * If the User is an Administrator, let them proceed as they desire.
          */
         if ($this->decisionManager->decide($token, array('ROLE_ADMIN'))) {
-            return true;
+            return TRUE;
         }
 
         switch ($attribute) {
             case self::CREATE:
-                return $this->canCreate($subject, $user);
+                return $this->canCreate($subject, $token);
             case self::VIEW:
-                return $this->canView($subject, $user);
+                return $this->canView($subject, $token);
             case self::PATCH:
-                return $this->canPatch($subject, $user);
+                return $this->canPatch($subject, $token);
             case self::EDIT:
-                return $this->canEdit($subject, $user);
+                return $this->canEdit($subject, $token);
         }
 
         throw new \LogicException('This code should not be reached!');
@@ -76,65 +76,42 @@ class UserVoter extends TavroVoter
 
     /**
      * @param \Tavro\Bundle\CoreBundle\Entity\User $newUser
-     * @param \Tavro\Bundle\CoreBundle\Entity\User $user
-     *
+     * @param \Symfony\Component\Security\Core\Authentication\Token\TokenInterface $token
      * @return bool
      */
-    private function canView(User $newUser, User $user)
+    private function canView(User $newUser, TokenInterface $token)
     {
-        return $this->checkUser($newUser, $user);
+        return $this->checkUser($newUser, $token);
     }
 
     /**
      * @param \Tavro\Bundle\CoreBundle\Entity\User $newUser
-     * @param \Tavro\Bundle\CoreBundle\Entity\User $user
-     *
+     * @param \Symfony\Component\Security\Core\Authentication\Token\TokenInterface $token
      * @return bool
      */
-    private function canCreate(User $newUser, User $user)
+    private function canCreate(User $newUser, TokenInterface $token)
     {
-        return true;
+        return TRUE;
     }
 
     /**
      * @param \Tavro\Bundle\CoreBundle\Entity\User $newUser
-     * @param \Tavro\Bundle\CoreBundle\Entity\User $user
-     *
+     * @param \Symfony\Component\Security\Core\Authentication\Token\TokenInterface $token
      * @return bool
      */
-    private function canEdit(User $newUser, User $user)
+    private function canEdit(User $newUser, TokenInterface $token)
     {
-        return $this->checkUser($newUser, $user);
+        return $this->checkUser($newUser, $token);
     }
 
     /**
      * @param \Tavro\Bundle\CoreBundle\Entity\User $newUser
-     * @param \Tavro\Bundle\CoreBundle\Entity\User $user
-     *
+     * @param \Symfony\Component\Security\Core\Authentication\Token\TokenInterface $token
      * @return bool
      */
-    private function canPatch(User $newUser, User $user)
+    private function canPatch(User $newUser, TokenInterface $token)
     {
-        return $this->checkUser($newUser, $user);
-    }
-
-    /**
-     * @param \Tavro\Bundle\CoreBundle\Entity\User $newUser
-     * @param \Tavro\Bundle\CoreBundle\Entity\User $user
-     *
-     * @return bool
-     */
-    public function checkUser(User $newUser, User $user)
-    {
-        if($user->isAdmin()) {
-            return true;
-        }
-        elseif($user->getId() === $newUser->getId()) {
-            return true;
-        }
-        else {
-            return false;
-        }
+        return $this->checkUser($newUser, $token);
     }
 
 }

@@ -26,19 +26,19 @@ class RevenueService extends Entity implements EntityInterface
 {
     /**
      * @ORM\ManyToOne(targetEntity="Tavro\Bundle\CoreBundle\Entity\Service", inversedBy="revenue_services")
-     * @ORM\JoinColumn(name="service_id", referencedColumnName="id", nullable=false)
+     * @ORM\JoinColumn(name="service_id", referencedColumnName="id", nullable=FALSE)
      * @Groups({"api", "tavro"})
      */
     protected $service;
 
     /**
      * @ORM\ManyToOne(targetEntity="Tavro\Bundle\CoreBundle\Entity\Revenue", inversedBy="revenue_services")
-     * @ORM\JoinColumn(name="revenue_id", referencedColumnName="id", nullable=false)
+     * @ORM\JoinColumn(name="revenue_id", referencedColumnName="id", nullable=FALSE)
      */
     protected $revenue;
 
     /**
-     * @ORM\Column(type="integer", nullable=true, options={"default" = 1})
+     * @ORM\Column(type="integer", nullable=TRUE, options={"default" = 1})
      * @Groups({"api", "tavro", "simple"})
      */
     protected $qty;

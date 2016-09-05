@@ -27,12 +27,12 @@ class TavroVoter extends Voter
 
     protected function supports($attribute, $subject)
     {
-        // if the attribute isn't one we support, return false
+        // if the attribute isn't one we support, return FALSE
         if (!in_array($attribute, array(self::VIEW, self::EDIT, self::CREATE, self::PATCH))) {
-            return false;
+            return FALSE;
         }
 
-        return true;
+        return TRUE;
     }
 
     protected function voteOnAttribute($attribute, $subject, TokenInterface $token)
@@ -42,22 +42,22 @@ class TavroVoter extends Voter
 
     private function canView($entity, User $user)
     {
-        return true;
+        return TRUE;
     }
 
     private function canCreate($entity, User $user)
     {
-        return true;
+        return TRUE;
     }
 
     private function canEdit($entity, User $user)
     {
-        return true;
+        return TRUE;
     }
 
     private function canPatch($entity, User $user)
     {
-        return true;
+        return TRUE;
     }
 
     /**
@@ -82,28 +82,29 @@ class TavroVoter extends Voter
         $id = $organization->getId();
 
         if(in_array($id, array_keys($organizations))) {
-            return true;
+            return TRUE;
         }
 
-        return false;
+        return FALSE;
     }
 
     /**
      * @param \Tavro\Bundle\CoreBundle\Entity\User $newUser
-     * @param \Tavro\Bundle\CoreBundle\Entity\User $user
-     *
+     * @param \Symfony\Component\Security\Core\Authentication\Token\TokenInterface $token
      * @return bool
      */
-    public function checkUser(User $newUser, User $user)
+    public function checkUser(User $newUser, TokenInterface $token)
     {
+        $user = $token->getUser();
+
         if($user->isAdmin()) {
-            return true;
+            return TRUE;
         }
         elseif($user->getId() === $newUser->getId()) {
-            return true;
+            return TRUE;
         }
         else {
-            return false;
+            return FALSE;
         }
     }
 

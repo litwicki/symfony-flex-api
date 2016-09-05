@@ -40,7 +40,7 @@ class TagController extends ApiController
         try {
 
             $handler = $this->getHandler($entity);
-            $data = json_decode($request->getContent(), true);
+            $data = json_decode($request->getContent(), TRUE);
 
             $tag = $handler->findByTag($data['tag']);
 

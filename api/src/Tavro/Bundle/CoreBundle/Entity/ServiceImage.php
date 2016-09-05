@@ -26,14 +26,14 @@ class ServiceImage extends Entity implements EntityInterface
 {
     /**
      * @ORM\ManyToOne(targetEntity="Tavro\Bundle\CoreBundle\Entity\Image", inversedBy="service_images")
-     * @ORM\JoinColumn(name="image_id", referencedColumnName="id", nullable=false)
+     * @ORM\JoinColumn(name="image_id", referencedColumnName="id", nullable=FALSE)
      * @Groups({"api", "tavro"})
      */
     protected $image;
 
     /**
      * @ORM\ManyToOne(targetEntity="Tavro\Bundle\CoreBundle\Entity\Service", inversedBy="service_images")
-     * @ORM\JoinColumn(name="service_id", referencedColumnName="id", nullable=false)
+     * @ORM\JoinColumn(name="service_id", referencedColumnName="id", nullable=FALSE)
      */
     protected $service;
 

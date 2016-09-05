@@ -25,7 +25,7 @@ class UserOrganization extends Entity implements EntityInterface
 {
     /**
      * @ORM\ManyToOne(targetEntity="Tavro\Bundle\CoreBundle\Entity\Organization", inversedBy="user_organizations")
-     * @ORM\JoinColumn(name="organization_id", referencedColumnName="id", nullable=false)
+     * @ORM\JoinColumn(name="organization_id", referencedColumnName="id", nullable=FALSE)
      * @Groups({"api", "tavro"})
      * @MaxDepth(3)
      */
@@ -33,14 +33,14 @@ class UserOrganization extends Entity implements EntityInterface
 
     /**
      * @ORM\ManyToOne(targetEntity="Tavro\Bundle\CoreBundle\Entity\User", inversedBy="user_organizations")
-     * @ORM\JoinColumn(name="user_id", referencedColumnName="id", nullable=false)
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id", nullable=FALSE)
      * @Groups({"api", "tavro"})
      * @MaxDepth(3)
      */
     protected $user;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="string", length=255, nullable=TRUE)
      * @Groups({"api", "tavro", "simple"})
      */
     protected $org_title;
