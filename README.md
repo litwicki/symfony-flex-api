@@ -40,10 +40,10 @@ Whatever you set the passphrase to you will need to also set in `app/config.para
 
 Workflow and useful 'stuff' for developing in Tavro.
 
-### Install Gulp + Dependencies etc.
+### Install Frontend Dev Tools
 
-    $ npm install --global gulp-cli
-    $ npm install --save-dev gulp gulp-sass gulp-concat gulp-minify-css fs gulp-s3 gulp-image gulp-util
+    $ npm install npm -g
+    $ brew install watchman
 
 ### Testing with PHPUnit
 

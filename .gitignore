@@ -93,7 +93,7 @@ sftp-config.json
 /api/var/sessions/*
 /api/src/Tavro/Bundle/AppBundle/Resources/views/Layouts/blueprint.html.twig
 
-/app/web/assets/*
+/angular2-sample-app-master/web/assets/*
 /app/aws.json
 /app/node_modules
 /app/bower_components
@@ -102,6 +102,6 @@ sftp-config.json
 
 api/var/cache/
 api/var/logs/
-app/web/assets/
+angular2-sample-app-master/web/assets/
 sami/build/
 sami/cache/

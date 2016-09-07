@@ -7,3 +7,6 @@
 
 - name: Copy PHPUNIT config..
   template: src=phpunit.xml.j2 dest=/var/www/{{appname}}/api/phpunit.xml
+
+- name: setup symfony binary alias
+  command: ln -s /var/www/{{appname}}/api/bin/console /var/www/{{appname}}/api/symfony
