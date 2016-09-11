@@ -27,14 +27,14 @@ use Tavro\Bundle\CoreBundle\Model\EntityInterface;
 class Organization extends Entity implements EntityInterface
 {
     /**
-     * @ORM\Column(type="string", length=500, nullable=false)
+     * @ORM\Column(type="string", length=500, nullable=FALSE)
      * @Groups({"api", "tavro", "typeahead"})
      */
     protected $title;
 
     /**
      * @ORM\ManyToOne(targetEntity="Tavro\Bundle\CoreBundle\Entity\User", inversedBy="organizations")
-     * @ORM\JoinColumn(name="user_id", referencedColumnName="id", nullable=false)
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id", nullable=FALSE)
      * @Groups({"api", "tavro"})
      * @MaxDepth(2)
      */
@@ -44,6 +44,11 @@ class Organization extends Entity implements EntityInterface
      * @ORM\OneToMany(targetEntity="Tavro\Bundle\CoreBundle\Entity\Node", mappedBy="organization", cascade={"remove"})
      */
     protected $nodes;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Tavro\Bundle\CoreBundle\Entity\Variable", mappedBy="organization", cascade={"remove"})
+     */
+    protected $variables;
 
     /**
      * @ORM\OneToMany(targetEntity="Tavro\Bundle\CoreBundle\Entity\Tag", mappedBy="organization")
@@ -113,6 +118,13 @@ class Organization extends Entity implements EntityInterface
     protected $revenues;
 
     /**
+     * @ORM\OneToMany(targetEntity="Tavro\Bundle\CoreBundle\Entity\Customer", mappedBy="organization", cascade={"remove"})
+     * @Groups({"tavro"})
+     * @MaxDepth(3)
+     */
+    protected $customers;
+
+    /**
      * @ORM\OneToMany(targetEntity="Tavro\Bundle\CoreBundle\Entity\FundingRound", mappedBy="organization", cascade={"remove"})
      * @Groups({"tavro"})
      * @MaxDepth(3)
@@ -123,6 +135,14 @@ class Organization extends Entity implements EntityInterface
      * @ORM\OneToMany(targetEntity="Tavro\Bundle\CoreBundle\Entity\FundingRoundShareholder", mappedBy="organization", cascade={"remove"})
      */
     protected $funding_round_shareholders;
+
+    /**
+     * Organization constructor.
+     */
+    public function __construct()
+    {
+        parent::__construct();
+    }
 
     /**
      * @param \Tavro\Bundle\CoreBundle\Entity\User $owner
@@ -486,8 +506,6 @@ class Organization extends Entity implements EntityInterface
         return $this->variables;
     }
 
-
-
     /**
      * Add node
      *
@@ -680,5 +698,39 @@ class Organization extends Entity implements EntityInterface
     public function getBody()
     {
         return $this->body;
+    }
+
+    /**
+     * Add customer
+     *
+     * @param \Tavro\Bundle\CoreBundle\Entity\Customer $customer
+     *
+     * @return Organization
+     */
+    public function addCustomer(\Tavro\Bundle\CoreBundle\Entity\Customer $customer)
+    {
+        $this->customers[] = $customer;
+
+        return $this;
+    }
+
+    /**
+     * Remove customer
+     *
+     * @param \Tavro\Bundle\CoreBundle\Entity\Customer $customer
+     */
+    public function removeCustomer(\Tavro\Bundle\CoreBundle\Entity\Customer $customer)
+    {
+        $this->customers->removeElement($customer);
+    }
+
+    /**
+     * Get customers
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getCustomers()
+    {
+        return $this->customers;
     }
 }

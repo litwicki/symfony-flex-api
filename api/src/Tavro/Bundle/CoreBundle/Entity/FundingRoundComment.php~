@@ -26,14 +26,14 @@ class FundingRoundComment extends Entity implements EntityInterface
 {
     /**
      * @ORM\ManyToOne(targetEntity="Tavro\Bundle\CoreBundle\Entity\Comment", inversedBy="funding_round_comments")
-     * @ORM\JoinColumn(name="comment_id", referencedColumnName="id", nullable=false)
+     * @ORM\JoinColumn(name="comment_id", referencedColumnName="id", nullable=FALSE)
      * @Groups({"api", "tavro"})
      */
     protected $comment;
 
     /**
      * @ORM\ManyToOne(targetEntity="Tavro\Bundle\CoreBundle\Entity\FundingRound", inversedBy="funding_round_comments")
-     * @ORM\JoinColumn(name="funding_round_id", referencedColumnName="id", nullable=false)
+     * @ORM\JoinColumn(name="funding_round_id", referencedColumnName="id", nullable=FALSE)
      */
     protected $funding_round;
 

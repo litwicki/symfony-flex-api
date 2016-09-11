@@ -27,25 +27,25 @@ use Tavro\Bundle\CoreBundle\Model\OrganizationEntityInterface;
 class FundingRound extends OrganizationEntity implements OrganizationEntityInterface
 {
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="string", length=255, nullable=TRUE)
      * @Groups({"api", "tavro", "simple"})
      */
     protected $type;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="string", length=255, nullable=TRUE)
      * @Groups({"api", "tavro", "simple"})
      */
     protected $prospectus;
 
     /**
-     * @ORM\Column(type="float", nullable=true, options={"default" = 0})
+     * @ORM\Column(type="float", nullable=TRUE, options={"default" = 0})
      * @Groups({"api", "tavro", "simple"})
      */
     protected $share_price;
 
     /**
-     * @ORM\Column(type="integer", nullable=true, options={"default" = 0})
+     * @ORM\Column(type="integer", nullable=TRUE, options={"default" = 0})
      * @Groups({"api", "tavro", "simple"})
      */
     protected $total_shares;

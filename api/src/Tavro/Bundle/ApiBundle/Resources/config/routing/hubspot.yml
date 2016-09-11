@@ -1,0 +1,7 @@
+api_hubspot_import:
+    path: /organizations/{organization}/hubspot/import.{_format}
+    defaults: { _controller: TavroApiBundle:Hubspot:importContacts, _format: json}
+    methods: POST
+    requirements:
+        organization: \d+
+        _format: json|xml

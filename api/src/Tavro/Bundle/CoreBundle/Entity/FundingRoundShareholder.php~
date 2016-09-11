@@ -25,7 +25,7 @@ class FundingRoundShareholder extends OrganizationEntity implements Organization
 {
     /**
      * @ORM\ManyToOne(targetEntity="Tavro\Bundle\CoreBundle\Entity\Shareholder", inversedBy="funding_round_shareholders")
-     * @ORM\JoinColumn(name="shareholder_id", referencedColumnName="id", nullable=false)
+     * @ORM\JoinColumn(name="shareholder_id", referencedColumnName="id", nullable=FALSE)
      * @Groups({"api", "tavro"})
      * @MaxDepth(3)
      */
@@ -33,14 +33,14 @@ class FundingRoundShareholder extends OrganizationEntity implements Organization
 
     /**
      * @ORM\ManyToOne(targetEntity="Tavro\Bundle\CoreBundle\Entity\FundingRound", inversedBy="funding_round_shareholders")
-     * @ORM\JoinColumn(name="funding_round_id", referencedColumnName="id", nullable=false)
+     * @ORM\JoinColumn(name="funding_round_id", referencedColumnName="id", nullable=FALSE)
      * @Groups({"api", "tavro"})
      * @MaxDepth(3)
      */
     protected $funding_round;
 
     /**
-     * @ORM\Column(type="integer", nullable=true, options={"default" = 0})
+     * @ORM\Column(type="integer", nullable=TRUE, options={"default" = 0})
      * @Groups({"api", "tavro", "simple"})
      */
     protected $shares;

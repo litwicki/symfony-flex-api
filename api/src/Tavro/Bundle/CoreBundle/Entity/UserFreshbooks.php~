@@ -28,32 +28,32 @@ class UserFreshbooks extends Entity implements EntityInterface
 {
 
     /**
-     * @ORM\Column(type="string", length=255, unique=true, nullable=false)
+     * @ORM\Column(type="string", length=255, unique=TRUE, nullable=FALSE)
      * @Groups({"tavro"})
      */
     protected $access_token;
 
     /**
-     * @ORM\Column(type="string", length=255, unique=true, nullable=false)
+     * @ORM\Column(type="string", length=255, unique=TRUE, nullable=FALSE)
      * @Groups({"tavro"})
      */
     protected $access_token_secret;
 
     /**
-     * @ORM\Column(type="string", length=255, unique=true, nullable=false)
+     * @ORM\Column(type="string", length=255, unique=TRUE, nullable=FALSE)
      * @Groups({"tavro"})
      */
     protected $consumer_key;
 
     /**
-     * @ORM\Column(type="string", length=255, unique=true, nullable=false)
+     * @ORM\Column(type="string", length=255, unique=TRUE, nullable=FALSE)
      * @Groups({"tavro"})
      */
     protected $consumer_secret;
 
     /**
      * @ORM\OneToOne(targetEntity="Tavro\Bundle\CoreBundle\Entity\User")
-     * @ORM\JoinColumn(name="user_id", referencedColumnName="id", nullable=false)
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id", nullable=FALSE)
      * @Groups({"api", "tavro", "simple"})
      * @MaxDepth(1)
      */

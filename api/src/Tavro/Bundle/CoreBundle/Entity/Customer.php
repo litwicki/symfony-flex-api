@@ -50,7 +50,7 @@ class Customer extends OrganizationEntity implements OrganizationEntityInterface
 
     /**
      * @ORM\ManyToOne(targetEntity="Tavro\Bundle\CoreBundle\Entity\Person")
-     * @ORM\JoinColumn(name="person_id", referencedColumnName="id", nullable=FALSE)
+     * @ORM\JoinColumn(name="person_id", referencedColumnName="id", nullable=TRUE)
      * @Groups({"api", "tavro", "simple"})
      * @MaxDepth(1)
      */
@@ -66,6 +66,7 @@ class Customer extends OrganizationEntity implements OrganizationEntityInterface
      */
     public function __construct()
     {
+        parent::__construct();
         $this->create_date = new \DateTime();
         $this->update_date = new \DateTime();
     }
@@ -150,30 +151,6 @@ class Customer extends OrganizationEntity implements OrganizationEntityInterface
     }
 
     /**
-     * Set person
-     *
-     * @param \Tavro\Bundle\CoreBundle\Entity\Person $person
-     *
-     * @return Customer
-     */
-    public function setPerson(\Tavro\Bundle\CoreBundle\Entity\Person $person)
-    {
-        $this->person = $person;
-
-        return $this;
-    }
-
-    /**
-     * Get person
-     *
-     * @return \Tavro\Bundle\CoreBundle\Entity\Person
-     */
-    public function getPerson()
-    {
-        return $this->person;
-    }
-
-    /**
      * Add customerComment
      *
      * @param \Tavro\Bundle\CoreBundle\Entity\CustomerComment $customerComment
@@ -205,5 +182,30 @@ class Customer extends OrganizationEntity implements OrganizationEntityInterface
     public function getCustomerComments()
     {
         return $this->customer_comments;
+    }
+
+
+    /**
+     * Set person
+     *
+     * @param \Tavro\Bundle\CoreBundle\Entity\Person $person
+     *
+     * @return Customer
+     */
+    public function setPerson(\Tavro\Bundle\CoreBundle\Entity\Person $person = null)
+    {
+        $this->person = $person;
+
+        return $this;
+    }
+
+    /**
+     * Get person
+     *
+     * @return \Tavro\Bundle\CoreBundle\Entity\Person
+     */
+    public function getPerson()
+    {
+        return $this->person;
     }
 }

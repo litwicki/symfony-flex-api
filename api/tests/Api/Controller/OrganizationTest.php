@@ -70,6 +70,7 @@ class OrganizationTest extends TavroTest
         $data = array(
             'title' => 'Organization Name',
             'body' => 'Product body..',
+            'customer_label' => 'Customer',
             'owner' => 1,
         );
 

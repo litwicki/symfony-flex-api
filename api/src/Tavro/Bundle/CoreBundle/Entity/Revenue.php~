@@ -28,7 +28,7 @@ class Revenue extends OrganizationEntity implements OrganizationEntityInterface
 {
 
     /**
-     * @ORM\Column(type="string", nullable=false)
+     * @ORM\Column(type="string", nullable=FALSE)
      * @Assert\Choice(
      *      choices = { "sale", "service", "other"},
      *      message = "Choose a valid Revenue type."
@@ -39,7 +39,7 @@ class Revenue extends OrganizationEntity implements OrganizationEntityInterface
 
     /**
      * @ORM\ManyToOne(targetEntity="Tavro\Bundle\CoreBundle\Entity\RevenueCategory", inversedBy="revenues")
-     * @ORM\JoinColumn(name="category_id", referencedColumnName="id", nullable=false)
+     * @ORM\JoinColumn(name="category_id", referencedColumnName="id", nullable=FALSE)
      * @Groups({"api", "tavro", "simple"})
      * @MaxDepth(1)
      */
@@ -47,7 +47,7 @@ class Revenue extends OrganizationEntity implements OrganizationEntityInterface
 
     /**
      * @ORM\ManyToOne(targetEntity="Tavro\Bundle\CoreBundle\Entity\User", inversedBy="revenues")
-     * @ORM\JoinColumn(name="user_id", referencedColumnName="id", nullable=false)
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id", nullable=FALSE)
      * @Groups({"api", "tavro", "simple"})
      * @MaxDepth(1)
      */
@@ -55,7 +55,7 @@ class Revenue extends OrganizationEntity implements OrganizationEntityInterface
 
     /**
      * @ORM\ManyToOne(targetEntity="Tavro\Bundle\CoreBundle\Entity\Customer", inversedBy="revenues")
-     * @ORM\JoinColumn(name="customer_id", referencedColumnName="id", nullable=true)
+     * @ORM\JoinColumn(name="customer_id", referencedColumnName="id", nullable=TRUE)
      * @Groups({"api", "tavro", "simple"})
      * @MaxDepth(1)
      */

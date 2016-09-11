@@ -26,19 +26,19 @@ class RevenueProduct extends Entity implements EntityInterface
 {
     /**
      * @ORM\ManyToOne(targetEntity="Tavro\Bundle\CoreBundle\Entity\Product", inversedBy="revenue_products")
-     * @ORM\JoinColumn(name="product_id", referencedColumnName="id", nullable=false)
+     * @ORM\JoinColumn(name="product_id", referencedColumnName="id", nullable=FALSE)
      * @Groups({"api", "tavro"})
      */
     protected $product;
 
     /**
      * @ORM\ManyToOne(targetEntity="Tavro\Bundle\CoreBundle\Entity\Revenue", inversedBy="revenue_products")
-     * @ORM\JoinColumn(name="revenue_id", referencedColumnName="id", nullable=false)
+     * @ORM\JoinColumn(name="revenue_id", referencedColumnName="id", nullable=FALSE)
      */
     protected $revenue;
 
     /**
-     * @ORM\Column(type="integer", nullable=true, options={"default" = 1})
+     * @ORM\Column(type="integer", nullable=TRUE, options={"default" = 1})
      * @Groups({"api", "tavro", "simple"})
      */
     protected $qty;

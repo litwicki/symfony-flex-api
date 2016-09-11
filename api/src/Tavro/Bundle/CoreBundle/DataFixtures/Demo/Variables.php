@@ -73,18 +73,18 @@ class Variables extends AbstractFixture implements OrderedFixtureInterface, Cont
 
         foreach($organizations as $organization) {
 
-            for($i=0;$i<$size;$i++) {
+            $integrations = [
+                'hubspot' => ['hapikey', 'userId'],
+                'harvest' => ['username', 'password', 'account']
+            ];
 
-                /**
-                 * Create Global Variables
-                 */
-                $variable = new Variable();
-                $variable->setName($lipsum->getWords(rand(1,3)));
-                $variable->setBody($lipsum->getSentences(rand(1,3)));
-                $variable->setOrganization($organization);
-                $manager->persist($variable);
-                $variables[] = $variable;
-
+            foreach($integrations as $name => $vars) {
+                foreach($vars as $var) {
+                    $variable = new Variable();
+                    $variable->setOrganization($organization);
+                    $variable->setName(sprintf('%s.%s',$name,$var));
+                    $manager->persist($variable);
+                }
             }
 
         }

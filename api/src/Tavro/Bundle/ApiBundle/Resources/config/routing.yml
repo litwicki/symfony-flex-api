@@ -57,3 +57,6 @@ tavro_user_quickbooks_api:
 
 tavro_user_freshbooks_api:
     resource: "@TavroApiBundle/Resources/config/routing/user_freshbooks.yml"
+
+tavro_hubspot_api:
+    resource: "@TavroApiBundle/Resources/config/routing/hubspot.yml"

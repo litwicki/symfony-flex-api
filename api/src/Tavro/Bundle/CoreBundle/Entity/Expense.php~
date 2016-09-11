@@ -27,26 +27,26 @@ use Tavro\Bundle\CoreBundle\Model\EntityInterface;
 class Expense extends Entity
 {
     /**
-     * @ORM\Column(type="string", length=8000, nullable=true)
+     * @ORM\Column(type="string", length=8000, nullable=TRUE)
      * @Groups({"api", "tavro", "simple"})
      */
     protected $body;
 
     /**
-     * @ORM\Column(type="float", nullable=false)
+     * @ORM\Column(type="float", nullable=FALSE)
      * @Groups({"api", "tavro", "simple"})
      */
     protected $amount;
 
     /**
-     * @ORM\Column(type="datetime", nullable=false)
+     * @ORM\Column(type="datetime", nullable=FALSE)
      * @Groups({"api", "tavro", "simple"})
      */
     protected $expense_date;
 
     /**
      * @ORM\ManyToOne(targetEntity="Tavro\Bundle\CoreBundle\Entity\ExpenseCategory", inversedBy="expenses")
-     * @ORM\JoinColumn(name="category_id", referencedColumnName="id", nullable=false)
+     * @ORM\JoinColumn(name="category_id", referencedColumnName="id", nullable=FALSE)
      * @Groups({"api", "tavro", "simple"})
      * @MaxDepth(1)
      */
@@ -54,7 +54,7 @@ class Expense extends Entity
 
     /**
      * @ORM\ManyToOne(targetEntity="Tavro\Bundle\CoreBundle\Entity\User", inversedBy="expenses")
-     * @ORM\JoinColumn(name="user_id", referencedColumnName="id", nullable=false)
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id", nullable=FALSE)
      * @Groups({"api", "tavro", "simple"})
      * @MaxDepth(1)
      */
@@ -72,7 +72,7 @@ class Expense extends Entity
 
     /**
      * @ORM\ManyToOne(targetEntity="Tavro\Bundle\CoreBundle\Entity\Organization", inversedBy="expenses")
-     * @ORM\JoinColumn(name="organization_id", referencedColumnName="id", nullable=false)
+     * @ORM\JoinColumn(name="organization_id", referencedColumnName="id", nullable=FALSE)
      * @Groups({"api", "tavro", "simple"})
      * @MaxDepth(1)
      */
@@ -80,7 +80,7 @@ class Expense extends Entity
 
     /**
      * @ORM\ManyToOne(targetEntity="Tavro\Bundle\CoreBundle\Entity\Organization", inversedBy="expenses")
-     * @ORM\JoinColumn(name="customer_id", referencedColumnName="id", nullable=true)
+     * @ORM\JoinColumn(name="customer_id", referencedColumnName="id", nullable=TRUE)
      * @Groups({"api", "tavro", "simple"})
      * @MaxDepth(1)
      */
