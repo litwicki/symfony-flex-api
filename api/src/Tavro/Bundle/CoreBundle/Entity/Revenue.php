@@ -14,19 +14,18 @@ use JMS\Serializer\Annotation\SerializedName;
 use Doctrine\ORM\Mapping\Table;
 use Symfony\Component\Validator\Constraints as Assert;
 
-use Tavro\Bundle\CoreBundle\Model\OrganizationEntity;
-use Tavro\Bundle\CoreBundle\Model\OrganizationEntityInterface;
+use Tavro\Bundle\CoreBundle\Model\AccountEntity;
+use Tavro\Bundle\CoreBundle\Model\AccountEntityInterface;
 
 /**
  * @ORM\Entity
- * @ORM\Entity(repositoryClass="Tavro\Bundle\CoreBundle\Doctrine\Repository\Entity\RevenueRepository")
+ * @ORM\Entity(repositoryClass="Tavro\Bundle\CoreBundle\Repository\RevenueRepository")
  * @ORM\HasLifecycleCallbacks
  * @ORM\Table(name="tavro_revenue")
  *
  */
-class Revenue extends OrganizationEntity implements OrganizationEntityInterface
+class Revenue extends AccountEntity implements AccountEntityInterface
 {
-
     /**
      * @ORM\Column(type="string", nullable=FALSE)
      * @Assert\Choice(
@@ -54,12 +53,12 @@ class Revenue extends OrganizationEntity implements OrganizationEntityInterface
     protected $user;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Tavro\Bundle\CoreBundle\Entity\Customer", inversedBy="revenues")
-     * @ORM\JoinColumn(name="customer_id", referencedColumnName="id", nullable=TRUE)
+     * @ORM\ManyToOne(targetEntity="Tavro\Bundle\CoreBundle\Entity\Organization", inversedBy="revenues")
+     * @ORM\JoinColumn(name="organization_id", referencedColumnName="id", nullable=TRUE)
      * @Groups({"api", "tavro", "simple"})
      * @MaxDepth(1)
      */
-    protected $customer;
+    protected $organization;
 
     /**
      * @ORM\OneToMany(targetEntity="Tavro\Bundle\CoreBundle\Entity\RevenueComment", mappedBy="revenue", cascade={"remove"})
@@ -304,30 +303,6 @@ class Revenue extends OrganizationEntity implements OrganizationEntityInterface
     }
 
     /**
-     * Set customer
-     *
-     * @param \Tavro\Bundle\CoreBundle\Entity\Customer $customer
-     *
-     * @return Revenue
-     */
-    public function setCustomer(\Tavro\Bundle\CoreBundle\Entity\Customer $customer)
-    {
-        $this->customer = $customer;
-
-        return $this;
-    }
-
-    /**
-     * Get customer
-     *
-     * @return \Tavro\Bundle\CoreBundle\Entity\Customer
-     */
-    public function getCustomer()
-    {
-        return $this->customer;
-    }
-
-    /**
      * Add revenueService
      *
      * @param \Tavro\Bundle\CoreBundle\Entity\RevenueService $revenueService
@@ -423,5 +398,29 @@ class Revenue extends OrganizationEntity implements OrganizationEntityInterface
             $items->add($entity->getProduct());
         }
         return $items;
+    }
+
+    /**
+     * Set organization
+     *
+     * @param \Tavro\Bundle\CoreBundle\Entity\Organization $organization
+     *
+     * @return Revenue
+     */
+    public function setOrganization(\Tavro\Bundle\CoreBundle\Entity\Organization $organization = null)
+    {
+        $this->organization = $organization;
+
+        return $this;
+    }
+
+    /**
+     * Get organization
+     *
+     * @return \Tavro\Bundle\CoreBundle\Entity\Organization
+     */
+    public function getOrganization()
+    {
+        return $this->organization;
     }
 }

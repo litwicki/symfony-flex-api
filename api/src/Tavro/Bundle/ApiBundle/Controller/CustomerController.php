@@ -40,7 +40,7 @@ class CustomerController extends ApiController
     {
         try {
 
-            $entities = $customer->getCustomerComments();
+            $entities = $customer->getOrganizationComments();
 
             $items = array();
 

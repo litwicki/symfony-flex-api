@@ -32,7 +32,7 @@ use Tavro\Bundle\CoreBundle\Entity\ProductCategory;
 use Tavro\Bundle\CoreBundle\Entity\RevenueCategory;
 use Tavro\Bundle\CoreBundle\Entity\ServiceCategory;
 use Tavro\Bundle\CoreBundle\Entity\Customer;
-use Tavro\Bundle\CoreBundle\Entity\CustomerComment;
+use Tavro\Bundle\CoreBundle\Entity\OrganizationComment;
 use Tavro\Bundle\CoreBundle\Entity\FundingRoundShareholder;
 use Tavro\Bundle\CoreBundle\Entity\RevenueService;
 use Tavro\Bundle\CoreBundle\Entity\RevenueProduct;
@@ -67,25 +67,18 @@ class Users extends AbstractFixture implements OrderedFixtureInterface, Containe
      */
     public function load(ObjectManager $manager)
     {
-        $size = 10;
-
-        $organizations = [];
-        $users = [];
-
-        $genders = array('male', 'female');
-        $faker = \Faker\Factory::create('en_EN');
-
         $userRole = $manager->getRepository('TavroCoreBundle:Role')->findOneBy(array(
             'role' => 'ROLE_USER',
         ));
 
-        $developerRole = $manager->getRepository('TavroCoreBundle:Role')->findOneBy(array(
-            'role' => 'ROLE_DEVELOPER',
+        $admin = $manager->getRepository('TavroCoreBundle:Role')->findOneBy(array(
+            'role' => 'ROLE_ADMIN',
         ));
 
-        $roles = array($userRole, $developerRole);
-
         $people = array();
+        $faker = \Faker\Factory::create('en_EN');
+        $size = 10;
+        $genders = ['male', 'female'];
 
         for($i=1;$i<$size;$i++) {
             $email = $faker->email;
@@ -93,7 +86,6 @@ class Users extends AbstractFixture implements OrderedFixtureInterface, Containe
             $gender = $genders[rand(0,1)];
             $person->setFirstName($faker->firstName);
             $person->setLastName($faker->lastName);
-            $person->setTitle($faker->title($gender));
             $person->setSuffix($faker->suffix);
             $person->setEmail($email);
             $person->setGender($gender);
@@ -120,38 +112,84 @@ class Users extends AbstractFixture implements OrderedFixtureInterface, Containe
             $user->setSalt($salt);
 
             /**
-             * Only do this for test Users!!!
+             * Only set the Api Key for test Users!!!
              */
             $user->setApiKey($person->getEmail());
 
             $user->setPassword($password);
             $user->setPerson($person);
-            $user->addRole($roles[array_rand($roles)]);
+            $user->addRole($userRole);
             $manager->persist($user);
-            $users[] = $user;
         }
 
-        $admin = $manager->getRepository('TavroCoreBundle:Role')->findOneBy(array(
-            'role' => 'ROLE_ADMIN',
-        ));
+        $autobots = [
+            'Optimus Prime',
+            'Sentinel Prime',
+            'Bluestreak',
+            'Hound',
+            'Ironhide',
+            'Jazz',
+            'Mirage',
+            'Prowl',
+            'Ratchet',
+            'Sideswipe',
+            'Sunstreaker',
+            'Wheeljack',
+            'Hoist',
+            'Red Alert',
+            'Smokescreen',
+            'Tracks',
+            'Blurr',
+            'Hot Rod',
+            'Kup',
+            'Brawn',
+            'Bumblebee'
+        ];
 
-        /**
-         * Add TavroBot
-         */
-        $username = 'tavrobot';
-        $email = 'bot@tavro.dev';
+        $decepticons = [
+            'Megatron',
+            'Soundwave',
+            'Shockwave',
+            'Skypwarp',
+            'Starscream',
+            'Thundercracker',
+            'Reflector',
+            'Thrust',
+            'Ramjet',
+            'Dirge'
+        ];
+
+        foreach($autobots as $name) {
+            $username = str_replace(' ', '_', $name);
+            $username = strtolower($username);
+            $this->create($manager, $username, 'autobot', $userRole);
+        }
+
+        foreach($decepticons as $name) {
+            $username = str_replace(' ', '_', $name);
+            $username = strtolower($username);
+            $this->create($manager, $username, 'decepticon', $userRole);
+        }
+
+        //create tavrobot!
+        $this->create($manager, 'tavrobot', 'bot', $admin);
+
+    }
+
+    public function create($manager, $username, $gender, Role $role, $password = 'Password1!')
+    {
+        $faker = \Faker\Factory::create('en_EN');
+
+        $email = sprintf('%s@tavro.dev', $username);
         $salt = md5($email);
-        $password = 'Password1!';
         $encoder = $this->container->get('tavro.password_encoder');
         $password = $encoder->encodePassword($password, $salt);
 
         $person = new Person();
-        $gender = 'robot';
         $person->setFirstName($faker->firstName);
         $person->setLastName($faker->lastName);
-        $person->setTitle($faker->title($gender));
         $person->setSuffix($faker->suffix);
-        $person->setEmail('bot@tavro.dev');
+        $person->setEmail($email);
         $person->setGender($gender);
         $person->setBirthday($faker->dateTimeThisCentury);
         $manager->persist($person);
@@ -166,49 +204,7 @@ class Users extends AbstractFixture implements OrderedFixtureInterface, Containe
         $user->setUsername($username);
         $user->setSalt($salt);
         $user->setPassword($password);
-
-        $user->addRole($admin);
-
-        $manager->persist($user);
-
-        /**
-         * Add Fembot
-         */
-        $username = 'fembot';
-        $email = 'fembot@tavro.dev';
-        $salt = md5($email);
-        $password = 'Password1!';
-        $encoder = $this->container->get('tavro.password_encoder');
-        $password = $encoder->encodePassword($password, $salt);
-
-        $person = new Person();
-        $gender = 'robot';
-        $person->setFirstName($faker->firstName);
-        $person->setLastName($faker->lastName);
-        $person->setTitle($faker->title($gender));
-        $person->setSuffix($faker->suffix);
-        $person->setEmail('fembot@tavro.dev');
-        $person->setGender($gender);
-        $person->setBirthday($faker->dateTimeThisCentury);
-        $manager->persist($person);
-        $manager->flush();
-
-        $user = new User();
-        $user->setPerson($person);
-        $user->setStatus(1);
-        $user->setCreateDate(new \DateTime());
-        $user->setApiEnabled(1);
-        $user->setApiKey('tavrobot-api-key');
-        $user->setUsername($username);
-        $user->setSalt($salt);
-        $user->setPassword($password);
-
-        $user->addRole($userRole);
-
-        $manager->persist($user);
-
-        $manager->flush();
-
+        $user->addRole($role);
     }
 
     /**

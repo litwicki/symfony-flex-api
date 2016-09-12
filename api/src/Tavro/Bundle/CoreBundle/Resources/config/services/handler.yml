@@ -24,7 +24,7 @@ services:
             - 'Tavro\Bundle\CoreBundle\Entity\RevenueComment'
 
     tavro.handler.customer_comments:
-        class: Tavro\Bundle\CoreBundle\Handler\Entity\CustomerCommentHandler
+        class: Tavro\Bundle\CoreBundle\Handler\Entity\OrganizationCommentHandler
         arguments:
             - '@doctrine.orm.main_entity_manager'
             - '@form.factory'
@@ -33,7 +33,7 @@ services:
             - '@security.token_storage'
             - '@security.authorization_checker'
             - '%amazon_s3_url%'
-            - 'Tavro\Bundle\CoreBundle\Entity\CustomerComment'
+            - 'Tavro\Bundle\CoreBundle\Entity\OrganizationComment'
 
     tavro.handler.expense_comments:
         class: Tavro\Bundle\CoreBundle\Handler\Entity\ExpenseCommentHandler

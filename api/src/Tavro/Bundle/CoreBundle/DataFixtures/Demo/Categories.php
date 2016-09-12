@@ -32,7 +32,7 @@ use Tavro\Bundle\CoreBundle\Entity\ProductCategory;
 use Tavro\Bundle\CoreBundle\Entity\RevenueCategory;
 use Tavro\Bundle\CoreBundle\Entity\ServiceCategory;
 use Tavro\Bundle\CoreBundle\Entity\Customer;
-use Tavro\Bundle\CoreBundle\Entity\CustomerComment;
+use Tavro\Bundle\CoreBundle\Entity\OrganizationComment;
 use Tavro\Bundle\CoreBundle\Entity\FundingRoundShareholder;
 
 use Cocur\Slugify\Slugify;
@@ -64,13 +64,12 @@ class Categories extends AbstractFixture implements OrderedFixtureInterface, Con
      */
     public function load(ObjectManager $manager)
     {
-        $lipsum = $this->container->get('apoutchika.lorem_ipsum');
-        $size = 10;
-
-        $organizations = $manager->getRepository('TavroCoreBundle:Organization')->findAll();
+        $accounts = $manager->getRepository('TavroCoreBundle:Account')->findAll();
         $users = $manager->getRepository('TavroCoreBundle:User')->findAllNonAdmin();
 
-        foreach($organizations as $organization) {
+        $faker = \Faker\Factory::create('en_EN');
+
+        foreach($accounts as $account) {
 
             $expenseCategories = array();
             $revenueCategories = array();
@@ -79,10 +78,10 @@ class Categories extends AbstractFixture implements OrderedFixtureInterface, Con
 
             for($i=0;$i<5;$i++) {
                 $productCategory = new ProductCategory();
-                $productCategory->setOrganization($organization);
+                $productCategory->setAccount($account);
                 $productCategory->setCreateDate(new \DateTime());
                 $productCategory->setStatus(1);
-                $productCategory->setBody($lipsum->getWords(rand(1,5)));
+                $productCategory->setBody($faker->words(rand(1,5)));
                 $manager->persist($productCategory);
                 $productCategories[] = $productCategory;
             }
@@ -91,10 +90,10 @@ class Categories extends AbstractFixture implements OrderedFixtureInterface, Con
 
             for($i=0;$i<5;$i++) {
                 $serviceCategory = new ServiceCategory();
-                $serviceCategory->setOrganization($organization);
+                $serviceCategory->setAccount($account);
                 $serviceCategory->setCreateDate(new \DateTime());
                 $serviceCategory->setStatus(1);
-                $serviceCategory->setBody($lipsum->getWords(rand(1,5)));
+                $serviceCategory->setBody($faker->words(rand(1,5)));
                 $manager->persist($serviceCategory);
                 $serviceCategories[] = $serviceCategory;
             }
@@ -103,10 +102,10 @@ class Categories extends AbstractFixture implements OrderedFixtureInterface, Con
 
             for($i=0;$i<5;$i++) {
                 $revenueCategory = new RevenueCategory();
-                $revenueCategory->setOrganization($organization);
+                $revenueCategory->setAccount($account);
                 $revenueCategory->setCreateDate(new \DateTime());
                 $revenueCategory->setStatus(1);
-                $revenueCategory->setBody($lipsum->getWords(rand(1,5)));
+                $revenueCategory->setBody($faker->words(rand(1,5)));
                 $manager->persist($revenueCategory);
                 $revenueCategories[] = $revenueCategory;
             }
@@ -115,10 +114,10 @@ class Categories extends AbstractFixture implements OrderedFixtureInterface, Con
 
             for($i=0;$i<5;$i++) {
                 $expenseCategory = new ExpenseCategory();
-                $expenseCategory->setOrganization($organization);
+                $expenseCategory->setAccount($account);
                 $expenseCategory->setCreateDate(new \DateTime());
                 $expenseCategory->setStatus(1);
-                $expenseCategory->setBody($lipsum->getWords(rand(1,5)));
+                $expenseCategory->setBody($faker->words(rand(1,5)));
                 $manager->persist($expenseCategory);
                 $expenseCategories[] = $expenseCategory;
             }
@@ -134,7 +133,7 @@ class Categories extends AbstractFixture implements OrderedFixtureInterface, Con
      */
     public function getOrder()
     {
-        return 6; // the order in which fixtures will be loaded
+        return 4; // the order in which fixtures will be loaded
     }
 
 }

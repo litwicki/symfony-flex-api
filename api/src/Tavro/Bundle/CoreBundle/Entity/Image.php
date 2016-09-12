@@ -2,7 +2,6 @@
 
 namespace Tavro\Bundle\CoreBundle\Entity;
 
-use Tavro\Bundle\CoreBundle\Model\Api\ApiEntityInterface;
 use Doctrine\ORM\Mapping AS ORM;
 
 use JMS\Serializer\Annotation\Accessor;
@@ -13,19 +12,18 @@ use JMS\Serializer\Annotation\VirtualProperty;
 use JMS\Serializer\Annotation\Groups;
 use Doctrine\ORM\Mapping\Table;
 
-use Tavro\Bundle\CoreBundle\Model\Entity;
-use Tavro\Bundle\CoreBundle\Model\EntityInterface;
+use Tavro\Bundle\CoreBundle\Model\AccountEntity;
+use Tavro\Bundle\CoreBundle\Model\AccountEntityInterface;
 use Tavro\Bundle\CoreBundle\Model\S3EntityInterface;
 
 /**
  * @ORM\Entity
- * @ORM\Entity(repositoryClass="Tavro\Bundle\CoreBundle\Doctrine\Repository\Entity\ImageRepository")
+ * @ORM\Entity(repositoryClass="Tavro\Bundle\CoreBundle\Repository\ImageRepository")
  * @ORM\HasLifecycleCallbacks
  * @Table(name="tavro_image")
  *
- *
  */
-class Image extends Entity implements S3EntityInterface
+class Image extends AccountEntity implements S3EntityInterface, AccountEntityInterface
 {
     /**
      * @ORM\Column(type="string", length=500, nullable=FALSE)

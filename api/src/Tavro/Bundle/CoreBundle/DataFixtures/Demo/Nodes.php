@@ -34,7 +34,7 @@ use Tavro\Bundle\CoreBundle\Entity\ProductCategory;
 use Tavro\Bundle\CoreBundle\Entity\RevenueCategory;
 use Tavro\Bundle\CoreBundle\Entity\ServiceCategory;
 use Tavro\Bundle\CoreBundle\Entity\Customer;
-use Tavro\Bundle\CoreBundle\Entity\CustomerComment;
+use Tavro\Bundle\CoreBundle\Entity\OrganizationComment;
 use Tavro\Bundle\CoreBundle\Entity\FundingRoundShareholder;
 
 use Cocur\Slugify\Slugify;
@@ -85,12 +85,12 @@ class Nodes extends AbstractFixture implements OrderedFixtureInterface, Containe
         $lipsum = $this->container->get('apoutchika.lorem_ipsum');
         $size = 10;
 
-        $organizations = $manager->getRepository('TavroCoreBundle:Organization')->findAll();
+        $accounts = $manager->getRepository('TavroCoreBundle:Account')->findAll();
 
-        foreach($organizations as $organization) {
+        foreach($accounts as $account) {
 
-            $tags = $organization->getTags()->toArray();
-            $users = $organization->getUsers();
+            $tags = $account->getTags()->toArray();
+            $users = $account->getUsers();
 
             $nodeTypes = array(
                 'article',
@@ -106,7 +106,7 @@ class Nodes extends AbstractFixture implements OrderedFixtureInterface, Containe
                 $node->setTitle($lipsum->getWords(rand(3,10)));
                 $node->setBody($lipsum->getParagraphs(rand(1,5)));
                 $node->setStatus(rand(0,1));
-                $node->setOrganization($organization);
+                $node->setAccount($account);
                 $node->setType($nodeTypes[array_rand($nodeTypes)]);
                 $node->setCreateDate(new \DateTime());
                 $node->setDisplayDate(new \DateTime());
@@ -126,7 +126,6 @@ class Nodes extends AbstractFixture implements OrderedFixtureInterface, Containe
                     $comment->setUser($users[array_rand($users)]);
                     $comment->setBody($lipsum->getSentences(rand(1,10)));
                     $comment->setStatus(rand(0,1));
-                    $comment->setTitle($lipsum->getWords(rand(2,10)));
                     $manager->persist($comment);
                     $manager->flush();
 

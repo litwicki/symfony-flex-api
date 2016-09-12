@@ -56,7 +56,7 @@ services:
          -  { name: form.type, alias: customer_type }
 
     tavro.form.customer_comment:
-        class: Tavro\Bundle\CoreBundle\Form\CustomerCommentType
+        class: Tavro\Bundle\CoreBundle\Form\OrganizationCommentType
         tags:
          -  { name: form.type, alias: customer_comment_type }
 

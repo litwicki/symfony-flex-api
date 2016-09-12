@@ -43,8 +43,8 @@ class HubspotController extends ApiController
                 'organization' => $organization->getId()
             ]);
 
-            $url = sprintf('https://api.hubapi.com/contacts/v1/lists/all/contacts/all?hapikey=%s', $var->getBody());
-die($url);
+            $url = sprintf('https://api.hubapi.com/companies/v2/companies?hapikey=%s', $var->getBody());
+
             $curl = new cURL();
             $curl->get($url);
             $response = $curl->response;
@@ -52,7 +52,7 @@ die($url);
             $data = json_decode($response, true);
             $people = array();
 
-            foreach($data['contacts'] as $contact) {
+            foreach($data['companies'] as $contact) {
 
                 if(isset($contact['properties']['firstname']['value'])) {
                     $person = [

@@ -9,7 +9,7 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 
-class CustomerCommentType extends AbstractType
+class OrganizationCommentType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
@@ -37,7 +37,7 @@ class CustomerCommentType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Tavro\Bundle\CoreBundle\Entity\CustomerComment',
+            'data_class' => 'Tavro\Bundle\CoreBundle\Entity\OrganizationComment',
             'csrf_protection'   => false,
         ));
     }

@@ -19,19 +19,19 @@ use Doctrine\ORM\Mapping\Table;
 use Symfony\Component\Validator\Constraints as Assert;
 
 use Tavro\Bundle\CoreBundle\Model\UserInterface;
-use Tavro\Bundle\CoreBundle\Model\OrganizationEntity;
-use Tavro\Bundle\CoreBundle\Model\OrganizationEntityInterface;
+use Tavro\Bundle\CoreBundle\Model\AccountEntity;
+use Tavro\Bundle\CoreBundle\Model\AccountEntityInterface;
 use JMS\Serializer\Annotation\MaxDepth;
 
 /**
  * @ORM\Entity
- * @ORM\Entity(repositoryClass="Tavro\Bundle\CoreBundle\Doctrine\Repository\Entity\CustomerRepository")
+ * @ORM\Entity(repositoryClass="Tavro\Bundle\CoreBundle\Repository\CustomerRepository")
  * @Table(name="tavro_customer")
  *
  * @XmlRoot("shareholder")
  * @XmlNamespace(uri="http://tavro.io/api/shareholders")
  */
-class Customer extends OrganizationEntity implements OrganizationEntityInterface
+class Customer extends AccountEntity implements AccountEntityInterface
 {
 
     /**
@@ -73,7 +73,7 @@ class Customer extends OrganizationEntity implements OrganizationEntityInterface
 
     public function __toString()
     {
-        return sprintf('%s, %s', $this->last_name, $this->first_name);
+        return sprintf('%s, %s', $this->getPerson()->getLastName(), $this->getPerson()->getFirstName());
     }
 
 

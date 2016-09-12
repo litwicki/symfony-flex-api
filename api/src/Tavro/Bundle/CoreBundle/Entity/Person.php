@@ -18,6 +18,8 @@ use Doctrine\ORM\Mapping\Table;
 
 use Symfony\Component\Validator\Constraints as Assert;
 
+use Tavro\Bundle\CoreBundle\Model\AccountEntity;
+use Tavro\Bundle\CoreBundle\Model\AccountEntityInterface;
 use Tavro\Bundle\CoreBundle\Model\UserInterface;
 use Tavro\Bundle\CoreBundle\Model\Entity;
 use Tavro\Bundle\CoreBundle\Model\EntityInterface;
@@ -25,13 +27,13 @@ use JMS\Serializer\Annotation\MaxDepth;
 
 /**
  * @ORM\Entity
- * @ORM\Entity(repositoryClass="Tavro\Bundle\CoreBundle\Doctrine\Repository\Entity\PersonRepository")
- * @Table(name="tavro_person")
+ * @ORM\Entity(repositoryClass="Tavro\Bundle\CoreBundle\Repository\PersonRepository")
+ * @ORM\Table(name="tavro_person", indexes={@ORM\Index(name="ACCOUNT_PERSON", columns={"id","account_id"})})
  *
  * @XmlRoot("person")
  * @XmlNamespace(uri="http://tavro.io/api/people")
  */
-class Person extends Entity implements EntityInterface
+class Person extends AccountEntity implements AccountEntityInterface
 {
     /**
      * @ORM\Column(type="string", length=255, nullable=TRUE)
@@ -50,12 +52,6 @@ class Person extends Entity implements EntityInterface
      * @Groups({"api", "tavro", "simple", "typeahead"})
      */
     protected $last_name;
-
-    /**
-     * @ORM\Column(type="string", length=255, nullable=TRUE)
-     * @Groups({"api", "tavro", "simple"})
-     */
-    protected $title;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=TRUE)
@@ -112,7 +108,7 @@ class Person extends Entity implements EntityInterface
     protected $zip;
 
     /**
-     * @ORM\Column(type="string", unique=TRUE, nullable=TRUE)
+     * @ORM\Column(type="string", unique=FALSE, nullable=TRUE)
      * @Groups({"api", "tavro", "simple", "typeahead"})
      */
     protected $email;
@@ -129,8 +125,6 @@ class Person extends Entity implements EntityInterface
     public function __construct()
     {
         parent::__construct();
-        $this->create_date = new \DateTime();
-        $this->update_date = new \DateTime();
     }
 
     public function __toString()
@@ -209,30 +203,6 @@ class Person extends Entity implements EntityInterface
     public function getLastName()
     {
         return $this->last_name;
-    }
-
-    /**
-     * Set title
-     *
-     * @param string $title
-     *
-     * @return Person
-     */
-    public function setTitle($title)
-    {
-        $this->title = $title;
-
-        return $this;
-    }
-
-    /**
-     * Get title
-     *
-     * @return string
-     */
-    public function getTitle()
-    {
-        return $this->title;
     }
 
     /**

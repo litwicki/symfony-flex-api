@@ -83,15 +83,6 @@ api_new_organization_comment:
         organization: \d+
         _format: json|xml
 
-
-api_organization_users:
-    path: /organizations/{organization}/users.{_format}
-    defaults: { _controller: TavroApiBundle:Organization:users, _format: json}
-    methods: GET
-    requirements:
-        organization: \d+
-        _format: json|xml
-
 api_organization_services:
     path: /organizations/{organization}/services.{_format}
     defaults: { _controller: TavroApiBundle:Organization:services, _format: json}

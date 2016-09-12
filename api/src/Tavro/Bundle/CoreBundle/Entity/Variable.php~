@@ -12,15 +12,15 @@ use JMS\Serializer\Annotation\MaxDepth;
 use JMS\Serializer\Annotation\Groups;
 use Doctrine\ORM\Mapping\Table;
 
-use Tavro\Bundle\CoreBundle\Model\OrganizationEntity;
-use Tavro\Bundle\CoreBundle\Model\OrganizationEntityInterface;
+use Tavro\Bundle\CoreBundle\Model\AccountEntity;
+use Tavro\Bundle\CoreBundle\Model\AccountEntityInterface;
 
 /**
  * @ORM\Entity
- * @ORM\Entity(repositoryClass="Tavro\Bundle\CoreBundle\Doctrine\Repository\Entity\VariableRepository")
+ * @ORM\Entity(repositoryClass="Tavro\Bundle\CoreBundle\Repository\VariableRepository")
  * @Table(name="tavro_variable")
  */
-class Variable extends OrganizationEntity implements OrganizationEntityInterface
+class Variable extends AccountEntity implements AccountEntityInterface
 {
     /**
      * @ORM\Column(type="string", length=100, nullable=FALSE)

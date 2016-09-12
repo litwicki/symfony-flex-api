@@ -3,7 +3,7 @@
 namespace Tavro\Bundle\CoreBundle\Model;
 
 /**
- * Interface EntityInterface
+ * Interface OrganizationEntityInterface
  *
  * @package Tavro\Bundle\CoreBundle\Model
  */
@@ -60,5 +60,22 @@ interface OrganizationEntityInterface
      * @return \DateTime
      */
     public function getUpdateDate();
+
+
+    /**
+     * Set organization
+     *
+     * @param \Tavro\Bundle\CoreBundle\Entity\Organization $organization
+     *
+     * @return Expense
+     */
+    public function setOrganization(\Tavro\Bundle\CoreBundle\Entity\Organization $organization);
+
+    /**
+     * Get organization
+     *
+     * @return \Tavro\Bundle\CoreBundle\Entity\Organization
+     */
+    public function getOrganization();
 
 }

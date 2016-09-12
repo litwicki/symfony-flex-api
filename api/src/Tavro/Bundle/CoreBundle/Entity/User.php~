@@ -26,7 +26,7 @@ use JMS\Serializer\Annotation\MaxDepth;
 
 /**
  * @ORM\Entity
- * @ORM\Entity(repositoryClass="Tavro\Bundle\CoreBundle\Doctrine\Repository\Entity\UserRepository")
+ * @ORM\Entity(repositoryClass="Tavro\Bundle\CoreBundle\Repository\UserRepository")
  * @Table(name="tavro_user")
  *
  * @XmlRoot("user")
@@ -154,9 +154,9 @@ class User extends Entity implements UserInterface, \Serializable
     protected $nodes_read;
 
     /**
-     * @ORM\OneToMany(targetEntity="Tavro\Bundle\CoreBundle\Entity\UserOrganization", mappedBy="user")
+     * @ORM\OneToMany(targetEntity="Tavro\Bundle\CoreBundle\Entity\AccountUser", mappedBy="user")
      */
-    protected $user_organizations;
+    protected $account_users;
 
     /**
      * @ORM\ManyToOne(targetEntity="Tavro\Bundle\CoreBundle\Entity\Image")
@@ -185,7 +185,7 @@ class User extends Entity implements UserInterface, \Serializable
         $this->update_date = new \DateTime();
         $this->nodes = new \Doctrine\Common\Collections\ArrayCollection();
         $this->organizations = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->user_organizations = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->account_users = new \Doctrine\Common\Collections\ArrayCollection();
         $this->roles = new \Doctrine\Common\Collections\ArrayCollection();
         $this->nodes_read = new \Doctrine\Common\Collections\ArrayCollection();
 
@@ -616,7 +616,7 @@ class User extends Entity implements UserInterface, \Serializable
     /**
      * Get node
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getNodes()
     {
@@ -728,7 +728,7 @@ class User extends Entity implements UserInterface, \Serializable
     /**
      * Get nodes_read
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getNodesRead()
     {
@@ -807,7 +807,7 @@ class User extends Entity implements UserInterface, \Serializable
     /**
      * Get comments
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getComments()
     {
@@ -1019,5 +1019,39 @@ class User extends Entity implements UserInterface, \Serializable
     public function getPerson()
     {
         return $this->person;
+    }
+
+    /**
+     * Add accountUser
+     *
+     * @param \Tavro\Bundle\CoreBundle\Entity\AccountUser $accountUser
+     *
+     * @return User
+     */
+    public function addAccountUser(\Tavro\Bundle\CoreBundle\Entity\AccountUser $accountUser)
+    {
+        $this->account_users[] = $accountUser;
+
+        return $this;
+    }
+
+    /**
+     * Remove accountUser
+     *
+     * @param \Tavro\Bundle\CoreBundle\Entity\AccountUser $accountUser
+     */
+    public function removeAccountUser(\Tavro\Bundle\CoreBundle\Entity\AccountUser $accountUser)
+    {
+        $this->account_users->removeElement($accountUser);
+    }
+
+    /**
+     * Get accountUsers
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getAccountUsers()
+    {
+        return $this->account_users;
     }
 }

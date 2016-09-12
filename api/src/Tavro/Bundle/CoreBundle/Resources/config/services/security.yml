@@ -31,6 +31,13 @@ services:
 # ENTITY VOTERS
 # ==============
 
+    tavro.voter.account:
+        class: Tavro\Bundle\CoreBundle\Security\Voter\Entity\AccountVoter
+        public: false
+        arguments: ['@security.access.decision_manager']
+        tags:
+           - { name: security.voter }
+
     tavro.voter.comment:
         class: Tavro\Bundle\CoreBundle\Security\Voter\Entity\CommentVoter
         public: false
@@ -87,8 +94,8 @@ services:
         tags:
             - { name: security.voter }
 
-    tavro.voter.user_organization:
-        class: Tavro\Bundle\CoreBundle\Security\Voter\Entity\UserOrganizationVoter
+    tavro.voter.account_user:
+        class: Tavro\Bundle\CoreBundle\Security\Voter\Entity\AccountUserVoter
         public: false
         arguments: ['@security.access.decision_manager']
         tags:
@@ -101,15 +108,15 @@ services:
         tags:
             - { name: security.voter }
 
-    tavro.voter.customer_comment:
-        class: Tavro\Bundle\CoreBundle\Security\Voter\Entity\CustomerCommentVoter
+    tavro.voter.organization_comment:
+        class: Tavro\Bundle\CoreBundle\Security\Voter\Entity\OrganizationCommentVoter
         public: false
         arguments: ['@security.access.decision_manager']
         tags:
             - { name: security.voter }
 
-    tavro.voter.customer:
-        class: Tavro\Bundle\CoreBundle\Security\Voter\Entity\CustomerVoter
+    tavro.voter.contact:
+        class: Tavro\Bundle\CoreBundle\Security\Voter\Entity\ContactVoter
         public: false
         arguments: ['@security.access.decision_manager']
         tags:
@@ -264,13 +271,6 @@ services:
 
     tavro.voter.shareholder:
         class: Tavro\Bundle\CoreBundle\Security\Voter\Entity\ShareholderVoter
-        public: false
-        arguments: ['@security.access.decision_manager']
-        tags:
-            - { name: security.voter }
-
-    tavro.voter.user_quickbooks:
-        class: Tavro\Bundle\CoreBundle\Security\Voter\Entity\UserQuickbooksVoter
         public: false
         arguments: ['@security.access.decision_manager']
         tags:

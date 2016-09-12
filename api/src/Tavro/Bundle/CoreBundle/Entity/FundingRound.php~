@@ -14,17 +14,17 @@ use JMS\Serializer\Annotation\SerializedName;
 use Doctrine\ORM\Mapping\Table;
 use Symfony\Component\Validator\Constraints as Assert;
 
-use Tavro\Bundle\CoreBundle\Model\OrganizationEntity;
-use Tavro\Bundle\CoreBundle\Model\OrganizationEntityInterface;
+use Tavro\Bundle\CoreBundle\Model\AccountEntity;
+use Tavro\Bundle\CoreBundle\Model\AccountEntityInterface;
 
 /**
  * @ORM\Entity
- * @ORM\Entity(repositoryClass="Tavro\Bundle\CoreBundle\Doctrine\Repository\Entity\FundingRoundRepository")
+ * @ORM\Entity(repositoryClass="Tavro\Bundle\CoreBundle\Repository\FundingRoundRepository")
  * @ORM\HasLifecycleCallbacks
  * @ORM\Table(name="tavro_funding_round")
  *
  */
-class FundingRound extends OrganizationEntity implements OrganizationEntityInterface
+class FundingRound extends AccountEntity implements AccountEntityInterface
 {
     /**
      * @ORM\Column(type="string", length=255, nullable=TRUE)
@@ -68,11 +68,7 @@ class FundingRound extends OrganizationEntity implements OrganizationEntityInter
     public function __construct()
     {
         parent::__construct();
-        $this->status = 1;
-        $now = new \DateTime();
-        $tz = new \DateTimeZone('America/New_York');
-        $now->setTimezone($tz);
-        $this->create_date = $now;
+        $this->status = self::STATUS_ENABLED;
         $this->funding_round_shareholders = new \Doctrine\Common\Collections\ArrayCollection();
     }
 

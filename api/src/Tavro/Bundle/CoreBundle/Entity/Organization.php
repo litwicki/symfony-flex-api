@@ -14,31 +14,23 @@ use JMS\Serializer\Annotation\SerializedName;
 use Doctrine\ORM\Mapping\Table;
 use Symfony\Component\Validator\Constraints as Assert;
 
-use Tavro\Bundle\CoreBundle\Model\Entity;
-use Tavro\Bundle\CoreBundle\Model\EntityInterface;
+use Tavro\Bundle\CoreBundle\Model\AccountEntity;
+use Tavro\Bundle\CoreBundle\Model\AccountEntityInterface;
 
 /**
  * @ORM\Entity
- * @ORM\Entity(repositoryClass="Tavro\Bundle\CoreBundle\Doctrine\Repository\Entity\OrganizationRepository")
+ * @ORM\Entity(repositoryClass="Tavro\Bundle\CoreBundle\Repository\OrganizationRepository")
  * @ORM\HasLifecycleCallbacks
  * @ORM\Table(name="tavro_organization")
  *
  */
-class Organization extends Entity implements EntityInterface
+class Organization extends AccountEntity implements AccountEntityInterface
 {
     /**
-     * @ORM\Column(type="string", length=500, nullable=FALSE)
-     * @Groups({"api", "tavro", "typeahead"})
+     * @ORM\Column(type="string", length=255, nullable=FALSE)
+     * @Groups({"api", "tavro", "simple"})
      */
     protected $title;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="Tavro\Bundle\CoreBundle\Entity\User", inversedBy="organizations")
-     * @ORM\JoinColumn(name="user_id", referencedColumnName="id", nullable=FALSE)
-     * @Groups({"api", "tavro"})
-     * @MaxDepth(2)
-     */
-    protected $owner;
 
     /**
      * @ORM\OneToMany(targetEntity="Tavro\Bundle\CoreBundle\Entity\Node", mappedBy="organization", cascade={"remove"})
@@ -55,11 +47,6 @@ class Organization extends Entity implements EntityInterface
      * @ORM\OrderBy({"id" = "DESC"})
      */
     protected $tags;
-
-    /**
-     * @ORM\OneToMany(targetEntity="Tavro\Bundle\CoreBundle\Entity\UserOrganization", mappedBy="organization", cascade={"remove"})
-     */
-    protected $user_organizations;
 
     /**
      * @ORM\OneToMany(targetEntity="Tavro\Bundle\CoreBundle\Entity\ServiceCategory", mappedBy="organization", cascade={"remove"})
@@ -118,11 +105,11 @@ class Organization extends Entity implements EntityInterface
     protected $revenues;
 
     /**
-     * @ORM\OneToMany(targetEntity="Tavro\Bundle\CoreBundle\Entity\Customer", mappedBy="organization", cascade={"remove"})
+     * @ORM\OneToMany(targetEntity="Tavro\Bundle\CoreBundle\Entity\Contact", mappedBy="organization", cascade={"remove"})
      * @Groups({"tavro"})
      * @MaxDepth(3)
      */
-    protected $customers;
+    protected $contacts;
 
     /**
      * @ORM\OneToMany(targetEntity="Tavro\Bundle\CoreBundle\Entity\FundingRound", mappedBy="organization", cascade={"remove"})
@@ -135,70 +122,6 @@ class Organization extends Entity implements EntityInterface
      * @ORM\OneToMany(targetEntity="Tavro\Bundle\CoreBundle\Entity\FundingRoundShareholder", mappedBy="organization", cascade={"remove"})
      */
     protected $funding_round_shareholders;
-
-    /**
-     * Organization constructor.
-     */
-    public function __construct()
-    {
-        parent::__construct();
-    }
-
-    /**
-     * @param \Tavro\Bundle\CoreBundle\Entity\User $owner
-     *
-     * @return $this
-     */
-    public function setOwner(\Tavro\Bundle\CoreBundle\Entity\User $owner)
-    {
-        $this->owner = $owner;
-
-        return $this;
-    }
-
-    /**
-     * Get user
-     *
-     * @return \Tavro\Bundle\CoreBundle\Entity\User
-     */
-    public function getOwner()
-    {
-        return $this->owner;
-    }
-
-    /**
-     * Add userOrganization
-     *
-     * @param \Tavro\Bundle\CoreBundle\Entity\UserOrganization $userOrganization
-     *
-     * @return Organization
-     */
-    public function addUserOrganization(\Tavro\Bundle\CoreBundle\Entity\UserOrganization $userOrganization)
-    {
-        $this->user_organizations[] = $userOrganization;
-
-        return $this;
-    }
-
-    /**
-     * Remove userOrganization
-     *
-     * @param \Tavro\Bundle\CoreBundle\Entity\UserOrganization $userOrganization
-     */
-    public function removeUserOrganization(\Tavro\Bundle\CoreBundle\Entity\UserOrganization $userOrganization)
-    {
-        $this->user_organizations->removeElement($userOrganization);
-    }
-
-    /**
-     * Get userOrganizations
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getUserOrganizations()
-    {
-        return $this->user_organizations;
-    }
 
     /**
      * Add serviceCategory
@@ -510,7 +433,7 @@ class Organization extends Entity implements EntityInterface
      * Add node
      *
      * @param \Tavro\Bundle\CoreBundle\Entity\Node $node
-     * @return User
+     * @return Organization
      */
     public function addNode(\Tavro\Bundle\CoreBundle\Entity\Node $node)
     {
@@ -653,6 +576,40 @@ class Organization extends Entity implements EntityInterface
     }
 
     /**
+     * Add contact
+     *
+     * @param \Tavro\Bundle\CoreBundle\Entity\Contact $contact
+     *
+     * @return Organization
+     */
+    public function addContact(\Tavro\Bundle\CoreBundle\Entity\Contact $contact)
+    {
+        $this->contacts[] = $contact;
+
+        return $this;
+    }
+
+    /**
+     * Remove contact
+     *
+     * @param \Tavro\Bundle\CoreBundle\Entity\Contact $contact
+     */
+    public function removeContact(\Tavro\Bundle\CoreBundle\Entity\Contact $contact)
+    {
+        $this->contacts->removeElement($contact);
+    }
+
+    /**
+     * Get contacts
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getContacts()
+    {
+        return $this->contacts;
+    }
+
+    /**
      * Set title
      *
      * @param string $title
@@ -698,39 +655,5 @@ class Organization extends Entity implements EntityInterface
     public function getBody()
     {
         return $this->body;
-    }
-
-    /**
-     * Add customer
-     *
-     * @param \Tavro\Bundle\CoreBundle\Entity\Customer $customer
-     *
-     * @return Organization
-     */
-    public function addCustomer(\Tavro\Bundle\CoreBundle\Entity\Customer $customer)
-    {
-        $this->customers[] = $customer;
-
-        return $this;
-    }
-
-    /**
-     * Remove customer
-     *
-     * @param \Tavro\Bundle\CoreBundle\Entity\Customer $customer
-     */
-    public function removeCustomer(\Tavro\Bundle\CoreBundle\Entity\Customer $customer)
-    {
-        $this->customers->removeElement($customer);
-    }
-
-    /**
-     * Get customers
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getCustomers()
-    {
-        return $this->customers;
     }
 }

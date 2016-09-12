@@ -161,7 +161,7 @@ class CommentVoter extends TavroVoter
         $nodeComments = $comment->getNodeComments();
         if($nodeComments->isEmpty()) {
             foreach($nodeComments as $nc) {
-                if($this->checkOrganization($nc->getNode()->getOrganization(), $token->getUser())) {
+                if($this->checkAccount($nc->getNode()->getAccount(), $token->getUser())) {
                     return TRUE;
                 }
             }
@@ -173,7 +173,7 @@ class CommentVoter extends TavroVoter
         $expenseComments = $comment->getExpenseComments();
         if($expenseComments->isEmpty()) {
             foreach($nodeComments as $nc) {
-                if($this->checkOrganization($nc->getExpense()->getOrganization(), $token->getUser())) {
+                if($this->checkAccount($nc->getExpense()->getAccount(), $token->getUser())) {
                     return TRUE;
                 }
             }
@@ -186,7 +186,7 @@ class CommentVoter extends TavroVoter
         if($revenueComments->isEmpty()) {
             foreach($revenueComments as $rc) {
                 foreach($nodeComments as $nc) {
-                    if($this->checkOrganization($nc->getRevenue()->getOrganization(), $token->getUser())) {
+                    if($this->checkAccount($nc->getRevenue()->getAccount(), $token->getUser())) {
                         return TRUE;
                     }
                 }
@@ -194,12 +194,12 @@ class CommentVoter extends TavroVoter
         }
 
         /**
-         * Is this a Customer Comment?
+         * Is this an Organization Comment?
          */
-        $customerComments = $comment->getCustomerComments();
-        if($customerComments->isEmpty()) {
-            foreach($customerComments as $nc) {
-                if($this->checkOrganization($nc->getCustomer()->getOrganization(), $token->getUser())) {
+        $orgComments = $comment->getOrganizationComments();
+        if($orgComments->isEmpty()) {
+            foreach($orgComments as $nc) {
+                if($this->checkAccount($nc->getOrganization()->getAccount(), $token->getUser())) {
                     return TRUE;
                 }
             }
@@ -211,7 +211,7 @@ class CommentVoter extends TavroVoter
         $fundingRoundComments = $comment->getFundingRoundComments();
         if($fundingRoundComments->isEmpty()) {
             foreach($fundingRoundComments as $nc) {
-                if($this->checkOrganization($nc->getFundingRound()->getOrganization(), $token->getUser())) {
+                if($this->checkAccount($nc->getFundingRound()->getOrganization(), $token->getUser())) {
                     return TRUE;
                 }
             }

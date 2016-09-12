@@ -14,17 +14,19 @@ use JMS\Serializer\Annotation\SerializedName;
 use Doctrine\ORM\Mapping\Table;
 use Symfony\Component\Validator\Constraints as Assert;
 
+use Tavro\Bundle\CoreBundle\Model\AccountEntity;
+use Tavro\Bundle\CoreBundle\Model\AccountEntityInterface;
 use Tavro\Bundle\CoreBundle\Model\Entity;
 use Tavro\Bundle\CoreBundle\Model\EntityInterface;
 
 /**
  * @ORM\Entity
- * @ORM\Entity(repositoryClass="Tavro\Bundle\CoreBundle\Doctrine\Repository\Entity\ExpenseRepository")
+ * @ORM\Entity(repositoryClass="Tavro\Bundle\CoreBundle\Repository\ExpenseRepository")
  * @ORM\HasLifecycleCallbacks
  * @ORM\Table(name="tavro_expense")
  *
  */
-class Expense extends Entity
+class Expense extends AccountEntity implements AccountEntityInterface
 {
     /**
      * @ORM\Column(type="string", length=8000, nullable=TRUE)
@@ -79,14 +81,6 @@ class Expense extends Entity
     protected $organization;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Tavro\Bundle\CoreBundle\Entity\Organization", inversedBy="expenses")
-     * @ORM\JoinColumn(name="customer_id", referencedColumnName="id", nullable=TRUE)
-     * @Groups({"api", "tavro", "simple"})
-     * @MaxDepth(1)
-     */
-    protected $customer;
-
-    /**
      * Constructor
      */
     public function __construct()
@@ -95,7 +89,7 @@ class Expense extends Entity
         $this->expense_tags = new \Doctrine\Common\Collections\ArrayCollection();;
         $this->expense_comments = new \Doctrine\Common\Collections\ArrayCollection();
         $this->expense_date = new \DateTime();
-        $this->status = 1;
+        $this->status = self::STATUS_ENABLED;
     }
 
     /**
@@ -296,6 +290,7 @@ class Expense extends Entity
     public function setOrganization(\Tavro\Bundle\CoreBundle\Entity\Organization $organization)
     {
         $this->organization = $organization;
+
         return $this;
     }
 
@@ -307,29 +302,5 @@ class Expense extends Entity
     public function getOrganization()
     {
         return $this->organization;
-    }
-
-    /**
-     * Set customer
-     *
-     * @param \Tavro\Bundle\CoreBundle\Entity\Organization $customer
-     *
-     * @return Expense
-     */
-    public function setCustomer(\Tavro\Bundle\CoreBundle\Entity\Organization $customer = null)
-    {
-        $this->customer = $customer;
-
-        return $this;
-    }
-
-    /**
-     * Get customer
-     *
-     * @return \Tavro\Bundle\CoreBundle\Entity\Organization
-     */
-    public function getCustomer()
-    {
-        return $this->customer;
     }
 }

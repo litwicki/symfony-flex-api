@@ -18,7 +18,7 @@ use Tavro\Bundle\CoreBundle\Model\EntityInterface;
 
 /**
  * @ORM\Entity
- * @ORM\Entity(repositoryClass="Tavro\Bundle\CoreBundle\Doctrine\Repository\Entity\CommentRepository")
+ * @ORM\Entity(repositoryClass="Tavro\Bundle\CoreBundle\Repository\CommentRepository")
  * @ORM\HasLifecycleCallbacks
  * @Table(name="tavro_comment")
  */
@@ -39,10 +39,6 @@ class Comment extends Entity implements EntityInterface
      */
     protected $revenue_comments;
 
-    /**
-     * @ORM\OneToMany(targetEntity="Tavro\Bundle\CoreBundle\Entity\CustomerComment", mappedBy="comment", cascade={"remove"})
-     */
-    protected $customer_comments;
 
     /**
      * @ORM\OneToMany(targetEntity="Tavro\Bundle\CoreBundle\Entity\FundingRoundComment", mappedBy="comment", cascade={"remove"})
@@ -66,7 +62,7 @@ class Comment extends Entity implements EntityInterface
         $this->node_comments = new \Doctrine\Common\Collections\ArrayCollection();
         $this->expense_comments = new \Doctrine\Common\Collections\ArrayCollection();
         $this->revenue_comments = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->customer_comments = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->contact_comments = new \Doctrine\Common\Collections\ArrayCollection();
         $this->funding_round_comments = new \Doctrine\Common\Collections\ArrayCollection();
         $this->status = 1;
         $this->create_date = new \DateTime();
@@ -126,7 +122,7 @@ class Comment extends Entity implements EntityInterface
     /**
      * Get node_comments
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getNodeComments()
     {
@@ -259,36 +255,36 @@ class Comment extends Entity implements EntityInterface
     }
 
     /**
-     * Add customerComment
+     * Add contactComment
      *
-     * @param \Tavro\Bundle\CoreBundle\Entity\CustomerComment $customerComment
+     * @param \Tavro\Bundle\CoreBundle\Entity\ContactComment $contactComment
      *
      * @return Comment
      */
-    public function addCustomerComment(\Tavro\Bundle\CoreBundle\Entity\CustomerComment $customerComment)
+    public function addContactComment(\Tavro\Bundle\CoreBundle\Entity\ContactComment $contactComment)
     {
-        $this->customer_comments[] = $customerComment;
+        $this->contact_comments[] = $contactComment;
 
         return $this;
     }
 
     /**
-     * Remove customerComment
+     * Remove contactComment
      *
-     * @param \Tavro\Bundle\CoreBundle\Entity\CustomerComment $customerComment
+     * @param \Tavro\Bundle\CoreBundle\Entity\ContactComment $contactComment
      */
-    public function removeCustomerComment(\Tavro\Bundle\CoreBundle\Entity\CustomerComment $customerComment)
+    public function removeContactComment(\Tavro\Bundle\CoreBundle\Entity\ContactComment $contactComment)
     {
-        $this->customer_comments->removeElement($customerComment);
+        $this->contact_comments->removeElement($contactComment);
     }
 
     /**
-     * Get customerComments
+     * Get contactComments
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getCustomerComments()
+    public function getContactComments()
     {
-        return $this->customer_comments;
+        return $this->contact_comments;
     }
 }

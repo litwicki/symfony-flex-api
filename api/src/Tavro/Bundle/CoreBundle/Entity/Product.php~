@@ -14,17 +14,17 @@ use JMS\Serializer\Annotation\SerializedName;
 use Doctrine\ORM\Mapping\Table;
 use Symfony\Component\Validator\Constraints as Assert;
 
-use Tavro\Bundle\CoreBundle\Model\OrganizationEntity;
-use Tavro\Bundle\CoreBundle\Model\OrganizationEntityInterface;
+use Tavro\Bundle\CoreBundle\Model\AccountEntity;
+use Tavro\Bundle\CoreBundle\Model\AccountEntityInterface;
 
 /**
  * @ORM\Entity
- * @ORM\Entity(repositoryClass="Tavro\Bundle\CoreBundle\Doctrine\Repository\Entity\ProductRepository")
+ * @ORM\Entity(repositoryClass="Tavro\Bundle\CoreBundle\Repository\ProductRepository")
  * @ORM\HasLifecycleCallbacks
  * @ORM\Table(name="tavro_product")
  *
  */
-class Product extends OrganizationEntity implements OrganizationEntityInterface
+class Product extends AccountEntity implements AccountEntityInterface
 {
 
     /**

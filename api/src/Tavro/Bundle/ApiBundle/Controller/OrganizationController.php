@@ -22,36 +22,6 @@ use Tavro\Bundle\ApiBundle\Controller\DefaultController as ApiController;
 
 class OrganizationController extends ApiController
 {
-    /**
-     * @param \Symfony\Component\HttpFoundation\Request $request
-     * @param \Tavro\Bundle\CoreBundle\Entity\Organization $organization
-     * @param $_format
-     *
-     * @return \Symfony\Component\HttpFoundation\Response
-     * @throws \Exception
-     */
-    public function usersAction(Request $request, Organization $organization, $_format)
-    {
-        try {
-
-            $entities = $organization->getUserOrganizations();
-
-            $items = array();
-
-            foreach($entities as $entity) {
-                $items[] = $entity->getUser();
-            }
-
-        }
-        catch(\Exception $e) {
-            throw $e;
-        }
-        finally {
-            $data = $this->serialize($items, $_format, $group = 'simple');
-            $response = $this->apiResponse($data, $_format);
-            return $response;
-        }
-    }
 
     /**
      * @param \Symfony\Component\HttpFoundation\Request $request

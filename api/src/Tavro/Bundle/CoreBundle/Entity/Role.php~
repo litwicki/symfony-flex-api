@@ -18,7 +18,7 @@ use Doctrine\ORM\Mapping\Table;
 
 /**
  * @ORM\Entity
- * @ORM\Entity(repositoryClass="Tavro\Bundle\CoreBundle\Doctrine\Repository\Entity\RoleRepository")
+ * @ORM\Entity(repositoryClass="Tavro\Bundle\CoreBundle\Repository\RoleRepository")
  * @Table(name="tavro_role")
  *
  */
@@ -47,10 +47,9 @@ class Role extends Entity implements RoleInterface, EntityInterface, \Serializab
      */
     public function __construct()
     {
+        parent::__construct();
         $this->users = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->create_date = new \DateTime();
-        $this->update_date = new \DateTime();
-        $this->status = 1;
+        $this->status = self::STATUS_ENABLED;
     }
 
     public function __toString()
@@ -130,7 +129,7 @@ class Role extends Entity implements RoleInterface, EntityInterface, \Serializab
     /**
      * Get user
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getUsers()
     {
@@ -161,6 +160,7 @@ class Role extends Entity implements RoleInterface, EntityInterface, \Serializab
             $this->role
         ) = \unserialize($serialized);
     }
+
 
     /**
      * Set body

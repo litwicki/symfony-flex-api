@@ -32,7 +32,7 @@ use Tavro\Bundle\CoreBundle\Entity\ProductCategory;
 use Tavro\Bundle\CoreBundle\Entity\RevenueCategory;
 use Tavro\Bundle\CoreBundle\Entity\ServiceCategory;
 use Tavro\Bundle\CoreBundle\Entity\Customer;
-use Tavro\Bundle\CoreBundle\Entity\CustomerComment;
+use Tavro\Bundle\CoreBundle\Entity\OrganizationComment;
 use Tavro\Bundle\CoreBundle\Entity\FundingRoundShareholder;
 use Tavro\Bundle\CoreBundle\Entity\RevenueService;
 use Tavro\Bundle\CoreBundle\Entity\RevenueProduct;
@@ -66,21 +66,25 @@ class Organizations extends AbstractFixture implements OrderedFixtureInterface, 
      */
     public function load(ObjectManager $manager)
     {
-        $lipsum = $this->container->get('apoutchika.lorem_ipsum');
+        $faker = \Faker\Factory::create('en_EN');
         $size = 10;
 
-        $users = $manager->getRepository('TavroCoreBundle:User')->findAll();
+        $accounts = $manager->getRepository('TavroCoreBundle:Account')->findAll();
 
-        for($i=0;$i<$size;$i++) {
+        foreach($accounts as $account) {
 
-            $organization = new Organization();
-            $organization->setTitle($lipsum->getWords(1,10));
-            $organization->setBody($lipsum->getSentences(rand(1,5)));
-            $organization->setCreateDate(new \DateTime());
-            $organization->setOwner($users[array_rand($users)]);
-            $organization->setStatus(rand(0,1));
-            $manager->persist($organization);
-            $organizations[] = $organization;
+            for($i=0;$i<$size;$i++) {
+
+                $organization = new Organization();
+                $organization->setTitle($faker->words(rand(1,5)));
+                $organization->setBody($faker->sentences(rand(1,5)));
+                $organization->setCreateDate(new \DateTime());
+                $organization->setAccount($account);
+                $organization->setStatus(rand(0,1));
+                $manager->persist($organization);
+                $organizations[] = $organization;
+
+            }
 
         }
 
@@ -93,7 +97,7 @@ class Organizations extends AbstractFixture implements OrderedFixtureInterface, 
      */
     public function getOrder()
     {
-        return 2; // the order in which fixtures will be loaded
+        return 5; // the order in which fixtures will be loaded
     }
 
 }

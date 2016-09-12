@@ -18,7 +18,7 @@ use Tavro\Bundle\CoreBundle\Model\EntityInterface;
 
 /**
  * @ORM\Entity
- * @ORM\Entity(repositoryClass="Tavro\Bundle\CoreBundle\Doctrine\Repository\Entity\ExpenseCommentRepository")
+ * @ORM\Entity(repositoryClass="Tavro\Bundle\CoreBundle\Repository\ExpenseCommentRepository")
  * @ORM\Table(name="tavro_expense_comment", indexes={@ORM\Index(name="NODE_COMMENT", columns={"comment_id","expense_id"})})
  * @ExclusionPolicy("all")
  */

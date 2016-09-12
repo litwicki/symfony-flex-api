@@ -54,6 +54,8 @@ class PersonVoter extends TavroVoter
             return TRUE;
         }
 
+        $user = $token->getUser();
+
         switch ($attribute) {
             case self::CREATE:
                 return $this->canCreate($subject, $token);

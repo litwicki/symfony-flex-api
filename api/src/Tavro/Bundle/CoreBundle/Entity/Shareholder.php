@@ -18,22 +18,20 @@ use Doctrine\ORM\Mapping\Table;
 
 use Symfony\Component\Validator\Constraints as Assert;
 
-use Tavro\Bundle\CoreBundle\Model\UserInterface;
-use Tavro\Bundle\CoreBundle\Model\Entity;
-use Tavro\Bundle\CoreBundle\Model\EntityInterface;
+use Tavro\Bundle\CoreBundle\Model\AccountEntity;
+use Tavro\Bundle\CoreBundle\Model\AccountEntityInterface;
 use JMS\Serializer\Annotation\MaxDepth;
 
 /**
  * @ORM\Entity
- * @ORM\Entity(repositoryClass="Tavro\Bundle\CoreBundle\Doctrine\Repository\Entity\ShareholderRepository")
+ * @ORM\Entity(repositoryClass="Tavro\Bundle\CoreBundle\Repository\ShareholderRepository")
  * @Table(name="tavro_shareholder")
  *
  * @XmlRoot("shareholder")
  * @XmlNamespace(uri="http://tavro.io/api/shareholders")
  */
-class Shareholder extends Entity implements EntityInterface
+class Shareholder extends AccountEntity implements AccountEntityInterface
 {
-
     /**
      * @ORM\ManyToOne(targetEntity="Tavro\Bundle\CoreBundle\Entity\Person")
      * @ORM\JoinColumn(name="person_id", referencedColumnName="id", nullable=FALSE)
@@ -49,30 +47,6 @@ class Shareholder extends Entity implements EntityInterface
      */
     protected $funding_round_shareholders;
 
-
-    /**
-     * Set body
-     *
-     * @param string $body
-     *
-     * @return Shareholder
-     */
-    public function setBody($body)
-    {
-        $this->body = $body;
-
-        return $this;
-    }
-
-    /**
-     * Get body
-     *
-     * @return string
-     */
-    public function getBody()
-    {
-        return $this->body;
-    }
 
     /**
      * Set person
@@ -130,5 +104,29 @@ class Shareholder extends Entity implements EntityInterface
     public function getFundingRoundShareholders()
     {
         return $this->funding_round_shareholders;
+    }
+
+    /**
+     * Set body
+     *
+     * @param string $body
+     *
+     * @return Shareholder
+     */
+    public function setBody($body)
+    {
+        $this->body = $body;
+
+        return $this;
+    }
+
+    /**
+     * Get body
+     *
+     * @return string
+     */
+    public function getBody()
+    {
+        return $this->body;
     }
 }

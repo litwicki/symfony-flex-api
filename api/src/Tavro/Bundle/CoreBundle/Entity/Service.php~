@@ -14,23 +14,18 @@ use JMS\Serializer\Annotation\SerializedName;
 use Doctrine\ORM\Mapping\Table;
 use Symfony\Component\Validator\Constraints as Assert;
 
-use Tavro\Bundle\CoreBundle\Model\Entity;
-use Tavro\Bundle\CoreBundle\Model\EntityInterface;
+use Tavro\Bundle\CoreBundle\Model\AccountEntity;
+use Tavro\Bundle\CoreBundle\Model\AccountEntityInterface;
 
 /**
  * @ORM\Entity
- * @ORM\Entity(repositoryClass="Tavro\Bundle\CoreBundle\Doctrine\Repository\Entity\ServiceRepository")
+ * @ORM\Entity(repositoryClass="Tavro\Bundle\CoreBundle\Repository\ServiceRepository")
  * @ORM\HasLifecycleCallbacks
  * @ORM\Table(name="tavro_service")
  *
  */
-class Service extends Entity
+class Service extends AccountEntity implements AccountEntityInterface
 {
-    /**
-     * @ORM\Column(type="string", length=8000, nullable=TRUE)
-     * @Groups({"api", "tavro", "simple"})
-     */
-    protected $body;
 
     /**
      * @ORM\Column(type="float", nullable=FALSE, options={"default" = 0})
@@ -79,64 +74,14 @@ class Service extends Entity
      */
     public function __construct()
     {
-        $this->status = 1;
-        $now = new \DateTime();
-        $tz = new \DateTimeZone('America/New_York');
-        $now->setTimezone($tz);
-        $this->create_date = $now;
+        parent::__construct();
+        $this->status = self::STATUS_ENABLED;
     }
 
     public function __toString()
     {
-        return $this->title;
-    }
-
-    /**
-     * Set body
-     *
-     * @param string $body
-     * @return Service
-     */
-    public function setBody($body)
-    {
-        $this->body = $body;
-
-        return $this;
-    }
-
-    /**
-     * Get body
-     *
-     * @return string
-     */
-    public function getBody()
-    {
         return $this->body;
     }
-
-    /**
-     * Set organization
-     *
-     * @param \Tavro\Bundle\CoreBundle\Entity\Organization $organization
-     * @return Service
-     */
-    public function setOrganization(\Tavro\Bundle\CoreBundle\Entity\Organization $organization)
-    {
-        $this->organization = $organization;
-
-        return $this;
-    }
-
-    /**
-     * Get organization
-     *
-     * @return \Tavro\Bundle\CoreBundle\Entity\Organization
-     */
-    public function getOrganization()
-    {
-        return $this->organization;
-    }
-
 
     /**
      * Set category
@@ -276,5 +221,53 @@ class Service extends Entity
     public function getServiceImages()
     {
         return $this->service_images;
+    }
+
+    /**
+     * Set body
+     *
+     * @param string $body
+     *
+     * @return Service
+     */
+    public function setBody($body)
+    {
+        $this->body = $body;
+
+        return $this;
+    }
+
+    /**
+     * Get body
+     *
+     * @return string
+     */
+    public function getBody()
+    {
+        return $this->body;
+    }
+
+    /**
+     * Set organization
+     *
+     * @param \Tavro\Bundle\CoreBundle\Entity\Organization $organization
+     *
+     * @return Service
+     */
+    public function setOrganization(\Tavro\Bundle\CoreBundle\Entity\Organization $organization)
+    {
+        $this->organization = $organization;
+
+        return $this;
+    }
+
+    /**
+     * Get organization
+     *
+     * @return \Tavro\Bundle\CoreBundle\Entity\Organization
+     */
+    public function getOrganization()
+    {
+        return $this->organization;
     }
 }

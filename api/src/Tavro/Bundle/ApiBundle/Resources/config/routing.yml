@@ -1,11 +1,14 @@
 tavro_auth_api:
     resource: "@TavroApiBundle/Resources/config/routing/auth.yml"
 
+tavro_account_api:
+    resource: "@TavroApiBundle/Resources/config/routing/account.yml"
+
 tavro_comment_api:
     resource: "@TavroApiBundle/Resources/config/routing/comment.yml"
 
-tavro_customer_api:
-    resource: "@TavroApiBundle/Resources/config/routing/customer.yml"
+tavro_contact_api:
+    resource: "@TavroApiBundle/Resources/config/routing/contact.yml"
 
 tavro_expense_api:
     resource: "@TavroApiBundle/Resources/config/routing/expense.yml"

@@ -86,24 +86,20 @@ class EntityHandler implements EntityHandlerInterface
     }
 
     /**
-     * Get an array of all Organizations this User should have access to.
+     * Get an array of all ACcounts this User should have access to.
      * This includes Organizations they "own" as well as ones they are mere Users of
      */
-    public function getMyOrganizations()
+    public function getMyAccounts()
     {
         try {
 
-            $organizations = array();
+            $accounts = array();
 
-            foreach($this->user->getOrganizations() as $entity) {
-                $organizations[$entity->getId()] = $entity;
+            foreach($this->user->getAccountUsers() as $entity) {
+                $accounts[$entity->getId()][] = $entity->getAccount();
             }
 
-            foreach($this->user->getUserOrganizations() as $entity) {
-                $organizations[$entity->getOrganization()->getId()] = $entity->getOrganization();
-            }
-
-            return $organizations;
+            return $accounts;
 
         }
         catch(\Exception $e) {
@@ -121,7 +117,9 @@ class EntityHandler implements EntityHandlerInterface
     public function find($id)
     {
         try {
+
             $entity = $this->repository->find($id);
+
             if($this->auth->isGranted('view', $entity)) {
                 return $entity;
             }
@@ -129,6 +127,7 @@ class EntityHandler implements EntityHandlerInterface
                 $message = sprintf('You are not authorized to view this %s.', $this->entityClass, $id);
                 throw new ApiAccessDeniedException($message);
             }
+
         }
         catch(ApiAccessDeniedException $e) {
             throw $e;
@@ -245,17 +244,29 @@ class EntityHandler implements EntityHandlerInterface
             );
 
             $items = array();
+            $count = 0;
 
             foreach($entities as $entity) {
+
                 if($this->auth->isGranted('view', $entity)) {
-                    $items[] = $entity;
+
+                    if($entity instanceof AccountEntityInterface) {
+                        $items['accounts'][$entity->getAccount()->getId()][] = $entity;
+                    }
+                    else {
+                        $items[] = $entity;
+                    }
+
+                    $count++;
+
                 }
+
             }
 
             return array(
                 'data' => $items,
                 'message' => sprintf('%s %s retrieved.',
-                    count($items),
+                    $count,
                     str_replace('Tavro\\Bundle\\CoreBundle\\Entity\\', '', Inflector::pluralize($this->entityClass))
                 )
             );
@@ -609,7 +620,7 @@ class EntityHandler implements EntityHandlerInterface
 
         $map = array(
             'Tavro\Bundle\CoreBundle\Entity\Comment'             => 'Tavro\Bundle\CoreBundle\Form\CommentType',
-            'Tavro\Bundle\CoreBundle\Entity\CustomerComment'     => 'Tavro\Bundle\CoreBundle\Form\CustomerCommentType',
+            'Tavro\Bundle\CoreBundle\Entity\OrganizationComment'     => 'Tavro\Bundle\CoreBundle\Form\OrganizationCommentType',
             'Tavro\Bundle\CoreBundle\Entity\Customer'            => 'Tavro\Bundle\CoreBundle\Form\CustomerType',
             'Tavro\Bundle\CoreBundle\Entity\ExpenseCategory'     => 'Tavro\Bundle\CoreBundle\Form\ExpenseCategoryType',
             'Tavro\Bundle\CoreBundle\Entity\ExpenseComment'      => 'Tavro\Bundle\CoreBundle\Form\ExpenseCommentType',

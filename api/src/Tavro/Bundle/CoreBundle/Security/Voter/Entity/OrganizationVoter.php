@@ -85,7 +85,7 @@ class OrganizationVoter extends TavroVoter
      */
     private function canView(Organization $organization, User $user)
     {
-        return $this->checkOrganization($organization, $user);
+        return $this->checkAccount($organization->getAccount(), $user);
     }
 
     /**
@@ -110,7 +110,7 @@ class OrganizationVoter extends TavroVoter
      */
     private function canEdit(Organization $organization, User $user)
     {
-        return $this->checkOrganization($organization, $user);
+        return $this->checkAccount($organization->getAccount(), $user);
     }
 
     /**
@@ -121,7 +121,7 @@ class OrganizationVoter extends TavroVoter
      */
     private function canPatch(Organization $organization, User $user)
     {
-        return $this->checkOrganization($organization, $user);
+        return $this->checkAccount($organization->getAccount(), $user);
     }
 
 }

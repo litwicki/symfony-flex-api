@@ -13,15 +13,15 @@ use JMS\Serializer\Annotation\Groups;
 use JMS\Serializer\Annotation\MaxDepth;
 use Doctrine\ORM\Mapping\Table;
 
-use Tavro\Bundle\CoreBundle\Model\OrganizationEntity;
-use Tavro\Bundle\CoreBundle\Model\OrganizationEntityInterface;
+use Tavro\Bundle\CoreBundle\Model\Entity;
+use Tavro\Bundle\CoreBundle\Model\EntityInterface;
 
 /**
  * @ORM\Entity
- * @ORM\Entity(repositoryClass="Tavro\Bundle\CoreBundle\Doctrine\Repository\Entity\FundingRoundShareholderRepository")
- * @ORM\Table(name="tavro_funding_round_shareholder", indexes={@ORM\Index(name="ORGANIZATION_SHAREHOLDER", columns={"shareholder_id","funding_round_id"})})
+ * @ORM\Entity(repositoryClass="Tavro\Bundle\CoreBundle\Repository\FundingRoundShareholderRepository")
+ * @ORM\Table(name="tavro_funding_round_shareholder", indexes={@ORM\Index(name="FUNDING_ROUND_SHAREHOLDER", columns={"shareholder_id","funding_round_id"})})
  */
-class FundingRoundShareholder extends OrganizationEntity implements OrganizationEntityInterface
+class FundingRoundShareholder extends Entity implements EntityInterface
 {
     /**
      * @ORM\ManyToOne(targetEntity="Tavro\Bundle\CoreBundle\Entity\Shareholder", inversedBy="funding_round_shareholders")

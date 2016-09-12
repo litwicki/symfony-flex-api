@@ -14,17 +14,17 @@ use JMS\Serializer\Annotation\SerializedName;
 use Doctrine\ORM\Mapping\Table;
 use Symfony\Component\Validator\Constraints as Assert;
 
-use Tavro\Bundle\CoreBundle\Model\OrganizationEntity;
-use Tavro\Bundle\CoreBundle\Model\OrganizationEntityInterface;
+use Tavro\Bundle\CoreBundle\Model\AccountEntity;
+use Tavro\Bundle\CoreBundle\Model\AccountEntityInterface;
 
 /**
  * @ORM\Entity
- * @ORM\Entity(repositoryClass="Tavro\Bundle\CoreBundle\Doctrine\Repository\Entity\NodeRepository")
+ * @ORM\Entity(repositoryClass="Tavro\Bundle\CoreBundle\Repository\NodeRepository")
  * @ORM\HasLifecycleCallbacks
  * @ORM\Table(name="tavro_node", indexes={@ORM\Index(name="NODE_TYPE", columns={"type"})})
  *
  */
-class Node extends OrganizationEntity implements OrganizationEntityInterface
+class Node extends AccountEntity implements AccountEntityInterface
 {
 
     /**
@@ -42,12 +42,6 @@ class Node extends OrganizationEntity implements OrganizationEntityInterface
      * @Groups({"api", "tavro", "simple"})
      */
     protected $type;
-
-    /**
-     * @ORM\Column(type="string", length=8000, nullable=TRUE)
-     * @Groups({"api", "tavro", "simple"})
-     */
-    protected $body;
 
     /**
      * @ORM\Column(type="datetime", length=1000, nullable=TRUE)
@@ -89,14 +83,12 @@ class Node extends OrganizationEntity implements OrganizationEntityInterface
      */
     public function __construct()
     {
+        parent::__construct();
         $this->node_tags = new \Doctrine\Common\Collections\ArrayCollection();
         $this->node_comments = new \Doctrine\Common\Collections\ArrayCollection();
         $this->nodes_read = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->status = 1;
-        $now = new \DateTime();
-        $tz = new \DateTimeZone('America/New_York');
-        $now->setTimezone($tz);
-        $this->create_date = $now;
+        $this->status = self::STATUS_ENABLED;
+        $this->create_date = new \DateTime();
         $this->views = 0;
         $this->display_date = new \DateTime();
     }
@@ -127,29 +119,6 @@ class Node extends OrganizationEntity implements OrganizationEntityInterface
     public function getType()
     {
         return $this->type;
-    }
-
-    /**
-     * Set body
-     *
-     * @param string $body
-     * @return Node
-     */
-    public function setBody($body)
-    {
-        $this->body = $body;
-
-        return $this;
-    }
-
-    /**
-     * Get body
-     *
-     * @return string
-     */
-    public function getBody()
-    {
-        return $this->body;
     }
 
     /**
@@ -397,7 +366,7 @@ class Node extends OrganizationEntity implements OrganizationEntityInterface
     /**
      * Get node_tags
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getNodeTags()
     {
@@ -427,5 +396,29 @@ class Node extends OrganizationEntity implements OrganizationEntityInterface
     public function getTitle()
     {
         return $this->title;
+    }
+
+    /**
+     * Set body
+     *
+     * @param string $body
+     *
+     * @return Node
+     */
+    public function setBody($body)
+    {
+        $this->body = $body;
+
+        return $this;
+    }
+
+    /**
+     * Get body
+     *
+     * @return string
+     */
+    public function getBody()
+    {
+        return $this->body;
     }
 }

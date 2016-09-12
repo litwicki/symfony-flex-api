@@ -3,11 +3,11 @@
 namespace Tavro\Bundle\CoreBundle\Security\Voter;
 
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
-use Tavro\Bundle\CoreBundle\Entity\Organization;
-use Tavro\Bundle\CoreBundle\Entity\User;
 use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 use Symfony\Component\Security\Core\Authorization\AccessDecisionManagerInterface;
-use Tavro\Bundle\CoreBundle\Model\EntityInterface;
+
+use Tavro\Bundle\CoreBundle\Entity\Account;
+use Tavro\Bundle\CoreBundle\Entity\User;
 
 class TavroVoter extends Voter
 {
@@ -64,24 +64,24 @@ class TavroVoter extends Voter
      * Validate that the entity being manipulated is within the ecosystem
      * of Organizations this User belongs to.
      *
-     * @param \Tavro\Bundle\CoreBundle\Entity\Organization $organization
+     * @param \Tavro\Bundle\CoreBundle\Entity\Account $account
      * @param \Tavro\Bundle\CoreBundle\Entity\User $user
      *
      * @return bool
      */
-    public function checkOrganization(Organization $organization, User $user)
+    public function checkAccount(Account $account, User $user)
     {
-        $items = $user->getUserOrganizations();
-        $organizations = array();
+        $items = $user->getAccountUsers();
+        $accounts = array();
 
         foreach($items as $item) {
-            $org = $item->getOrganization();
-            $organizations[$org->getId()] = $org;
+            $acc = $item->getAccount();
+            $accounts[$acc->getId()] = $acc;
         }
 
-        $id = $organization->getId();
+        $id = $account->getId();
 
-        if(in_array($id, array_keys($organizations))) {
+        if(in_array($id, array_keys($accounts))) {
             return TRUE;
         }
 
