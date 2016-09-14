@@ -69,9 +69,9 @@ class Variables extends AbstractFixture implements OrderedFixtureInterface, Cont
         $lipsum = $this->container->get('apoutchika.lorem_ipsum');
         $size = 10;
 
-        $organizations = $manager->getRepository('TavroCoreBundle:Organization')->findAll();
+        $accounts = $manager->getRepository('TavroCoreBundle:Account')->findAll();
 
-        foreach($organizations as $organization) {
+        foreach($accounts as $account) {
 
             $integrations = [
                 'hubspot' => ['hapikey', 'userId'],
@@ -81,7 +81,7 @@ class Variables extends AbstractFixture implements OrderedFixtureInterface, Cont
             foreach($integrations as $name => $vars) {
                 foreach($vars as $var) {
                     $variable = new Variable();
-                    $variable->setOrganization($organization);
+                    $variable->setAccount($account);
                     $variable->setName(sprintf('%s.%s',$name,$var));
                     $manager->persist($variable);
                 }

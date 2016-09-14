@@ -1,4 +1,63 @@
 services:
+    tavro.handler.accounts:
+        class: Tavro\Bundle\CoreBundle\Handler\Entity\AccountHandler
+        arguments:
+            - '@doctrine.orm.main_entity_manager'
+            - '@form.factory'
+            - '@validator'
+            - '@security.encoder_factory.generic'
+            - '@security.token_storage'
+            - '@security.authorization_checker'
+            - '%amazon_s3_url%'
+            - 'Tavro\Bundle\CoreBundle\Entity\Account'
+
+    tavro.handler.accounts:
+        class: Tavro\Bundle\CoreBundle\Handler\Entity\AccountUserHandler
+        arguments:
+            - '@doctrine.orm.main_entity_manager'
+            - '@form.factory'
+            - '@validator'
+            - '@security.encoder_factory.generic'
+            - '@security.token_storage'
+            - '@security.authorization_checker'
+            - '%amazon_s3_url%'
+            - 'Tavro\Bundle\CoreBundle\Entity\AccountUser'
+
+    tavro.handler.accounts:
+        class: Tavro\Bundle\CoreBundle\Handler\Entity\AccountGroupHandler
+        arguments:
+            - '@doctrine.orm.main_entity_manager'
+            - '@form.factory'
+            - '@validator'
+            - '@security.encoder_factory.generic'
+            - '@security.token_storage'
+            - '@security.authorization_checker'
+            - '%amazon_s3_url%'
+            - 'Tavro\Bundle\CoreBundle\Entity\AccountGroup'
+    tavro.handler.accounts:
+        class: Tavro\Bundle\CoreBundle\Handler\Entity\AccountGroupUserHandler
+        arguments:
+            - '@doctrine.orm.main_entity_manager'
+            - '@form.factory'
+            - '@validator'
+            - '@security.encoder_factory.generic'
+            - '@security.token_storage'
+            - '@security.authorization_checker'
+            - '%amazon_s3_url%'
+            - 'Tavro\Bundle\CoreBundle\Entity\AccountGroupUser'
+
+
+    tavro.handler.comments:
+        class: Tavro\Bundle\CoreBundle\Handler\Entity\CommentHandler
+        arguments:
+            - '@doctrine.orm.main_entity_manager'
+            - '@form.factory'
+            - '@validator'
+            - '@security.encoder_factory.generic'
+            - '@security.token_storage'
+            - '@security.authorization_checker'
+            - '%amazon_s3_url%'
+            - 'Tavro\Bundle\CoreBundle\Entity\Comment'
     tavro.handler.comments:
         class: Tavro\Bundle\CoreBundle\Handler\Entity\CommentHandler
         arguments:
@@ -59,8 +118,8 @@ services:
             - '%amazon_s3_url%'
             - 'Tavro\Bundle\CoreBundle\Entity\NodeComment'
 
-    tavro.handler.customers:
-        class: Tavro\Bundle\CoreBundle\Handler\Entity\CustomerHandler
+    tavro.handler.contacts:
+        class: Tavro\Bundle\CoreBundle\Handler\Entity\ContactHandler
         arguments:
             - '@doctrine.orm.main_entity_manager'
             - '@form.factory'
@@ -69,7 +128,7 @@ services:
             - '@security.token_storage'
             - '@security.authorization_checker'
             - '%amazon_s3_url%'
-            - 'Tavro\Bundle\CoreBundle\Entity\Customer'
+            - 'Tavro\Bundle\CoreBundle\Entity\Contact'
 
     tavro.handler.expenses:
         class: Tavro\Bundle\CoreBundle\Handler\Entity\ExpenseHandler

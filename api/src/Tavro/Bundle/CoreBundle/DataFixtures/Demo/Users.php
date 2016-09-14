@@ -21,7 +21,7 @@ use Tavro\Bundle\CoreBundle\Entity\Expense;
 use Tavro\Bundle\CoreBundle\Entity\Node;
 use Tavro\Bundle\CoreBundle\Entity\Revenue;
 use Tavro\Bundle\CoreBundle\Entity\Tag;
-use Tavro\Bundle\CoreBundle\Entity\UserOrganization;
+use Tavro\Bundle\CoreBundle\Entity\AccountUser;
 use Tavro\Bundle\CoreBundle\Entity\ExpenseCategory;
 use Tavro\Bundle\CoreBundle\Entity\ExpenseComment;
 use Tavro\Bundle\CoreBundle\Entity\ExpenseTag;
@@ -31,7 +31,7 @@ use Tavro\Bundle\CoreBundle\Entity\NodeComment;
 use Tavro\Bundle\CoreBundle\Entity\ProductCategory;
 use Tavro\Bundle\CoreBundle\Entity\RevenueCategory;
 use Tavro\Bundle\CoreBundle\Entity\ServiceCategory;
-use Tavro\Bundle\CoreBundle\Entity\Customer;
+use Tavro\Bundle\CoreBundle\Entity\Contact;
 use Tavro\Bundle\CoreBundle\Entity\OrganizationComment;
 use Tavro\Bundle\CoreBundle\Entity\FundingRoundShareholder;
 use Tavro\Bundle\CoreBundle\Entity\RevenueService;
@@ -67,19 +67,29 @@ class Users extends AbstractFixture implements OrderedFixtureInterface, Containe
      */
     public function load(ObjectManager $manager)
     {
-        $userRole = $manager->getRepository('TavroCoreBundle:Role')->findOneBy(array(
+        $userRole = $manager->getRepository('TavroCoreBundle:Role')->findOneBy([
             'role' => 'ROLE_USER',
-        ));
+        ]);
 
-        $admin = $manager->getRepository('TavroCoreBundle:Role')->findOneBy(array(
+        $admin = $manager->getRepository('TavroCoreBundle:Role')->findOneBy([
             'role' => 'ROLE_ADMIN',
-        ));
+        ]);
+
+        $developer = $manager->getRepository('TavroCoreBundle:Role')->findOneBy([
+            'role' => 'ROLE_DEVELOPER',
+        ]);
 
         $people = array();
         $faker = \Faker\Factory::create('en_EN');
         $size = 10;
         $genders = ['male', 'female'];
+        $roles = [$userRole, $developer];
 
+        /**
+         * These are "dummy" users we'll use for testing, but not actually
+         * assigning to specific Accounts like the Transformers (below)
+         * who we'll be testing functionally within their Account.
+         */
         for($i=1;$i<$size;$i++) {
             $email = $faker->email;
             $person = new Person();
@@ -97,6 +107,7 @@ class Users extends AbstractFixture implements OrderedFixtureInterface, Containe
         $manager->flush();
 
         foreach($people as $person) {
+
             $salt = md5($person->getEmail());
             $password = 'Password1!';
             $encoder = $this->container->get('tavro.password_encoder');
@@ -109,6 +120,10 @@ class Users extends AbstractFixture implements OrderedFixtureInterface, Containe
             $user->setApiEnabled(rand(0,1));
             $user->setUsername($faker->userName);
             $user->setUserAgent($faker->userAgent);
+            $user->setApiEnabled(rand(0,1));
+            $user->setBody($faker->words(rand(5,100)));
+            $user->setLastOnlineDate($faker->dateTimeThisMonth);
+            $user->setSignature($faker->words(rand(5,25)));
             $user->setSalt($salt);
 
             /**
@@ -118,8 +133,9 @@ class Users extends AbstractFixture implements OrderedFixtureInterface, Containe
 
             $user->setPassword($password);
             $user->setPerson($person);
-            $user->addRole($userRole);
+            $user->addRole($roles[rand(0,1)]);
             $manager->persist($user);
+
         }
 
         $autobots = [
@@ -162,25 +178,55 @@ class Users extends AbstractFixture implements OrderedFixtureInterface, Containe
         foreach($autobots as $name) {
             $username = str_replace(' ', '_', $name);
             $username = strtolower($username);
-            $this->create($manager, $username, 'autobot', $userRole);
+            $email = sprintf('%s@autobots.tavro.dev', $username);
+            $this->create($manager, $userRole, [
+                'username' => $username,
+                'email' => $email,
+                'password' => $username,
+            ]);
         }
 
         foreach($decepticons as $name) {
             $username = str_replace(' ', '_', $name);
             $username = strtolower($username);
-            $this->create($manager, $username, 'decepticon', $userRole);
+            $email = sprintf('%s@decepticons.tavro.dev', $username);
+            $this->create($manager, $userRole, [
+                'username' => $username,
+                'email' => $email,
+                'password' => $username
+            ]);
         }
 
         //create tavrobot!
-        $this->create($manager, 'tavrobot', 'bot', $admin);
+        $this->create($manager, $admin, [
+            'username' => 'tavrobot',
+            'email' => 'dev@zoadilack.com'
+        ]);
+
+        //create hutch!
+        $this->create($manager, $developer, [
+            'username' => 'hutch.white',
+            'email' => 'hutch@zoadilack.com'
+        ]);
+
+        //create jake!
+        $this->create($manager, $developer, [
+            'username' => 'jake.litwicki',
+            'email' => 'jake@zoadilack.com'
+        ]);
 
     }
 
-    public function create($manager, $username, $gender, Role $role, $password = 'Password1!')
+    public function create(ObjectManager $manager, Role $role, array $parameters = array())
     {
         $faker = \Faker\Factory::create('en_EN');
+        $genders = ['male', 'female'];
 
-        $email = sprintf('%s@tavro.dev', $username);
+        $api = isset($parameters['api']) ? $parameters['api'] : TRUE;
+        $password = isset($parameters['password']) ? $parameters['password'] : 'Password1!';
+        $gender = isset($parameters['gender']) ? $parameters['gender'] : $genders[rand(0,1)];
+        $email = isset($parameters['email']) ? $parameters['email'] : sprintf('%s@tavro.dev', $parameters['username']);
+
         $salt = md5($email);
         $encoder = $this->container->get('tavro.password_encoder');
         $password = $encoder->encodePassword($password, $salt);
@@ -188,7 +234,6 @@ class Users extends AbstractFixture implements OrderedFixtureInterface, Containe
         $person = new Person();
         $person->setFirstName($faker->firstName);
         $person->setLastName($faker->lastName);
-        $person->setSuffix($faker->suffix);
         $person->setEmail($email);
         $person->setGender($gender);
         $person->setBirthday($faker->dateTimeThisCentury);
@@ -199,12 +244,13 @@ class Users extends AbstractFixture implements OrderedFixtureInterface, Containe
         $user->setPerson($person);
         $user->setStatus(1);
         $user->setCreateDate(new \DateTime());
-        $user->setApiEnabled(1);
-        $user->setApiKey('tavrobot-api-key');
-        $user->setUsername($username);
+        $user->setApiEnabled($api);
+        $user->setUsername($parameters['username']);
         $user->setSalt($salt);
         $user->setPassword($password);
         $user->addRole($role);
+        $manager->persist($user);
+        $manager->flush();
     }
 
     /**

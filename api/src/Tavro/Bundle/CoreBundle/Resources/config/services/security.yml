@@ -38,6 +38,27 @@ services:
         tags:
            - { name: security.voter }
 
+    tavro.voter.account_user:
+        class: Tavro\Bundle\CoreBundle\Security\Voter\Entity\AccountUserVoter
+        public: false
+        arguments: ['@security.access.decision_manager']
+        tags:
+           - { name: security.voter }
+
+    tavro.voter.account_group:
+        class: Tavro\Bundle\CoreBundle\Security\Voter\Entity\AccountGroupVoter
+        public: false
+        arguments: ['@security.access.decision_manager']
+        tags:
+           - { name: security.voter }
+
+    tavro.voter.account_group_user:
+        class: Tavro\Bundle\CoreBundle\Security\Voter\Entity\AccountGroupUserVoter
+        public: false
+        arguments: ['@security.access.decision_manager']
+        tags:
+           - { name: security.voter }
+
     tavro.voter.comment:
         class: Tavro\Bundle\CoreBundle\Security\Voter\Entity\CommentVoter
         public: false
