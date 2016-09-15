@@ -90,6 +90,7 @@ class Users extends AbstractFixture implements OrderedFixtureInterface, Containe
          * assigning to specific Accounts like the Transformers (below)
          * who we'll be testing functionally within their Account.
          */
+
         for($i=1;$i<$size;$i++) {
             $email = $faker->email;
             $person = new Person();
@@ -99,7 +100,7 @@ class Users extends AbstractFixture implements OrderedFixtureInterface, Containe
             $person->setSuffix($faker->suffix);
             $person->setEmail($email);
             $person->setGender($gender);
-            $person->setBirthday($faker->dateTimeThisCentury);
+            $person->setBirthday(new \DateTime($faker->dateTimeThisCentury->format('Y-m-d')));
             $manager->persist($person);
             $people[] = $person;
         }
@@ -122,7 +123,7 @@ class Users extends AbstractFixture implements OrderedFixtureInterface, Containe
             $user->setUserAgent($faker->userAgent);
             $user->setApiEnabled(rand(0,1));
             $user->setBody($faker->words(rand(5,100)));
-            $user->setLastOnlineDate($faker->dateTimeThisMonth);
+            $user->setLastOnlineDate(new \DateTime($faker->dateTimeThisMonth->format('Y-m-d H:i:s')));
             $user->setSignature($faker->words(rand(5,25)));
             $user->setSalt($salt);
 
@@ -179,10 +180,14 @@ class Users extends AbstractFixture implements OrderedFixtureInterface, Containe
             $username = str_replace(' ', '_', $name);
             $username = strtolower($username);
             $email = sprintf('%s@autobots.tavro.dev', $username);
+            $fullname = explode(' ', $name);
             $this->create($manager, $userRole, [
                 'username' => $username,
                 'email' => $email,
                 'password' => $username,
+                'first_name' => $fullname[0],
+                'last_name' => isset($fullname[1]) ? $fullname[1] : NULL,
+                'gender' => 'male',
             ]);
         }
 
@@ -190,10 +195,14 @@ class Users extends AbstractFixture implements OrderedFixtureInterface, Containe
             $username = str_replace(' ', '_', $name);
             $username = strtolower($username);
             $email = sprintf('%s@decepticons.tavro.dev', $username);
+            $fullname = explode(' ', $name);
             $this->create($manager, $userRole, [
                 'username' => $username,
                 'email' => $email,
-                'password' => $username
+                'password' => $username,
+                'first_name' => $fullname[0],
+                'last_name' => isset($fullname[1]) ? $fullname[1] : NULL,
+                'gender' => 'male',
             ]);
         }
 
@@ -219,38 +228,49 @@ class Users extends AbstractFixture implements OrderedFixtureInterface, Containe
 
     public function create(ObjectManager $manager, Role $role, array $parameters = array())
     {
-        $faker = \Faker\Factory::create('en_EN');
-        $genders = ['male', 'female'];
+        try {
 
-        $api = isset($parameters['api']) ? $parameters['api'] : TRUE;
-        $password = isset($parameters['password']) ? $parameters['password'] : 'Password1!';
-        $gender = isset($parameters['gender']) ? $parameters['gender'] : $genders[rand(0,1)];
-        $email = isset($parameters['email']) ? $parameters['email'] : sprintf('%s@tavro.dev', $parameters['username']);
+            $faker = \Faker\Factory::create('en_EN');
+            $genders = ['male', 'female'];
 
-        $salt = md5($email);
-        $encoder = $this->container->get('tavro.password_encoder');
-        $password = $encoder->encodePassword($password, $salt);
+            $password = isset($parameters['password']) ? $parameters['password'] : 'Password1!';
+            $email = isset($parameters['email']) ? $parameters['email'] : sprintf('%s@tavro.dev', $parameters['username']);
 
-        $person = new Person();
-        $person->setFirstName($faker->firstName);
-        $person->setLastName($faker->lastName);
-        $person->setEmail($email);
-        $person->setGender($gender);
-        $person->setBirthday($faker->dateTimeThisCentury);
-        $manager->persist($person);
-        $manager->flush();
+            $firstname = isset($parameters['first_name']) ? $parameters['first_name'] : $faker->firstName;
+            $lastname = isset($parameters['last_name']) ? $parameters['last_name'] : $faker->lastName;
 
-        $user = new User();
-        $user->setPerson($person);
-        $user->setStatus(1);
-        $user->setCreateDate(new \DateTime());
-        $user->setApiEnabled($api);
-        $user->setUsername($parameters['username']);
-        $user->setSalt($salt);
-        $user->setPassword($password);
-        $user->addRole($role);
-        $manager->persist($user);
-        $manager->flush();
+            $salt = md5($email);
+            $encoder = $this->container->get('tavro.password_encoder');
+            $password = $encoder->encodePassword($password, $salt);
+
+            $person = new Person();
+            $person->setFirstName($firstname);
+            $person->setLastName($lastname);
+            $person->setEmail($email);
+            $person->setGender('male');
+            $person->setStatus(Person::STATUS_ENABLED);
+            $person->setCreateDate(new \DateTime());
+            $person->setUpdateDate(new \DateTime());
+            $person->setBirthday(new \DateTime($faker->dateTimeThisCentury->format('Y-m-d')));
+            $manager->persist($person);
+            $manager->flush();
+
+            $user = new User();
+            $user->setPerson($person);
+            $user->setStatus(User::STATUS_ENABLED);
+            $user->setCreateDate(new \DateTime());
+            $user->setApiEnabled(TRUE);
+            $user->setUsername($parameters['username']);
+            $user->setSalt($salt);
+            $user->setPassword($password);
+            $user->addRole($role);
+            $manager->persist($user);
+            $manager->flush();
+
+        }
+        catch(\Exception $e) {
+            throw $e;
+        }
     }
 
     /**

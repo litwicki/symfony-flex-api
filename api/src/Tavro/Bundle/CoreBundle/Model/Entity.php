@@ -66,6 +66,7 @@ class Entity implements EntityInterface
     {
         $this->create_date = new \DateTime();
         $this->update_date = new \DateTime();
+        $this->status = self::STATUS_ENABLED;
     }
 
     /**

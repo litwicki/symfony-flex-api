@@ -44,4 +44,100 @@ class AccountGroup extends Entity implements EntityInterface
      */
     protected $name_clean;
 
+
+    /**
+     * Set name
+     *
+     * @param string $name
+     *
+     * @return AccountGroup
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    /**
+     * Get name
+     *
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * Set nameClean
+     *
+     * @param string $nameClean
+     *
+     * @return AccountGroup
+     */
+    public function setNameClean($nameClean)
+    {
+        $this->name_clean = $nameClean;
+
+        return $this;
+    }
+
+    /**
+     * Get nameClean
+     *
+     * @return string
+     */
+    public function getNameClean()
+    {
+        return $this->name_clean;
+    }
+
+    /**
+     * Set body
+     *
+     * @param string $body
+     *
+     * @return AccountGroup
+     */
+    public function setBody($body)
+    {
+        $this->body = $body;
+
+        return $this;
+    }
+
+    /**
+     * Get body
+     *
+     * @return string
+     */
+    public function getBody()
+    {
+        return $this->body;
+    }
+
+    /**
+     * Set user
+     *
+     * @param \Tavro\Bundle\CoreBundle\Entity\User $user
+     *
+     * @return AccountGroup
+     */
+    public function setUser(\Tavro\Bundle\CoreBundle\Entity\User $user)
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return \Tavro\Bundle\CoreBundle\Entity\User
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
 }

@@ -44,7 +44,7 @@ use Litwicki\Common\Common as Litwicki;
  *
  * @author jake.litwicki@gmail.com
  */
-class Categories extends AbstractFixture implements OrderedFixtureInterface, ContainerAwareInterface
+class Accounts extends AbstractFixture implements OrderedFixtureInterface, ContainerAwareInterface
 {
 
     /**

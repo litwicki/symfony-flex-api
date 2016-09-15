@@ -28,12 +28,12 @@ use JMS\Serializer\Annotation\MaxDepth;
 /**
  * @ORM\Entity
  * @ORM\Entity(repositoryClass="Tavro\Bundle\CoreBundle\Repository\PersonRepository")
- * @ORM\Table(name="tavro_person", indexes={@ORM\Index(name="ACCOUNT_PERSON", columns={"id","account_id"})})
+ * @ORM\Table(name="tavro_person", indexes={@ORM\Index(name="PERSON", columns={"id"})})
  *
  * @XmlRoot("person")
  * @XmlNamespace(uri="http://tavro.io/api/people")
  */
-class Person extends AccountEntity implements AccountEntityInterface
+class Person extends Entity implements EntityInterface
 {
     /**
      * @ORM\Column(type="string", length=255, nullable=TRUE)
@@ -124,7 +124,11 @@ class Person extends AccountEntity implements AccountEntityInterface
      */
     public function __construct()
     {
-        parent::__construct();
+        //parent::__construct();
+        $this->setCreateDate(new \DateTime());
+        //$this->setUpdateDate(new \DateTime());
+        ///$this->setStatus(self::STATUS_ENABLED);
+        $this->setGender('male');
     }
 
     public function __toString()

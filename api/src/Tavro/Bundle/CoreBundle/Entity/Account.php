@@ -126,7 +126,7 @@ class Account extends Entity implements EntityInterface
         $clean = str_replace(' ', '-', $name);
         $clean = str_replace('_', '-', $name);
         $clean = strtolower($clean);
-        $clean = preg_replace('/[^A-Za-z0-9-/', '', $clean);
+        $clean = preg_replace('/[^A-Za-z0-9-]/', '', $clean);
 
         $this->setNameClean($clean);
 

@@ -89,4 +89,28 @@ class AccountGroupUser extends Entity implements EntityInterface
         return $this->account_group;
     }
 
+
+    /**
+     * Set body
+     *
+     * @param string $body
+     *
+     * @return AccountGroupUser
+     */
+    public function setBody($body)
+    {
+        $this->body = $body;
+
+        return $this;
+    }
+
+    /**
+     * Get body
+     *
+     * @return string
+     */
+    public function getBody()
+    {
+        return $this->body;
+    }
 }
