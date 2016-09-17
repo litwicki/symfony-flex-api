@@ -132,6 +132,7 @@ class AccountTest extends TavroTest
 
         $this->assertEquals(500, $response->getStatusCode());
         $this->assertEquals(1, preg_match('/Please enter a valid User/', $body['message']));
+        die(__METHOD__);
 
     }
 

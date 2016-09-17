@@ -5,13 +5,16 @@
 - name: Add repository for Ansible
   apt_repository: repo="ppa:ansible/ansible" state=present update_cache=yes
 
-- name: Install System Packages
-  apt: pkg={{ item }} state=latest
-  with_items: "{{ server.packages }}"
+- name: Update Apt Repos
+  apt: update_cache=yes cache_valid_time=3600
 
 - name: Purge stuff
   apt: pkg={{ item }} state=absent autoremove=yes
   with_items: "{{ server.remove_packages }}"
+
+- name: Install System Packages
+  apt: pkg={{ item }} state=latest
+  with_items: "{{ server.packages }}"
 
 - name: Install php7 Packages
   apt: pkg={{ item }} state=latest

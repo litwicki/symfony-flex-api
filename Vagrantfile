@@ -11,10 +11,11 @@ Vagrant.configure(2) do |config|
   # For a complete reference, please see the online documentation at
   # https://docs.vagrantup.com.
 
-  Vagrant.require_version ">= 1.6.0"
+  Vagrant.require_version ">= 1.8.0"
 
   config.vm.box = "ubuntu/xenial64"
   config.vm.network "private_network", ip: ip_address
+  config.vm.hostname = appname
 
   # Landrush: https://github.com/phinze/landrush
   config.landrush.enabled = true
@@ -29,7 +30,6 @@ Vagrant.configure(2) do |config|
   config.ssh.forward_agent = true
   # Configuration options for the VirtualBox provider.
   config.vm.provider :virtualbox do |v|
-    v.customize ["modifyvm", :id, "--name", appname + "-ubuntu-xenial64"]
     v.customize ["modifyvm", :id, "--memory", 1024]
     v.customize ["modifyvm", :id, "--cpus", 2]
     v.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
@@ -47,7 +47,6 @@ Vagrant.configure(2) do |config|
   end
 
   config.vm.provision "ansible" do |ansible|
-      # Provision Wordpress submodule as www.{{hostname}}
       ansible.playbook = "ansible/provision.yml"
       ansible.extra_vars = {
           hostname: hostname,

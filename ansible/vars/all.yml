@@ -1,7 +1,7 @@
 ---
 server:
     install: '1'
-    packages: [curl,unzip,wget,snmp,build-essential,python-software-properties,python-pip,python-dev,libssl-dev,libcurl4-openssl-dev,pkg-config,openssl,ansible,vim,git,nodejs,npm,mysql-server,mysql-client,python-mysqldb]
+    packages: [curl,unzip,wget,snmp,build-essential,python-software-properties,python-pip,python2.7,libssl-dev,libcurl4-openssl-dev,pkg-config,openssl,ansible,vim,git,nodejs,npm,mysql-server,mysql-client,python-mysqldb]
     remove_packages: [apache]
     timezone: UTC
     locale: en_US.UTF-8

@@ -8,6 +8,8 @@ Clone the Zoadilack dev repo and run the OSX Developer script to install (or upd
 
     $ git clone git@bitbucket.org:zoadilack/zoadilack-scripts.git /usr/public/zoadilack-scripts
     $ sudo bash /usr/public/zoadilack-scripts/osx-dev.sh
+    
+    $ sudo vagrant plugin install vagrant-vbguest
 
 ### Your Hosts File
 
