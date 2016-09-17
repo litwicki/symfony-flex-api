@@ -33,12 +33,6 @@ class Tag extends AccountEntity implements AccountEntityInterface
     protected $tag;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Tavro\Bundle\CoreBundle\Entity\Organization", inversedBy="tags")
-     * @ORM\JoinColumn(name="organization_id", referencedColumnName="id", nullable=FALSE)
-     */
-    protected $organization;
-
-    /**
      * @ORM\OneToMany(targetEntity="Tavro\Bundle\CoreBundle\Entity\NodeTag", mappedBy="tag", cascade={"remove"})
      */
     protected $node_tags;
@@ -163,27 +157,4 @@ class Tag extends AccountEntity implements AccountEntityInterface
         return $this->expense_tags;
     }
 
-    /**
-     * Set organization
-     *
-     * @param \Tavro\Bundle\CoreBundle\Entity\Organization $organization
-     *
-     * @return Tag
-     */
-    public function setOrganization(\Tavro\Bundle\CoreBundle\Entity\Organization $organization)
-    {
-        $this->organization = $organization;
-
-        return $this;
-    }
-
-    /**
-     * Get organization
-     *
-     * @return \Tavro\Bundle\CoreBundle\Entity\Organization
-     */
-    public function getOrganization()
-    {
-        return $this->organization;
-    }
 }

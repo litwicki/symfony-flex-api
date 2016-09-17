@@ -21,7 +21,7 @@ use Tavro\Bundle\CoreBundle\Entity\Expense;
 use Tavro\Bundle\CoreBundle\Entity\Node;
 use Tavro\Bundle\CoreBundle\Entity\Revenue;
 use Tavro\Bundle\CoreBundle\Entity\Tag;
-use Tavro\Bundle\CoreBundle\Entity\UserOrganization;
+use Tavro\Bundle\CoreBundle\Entity\AccountUser;
 use Tavro\Bundle\CoreBundle\Entity\ExpenseCategory;
 use Tavro\Bundle\CoreBundle\Entity\ExpenseComment;
 use Tavro\Bundle\CoreBundle\Entity\ExpenseTag;
@@ -31,7 +31,7 @@ use Tavro\Bundle\CoreBundle\Entity\NodeComment;
 use Tavro\Bundle\CoreBundle\Entity\ProductCategory;
 use Tavro\Bundle\CoreBundle\Entity\RevenueCategory;
 use Tavro\Bundle\CoreBundle\Entity\ServiceCategory;
-use Tavro\Bundle\CoreBundle\Entity\Customer;
+use Tavro\Bundle\CoreBundle\Entity\Contact;
 use Tavro\Bundle\CoreBundle\Entity\OrganizationComment;
 use Tavro\Bundle\CoreBundle\Entity\FundingRoundShareholder;
 
@@ -81,7 +81,7 @@ class Categories extends AbstractFixture implements OrderedFixtureInterface, Con
                 $productCategory->setAccount($account);
                 $productCategory->setCreateDate(new \DateTime());
                 $productCategory->setStatus(1);
-                $productCategory->setBody($faker->words(rand(1,5)));
+                $productCategory->setBody($faker->text(rand(10,500)));
                 $manager->persist($productCategory);
                 $productCategories[] = $productCategory;
             }
@@ -93,7 +93,7 @@ class Categories extends AbstractFixture implements OrderedFixtureInterface, Con
                 $serviceCategory->setAccount($account);
                 $serviceCategory->setCreateDate(new \DateTime());
                 $serviceCategory->setStatus(1);
-                $serviceCategory->setBody($faker->words(rand(1,5)));
+                $serviceCategory->setBody($faker->text(rand(10,500)));
                 $manager->persist($serviceCategory);
                 $serviceCategories[] = $serviceCategory;
             }
@@ -105,7 +105,7 @@ class Categories extends AbstractFixture implements OrderedFixtureInterface, Con
                 $revenueCategory->setAccount($account);
                 $revenueCategory->setCreateDate(new \DateTime());
                 $revenueCategory->setStatus(1);
-                $revenueCategory->setBody($faker->words(rand(1,5)));
+                $revenueCategory->setBody($faker->text(rand(10,500)));
                 $manager->persist($revenueCategory);
                 $revenueCategories[] = $revenueCategory;
             }
@@ -117,7 +117,7 @@ class Categories extends AbstractFixture implements OrderedFixtureInterface, Con
                 $expenseCategory->setAccount($account);
                 $expenseCategory->setCreateDate(new \DateTime());
                 $expenseCategory->setStatus(1);
-                $expenseCategory->setBody($faker->words(rand(1,5)));
+                $expenseCategory->setBody($faker->text(rand(10,500)));
                 $manager->persist($expenseCategory);
                 $expenseCategories[] = $expenseCategory;
             }

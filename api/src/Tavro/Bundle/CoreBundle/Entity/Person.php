@@ -120,15 +120,17 @@ class Person extends Entity implements EntityInterface
     protected $phone;
 
     /**
+     * @ORM\OneToOne(targetEntity="Tavro\Bundle\CoreBundle\Entity\User", mappedBy="person", cascade={"remove"})
+     */
+    protected $user;
+
+    /**
      * Constructor
      */
     public function __construct()
     {
-        //parent::__construct();
-        $this->setCreateDate(new \DateTime());
-        //$this->setUpdateDate(new \DateTime());
-        ///$this->setStatus(self::STATUS_ENABLED);
-        $this->setGender('male');
+        parent::__construct();
+        $this->gender = 'male';
     }
 
     public function __toString()
@@ -471,5 +473,29 @@ class Person extends Entity implements EntityInterface
     public function getBirthday()
     {
         return $this->birthday;
+    }
+
+    /**
+     * Set user
+     *
+     * @param \Tavro\Bundle\CoreBundle\Entity\User $user
+     *
+     * @return Person
+     */
+    public function setUser(\Tavro\Bundle\CoreBundle\Entity\User $user = null)
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return \Tavro\Bundle\CoreBundle\Entity\User
+     */
+    public function getUser()
+    {
+        return $this->user;
     }
 }

@@ -335,30 +335,6 @@ services:
             - 'Tavro\Bundle\CoreBundle\Entity\User'
             - '@tavro.handler.people'
 
-    tavro.handler.user_quickbooks:
-        class: Tavro\Bundle\CoreBundle\Handler\Entity\UserQuickbooksHandler
-        arguments:
-            - '@doctrine.orm.main_entity_manager'
-            - '@form.factory'
-            - '@validator'
-            - '@security.encoder_factory.generic'
-            - '@security.token_storage'
-            - '@security.authorization_checker'
-            - '%amazon_s3_url%'
-            - 'Tavro\Bundle\CoreBundle\Entity\UserQuickbooks'
-
-    tavro.handler.user_organizations:
-        class: Tavro\Bundle\CoreBundle\Handler\Entity\UserOrganizationHandler
-        arguments:
-            - '@doctrine.orm.main_entity_manager'
-            - '@form.factory'
-            - '@validator'
-            - '@security.encoder_factory.generic'
-            - '@security.token_storage'
-            - '@security.authorization_checker'
-            - '%amazon_s3_url%'
-            - 'Tavro\Bundle\CoreBundle\Entity\UserOrganization'
-
     tavro.handler.variables:
         class: Tavro\Bundle\CoreBundle\Handler\Entity\VariableHandler
         arguments:

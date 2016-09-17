@@ -28,6 +28,12 @@ class Service extends AccountEntity implements AccountEntityInterface
 {
 
     /**
+     * @ORM\Column(type="string", length=255, nullable=FALSE)
+     * @Groups({"api", "tavro", "simple"})
+     */
+    protected $title;
+
+    /**
      * @ORM\Column(type="float", nullable=FALSE, options={"default" = 0})
      * @Groups({"api", "tavro", "simple"})
      */
@@ -50,14 +56,6 @@ class Service extends AccountEntity implements AccountEntityInterface
      * @MaxDepth(3)
      */
     protected $category;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="Tavro\Bundle\CoreBundle\Entity\Organization", inversedBy="services")
-     * @ORM\JoinColumn(name="organization_id", referencedColumnName="id", nullable=FALSE)
-     * @Groups({"api", "tavro", "simple"})
-     * @MaxDepth(3)
-     */
-    protected $organization;
 
     /**
      * @ORM\OneToMany(targetEntity="Tavro\Bundle\CoreBundle\Entity\RevenueService", mappedBy="service", cascade={"remove"})
@@ -248,26 +246,26 @@ class Service extends AccountEntity implements AccountEntityInterface
     }
 
     /**
-     * Set organization
+     * Set title
      *
-     * @param \Tavro\Bundle\CoreBundle\Entity\Organization $organization
+     * @param string $title
      *
      * @return Service
      */
-    public function setOrganization(\Tavro\Bundle\CoreBundle\Entity\Organization $organization)
+    public function setTitle($title)
     {
-        $this->organization = $organization;
+        $this->title = $title;
 
         return $this;
     }
 
     /**
-     * Get organization
+     * Get title
      *
-     * @return \Tavro\Bundle\CoreBundle\Entity\Organization
+     * @return string
      */
-    public function getOrganization()
+    public function getTitle()
     {
-        return $this->organization;
+        return $this->title;
     }
 }

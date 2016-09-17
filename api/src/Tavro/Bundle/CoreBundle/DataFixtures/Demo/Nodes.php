@@ -23,7 +23,7 @@ use Tavro\Bundle\CoreBundle\Entity\Node;
 use Tavro\Bundle\CoreBundle\Entity\Revenue;
 use Tavro\Bundle\CoreBundle\Entity\Tag;
 use Tavro\Bundle\CoreBundle\Entity\NodeTag;
-use Tavro\Bundle\CoreBundle\Entity\UserOrganization;
+use Tavro\Bundle\CoreBundle\Entity\AccountUser;
 use Tavro\Bundle\CoreBundle\Entity\ExpenseCategory;
 use Tavro\Bundle\CoreBundle\Entity\ExpenseComment;
 use Tavro\Bundle\CoreBundle\Entity\ExpenseTag;
@@ -33,7 +33,7 @@ use Tavro\Bundle\CoreBundle\Entity\NodeComment;
 use Tavro\Bundle\CoreBundle\Entity\ProductCategory;
 use Tavro\Bundle\CoreBundle\Entity\RevenueCategory;
 use Tavro\Bundle\CoreBundle\Entity\ServiceCategory;
-use Tavro\Bundle\CoreBundle\Entity\Customer;
+use Tavro\Bundle\CoreBundle\Entity\Contact;
 use Tavro\Bundle\CoreBundle\Entity\OrganizationComment;
 use Tavro\Bundle\CoreBundle\Entity\FundingRoundShareholder;
 
@@ -82,7 +82,7 @@ class Nodes extends AbstractFixture implements OrderedFixtureInterface, Containe
      */
     public function load(ObjectManager $manager)
     {
-        $lipsum = $this->container->get('apoutchika.lorem_ipsum');
+        $faker = \Faker\Factory::create('en_EN');
         $size = 10;
 
         $accounts = $manager->getRepository('TavroCoreBundle:Account')->findAll();
@@ -90,7 +90,7 @@ class Nodes extends AbstractFixture implements OrderedFixtureInterface, Containe
         foreach($accounts as $account) {
 
             $tags = $account->getTags()->toArray();
-            $users = $account->getUsers();
+            $users = $account->getUsers()->toArray();
 
             $nodeTypes = array(
                 'article',
@@ -103,12 +103,11 @@ class Nodes extends AbstractFixture implements OrderedFixtureInterface, Containe
             for($i=0;$i<$size;$i++) {
 
                 $node = new Node();
-                $node->setTitle($lipsum->getWords(rand(3,10)));
-                $node->setBody($lipsum->getParagraphs(rand(1,5)));
+                $node->setTitle($faker->title);
+                $node->setBody($faker->text(rand(100,1000)));
                 $node->setStatus(rand(0,1));
                 $node->setAccount($account);
                 $node->setType($nodeTypes[array_rand($nodeTypes)]);
-                $node->setCreateDate(new \DateTime());
                 $node->setDisplayDate(new \DateTime());
                 $node->setUser($users[array_rand($users)]);
                 $node->setViews(rand(0,999999));
@@ -124,7 +123,7 @@ class Nodes extends AbstractFixture implements OrderedFixtureInterface, Containe
                 for($i=0;$i<rand(0,$size);$i++) {
                     $comment = new Comment();
                     $comment->setUser($users[array_rand($users)]);
-                    $comment->setBody($lipsum->getSentences(rand(1,10)));
+                    $comment->setBody($faker->text(rand(100,1000)));
                     $comment->setStatus(rand(0,1));
                     $manager->persist($comment);
                     $manager->flush();

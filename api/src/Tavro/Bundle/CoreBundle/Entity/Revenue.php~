@@ -53,14 +53,6 @@ class Revenue extends AccountEntity implements AccountEntityInterface
     protected $user;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Tavro\Bundle\CoreBundle\Entity\Organization", inversedBy="revenues")
-     * @ORM\JoinColumn(name="organization_id", referencedColumnName="id", nullable=TRUE)
-     * @Groups({"api", "tavro", "simple"})
-     * @MaxDepth(1)
-     */
-    protected $organization;
-
-    /**
      * @ORM\OneToMany(targetEntity="Tavro\Bundle\CoreBundle\Entity\RevenueComment", mappedBy="revenue", cascade={"remove"})
      */
     protected $revenue_comments;
@@ -90,11 +82,7 @@ class Revenue extends AccountEntity implements AccountEntityInterface
         $this->revenue_comments = new \Doctrine\Common\Collections\ArrayCollection();
         $this->revenue_services = new \Doctrine\Common\Collections\ArrayCollection();
         $this->revenue_products = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->status = 1;
-        $now = new \DateTime();
-        $tz = new \DateTimeZone('America/New_York');
-        $now->setTimezone($tz);
-        $this->create_date = $now;
+        $this->status = self::STATUS_ENABLED;
     }
 
     public function __toString()
@@ -400,27 +388,4 @@ class Revenue extends AccountEntity implements AccountEntityInterface
         return $items;
     }
 
-    /**
-     * Set organization
-     *
-     * @param \Tavro\Bundle\CoreBundle\Entity\Organization $organization
-     *
-     * @return Revenue
-     */
-    public function setOrganization(\Tavro\Bundle\CoreBundle\Entity\Organization $organization = null)
-    {
-        $this->organization = $organization;
-
-        return $this;
-    }
-
-    /**
-     * Get organization
-     *
-     * @return \Tavro\Bundle\CoreBundle\Entity\Organization
-     */
-    public function getOrganization()
-    {
-        return $this->organization;
-    }
 }

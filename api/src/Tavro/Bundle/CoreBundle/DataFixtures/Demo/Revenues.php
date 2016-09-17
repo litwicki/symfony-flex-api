@@ -21,7 +21,7 @@ use Tavro\Bundle\CoreBundle\Entity\Expense;
 use Tavro\Bundle\CoreBundle\Entity\Node;
 use Tavro\Bundle\CoreBundle\Entity\Revenue;
 use Tavro\Bundle\CoreBundle\Entity\Tag;
-use Tavro\Bundle\CoreBundle\Entity\UserOrganization;
+use Tavro\Bundle\CoreBundle\Entity\AccountUser;
 use Tavro\Bundle\CoreBundle\Entity\ExpenseCategory;
 use Tavro\Bundle\CoreBundle\Entity\ExpenseComment;
 use Tavro\Bundle\CoreBundle\Entity\ExpenseTag;
@@ -31,7 +31,7 @@ use Tavro\Bundle\CoreBundle\Entity\NodeComment;
 use Tavro\Bundle\CoreBundle\Entity\ProductCategory;
 use Tavro\Bundle\CoreBundle\Entity\RevenueCategory;
 use Tavro\Bundle\CoreBundle\Entity\ServiceCategory;
-use Tavro\Bundle\CoreBundle\Entity\Customer;
+use Tavro\Bundle\CoreBundle\Entity\Contact;
 use Tavro\Bundle\CoreBundle\Entity\OrganizationComment;
 use Tavro\Bundle\CoreBundle\Entity\FundingRoundShareholder;
 use Tavro\Bundle\CoreBundle\Entity\RevenueService;
@@ -66,17 +66,17 @@ class Revenues extends AbstractFixture implements OrderedFixtureInterface, Conta
      */
     public function load(ObjectManager $manager)
     {
-        $lipsum = $this->container->get('apoutchika.lorem_ipsum');
+        $faker = \Faker\Factory::create('en_EN');
         $size = 10;
 
-        $organizations = $manager->getRepository('TavroCoreBundle:Organization')->findAll();
+        $accounts = $manager->getRepository('TavroCoreBundle:Account')->findAll();
 
-        foreach($organizations as $organization) {
+        foreach($accounts as $account) {
 
-            $revenueCategories = $organization->getRevenueCategories()->toArray();
-            $users = $organization->getUsers();
-            $services = $organization->getServices()->toArray();
-            $products = $organization->getProducts()->toArray();
+            $revenueCategories = $account->getRevenueCategories()->toArray();
+            $users = $account->getUsers()->toArray();
+            $services = $account->getServices()->toArray();
+            $products = $account->getProducts()->toArray();
 
             $revenues = array();
             $revenueTypes = array('sale', 'service', 'other');
@@ -84,13 +84,12 @@ class Revenues extends AbstractFixture implements OrderedFixtureInterface, Conta
             for($i=0;$i<$size;$i++) {
 
                 $revenue = new Revenue();
-                $revenue->setOrganization($organization);
+                $revenue->setAccount($account);
                 $revenue->setStatus(rand(0,1));
                 $revenue->setType($revenueTypes[rand(0,2)]);
                 $revenue->setCreateDate(new \DateTime());
                 $revenue->setUser($users[array_rand($users)]);
-                $revenue->setTitle(ucwords($lipsum->getWords(rand(1,5))));
-                $revenue->setBody($lipsum->getParagraphs(rand(1,3)));
+                $revenue->setBody($faker->text(rand(100,1000)));
                 $revenue->setCategory($revenueCategories[array_rand($revenueCategories)]);
                 $manager->persist($revenue);
                 $revenues[] = $revenue;

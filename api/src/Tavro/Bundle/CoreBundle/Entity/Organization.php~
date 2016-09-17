@@ -49,34 +49,6 @@ class Organization extends AccountEntity implements AccountEntityInterface
     protected $tags;
 
     /**
-     * @ORM\OneToMany(targetEntity="Tavro\Bundle\CoreBundle\Entity\ServiceCategory", mappedBy="organization", cascade={"remove"})
-     * @Groups({"tavro"})
-     * @MaxDepth(3)
-     */
-    protected $service_categories;
-
-    /**
-     * @ORM\OneToMany(targetEntity="Tavro\Bundle\CoreBundle\Entity\ExpenseCategory", mappedBy="organization", cascade={"remove"})
-     * @Groups({"tavro"})
-     * @MaxDepth(3)
-     */
-    protected $expense_categories;
-
-    /**
-     * @ORM\OneToMany(targetEntity="Tavro\Bundle\CoreBundle\Entity\ProductCategory", mappedBy="organization", cascade={"remove"})
-     * @Groups({"tavro"})
-     * @MaxDepth(3)
-     */
-    protected $product_categories;
-
-    /**
-     * @ORM\OneToMany(targetEntity="Tavro\Bundle\CoreBundle\Entity\RevenueCategory", mappedBy="organization", cascade={"remove"})
-     * @Groups({"tavro"})
-     * @MaxDepth(3)
-     */
-    protected $revenue_categories;
-
-    /**
      * @ORM\OneToMany(targetEntity="Tavro\Bundle\CoreBundle\Entity\Service", mappedBy="organization", cascade={"remove"})
      * @Groups({"tavro"})
      * @MaxDepth(3)
@@ -123,140 +95,155 @@ class Organization extends AccountEntity implements AccountEntityInterface
      */
     protected $funding_round_shareholders;
 
+
     /**
-     * Add serviceCategory
+     * Set title
      *
-     * @param \Tavro\Bundle\CoreBundle\Entity\ServiceCategory $serviceCategory
+     * @param string $title
      *
      * @return Organization
      */
-    public function addServiceCategory(\Tavro\Bundle\CoreBundle\Entity\ServiceCategory $serviceCategory)
+    public function setTitle($title)
     {
-        $this->service_categories[] = $serviceCategory;
+        $this->title = $title;
 
         return $this;
     }
 
     /**
-     * Remove serviceCategory
+     * Get title
      *
-     * @param \Tavro\Bundle\CoreBundle\Entity\ServiceCategory $serviceCategory
+     * @return string
      */
-    public function removeServiceCategory(\Tavro\Bundle\CoreBundle\Entity\ServiceCategory $serviceCategory)
+    public function getTitle()
     {
-        $this->service_categories->removeElement($serviceCategory);
+        return $this->title;
     }
 
     /**
-     * Get serviceCategories
+     * Set body
      *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getServiceCategories()
-    {
-        return $this->service_categories;
-    }
-
-    /**
-     * Add expenseCategory
-     *
-     * @param \Tavro\Bundle\CoreBundle\Entity\ExpenseCategory $expenseCategory
+     * @param string $body
      *
      * @return Organization
      */
-    public function addExpenseCategory(\Tavro\Bundle\CoreBundle\Entity\ExpenseCategory $expenseCategory)
+    public function setBody($body)
     {
-        $this->expense_categories[] = $expenseCategory;
+        $this->body = $body;
 
         return $this;
     }
 
     /**
-     * Remove expenseCategory
+     * Get body
      *
-     * @param \Tavro\Bundle\CoreBundle\Entity\ExpenseCategory $expenseCategory
+     * @return string
      */
-    public function removeExpenseCategory(\Tavro\Bundle\CoreBundle\Entity\ExpenseCategory $expenseCategory)
+    public function getBody()
     {
-        $this->expense_categories->removeElement($expenseCategory);
+        return $this->body;
     }
 
     /**
-     * Get expenseCategories
+     * Add node
      *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getExpenseCategories()
-    {
-        return $this->expense_categories;
-    }
-
-    /**
-     * Add productCategory
-     *
-     * @param \Tavro\Bundle\CoreBundle\Entity\ProductCategory $productCategory
+     * @param \Tavro\Bundle\CoreBundle\Entity\Node $node
      *
      * @return Organization
      */
-    public function addProductCategory(\Tavro\Bundle\CoreBundle\Entity\ProductCategory $productCategory)
+    public function addNode(\Tavro\Bundle\CoreBundle\Entity\Node $node)
     {
-        $this->product_categories[] = $productCategory;
+        $this->nodes[] = $node;
 
         return $this;
     }
 
     /**
-     * Remove productCategory
+     * Remove node
      *
-     * @param \Tavro\Bundle\CoreBundle\Entity\ProductCategory $productCategory
+     * @param \Tavro\Bundle\CoreBundle\Entity\Node $node
      */
-    public function removeProductCategory(\Tavro\Bundle\CoreBundle\Entity\ProductCategory $productCategory)
+    public function removeNode(\Tavro\Bundle\CoreBundle\Entity\Node $node)
     {
-        $this->product_categories->removeElement($productCategory);
+        $this->nodes->removeElement($node);
     }
 
     /**
-     * Get productCategories
+     * Get nodes
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getProductCategories()
+    public function getNodes()
     {
-        return $this->product_categories;
+        return $this->nodes;
     }
 
     /**
-     * Add revenueCategory
+     * Add variable
      *
-     * @param \Tavro\Bundle\CoreBundle\Entity\RevenueCategory $revenueCategory
+     * @param \Tavro\Bundle\CoreBundle\Entity\Variable $variable
      *
      * @return Organization
      */
-    public function addRevenueCategory(\Tavro\Bundle\CoreBundle\Entity\RevenueCategory $revenueCategory)
+    public function addVariable(\Tavro\Bundle\CoreBundle\Entity\Variable $variable)
     {
-        $this->revenue_categories[] = $revenueCategory;
+        $this->variables[] = $variable;
 
         return $this;
     }
 
     /**
-     * Remove revenueCategory
+     * Remove variable
      *
-     * @param \Tavro\Bundle\CoreBundle\Entity\RevenueCategory $revenueCategory
+     * @param \Tavro\Bundle\CoreBundle\Entity\Variable $variable
      */
-    public function removeRevenueCategory(\Tavro\Bundle\CoreBundle\Entity\RevenueCategory $revenueCategory)
+    public function removeVariable(\Tavro\Bundle\CoreBundle\Entity\Variable $variable)
     {
-        $this->revenue_categories->removeElement($revenueCategory);
+        $this->variables->removeElement($variable);
     }
 
     /**
-     * Get revenueCategories
+     * Get variables
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getRevenueCategories()
+    public function getVariables()
     {
-        return $this->revenue_categories;
+        return $this->variables;
+    }
+
+    /**
+     * Add tag
+     *
+     * @param \Tavro\Bundle\CoreBundle\Entity\Tag $tag
+     *
+     * @return Organization
+     */
+    public function addTag(\Tavro\Bundle\CoreBundle\Entity\Tag $tag)
+    {
+        $this->tags[] = $tag;
+
+        return $this;
+    }
+
+    /**
+     * Remove tag
+     *
+     * @param \Tavro\Bundle\CoreBundle\Entity\Tag $tag
+     */
+    public function removeTag(\Tavro\Bundle\CoreBundle\Entity\Tag $tag)
+    {
+        $this->tags->removeElement($tag);
+    }
+
+    /**
+     * Get tags
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getTags()
+    {
+        return $this->tags;
     }
 
     /**
@@ -396,186 +383,6 @@ class Organization extends AccountEntity implements AccountEntityInterface
     }
 
     /**
-     * Add variable
-     *
-     * @param \Tavro\Bundle\CoreBundle\Entity\Variable $variable
-     *
-     * @return Organization
-     */
-    public function addVariable(\Tavro\Bundle\CoreBundle\Entity\Variable $variable)
-    {
-        $this->variables[] = $variable;
-
-        return $this;
-    }
-
-    /**
-     * Remove variable
-     *
-     * @param \Tavro\Bundle\CoreBundle\Entity\Variable $variable
-     */
-    public function removeVariable(\Tavro\Bundle\CoreBundle\Entity\Variable $variable)
-    {
-        $this->variables->removeElement($variable);
-    }
-
-    /**
-     * Get variables
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getVariables()
-    {
-        return $this->variables;
-    }
-
-    /**
-     * Add node
-     *
-     * @param \Tavro\Bundle\CoreBundle\Entity\Node $node
-     * @return Organization
-     */
-    public function addNode(\Tavro\Bundle\CoreBundle\Entity\Node $node)
-    {
-        $this->nodes[] = $node;
-
-        return $this;
-    }
-
-    /**
-     * Remove node
-     *
-     * @param \Tavro\Bundle\CoreBundle\Entity\Node $node
-     */
-    public function removeNode(\Tavro\Bundle\CoreBundle\Entity\Node $node)
-    {
-        $this->nodes->removeElement($node);
-    }
-
-    /**
-     * Get node
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getNodes()
-    {
-        return $this->nodes;
-    }
-
-    /**
-     * Add FundingRound
-     *
-     * @param \Tavro\Bundle\CoreBundle\Entity\FundingRound $funding_round
-     *
-     * @return Organization
-     */
-    public function addFundingRound(\Tavro\Bundle\CoreBundle\Entity\FundingRound $funding_round)
-    {
-        $this->funding_rounds[] = $funding_round;
-
-        return $this;
-    }
-
-    /**
-     * Remove funding_round
-     *
-     * @param \Tavro\Bundle\CoreBundle\Entity\FundingRound $funding_round
-     */
-    public function removeFundingRound(\Tavro\Bundle\CoreBundle\Entity\FundingRound $funding_round)
-    {
-        $this->funding_rounds->removeElement($funding_round);
-    }
-
-    /**
-     * Get products
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getFundingRounds()
-    {
-        return $this->funding_rounds;
-    }
-
-    /**
-     * Add shareholderOrganization
-     *
-     * @param \Tavro\Bundle\CoreBundle\Entity\FundingRoundShareholder $shareholderOrganization
-     *
-     * @return Shareholder
-     */
-    public function addFundingRoundShareholder(\Tavro\Bundle\CoreBundle\Entity\FundingRoundShareholder $shareholderOrganization)
-    {
-        $this->funding_round_shareholders[] = $shareholderOrganization;
-
-        return $this;
-    }
-
-    /**
-     * Remove shareholderOrganization
-     *
-     * @param \Tavro\Bundle\CoreBundle\Entity\FundingRoundShareholder $shareholderOrganization
-     */
-    public function removeFundingRoundShareholder(\Tavro\Bundle\CoreBundle\Entity\FundingRoundShareholder $shareholderOrganization)
-    {
-        $this->funding_round_shareholders->removeElement($shareholderOrganization);
-    }
-
-    /**
-     * Get shareholderOrganizations
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getFundingRoundShareholders()
-    {
-        return $this->funding_round_shareholders;
-    }
-
-    /**
-     * Add tag
-     *
-     * @param \Tavro\Bundle\CoreBundle\Entity\Tag $tag
-     *
-     * @return Organization
-     */
-    public function addTag(\Tavro\Bundle\CoreBundle\Entity\Tag $tag)
-    {
-        $this->tags[] = $tag;
-
-        return $this;
-    }
-
-    /**
-     * Remove tag
-     *
-     * @param \Tavro\Bundle\CoreBundle\Entity\Tag $tag
-     */
-    public function removeTag(\Tavro\Bundle\CoreBundle\Entity\Tag $tag)
-    {
-        $this->tags->removeElement($tag);
-    }
-
-    /**
-     * Get tags
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getTags()
-    {
-        return $this->tags;
-    }
-
-    public function getUsers()
-    {
-        $items = array();
-        if(!empty($this->user_organizations)) {
-            foreach($this->user_organizations as $entity) {
-                $items[] = $entity->getUser();
-            }
-        }
-        return $items;
-    }
-
-    /**
      * Add contact
      *
      * @param \Tavro\Bundle\CoreBundle\Entity\Contact $contact
@@ -610,50 +417,70 @@ class Organization extends AccountEntity implements AccountEntityInterface
     }
 
     /**
-     * Set title
+     * Add fundingRound
      *
-     * @param string $title
+     * @param \Tavro\Bundle\CoreBundle\Entity\FundingRound $fundingRound
      *
      * @return Organization
      */
-    public function setTitle($title)
+    public function addFundingRound(\Tavro\Bundle\CoreBundle\Entity\FundingRound $fundingRound)
     {
-        $this->title = $title;
+        $this->funding_rounds[] = $fundingRound;
 
         return $this;
     }
 
     /**
-     * Get title
+     * Remove fundingRound
      *
-     * @return string
+     * @param \Tavro\Bundle\CoreBundle\Entity\FundingRound $fundingRound
      */
-    public function getTitle()
+    public function removeFundingRound(\Tavro\Bundle\CoreBundle\Entity\FundingRound $fundingRound)
     {
-        return $this->title;
+        $this->funding_rounds->removeElement($fundingRound);
     }
 
     /**
-     * Set body
+     * Get fundingRounds
      *
-     * @param string $body
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getFundingRounds()
+    {
+        return $this->funding_rounds;
+    }
+
+    /**
+     * Add fundingRoundShareholder
+     *
+     * @param \Tavro\Bundle\CoreBundle\Entity\FundingRoundShareholder $fundingRoundShareholder
      *
      * @return Organization
      */
-    public function setBody($body)
+    public function addFundingRoundShareholder(\Tavro\Bundle\CoreBundle\Entity\FundingRoundShareholder $fundingRoundShareholder)
     {
-        $this->body = $body;
+        $this->funding_round_shareholders[] = $fundingRoundShareholder;
 
         return $this;
     }
 
     /**
-     * Get body
+     * Remove fundingRoundShareholder
      *
-     * @return string
+     * @param \Tavro\Bundle\CoreBundle\Entity\FundingRoundShareholder $fundingRoundShareholder
      */
-    public function getBody()
+    public function removeFundingRoundShareholder(\Tavro\Bundle\CoreBundle\Entity\FundingRoundShareholder $fundingRoundShareholder)
     {
-        return $this->body;
+        $this->funding_round_shareholders->removeElement($fundingRoundShareholder);
+    }
+
+    /**
+     * Get fundingRoundShareholders
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getFundingRoundShareholders()
+    {
+        return $this->funding_round_shareholders;
     }
 }

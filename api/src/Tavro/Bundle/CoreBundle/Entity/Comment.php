@@ -39,11 +39,15 @@ class Comment extends Entity implements EntityInterface
      */
     protected $revenue_comments;
 
-
     /**
      * @ORM\OneToMany(targetEntity="Tavro\Bundle\CoreBundle\Entity\FundingRoundComment", mappedBy="comment", cascade={"remove"})
      */
     protected $funding_round_comments;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Tavro\Bundle\CoreBundle\Entity\OrganizationComment", mappedBy="comment", cascade={"remove"})
+     */
+    protected $organization_comments;
 
     /**
      * @ORM\ManyToOne(targetEntity="Tavro\Bundle\CoreBundle\Entity\User", inversedBy="comments")
@@ -62,7 +66,7 @@ class Comment extends Entity implements EntityInterface
         $this->node_comments = new \Doctrine\Common\Collections\ArrayCollection();
         $this->expense_comments = new \Doctrine\Common\Collections\ArrayCollection();
         $this->revenue_comments = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->contact_comments = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->organization_comments = new \Doctrine\Common\Collections\ArrayCollection();
         $this->funding_round_comments = new \Doctrine\Common\Collections\ArrayCollection();
         $this->status = 1;
         $this->create_date = new \DateTime();
@@ -255,36 +259,36 @@ class Comment extends Entity implements EntityInterface
     }
 
     /**
-     * Add contactComment
+     * Add OrganizationComment
      *
-     * @param \Tavro\Bundle\CoreBundle\Entity\ContactComment $contactComment
+     * @param \Tavro\Bundle\CoreBundle\Entity\OrganizationComment $organizationComment
      *
      * @return Comment
      */
-    public function addContactComment(\Tavro\Bundle\CoreBundle\Entity\ContactComment $contactComment)
+    public function addOrganizationComment(\Tavro\Bundle\CoreBundle\Entity\OrganizationComment $organizationComment)
     {
-        $this->contact_comments[] = $contactComment;
+        $this->organization_comments[] = $organizationComment;
 
         return $this;
     }
 
     /**
-     * Remove contactComment
+     * Remove OrganizationComment
      *
-     * @param \Tavro\Bundle\CoreBundle\Entity\ContactComment $contactComment
+     * @param \Tavro\Bundle\CoreBundle\Entity\OrganizationComment $organizationComment
      */
-    public function removeContactComment(\Tavro\Bundle\CoreBundle\Entity\ContactComment $contactComment)
+    public function removeOrganizationComment(\Tavro\Bundle\CoreBundle\Entity\OrganizationComment $organizationComment)
     {
-        $this->contact_comments->removeElement($contactComment);
+        $this->organization_comments->removeElement($organizationComment);
     }
 
     /**
-     * Get contactComments
+     * Get organizationComments
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getContactComments()
+    public function getOrganizationComments()
     {
-        return $this->contact_comments;
+        return $this->organization_comments;
     }
 }

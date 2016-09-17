@@ -19,23 +19,23 @@ use Tavro\Bundle\CoreBundle\Model\EntityInterface;
 /**
  * @ORM\Entity
  * @ORM\Entity(repositoryClass="Tavro\Bundle\CoreBundle\Repository\OrganizationCommentRepository")
- * @ORM\Table(name="tavro_contact_comment", indexes={@ORM\Index(name="CUSTOMER_COMMENT", columns={"comment_id","contact_id"})})
+ * @ORM\Table(name="tavro_organization_comment", indexes={@ORM\Index(name="ORGANIZATION_COMMENT", columns={"comment_id","organization_id"})})
  * @ExclusionPolicy("all")
  */
 class OrganizationComment extends Entity implements EntityInterface
 {
     /**
-     * @ORM\ManyToOne(targetEntity="Tavro\Bundle\CoreBundle\Entity\Comment", inversedBy="contact_comments")
+     * @ORM\ManyToOne(targetEntity="Tavro\Bundle\CoreBundle\Entity\Comment", inversedBy="organization_comments")
      * @ORM\JoinColumn(name="comment_id", referencedColumnName="id", nullable=FALSE)
      * @Groups({"api", "tavro"})
      */
     protected $comment;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Tavro\Bundle\CoreBundle\Entity\Contact", inversedBy="contact_comments")
-     * @ORM\JoinColumn(name="contact_id", referencedColumnName="id", nullable=FALSE)
+     * @ORM\ManyToOne(targetEntity="Tavro\Bundle\CoreBundle\Entity\Organization", inversedBy="organization_comments")
+     * @ORM\JoinColumn(name="organization_id", referencedColumnName="id", nullable=FALSE)
      */
-    protected $contact;
+    protected $organization;
 
     /**
      * Set comment
@@ -61,26 +61,26 @@ class OrganizationComment extends Entity implements EntityInterface
     }
 
     /**
-     * Set Contact
+     * Set Organization
      *
-     * @param \Tavro\Bundle\CoreBundle\Entity\Contact $contact
+     * @param \Tavro\Bundle\CoreBundle\Entity\Organization $organization
      * @return OrganizationComment
      */
-    public function setContact(\Tavro\Bundle\CoreBundle\Entity\Contact $contact)
+    public function setOrganization(\Tavro\Bundle\CoreBundle\Entity\Organization $organization)
     {
-        $this->contact = $contact;
+        $this->organization = $organization;
 
         return $this;
     }
 
     /**
-     * Get Contact
+     * Get Organization
      *
-     * @return \Tavro\Bundle\CoreBundle\Entity\Contact
+     * @return \Tavro\Bundle\CoreBundle\Entity\Organization
      */
-    public function getContact()
+    public function getOrganization()
     {
-        return $this->contact;
+        return $this->organization;
     }
 
 
@@ -107,4 +107,5 @@ class OrganizationComment extends Entity implements EntityInterface
     {
         return $this->body;
     }
+
 }

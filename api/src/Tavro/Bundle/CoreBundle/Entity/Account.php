@@ -43,6 +43,31 @@ class Account extends Entity implements EntityInterface
     protected $organizations;
 
     /**
+     * @ORM\OneToMany(targetEntity="Tavro\Bundle\CoreBundle\Entity\Service", mappedBy="account", cascade={"remove"})
+     */
+    protected $services;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Tavro\Bundle\CoreBundle\Entity\Revenue", mappedBy="account", cascade={"remove"})
+     */
+    protected $revenues;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Tavro\Bundle\CoreBundle\Entity\Product", mappedBy="account", cascade={"remove"})
+     */
+    protected $products;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Tavro\Bundle\CoreBundle\Entity\Expense", mappedBy="account", cascade={"remove"})
+     */
+    protected $expenses;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Tavro\Bundle\CoreBundle\Entity\Tag", mappedBy="account", cascade={"remove"})
+     */
+    protected $tags;
+
+    /**
      * @ORM\Column(type="string", unique=TRUE, length=500, nullable=FALSE)
      * @Groups({"api", "tavro", "simple"})
      */
@@ -53,6 +78,50 @@ class Account extends Entity implements EntityInterface
      * @Groups({"api", "tavro", "simple"})
      */
     protected $name_clean;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Tavro\Bundle\CoreBundle\Entity\ServiceCategory", mappedBy="account", cascade={"remove"})
+     * @Groups({"tavro"})
+     * @MaxDepth(3)
+     */
+    protected $service_categories;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Tavro\Bundle\CoreBundle\Entity\ExpenseCategory", mappedBy="account", cascade={"remove"})
+     * @Groups({"tavro"})
+     * @MaxDepth(3)
+     */
+    protected $expense_categories;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Tavro\Bundle\CoreBundle\Entity\ProductCategory", mappedBy="account", cascade={"remove"})
+     * @Groups({"tavro"})
+     * @MaxDepth(3)
+     */
+    protected $product_categories;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Tavro\Bundle\CoreBundle\Entity\RevenueCategory", mappedBy="account", cascade={"remove"})
+     * @Groups({"tavro"})
+     * @MaxDepth(3)
+     */
+    protected $revenue_categories;
+
+    public function __construct()
+    {
+        parent::__construct();
+        $this->organizations = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->account_users = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->tags = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->services = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->revenues = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->products = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->expenses = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->service_categories = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->expense_categories = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->product_categories = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->revenue_categories = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
     /**
      * Set body
@@ -238,5 +307,311 @@ class Account extends Entity implements EntityInterface
     public function getOrganizations()
     {
         return $this->organizations;
+    }
+
+    /**
+     * Add tag
+     *
+     * @param \Tavro\Bundle\CoreBundle\Entity\Tag $tag
+     *
+     * @return Account
+     */
+    public function addTag(\Tavro\Bundle\CoreBundle\Entity\Tag $tag)
+    {
+        $this->tags[] = $tag;
+
+        return $this;
+    }
+
+    /**
+     * Remove tag
+     *
+     * @param \Tavro\Bundle\CoreBundle\Entity\Tag $tag
+     */
+    public function removeTag(\Tavro\Bundle\CoreBundle\Entity\Tag $tag)
+    {
+        $this->tags->removeElement($tag);
+    }
+
+    /**
+     * Get tags
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getTags()
+    {
+        return $this->tags;
+    }
+
+    /**
+     * Add serviceCategory
+     *
+     * @param \Tavro\Bundle\CoreBundle\Entity\ServiceCategory $serviceCategory
+     *
+     * @return Account
+     */
+    public function addServiceCategory(\Tavro\Bundle\CoreBundle\Entity\ServiceCategory $serviceCategory)
+    {
+        $this->service_categories[] = $serviceCategory;
+
+        return $this;
+    }
+
+    /**
+     * Remove serviceCategory
+     *
+     * @param \Tavro\Bundle\CoreBundle\Entity\ServiceCategory $serviceCategory
+     */
+    public function removeServiceCategory(\Tavro\Bundle\CoreBundle\Entity\ServiceCategory $serviceCategory)
+    {
+        $this->service_categories->removeElement($serviceCategory);
+    }
+
+    /**
+     * Get serviceCategories
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getServiceCategories()
+    {
+        return $this->service_categories;
+    }
+
+    /**
+     * Add expenseCategory
+     *
+     * @param \Tavro\Bundle\CoreBundle\Entity\ExpenseCategory $expenseCategory
+     *
+     * @return Account
+     */
+    public function addExpenseCategory(\Tavro\Bundle\CoreBundle\Entity\ExpenseCategory $expenseCategory)
+    {
+        $this->expense_categories[] = $expenseCategory;
+
+        return $this;
+    }
+
+    /**
+     * Remove expenseCategory
+     *
+     * @param \Tavro\Bundle\CoreBundle\Entity\ExpenseCategory $expenseCategory
+     */
+    public function removeExpenseCategory(\Tavro\Bundle\CoreBundle\Entity\ExpenseCategory $expenseCategory)
+    {
+        $this->expense_categories->removeElement($expenseCategory);
+    }
+
+    /**
+     * Get expenseCategories
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getExpenseCategories()
+    {
+        return $this->expense_categories;
+    }
+
+    /**
+     * Add productCategory
+     *
+     * @param \Tavro\Bundle\CoreBundle\Entity\ProductCategory $productCategory
+     *
+     * @return Account
+     */
+    public function addProductCategory(\Tavro\Bundle\CoreBundle\Entity\ProductCategory $productCategory)
+    {
+        $this->product_categories[] = $productCategory;
+
+        return $this;
+    }
+
+    /**
+     * Remove productCategory
+     *
+     * @param \Tavro\Bundle\CoreBundle\Entity\ProductCategory $productCategory
+     */
+    public function removeProductCategory(\Tavro\Bundle\CoreBundle\Entity\ProductCategory $productCategory)
+    {
+        $this->product_categories->removeElement($productCategory);
+    }
+
+    /**
+     * Get productCategories
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getProductCategories()
+    {
+        return $this->product_categories;
+    }
+
+    /**
+     * Add revenueCategory
+     *
+     * @param \Tavro\Bundle\CoreBundle\Entity\RevenueCategory $revenueCategory
+     *
+     * @return Account
+     */
+    public function addRevenueCategory(\Tavro\Bundle\CoreBundle\Entity\RevenueCategory $revenueCategory)
+    {
+        $this->revenue_categories[] = $revenueCategory;
+
+        return $this;
+    }
+
+    /**
+     * Remove revenueCategory
+     *
+     * @param \Tavro\Bundle\CoreBundle\Entity\RevenueCategory $revenueCategory
+     */
+    public function removeRevenueCategory(\Tavro\Bundle\CoreBundle\Entity\RevenueCategory $revenueCategory)
+    {
+        $this->revenue_categories->removeElement($revenueCategory);
+    }
+
+    /**
+     * Get revenueCategories
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getRevenueCategories()
+    {
+        return $this->revenue_categories;
+    }
+
+    /**
+     * Add service
+     *
+     * @param \Tavro\Bundle\CoreBundle\Entity\Service $service
+     *
+     * @return Account
+     */
+    public function addService(\Tavro\Bundle\CoreBundle\Entity\Service $service)
+    {
+        $this->services[] = $service;
+
+        return $this;
+    }
+
+    /**
+     * Remove service
+     *
+     * @param \Tavro\Bundle\CoreBundle\Entity\Service $service
+     */
+    public function removeService(\Tavro\Bundle\CoreBundle\Entity\Service $service)
+    {
+        $this->services->removeElement($service);
+    }
+
+    /**
+     * Get services
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getServices()
+    {
+        return $this->services;
+    }
+
+    /**
+     * Add revenue
+     *
+     * @param \Tavro\Bundle\CoreBundle\Entity\Revenue $revenue
+     *
+     * @return Account
+     */
+    public function addRevenue(\Tavro\Bundle\CoreBundle\Entity\Revenue $revenue)
+    {
+        $this->revenues[] = $revenue;
+
+        return $this;
+    }
+
+    /**
+     * Remove revenue
+     *
+     * @param \Tavro\Bundle\CoreBundle\Entity\Revenue $revenue
+     */
+    public function removeRevenue(\Tavro\Bundle\CoreBundle\Entity\Revenue $revenue)
+    {
+        $this->revenues->removeElement($revenue);
+    }
+
+    /**
+     * Get revenues
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getRevenues()
+    {
+        return $this->revenues;
+    }
+
+    /**
+     * Add product
+     *
+     * @param \Tavro\Bundle\CoreBundle\Entity\Product $product
+     *
+     * @return Account
+     */
+    public function addProduct(\Tavro\Bundle\CoreBundle\Entity\Product $product)
+    {
+        $this->products[] = $product;
+
+        return $this;
+    }
+
+    /**
+     * Remove product
+     *
+     * @param \Tavro\Bundle\CoreBundle\Entity\Product $product
+     */
+    public function removeProduct(\Tavro\Bundle\CoreBundle\Entity\Product $product)
+    {
+        $this->products->removeElement($product);
+    }
+
+    /**
+     * Get products
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getProducts()
+    {
+        return $this->products;
+    }
+
+    /**
+     * Add expense
+     *
+     * @param \Tavro\Bundle\CoreBundle\Entity\Expense $expense
+     *
+     * @return Account
+     */
+    public function addExpense(\Tavro\Bundle\CoreBundle\Entity\Expense $expense)
+    {
+        $this->expenses[] = $expense;
+
+        return $this;
+    }
+
+    /**
+     * Remove expense
+     *
+     * @param \Tavro\Bundle\CoreBundle\Entity\Expense $expense
+     */
+    public function removeExpense(\Tavro\Bundle\CoreBundle\Entity\Expense $expense)
+    {
+        $this->expenses->removeElement($expense);
+    }
+
+    /**
+     * Get expenses
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getExpenses()
+    {
+        return $this->expenses;
     }
 }

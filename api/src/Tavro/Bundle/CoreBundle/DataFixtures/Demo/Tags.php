@@ -21,7 +21,7 @@ use Tavro\Bundle\CoreBundle\Entity\Expense;
 use Tavro\Bundle\CoreBundle\Entity\Node;
 use Tavro\Bundle\CoreBundle\Entity\Revenue;
 use Tavro\Bundle\CoreBundle\Entity\Tag;
-use Tavro\Bundle\CoreBundle\Entity\UserOrganization;
+use Tavro\Bundle\CoreBundle\Entity\AccountUser;
 use Tavro\Bundle\CoreBundle\Entity\ExpenseCategory;
 use Tavro\Bundle\CoreBundle\Entity\ExpenseComment;
 use Tavro\Bundle\CoreBundle\Entity\ExpenseTag;
@@ -31,7 +31,7 @@ use Tavro\Bundle\CoreBundle\Entity\NodeComment;
 use Tavro\Bundle\CoreBundle\Entity\ProductCategory;
 use Tavro\Bundle\CoreBundle\Entity\RevenueCategory;
 use Tavro\Bundle\CoreBundle\Entity\ServiceCategory;
-use Tavro\Bundle\CoreBundle\Entity\Customer;
+use Tavro\Bundle\CoreBundle\Entity\Contact;
 use Tavro\Bundle\CoreBundle\Entity\OrganizationComment;
 use Tavro\Bundle\CoreBundle\Entity\FundingRoundShareholder;
 use Tavro\Bundle\CoreBundle\Entity\RevenueService;
@@ -66,24 +66,21 @@ class Tags extends AbstractFixture implements OrderedFixtureInterface, Container
      */
     public function load(ObjectManager $manager)
     {
-        $lipsum = $this->container->get('apoutchika.lorem_ipsum');
-        $size = 10;
+        $size = 25;
+        $faker = \Faker\Factory::create('en_EN');
 
         $tags = array();
 
-        $organizations = $manager->getRepository('TavroCoreBundle:Organization')->findAll();
+        $accounts = $manager->getRepository('TavroCoreBundle:Account')->findAll();
 
-        $types = array('hourly', 'unit', 'retainer');
+        foreach($accounts as $account) {
 
-        foreach($organizations as $organization) {
-
-            for($i=0;$i<20;$i++) {
+            for($i=0;$i<rand(5,$size);$i++) {
 
                 $tag = new Tag();
-                $tag->setOrganization($organization);
-                $tag->setTag($lipsum->getWords(1));
-                $tag->setBody($lipsum->getSentences(1));
-                $tag->setCreateDate(new \DateTime());
+                $tag->setAccount($account);
+                $tag->setTag($faker->text(rand(5,50)));
+                $tag->setBody($faker->text(rand(100,1000)));
                 $tag->setStatus(1);
                 $manager->persist($tag);
                 $tags[] = $tag;

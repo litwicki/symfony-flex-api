@@ -21,7 +21,7 @@ use Tavro\Bundle\CoreBundle\Entity\Expense;
 use Tavro\Bundle\CoreBundle\Entity\Node;
 use Tavro\Bundle\CoreBundle\Entity\Revenue;
 use Tavro\Bundle\CoreBundle\Entity\Tag;
-use Tavro\Bundle\CoreBundle\Entity\UserOrganization;
+use Tavro\Bundle\CoreBundle\Entity\AccountUser;
 use Tavro\Bundle\CoreBundle\Entity\ExpenseCategory;
 use Tavro\Bundle\CoreBundle\Entity\ExpenseComment;
 use Tavro\Bundle\CoreBundle\Entity\ExpenseTag;
@@ -31,7 +31,7 @@ use Tavro\Bundle\CoreBundle\Entity\NodeComment;
 use Tavro\Bundle\CoreBundle\Entity\ProductCategory;
 use Tavro\Bundle\CoreBundle\Entity\RevenueCategory;
 use Tavro\Bundle\CoreBundle\Entity\ServiceCategory;
-use Tavro\Bundle\CoreBundle\Entity\Customer;
+use Tavro\Bundle\CoreBundle\Entity\Contact;
 use Tavro\Bundle\CoreBundle\Entity\OrganizationComment;
 use Tavro\Bundle\CoreBundle\Entity\FundingRoundShareholder;
 use Tavro\Bundle\CoreBundle\Entity\RevenueService;
@@ -61,49 +61,32 @@ class Services extends AbstractFixture implements OrderedFixtureInterface, Conta
         $this->container = $container;
     }
 
-    public function getCities($state)
-    {
-        $json = file_get_contents(sprintf('http://api.sba.gov/geodata/city_links_for_state_of/%s.json', $state));
-        $data = json_decode($json, TRUE);
-        $cities = [];
-        foreach ($data as $item) {
-            $cities[] = $item['name'];
-        }
-
-        return $cities;
-    }
-
-    public function getStates()
-    {
-        return Litwicki::getStateSelectChoices();
-    }
-
     /**
      * {@inheritDoc}
      */
     public function load(ObjectManager $manager)
     {
-        $lipsum = $this->container->get('apoutchika.lorem_ipsum');
+        $faker = \Faker\Factory::create('en_EN');
         $size = 10;
 
-        $organizations = $manager->getRepository('TavroCoreBundle:Organization')->findAll();
+        $accounts = $manager->getRepository('TavroCoreBundle:Account')->findAll();
 
         $types = array('hourly', 'unit', 'retainer');
 
-        foreach($organizations as $organization) {
+        foreach($accounts as $account) {
 
-            $serviceCategories = $organization->getServiceCategories()->toArray();
+            $serviceCategories = $account->getServiceCategories()->toArray();
 
             $services = array();
 
             for($i=0;$i<$size;$i++) {
 
                 $service = new Service();
-                $service->setOrganization($organization);
+                $service->setAccount($account);
                 $service->setCreateDate(new \DateTime());
                 $service->setCategory($serviceCategories[array_rand($serviceCategories)]);
-                $service->setTitle(ucwords($lipsum->getWords(rand(1,5))));
-                $service->setBody($lipsum->getParagraphs(rand(1,3)));
+                $service->setTitle(ucwords($faker->text(rand(10,100))));
+                $service->setBody($faker->text(rand(100,1000)));
                 $service->setStatus(rand(0,1));
                 $service->setPrice(rand(1.00, 999.99));
                 $service->setType($types[array_rand($types)]);

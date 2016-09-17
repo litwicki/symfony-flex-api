@@ -117,27 +117,21 @@ class Users extends AbstractFixture implements OrderedFixtureInterface, Containe
             $user = new User();
             $user->setPerson($person);
             $user->setStatus(rand(0,1));
-            $user->setCreateDate(new \DateTime());
             $user->setApiEnabled(rand(0,1));
             $user->setUsername($faker->userName);
             $user->setUserAgent($faker->userAgent);
             $user->setApiEnabled(rand(0,1));
-            $user->setBody($faker->words(rand(5,100)));
+            $user->setBody($faker->text(rand(100,1000)));
             $user->setLastOnlineDate(new \DateTime($faker->dateTimeThisMonth->format('Y-m-d H:i:s')));
-            $user->setSignature($faker->words(rand(5,25)));
+            $user->setSignature($faker->text(rand(10,500)));
             $user->setSalt($salt);
-
-            /**
-             * Only set the Api Key for test Users!!!
-             */
-            $user->setApiKey($person->getEmail());
-
             $user->setPassword($password);
-            $user->setPerson($person);
             $user->addRole($roles[rand(0,1)]);
             $manager->persist($user);
 
         }
+
+        $manager->flush();
 
         $autobots = [
             'Optimus Prime',
@@ -187,7 +181,7 @@ class Users extends AbstractFixture implements OrderedFixtureInterface, Containe
                 'password' => $username,
                 'first_name' => $fullname[0],
                 'last_name' => isset($fullname[1]) ? $fullname[1] : NULL,
-                'gender' => 'male',
+                'gender' => 'autobot',
             ]);
         }
 
@@ -202,7 +196,7 @@ class Users extends AbstractFixture implements OrderedFixtureInterface, Containe
                 'password' => $username,
                 'first_name' => $fullname[0],
                 'last_name' => isset($fullname[1]) ? $fullname[1] : NULL,
-                'gender' => 'male',
+                'gender' => 'decepticon',
             ]);
         }
 
@@ -231,26 +225,26 @@ class Users extends AbstractFixture implements OrderedFixtureInterface, Containe
         try {
 
             $faker = \Faker\Factory::create('en_EN');
-            $genders = ['male', 'female'];
 
             $password = isset($parameters['password']) ? $parameters['password'] : 'Password1!';
             $email = isset($parameters['email']) ? $parameters['email'] : sprintf('%s@tavro.dev', $parameters['username']);
 
             $firstname = isset($parameters['first_name']) ? $parameters['first_name'] : $faker->firstName;
             $lastname = isset($parameters['last_name']) ? $parameters['last_name'] : $faker->lastName;
+            $gender = isset($parameters['gender']) ? $parameters['gender'] : 'male';
 
             $salt = md5($email);
             $encoder = $this->container->get('tavro.password_encoder');
             $password = $encoder->encodePassword($password, $salt);
 
+            $email = $faker->email;
+
             $person = new Person();
             $person->setFirstName($firstname);
             $person->setLastName($lastname);
+            $person->setSuffix($faker->suffix);
             $person->setEmail($email);
-            $person->setGender('male');
-            $person->setStatus(Person::STATUS_ENABLED);
-            $person->setCreateDate(new \DateTime());
-            $person->setUpdateDate(new \DateTime());
+            $person->setGender($gender);
             $person->setBirthday(new \DateTime($faker->dateTimeThisCentury->format('Y-m-d')));
             $manager->persist($person);
             $manager->flush();

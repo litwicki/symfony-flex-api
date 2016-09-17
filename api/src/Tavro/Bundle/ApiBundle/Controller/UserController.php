@@ -181,23 +181,23 @@ class UserController extends ApiController
      *
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function organizationsAction(Request $request, User $user, $_format)
+    public function accountsAction(Request $request, User $user, $_format)
     {
 
-        $uos = $user->getUserOrganizations();
+        $accounts = $user->getUserAccounts();
 
         $items = array();
 
-        foreach($uos as $uo) {
-            $org = $uo->getOrganization();
-            $items[$org->getId()] = $org;
+        foreach($accounts as $entity) {
+            $account = $entity->getAccount();
+            $items[$account->getId()] = $account;
         }
 
         /**
          * Cross Reference every Organization this User owns but may not be
          * a "User" of..
          */
-        $entities = $this->getDoctrine()->getManager()->getRepository('TavroApiBundle:Organization')->findBy(array(
+        $entities = $this->getDoctrine()->getManager()->getRepository('TavroApiBundle:Account')->findBy(array(
             'user' => $user
         ));
 

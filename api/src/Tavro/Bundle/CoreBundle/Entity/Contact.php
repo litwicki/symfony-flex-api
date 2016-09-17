@@ -162,41 +162,6 @@ class Contact extends AccountEntity implements AccountEntityInterface
     }
 
     /**
-     * Add contactComment
-     *
-     * @param \Tavro\Bundle\CoreBundle\Entity\ContactComment $contactComment
-     *
-     * @return Contact
-     */
-    public function addContactComment(\Tavro\Bundle\CoreBundle\Entity\ContactComment $contactComment)
-    {
-        $this->contact_comments[] = $contactComment;
-
-        return $this;
-    }
-
-    /**
-     * Remove contactComment
-     *
-     * @param \Tavro\Bundle\CoreBundle\Entity\ContactComment $contactComment
-     */
-    public function removeContactComment(\Tavro\Bundle\CoreBundle\Entity\ContactComment $contactComment)
-    {
-        $this->contact_comments->removeElement($contactComment);
-    }
-
-    /**
-     * Get contactComments
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getContactComments()
-    {
-        return $this->contact_comments;
-    }
-
-
-    /**
      * Set person
      *
      * @param \Tavro\Bundle\CoreBundle\Entity\Person $person

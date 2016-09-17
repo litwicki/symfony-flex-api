@@ -123,12 +123,6 @@ class User extends Entity implements UserInterface, \Serializable
     protected $nodes;
 
     /**
-     * @ORM\OneToMany(targetEntity="Tavro\Bundle\CoreBundle\Entity\Organization", mappedBy="owner")
-     * @ORM\OrderBy({"id" = "DESC"})
-     */
-    protected $organizations;
-
-    /**
      * @ORM\OneToMany(targetEntity="Tavro\Bundle\CoreBundle\Entity\Comment", mappedBy="user")
      * @ORM\OrderBy({"id" = "DESC"})
      */
@@ -736,38 +730,6 @@ class User extends Entity implements UserInterface, \Serializable
     }
 
     /**
-     * @param \Tavro\Bundle\CoreBundle\Entity\UserOrganization $user_organization
-     *
-     * @return $this
-     */
-    public function addUserOrganizations(\Tavro\Bundle\CoreBundle\Entity\UserOrganization $user_organization)
-    {
-        $this->user_organizations[] = $user_organization;
-
-        return $this;
-    }
-
-    /**
-     * Remove user_organization
-     *
-     * @param \Tavro\Bundle\CoreBundle\Entity\UserOrganization $user_organization
-     */
-    public function removeUserOrganization(\Tavro\Bundle\CoreBundle\Entity\UserOrganization $user_organization)
-    {
-        $this->user_organizations->removeElement($user_organization);
-    }
-
-    /**
-     * Get user_organizations
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getUserOrganizations()
-    {
-        return $this->user_organizations;
-    }
-
-    /**
      * Check if the current Password Token has expired.
      * @return boolean
      */
@@ -923,54 +885,6 @@ class User extends Entity implements UserInterface, \Serializable
     public function getAvatar()
     {
         return $this->avatar;
-    }
-
-    /**
-     * Add organization
-     *
-     * @param \Tavro\Bundle\CoreBundle\Entity\Organization $organization
-     *
-     * @return User
-     */
-    public function addOrganization(\Tavro\Bundle\CoreBundle\Entity\Organization $organization)
-    {
-        $this->organizations[] = $organization;
-
-        return $this;
-    }
-
-    /**
-     * Remove organization
-     *
-     * @param \Tavro\Bundle\CoreBundle\Entity\Organization $organization
-     */
-    public function removeOrganization(\Tavro\Bundle\CoreBundle\Entity\Organization $organization)
-    {
-        $this->organizations->removeElement($organization);
-    }
-
-    /**
-     * Get organizations
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getOrganizations()
-    {
-        return $this->organizations;
-    }
-
-    /**
-     * Add userOrganization
-     *
-     * @param \Tavro\Bundle\CoreBundle\Entity\UserOrganization $userOrganization
-     *
-     * @return User
-     */
-    public function addUserOrganization(\Tavro\Bundle\CoreBundle\Entity\UserOrganization $userOrganization)
-    {
-        $this->user_organizations[] = $userOrganization;
-
-        return $this;
     }
 
     /**

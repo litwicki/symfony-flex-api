@@ -73,14 +73,6 @@ class Expense extends AccountEntity implements AccountEntityInterface
     protected $expense_tags;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Tavro\Bundle\CoreBundle\Entity\Organization", inversedBy="expenses")
-     * @ORM\JoinColumn(name="organization_id", referencedColumnName="id", nullable=FALSE)
-     * @Groups({"api", "tavro", "simple"})
-     * @MaxDepth(1)
-     */
-    protected $organization;
-
-    /**
      * Constructor
      */
     public function __construct()
@@ -91,6 +83,7 @@ class Expense extends AccountEntity implements AccountEntityInterface
         $this->expense_date = new \DateTime();
         $this->status = self::STATUS_ENABLED;
     }
+
 
     /**
      * Set body
@@ -278,29 +271,5 @@ class Expense extends AccountEntity implements AccountEntityInterface
     public function getExpenseTags()
     {
         return $this->expense_tags;
-    }
-
-    /**
-     * Set organization
-     *
-     * @param \Tavro\Bundle\CoreBundle\Entity\Organization $organization
-     *
-     * @return Expense
-     */
-    public function setOrganization(\Tavro\Bundle\CoreBundle\Entity\Organization $organization)
-    {
-        $this->organization = $organization;
-
-        return $this;
-    }
-
-    /**
-     * Get organization
-     *
-     * @return \Tavro\Bundle\CoreBundle\Entity\Organization
-     */
-    public function getOrganization()
-    {
-        return $this->organization;
     }
 }

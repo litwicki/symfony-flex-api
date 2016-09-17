@@ -21,7 +21,7 @@ use Tavro\Bundle\CoreBundle\Entity\Expense;
 use Tavro\Bundle\CoreBundle\Entity\Node;
 use Tavro\Bundle\CoreBundle\Entity\Revenue;
 use Tavro\Bundle\CoreBundle\Entity\Tag;
-use Tavro\Bundle\CoreBundle\Entity\UserOrganization;
+use Tavro\Bundle\CoreBundle\Entity\AccountUser;
 use Tavro\Bundle\CoreBundle\Entity\ExpenseCategory;
 use Tavro\Bundle\CoreBundle\Entity\ExpenseComment;
 use Tavro\Bundle\CoreBundle\Entity\ExpenseTag;
@@ -31,7 +31,7 @@ use Tavro\Bundle\CoreBundle\Entity\NodeComment;
 use Tavro\Bundle\CoreBundle\Entity\ProductCategory;
 use Tavro\Bundle\CoreBundle\Entity\RevenueCategory;
 use Tavro\Bundle\CoreBundle\Entity\ServiceCategory;
-use Tavro\Bundle\CoreBundle\Entity\Customer;
+use Tavro\Bundle\CoreBundle\Entity\Contact;
 use Tavro\Bundle\CoreBundle\Entity\OrganizationComment;
 use Tavro\Bundle\CoreBundle\Entity\FundingRoundShareholder;
 
@@ -64,16 +64,16 @@ class Expenses extends AbstractFixture implements OrderedFixtureInterface, Conta
      */
     public function load(ObjectManager $manager)
     {
-        $lipsum = $this->container->get('apoutchika.lorem_ipsum');
+        $faker = \Faker\Factory::create('en_EN');
         $size = 10;
 
-        $organizations = $manager->getRepository('TavroCoreBundle:Organization')->findAll();
+        $accounts = $manager->getRepository('TavroCoreBundle:Account')->findAll();
 
-        foreach($organizations as $organization) {
+        foreach($accounts as $account) {
 
-            $expenseCategories = $organization->getExpenseCategories()->toArray();
-            $users = $organization->getUsers();
-            $tags = $organization->getTags()->toArray();
+            $expenseCategories = $account->getExpenseCategories()->toArray();
+            $users = $account->getUsers()->toArray();
+            $tags = $account->getTags()->toArray();
 
             $expenses = array();
 
@@ -83,10 +83,9 @@ class Expenses extends AbstractFixture implements OrderedFixtureInterface, Conta
                 $category = $expenseCategories[array_rand($expenseCategories)];
 
                 $expense = new Expense();
-                $expense->setOrganization($organization);
+                $expense->setAccount($account);
                 $expense->setCategory($category);
-                $expense->setTitle($lipsum->getWords(rand(1,10)));
-                $expense->setBody($lipsum->getSentences(rand(1,3)));
+                $expense->setBody($faker->text(rand(100,1000)));
                 $expense->setCreateDate(new \DateTime());
                 $expense->setStatus(rand(0,1));
                 $expense->setAmount(rand(0,9999));
@@ -105,9 +104,8 @@ class Expenses extends AbstractFixture implements OrderedFixtureInterface, Conta
                 for($i=0;$i<rand(0,$size);$i++) {
                     $comment = new Comment();
                     $comment->setUser($users[array_rand($users)]);
-                    $comment->setBody($lipsum->getSentences(rand(1,10)));
+                    $comment->setBody($faker->text(rand(100,1000)));
                     $comment->setStatus(rand(0,1));
-                    $comment->setTitle($lipsum->getWords(rand(2,10)));
                     $manager->persist($comment);
                     $manager->flush();
 
@@ -118,6 +116,9 @@ class Expenses extends AbstractFixture implements OrderedFixtureInterface, Conta
                     $manager->flush();
                 }
 
+                /**
+                 * For this Expense, let's add some tags..
+                 */
                 for($i=0;$i<rand(0,$size);$i++) {
                     $expenseTag = new ExpenseTag();
                     $expenseTag->setExpense($expense);

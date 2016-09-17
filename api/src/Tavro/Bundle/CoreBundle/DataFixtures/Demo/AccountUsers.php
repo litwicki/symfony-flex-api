@@ -67,36 +67,38 @@ class AccountUsers extends AbstractFixture implements OrderedFixtureInterface, C
     public function load(ObjectManager $manager)
     {
 
-        $size = 10;
+        $size = 25;
 
         $accounts = $manager->getRepository('TavroCoreBundle:Account')->findAll();
 
-        $autobots = $manager->getRepository('TavroCoreBundle:User')->findBy([
+        $autobots = $manager->getRepository('TavroCoreBundle:Person')->findBy([
             'gender' => 'autobot'
         ]);
 
-        $decepticons = $manager->getRepository('TavroCoreBundle:User')->findBy([
+        $decepticons = $manager->getRepository('TavroCoreBundle:Person')->findBy([
             'gender' => 'decepticon'
         ]);
 
-        $users = $manager->getRepository('TavroCoreBundle:User')->findBy([
+        $people = $manager->getRepository('TavroCoreBundle:Person')->findBy([
             'gender' => ['male', 'female']
         ]);
 
         foreach($accounts as $account) {
 
-            for($i=0;$i<$size;$i++) {
+            for($i=0;$i<rand(1,$size);$i++) {
 
                 switch($account->getName()) {
                     case 'Decepticons':
-                        $user = $decepticons[array_rand($decepticons)];
+                        $person = $decepticons[array_rand($decepticons)];
                         break;
                     case 'Autobots':
-                        $user = $autobots[array_rand($autobots)];
+                        $person = $autobots[array_rand($autobots)];
                         break;
                     default:
-                        $user = $users[array_rand($users)];
+                        $person = $people[array_rand($people)];
                 }
+
+                $user = $person->getUser();
 
                 /**
                  * Don't create an AccountUser for someone who is already the Owner of the Account.

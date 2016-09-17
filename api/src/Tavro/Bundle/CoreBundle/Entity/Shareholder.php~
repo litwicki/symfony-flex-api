@@ -18,8 +18,8 @@ use Doctrine\ORM\Mapping\Table;
 
 use Symfony\Component\Validator\Constraints as Assert;
 
-use Tavro\Bundle\CoreBundle\Model\AccountEntity;
-use Tavro\Bundle\CoreBundle\Model\AccountEntityInterface;
+use Tavro\Bundle\CoreBundle\Model\Entity;
+use Tavro\Bundle\CoreBundle\Model\EntityInterface;
 use JMS\Serializer\Annotation\MaxDepth;
 
 /**
@@ -30,7 +30,7 @@ use JMS\Serializer\Annotation\MaxDepth;
  * @XmlRoot("shareholder")
  * @XmlNamespace(uri="http://tavro.io/api/shareholders")
  */
-class Shareholder extends AccountEntity implements AccountEntityInterface
+class Shareholder extends Entity implements EntityInterface
 {
     /**
      * @ORM\ManyToOne(targetEntity="Tavro\Bundle\CoreBundle\Entity\Person")
