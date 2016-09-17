@@ -40,7 +40,6 @@ class PersonTest extends TavroTest
         $data = [
             'first_name' => $faker->firstName,
             'last_name' => $faker->lastName,
-            'title' => $faker->title,
             'body' => $faker->text(500),
             'email' => $faker->email,
             'gender' => $gender,
@@ -65,6 +64,7 @@ class PersonTest extends TavroTest
 
         $json = $response->getBody(true);
         $body = json_decode($json, true);
+        die($json);
 
         $this->assertEquals(200, $response->getStatusCode());
 
@@ -79,7 +79,6 @@ class PersonTest extends TavroTest
         $data = [
             'first_name' => $faker->firstName,
             'last_name' => $faker->lastName,
-            'title' => $faker->title,
             'body' => $faker->text(500),
             'email' => $faker->email,
             'gender' => 'gremlin',

@@ -22,7 +22,6 @@ class PersonType extends AbstractType
             ->add('first_name')
             ->add('middle_name')
             ->add('last_name')
-            ->add('title')
             ->add('suffix')
             ->add('gender')
             ->add('birthday', DateType::class)

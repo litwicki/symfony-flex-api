@@ -38,7 +38,7 @@ class TagTest extends TavroTest
 
         $data = array(
             'tag' => $faker->text(5),
-            'organization' => 1
+            'account' => 1
         );
 
         $url = 'http://api.tavro.dev/api/v1/tags';

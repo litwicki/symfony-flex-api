@@ -40,7 +40,7 @@ class ProductTest extends TavroTest
             'cost' => 75,
             'status' => 1,
             'category' => 1,
-            'organization' => 1
+            'account' => 1
         );
 
         $url = 'http://api.tavro.dev/api/v1/products';

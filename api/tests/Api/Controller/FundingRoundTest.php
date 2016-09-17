@@ -43,7 +43,7 @@ class FundingRoundTest extends TavroTest
         $data = array(
             'body' => 'FundingRound body description.',
             'type' => 'funding_round_test',
-            'organization' => 1
+            'account' => 1
         );
 
         $url = 'http://api.tavro.dev/api/v1/funding';

@@ -1,6 +1,6 @@
 <?php
 
-namespace Tavro\Bundle\CoreBundle\Entity;
+namespace Tavro\Bundle\CoreBundle\Handler;
 
 use Gaufrette\Adapter\AwsS3;
 use Tavro\Bundle\CoreBundle\Exception\Api\ApiException;

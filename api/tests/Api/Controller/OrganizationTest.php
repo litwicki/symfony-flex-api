@@ -36,8 +36,9 @@ class OrganizationTest extends TavroTest
 
         $data = array(
             'title' => 'Organization Name',
-            'body' => 'Product body..',
+            'body' => 'Organization body..',
             'owner' => 1,
+            'account' => 1
         );
 
         $url = 'http://api.tavro.dev/api/v1/organizations';

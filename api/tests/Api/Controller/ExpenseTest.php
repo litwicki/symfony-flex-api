@@ -41,7 +41,7 @@ class ExpenseTest extends TavroTest
             'amount' => 100,
             'expense_date' => $faker->dateTimeThisMonth->format('Y-m-d h:i:s'),
             'user' => 1,
-            'organization' => 1,
+            'account' => 1,
             'category' => 1,
         );
 

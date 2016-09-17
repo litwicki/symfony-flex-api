@@ -1,6 +1,6 @@
 <?php
 
-namespace Tavro\Bundle\CoreBundle\Entity;
+namespace Tavro\Bundle\CoreBundle\Handler;
 
 use Tavro\Bundle\CoreBundle\Exception\Api\ApiException;
 use Tavro\Bundle\CoreBundle\Model\EntityHandler;

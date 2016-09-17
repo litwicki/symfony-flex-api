@@ -165,8 +165,7 @@ class DefaultController extends Controller
     {
         try {
             $service = sprintf('tavro.handler.%s', $entityName);
-            $handler = $this->container->get($service);
-            return $handler;
+            return $this->container->get($service);
         }
         catch(\Exception $e) {
             throw $e;

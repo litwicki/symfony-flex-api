@@ -1,6 +1,6 @@
 services:
     tavro.handler.accounts:
-        class: Tavro\Bundle\CoreBundle\Handler\Entity\AccountHandler
+        class: Tavro\Bundle\CoreBundle\Handler\AccountHandler
         arguments:
             - '@doctrine.orm.main_entity_manager'
             - '@form.factory'
@@ -12,7 +12,7 @@ services:
             - 'Tavro\Bundle\CoreBundle\Entity\Account'
 
     tavro.handler.accounts:
-        class: Tavro\Bundle\CoreBundle\Handler\Entity\AccountUserHandler
+        class: Tavro\Bundle\CoreBundle\Handler\AccountUserHandler
         arguments:
             - '@doctrine.orm.main_entity_manager'
             - '@form.factory'
@@ -24,7 +24,7 @@ services:
             - 'Tavro\Bundle\CoreBundle\Entity\AccountUser'
 
     tavro.handler.accounts:
-        class: Tavro\Bundle\CoreBundle\Handler\Entity\AccountGroupHandler
+        class: Tavro\Bundle\CoreBundle\Handler\AccountGroupHandler
         arguments:
             - '@doctrine.orm.main_entity_manager'
             - '@form.factory'
@@ -35,7 +35,7 @@ services:
             - '%amazon_s3_url%'
             - 'Tavro\Bundle\CoreBundle\Entity\AccountGroup'
     tavro.handler.accounts:
-        class: Tavro\Bundle\CoreBundle\Handler\Entity\AccountGroupUserHandler
+        class: Tavro\Bundle\CoreBundle\Handler\AccountGroupUserHandler
         arguments:
             - '@doctrine.orm.main_entity_manager'
             - '@form.factory'
@@ -48,7 +48,7 @@ services:
 
 
     tavro.handler.comments:
-        class: Tavro\Bundle\CoreBundle\Handler\Entity\CommentHandler
+        class: Tavro\Bundle\CoreBundle\Handler\CommentHandler
         arguments:
             - '@doctrine.orm.main_entity_manager'
             - '@form.factory'
@@ -59,7 +59,7 @@ services:
             - '%amazon_s3_url%'
             - 'Tavro\Bundle\CoreBundle\Entity\Comment'
     tavro.handler.comments:
-        class: Tavro\Bundle\CoreBundle\Handler\Entity\CommentHandler
+        class: Tavro\Bundle\CoreBundle\Handler\CommentHandler
         arguments:
             - '@doctrine.orm.main_entity_manager'
             - '@form.factory'
@@ -71,7 +71,7 @@ services:
             - 'Tavro\Bundle\CoreBundle\Entity\Comment'
 
     tavro.handler.revenue_comments:
-        class: Tavro\Bundle\CoreBundle\Handler\Entity\RevenueCommentHandler
+        class: Tavro\Bundle\CoreBundle\Handler\RevenueCommentHandler
         arguments:
             - '@doctrine.orm.main_entity_manager'
             - '@form.factory'
@@ -83,7 +83,7 @@ services:
             - 'Tavro\Bundle\CoreBundle\Entity\RevenueComment'
 
     tavro.handler.customer_comments:
-        class: Tavro\Bundle\CoreBundle\Handler\Entity\OrganizationCommentHandler
+        class: Tavro\Bundle\CoreBundle\Handler\OrganizationCommentHandler
         arguments:
             - '@doctrine.orm.main_entity_manager'
             - '@form.factory'
@@ -95,7 +95,7 @@ services:
             - 'Tavro\Bundle\CoreBundle\Entity\OrganizationComment'
 
     tavro.handler.expense_comments:
-        class: Tavro\Bundle\CoreBundle\Handler\Entity\ExpenseCommentHandler
+        class: Tavro\Bundle\CoreBundle\Handler\ExpenseCommentHandler
         arguments:
             - '@doctrine.orm.main_entity_manager'
             - '@form.factory'
@@ -107,7 +107,7 @@ services:
             - 'Tavro\Bundle\CoreBundle\Entity\ExpenseComment'
 
     tavro.handler.node_comments:
-        class: Tavro\Bundle\CoreBundle\Handler\Entity\NodeCommentHandler
+        class: Tavro\Bundle\CoreBundle\Handler\NodeCommentHandler
         arguments:
             - '@doctrine.orm.main_entity_manager'
             - '@form.factory'
@@ -119,7 +119,7 @@ services:
             - 'Tavro\Bundle\CoreBundle\Entity\NodeComment'
 
     tavro.handler.contacts:
-        class: Tavro\Bundle\CoreBundle\Handler\Entity\ContactHandler
+        class: Tavro\Bundle\CoreBundle\Handler\ContactHandler
         arguments:
             - '@doctrine.orm.main_entity_manager'
             - '@form.factory'
@@ -131,7 +131,7 @@ services:
             - 'Tavro\Bundle\CoreBundle\Entity\Contact'
 
     tavro.handler.expenses:
-        class: Tavro\Bundle\CoreBundle\Handler\Entity\ExpenseHandler
+        class: Tavro\Bundle\CoreBundle\Handler\ExpenseHandler
         arguments:
             - '@doctrine.orm.main_entity_manager'
             - '@form.factory'
@@ -143,7 +143,7 @@ services:
             - 'Tavro\Bundle\CoreBundle\Entity\Expense'
 
     tavro.handler.expense_categories:
-        class: Tavro\Bundle\CoreBundle\Handler\Entity\ExpenseCategoryHandler
+        class: Tavro\Bundle\CoreBundle\Handler\ExpenseCategoryHandler
         arguments:
             - '@doctrine.orm.main_entity_manager'
             - '@form.factory'
@@ -155,7 +155,7 @@ services:
             - 'Tavro\Bundle\CoreBundle\Entity\ExpenseCategory'
 
     tavro.handler.expense_tags:
-        class: Tavro\Bundle\CoreBundle\Handler\Entity\ExpenseTagHandler
+        class: Tavro\Bundle\CoreBundle\Handler\ExpenseTagHandler
         arguments:
             - '@doctrine.orm.main_entity_manager'
             - '@form.factory'
@@ -167,7 +167,7 @@ services:
             - 'Tavro\Bundle\CoreBundle\Entity\Expense'
 
     tavro.handler.expense_comments:
-        class: Tavro\Bundle\CoreBundle\Handler\Entity\ExpenseCommentHandler
+        class: Tavro\Bundle\CoreBundle\Handler\ExpenseCommentHandler
         arguments:
             - '@doctrine.orm.main_entity_manager'
             - '@form.factory'
@@ -179,7 +179,7 @@ services:
             - 'Tavro\Bundle\CoreBundle\Entity\ExpenseComment'
 
     tavro.handler.funding:
-        class: Tavro\Bundle\CoreBundle\Handler\Entity\FundingHandler
+        class: Tavro\Bundle\CoreBundle\Handler\FundingHandler
         arguments:
             - '@doctrine.orm.main_entity_manager'
             - '@form.factory'
@@ -191,7 +191,7 @@ services:
             - 'Tavro\Bundle\CoreBundle\Entity\FundingRound'
 
     tavro.handler.nodes:
-        class: Tavro\Bundle\CoreBundle\Handler\Entity\NodeHandler
+        class: Tavro\Bundle\CoreBundle\Handler\NodeHandler
         arguments:
             - '@doctrine.orm.main_entity_manager'
             - '@form.factory'
@@ -203,7 +203,7 @@ services:
             - 'Tavro\Bundle\CoreBundle\Entity\Node'
 
     tavro.handler.node_tags:
-        class: Tavro\Bundle\CoreBundle\Handler\Entity\NodeTagHandler
+        class: Tavro\Bundle\CoreBundle\Handler\NodeTagHandler
         arguments:
             - '@doctrine.orm.main_entity_manager'
             - '@form.factory'
@@ -215,7 +215,7 @@ services:
             - 'Tavro\Bundle\CoreBundle\Entity\NodeTag'
 
     tavro.handler.node_comments:
-        class: Tavro\Bundle\CoreBundle\Handler\Entity\NodeCommentHandler
+        class: Tavro\Bundle\CoreBundle\Handler\NodeCommentHandler
         arguments:
             - '@doctrine.orm.main_entity_manager'
             - '@form.factory'
@@ -227,7 +227,7 @@ services:
             - 'Tavro\Bundle\CoreBundle\Entity\NodeComment'
 
     tavro.handler.organizations:
-        class: Tavro\Bundle\CoreBundle\Handler\Entity\OrganizationHandler
+        class: Tavro\Bundle\CoreBundle\Handler\OrganizationHandler
         arguments:
             - '@doctrine.orm.main_entity_manager'
             - '@form.factory'
@@ -239,7 +239,7 @@ services:
             - 'Tavro\Bundle\CoreBundle\Entity\Organization'
 
     tavro.handler.people:
-        class: Tavro\Bundle\CoreBundle\Handler\Entity\PersonHandler
+        class: Tavro\Bundle\CoreBundle\Handler\PersonHandler
         arguments:
             - '@doctrine.orm.main_entity_manager'
             - '@form.factory'
@@ -251,7 +251,7 @@ services:
             - 'Tavro\Bundle\CoreBundle\Entity\Person'
 
     tavro.handler.products:
-        class: Tavro\Bundle\CoreBundle\Handler\Entity\ProductHandler
+        class: Tavro\Bundle\CoreBundle\Handler\ProductHandler
         arguments:
             - '@doctrine.orm.main_entity_manager'
             - '@form.factory'
@@ -263,7 +263,7 @@ services:
             - 'Tavro\Bundle\CoreBundle\Entity\Product'
 
     tavro.handler.revenues:
-        class: Tavro\Bundle\CoreBundle\Handler\Entity\RevenueHandler
+        class: Tavro\Bundle\CoreBundle\Handler\RevenueHandler
         arguments:
             - '@doctrine.orm.main_entity_manager'
             - '@form.factory'
@@ -275,7 +275,7 @@ services:
             - 'Tavro\Bundle\CoreBundle\Entity\Revenue'
 
     tavro.handler.roles:
-        class: Tavro\Bundle\CoreBundle\Handler\Entity\RoleHandler
+        class: Tavro\Bundle\CoreBundle\Handler\RoleHandler
         arguments:
             - '@doctrine.orm.main_entity_manager'
             - '@form.factory'
@@ -287,7 +287,7 @@ services:
             - 'Tavro\Bundle\CoreBundle\Entity\Role'
 
     tavro.handler.services:
-        class: Tavro\Bundle\CoreBundle\Handler\Entity\ServiceHandler
+        class: Tavro\Bundle\CoreBundle\Handler\ServiceHandler
         arguments:
             - '@doctrine.orm.main_entity_manager'
             - '@form.factory'
@@ -299,7 +299,7 @@ services:
             - 'Tavro\Bundle\CoreBundle\Entity\Service'
 
     tavro.handler.shareholders:
-        class: Tavro\Bundle\CoreBundle\Handler\Entity\ShareholderHandler
+        class: Tavro\Bundle\CoreBundle\Handler\ShareholderHandler
         arguments:
             - '@doctrine.orm.main_entity_manager'
             - '@form.factory'
@@ -311,7 +311,7 @@ services:
             - 'Tavro\Bundle\CoreBundle\Entity\Shareholder'
 
     tavro.handler.tags:
-        class: Tavro\Bundle\CoreBundle\Handler\Entity\TagHandler
+        class: Tavro\Bundle\CoreBundle\Handler\TagHandler
         arguments:
             - '@doctrine.orm.main_entity_manager'
             - '@form.factory'
@@ -323,7 +323,7 @@ services:
             - 'Tavro\Bundle\CoreBundle\Entity\Tag'
 
     tavro.handler.users:
-        class: Tavro\Bundle\CoreBundle\Handler\Entity\UserHandler
+        class: Tavro\Bundle\CoreBundle\Handler\UserHandler
         arguments:
             - '@doctrine.orm.main_entity_manager'
             - '@form.factory'
@@ -336,7 +336,7 @@ services:
             - '@tavro.handler.people'
 
     tavro.handler.variables:
-        class: Tavro\Bundle\CoreBundle\Handler\Entity\VariableHandler
+        class: Tavro\Bundle\CoreBundle\Handler\VariableHandler
         arguments:
             - '@doctrine.orm.main_entity_manager'
             - '@form.factory'
@@ -352,7 +352,7 @@ services:
 # -------------------
 
 #    tavro.handler.files:
-#        class: Tavro\Bundle\CoreBundle\Handler\Entity\FileHandler
+#        class: Tavro\Bundle\CoreBundle\Handler\FileHandler
 #        arguments:
 #            - '@doctrine.orm.main_entity_manager'
 #            - '@form.factory'
@@ -364,7 +364,7 @@ services:
 #            - 'Tavro\Bundle\CoreBundle\Entity\File'
 
     tavro.handler.images:
-        class: Tavro\Bundle\CoreBundle\Handler\Entity\ImageHandler
+        class: Tavro\Bundle\CoreBundle\Handler\ImageHandler
         arguments:
             - '@doctrine.orm.main_entity_manager'
             - '@form.factory'

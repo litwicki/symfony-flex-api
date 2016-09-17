@@ -42,7 +42,7 @@ class CustomerTest extends TavroTest
         $data = array(
             'job_title' => 'Wizard',
             'person' => 1,
-            'organization' => 1
+            'account' => 1
         );
 
         $url = 'http://api.tavro.dev/api/v1/customers';

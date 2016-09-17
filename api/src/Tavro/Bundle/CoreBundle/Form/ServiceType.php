@@ -17,6 +17,7 @@ class ServiceType extends AbstractType
     {
         $builder
             ->add('body')
+            ->add('title')
             ->add('price')
             ->add('type')
             ->add('status')

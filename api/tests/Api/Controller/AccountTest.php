@@ -3,10 +3,10 @@
 use Guzzle\Http\Client;
 use Tavro\Bundle\CoreBundle\Testing\TavroTest;
 
-class NodeTest extends TavroTest
+class AccountTest extends TavroTest
 {
 
-    public function testNodeRoute()
+    public function testAccountRoute()
     {
         $client = new Client('http://api.tavro.dev/api/v1', array(
             'request.options' => array(
@@ -16,7 +16,7 @@ class NodeTest extends TavroTest
 
         $token = $this->authorize();
 
-        $url = 'http://api.tavro.dev/api/v1/nodes';
+        $url = 'http://api.tavro.dev/api/v1/accounts';
 
         $request = $client->get($url);
         $request->addHeader('Authorization', sprintf('Bearer %s', $token));
@@ -29,7 +29,7 @@ class NodeTest extends TavroTest
 
     }
 
-    public function testNodeCreate()
+    public function testAccountCreate()
     {
 
         $token = $this->authorize();
@@ -37,16 +37,12 @@ class NodeTest extends TavroTest
         $faker = \Faker\Factory::create('en_EN');
 
         $data = array(
-            'title' => 'Node Name',
-            'body' => 'Node body description.',
-            'type' => 'node',
-            'views' => 1,
-            'display_date' => $faker->dateTimeThisMonth->format('Y-m-d h:i:s'),
-            'user' => 1,
-            'account' => 1
+            'name' => 'Account Name',
+            'body' => 'Account body description.',
+            'user' => 1
         );
 
-        $url = 'http://api.tavro.dev/api/v1/nodes';
+        $url = 'http://api.tavro.dev/api/v1/accounts';
 
         $client = new Client($url, array(
             'request.options' => array(
@@ -65,7 +61,7 @@ class NodeTest extends TavroTest
 
     }
 
-    public function testNodeCreateBadOrganization()
+    public function testAccountCreateBadOrganization()
     {
 
         $token = $this->authorize();
@@ -73,16 +69,13 @@ class NodeTest extends TavroTest
         $faker = \Faker\Factory::create('en_EN');
 
         $data = array(
-            'title' => 'Node Name',
-            'body' => 'Node body description.',
-            'type' => 'node',
-            'views' => 1,
-            'display_date' => $faker->dateTimeThisMonth->format('Y-m-d h:i:s'),
+            'name' => 'Account Name',
+            'body' => 'Account body description.',
             'user' => 1,
             'organization' => -1
         );
 
-        $url = 'http://api.tavro.dev/api/v1/nodes';
+        $url = 'http://api.tavro.dev/api/v1/accounts';
 
         $client = new Client($url, array(
             'request.options' => array(
@@ -102,7 +95,7 @@ class NodeTest extends TavroTest
 
     }
 
-    public function testNodeCreateBadUser()
+    public function testAccountCreateBadUser()
     {
         // create our http client (Guzzle)
         $client = new Client('http://api.tavro.dev/api/v1', array(
@@ -116,16 +109,13 @@ class NodeTest extends TavroTest
         $faker = \Faker\Factory::create('en_EN');
 
         $data = array(
-            'title' => 'Node Name',
-            'body' => 'Node body description.',
-            'type' => 'node',
-            'views' => 1,
-            'display_date' => $faker->dateTimeThisCentury,
+            'name' => 'Account Name',
+            'body' => 'Account body description.',
             'user' => -1,
-            'account' => 1
+            'organization' => 1
         );
 
-        $url = 'http://api.tavro.dev/api/v1/nodes';
+        $url = 'http://api.tavro.dev/api/v1/accounts';
 
         $client = new Client($url, array(
             'request.options' => array(

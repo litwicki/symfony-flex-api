@@ -40,7 +40,7 @@ class RevenueTest extends TavroTest
             'user' => 1,
             'customer' => 1,
             'services' => array(1,2,3),
-            'organization' => 1
+            'account' => 1
         );
 
         $url = 'http://api.tavro.dev/api/v1/revenues';
@@ -73,7 +73,7 @@ class RevenueTest extends TavroTest
             'user' => 1,
             'customer' => 1,
             'products' => array(1,2,3),
-            'organization' => 1
+            'account' => 1
         );
 
         $url = 'http://api.tavro.dev/api/v1/revenues';
