@@ -107,6 +107,21 @@ class Account extends Entity implements EntityInterface
      */
     protected $revenue_categories;
 
+    /**
+     * Automatically set the create_date and last_update_date on persist.
+     * @ORM\PrePersist
+     */
+    public function onPrePersist()
+    {
+        $this->setNameClean($this->createCleanName($this->getName()));
+
+        if(is_null($this->create_date)) {
+            $this->create_date = new \DateTime();
+        }
+
+        $this->update_date = new \DateTime();
+    }
+
     public function __construct()
     {
         parent::__construct();
@@ -181,6 +196,17 @@ class Account extends Entity implements EntityInterface
         return $this->account_users;
     }
 
+    public function createCleanName($name)
+    {
+
+        $clean = preg_replace('/[^A-Za-z0-9-_\s]/', '', $name);
+        $clean = str_replace(' ', '-', $clean);
+        $clean = str_replace('_', '-', $clean);
+        $clean = strtolower($clean);
+
+        return $clean;
+    }
+
     /**
      * Set name
      *
@@ -192,10 +218,7 @@ class Account extends Entity implements EntityInterface
     {
         $this->name = $name;
 
-        $clean = str_replace(' ', '-', $name);
-        $clean = str_replace('_', '-', $name);
-        $clean = strtolower($clean);
-        $clean = preg_replace('/[^A-Za-z0-9-]/', '', $clean);
+        $clean = $this->createCleanName($name);
 
         $this->setNameClean($clean);
 

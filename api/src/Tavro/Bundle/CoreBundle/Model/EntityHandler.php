@@ -625,6 +625,7 @@ class EntityHandler implements EntityHandlerInterface
             'Tavro\Bundle\CoreBundle\Entity\AccountGroupUser'           => 'Tavro\Bundle\CoreBundle\Form\AccountGroupUserType',
             'Tavro\Bundle\CoreBundle\Entity\OrganizationComment'        => 'Tavro\Bundle\CoreBundle\Form\OrganizationCommentType',
             'Tavro\Bundle\CoreBundle\Entity\Customer'                   => 'Tavro\Bundle\CoreBundle\Form\CustomerType',
+            'Tavro\Bundle\CoreBundle\Entity\Contact'                    => 'Tavro\Bundle\CoreBundle\Form\ContactType',
             'Tavro\Bundle\CoreBundle\Entity\ExpenseCategory'            => 'Tavro\Bundle\CoreBundle\Form\ExpenseCategoryType',
             'Tavro\Bundle\CoreBundle\Entity\ExpenseComment'             => 'Tavro\Bundle\CoreBundle\Form\ExpenseCommentType',
             'Tavro\Bundle\CoreBundle\Entity\ExpenseTag'                 => 'Tavro\Bundle\CoreBundle\Form\ExpenseTagType',

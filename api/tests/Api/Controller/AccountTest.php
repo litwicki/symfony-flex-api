@@ -38,7 +38,7 @@ class AccountTest extends TavroTest
 
         $data = array(
             'name' => 'Account Name',
-            'body' => 'Account body description.',
+            'body' => 'Account body.....',
             'user' => 1
         );
 
@@ -56,7 +56,8 @@ class AccountTest extends TavroTest
 
         $json = $response->getBody(true);
         $body = json_decode($json, true);
-
+        var_dump($body);
+        die(__METHOD__);
         $this->assertEquals(200, $response->getStatusCode());
 
     }
@@ -132,7 +133,6 @@ class AccountTest extends TavroTest
 
         $this->assertEquals(500, $response->getStatusCode());
         $this->assertEquals(1, preg_match('/Please enter a valid User/', $body['message']));
-        die(__METHOD__);
 
     }
 

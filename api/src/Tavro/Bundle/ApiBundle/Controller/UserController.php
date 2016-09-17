@@ -54,7 +54,6 @@ class UserController extends ApiController
                 'last_name' => isset($data['last_name']) ? $data['last_name'] : null,
                 'email' => isset($data['email']) ? $data['email'] : null,
                 'gender' => isset($data['gender']) ? $data['gender'] : null,
-                'title' => isset($data['title']) ? $data['title'] : null,
                 'suffix' => isset($data['suffix']) ? $data['suffix'] : null,
                 'birthday' => isset($data['birthday']) ? $data['birthday'] : null,
                 'address' => isset($data['address']) ? $data['address'] : null,
