@@ -13,7 +13,7 @@ Vagrant.configure(2) do |config|
 
   Vagrant.require_version ">= 1.8.0"
 
-  config.vm.box = "ubuntu/xenial64"
+  config.vm.box = "geerlingguy/ubuntu1604"
   config.vm.network "private_network", ip: ip_address
   config.vm.hostname = appname
 

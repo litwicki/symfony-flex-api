@@ -2,9 +2,6 @@
 - name: fix proxy for Ubuntu
   shell: echo "nameserver 8.8.8.8" | sudo tee /etc/resolv.conf > /dev/null
 
-- name: Add repository for Ansible
-  apt_repository: repo="ppa:ansible/ansible" state=present update_cache=yes
-
 - name: Update Apt Repos
   apt: update_cache=yes cache_valid_time=3600
 
