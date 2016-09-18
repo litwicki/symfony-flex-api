@@ -17,6 +17,7 @@ class TavroVoter extends Voter
     const EDIT = 'edit';
     const CREATE = 'create';
     const PATCH = 'patch';
+    const DELETE = 'delete';
 
     protected $decisionManager;
 
@@ -28,7 +29,7 @@ class TavroVoter extends Voter
     protected function supports($attribute, $subject)
     {
         // if the attribute isn't one we support, return FALSE
-        if (!in_array($attribute, array(self::VIEW, self::EDIT, self::CREATE, self::PATCH))) {
+        if (!in_array($attribute, array(self::VIEW, self::EDIT, self::CREATE, self::PATCH, self::DELETE))) {
             return FALSE;
         }
 
@@ -37,7 +38,27 @@ class TavroVoter extends Voter
 
     protected function voteOnAttribute($attribute, $subject, TokenInterface $token)
     {
-        throw new \LogicException('This code should not be reached!');
+
+        $user = $token->getUser();
+
+        switch($attribute) {
+
+            case $attribute == self::VIEW:
+                return $this->canView($subject, $user);
+
+            case $attribute == self::PATCH:
+                return $this->canPath($subject, $user);
+
+            case $attribute == self::EDIT:
+                return $this->canEdit($subject, $user);
+
+            case $attribute == self::CREATE:
+                return $this->canCreate($subject, $user);
+
+            case $attribute == self::DELETE:
+                return $this->canDelete($subject, $user);
+
+        }
     }
 
     private function canView($entity, User $user)
@@ -56,6 +77,11 @@ class TavroVoter extends Voter
     }
 
     private function canPatch($entity, User $user)
+    {
+        return TRUE;
+    }
+
+    private function canDelete($entity, User $user)
     {
         return TRUE;
     }

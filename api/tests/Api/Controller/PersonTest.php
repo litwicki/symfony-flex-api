@@ -64,7 +64,6 @@ class PersonTest extends TavroTest
 
         $json = $response->getBody(true);
         $body = json_decode($json, true);
-        die($json);
 
         $this->assertEquals(200, $response->getStatusCode());
 
