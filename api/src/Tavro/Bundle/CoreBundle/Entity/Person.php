@@ -37,25 +37,25 @@ class Person extends Entity implements EntityInterface
 {
     /**
      * @ORM\Column(type="string", length=255, nullable=TRUE)
-     * @Groups({"api", "tavro", "simple", "typeahead"})
+     * @Groups({"api", "detail", "simple", "typeahead"})
      */
     protected $first_name;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=TRUE)
-     * @Groups({"api", "tavro", "simple"})
+     * @Groups({"api", "detail", "simple"})
      */
     protected $middle_name;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=TRUE)
-     * @Groups({"api", "tavro", "simple", "typeahead"})
+     * @Groups({"api", "detail", "simple", "typeahead"})
      */
     protected $last_name;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=TRUE)
-     * @Groups({"api", "tavro", "simple"})
+     * @Groups({"api", "detail", "simple"})
      */
     protected $suffix;
 
@@ -65,7 +65,7 @@ class Person extends Entity implements EntityInterface
      *      choices = { "male", "female", "other", "robot" },
      *      message = "Choose a valid gender."
      * )
-     * @Groups({"api", "tavro", "simple"})
+     * @Groups({"api", "detail", "simple"})
      * @Accessor(getter="getGender", setter="setGender")
      * @MaxDepth(1)
      */
@@ -73,49 +73,49 @@ class Person extends Entity implements EntityInterface
 
     /**
      * @ORM\Column(type="date", length=255, nullable=TRUE)
-     * @Groups({"tavro"})
+     * @Groups({"detail"})
      */
     protected $birthday;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=TRUE)
-     * @Groups({"api", "tavro", "simple"})
+     * @Groups({"api", "detail", "simple"})
      */
     protected $address;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=TRUE)
-     * @Groups({"api", "tavro", "simple"})
+     * @Groups({"api", "detail", "simple"})
      */
     protected $address2;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=TRUE)
-     * @Groups({"api", "tavro", "simple"})
+     * @Groups({"api", "detail", "simple"})
      */
     protected $city;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=TRUE)
-     * @Groups({"api", "tavro", "simple"})
+     * @Groups({"api", "detail", "simple"})
      */
     protected $state;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=TRUE)
-     * @Groups({"api", "tavro", "simple"})
+     * @Groups({"api", "detail", "simple"})
      */
     protected $zip;
 
     /**
      * @ORM\Column(type="string", unique=FALSE, nullable=TRUE)
-     * @Groups({"api", "tavro", "simple", "typeahead"})
+     * @Groups({"api", "detail", "simple", "typeahead"})
      */
     protected $email;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=TRUE)
-     * @Groups({"api", "tavro", "simple", "typeahead"})
+     * @Groups({"api", "detail", "simple", "typeahead"})
      */
     protected $phone;
 

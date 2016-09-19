@@ -26,7 +26,7 @@ class AccountUser extends Entity implements EntityInterface
     /**
      * @ORM\ManyToOne(targetEntity="Tavro\Bundle\CoreBundle\Entity\Account", inversedBy="user_accounts")
      * @ORM\JoinColumn(name="account_id", referencedColumnName="id", nullable=FALSE)
-     * @Groups({"api", "tavro"})
+     * @Groups({"api", "detail"})
      * @MaxDepth(3)
      */
     protected $account;
@@ -34,7 +34,7 @@ class AccountUser extends Entity implements EntityInterface
     /**
      * @ORM\ManyToOne(targetEntity="Tavro\Bundle\CoreBundle\Entity\User", inversedBy="user_accounts")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id", nullable=FALSE)
-     * @Groups({"api", "tavro"})
+     * @Groups({"api", "detail"})
      * @MaxDepth(3)
      */
     protected $user;

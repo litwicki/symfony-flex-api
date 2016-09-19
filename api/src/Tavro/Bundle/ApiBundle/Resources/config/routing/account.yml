@@ -51,3 +51,115 @@ api_account_users:
     requirements:
         account: \d+
         _format: json|xml
+
+api_account_user_new:
+    path: /accounts/{account}/newUser.{_format}
+    defaults: { _controller: TavroApiBundle:Account:newUser, _format: json}
+    methods: GET
+    requirements:
+        account: \d+
+        _format: json|xml
+
+api_account_organizations:
+    path: /accounts/{account}/organizations.{_format}
+    defaults: { _controller: TavroApiBundle:Account:organizations, _format: json}
+    methods: GET
+    requirements:
+        account: \d+
+        _format: json|xml
+
+api_account_groups:
+    path: /accounts/{account}/groups.{_format}
+    defaults: { _controller: TavroApiBundle:Account:groups, _format: json}
+    methods: GET
+    requirements:
+        account: \d+
+        _format: json|xml
+
+api_account_group_new:
+    path: /accounts/{account}/newGroup.{_format}
+    defaults: { _controller: TavroApiBundle:Account:newGroup, _format: json}
+    methods: GET
+    requirements:
+        account: \d+
+        _format: json|xml
+
+api_account_services:
+    path: /accounts/{account}/services.{_format}
+    defaults: { _controller: TavroApiBundle:Account:services, _format: json}
+    methods: GET
+    requirements:
+        account: \d+
+        _format: json|xml
+
+api_account_service_categories:
+    path: /accounts/{account}/services/categories.{_format}
+    defaults: { _controller: TavroApiBundle:Account:serviceCategories, _format: json}
+    methods: GET
+    requirements:
+        account: \d+
+        _format: json|xml
+
+api_account_expenses:
+    path: /accounts/{account}/expenses.{_format}
+    defaults: { _controller: TavroApiBundle:Account:expenses, _format: json}
+    methods: GET
+    requirements:
+        account: \d+
+        _format: json|xml
+
+api_account_expense_categories:
+    path: /accounts/{account}/expenses/categories.{_format}
+    defaults: { _controller: TavroApiBundle:Account:expenseCategories, _format: json}
+    methods: GET
+    requirements:
+        account: \d+
+        _format: json|xml
+
+api_account_products:
+    path: /accounts/{account}/products.{_format}
+    defaults: { _controller: TavroApiBundle:Account:products, _format: json}
+    methods: GET
+    requirements:
+        account: \d+
+        _format: json|xml
+
+api_account_product_categories:
+    path: /accounts/{account}/products/categories.{_format}
+    defaults: { _controller: TavroApiBundle:Account:productCategories, _format: json}
+    methods: GET
+    requirements:
+        account: \d+
+        _format: json|xml
+
+api_account_revenues:
+    path: /accounts/{account}/revenues.{_format}
+    defaults: { _controller: TavroApiBundle:Account:revenues, _format: json}
+    methods: GET
+    requirements:
+        account: \d+
+        _format: json|xml
+
+api_account_nodes:
+    path: /accounts/{account}/nodes.{_format}
+    defaults: { _controller: TavroApiBundle:Account:nodes, _format: json}
+    methods: GET
+    requirements:
+        account: \d+
+        _format: json|xml
+
+api_account_funding:
+    path: /accounts/{account}/funding.{_format}
+    defaults: { _controller: TavroApiBundle:Account:funding, _format: json}
+    methods: GET
+    requirements:
+        account: \d+
+        _format: json|xml
+
+api_account_shareholders:
+    path: /accounts/{account}/shareholders.{_format}
+    defaults: { _controller: TavroApiBundle:Account:shareholders, _format: json}
+    methods: GET
+    requirements:
+        account: \d+
+        _format: json|xml

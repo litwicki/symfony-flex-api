@@ -27,7 +27,7 @@ class Account extends Entity implements EntityInterface
     /**
      * @ORM\ManyToOne(targetEntity="Tavro\Bundle\CoreBundle\Entity\User", inversedBy="nodes")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id", nullable=FALSE)
-     * @Groups({"api", "tavro", "simple"})
+     * @Groups({"api", "detail", "simple"})
      * @MaxDepth(1)
      */
     protected $user;
@@ -38,9 +38,19 @@ class Account extends Entity implements EntityInterface
     protected $account_users;
 
     /**
+     * @ORM\OneToMany(targetEntity="Tavro\Bundle\CoreBundle\Entity\AccountGroup", mappedBy="account", cascade={"remove"})
+     */
+    protected $account_groups;
+
+    /**
      * @ORM\OneToMany(targetEntity="Tavro\Bundle\CoreBundle\Entity\Organization", mappedBy="account", cascade={"remove"})
      */
     protected $organizations;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Tavro\Bundle\CoreBundle\Entity\FundingRound", mappedBy="account", cascade={"remove"})
+     */
+    protected $funding_rounds;
 
     /**
      * @ORM\OneToMany(targetEntity="Tavro\Bundle\CoreBundle\Entity\Service", mappedBy="account", cascade={"remove"})
@@ -69,40 +79,40 @@ class Account extends Entity implements EntityInterface
 
     /**
      * @ORM\Column(type="string", unique=TRUE, length=500, nullable=FALSE)
-     * @Groups({"api", "tavro", "simple"})
+     * @Groups({"api", "detail", "simple"})
      */
     protected $name;
 
     /**
      * @ORM\Column(type="string", unique=TRUE, length=500, nullable=FALSE)
-     * @Groups({"api", "tavro", "simple"})
+     * @Groups({"api", "detail", "simple"})
      */
     protected $name_clean;
 
     /**
      * @ORM\OneToMany(targetEntity="Tavro\Bundle\CoreBundle\Entity\ServiceCategory", mappedBy="account", cascade={"remove"})
-     * @Groups({"tavro"})
+     * @Groups({"detail"})
      * @MaxDepth(3)
      */
     protected $service_categories;
 
     /**
      * @ORM\OneToMany(targetEntity="Tavro\Bundle\CoreBundle\Entity\ExpenseCategory", mappedBy="account", cascade={"remove"})
-     * @Groups({"tavro"})
+     * @Groups({"detail"})
      * @MaxDepth(3)
      */
     protected $expense_categories;
 
     /**
      * @ORM\OneToMany(targetEntity="Tavro\Bundle\CoreBundle\Entity\ProductCategory", mappedBy="account", cascade={"remove"})
-     * @Groups({"tavro"})
+     * @Groups({"detail"})
      * @MaxDepth(3)
      */
     protected $product_categories;
 
     /**
      * @ORM\OneToMany(targetEntity="Tavro\Bundle\CoreBundle\Entity\RevenueCategory", mappedBy="account", cascade={"remove"})
-     * @Groups({"tavro"})
+     * @Groups({"detail"})
      * @MaxDepth(3)
      */
     protected $revenue_categories;
@@ -128,6 +138,7 @@ class Account extends Entity implements EntityInterface
         $this->organizations = new \Doctrine\Common\Collections\ArrayCollection();
         $this->account_users = new \Doctrine\Common\Collections\ArrayCollection();
         $this->tags = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->funding_rounds = new \Doctrine\Common\Collections\ArrayCollection();
         $this->services = new \Doctrine\Common\Collections\ArrayCollection();
         $this->revenues = new \Doctrine\Common\Collections\ArrayCollection();
         $this->products = new \Doctrine\Common\Collections\ArrayCollection();
@@ -636,5 +647,89 @@ class Account extends Entity implements EntityInterface
     public function getExpenses()
     {
         return $this->expenses;
+    }
+
+    /**
+     * Add accountGroup
+     *
+     * @param \Tavro\Bundle\CoreBundle\Entity\AccountGroup $accountGroup
+     *
+     * @return Account
+     */
+    public function addAccountGroup(\Tavro\Bundle\CoreBundle\Entity\AccountGroup $accountGroup)
+    {
+        $this->account_groups[] = $accountGroup;
+
+        return $this;
+    }
+
+    /**
+     * Remove accountGroup
+     *
+     * @param \Tavro\Bundle\CoreBundle\Entity\AccountGroup $accountGroup
+     */
+    public function removeAccountGroup(\Tavro\Bundle\CoreBundle\Entity\AccountGroup $accountGroup)
+    {
+        $this->account_groups->removeElement($accountGroup);
+    }
+
+    /**
+     * Get accountGroups
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getAccountGroups()
+    {
+        return $this->account_groups;
+    }
+
+    /**
+     * Add fundingRound
+     *
+     * @param \Tavro\Bundle\CoreBundle\Entity\FundingRound $fundingRound
+     *
+     * @return Account
+     */
+    public function addFundingRound(\Tavro\Bundle\CoreBundle\Entity\FundingRound $fundingRound)
+    {
+        $this->funding_rounds[] = $fundingRound;
+
+        return $this;
+    }
+
+    /**
+     * Remove fundingRound
+     *
+     * @param \Tavro\Bundle\CoreBundle\Entity\FundingRound $fundingRound
+     */
+    public function removeFundingRound(\Tavro\Bundle\CoreBundle\Entity\FundingRound $fundingRound)
+    {
+        $this->funding_rounds->removeElement($fundingRound);
+    }
+
+    /**
+     * Get fundingRounds
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getFundingRounds()
+    {
+        return $this->funding_rounds;
+    }
+
+    /**
+     * Get All Shareholders for this Account across all Funding Rounds.
+     *
+     * @return \Doctrine\Common\Collections\ArrayCollection
+     */
+    public function getShareholders()
+    {
+        $items = new \Doctrine\Common\Collections\ArrayCollection();
+        foreach($this->funding_rounds as $funding_round) {
+            foreach($funding_round->getFundingRoundShareholders() as $entity) {
+                $items->add($entity->getShareholder());
+            }
+        }
+        return $items;
     }
 }

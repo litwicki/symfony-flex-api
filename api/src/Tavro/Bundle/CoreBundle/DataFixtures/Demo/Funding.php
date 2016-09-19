@@ -60,22 +60,6 @@ class Funding extends AbstractFixture implements OrderedFixtureInterface, Contai
         $this->container = $container;
     }
 
-    public function getCities($state)
-    {
-        $json = file_get_contents(sprintf('http://api.sba.gov/geodata/city_links_for_state_of/%s.json', $state));
-        $data = json_decode($json, true);
-        $cities = array();
-        foreach($data as $item) {
-            $cities[] = $item['name'];
-        }
-        return $cities;
-    }
-
-    public function getStates()
-    {
-        return Litwicki::getStateSelectChoices();
-    }
-
     /**
      * {@inheritDoc}
      */
@@ -87,10 +71,6 @@ class Funding extends AbstractFixture implements OrderedFixtureInterface, Contai
         $accounts = $manager->getRepository('TavroCoreBundle:Account')->findAll();
         $users = $manager->getRepository('TavroCoreBundle:User')->findAllNonAdmin();
         $shareholders = $manager->getRepository('TavroCoreBundle:Shareholder')->findAll();
-
-        $types = [
-
-        ];
 
         foreach($accounts as $account) {
 

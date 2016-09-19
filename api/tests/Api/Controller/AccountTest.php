@@ -37,8 +37,8 @@ class AccountTest extends TavroTest
         $faker = \Faker\Factory::create('en_EN');
 
         $data = array(
-            'name' => 'Account Name',
-            'body' => 'Account body.....',
+            'name' => $faker->company,
+            'body' => $faker->text(rand(100,1000)),
             'user' => 1
         );
 
@@ -62,40 +62,6 @@ class AccountTest extends TavroTest
 
     }
 
-    public function testAccountCreateBadOrganization()
-    {
-
-        $token = $this->authorize();
-
-        $faker = \Faker\Factory::create('en_EN');
-
-        $data = array(
-            'name' => 'Account Name',
-            'body' => 'Account body description.',
-            'user' => 1,
-            'organization' => -1
-        );
-
-        $url = 'http://api.tavro.dev/api/v1/accounts';
-
-        $client = new Client($url, array(
-            'request.options' => array(
-                'exceptions' => false,
-            )
-        ));
-
-        $request = $client->post($url, null, json_encode($data));
-        $request->addHeader('Authorization', sprintf('Bearer %s', $token));
-        $response = $request->send();
-
-        $json = $response->getBody(true);
-        $body = json_decode($json, true);
-
-        $this->assertEquals(500, $response->getStatusCode());
-        $this->assertEquals(1, preg_match('/Please enter a valid Organization/', $body['message']));
-
-    }
-
     public function testAccountCreateBadUser()
     {
         // create our http client (Guzzle)
@@ -110,10 +76,9 @@ class AccountTest extends TavroTest
         $faker = \Faker\Factory::create('en_EN');
 
         $data = array(
-            'name' => 'Account Name',
-            'body' => 'Account body description.',
+            'name' => $faker->company,
+            'body' => $faker->text(rand(100,1000)),
             'user' => -1,
-            'organization' => 1
         );
 
         $url = 'http://api.tavro.dev/api/v1/accounts';

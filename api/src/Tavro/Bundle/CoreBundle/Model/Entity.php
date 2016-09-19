@@ -29,31 +29,31 @@ class Entity implements EntityInterface
      * @ORM\Id
      * @ORM\Column(type="integer")
      * @ORM\GeneratedValue(strategy="AUTO")
-     * @Groups({"api", "tavro", "simple", "typeahead"})
+     * @Groups({"api", "detail", "simple", "typeahead"})
      */
     protected $id;
 
     /**
      * @ORM\Column(type="string", length=8000, nullable=true)
-     * @Groups({"api", "tavro", "simple"})
+     * @Groups({"api", "detail", "simple"})
      */
     protected $body;
 
     /**
      * @ORM\Column(type="integer", nullable=FALSE, options={"default" = 1})
-     * @Groups({"api", "tavro"})
+     * @Groups({"api", "detail"})
      */
     protected $status = self::STATUS_ENABLED;
 
     /**
      * @ORM\Column(type="datetime", length=1000, nullable=FALSE)
-     * @Groups({"api", "tavro"})
+     * @Groups({"api", "detail"})
      */
     protected $create_date;
 
     /**
      * @ORM\Column(type="datetime", length=1000, nullable=true)
-     * @Groups({"api", "tavro"})
+     * @Groups({"api", "detail"})
      */
     protected $update_date;
 

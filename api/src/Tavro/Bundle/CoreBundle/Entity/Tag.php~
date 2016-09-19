@@ -28,7 +28,7 @@ class Tag extends AccountEntity implements AccountEntityInterface
 {
     /**
      * @ORM\Column(type="string", length=500, nullable=FALSE)
-     * @Groups({"api", "tavro", "simple", "typeahead"})
+     * @Groups({"api", "detail", "simple", "typeahead"})
      */
     protected $tag;
 

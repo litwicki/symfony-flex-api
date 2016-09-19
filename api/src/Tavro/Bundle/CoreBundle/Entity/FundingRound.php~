@@ -28,32 +28,30 @@ class FundingRound extends AccountEntity implements AccountEntityInterface
 {
     /**
      * @ORM\Column(type="string", length=255, nullable=TRUE)
-     * @Groups({"api", "tavro", "simple"})
+     * @Groups({"api", "detail", "simple"})
      */
     protected $type;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=TRUE)
-     * @Groups({"api", "tavro", "simple"})
+     * @Groups({"api", "detail", "simple"})
      */
     protected $prospectus;
 
     /**
      * @ORM\Column(type="float", nullable=TRUE, options={"default" = 0})
-     * @Groups({"api", "tavro", "simple"})
+     * @Groups({"api", "detail", "simple"})
      */
     protected $share_price;
 
     /**
      * @ORM\Column(type="integer", nullable=TRUE, options={"default" = 0})
-     * @Groups({"api", "tavro", "simple"})
+     * @Groups({"api", "detail", "simple"})
      */
     protected $total_shares;
 
     /**
      * @ORM\OneToMany(targetEntity="Tavro\Bundle\CoreBundle\Entity\FundingRoundShareholder", mappedBy="funding_round", cascade={"remove"})
-     * @Groups({"tavro"})
-     * @MaxDepth(1)
      */
     protected $funding_round_shareholders;
 
@@ -268,14 +266,17 @@ class FundingRound extends AccountEntity implements AccountEntityInterface
     /**
      * @VirtualProperty
      * @SerializedName("shareholders")
-     * @Groups({"api", "tavro"})
-     * @MaxDepth(2)
+     * @Groups({"api", "detail"})
+     * @MaxDepth(3)
      */
     public function getShareholders()
     {
         $items = new \Doctrine\Common\Collections\ArrayCollection();
         foreach($this->funding_round_shareholders as $entity) {
-            $items->add($entity->getShareholder());
+            $items->add([
+                'shares' => $entity->getShares(),
+                'shareholder' => $entity->getShareholder()
+            ]);
         }
         return $items;
     }

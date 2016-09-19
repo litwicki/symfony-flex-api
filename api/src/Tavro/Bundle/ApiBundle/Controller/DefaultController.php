@@ -235,7 +235,7 @@ class DefaultController extends Controller
         try {
             $handler = $this->getHandler($entity);
             $item = $handler->find($id);
-            $data = $this->serialize($item, $_format);
+            $data = $this->serialize($item, $_format, $group = 'detail');
             return $this->apiResponse($data, $_format);
         }
         catch(ApiAccessDeniedException $e) {

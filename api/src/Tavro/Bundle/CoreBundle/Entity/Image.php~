@@ -27,55 +27,55 @@ class Image extends AccountEntity implements S3EntityInterface, AccountEntityInt
 {
     /**
      * @ORM\Column(type="string", length=500, nullable=FALSE)
-     * @Groups({"api", "tavro"})
+     * @Groups({"api", "detail"})
      */
     protected $aws_url;
 
     /**
      * @ORM\Column(type="string", length=32, nullable=FALSE)
-     * @Groups({"tavro"})
+     * @Groups({"detail"})
      */
     protected $bucket;
 
     /**
      * @ORM\Column(type="string", length=32, nullable=FALSE)
-     * @Groups({"tavro"})
+     * @Groups({"detail"})
      */
     protected $directory;
 
     /**
      * @ORM\Column(type="string", length=500, nullable=FALSE)
-     * @Groups({"api", "tavro", "simple"})
+     * @Groups({"api", "detail", "simple"})
      */
     protected $aws_key;
 
     /**
      * @ORM\Column(type="string", length=500, nullable=FALSE)
-     * @Groups({"api", "tavro", "simple"})
+     * @Groups({"api", "detail", "simple"})
      */
     protected $original_filename;
 
     /**
      * @ORM\Column(type="string", length=500, nullable=FALSE)
-     * @Groups({"api", "tavro"})
+     * @Groups({"api", "detail"})
      */
     protected $mime_type;
 
     /**
      * @ORM\Column(type="integer", nullable=FALSE)
-     * @Groups({"api", "tavro"})
+     * @Groups({"api", "detail"})
      */
     protected $filesize;
 
     /**
      * @ORM\Column(type="integer", nullable=FALSE)
-     * @Groups({"api", "tavro"})
+     * @Groups({"api", "detail"})
      */
     protected $height;
 
     /**
      * @ORM\Column(type="integer", nullable=FALSE)
-     * @Groups({"api", "tavro"})
+     * @Groups({"api", "detail"})
      */
     protected $width;
 

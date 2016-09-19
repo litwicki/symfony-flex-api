@@ -35,15 +35,15 @@ class Shareholder extends Entity implements EntityInterface
     /**
      * @ORM\ManyToOne(targetEntity="Tavro\Bundle\CoreBundle\Entity\Person")
      * @ORM\JoinColumn(name="person_id", referencedColumnName="id", nullable=FALSE)
-     * @Groups({"api", "tavro", "simple"})
-     * @MaxDepth(1)
+     * @Groups({"api", "detail", "simple"})
+     * @MaxDepth(3)
      */
     protected $person;
 
     /**
      * @ORM\OneToMany(targetEntity="Tavro\Bundle\CoreBundle\Entity\FundingRoundShareholder", mappedBy="shareholder", cascade={"remove"})
-     * @Groups({"tavro"})
-     * @MaxDepth(3)
+     * @Groups({"detail"})
+     * @MaxDepth(1)
      */
     protected $funding_round_shareholders;
 

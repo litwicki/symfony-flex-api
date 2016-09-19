@@ -29,7 +29,7 @@ class Node extends AccountEntity implements AccountEntityInterface
 
     /**
      * @ORM\Column(type="string", length=255, nullable=FALSE)
-     * @Groups({"api", "tavro", "simple"})
+     * @Groups({"api", "detail", "simple"})
      */
     protected $title;
 
@@ -39,26 +39,26 @@ class Node extends AccountEntity implements AccountEntityInterface
      *      choices = { "guide", "node", "page", "article", "wiki"},
      *      message = "Choose a valid node type."
      * )
-     * @Groups({"api", "tavro", "simple"})
+     * @Groups({"api", "detail", "simple"})
      */
     protected $type;
 
     /**
      * @ORM\Column(type="datetime", length=1000, nullable=TRUE)
-     * @Groups({"api", "tavro", "simple"})
+     * @Groups({"api", "detail", "simple"})
      */
     protected $display_date;
 
     /**
      * @ORM\Column(type="integer", nullable=TRUE, options={"default" = 0})
-     * @Groups({"api", "tavro", "simple"})
+     * @Groups({"api", "detail", "simple"})
      */
     protected $views;
 
     /**
      * @ORM\ManyToOne(targetEntity="Tavro\Bundle\CoreBundle\Entity\User", inversedBy="nodes")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id", nullable=FALSE)
-     * @Groups({"api", "tavro", "simple"})
+     * @Groups({"api", "detail", "simple"})
      * @MaxDepth(1)
      */
     protected $user;
@@ -306,7 +306,7 @@ class Node extends AccountEntity implements AccountEntityInterface
     /**
      * @VirtualProperty
      * @SerializedName("read_count")
-     * @Groups({"api", "tavro", "simple"})
+     * @Groups({"api", "detail", "simple"})
      * @return int
      */
     public function getReadCount()
@@ -317,7 +317,7 @@ class Node extends AccountEntity implements AccountEntityInterface
     /**
      * @VirtualProperty
      * @SerializedName("comment_count")
-     * @Groups({"api", "tavro", "simple"})
+     * @Groups({"api", "detail", "simple"})
      * @return int
      */
     public function getCommentCount()
@@ -328,7 +328,7 @@ class Node extends AccountEntity implements AccountEntityInterface
     /**
      * @VirtualProperty
      * @SerializedName("tags")
-     * @Groups({"api", "tavro","detail"})
+     * @Groups({"api", "detail","detail"})
      * @MaxDepth(2)
      */
     public function getTags()

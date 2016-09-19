@@ -27,7 +27,7 @@ class RevenueTag extends Entity implements EntityInterface
     /**
      * @ORM\ManyToOne(targetEntity="Tavro\Bundle\CoreBundle\Entity\Tag", inversedBy="revenue_tags")
      * @ORM\JoinColumn(name="tag_id", referencedColumnName="id", nullable=FALSE)
-     * @Groups({"api", "tavro"})
+     * @Groups({"api", "detail"})
      */
     protected $tag;
 

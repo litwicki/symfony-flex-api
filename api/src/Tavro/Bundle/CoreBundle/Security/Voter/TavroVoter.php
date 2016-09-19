@@ -47,7 +47,7 @@ class TavroVoter extends Voter
                 return $this->canView($subject, $user);
 
             case $attribute == self::PATCH:
-                return $this->canPath($subject, $user);
+                return $this->canPatch($subject, $user);
 
             case $attribute == self::EDIT:
                 return $this->canEdit($subject, $user);

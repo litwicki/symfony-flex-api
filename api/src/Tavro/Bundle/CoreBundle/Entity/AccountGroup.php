@@ -27,20 +27,20 @@ class AccountGroup extends Entity implements EntityInterface
     /**
      * @ORM\ManyToOne(targetEntity="Tavro\Bundle\CoreBundle\Entity\User", inversedBy="account_groups")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id", nullable=FALSE)
-     * @Groups({"api", "tavro", "simple"})
+     * @Groups({"api", "detail", "simple"})
      * @MaxDepth(1)
      */
     protected $user;
 
     /**
      * @ORM\Column(type="string", unique=TRUE, length=500, nullable=FALSE)
-     * @Groups({"api", "tavro", "simple"})
+     * @Groups({"api", "detail", "simple"})
      */
     protected $name;
 
     /**
      * @ORM\Column(type="string", unique=TRUE, length=500, nullable=FALSE)
-     * @Groups({"api", "tavro", "simple"})
+     * @Groups({"api", "detail", "simple"})
      */
     protected $name_clean;
 

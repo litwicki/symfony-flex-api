@@ -30,26 +30,26 @@ class Expense extends AccountEntity implements AccountEntityInterface
 {
     /**
      * @ORM\Column(type="string", length=8000, nullable=TRUE)
-     * @Groups({"api", "tavro", "simple"})
+     * @Groups({"api", "detail", "simple"})
      */
     protected $body;
 
     /**
      * @ORM\Column(type="float", nullable=FALSE)
-     * @Groups({"api", "tavro", "simple"})
+     * @Groups({"api", "detail", "simple"})
      */
     protected $amount;
 
     /**
      * @ORM\Column(type="datetime", nullable=FALSE)
-     * @Groups({"api", "tavro", "simple"})
+     * @Groups({"api", "detail", "simple"})
      */
     protected $expense_date;
 
     /**
      * @ORM\ManyToOne(targetEntity="Tavro\Bundle\CoreBundle\Entity\ExpenseCategory", inversedBy="expenses")
      * @ORM\JoinColumn(name="category_id", referencedColumnName="id", nullable=FALSE)
-     * @Groups({"api", "tavro", "simple"})
+     * @Groups({"api", "detail", "simple"})
      * @MaxDepth(1)
      */
     protected $category;
@@ -57,7 +57,7 @@ class Expense extends AccountEntity implements AccountEntityInterface
     /**
      * @ORM\ManyToOne(targetEntity="Tavro\Bundle\CoreBundle\Entity\User", inversedBy="expenses")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id", nullable=FALSE)
-     * @Groups({"api", "tavro", "simple"})
+     * @Groups({"api", "detail", "simple"})
      * @MaxDepth(1)
      */
     protected $user;

@@ -35,7 +35,7 @@ class User extends Entity implements UserInterface, \Serializable
 {
     /**
      * @ORM\Column(type="string", length=255, unique=TRUE, nullable=FALSE)
-     * @Groups({"api", "tavro", "simple", "typeahead"})
+     * @Groups({"api", "detail", "simple", "typeahead"})
      */
     protected $username;
 
@@ -62,20 +62,19 @@ class User extends Entity implements UserInterface, \Serializable
 
     /**
      * @ORM\Column(type="string", length=500, nullable=TRUE)
-     * @Groups({"tavro"})
+     * @Groups({"detail"})
      */
     protected $signature;
 
     /**
      * @ORM\Column(type="datetime", nullable=TRUE)
-     * @Groups({"tavro"})
+     * @Groups({"detail"})
      * @MaxDepth(1)
      */
     protected $last_online_date;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=FALSE)
-     * @Groups({"tavro"})
      * @Accessor(getter="getApiKey", setter="setApiKey")
      * @MaxDepth(1)
      */
@@ -83,7 +82,6 @@ class User extends Entity implements UserInterface, \Serializable
 
     /**
      * @ORM\Column(type="string", length=255, nullable=FALSE)
-     * @Groups({"tavro"})
      * @Accessor(getter="getApiPassword", setter="setApiPassword")
      * @MaxDepth(1)
      */
@@ -97,21 +95,20 @@ class User extends Entity implements UserInterface, \Serializable
 
     /**
      * @ORM\Column(type="string", length=255, nullable=FALSE)
-     * @Groups({"tavro"})
      * @Accessor(getter="getGuid", setter="setGuid")
      */
     protected $guid;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=TRUE)
-     * @Groups({"tavro"})
+     * @Groups({"detail"})
      * @MaxDepth(1)
      */
     protected $user_ip;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=TRUE)
-     * @Groups({"tavro"})
+     * @Groups({"detail"})
      * @MaxDepth(1)
      */
     protected $user_agent;
@@ -137,7 +134,7 @@ class User extends Entity implements UserInterface, \Serializable
      * )
      * @Type("array<string>")
      * @Accessor(getter="getSerializedRoles")
-     * @Groups({"tavro"})
+     * @Groups({"detail"})
      * @MaxDepth(3)
      */
     protected $roles;
@@ -155,7 +152,7 @@ class User extends Entity implements UserInterface, \Serializable
     /**
      * @ORM\ManyToOne(targetEntity="Tavro\Bundle\CoreBundle\Entity\Image")
      * @ORM\JoinColumn(name="avatar_image_id", referencedColumnName="id", nullable=TRUE)
-     * @Groups({"api", "tavro", "simple"})
+     * @Groups({"api", "detail", "simple"})
      * @MaxDepth(1)
      */
     protected $avatar;
@@ -163,7 +160,7 @@ class User extends Entity implements UserInterface, \Serializable
     /**
      * @ORM\ManyToOne(targetEntity="Tavro\Bundle\CoreBundle\Entity\Person")
      * @ORM\JoinColumn(name="person_id", referencedColumnName="id", nullable=TRUE)
-     * @Groups({"api", "tavro", "simple"})
+     * @Groups({"api", "detail", "simple"})
      * @MaxDepth(1)
      */
     protected $person;
@@ -178,7 +175,6 @@ class User extends Entity implements UserInterface, \Serializable
         $this->create_date = new \DateTime();
         $this->update_date = new \DateTime();
         $this->nodes = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->organizations = new \Doctrine\Common\Collections\ArrayCollection();
         $this->account_users = new \Doctrine\Common\Collections\ArrayCollection();
         $this->roles = new \Doctrine\Common\Collections\ArrayCollection();
         $this->nodes_read = new \Doctrine\Common\Collections\ArrayCollection();
@@ -791,7 +787,7 @@ class User extends Entity implements UserInterface, \Serializable
     /**
      * @VirtualProperty
      * @SerializedName("is_admin")
-     * @Groups({"api", "tavro"})
+     * @Groups({"api", "detail"})
      *
      */
     public function getIsAdmin()
@@ -817,7 +813,7 @@ class User extends Entity implements UserInterface, \Serializable
     /**
      * @VirtualProperty
      * @SerializedName("is_developer")
-     * @Groups({"api", "tavro"})
+     * @Groups({"api", "detail"})
      *
      */
     public function getIsDeveloper()
@@ -833,7 +829,7 @@ class User extends Entity implements UserInterface, \Serializable
     /**
      * @VirtualProperty
      * @SerializedName("node_count")
-     * @Groups({"tavro"})
+     * @Groups({"detail"})
      *
      */
     public function nodeCount()

@@ -3,6 +3,11 @@ api_auth_token:
     methods: POST
     defaults: { _controller: TavroApiBundle:Auth:tokenAuthenticate }
 
+api_auth_logout:
+    path: /auth/logout
+    methods: POST
+    defaults: { _controller: TavroApiBundle:Auth:tokenLogout }
+
 api_auth_reset_password:
     path: /auth/reset.{format}
     defaults: { _controller: TavroApiBundle:Auth:reset, _format: json }

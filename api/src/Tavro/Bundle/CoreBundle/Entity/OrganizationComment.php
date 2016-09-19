@@ -27,7 +27,7 @@ class OrganizationComment extends Entity implements EntityInterface
     /**
      * @ORM\ManyToOne(targetEntity="Tavro\Bundle\CoreBundle\Entity\Comment", inversedBy="organization_comments")
      * @ORM\JoinColumn(name="comment_id", referencedColumnName="id", nullable=FALSE)
-     * @Groups({"api", "tavro"})
+     * @Groups({"api", "detail"})
      */
     protected $comment;
 

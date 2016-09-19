@@ -92,7 +92,7 @@ class Shareholders extends AbstractFixture implements OrderedFixtureInterface, C
 
         foreach($people as $person) {
             $shareholder = new Shareholder();
-            $shareholder->setTitle($faker->jobTitle);
+            $shareholder->setBody($faker->text(rand(100,1000)));
             $shareholder->setCreateDate(new \DateTime());
             $shareholder->setPerson($person);
             $manager->persist($shareholder);

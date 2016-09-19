@@ -29,13 +29,13 @@ class Service extends AccountEntity implements AccountEntityInterface
 
     /**
      * @ORM\Column(type="string", length=255, nullable=FALSE)
-     * @Groups({"api", "tavro", "simple"})
+     * @Groups({"api", "detail", "simple"})
      */
     protected $title;
 
     /**
      * @ORM\Column(type="float", nullable=FALSE, options={"default" = 0})
-     * @Groups({"api", "tavro", "simple"})
+     * @Groups({"api", "detail", "simple"})
      */
     protected $price;
 
@@ -45,14 +45,14 @@ class Service extends AccountEntity implements AccountEntityInterface
      *      choices = {"hour", "unit", "retainer"},
      *      message = "Choose a valid service type."
      * )
-     * @Groups({"api", "tavro", "simple"})
+     * @Groups({"api", "detail", "simple"})
      */
     protected $type;
 
     /**
      * @ORM\ManyToOne(targetEntity="Tavro\Bundle\CoreBundle\Entity\ServiceCategory", inversedBy="services")
      * @ORM\JoinColumn(name="category_id", referencedColumnName="id", nullable=FALSE)
-     * @Groups({"api", "tavro", "simple"})
+     * @Groups({"api", "detail", "simple"})
      * @MaxDepth(3)
      */
     protected $category;

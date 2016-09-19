@@ -36,26 +36,26 @@ class Contact extends AccountEntity implements AccountEntityInterface
 
     /**
      * @ORM\Column(type="string", length=255, nullable=TRUE)
-     * @Groups({"api", "tavro", "simple", "typeahead"})
+     * @Groups({"api", "detail", "simple", "typeahead"})
      */
     protected $job_title;
 
     /**
      * @ORM\Column(type="string", unique=FALSE, nullable=TRUE)
-     * @Groups({"api", "tavro", "simple", "typeahead"})
+     * @Groups({"api", "detail", "simple", "typeahead"})
      */
     protected $email;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=TRUE)
-     * @Groups({"api", "tavro", "simple", "typeahead"})
+     * @Groups({"api", "detail", "simple", "typeahead"})
      */
     protected $phone;
 
     /**
      * @ORM\ManyToOne(targetEntity="Tavro\Bundle\CoreBundle\Entity\User")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id", nullable=TRUE)
-     * @Groups({"api", "tavro", "simple"})
+     * @Groups({"api", "detail", "simple"})
      * @MaxDepth(1)
      */
     protected $user;
@@ -63,7 +63,7 @@ class Contact extends AccountEntity implements AccountEntityInterface
     /**
      * @ORM\ManyToOne(targetEntity="Tavro\Bundle\CoreBundle\Entity\Organization")
      * @ORM\JoinColumn(name="organization_id", referencedColumnName="id", nullable=TRUE)
-     * @Groups({"api", "tavro", "simple"})
+     * @Groups({"api", "detail", "simple"})
      * @MaxDepth(1)
      */
     protected $organization;
@@ -71,7 +71,7 @@ class Contact extends AccountEntity implements AccountEntityInterface
     /**
      * @ORM\ManyToOne(targetEntity="Tavro\Bundle\CoreBundle\Entity\Person")
      * @ORM\JoinColumn(name="person_id", referencedColumnName="id", nullable=TRUE)
-     * @Groups({"api", "tavro", "simple"})
+     * @Groups({"api", "detail", "simple"})
      * @MaxDepth(1)
      */
     protected $person;

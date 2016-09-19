@@ -26,7 +26,7 @@ class FundingRoundShareholder extends Entity implements EntityInterface
     /**
      * @ORM\ManyToOne(targetEntity="Tavro\Bundle\CoreBundle\Entity\Shareholder", inversedBy="funding_round_shareholders")
      * @ORM\JoinColumn(name="shareholder_id", referencedColumnName="id", nullable=FALSE)
-     * @Groups({"api", "tavro"})
+     * @Groups({"api", "detail"})
      * @MaxDepth(3)
      */
     protected $shareholder;
@@ -34,14 +34,14 @@ class FundingRoundShareholder extends Entity implements EntityInterface
     /**
      * @ORM\ManyToOne(targetEntity="Tavro\Bundle\CoreBundle\Entity\FundingRound", inversedBy="funding_round_shareholders")
      * @ORM\JoinColumn(name="funding_round_id", referencedColumnName="id", nullable=FALSE)
-     * @Groups({"api", "tavro"})
-     * @MaxDepth(3)
+     * @Groups({"api", "detail"})
+     * @MaxDepth(1)
      */
     protected $funding_round;
 
     /**
      * @ORM\Column(type="integer", nullable=TRUE, options={"default" = 0})
-     * @Groups({"api", "tavro", "simple"})
+     * @Groups({"api", "detail", "simple"})
      */
     protected $shares;
 

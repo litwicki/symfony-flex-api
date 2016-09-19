@@ -31,22 +31,26 @@ class OrganizationController extends ApiController
      * @return \Symfony\Component\HttpFoundation\Response
      * @throws \Exception
      */
-    public function servicesAction(Request $request, Organization $organization, $_format)
+    public function contactsAction(Request $request, Organization $organization, $_format)
     {
         try {
-            $entities = $organization->getServices();
+
+            $entities = $organization->getContacts();
+
+            $data = $this->serialize($entities, $_format, $group = 'simple');
+            $response = $this->apiResponse($data, $_format);
+            return $response;
+
         }
         catch(\Exception $e) {
             throw $e;
         }
-        finally {
-            $data = $this->serialize($entities, $_format, $group = 'simple');
-            $response = $this->apiResponse($data, $_format);
-            return $response;
-        }
-    }
 
+    }
+    
     /**
+     * Display all Comments for this Organization.
+     *
      * @param \Symfony\Component\HttpFoundation\Request $request
      * @param \Tavro\Bundle\CoreBundle\Entity\Organization $organization
      * @param $_format
@@ -54,221 +58,18 @@ class OrganizationController extends ApiController
      * @return \Symfony\Component\HttpFoundation\Response
      * @throws \Exception
      */
-    public function serviceCategoriesAction(Request $request, Organization $organization, $_format)
+    public function commentsAction(Request $request, Organization $organization, $_format)
     {
         try {
-            $entities = $organization->getServiceCategories();
-        }
-        catch(\Exception $e) {
-            throw $e;
-        }
-        finally {
-            $data = $this->serialize($entities, $_format, $group = 'simple');
-            $response = $this->apiResponse($data, $_format);
-            return $response;
-        }
-    }
 
-    /**
-     * @param \Symfony\Component\HttpFoundation\Request $request
-     * @param \Tavro\Bundle\CoreBundle\Entity\Organization $organization
-     * @param $_format
-     *
-     * @return \Symfony\Component\HttpFoundation\Response
-     * @throws \Exception
-     */
-    public function productsAction(Request $request, Organization $organization, $_format)
-    {
-        try {
-            $entities = $organization->getProducts();
-        }
-        catch(\Exception $e) {
-            throw $e;
-        }
-        finally {
-            $data = $this->serialize($entities, $_format, $group = 'simple');
-            $response = $this->apiResponse($data, $_format);
-            return $response;
-        }
-    }
+            $entities = $organization->getOrganizationComments();
 
-    /**
-     * @param \Symfony\Component\HttpFoundation\Request $request
-     * @param \Tavro\Bundle\CoreBundle\Entity\Organization $organization
-     * @param $_format
-     *
-     * @return \Symfony\Component\HttpFoundation\Response
-     * @throws \Exception
-     */
-    public function productCategoriesAction(Request $request, Organization $organization, $_format)
-    {
-        try {
-            $entities = $organization->getProductCategories();
-        }
-        catch(\Exception $e) {
-            throw $e;
-        }
-        finally {
-            $data = $this->serialize($entities, $_format, $group = 'simple');
-            $response = $this->apiResponse($data, $_format);
-            return $response;
-        }
-    }
-
-    /**
-     * @param \Symfony\Component\HttpFoundation\Request $request
-     * @param \Tavro\Bundle\CoreBundle\Entity\Organization $organization
-     * @param $_format
-     *
-     * @return \Symfony\Component\HttpFoundation\Response
-     * @throws \Exception
-     */
-    public function revenuesAction(Request $request, Organization $organization, $_format)
-    {
-        try {
-            $entities = $organization->getRevenues();
-        }
-        catch(\Exception $e) {
-            throw $e;
-        }
-        finally {
-            $data = $this->serialize($entities, $_format, $group = 'simple');
-            $response = $this->apiResponse($data, $_format);
-            return $response;
-        }
-    }
-
-    /**
-     * @param \Symfony\Component\HttpFoundation\Request $request
-     * @param \Tavro\Bundle\CoreBundle\Entity\Organization $organization
-     * @param $_format
-     *
-     * @return \Symfony\Component\HttpFoundation\Response
-     * @throws \Exception
-     */
-    public function revenueCategoriesAction(Request $request, Organization $organization, $_format)
-    {
-        try {
-            $entities = $organization->getRevenueCategories();
-        }
-        catch(\Exception $e) {
-            throw $e;
-        }
-        finally {
-            $data = $this->serialize($entities, $_format, $group = 'simple');
-            $response = $this->apiResponse($data, $_format);
-            return $response;
-        }
-    }
-
-    /**
-     * @param \Symfony\Component\HttpFoundation\Request $request
-     * @param \Tavro\Bundle\CoreBundle\Entity\Organization $organization
-     * @param $_format
-     *
-     * @return \Symfony\Component\HttpFoundation\Response
-     * @throws \Exception
-     */
-    public function expensesAction(Request $request, Organization $organization, $_format)
-    {
-        try {
-            $entities = $organization->getExpenses();
-        }
-        catch(\Exception $e) {
-            throw $e;
-        }
-        finally {
-            $data = $this->serialize($entities, $_format, $group = 'simple');
-            $response = $this->apiResponse($data, $_format);
-            return $response;
-        }
-    }
-
-    /**
-     * @param \Symfony\Component\HttpFoundation\Request $request
-     * @param \Tavro\Bundle\CoreBundle\Entity\Organization $organization
-     * @param $_format
-     *
-     * @return \Symfony\Component\HttpFoundation\Response
-     * @throws \Exception
-     */
-    public function expenseCategoriesAction(Request $request, Organization $organization, $_format)
-    {
-        try {
-            $entities = $organization->getExpenseCategories();
-        }
-        catch(\Exception $e) {
-            throw $e;
-        }
-        finally {
-            $data = $this->serialize($entities, $_format, $group = 'simple');
-            $response = $this->apiResponse($data, $_format);
-            return $response;
-        }
-    }
-
-    /**
-     * @param \Symfony\Component\HttpFoundation\Request $request
-     * @param \Tavro\Bundle\CoreBundle\Entity\Organization $organization
-     * @param $_format
-     *
-     * @return \Symfony\Component\HttpFoundation\Response
-     * @throws \Exception
-     */
-    public function nodesAction(Request $request, Organization $organization, $_format)
-    {
-        try {
-            $entities = $organization->getNodes();
-        }
-        catch(\Exception $e) {
-            throw $e;
-        }
-        finally {
-            $data = $this->serialize($entities, $_format, $group = 'simple');
-            $response = $this->apiResponse($data, $_format);
-            return $response;
-        }
-    }
-
-    /**
-     * @param \Symfony\Component\HttpFoundation\Request $request
-     * @param \Tavro\Bundle\CoreBundle\Entity\Organization $organization
-     * @param $_format
-     *
-     * @return \Symfony\Component\HttpFoundation\Response
-     * @throws \Exception
-     */
-    public function fundingAction(Request $request, Organization $organization, $_format)
-    {
-        try {
-            $entities = $organization->getFundingRounds();
-        }
-        catch(\Exception $e) {
-            throw $e;
-        }
-        finally {
-            $data = $this->serialize($entities, $_format, $group = 'simple');
-            $response = $this->apiResponse($data, $_format);
-            return $response;
-        }
-    }
-
-    /**
-     * @param \Symfony\Component\HttpFoundation\Request $request
-     * @param \Tavro\Bundle\CoreBundle\Entity\Organization $organization
-     * @param $_format
-     *
-     * @return \Symfony\Component\HttpFoundation\Response
-     * @throws \Exception
-     */
-    public function shareholdersAction(Request $request, Organization $organization, $_format)
-    {
-        try {
             $items = array();
-            $entities = $organization->getOrganizationShareholders();
+
             foreach($entities as $entity) {
-                $items = $entity->getShareholder();
+                $items[] = $entity->getComment();
             }
+
         }
         catch(\Exception $e) {
             throw $e;
@@ -278,6 +79,47 @@ class OrganizationController extends ApiController
             $response = $this->apiResponse($data, $_format);
             return $response;
         }
+    }
+
+    /**
+     * @param \Symfony\Component\HttpFoundation\Request $request
+     * @param \Tavro\Bundle\CoreBundle\Entity\Organization $organization
+     * @param $_format
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     * @throws \Exception
+     */
+    public function newCommentAction(Request $request, Organization $organization, $_format)
+    {
+        try {
+
+            $data = json_decode($request->getContent(), TRUE);
+
+            $handler = $this->getHandler('comments');
+            $comment = $handler->post($request, $data);
+
+            /**
+             * Attach the Comment to the Organization
+             */
+            $this->getHandler('organization_comments')->post($request, array(
+                'comment' => $comment->getId(),
+                'organization' => $organization->getId()
+            ));
+
+        }
+        catch(\Exception $e) {
+            throw $e;
+        }
+        finally {
+            $routeOptions = array(
+                'entity'  => 'comments',
+                'id'      => $comment->getId(),
+                'format'  => $_format,
+            );
+
+            return $this->forward('TavroApiBundle:Default:get', $routeOptions);
+        }
+
     }
 
 }

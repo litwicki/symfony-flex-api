@@ -32,14 +32,14 @@ class Revenue extends AccountEntity implements AccountEntityInterface
      *      choices = { "sale", "service", "other"},
      *      message = "Choose a valid Revenue type."
      * )
-     * @Groups({"api", "tavro", "simple"})
+     * @Groups({"api", "detail", "simple"})
      */
     protected $type;
 
     /**
      * @ORM\ManyToOne(targetEntity="Tavro\Bundle\CoreBundle\Entity\RevenueCategory", inversedBy="revenues")
      * @ORM\JoinColumn(name="category_id", referencedColumnName="id", nullable=FALSE)
-     * @Groups({"api", "tavro", "simple"})
+     * @Groups({"api", "detail", "simple"})
      * @MaxDepth(1)
      */
     protected $category;
@@ -47,7 +47,7 @@ class Revenue extends AccountEntity implements AccountEntityInterface
     /**
      * @ORM\ManyToOne(targetEntity="Tavro\Bundle\CoreBundle\Entity\User", inversedBy="revenues")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id", nullable=FALSE)
-     * @Groups({"api", "tavro", "simple"})
+     * @Groups({"api", "detail", "simple"})
      * @MaxDepth(1)
      */
     protected $user;
@@ -195,7 +195,7 @@ class Revenue extends AccountEntity implements AccountEntityInterface
     /**
      * @VirtualProperty
      * @SerializedName("comments")
-     * @Groups({"api", "tavro","detail"})
+     * @Groups({"api", "detail","detail"})
      * @MaxDepth(1)
      */
     public function getComments()
@@ -209,7 +209,7 @@ class Revenue extends AccountEntity implements AccountEntityInterface
     /**
      * @VirtualProperty
      * @SerializedName("comment_count")
-     * @Groups({"api", "tavro", "simple"})
+     * @Groups({"api", "detail", "simple"})
      * @return int
      */
     public function getCommentCount()
@@ -220,7 +220,7 @@ class Revenue extends AccountEntity implements AccountEntityInterface
     /**
      * @VirtualProperty
      * @SerializedName("tags")
-     * @Groups({"api", "tavro","detail"})
+     * @Groups({"api", "detail","detail"})
      * @MaxDepth(1)
      */
     public function getTags()
@@ -361,7 +361,7 @@ class Revenue extends AccountEntity implements AccountEntityInterface
     /**
      * @VirtualProperty
      * @SerializedName("services")
-     * @Groups({"api", "tavro","detail"})
+     * @Groups({"api", "detail","detail"})
      * @MaxDepth(2)
      */
     public function getServices()
@@ -376,7 +376,7 @@ class Revenue extends AccountEntity implements AccountEntityInterface
     /**
      * @VirtualProperty
      * @SerializedName("products")
-     * @Groups({"api", "tavro","detail"})
+     * @Groups({"api", "detail","detail"})
      * @MaxDepth(2)
      */
     public function getProducts()

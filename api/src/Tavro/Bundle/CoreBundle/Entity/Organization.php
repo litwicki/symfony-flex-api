@@ -27,10 +27,64 @@ use Tavro\Bundle\CoreBundle\Model\AccountEntityInterface;
 class Organization extends AccountEntity implements AccountEntityInterface
 {
     /**
-     * @ORM\Column(type="string", length=255, nullable=FALSE)
-     * @Groups({"api", "tavro", "simple"})
+     * @ORM\Column(type="integer", length=255, unique=TRUE, nullable=TRUE)
+     * @Groups({"api", "detail", "simple"})
      */
-    protected $title;
+    protected $hubspot_id;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=FALSE)
+     * @Groups({"api", "detail", "simple"})
+     */
+    protected $name;
+
+    /**
+     * @ORM\Column(type="string", length=8000, nullable=TRUE)
+     * @Groups({"api", "detail", "simple"})
+     */
+    protected $description;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=TRUE)
+     * @Groups({"api", "detail", "simple"})
+     */
+    protected $address;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=TRUE)
+     * @Groups({"api", "detail", "simple"})
+     */
+    protected $address2;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=TRUE)
+     * @Groups({"api", "detail", "simple"})
+     */
+    protected $city;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=TRUE)
+     * @Groups({"api", "detail", "simple"})
+     */
+    protected $state;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=TRUE)
+     * @Groups({"api", "detail", "simple"})
+     */
+    protected $zip;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=TRUE)
+     * @Groups({"api", "detail", "simple", "typeahead"})
+     */
+    protected $phone;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=TRUE)
+     * @Groups({"api", "detail", "simple"})
+     */
+    protected $website;
 
     /**
      * @ORM\OneToMany(targetEntity="Tavro\Bundle\CoreBundle\Entity\Node", mappedBy="organization", cascade={"remove"})
@@ -50,42 +104,42 @@ class Organization extends AccountEntity implements AccountEntityInterface
 
     /**
      * @ORM\OneToMany(targetEntity="Tavro\Bundle\CoreBundle\Entity\Service", mappedBy="organization", cascade={"remove"})
-     * @Groups({"tavro"})
+     * @Groups({"detail"})
      * @MaxDepth(3)
      */
     protected $services;
 
     /**
      * @ORM\OneToMany(targetEntity="Tavro\Bundle\CoreBundle\Entity\Expense", mappedBy="organization", cascade={"remove"})
-     * @Groups({"tavro"})
+     * @Groups({"detail"})
      * @MaxDepth(3)
      */
     protected $expenses;
 
     /**
      * @ORM\OneToMany(targetEntity="Tavro\Bundle\CoreBundle\Entity\Product", mappedBy="organization", cascade={"remove"})
-     * @Groups({"tavro"})
+     * @Groups({"detail"})
      * @MaxDepth(3)
      */
     protected $products;
 
     /**
      * @ORM\OneToMany(targetEntity="Tavro\Bundle\CoreBundle\Entity\Revenue", mappedBy="organization", cascade={"remove"})
-     * @Groups({"tavro"})
+     * @Groups({"detail"})
      * @MaxDepth(3)
      */
     protected $revenues;
 
     /**
      * @ORM\OneToMany(targetEntity="Tavro\Bundle\CoreBundle\Entity\Contact", mappedBy="organization", cascade={"remove"})
-     * @Groups({"tavro"})
+     * @Groups({"detail"})
      * @MaxDepth(3)
      */
     protected $contacts;
 
     /**
      * @ORM\OneToMany(targetEntity="Tavro\Bundle\CoreBundle\Entity\FundingRound", mappedBy="organization", cascade={"remove"})
-     * @Groups({"tavro"})
+     * @Groups({"detail"})
      * @MaxDepth(3)
      */
     protected $funding_rounds;
@@ -97,27 +151,27 @@ class Organization extends AccountEntity implements AccountEntityInterface
 
 
     /**
-     * Set title
+     * Set name
      *
-     * @param string $title
+     * @param string $name
      *
      * @return Organization
      */
-    public function setTitle($title)
+    public function setName($name)
     {
-        $this->title = $title;
+        $this->name = $name;
 
         return $this;
     }
 
     /**
-     * Get title
+     * Get name
      *
      * @return string
      */
-    public function getTitle()
+    public function getName()
     {
-        return $this->title;
+        return $this->name;
     }
 
     /**
@@ -482,5 +536,221 @@ class Organization extends AccountEntity implements AccountEntityInterface
     public function getFundingRoundShareholders()
     {
         return $this->funding_round_shareholders;
+    }
+
+    /**
+     * Set hubspotId
+     *
+     * @param integer $hubspotId
+     *
+     * @return Organization
+     */
+    public function setHubspotId($hubspotId)
+    {
+        $this->hubspot_id = $hubspotId;
+
+        return $this;
+    }
+
+    /**
+     * Get hubspotId
+     *
+     * @return integer
+     */
+    public function getHubspotId()
+    {
+        return $this->hubspot_id;
+    }
+
+    /**
+     * Set description
+     *
+     * @param string $description
+     *
+     * @return Organization
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
+    /**
+     * Get description
+     *
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * Set address
+     *
+     * @param string $address
+     *
+     * @return Organization
+     */
+    public function setAddress($address)
+    {
+        $this->address = $address;
+
+        return $this;
+    }
+
+    /**
+     * Get address
+     *
+     * @return string
+     */
+    public function getAddress()
+    {
+        return $this->address;
+    }
+
+    /**
+     * Set address2
+     *
+     * @param string $address2
+     *
+     * @return Organization
+     */
+    public function setAddress2($address2)
+    {
+        $this->address2 = $address2;
+
+        return $this;
+    }
+
+    /**
+     * Get address2
+     *
+     * @return string
+     */
+    public function getAddress2()
+    {
+        return $this->address2;
+    }
+
+    /**
+     * Set city
+     *
+     * @param string $city
+     *
+     * @return Organization
+     */
+    public function setCity($city)
+    {
+        $this->city = $city;
+
+        return $this;
+    }
+
+    /**
+     * Get city
+     *
+     * @return string
+     */
+    public function getCity()
+    {
+        return $this->city;
+    }
+
+    /**
+     * Set state
+     *
+     * @param string $state
+     *
+     * @return Organization
+     */
+    public function setState($state)
+    {
+        $this->state = $state;
+
+        return $this;
+    }
+
+    /**
+     * Get state
+     *
+     * @return string
+     */
+    public function getState()
+    {
+        return $this->state;
+    }
+
+    /**
+     * Set zip
+     *
+     * @param string $zip
+     *
+     * @return Organization
+     */
+    public function setZip($zip)
+    {
+        $this->zip = $zip;
+
+        return $this;
+    }
+
+    /**
+     * Get zip
+     *
+     * @return string
+     */
+    public function getZip()
+    {
+        return $this->zip;
+    }
+
+    /**
+     * Set phone
+     *
+     * @param string $phone
+     *
+     * @return Organization
+     */
+    public function setPhone($phone)
+    {
+        $this->phone = $phone;
+
+        return $this;
+    }
+
+    /**
+     * Get phone
+     *
+     * @return string
+     */
+    public function getPhone()
+    {
+        return $this->phone;
+    }
+
+    /**
+     * Set website
+     *
+     * @param string $website
+     *
+     * @return Organization
+     */
+    public function setWebsite($website)
+    {
+        $this->website = $website;
+
+        return $this;
+    }
+
+    /**
+     * Get website
+     *
+     * @return string
+     */
+    public function getWebsite()
+    {
+        return $this->website;
     }
 }

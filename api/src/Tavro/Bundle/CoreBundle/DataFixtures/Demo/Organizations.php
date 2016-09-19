@@ -77,12 +77,11 @@ class Organizations extends AbstractFixture implements OrderedFixtureInterface, 
 
             $users = $account->getUsers()->toArray();
 
-            for($i=0;$i<rand(0,$size);$i++) {
+            for($i=0;$i<rand(1,$size);$i++) {
 
                 $organization = new Organization();
-                $organization->setTitle($faker->title);
+                $organization->setName($faker->company);
                 $organization->setBody($faker->text(rand(100,1000)));
-                $organization->setCreateDate(new \DateTime());
                 $organization->setAccount($account);
                 $organization->setStatus(rand(0,1));
                 $manager->persist($organization);
@@ -110,8 +109,6 @@ class Organizations extends AbstractFixture implements OrderedFixtureInterface, 
                 }
 
             }
-
-            $manager->flush();
 
         }
 

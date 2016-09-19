@@ -65,12 +65,13 @@ class OrganizationTest extends TavroTest
     {
 
         $token = $this->authorize('fembot', 'Password1!');
+        $faker = \Faker\Factory::create('en_EN');
 
         $this->assertTrue(!empty($token));
 
         $data = array(
-            'title' => 'Organization Name',
-            'body' => 'Product body..',
+            'title' => $faker->company,
+            'body' => $faker->text(rand(100,1000)),
             'customer_label' => 'Customer',
             'owner' => 1,
         );
