@@ -2,7 +2,7 @@
 
 use Doctrine\ORM\EntityRepository;
 
-class CustomerRepository extends EntityRepository
+class ContactRepository extends EntityRepository
 {
 
 }

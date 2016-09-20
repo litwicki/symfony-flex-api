@@ -62,7 +62,7 @@ class Contact extends AccountEntity implements AccountEntityInterface
 
     /**
      * @ORM\ManyToOne(targetEntity="Tavro\Bundle\CoreBundle\Entity\Organization")
-     * @ORM\JoinColumn(name="organization_id", referencedColumnName="id", nullable=TRUE)
+     * @ORM\JoinColumn(name="organization_id", referencedColumnName="id", nullable=FALSE)
      * @Groups({"api", "detail", "simple"})
      * @MaxDepth(1)
      */
@@ -70,19 +70,11 @@ class Contact extends AccountEntity implements AccountEntityInterface
 
     /**
      * @ORM\ManyToOne(targetEntity="Tavro\Bundle\CoreBundle\Entity\Person")
-     * @ORM\JoinColumn(name="person_id", referencedColumnName="id", nullable=TRUE)
+     * @ORM\JoinColumn(name="person_id", referencedColumnName="id", nullable=FALSE)
      * @Groups({"api", "detail", "simple"})
      * @MaxDepth(1)
      */
     protected $person;
-
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        parent::__construct();
-    }
 
     public function __toString()
     {

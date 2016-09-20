@@ -55,4 +55,9 @@ class AccountEntity extends Entity implements EntityInterface
         return $this->account;
     }
 
+    public function __construct()
+    {
+        parent::__construct();
+    }
+
 }

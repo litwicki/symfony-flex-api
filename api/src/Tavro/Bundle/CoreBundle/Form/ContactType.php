@@ -24,23 +24,21 @@ class ContactType extends AbstractType
             ->add('phone')
             ->add('body')
             ->add('status')
-            ->add('create_date', DateTimeType::class)
-            ->add('update_date', DateTimeType::class)
             ->add('user', EntityType::class, array(
                 'class' => 'TavroCoreBundle:User',
                 'choice_label' => 'User'
             ))
             ->add('organization', EntityType::class, array(
-                'class' => 'TavroCoreBundle:User',
-                'choice_label' => 'User'
+                'class' => 'TavroCoreBundle:Organization',
+                'choice_label' => 'Organization'
             ))
             ->add('person', EntityType::class, array(
-                'class' => 'TavroCoreBundle:User',
-                'choice_label' => 'User'
+                'class' => 'TavroCoreBundle:Person',
+                'choice_label' => 'Person'
             ))
             ->add('account', EntityType::class, array(
-                'class' => 'TavroCoreBundle:User',
-                'choice_label' => 'User'
+                'class' => 'TavroCoreBundle:Account',
+                'choice_label' => 'Account'
             ))
             ->add('submit', SubmitType::class)
         ;

@@ -6,6 +6,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
+use Tavro\Bundle\CoreBundle\Entity\Contact;
 use Tavro\Bundle\CoreBundle\Exception\Api\ApiException;
 use Tavro\Bundle\CoreBundle\Exception\Api\ApiNotFoundException;
 use Tavro\Bundle\CoreBundle\Exception\Api\ApiRequestLimitException;
@@ -72,6 +73,7 @@ class HubspotController extends ApiController
             $data = json_decode($response, true);
 
             $items = array();
+            $contactCount = $orgCount = $personCount = 0;
 
             foreach($data['companies'] as $row) {
 
@@ -79,6 +81,7 @@ class HubspotController extends ApiController
                 $companyId = $row['companyId'];
 
                 $item = [
+                    'account' => $account->getId(),
                     'address' => isset($company['address']['value']) ? $company['address']['value'] : null,
                     'address2' => isset($company['address2']['value']) ? $company['address2']['value'] : null,
                     'city' => isset($company['city']['value']) ? $company['city']['value'] : null,
@@ -87,7 +90,7 @@ class HubspotController extends ApiController
                     'website' => isset($company['website']['value']) ? $company['website']['value'] : null,
                     'phone' => isset($company['phone']['value']) ? $company['phone']['value'] : null,
                     'name' => isset($company['name']['value']) ? $company['name']['value'] : null,
-                    'hubspot_id' => isset($row['portalId']) ? $row['portalId'] : null,
+                    'hubspot_id' => isset($row['companyId']) ? $row['companyId'] : null,
                     'description' => isset($company['description']['value']) ? $company['description']['value'] : null,
                 ];
 
@@ -143,51 +146,96 @@ class HubspotController extends ApiController
 
             }
 
+            /**
+             * From the built array of companies and contacts, let's compare
+             * the existing database and import what we don't have yet..
+             */
             foreach($items as $item) {
 
+                /**
+                 * First look by hubspot_id in case we changed the Organization name after the last import..
+                 */
                 $organization = $this->getDoctrine()->getRepository('TavroCoreBundle:Organization')->findOneBy([
-                    'name' => $item['name']
+                    'hubspot_id' => $item['hubspot_id'],
+                    'account' => $account->getId()
                 ]);
 
-                if(!$organization) {
+                if(!$organization instanceof Organization) {
 
-                    $data = $item;
-                    unset($data['contacts']);
+                    /**
+                     * Still no Organization, let's look by Name..
+                     */
+                    $organization = $this->getDoctrine()->getRepository('TavroCoreBundle:Organization')->findOneBy([
+                        'name' => $item['name'],
+                        'account' => $account->getId()
+                    ]);
 
-                    $handler = $this->getHandler('organizations');
-                    $organization = $handler->post($request, $data);
+                    if(!$organization instanceof Organization) {
+                        $data = $item;
+                        unset($data['contacts']);
+                        $handler = $this->getHandler('organizations');
+                        $organization = $handler->post($request, $data);
+                        $orgCount++;
+                    }
 
                 }
 
                 foreach($item['contacts'] as $contact) {
 
-                    $person = $this->getDoctrine()->getRepository('TavroCoreBundle:Person')->findOneBy([
-                        'email' => $item['email']
-                    ]);
+                    if(isset($contact['email'])) {
 
-                    if(!$person) {
-
-                        $handler = $this->getHandler('people');
-                        $person = $handler->post($request, [
-                            'first_name' => $contact['firstname'],
-                            'last_name' => $contact['lastname'],
+                        $person = $this->getDoctrine()->getRepository('TavroCoreBundle:Person')->findOneBy([
                             'email' => $contact['email']
                         ]);
 
-                    }
+                        if(!$person) {
 
-                    $contact = $this->getDoctrine()->getRepository('TavroCoreBundle:Contact')->findOneBy([
-                        'person' => $person->getId()
-                    ]);
+                            $handler = $this->getHandler('people');
 
-                    if(!$contact) {
+                            try {
 
-                        $handler = $this->getHandler('contact');
-                        $contact = $handler->post($request, [
-                            'email' => $item['email'],
-                            'person' => $person->getId(),
-                            'organization' => $organization->getId()
+                                $person = $handler->post($request, [
+                                    'first_name' => isset($contact['first_name']) ? $contact['first_name'] : 'FIRST_NAME',
+                                    'last_name' => isset($contact['last_name']) ? $contact['last_name'] : 'LAST_NAME',
+                                    'email' => $contact['email']
+                                ]);
+
+                                $personCount++;
+
+                            }
+                            catch(\Exception $e) {
+                                throw $e;
+                            }
+
+                        }
+
+                        $contact = $this->getDoctrine()->getRepository('TavroCoreBundle:Contact')->findOneBy([
+                            'person' => $person->getId()
                         ]);
+
+                        if(!$contact instanceof Contact) {
+
+                            $handler = $this->getHandler('contacts');
+
+                            try {
+
+                                $contact = $handler->post($request, [
+                                    'email' => $contact['email'],
+                                    'person' => $person->getId(),
+                                    'organization' => $organization->getId(),
+                                    'account' => $account->getId()
+                                ]);
+
+                                $contactCount++;
+
+                            }
+                            catch(\Exception $e) {
+                                throw $e;
+                            }
+
+                        }
+
+                        $import['data'][] = $contact;
 
                     }
 
@@ -195,7 +243,9 @@ class HubspotController extends ApiController
 
             }
 
-            $data = $this->serialize($items, $_format);
+            $import['message'] = sprintf('%s Organizations and %s People imported, %s Contacts added.', $orgCount, $personCount, $contactCount);
+
+            $data = $this->serialize($import, $_format);
             return $this->apiResponse($data, $_format);
 
         }
