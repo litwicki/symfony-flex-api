@@ -7,6 +7,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 
@@ -33,7 +34,9 @@ class PersonType extends AbstractType
             ->add('email', EmailType::class)
             ->add('phone')
             ->add('body')
-            ->add('status')
+            ->add('status', IntegerType::class, [
+                'invalid_message' => 'Invalid status, only 0, 1, 2 allowed'
+            ])
             ->add('submit', SubmitType::class)
         ;
     }
@@ -43,9 +46,9 @@ class PersonType extends AbstractType
      */
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(array(
+        $resolver->setDefaults([
             'data_class' => 'Tavro\Bundle\CoreBundle\Entity\Person',
             'csrf_protection' => false
-        ));
+        ]);
     }
 }

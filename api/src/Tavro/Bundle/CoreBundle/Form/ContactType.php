@@ -7,6 +7,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 
@@ -23,27 +24,29 @@ class ContactType extends AbstractType
             ->add('email', EmailType::class)
             ->add('phone')
             ->add('body')
-            ->add('status')
-            ->add('user', EntityType::class, array(
+            ->add('status', IntegerType::class, [
+                'invalid_message' => 'Invalid status, only 0, 1, 2 allowed'
+            ])
+            ->add('user', EntityType::class, [
                 'class' => 'TavroCoreBundle:User',
                 'choice_label' => 'User',
                 'invalid_message' => 'Please enter a valid User'
-            ))
-            ->add('organization', EntityType::class, array(
+            ])
+            ->add('organization', EntityType::class, [
                 'class' => 'TavroCoreBundle:Organization',
                 'choice_label' => 'Organization',
                 'invalid_message' => 'Please enter a valid Organization'
-            ))
-            ->add('person', EntityType::class, array(
+            ])
+            ->add('person', EntityType::class, [
                 'class' => 'TavroCoreBundle:Person',
                 'choice_label' => 'Person',
                 'invalid_message' => 'Please enter a valid Person'
-            ))
-            ->add('account', EntityType::class, array(
+            ])
+            ->add('account', EntityType::class, [
                 'class' => 'TavroCoreBundle:Account',
                 'choice_label' => 'Account',
                 'invalid_message' => 'Please enter a valid Account'
-            ))
+            ])
             ->add('submit', SubmitType::class)
         ;
     }
@@ -53,9 +56,9 @@ class ContactType extends AbstractType
      */
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(array(
+        $resolver->setDefaults([
             'data_class' => 'Tavro\Bundle\CoreBundle\Entity\Contact',
             'csrf_protection'   => false,
-        ));
+        ]);
     }
 }

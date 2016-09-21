@@ -6,6 +6,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 
@@ -20,24 +21,26 @@ class NodeType extends AbstractType
         $builder
             ->add('type')
             ->add('body')
-            ->add('display_date', DateTimeType::class, array(
+            ->add('display_date', DateTimeType::class, [
                 'invalid_message' => 'Please enter a valid date with time for display date: Y-m-d h:i:s',
                 'widget' => 'single_text',
                 'format' => 'Y-m-d h:i:s',
-            ))
+            ])
             ->add('views')
             ->add('title')
-            ->add('status')
-            ->add('user', EntityType::class, array(
+            ->add('status', IntegerType::class, [
+                'invalid_message' => 'Invalid status, only 0, 1, 2 allowed'
+            ])
+            ->add('user', EntityType::class, [
                 'class' => 'TavroCoreBundle:User',
                 'choice_label' => 'User',
                 'invalid_message' => 'Please enter a valid User',
-            ))
-            ->add('account', EntityType::class, array(
+            ])
+            ->add('account', EntityType::class, [
                 'class' => 'TavroCoreBundle:Account',
                 'choice_label' => 'Account',
                 'invalid_message' => 'Please enter a valid Account'
-            ))
+            ])
             ->add('submit', SubmitType::class)
         ;
     }
@@ -47,9 +50,9 @@ class NodeType extends AbstractType
      */
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(array(
+        $resolver->setDefaults([
             'data_class' => 'Tavro\Bundle\CoreBundle\Entity\Node',
             'csrf_protection'   => false,
-        ));
+        ]);
     }
 }

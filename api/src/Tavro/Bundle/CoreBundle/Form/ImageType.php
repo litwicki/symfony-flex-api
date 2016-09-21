@@ -7,6 +7,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 class ImageType extends AbstractType
@@ -27,7 +28,9 @@ class ImageType extends AbstractType
             ->add('filesize')
             ->add('height')
             ->add('width')
-            ->add('status')
+            ->add('status', IntegerType::class, [
+                'invalid_message' => 'Invalid status, only 0, 1, 2 allowed'
+            ])
             ->add('submit', SubmitType::class)
         ;
     }
@@ -37,9 +40,9 @@ class ImageType extends AbstractType
      */
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(array(
+        $resolver->setDefaults([
             'data_class' => 'Tavro\Bundle\CoreBundle\Entity\Image',
             'csrf_protection'   => false,
-        ));
+        ]);
     }
 }

@@ -7,6 +7,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 
 class ServiceCategoryType extends AbstractType
@@ -20,17 +21,19 @@ class ServiceCategoryType extends AbstractType
         $builder
             ->add('body')
             ->add('title')
-            ->add('status')
-            ->add('account', EntityType::class, array(
+            ->add('status', IntegerType::class, [
+                'invalid_message' => 'Invalid status, only 0, 1, 2 allowed'
+            ])
+            ->add('account', EntityType::class, [
                 'class' => 'TavroCoreBundle:Account',
                 'choice_label' => 'Account',
                 'invalid_message' => 'Please enter a valid Account'
-            ))
-            ->add('updated_by', EntityType::class, array(
+            ])
+            ->add('updated_by', EntityType::class, [
                 'class' => 'TavroCoreBundle:User',
                 'choice_label' => 'User',
                 'invalid_message' => 'Please enter a valid User'
-            ))
+            ])
             ->add('submit', SubmitType::class)
         ;
     }
@@ -40,9 +43,9 @@ class ServiceCategoryType extends AbstractType
      */
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(array(
+        $resolver->setDefaults([
             'data_class' => 'Tavro\Bundle\CoreBundle\Entity\ServiceCategory',
             'csrf_protection'   => false,
-        ));
+        ]);
     }
 }

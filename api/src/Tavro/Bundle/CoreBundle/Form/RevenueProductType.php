@@ -5,7 +5,7 @@ namespace Tavro\Bundle\CoreBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -19,17 +19,19 @@ class RevenueProductType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('status')
-            ->add('product', EntityType::class, array(
+            ->add('status', IntegerType::class, [
+                'invalid_message' => 'Invalid status, only 0, 1, 2 allowed'
+            ])
+            ->add('product', EntityType::class, [
                 'class' => 'TavroCoreBundle:Product',
                 'choice_label' => 'Product',
                 'invalid_message' => 'Please enter a valid Product for this Revenue Product'
-            ))
-            ->add('revenue', EntityType::class, array(
+            ])
+            ->add('revenue', EntityType::class, [
                 'class' => 'TavroCoreBundle:Revenue',
                 'choice_label' => 'Revenue',
                 'invalid_message' => 'Please enter a valid Revenue for this Revenue Product'
-            ))
+            ])
             ->add('submit', SubmitType::class)
         ;
     }
@@ -39,9 +41,9 @@ class RevenueProductType extends AbstractType
      */
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(array(
+        $resolver->setDefaults([
             'data_class' => 'Tavro\Bundle\CoreBundle\Entity\RevenueProduct',
             'csrf_protection'   => false,
-        ));
+        ]);
     }
 }

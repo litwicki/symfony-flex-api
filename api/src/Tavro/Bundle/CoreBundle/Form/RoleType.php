@@ -6,6 +6,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 
@@ -20,12 +21,14 @@ class RoleType extends AbstractType
         $builder
             ->add('name')
             ->add('role')
-            ->add('status')
-            ->add('users', EntityType::class, array(
+            ->add('status', IntegerType::class, [
+                'invalid_message' => 'Invalid status, only 0, 1, 2 allowed'
+            ])
+            ->add('users', EntityType::class, [
                 'class' => 'TavroCoreBundle:User',
                 'choice_label' => 'User',
                 'invalid_message' => 'Please enter a valid User'
-            ))
+            ])
             ->add('submit', SubmitType::class)
         ;
     }
@@ -35,9 +38,9 @@ class RoleType extends AbstractType
      */
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(array(
+        $resolver->setDefaults([
             'data_class' => 'Tavro\Bundle\CoreBundle\Entity\Role',
             'csrf_protection'   => false,
-        ));
+        ]);
     }
 }

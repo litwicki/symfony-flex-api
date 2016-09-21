@@ -6,6 +6,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 
 class ShareholderType extends AbstractType
 {
@@ -17,12 +18,14 @@ class ShareholderType extends AbstractType
     {
         $builder
             ->add('body')
-            ->add('status')
-            ->add('person', EntityType::class, array(
+            ->add('status', IntegerType::class, [
+                'invalid_message' => 'Invalid status, only 0, 1, 2 allowed'
+            ])
+            ->add('person', EntityType::class, [
                 'class' => 'TavroCoreBundle:Person',
                 'choice_label' => 'Person',
                 'invalid_message' => 'Please enter a valid Person'
-            ))
+            ])
         ;
     }
     
@@ -31,9 +34,9 @@ class ShareholderType extends AbstractType
      */
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(array(
+        $resolver->setDefaults([
             'data_class' => 'Tavro\Bundle\CoreBundle\Entity\Shareholder',
             'csrf_protection' => false
-        ));
+        ]);
     }
 }

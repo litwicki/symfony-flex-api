@@ -6,6 +6,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 
 class ServiceType extends AbstractType
 {
@@ -20,17 +21,19 @@ class ServiceType extends AbstractType
             ->add('title')
             ->add('price')
             ->add('type')
-            ->add('status')
-            ->add('category', EntityType::class, array(
+            ->add('status', IntegerType::class, [
+                'invalid_message' => 'Invalid status, only 0, 1, 2 allowed'
+            ])
+            ->add('category', EntityType::class, [
                 'class' => 'TavroCoreBundle:ServiceCategory',
                 'choice_label' => 'Organization',
                 'invalid_message' => 'Please enter a valid Service Category'
-            ))
-            ->add('organization', EntityType::class, array(
+            ])
+            ->add('organization', EntityType::class, [
                 'class' => 'TavroCoreBundle:Organization',
                 'choice_label' => 'Organization',
                 'invalid_message' => 'Please enter a valid Organization'
-            ))
+            ])
         ;
     }
     
@@ -39,9 +42,9 @@ class ServiceType extends AbstractType
      */
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(array(
+        $resolver->setDefaults([
             'data_class' => 'Tavro\Bundle\CoreBundle\Entity\Service',
             'csrf_protection' => false
-        ));
+        ]);
     }
 }

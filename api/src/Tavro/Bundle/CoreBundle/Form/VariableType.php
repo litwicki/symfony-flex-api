@@ -8,6 +8,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 
 class VariableType extends AbstractType
 {
@@ -20,7 +21,14 @@ class VariableType extends AbstractType
         $builder
             ->add('name')
             ->add('value')
-            ->add('status')
+            ->add('status', IntegerType::class, [
+                'invalid_message' => 'Invalid status, only 0, 1, 2 allowed'
+            ])
+            ->add('account', EntityType::class, [
+                'class' => 'TavroCoreBundle:Account',
+                'choice_label' => 'Account',
+                'invalid_message' => 'Please enter a valid Account'
+            ])
             ->add('submit', SubmitType::class)
         ;
     }
@@ -30,9 +38,9 @@ class VariableType extends AbstractType
      */
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(array(
+        $resolver->setDefaults([
             'data_class' => 'Tavro\Bundle\CoreBundle\Entity\Variable',
             'csrf_protection'   => false,
-        ));
+        ]);
     }
 }
