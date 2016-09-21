@@ -25,13 +25,21 @@ class PersonType extends AbstractType
             ->add('last_name')
             ->add('suffix')
             ->add('gender')
-            ->add('birthday', DateType::class)
+            ->add('birthday', DateType::class, [
+                'invalid_message' => 'Please enter a valid date birthday: Y-m-d',
+                'widget' => 'single_text',
+                'format' => 'Y-m-d',
+            ])
             ->add('address')
             ->add('address2')
             ->add('city')
             ->add('state')
-            ->add('zip')
-            ->add('email', EmailType::class)
+            ->add('zip', IntegerType::class, [
+                'invalid_message' => 'Please enter a valid integer postal code'
+            ])
+            ->add('email', EmailType::class, [
+                'invalid_message' => 'Please enter a valid email address'
+            ])
             ->add('phone')
             ->add('body')
             ->add('status', IntegerType::class, [

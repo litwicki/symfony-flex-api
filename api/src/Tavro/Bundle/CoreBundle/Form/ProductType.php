@@ -7,6 +7,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Symfony\Component\Form\Extension\Core\Type\MoneyType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
@@ -24,8 +25,12 @@ class ProductType extends AbstractType
             ->add('status', IntegerType::class, [
                 'invalid_message' => 'Invalid status, only 0, 1, 2 allowed'
             ])
-            ->add('cost')
-            ->add('price')
+            ->add('cost', MoneyType::class, [
+                'invalid_message' => 'Invalid `cost` please enter a valid number'
+            ])
+            ->add('price', MoneyType::class, [
+                'invalid_message' => 'Invalid `price` please enter a valid number'
+            ])
             ->add('category', EntityType::class, [
                 'class' => 'TavroCoreBundle:ProductCategory',
                 'choice_label' => 'Category',

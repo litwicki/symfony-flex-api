@@ -7,6 +7,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Symfony\Component\Form\Extension\Core\Type\MoneyType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 
@@ -20,7 +21,9 @@ class ExpenseType extends AbstractType
     {
         $builder
             ->add('body')
-            ->add('amount')
+            ->add('amount', MoneyType::class, [
+                'invalid_message' => 'Invalid `amount` value, please enter a valid dollar amount'
+            ])
             ->add('status', IntegerType::class, [
                 'invalid_message' => 'Invalid status, only 0, 1, 2 allowed'
             ])

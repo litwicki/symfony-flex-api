@@ -26,7 +26,9 @@ class NodeType extends AbstractType
                 'widget' => 'single_text',
                 'format' => 'Y-m-d h:i:s',
             ])
-            ->add('views')
+            ->add('views', IntegerType::class, [
+                'invalid_message' => 'Views must be a valid integer'
+            ])
             ->add('title')
             ->add('status', IntegerType::class, [
                 'invalid_message' => 'Invalid status, only 0, 1, 2 allowed'

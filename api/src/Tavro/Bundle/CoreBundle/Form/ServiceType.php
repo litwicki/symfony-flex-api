@@ -6,6 +6,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Form\Extension\Core\Type\MoneyType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 
 class ServiceType extends AbstractType
@@ -19,7 +20,9 @@ class ServiceType extends AbstractType
         $builder
             ->add('body')
             ->add('title')
-            ->add('price')
+            ->add('price', MoneyType::class, [
+                'invalid_message' => 'Invalid `price` please enter a valid number'
+            ])
             ->add('type')
             ->add('status', IntegerType::class, [
                 'invalid_message' => 'Invalid status, only 0, 1, 2 allowed'
@@ -29,10 +32,10 @@ class ServiceType extends AbstractType
                 'choice_label' => 'Organization',
                 'invalid_message' => 'Please enter a valid Service Category'
             ])
-            ->add('organization', EntityType::class, [
-                'class' => 'TavroCoreBundle:Organization',
-                'choice_label' => 'Organization',
-                'invalid_message' => 'Please enter a valid Organization'
+            ->add('account', EntityType::class, [
+                'class' => 'TavroCoreBundle:Account',
+                'choice_label' => 'Account',
+                'invalid_message' => 'Please enter a valid Account'
             ])
         ;
     }
