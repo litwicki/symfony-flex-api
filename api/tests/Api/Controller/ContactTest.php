@@ -39,7 +39,8 @@ class ContactTest extends TavroTest
         $data = array(
             'name' => 'Contact Name',
             'body' => 'Contact body description.',
-            'user' => 1
+            'user' => 1,
+            'organization' => 1
         );
 
         $url = 'http://api.tavro.dev/api/v1/contacts';

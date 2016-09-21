@@ -21,11 +21,13 @@ class RevenueTagType extends AbstractType
             ->add('status')
             ->add('tag', EntityType::class, array(
                 'class' => 'TavroCoreBundle:Tag',
-                'choice_label' => 'Tag'
+                'choice_label' => 'Tag',
+                'invalid_message' => 'Please enter a valid Tag for this Revenue'
             ))
             ->add('revenue', EntityType::class, array(
                 'class' => 'TavroCoreBundle:Revenue',
-                'choice_label' => 'Revenue'
+                'choice_label' => 'Revenue',
+                'invalid_message' => 'Please enter a valid Revenue for this Revenue Tag'
             ))
             ->add('submit', SubmitType::class)
         ;

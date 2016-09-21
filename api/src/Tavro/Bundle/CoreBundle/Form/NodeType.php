@@ -33,10 +33,10 @@ class NodeType extends AbstractType
                 'choice_label' => 'User',
                 'invalid_message' => 'Please enter a valid User',
             ))
-            ->add('organization', EntityType::class, array(
-                'class' => 'TavroCoreBundle:Organization',
-                'choice_label' => 'Organization',
-                'invalid_message' => 'Please enter a valid Organization'
+            ->add('account', EntityType::class, array(
+                'class' => 'TavroCoreBundle:Account',
+                'choice_label' => 'Account',
+                'invalid_message' => 'Please enter a valid Account'
             ))
             ->add('submit', SubmitType::class)
         ;

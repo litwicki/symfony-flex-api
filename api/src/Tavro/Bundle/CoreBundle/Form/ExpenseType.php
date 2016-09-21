@@ -22,21 +22,24 @@ class ExpenseType extends AbstractType
             ->add('amount')
             ->add('status')
             ->add('expense_date', DateTimeType::class, array(
-                'invalid_message' => 'Please enter a valid date with time for expense date:  Y-m-d h:i:s',
+                'invalid_message' => 'Please enter a valid expense date:  Y-m-d',
                 'widget' => 'single_text',
-                'format' => 'Y-m-d h:i:s',
+                'format' => 'Y-m-d',
             ))
             ->add('category', EntityType::class, array(
                 'class' => 'TavroCoreBundle:ExpenseCategory',
-                'choice_label' => 'Category'
+                'choice_label' => 'Category',
+                'invalid_message' => 'Please enter a valid Expense Category'
             ))
             ->add('user', EntityType::class, array(
                 'class' => 'TavroCoreBundle:User',
-                'choice_label' => 'User'
+                'choice_label' => 'User',
+                'invalid_message' => 'Please enter a valid User'
             ))
-            ->add('organization', EntityType::class, array(
-                'class' => 'TavroCoreBundle:Organization',
-                'choice_label' => 'Organization'
+            ->add('account', EntityType::class, array(
+                'class' => 'TavroCoreBundle:Account',
+                'choice_label' => 'Account',
+                'invalid_message' => 'Please enter a valid Account'
             ))
             ->add('submit', SubmitType::class)
         ;

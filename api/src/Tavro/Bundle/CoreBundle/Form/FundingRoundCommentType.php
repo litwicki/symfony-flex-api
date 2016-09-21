@@ -21,11 +21,13 @@ class FundingCommentType extends AbstractType
             ->add('status')
             ->add('comment', EntityType::class, array(
                 'class' => 'TavroCoreBundle:Comment',
-                'choice_label' => 'Comment'
+                'choice_label' => 'Comment',
+                'invalid_message' => 'Please enter a valid Comment for this Funding Round'
             ))
             ->add('funding', EntityType::class, array(
                 'class' => 'TavroCoreBundle:Funding',
-                'choice_label' => 'Funding'
+                'choice_label' => 'Funding',
+                'invalid_message' => 'Please enter a valid Funding Round to comment on'
             ))
             ->add('submit', SubmitType::class)
         ;

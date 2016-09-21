@@ -21,11 +21,13 @@ class NodeTagType extends AbstractType
             ->add('status')
             ->add('tag', EntityType::class, array(
                 'class' => 'TavroCoreBundle:Tag',
-                'choice_label' => 'Tag'
+                'choice_label' => 'Tag',
+                'invalid_message' => 'Please enter a valid Tag for this Node'
             ))
             ->add('node', EntityType::class, array(
                 'class' => 'TavroCoreBundle:Node',
-                'choice_label' => 'Node'
+                'choice_label' => 'Node',
+                'invalid_message' => 'Please enter a valid Node for this Tag'
             ))
             ->add('submit', SubmitType::class)
         ;

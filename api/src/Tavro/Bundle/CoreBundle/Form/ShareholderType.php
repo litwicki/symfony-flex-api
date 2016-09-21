@@ -20,7 +20,8 @@ class ShareholderType extends AbstractType
             ->add('status')
             ->add('person', EntityType::class, array(
                 'class' => 'TavroCoreBundle:Person',
-                'choice_label' => 'Person'
+                'choice_label' => 'Person',
+                'invalid_message' => 'Please enter a valid Person'
             ))
         ;
     }

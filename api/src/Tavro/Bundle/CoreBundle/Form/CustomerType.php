@@ -22,17 +22,20 @@ class CustomerType extends AbstractType
             ->add('status')
             ->add('user', EntityType::class, array(
                 'class' => 'TavroCoreBundle:User',
-                'choice_label' => 'User'
+                'choice_label' => 'User',
+                'invalid_message' => 'Please enter a valid User'
             ))
             ->add('person', EntityType::class, array(
                 'class' => 'TavroCoreBundle:Person',
                 'choice_label' => 'Person',
-                'required' => true
+                'required' => true,
+                'invalid_message' => 'Please enter a valid Person'
             ))
             ->add('organization', EntityType::class, array(
                 'class' => 'TavroCoreBundle:Organization',
                 'choice_label' => 'Organization',
-                'required' => true
+                'required' => true,
+                'invalid_message' => 'Please enter a valid Organization'
             ))
             ->add('submit', SubmitType::class)
         ;

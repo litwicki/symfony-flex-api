@@ -56,21 +56,12 @@ class AccountTest extends TavroTest
 
         $json = $response->getBody(true);
         $body = json_decode($json, true);
-        var_dump($body);
-        die(__METHOD__);
         $this->assertEquals(200, $response->getStatusCode());
 
     }
 
     public function testAccountCreateBadUser()
     {
-        // create our http client (Guzzle)
-        $client = new Client('http://api.tavro.dev/api/v1', array(
-            'request.options' => array(
-                'exceptions' => false,
-            )
-        ));
-
         $token = $this->authorize();
 
         $faker = \Faker\Factory::create('en_EN');
@@ -95,6 +86,7 @@ class AccountTest extends TavroTest
 
         $json = $response->getBody(true);
         $body = json_decode($json, true);
+        var_dump($body);die();
 
         $this->assertEquals(500, $response->getStatusCode());
         $this->assertEquals(1, preg_match('/Please enter a valid User/', $body['message']));

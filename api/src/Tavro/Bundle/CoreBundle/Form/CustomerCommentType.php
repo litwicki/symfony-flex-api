@@ -21,11 +21,13 @@ class OrganizationCommentType extends AbstractType
             ->add('status')
             ->add('comment', EntityType::class, array(
                 'class' => 'TavroCoreBundle:Comment',
-                'choice_label' => 'Comment'
+                'choice_label' => 'Comment',
+                'invalid_message' => 'Please enter a valid Comment'
             ))
             ->add('customer', EntityType::class, array(
                 'class' => 'TavroCoreBundle:Customer',
-                'choice_label' => 'Customer'
+                'choice_label' => 'Customer',
+                'invalid_message' => 'Please enter a valid Customer'
             ))
             ->add('submit', SubmitType::class)
         ;

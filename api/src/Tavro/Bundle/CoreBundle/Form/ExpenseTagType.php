@@ -21,11 +21,13 @@ class ExpenseTagType extends AbstractType
             ->add('status')
             ->add('tag', EntityType::class, array(
                 'class' => 'TavroCoreBundle:Tag',
-                'choice_label' => 'Tag'
+                'choice_label' => 'Tag',
+                'invalid_message' => 'Please enter a valid Tag'
             ))
             ->add('expense', EntityType::class, array(
                 'class' => 'TavroCoreBundle:Expense',
-                'choice_label' => 'Expense'
+                'choice_label' => 'Expense',
+                'invalid_message' => 'Please enter a valid Expense to tag'
             ))
             ->add('submit', SubmitType::class)
         ;

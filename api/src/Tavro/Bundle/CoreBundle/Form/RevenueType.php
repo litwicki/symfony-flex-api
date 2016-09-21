@@ -22,29 +22,35 @@ class RevenueType extends AbstractType
             ->add('type')
             ->add('category', EntityType::class, array(
                 'class' => 'TavroCoreBundle:RevenueCategory',
-                'choice_label' => 'Category'
+                'choice_label' => 'Category',
+                'invalid_message' => 'Please enter a valid Revenue Category'
             ))
             ->add('user', EntityType::class, array(
                 'class' => 'TavroCoreBundle:User',
-                'choice_label' => 'User'
+                'choice_label' => 'User',
+                'invalid_message' => 'Please enter a valid User'
             ))
             ->add('customer', EntityType::class, array(
                 'class' => 'TavroCoreBundle:Customer',
-                'choice_label' => 'Customer'
+                'choice_label' => 'Customer',
+                'invalid_message' => 'Please enter a valid Customer'
             ))
-            ->add('organization', EntityType::class, array(
-                'class' => 'TavroCoreBundle:Organization',
-                'choice_label' => 'Organization'
+            ->add('account', EntityType::class, array(
+                'class' => 'TavroCoreBundle:Account',
+                'choice_label' => 'Account',
+                'invalid_message' => 'Please enter a valid Account'
             ))
             ->add('services', EntityType::class, array(
                 'class' => 'TavroCoreBundle:Service',
                 'choice_label' => 'Services',
+                'invalid_message' => 'Please enter a valid Service for this Revenue',
                 'multiple' => true,
                 'mapped' => false
             ))
             ->add('products', EntityType::class, array(
                 'class' => 'TavroCoreBundle:Product',
                 'choice_label' => 'Products',
+                'invalid_message' => 'Please enter a valid Product for this Revenue',
                 'multiple' => true,
                 'mapped' => false
             ))

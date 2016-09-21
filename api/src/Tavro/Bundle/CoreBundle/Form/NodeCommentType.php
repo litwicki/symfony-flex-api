@@ -21,11 +21,13 @@ class NodeCommentType extends AbstractType
             ->add('status')
             ->add('comment', EntityType::class, array(
                 'class' => 'TavroCoreBundle:Comment',
-                'choice_label' => 'Comment'
+                'choice_label' => 'Comment',
+                'invalid_message' => 'Please enter a valid Comment for this Node'
             ))
             ->add('node', EntityType::class, array(
                 'class' => 'TavroCoreBundle:Node',
-                'choice_label' => 'Node'
+                'choice_label' => 'Node',
+                'invalid_message' => 'Please enter a valid Node  for this Comment'
             ))
             ->add('submit', SubmitType::class)
         ;

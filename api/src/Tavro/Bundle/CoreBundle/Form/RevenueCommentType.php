@@ -21,11 +21,13 @@ class RevenueCommentType extends AbstractType
             ->add('status')
             ->add('comment', EntityType::class, array(
                 'class' => 'TavroCoreBundle:Comment',
-                'choice_label' => 'Comment'
+                'choice_label' => 'Comment',
+                'invalid_message' => 'Please enter a valid Comment for this Revenue'
             ))
             ->add('revenue', EntityType::class, array(
                 'class' => 'TavroCoreBundle:Revenue',
-                'choice_label' => 'Revenue'
+                'choice_label' => 'Revenue',
+                'invalid_message' => 'Please enter a valid Revenue for this Comment'
             ))
             ->add('submit', SubmitType::class)
         ;

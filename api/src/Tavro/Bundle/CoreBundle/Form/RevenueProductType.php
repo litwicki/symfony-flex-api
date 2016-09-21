@@ -22,11 +22,13 @@ class RevenueProductType extends AbstractType
             ->add('status')
             ->add('product', EntityType::class, array(
                 'class' => 'TavroCoreBundle:Product',
-                'choice_label' => 'Product'
+                'choice_label' => 'Product',
+                'invalid_message' => 'Please enter a valid Product for this Revenue Product'
             ))
             ->add('revenue', EntityType::class, array(
                 'class' => 'TavroCoreBundle:Revenue',
-                'choice_label' => 'Revenue'
+                'choice_label' => 'Revenue',
+                'invalid_message' => 'Please enter a valid Revenue for this Revenue Product'
             ))
             ->add('submit', SubmitType::class)
         ;

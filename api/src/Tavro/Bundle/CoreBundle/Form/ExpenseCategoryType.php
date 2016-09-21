@@ -22,13 +22,15 @@ class ExpenseCategoryType extends AbstractType
             ->add('body')
             ->add('title')
             ->add('status')
-            ->add('organization', EntityType::class, array(
-                'class' => 'TavroCoreBundle:Organization',
-                'choice_label' => 'Organization'
+            ->add('account', EntityType::class, array(
+                'class' => 'TavroCoreBundle:Account',
+                'choice_label' => 'Account',
+                'invalid_message' => 'Please enter a valid Account'
             ))
             ->add('updated_by', EntityType::class, array(
                 'class' => 'TavroCoreBundle:User',
-                'choice_label' => 'User'
+                'choice_label' => 'User',
+                'invalid_message' => 'Please enter a valid User'
             ))
             ->add('submit', SubmitType::class)
         ;

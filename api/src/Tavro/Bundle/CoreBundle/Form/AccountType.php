@@ -22,11 +22,10 @@ class AccountType extends AbstractType
             ->add('name_clean')
             ->add('body')
             ->add('status')
-            ->add('create_date', DateTimeType::class)
-            ->add('update_date', DateTimeType::class)
             ->add('user', EntityType::class, array(
                 'class' => 'TavroCoreBundle:User',
-                'choice_label' => 'User'
+                'choice_label' => 'User',
+                'invalid_message' => 'Please enter a valid User'
             ))
             ->add('submit', SubmitType::class)
         ;

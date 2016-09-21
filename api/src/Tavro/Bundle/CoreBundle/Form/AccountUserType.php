@@ -20,15 +20,15 @@ class AccountUserType extends AbstractType
         $builder
             ->add('body')
             ->add('status')
-            ->add('create_date', DateTimeType::class)
-            ->add('update_date', DateTimeType::class)
             ->add('user', EntityType::class, array(
                 'class' => 'TavroCoreBundle:User',
-                'choice_label' => 'User'
+                'choice_label' => 'User',
+                'invalid_message' => 'Please enter a valid User'
             ))
             ->add('account', EntityType::class, array(
                 'class' => 'TavroCoreBundle:Account',
-                'choice_label' => 'Account'
+                'choice_label' => 'Account',
+                'invalid_message' => 'Please enter a valid Account'
             ))
             ->add('submit', SubmitType::class)
         ;

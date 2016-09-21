@@ -21,11 +21,13 @@ class RevenueServiceType extends AbstractType
             ->add('status')
             ->add('service', EntityType::class, array(
                 'class' => 'TavroCoreBundle:Service',
-                'choice_label' => 'Service'
+                'choice_label' => 'Service',
+                'invalid_message' => 'Please enter a valid Service for this Revenue Service'
             ))
             ->add('revenue', EntityType::class, array(
                 'class' => 'TavroCoreBundle:Revenue',
-                'choice_label' => 'Revenue'
+                'choice_label' => 'Revenue',
+                'invalid_message' => 'Please enter a valid Revenue for this Revenue Service'
             ))
             ->add('submit', SubmitType::class)
         ;

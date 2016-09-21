@@ -23,7 +23,8 @@ class RoleType extends AbstractType
             ->add('status')
             ->add('users', EntityType::class, array(
                 'class' => 'TavroCoreBundle:User',
-                'choice_label' => 'User'
+                'choice_label' => 'User',
+                'invalid_message' => 'Please enter a valid User'
             ))
             ->add('submit', SubmitType::class)
         ;

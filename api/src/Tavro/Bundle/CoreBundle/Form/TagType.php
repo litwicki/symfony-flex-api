@@ -20,9 +20,10 @@ class TagType extends AbstractType
         $builder
             ->add('tag')
             ->add('status')
-            ->add('organization', EntityType::class, array(
-                'class' => 'TavroCoreBundle:Organization',
-                'choice_label' => 'Organization'
+            ->add('account', EntityType::class, array(
+                'class' => 'TavroCoreBundle:Account',
+                'choice_label' => 'Account',
+                'invalid_message' => 'Please enter a valid Account'
             ))
             ->add('submit', SubmitType::class)
         ;

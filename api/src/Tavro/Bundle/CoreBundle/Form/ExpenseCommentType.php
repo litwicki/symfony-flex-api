@@ -21,11 +21,13 @@ class ExpenseCommentType extends AbstractType
             ->add('status')
             ->add('comment', EntityType::class, array(
                 'class' => 'TavroCoreBundle:Comment',
-                'choice_label' => 'Comment'
+                'choice_label' => 'Comment',
+                'invalid_message' => 'Please enter a valid Comment'
             ))
             ->add('expense', EntityType::class, array(
                 'class' => 'TavroCoreBundle:Expense',
-                'choice_label' => 'Expense'
+                'choice_label' => 'Expense',
+                'invalid_message' => 'Please enter a valid Expense'
             ))
             ->add('submit', SubmitType::class)
         ;
