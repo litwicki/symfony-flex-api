@@ -28,7 +28,7 @@ class AccountType extends AbstractType
             ->add('user', EntityType::class, [
                 'class' => 'TavroCoreBundle:User',
                 'choice_label' => 'User',
-                'invalid_message' => 'Please enter a valid User'
+                'invalid_message' => 'Please enter a valid User for this Account'
             ])
             ->add('submit', SubmitType::class)
         ;
