@@ -28,10 +28,6 @@ class Revenue extends AccountEntity implements AccountEntityInterface
 {
     /**
      * @ORM\Column(type="string", nullable=FALSE)
-     * @Assert\Choice(
-     *      choices = { "sale", "service", "other"},
-     *      message = "Choose a valid Revenue type."
-     * )
      * @Groups({"api", "detail", "simple"})
      */
     protected $type;

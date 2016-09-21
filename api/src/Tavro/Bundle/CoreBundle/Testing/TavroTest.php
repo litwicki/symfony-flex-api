@@ -6,13 +6,6 @@ class TavroTest extends \PHPUnit_Framework_TestCase
 {
     public function authorize($username = 'tavrobot', $password = 'Password1!')
     {
-
-//        $cookieName = 'tavro_phpunit_jwt';
-//
-//        if(isset($_COOKIE[$cookieName])) {
-//           return $_COOKIE[$cookieName];
-//        }
-
         $client = new Client('http://api.tavro.dev/api/v1', array(
             'request.options' => array(
                 'exceptions' => FALSE,
@@ -32,9 +25,7 @@ class TavroTest extends \PHPUnit_Framework_TestCase
         $body = json_decode($json, TRUE);
 
         if(isset($body['token'])) {
-            $token = $body['token'];
-            //setcookie($cookieName, $token, 360, '/', 'api.tavro.dev', FALSE, TRUE);
-            return $token;
+            return $body['token'];
         }
 
         return FALSE;

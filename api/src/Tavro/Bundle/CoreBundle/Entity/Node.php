@@ -35,10 +35,6 @@ class Node extends AccountEntity implements AccountEntityInterface
 
     /**
      * @ORM\Column(type="string", nullable=TRUE)
-     * @Assert\Choice(
-     *      choices = { "guide", "node", "page", "article", "wiki"},
-     *      message = "Choose a valid node type."
-     * )
      * @Groups({"api", "detail", "simple"})
      */
     protected $type;

@@ -41,10 +41,6 @@ class Service extends AccountEntity implements AccountEntityInterface
 
     /**
      * @ORM\Column(type="string", nullable=FALSE)
-     * @Assert\Choice(
-     *      choices = {"hour", "unit", "retainer"},
-     *      message = "Choose a valid service type."
-     * )
      * @Groups({"api", "detail", "simple"})
      */
     protected $type;

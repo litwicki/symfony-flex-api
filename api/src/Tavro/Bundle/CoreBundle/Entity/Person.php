@@ -61,10 +61,6 @@ class Person extends Entity implements EntityInterface
 
     /**
      * @ORM\Column(type="string", length=32, nullable=TRUE)
-     * @Assert\Choice(
-     *      choices = { "male", "female", "other", "robot" },
-     *      message = "Choose a valid gender."
-     * )
      * @Groups({"api", "detail", "simple"})
      * @Accessor(getter="getGender", setter="setGender")
      * @MaxDepth(1)

@@ -3,10 +3,10 @@
 use Guzzle\Http\Client;
 use Tavro\Bundle\CoreBundle\Testing\TavroTest;
 
-class AccountTest extends TavroTest
+class AccountGroupTest extends TavroTest
 {
 
-    public function testAccountRoute()
+    public function testAccountGroupRoute()
     {
         $client = new Client('http://api.tavro.dev/api/v1', array(
             'request.options' => array(
@@ -16,7 +16,7 @@ class AccountTest extends TavroTest
 
         $token = $this->authorize();
 
-        $url = 'http://api.tavro.dev/api/v1/accounts';
+        $url = 'http://api.tavro.dev/api/v1/accounts/1/groups';
 
         $request = $client->get($url);
         $request->addHeader('Authorization', sprintf('Bearer %s', $token));
@@ -29,7 +29,7 @@ class AccountTest extends TavroTest
 
     }
 
-    public function testAccountCreate()
+    public function testAccountGroupCreate()
     {
 
         $token = $this->authorize();
@@ -38,11 +38,9 @@ class AccountTest extends TavroTest
 
         $data = array(
             'name' => $faker->company,
-            'body' => $faker->text(rand(100,1000)),
-            'user' => 1
         );
 
-        $url = 'http://api.tavro.dev/api/v1/accounts';
+        $url = 'http://api.tavro.dev/api/v1/accounts/1/groups';
 
         $client = new Client($url, array(
             'request.options' => array(
@@ -56,41 +54,7 @@ class AccountTest extends TavroTest
 
         $json = $response->getBody(true);
         $body = json_decode($json, true);
-        var_dump($body);
-        die(__METHOD__);
         $this->assertEquals(200, $response->getStatusCode());
-
-    }
-
-    public function testAccountCreateBadUser()
-    {
-        $token = $this->authorize();
-
-        $faker = \Faker\Factory::create('en_EN');
-
-        $data = array(
-            'name' => $faker->company,
-            'body' => $faker->text(rand(100,1000)),
-            'user' => -1,
-        );
-
-        $url = 'http://api.tavro.dev/api/v1/accounts';
-
-        $client = new Client($url, array(
-            'request.options' => array(
-                'exceptions' => false,
-            )
-        ));
-
-        $request = $client->post($url, null, json_encode($data));
-        $request->addHeader('Authorization', sprintf('Bearer %s', $token));
-        $response = $request->send();
-
-        $json = $response->getBody(true);
-        $body = json_decode($json, true);
-
-        $this->assertEquals(500, $response->getStatusCode());
-        $this->assertEquals(1, preg_match('/Please enter a valid User/', $body['message']));
 
     }
 
