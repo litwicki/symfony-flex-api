@@ -3,8 +3,10 @@
 namespace Tavro\Bundle\CoreBundle\Handler;
 
 use Gaufrette\Adapter\AwsS3;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
+
 use Tavro\Bundle\CoreBundle\Exception\Api\ApiException;
-use Tavro\Bundle\CoreBundle\Model\EntityHandler;
+use Tavro\Bundle\CoreBundle\Model\S3EntityHandler;
 use Tavro\Bundle\CoreBundle\Exception\Form\InvalidFormException;
 use Tavro\Bundle\CoreBundle\Model\EntityInterface;
 use Tavro\Bundle\CoreBundle\Exception\Api\ApiAccessDeniedException;
@@ -25,44 +27,8 @@ use Symfony\Component\HttpFoundation\Request;
  *
  * @package Tavro\Bundle\CoreBundle\Handler
  */
-class ImageHandler extends EntityHandler
+class ImageHandler extends S3EntityHandler
 {
-    /**
-     * @return mixed
-     */
-    public function getBucket()
-    {
-        return $this->container->getParameter('image_bucket');
-    }
-
-    /**
-     * Build the fully qualified URL to the image.
-     *
-     * @param $filename
-     * @param $directory
-     */
-    public function buildUrl($filename, $directory)
-    {
-        if($directory == '') {
-
-            $url = sprintf('%s/%s/%s',
-                $this->container->getParameter('amazon_s3_url'),
-                $this->getBucket(),
-                $filename
-            );
-
-        }
-        else {
-
-            $url = sprintf('%s/%s/%s',
-                $this->container->getParameter('amazon_s3_url'),
-                $this->getBucket(),
-                $directory,
-                $filename
-            );
-
-        }
-    }
 
     /**
      * @param \Symfony\Component\HttpFoundation\Request $request
@@ -198,76 +164,6 @@ class ImageHandler extends EntityHandler
         }
         catch(\Exception $e) {
             throw new ApiException($e->getMessage());
-        }
-    }
-
-    /**
-     * @param \Tavro\Bundle\CoreBundle\Model\EntityInterface $entity
-     * @param array $parameters
-     * @param array|string $method
-     *
-     * @return mixed|\Tavro\Bundle\CoreBundle\Model\EntityInterface
-     * @throws \Exception
-     */
-    public function processForm(EntityInterface $entity, array $parameters, $method = self::HTTP_METHOD_POST)
-    {
-        try {
-
-            $formType = $this->mapEntityToForm($this->entityClass);
-
-            $form = $this->formFactory->create($formType, $entity, array('method' => $method));
-
-            $form->submit($parameters);
-
-            if ($form->isValid()) {
-
-                $entity = $form->getData();
-                //$entity = $this->updateCache($entity);
-
-                $this->om->persist($entity);
-                $this->om->flush($entity);
-
-                return $entity;
-            }
-            else {
-                $errors = (string) $form->getErrors(true, false);
-                throw new ApiException($errors);
-            }
-
-        }
-        catch(TransformationFailedException $e) {
-            throw $e;
-        }
-        catch(UnexpectedTypeException $e) {
-            throw $e;
-        }
-        catch(InvalidPropertyPathException $e) {
-            throw $e;
-        }
-        catch(\Exception $e) {
-            throw $e;
-        }
-    }
-
-    /**
-     * @param \Tavro\Bundle\CoreBundle\Entity\Image $image
-     * @param \Tavro\Bundle\CoreBundle\Entity\Mod $mod
-     *
-     * @throws \Exception
-     */
-    public function addMod(Image $image, Mod $mod)
-    {
-        try {
-
-            $mi = new ModImage();
-            $mi->setImage($image);
-            $mi->setMod($mod);
-            $this->om->persist($mi);
-            $this->om->flush();
-
-        }
-        catch(\Exception $e) {
-            throw $e;
         }
     }
 

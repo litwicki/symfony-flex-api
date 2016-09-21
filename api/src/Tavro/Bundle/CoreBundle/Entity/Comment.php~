@@ -68,8 +68,6 @@ class Comment extends Entity implements EntityInterface
         $this->revenue_comments = new \Doctrine\Common\Collections\ArrayCollection();
         $this->organization_comments = new \Doctrine\Common\Collections\ArrayCollection();
         $this->funding_round_comments = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->status = 1;
-        $this->create_date = new \DateTime();
     }
 
     public function __toString()

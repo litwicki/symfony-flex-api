@@ -31,7 +31,7 @@ class Product extends AccountEntity implements AccountEntityInterface
      * @ORM\Column(type="string", length=255, nullable=FALSE)
      * @Groups({"api", "detail", "simple"})
      */
-    protected $title;
+    protected $name;
 
     /**
      * @ORM\Column(type="float", nullable=FALSE, options={"default" = 0})
@@ -63,21 +63,9 @@ class Product extends AccountEntity implements AccountEntityInterface
      */
     protected $revenue_products;
 
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->status = 1;
-        $now = new \DateTime();
-        $tz = new \DateTimeZone('America/New_York');
-        $now->setTimezone($tz);
-        $this->create_date = $now;
-    }
-
     public function __toString()
     {
-        return $this->title;
+        return $this->name;
     }
 
     /**
@@ -104,26 +92,26 @@ class Product extends AccountEntity implements AccountEntityInterface
     }
 
     /**
-     * Set title
+     * Set name
      *
-     * @param string $title
+     * @param string $name
      * @return Product
      */
-    public function setTitle($title)
+    public function setName($name)
     {
-        $this->title = $title;
+        $this->name = $name;
 
         return $this;
     }
 
     /**
-     * Get title
+     * Get name
      *
      * @return string
      */
-    public function getTitle()
+    public function getName()
     {
-        return $this->title;
+        return $this->name;
     }
 
     /**

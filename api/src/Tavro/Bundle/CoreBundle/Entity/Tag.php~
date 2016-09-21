@@ -27,7 +27,7 @@ use Tavro\Bundle\CoreBundle\Model\AccountEntityInterface;
 class Tag extends AccountEntity implements AccountEntityInterface
 {
     /**
-     * @ORM\Column(type="string", length=500, nullable=FALSE)
+     * @ORM\Column(type="string", length=30, nullable=FALSE)
      * @Groups({"api", "detail", "simple", "typeahead"})
      */
     protected $tag;

@@ -81,7 +81,6 @@ class Expense extends AccountEntity implements AccountEntityInterface
         $this->expense_tags = new \Doctrine\Common\Collections\ArrayCollection();;
         $this->expense_comments = new \Doctrine\Common\Collections\ArrayCollection();
         $this->expense_date = new \DateTime();
-        $this->status = self::STATUS_ENABLED;
     }
 
 

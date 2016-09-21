@@ -78,12 +78,11 @@ class Revenue extends AccountEntity implements AccountEntityInterface
         $this->revenue_comments = new \Doctrine\Common\Collections\ArrayCollection();
         $this->revenue_services = new \Doctrine\Common\Collections\ArrayCollection();
         $this->revenue_products = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->status = self::STATUS_ENABLED;
     }
 
     public function __toString()
     {
-        return $this->title;
+        return $this->name;
     }
 
     /**

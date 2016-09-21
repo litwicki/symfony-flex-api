@@ -31,7 +31,7 @@ class Service extends AccountEntity implements AccountEntityInterface
      * @ORM\Column(type="string", length=255, nullable=FALSE)
      * @Groups({"api", "detail", "simple"})
      */
-    protected $title;
+    protected $name;
 
     /**
      * @ORM\Column(type="float", nullable=FALSE, options={"default" = 0})
@@ -242,26 +242,26 @@ class Service extends AccountEntity implements AccountEntityInterface
     }
 
     /**
-     * Set title
+     * Set name
      *
-     * @param string $title
+     * @param string $name
      *
      * @return Service
      */
-    public function setTitle($title)
+    public function setName($name)
     {
-        $this->title = $title;
+        $this->name = $name;
 
         return $this;
     }
 
     /**
-     * Get title
+     * Get name
      *
      * @return string
      */
-    public function getTitle()
+    public function getName()
     {
-        return $this->title;
+        return $this->name;
     }
 }

@@ -1,0 +1,296 @@
+Tavro\Bundle\CoreBundle\Entity\Account:
+    properties:
+        name:
+            - Regex:
+                pattern: '/[A-Za-z0-9-]/'
+                match:   true
+                message: Account name may only contain numbers, letters, spaces, and dashes
+
+Tavro\Bundle\CoreBundle\Entity\AccountGroup:
+    properties:
+        name:
+            - Regex:
+                pattern: '/[A-Za-z0-9\s\-]/'
+                match:   true
+                message: Account Group name may only contain numbers, letters, spaces, and dashes
+
+Tavro\Bundle\CoreBundle\Entity\Contact:
+    properties:
+        phone:
+            - Regex:
+                pattern: '/^(?:(?:\+?1\s*(?:[.-]\s*)?)?(?:\(\s*([2-9]1[02-9]|[2-9][02-8]1|[2-9][02-8][02-9])\s*\)|([2-9]1[02-9]|[2-9][02-8]1|[2-9][02-8][02-9]))\s*(?:[.-]\s*)?)?([2-9]1[02-9]|[2-9][02-9]1|[2-9][02-9]{2})\s*(?:[.-]\s*)?([0-9]{4})(?:\s*(?:#|x\.?|ext\.?|extension)\s*(\d+))?$/'
+                match:   true
+                message: Phone number must match accepted format
+        email:
+            - Regex:
+                pattern: '/^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/'
+                match: true
+                message: Please enter a valid RFC 5322 email address
+
+        job_title:
+            - Regex:
+                pattern: '/[A-Za-z0-9\s\-]/'
+                match: true
+                message: Job title may only contain numbers, letters, spaces, and dashes
+
+Tavro\Bundle\CoreBundle\Entity\Expense:
+    properties:
+        amount:
+            - Regex:
+                pattern: '/^(?:[1-9]\d*|0)?(?:\.\d+)?$/'
+                match: true
+                message: Expense amount must be a positive decimal number
+
+Tavro\Bundle\CoreBundle\Entity\File:
+    properties:
+        filesize:
+            - Regex:
+                pattern: '/[1-9][0-9]*/'
+                match: true
+                message: File Filesize must be a positive integer greater than zero
+        aws_url:
+            - Regex:
+                pattern: '/[A-Za-z0-9\s\-]/'
+                match: true
+                message: File AWS URL may only contain numbers, letters, spaces, and dashes
+        bucket:
+            - Regex:
+                pattern: '/[A-Za-z0-9\s\-]/'
+                match: true
+                message: File AWS Bucket may only contain numbers, letters, spaces, and dashes
+        directory:
+            - Regex:
+                pattern: '/[A-Za-z0-9\s\-]/'
+                match: true
+                message: File AWS Directory may only contain numbers, letters, spaces, and dashes
+        aws_key:
+            - Regex:
+                pattern: '/[A-Za-z0-9\s\-]/'
+                match: true
+                message: File AWS Key (filename) may only contain numbers, letters, spaces, and dashes
+        aws_url:
+            - Regex:
+                pattern: '/[A-Za-z0-9\s\-]/'
+                match: true
+                message: File AWS URL may only contain numbers, letters, spaces, and dashes
+
+Tavro\Bundle\CoreBundle\Entity\FundingRound:
+    properties:
+        share_price:
+            - Regex:
+                pattern: '/^(?:[1-9]\d*|0)?(?:\.\d+)?$/'
+                match: true
+                message: Share Price must be a positive decimal number
+        total_shares:
+            - Regex:
+                pattern: '/[1-9][0-9]*/'
+                match: true
+                message: Share Price must be a positive integer greater than zero
+
+Tavro\Bundle\CoreBundle\Entity\Image:
+    properties:
+        filesize:
+            - Regex:
+                pattern: '/[1-9][0-9]*/'
+                match: true
+                message: Image Filesize must be a positive integer greater than zero
+        aws_url:
+            - Regex:
+                pattern: '/[A-Za-z0-9\s\-]/'
+                match: true
+                message: Image AWS URL may only contain numbers, letters, spaces, and dashes
+        bucket:
+            - Regex:
+                pattern: '/[A-Za-z0-9\s\-]/'
+                match: true
+                message: Image AWS Bucket may only contain numbers, letters, spaces, and dashes
+        directory:
+            - Regex:
+                pattern: '/[A-Za-z0-9\s\-]/'
+                match: true
+                message: Image AWS Directory may only contain numbers, letters, spaces, and dashes
+        aws_key:
+            - Regex:
+                pattern: '/[A-Za-z0-9\s\-]/'
+                match: true
+                message: Image AWS Key (filename) may only contain numbers, letters, spaces, and dashes
+        aws_url:
+            - Regex:
+                pattern: '/[A-Za-z0-9\s\-]/'
+                match: true
+                message: Image AWS URL may only contain numbers, letters, spaces, and dashes
+
+Tavro\Bundle\CoreBundle\Entity\Node:
+    properties:
+        type:
+            - Regex:
+                pattern: '/^(node|press|article|wiki)*$/'
+                match: true
+                message: Node type must match: node, press, article, wiki
+        title:
+            - Regex:
+                pattern: '/[A-Za-z0-9\s\-]/'
+                match: true
+                message: Node title may only contain numbers, letters, spaces, and dashes
+        views:
+            - Regex:
+                pattern: '/[1-9][0-9]*/'
+                match: true
+                message: Node Views must be a positive integer greater than zero
+        aws_url:
+            - Regex:
+                pattern: '/[A-Za-z0-9\s\-]/'
+                match: true
+                message: Image AWS URL may only contain numbers, letters, spaces, and dashes
+
+Tavro\Bundle\CoreBundle\Entity\Organization:
+    properties:
+        name:
+            - Regex:
+                pattern: '/[A-Za-z0-9\s\-]/'
+                match: true
+                message: Organization name may only contain numbers, letters, spaces, and dashes
+        website:
+            - Regex:
+                pattern: '/^((http[s]?|ftp):\/)?\/?([^:\/\s]+)((\/\w+)*\/)([\w\-\.]+[^#?\s]+)(.*)?(#[\w\-]+)?$/'
+                match: true
+                message: Please enter a valid Organization website URL
+        hubspot_id:
+            - Regex:
+                pattern: '/[1-9][0-9]*/'
+                match: true
+                message: Node Views must be a positive integer greater than zero
+
+Tavro\Bundle\CoreBundle\Entity\Person:
+    properties:
+        first_name:
+            - Regex:
+                pattern: '/[A-Za-z]/'
+                match: true
+                message: First name may only contain letters
+        last_name:
+            - Regex:
+                pattern: '/[A-Za-z0-9]/'
+                match: true
+                message: Last name may only contain letters and digits
+        middle_name:
+            - Regex:
+                pattern: '/[A-Za-z]/'
+                match: true
+                message: First name may only contain letters
+        address:
+            - Regex:
+                pattern: '/[A-Za-z]/'
+                match: true
+                message: Address may only contain letters
+        address2:
+            - Regex:
+                pattern: '/[A-Za-z]/'
+                match: true
+                message: Address2 may only contain letters
+        city:
+            - Regex:
+                pattern: '/[A-Za-z]/'
+                match: true
+                message: City name may only contain letters
+        state:
+            - Regex:
+                pattern: '/(Alabama|Alaska|Arizona|Arkansas|California|Colorado|Connecticut|Delaware|Florida|Georgia|Hawaii|Idaho|Illinois|Indiana|Iowa|Kansas|Kentucky|Louisiana|Maine|Maryland|Massachusetts|Michigan|Minnesota|Mississippi|Missouri|Montana|Nebraska|Nevada|New\sHampshire|New\sJersey|New\sMexico|New\sYork|North\sCarolina|North\sDakota|Ohio|Oklahoma|Oregon|Pennsylvania|Rhode\sIsland|South\sCarolina|South\sDakota|Tennessee|Texas|Utah|Vermont|Virginia|Washington|West\sVirginia|Wisconsin|Wyoming)/'
+                match: true
+                message: Please enter the full proper state name
+        zip:
+            - Regex:
+                pattern: '/[1-9][0-9]*/'
+                match: true
+                message: Postal code (Zip) must be a positive integer greater than zero
+        phone:
+            - Regex:
+                pattern: '/^(?:(?:\+?1\s*(?:[.-]\s*)?)?(?:\(\s*([2-9]1[02-9]|[2-9][02-8]1|[2-9][02-8][02-9])\s*\)|([2-9]1[02-9]|[2-9][02-8]1|[2-9][02-8][02-9]))\s*(?:[.-]\s*)?)?([2-9]1[02-9]|[2-9][02-9]1|[2-9][02-9]{2})\s*(?:[.-]\s*)?([0-9]{4})(?:\s*(?:#|x\.?|ext\.?|extension)\s*(\d+))?$/'
+                match:   true
+                message: Phone number must match accepted format
+        email:
+            - Regex:
+                pattern: '/^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/'
+                match: true
+                message: Please enter a valid RFC 5322 email address
+
+Tavro\Bundle\CoreBundle\Entity\Product:
+    properties:
+        name:
+            - Regex:
+                pattern: '/[A-Za-z]/'
+                match: true
+                message: Product name may only contain letters
+        price:
+            - Regex:
+                pattern: '/^(?:[1-9]\d*|0)?(?:\.\d+)?$/'
+                match: true
+                message: Product Price must be a positive decimal number
+        cost:
+            - Regex:
+                pattern: '/^(?:[1-9]\d*|0)?(?:\.\d+)?$/'
+                match: true
+                message: Product Cost must be a positive decimal number
+
+Tavro\Bundle\CoreBundle\Entity\Revenue:
+    properties:
+        type:
+            - Regex:
+                pattern: '/^(subscription|service|sale|other)*$/'
+                match: true
+                message: Service type must match: subscription, service, sale, other
+
+Tavro\Bundle\CoreBundle\Entity\Role:
+    properties:
+        name:
+            - Regex:
+                pattern: '/^(subscription|service|sale|other)*$/'
+                match: true
+                message: Service type must match: subscription, service, sale, other
+        role:
+            - Regex:
+                pattern: '/^ROLE_[A-Z]+?$/'
+                match: true
+                message: Role must be capitalized and prefixed with ROLE_
+
+Tavro\Bundle\CoreBundle\Entity\Service:
+    properties:
+        name:
+            - Regex:
+                pattern: '/^(subscription|service|sale|other)*$/'
+                match: true
+                message: Service type must match: subscription, service, sale, other
+        price:
+            - Regex:
+                pattern: '/^(?:[1-9]\d*|0)?(?:\.\d+)?$/'
+                match: true
+                message: Service Price must be a positive decimal number
+        type:
+            - Regex:
+                pattern: '/^(hourly|retainer|fixed|other)*$/'
+                match: true
+                message: Service type must match: hourly, retainer, fixed, other
+
+Tavro\Bundle\CoreBundle\Entity\Tag:
+    properties:
+        tag:
+            - Regex:
+                pattern: '/[A-Za-z0-9\s\-]{,30}/'
+                match: true
+                message: Tag value must be less than 30 lowercase letters or digits only
+
+Tavro\Bundle\CoreBundle\Entity\User:
+    properties:
+        username:
+            - Regex:
+                pattern: '/[A-Za-z0-9\-_\s]/'
+                match: true
+                message: Username must be alphanumeric with spaces, hyphens and underscores only
+
+Tavro\Bundle\CoreBundle\Entity\Variable:
+    properties:
+        name:
+            - Regex:
+                pattern: '/[A-Za-z0-9\-]/'
+                match: true
+                message: Variables must be alphanumeric and hyphens only

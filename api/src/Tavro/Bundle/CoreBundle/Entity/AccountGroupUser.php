@@ -37,12 +37,6 @@ class AccountGroupUser extends Entity implements EntityInterface
      */
     protected $account_group;
 
-    public function __construct()
-    {
-        parent::__construct();
-        $this->create_date = new \DateTime();
-    }
-
     /**
      * Set user
      *
