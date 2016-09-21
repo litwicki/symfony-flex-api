@@ -21,7 +21,9 @@ class ContactType extends AbstractType
     {
         $builder
             ->add('job_title')
-            ->add('email', EmailType::class)
+            ->add('email', EmailType::class, [
+                'invalid_message' => 'Invalid email address'
+            ])
             ->add('phone')
             ->add('body')
             ->add('status', IntegerType::class, [

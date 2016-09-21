@@ -7,6 +7,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
@@ -24,7 +25,12 @@ class PersonType extends AbstractType
             ->add('middle_name')
             ->add('last_name')
             ->add('suffix')
-            ->add('gender')
+            ->add('gender', ChoiceType::class, [
+                'choices' => array(
+                    'male' => 'Male',
+                    'female' => 'Female'
+                ),
+            ])
             ->add('birthday', DateType::class, [
                 'invalid_message' => 'Please enter a valid date birthday: Y-m-d',
                 'widget' => 'single_text',
@@ -38,7 +44,7 @@ class PersonType extends AbstractType
                 'invalid_message' => 'Please enter a valid integer postal code'
             ])
             ->add('email', EmailType::class, [
-                'invalid_message' => 'Please enter a valid email address'
+                'invalid_message' => 'Invalid email address'
             ])
             ->add('phone')
             ->add('body')

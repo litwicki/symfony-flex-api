@@ -7,6 +7,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 
@@ -19,7 +20,15 @@ class NodeType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('type')
+            ->add('type', ChoiceType::class, [
+                'choices' => array(
+                    'article' => 'Article',
+                    'page' => 'Page',
+                    'press' => 'Press Release',
+                    'node' => 'Node'
+                ),
+                'invalid_message' => 'Please enter a valid Node type: article, page, press, node'
+            ])
             ->add('body')
             ->add('display_date', DateTimeType::class, [
                 'invalid_message' => 'Please enter a valid date with time for display date: Y-m-d h:i:s',
