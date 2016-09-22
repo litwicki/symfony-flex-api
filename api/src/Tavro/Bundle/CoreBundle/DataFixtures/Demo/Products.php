@@ -82,7 +82,7 @@ class Products extends AbstractFixture implements OrderedFixtureInterface, Conta
                 $product->setCategory($category);
                 $product->setCreateDate(new \DateTime());
                 $product->setStatus(rand(0,1));
-                $product->setTitle($faker->text(rand(10,100)));
+                $product->setName($faker->text(rand(10,100)));
                 $product->setBody($faker->text(rand(100,1000)));
                 $product->setAccount($account);
                 $product->setCost($cost);

@@ -85,7 +85,7 @@ class Services extends AbstractFixture implements OrderedFixtureInterface, Conta
                 $service->setAccount($account);
                 $service->setCreateDate(new \DateTime());
                 $service->setCategory($serviceCategories[array_rand($serviceCategories)]);
-                $service->setTitle(ucwords($faker->text(rand(10,100))));
+                $service->setName(ucwords($faker->text(rand(10,100))));
                 $service->setBody($faker->text(rand(100,1000)));
                 $service->setStatus(rand(0,1));
                 $service->setPrice(rand(1.00, 999.99));

@@ -145,9 +145,9 @@ class AccountController extends ApiController
             $account_group = $handler->post($request, $data);
 
             /**
-             * Attach the Comment to the Node
+             * Attach the AccountGroup to the Account
              */
-            $this->getHandler('account_group_users')->post($request, array(
+            $this->getHandler('account_groups')->post($request, array(
                 'account_group' => $account_group->getId(),
                 'account' => $account->getId()
             ));

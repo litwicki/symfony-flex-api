@@ -79,7 +79,7 @@ class Tags extends AbstractFixture implements OrderedFixtureInterface, Container
 
                 $tag = new Tag();
                 $tag->setAccount($account);
-                $tag->setTag($faker->text(rand(5,50)));
+                $tag->setTag($faker->text(rand(5,30)));
                 $tag->setBody($faker->text(rand(100,1000)));
                 $tag->setStatus(1);
                 $manager->persist($tag);
