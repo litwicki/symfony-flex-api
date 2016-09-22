@@ -19,7 +19,7 @@ use Tavro\Bundle\CoreBundle\Model\EntityInterface;
 /**
  * @ORM\Entity
  * @ORM\Entity(repositoryClass="Tavro\Bundle\CoreBundle\Repository\AccountUserRepository")
- * @ORM\Table(name="tavro_user_account", indexes={@ORM\Index(name="ACCOUNT_USER", columns={"account_id","user_id"})})
+ * @ORM\Table(name="tavro_account_user", indexes={@ORM\Index(name="ACCOUNT_USER", columns={"account_id","user_id"})})
  */
 class AccountUser extends Entity implements EntityInterface
 {

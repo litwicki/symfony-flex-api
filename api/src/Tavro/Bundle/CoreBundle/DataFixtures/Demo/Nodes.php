@@ -155,7 +155,7 @@ class Nodes extends AbstractFixture implements OrderedFixtureInterface, Containe
      */
     public function getOrder()
     {
-        return 7; // the order in which fixtures will be loaded
+        return 99; // the order in which fixtures will be loaded
     }
 
 }

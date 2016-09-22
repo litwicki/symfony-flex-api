@@ -207,7 +207,7 @@ class Account extends Entity implements EntityInterface
         return $this->account_users;
     }
 
-    public function createCleanName($name)
+    public static function createCleanName($name)
     {
 
         $clean = preg_replace('/[^A-Za-z0-9-_\s]/', '', $name);

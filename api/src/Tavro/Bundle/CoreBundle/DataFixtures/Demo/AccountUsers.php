@@ -35,10 +35,11 @@ use Tavro\Bundle\CoreBundle\Entity\ServiceCategory;
 use Tavro\Bundle\CoreBundle\Entity\Contact;
 use Tavro\Bundle\CoreBundle\Entity\OrganizationComment;
 use Tavro\Bundle\CoreBundle\Entity\FundingRoundShareholder;
+use Tavro\Bundle\CoreBundle\Entity\AccountGroup;
+use Tavro\Bundle\CoreBundle\Entity\AccountGroupUser;
 
 use Cocur\Slugify\Slugify;
 use Litwicki\Common\Common as Litwicki;
-use Tavro\Bundle\CoreBundle\Model\AccountEntity;
 
 /**
  * Defines all predefined installed types created during install.
@@ -67,52 +68,123 @@ class AccountUsers extends AbstractFixture implements OrderedFixtureInterface, C
     public function load(ObjectManager $manager)
     {
 
-        $size = 25;
+        $items = [
+            'Autobots' => [
+                'Primes' => [
+                    'Sentinel Prime',
+                    'Optimus Prime',
+                ],
+                'Cars' => [
+                    'Bluestreak',
+                    'Hound',
+                    'Ironhide',
+                    'Jazz',
+                    'Mirage',
+                    'Prowl',
+                    'Ratchet',
+                    'Sideswipe',
+                    'Sunstreaker',
+                    'Wheeljack',
+                    'Hoist',
+                    'Red Alert',
+                    'Smokescreen',
+                    'Tracks',
+                    'Blurr',
+                    'Hot Rod',
+                    'Kup',
+                ],
+                'Mini-Vehicles' => [
+                    'Brawn',
+                    'Bumblebee',
+                    'Cliffjumper',
+                    'Gears',
+                    'Windcharger',
+                    'Beachcomber',
+                    'Cosmos',
+                    'Warpath',
+                    'Wheelie'
+                ],
+                'Aerialbots' => [
+                    'Silverbolt',
+                    'Air Raid',
+                    'Firefight',
+                    'Skydive',
+                    'Slingshot'
+                ]
+            ],
 
-        $accounts = $manager->getRepository('TavroCoreBundle:Account')->findAll();
+            'Decepticons' => [
+                'Leaders' => [
+                    'Megatron',
+                    'Galvatron'
+                ],
+                'Constructicons' => [
+                    'Scrapper',
+                    'Bonecrusher',
+                    'Hook',
+                    'Long Haul',
+                    'Mixmaster',
+                    'Scavenger'
+                ],
+                'Combaticons' => [
+                    'Onslaught',
+                    'Brawl',
+                    'Swindle',
+                    'Blast Off',
+                    'Vortex',
+                ],
+                'Stunticons' => [
+                    'Motormaster',
+                    'Breakdown',
+                    'Drag Strip',
+                    'Dead End',
+                    'Wildrider'
+                ],
+                'Predacons' => [
+                    'Razorclaw',
+                    'Divebomb',
+                    'Headstrong',
+                    'Rampage',
+                    'Tantrum'
+                ]
+            ]
+        ];
 
-        $autobots = $manager->getRepository('TavroCoreBundle:Person')->findBy([
-            'gender' => 'autobot'
-        ]);
+        foreach($items as $accountName => $groups) {
 
-        $decepticons = $manager->getRepository('TavroCoreBundle:Person')->findBy([
-            'gender' => 'decepticon'
-        ]);
+            $account = $manager->getRepository('TavroCoreBundle:Account')->findOneBy([
+                'name' => $accountName,
+            ]);
 
-        $people = $manager->getRepository('TavroCoreBundle:Person')->findBy([
-            'gender' => ['male', 'female']
-        ]);
+            foreach($groups as $groupName => $users) {
 
-        foreach($accounts as $account) {
+                $group = $manager->getRepository('TavroCoreBundle:AccountGroup')->findOneBy([
+                    'name' => $groupName,
+                    'account' => $account->getId()
+                ]);
 
-            for($i=0;$i<rand(1,$size);$i++) {
+                foreach ($users as $name) {
 
-                switch($account->getName()) {
-                    case 'Decepticons':
-                        $person = $decepticons[array_rand($decepticons)];
-                        break;
-                    case 'Autobots':
-                        $person = $autobots[array_rand($autobots)];
-                        break;
-                    default:
-                        $person = $people[array_rand($people)];
-                }
+                    $username = str_replace(' ', '_', $name);
+                    $username = strtolower($username);
 
-                $user = $person->getUser();
+                    $user = $manager->getRepository('TavroCoreBundle:User')->findOneBy([
+                        'username' => $username
+                    ]);
 
-                /**
-                 * Don't create an AccountUser for someone who is already the Owner of the Account.
-                 *
-                 */
-                if($account->getUser()->getId() != $user->getId()) {
+                    //create the AccountUser
                     $au = new AccountUser();
-                    $au->setUser($user);
                     $au->setAccount($account);
+                    $au->setUser($user);
                     $manager->persist($au);
+
+                    //create the GroupUser
+                    $gu = new AccountGroupUser();
+                    $gu->setAccountGroup($group);
+                    $gu->setUser($user);
+                    $manager->persist($gu);
                 }
-
             }
-
         }
 
         $manager->flush();
@@ -124,7 +196,7 @@ class AccountUsers extends AbstractFixture implements OrderedFixtureInterface, C
      */
     public function getOrder()
     {
-        return 3; // the order in which fixtures will be loaded
+        return 5; // the order in which fixtures will be loaded
     }
 
 }

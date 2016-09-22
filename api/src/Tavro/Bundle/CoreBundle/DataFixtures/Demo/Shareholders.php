@@ -108,7 +108,7 @@ class Shareholders extends AbstractFixture implements OrderedFixtureInterface, C
      */
     public function getOrder()
     {
-        return 4; // the order in which fixtures will be loaded
+        return 14; // the order in which fixtures will be loaded
     }
 
 }

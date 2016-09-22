@@ -133,7 +133,7 @@ class Categories extends AbstractFixture implements OrderedFixtureInterface, Con
      */
     public function getOrder()
     {
-        return 4; // the order in which fixtures will be loaded
+        return 6; // the order in which fixtures will be loaded
     }
 
 }

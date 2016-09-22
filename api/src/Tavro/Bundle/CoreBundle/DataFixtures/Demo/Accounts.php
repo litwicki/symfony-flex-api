@@ -65,7 +65,6 @@ class Accounts extends AbstractFixture implements OrderedFixtureInterface, Conta
      */
     public function load(ObjectManager $manager)
     {
-
         /**
          * Create Autobots
          */
@@ -107,10 +106,6 @@ class Accounts extends AbstractFixture implements OrderedFixtureInterface, Conta
         $account->setUser($bot);
         $manager->persist($account);
         $manager->flush();
-
-        /**
-         * Create some basic Groups
-         */
 
     }
 

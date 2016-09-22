@@ -46,7 +46,7 @@ use Litwicki\Common\Common as Litwicki;
  *
  * @author jake.litwicki@gmail.com
  */
-class AccountGroupsAndUsers extends AbstractFixture implements OrderedFixtureInterface, ContainerAwareInterface
+class AccountGroups extends AbstractFixture implements OrderedFixtureInterface, ContainerAwareInterface
 {
 
     /**
@@ -68,114 +68,36 @@ class AccountGroupsAndUsers extends AbstractFixture implements OrderedFixtureInt
     public function load(ObjectManager $manager)
     {
 
-        $autobots = $manager->getRepository('TavroCoreBundle:Account')->findOneBy([
-            'name' => 'Autobots'
-        ]);
-
         $groups = [
-            'Cars' => [
-                'Bluestreak',
-                'Hound',
-                'Ironhide',
-                'Jazz',
-                'Mirage',
-                'Prowl',
-                'Ratchet',
-                'Sideswipe',
-                'Sunstreaker',
-                'Wheeljack',
-                'Hoist',
-                'Red Alert',
-                'Smokescreen',
-                'Tracks',
-                'Blurr',
-                'Hot Rod',
-                'Kup',
+            'Autobots' => [
+                'Primes',
+                'Cars',
+                'Mini-Vehicles',
+                'Aerialbots',
             ],
-            'Mini-Vehicles' => [
-                'Brawn',
-                'Bumblebee',
-                'Cliffjumper',
-                'Gears',
-                'Windcharger',
-                'Beachcomber',
-                'Cosmos',
-                'Warpath',
-                'Wheelie'
-            ],
-            'Aerialbots' => [
-                'Silverbolt',
-                'Air Raid',
-                'Firefight',
-                'Skydive',
-                'Slingshot'
+            'Decepticons' => [
+                'Leaders',
+                'Constructicons',
+                'Combaticons',
+                'Stunticons',
+                'Predacons',
             ]
         ];
 
-        foreach($groups as $name => $users) {
+        foreach($groups as $accountName => $groups) {
 
-            $group = new AccountGroup();
-            $group->setName($name);
-            $group->setAccount($autobots);
-            $manager->persist($group);
-            $manager->flush();
+            $account = $manager->getRepository('TavroCoreBundle:Account')->findOneBy([
+                'name' => $accountName
+            ]);
 
-            foreach($users as $username) {
-
-                $groupUser = new AccountGroupUser();
-                $groupUser->setUser($user);
-                $groupUser->setGroup($group);
-                $manager->persist($groupUser);
-
+            foreach($groups as $name) {
+                $group = new AccountGroup();
+                $group->setName($name);
+                $group->setAccount($account);
+                $group->setUser($account->getUser());
+                $manager->persist($group);
             }
 
-            $manager->flush();
-
-        }
-
-
-
-        $decepticons = $manager->getRepository('TavroCoreBundle:Account')->findOneBy([
-            'name' => 'Decepticons'
-        ]);
-
-        $groups = [
-            'Constructicons' => [
-                'Scrapper',
-                'Bonecrusher',
-                'Hook',
-                'Long Haul',
-                'Mixmaster',
-                'Scavenger'
-            ],
-            'Combaticons' => [
-                'Onslaught',
-                'Brawl',
-                'Swindle',
-                'Blast Off',
-                'Vortex',
-            ],
-            'Stunticons' => [
-                'Motormaster',
-                'Breakdown',
-                'Drag Strip',
-                'Dead End',
-                'Wildrider'
-            ],
-            'Predacons' => [
-                'Razorclaw',
-                'Divebomb',
-                'Headstrong',
-                'Rampage',
-                'Tantrum'
-            ]
-        ];
-
-        foreach($groups as $name) {
-            $group = new AccountGroup();
-            $group->setName($name);
-            $group->setAccount($autobots);
-            $manager->persist($group);
         }
 
         $manager->flush();
@@ -187,7 +109,7 @@ class AccountGroupsAndUsers extends AbstractFixture implements OrderedFixtureInt
      */
     public function getOrder()
     {
-        return 3; // the order in which fixtures will be loaded
+        return 4; // the order in which fixtures will be loaded
     }
 
 }

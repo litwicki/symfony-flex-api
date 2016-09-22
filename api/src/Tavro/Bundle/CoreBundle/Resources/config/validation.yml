@@ -5,6 +5,11 @@ Tavro\Bundle\CoreBundle\Entity\Account:
                 pattern: '/[A-Za-z0-9-]/'
                 match:   true
                 message: "Account name may only contain numbers, letters, spaces, and dashes"
+        status:
+            - Tegex:
+                pattern: ''
+                match: true
+                message: "Invalid Status; 0 = Disabled, 1 = Enabled, 2 = Pending"
 
 Tavro\Bundle\CoreBundle\Entity\AccountGroup:
     properties:
@@ -13,6 +18,11 @@ Tavro\Bundle\CoreBundle\Entity\AccountGroup:
                 pattern: '/[A-Za-z0-9\s\-]/'
                 match:   true
                 message: "Account Group name may only contain numbers, letters, spaces, and dashes"
+        status:
+            - Tegex:
+                pattern: ''
+                match: true
+                message: "Invalid Status; 0 = Disabled, 1 = Enabled, 2 = Pending"
 
 Tavro\Bundle\CoreBundle\Entity\Contact:
     properties:
@@ -32,6 +42,11 @@ Tavro\Bundle\CoreBundle\Entity\Contact:
                 pattern: '/[A-Za-z0-9\s\-]/'
                 match: true
                 message: "Job title may only contain numbers, letters, spaces, and dashes"
+        status:
+            - Tegex:
+                pattern: ''
+                match: true
+                message: "Invalid Status; 0 = Disabled, 1 = Enabled, 2 = Pending"
 
 Tavro\Bundle\CoreBundle\Entity\Expense:
     properties:
@@ -40,6 +55,11 @@ Tavro\Bundle\CoreBundle\Entity\Expense:
                 pattern: '/^(?:[1-9]\d*|0)?(?:\.\d+)?$/'
                 match: true
                 message: "Expense amount must be a positive decimal number"
+        status:
+            - Tegex:
+                pattern: ''
+                match: true
+                message: "Invalid Status; 0 = Disabled, 1 = Enabled, 2 = Pending"
 
 Tavro\Bundle\CoreBundle\Entity\File:
     properties:
@@ -48,6 +68,11 @@ Tavro\Bundle\CoreBundle\Entity\File:
                 pattern: '/[1-9][0-9]*/'
                 match: true
                 message: "File Filesize must be a positive integer greater than zero"
+        status:
+            - Tegex:
+                pattern: ''
+                match: true
+                message: "Invalid Status; 0 = Disabled, 1 = Enabled, 2 = Pending"
         aws_url:
             - Regex:
                 pattern: '/[A-Za-z0-9\s\-]/'
@@ -86,6 +111,11 @@ Tavro\Bundle\CoreBundle\Entity\FundingRound:
                 pattern: '/[1-9][0-9]*/'
                 match: true
                 message: "Share Price must be a positive integer greater than zero"
+        status:
+            - Tegex:
+                pattern: ''
+                match: true
+                message: "Invalid Status; 0 = Disabled, 1 = Enabled, 2 = Pending"
 
 Tavro\Bundle\CoreBundle\Entity\Image:
     properties:
@@ -119,6 +149,11 @@ Tavro\Bundle\CoreBundle\Entity\Image:
                 pattern: '/[A-Za-z0-9\s\-]/'
                 match: true
                 message: "Image AWS URL may only contain numbers, letters, spaces, and dashes"
+        status:
+            - Tegex:
+                pattern: ''
+                match: true
+                message: "Invalid Status; 0 = Disabled, 1 = Enabled, 2 = Pending"
 
 Tavro\Bundle\CoreBundle\Entity\Node:
     properties:
@@ -142,6 +177,11 @@ Tavro\Bundle\CoreBundle\Entity\Node:
                 pattern: '/[A-Za-z0-9\s\-]/'
                 match: true
                 message: "Image AWS URL may only contain numbers, letters, spaces, and dashes"
+        status:
+            - Tegex:
+                pattern: ''
+                match: true
+                message: "Invalid Status; 0 = Disabled, 1 = Enabled, 2 = Pending"
 
 Tavro\Bundle\CoreBundle\Entity\Organization:
     properties:
@@ -160,9 +200,19 @@ Tavro\Bundle\CoreBundle\Entity\Organization:
                 pattern: '/[1-9][0-9]*/'
                 match: true
                 message: "Node Views must be a positive integer greater than zero"
+        status:
+            - Tegex:
+                pattern: ''
+                match: true
+                message: "Invalid Status; 0 = Disabled, 1 = Enabled, 2 = Pending"
 
 Tavro\Bundle\CoreBundle\Entity\Person:
     properties:
+        status:
+            - Tegex:
+                pattern: ''
+                match: true
+                message: "Invalid Status; 0 = Disabled, 1 = Enabled, 2 = Pending"
         first_name:
             - Regex:
                 pattern: '/[A-Za-z]/'
@@ -216,6 +266,11 @@ Tavro\Bundle\CoreBundle\Entity\Person:
 
 Tavro\Bundle\CoreBundle\Entity\Product:
     properties:
+        status:
+            - Tegex:
+                pattern: ''
+                match: true
+                message: "Invalid Status; 0 = Disabled, 1 = Enabled, 2 = Pending"
         name:
             - Regex:
                 pattern: '/[A-Za-z]/'
@@ -234,6 +289,11 @@ Tavro\Bundle\CoreBundle\Entity\Product:
 
 Tavro\Bundle\CoreBundle\Entity\Revenue:
     properties:
+        status:
+            - Tegex:
+                pattern: ''
+                match: true
+                message: "Invalid Status; 0 = Disabled, 1 = Enabled, 2 = Pending"
         type:
             - Regex:
                 pattern: '/^(subscription|service|sale|other)*$/'
@@ -242,6 +302,11 @@ Tavro\Bundle\CoreBundle\Entity\Revenue:
 
 Tavro\Bundle\CoreBundle\Entity\Role:
     properties:
+        status:
+            - Tegex:
+                pattern: ''
+                match: true
+                message: "Invalid Status; 0 = Disabled, 1 = Enabled, 2 = Pending"
         name:
             - Regex:
                 pattern: '/^(subscription|service|sale|other)*$/'
@@ -255,6 +320,11 @@ Tavro\Bundle\CoreBundle\Entity\Role:
 
 Tavro\Bundle\CoreBundle\Entity\Service:
     properties:
+        status:
+            - Tegex:
+                pattern: ''
+                match: true
+                message: "Invalid Status; 0 = Disabled, 1 = Enabled, 2 = Pending"
         name:
             - Regex:
                 pattern: '/^(subscription|service|sale|other)*$/'
@@ -273,6 +343,11 @@ Tavro\Bundle\CoreBundle\Entity\Service:
 
 Tavro\Bundle\CoreBundle\Entity\Tag:
     properties:
+        status:
+            - Tegex:
+                pattern: ''
+                match: true
+                message: "Invalid Status; 0 = Disabled, 1 = Enabled, 2 = Pending"
         tag:
             - Regex:
                 pattern: '/[A-Za-z0-9\s\-]{,30}/'
@@ -281,6 +356,11 @@ Tavro\Bundle\CoreBundle\Entity\Tag:
 
 Tavro\Bundle\CoreBundle\Entity\User:
     properties:
+        status:
+            - Tegex:
+                pattern: ''
+                match: true
+                message: "Invalid Status; 0 = Disabled, 1 = Enabled, 2 = Pending"
         username:
             - Regex:
                 pattern: '/[A-Za-z0-9\-_\s]/'
@@ -289,6 +369,11 @@ Tavro\Bundle\CoreBundle\Entity\User:
 
 Tavro\Bundle\CoreBundle\Entity\Variable:
     properties:
+        status:
+            - Tegex:
+                pattern: ''
+                match: true
+                message: "Invalid Status; 0 = Disabled, 1 = Enabled, 2 = Pending"
         name:
             - Regex:
                 pattern: '/[A-Za-z0-9\-]/'

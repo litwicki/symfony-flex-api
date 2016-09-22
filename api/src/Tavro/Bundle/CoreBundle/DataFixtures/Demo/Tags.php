@@ -98,7 +98,7 @@ class Tags extends AbstractFixture implements OrderedFixtureInterface, Container
      */
     public function getOrder()
     {
-        return 5; // the order in which fixtures will be loaded
+        return 8; // the order in which fixtures will be loaded
     }
 
 }

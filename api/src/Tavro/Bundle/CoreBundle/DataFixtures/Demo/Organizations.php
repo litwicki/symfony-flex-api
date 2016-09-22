@@ -75,7 +75,7 @@ class Organizations extends AbstractFixture implements OrderedFixtureInterface, 
 
         foreach($accounts as $account) {
 
-            $users = $account->getUsers()->toArray();
+            $users = $account->getUsers();
 
             for($i=0;$i<rand(1,$size);$i++) {
 
@@ -93,7 +93,7 @@ class Organizations extends AbstractFixture implements OrderedFixtureInterface, 
 
             foreach($organizations as $organization) {
 
-                for($i=0;$i<rand(0,$size);$i++) {
+                for($i=0;$i<rand(1,$size);$i++) {
                     $comment = new Comment();
                     $comment->setUser($users[array_rand($users)]);
                     $comment->setBody($faker->text(rand(100,1000)));
@@ -119,7 +119,7 @@ class Organizations extends AbstractFixture implements OrderedFixtureInterface, 
      */
     public function getOrder()
     {
-        return 5; // the order in which fixtures will be loaded
+        return 7; // the order in which fixtures will be loaded
     }
 
 }

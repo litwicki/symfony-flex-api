@@ -134,70 +134,117 @@ class Users extends AbstractFixture implements OrderedFixtureInterface, Containe
         $manager->flush();
 
         $autobots = [
-            'Optimus Prime',
-            'Sentinel Prime',
-            'Bluestreak',
-            'Hound',
-            'Ironhide',
-            'Jazz',
-            'Mirage',
-            'Prowl',
-            'Ratchet',
-            'Sideswipe',
-            'Sunstreaker',
-            'Wheeljack',
-            'Hoist',
-            'Red Alert',
-            'Smokescreen',
-            'Tracks',
-            'Blurr',
-            'Hot Rod',
-            'Kup',
-            'Brawn',
-            'Bumblebee'
+            'Prime' => [
+                'Sentinel Prime',
+                'Optimus Prime',
+            ],
+            'Cars' => [
+                'Bluestreak',
+                'Hound',
+                'Ironhide',
+                'Jazz',
+                'Mirage',
+                'Prowl',
+                'Ratchet',
+                'Sideswipe',
+                'Sunstreaker',
+                'Wheeljack',
+                'Hoist',
+                'Red Alert',
+                'Smokescreen',
+                'Tracks',
+                'Blurr',
+                'Hot Rod',
+                'Kup',
+            ],
+            'Mini-Vehicles' => [
+                'Brawn',
+                'Bumblebee',
+                'Cliffjumper',
+                'Gears',
+                'Windcharger',
+                'Beachcomber',
+                'Cosmos',
+                'Warpath',
+                'Wheelie'
+            ],
+            'Aerialbots' => [
+                'Silverbolt',
+                'Air Raid',
+                'Firefight',
+                'Skydive',
+                'Slingshot'
+            ]
         ];
 
         $decepticons = [
-            'Megatron',
-            'Soundwave',
-            'Shockwave',
-            'Skypwarp',
-            'Starscream',
-            'Thundercracker',
-            'Reflector',
-            'Thrust',
-            'Ramjet',
-            'Dirge'
+            'Leaders' => [
+                'Megatron',
+                'Galvatron'
+            ],
+            'Constructicons' => [
+                'Scrapper',
+                'Bonecrusher',
+                'Hook',
+                'Long Haul',
+                'Mixmaster',
+                'Scavenger'
+            ],
+            'Combaticons' => [
+                'Onslaught',
+                'Brawl',
+                'Swindle',
+                'Blast Off',
+                'Vortex',
+            ],
+            'Stunticons' => [
+                'Motormaster',
+                'Breakdown',
+                'Drag Strip',
+                'Dead End',
+                'Wildrider'
+            ],
+            'Predacons' => [
+                'Razorclaw',
+                'Divebomb',
+                'Headstrong',
+                'Rampage',
+                'Tantrum'
+            ]
         ];
 
-        foreach($autobots as $name) {
-            $username = str_replace(' ', '_', $name);
-            $username = strtolower($username);
-            $email = sprintf('%s@autobots.tavro.dev', $username);
-            $fullname = explode(' ', $name);
-            $this->create($manager, $userRole, [
-                'username' => $username,
-                'email' => $email,
-                'password' => $username,
-                'first_name' => $fullname[0],
-                'last_name' => isset($fullname[1]) ? $fullname[1] : NULL,
-                'gender' => 'autobot',
-            ]);
+        foreach($autobots as $group => $users) {
+            foreach($users as $name) {
+                $username = str_replace(' ', '_', $name);
+                $username = strtolower($username);
+                $email = sprintf('%s@autobots.tavro.dev', $username);
+                $fullname = explode(' ', $name);
+                $this->create($manager, $userRole, [
+                    'username' => $username,
+                    'email' => $email,
+                    'password' => $username,
+                    'first_name' => $fullname[0],
+                    'last_name' => isset($fullname[1]) ? $fullname[1] : NULL,
+                    'gender' => 'autobot',
+                ]);
+            }
         }
 
-        foreach($decepticons as $name) {
-            $username = str_replace(' ', '_', $name);
-            $username = strtolower($username);
-            $email = sprintf('%s@decepticons.tavro.dev', $username);
-            $fullname = explode(' ', $name);
-            $this->create($manager, $userRole, [
-                'username' => $username,
-                'email' => $email,
-                'password' => $username,
-                'first_name' => $fullname[0],
-                'last_name' => isset($fullname[1]) ? $fullname[1] : NULL,
-                'gender' => 'decepticon',
-            ]);
+        foreach($decepticons as $groups => $users) {
+            foreach($users as $name) {
+                $username = str_replace(' ', '_', $name);
+                $username = strtolower($username);
+                $email = sprintf('%s@decepticons.tavro.dev', $username);
+                $fullname = explode(' ', $name);
+                $this->create($manager, $userRole, [
+                    'username'   => $username,
+                    'email'      => $email,
+                    'password'   => $username,
+                    'first_name' => $fullname[0],
+                    'last_name'  => isset($fullname[1]) ? $fullname[1] : NULL,
+                    'gender'     => 'decepticon',
+                ]);
+            }
         }
 
         //create tavrobot!

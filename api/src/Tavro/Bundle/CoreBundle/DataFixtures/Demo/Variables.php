@@ -98,7 +98,7 @@ class Variables extends AbstractFixture implements OrderedFixtureInterface, Cont
      */
     public function getOrder()
     {
-        return 5; // the order in which fixtures will be loaded
+        return 100; // the order in which fixtures will be loaded
     }
 
 }

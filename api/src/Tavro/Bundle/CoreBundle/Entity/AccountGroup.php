@@ -44,6 +44,20 @@ class AccountGroup extends AccountEntity implements AccountEntityInterface
      */
     protected $name_clean;
 
+    /**
+     * Automatically set the create_date and last_update_date on persist.
+     * @ORM\PrePersist
+     */
+    public function onPrePersist()
+    {
+        $this->setNameClean(Account::createCleanName($this->getName()));
+
+        if(is_null($this->create_date)) {
+            $this->create_date = new \DateTime();
+        }
+
+        $this->update_date = new \DateTime();
+    }
 
     /**
      * Set name
@@ -55,6 +69,10 @@ class AccountGroup extends AccountEntity implements AccountEntityInterface
     public function setName($name)
     {
         $this->name = $name;
+
+        $clean = Account::createCleanName($name);
+
+        $this->setNameClean($clean);
 
         return $this;
     }

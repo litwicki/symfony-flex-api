@@ -130,7 +130,7 @@ class Contacts extends AbstractFixture implements OrderedFixtureInterface, Conta
      */
     public function getOrder()
     {
-        return 6; // the order in which fixtures will be loaded
+        return 8; // the order in which fixtures will be loaded
     }
 
 }
