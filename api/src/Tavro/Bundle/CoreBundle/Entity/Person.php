@@ -116,7 +116,7 @@ class Person extends Entity implements EntityInterface
     protected $phone;
 
     /**
-     * @ORM\OneToOne(targetEntity="Tavro\Bundle\CoreBundle\Entity\User", mappedBy="person", cascade={"remove"})
+     * @ORM\OneToOne(targetEntity="Tavro\Bundle\CoreBundle\Entity\User", inversedBy="person", cascade={"remove"})
      */
     protected $user;
 

@@ -24,7 +24,7 @@ use Tavro\Bundle\CoreBundle\Model\EntityInterface;
 class AccountUser extends Entity implements EntityInterface
 {
     /**
-     * @ORM\ManyToOne(targetEntity="Tavro\Bundle\CoreBundle\Entity\Account", inversedBy="user_accounts")
+     * @ORM\ManyToOne(targetEntity="Tavro\Bundle\CoreBundle\Entity\Account", inversedBy="account_users")
      * @ORM\JoinColumn(name="account_id", referencedColumnName="id", nullable=FALSE)
      * @Groups({"api", "detail"})
      * @MaxDepth(3)
@@ -32,7 +32,7 @@ class AccountUser extends Entity implements EntityInterface
     protected $account;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Tavro\Bundle\CoreBundle\Entity\User", inversedBy="user_accounts")
+     * @ORM\ManyToOne(targetEntity="Tavro\Bundle\CoreBundle\Entity\User", inversedBy="account_users")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id", nullable=FALSE)
      * @Groups({"api", "detail"})
      * @MaxDepth(3)

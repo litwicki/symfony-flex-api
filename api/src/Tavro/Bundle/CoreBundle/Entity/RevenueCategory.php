@@ -27,6 +27,11 @@ use Tavro\Bundle\CoreBundle\Model\AccountEntityInterface;
 class RevenueCategory extends AccountEntity implements AccountEntityInterface
 {
 
+    /**
+     * @ORM\OneToMany(targetEntity="Tavro\Bundle\CoreBundle\Entity\Revenue", mappedBy="category")
+     * @ORM\OrderBy({"id" = "DESC"})
+     */
+    protected $revenues;
 
     /**
      * Set body

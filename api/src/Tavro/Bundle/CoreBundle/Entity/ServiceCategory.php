@@ -26,7 +26,11 @@ use Tavro\Bundle\CoreBundle\Model\AccountEntityInterface;
  */
 class ServiceCategory extends AccountEntity implements AccountEntityInterface
 {
-
+    /**
+     * @ORM\OneToMany(targetEntity="Tavro\Bundle\CoreBundle\Entity\Service", mappedBy="category")
+     * @ORM\OrderBy({"id" = "DESC"})
+     */
+    protected $services;
 
     /**
      * Set body

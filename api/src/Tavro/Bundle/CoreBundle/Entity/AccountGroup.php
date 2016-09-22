@@ -45,6 +45,12 @@ class AccountGroup extends AccountEntity implements AccountEntityInterface
     protected $name_clean;
 
     /**
+     * @ORM\OneToMany(targetEntity="Tavro\Bundle\CoreBundle\Entity\AccountGroupUser", mappedBy="account_group")
+     * @ORM\OrderBy({"id" = "DESC"})
+     */
+    protected $account_group_users;
+
+    /**
      * Automatically set the create_date and last_update_date on persist.
      * @ORM\PrePersist
      */

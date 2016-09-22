@@ -29,6 +29,12 @@ class ExpenseCategory extends AccountEntity implements AccountEntityInterface
 {
 
     /**
+     * @ORM\OneToMany(targetEntity="Tavro\Bundle\CoreBundle\Entity\Expense", mappedBy="category")
+     * @ORM\OrderBy({"id" = "DESC"})
+     */
+    protected $expenses;
+
+    /**
      * Set body
      *
      * @param string $body

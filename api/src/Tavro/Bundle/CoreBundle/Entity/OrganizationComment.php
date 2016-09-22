@@ -12,6 +12,7 @@ use JMS\Serializer\Annotation\VirtualProperty;
 use JMS\Serializer\Annotation\Groups;
 use JMS\Serializer\Annotation\MaxDepth;
 use Doctrine\ORM\Mapping\Table;
+use JMS\Serializer\Annotation\SerializedName;
 
 use Tavro\Bundle\CoreBundle\Model\Entity;
 use Tavro\Bundle\CoreBundle\Model\EntityInterface;
@@ -106,6 +107,19 @@ class OrganizationComment extends Entity implements EntityInterface
     public function getBody()
     {
         return $this->body;
+    }
+
+    /**
+     * @VirtualProperty
+     * @SerializedName("comments")
+     */
+    public function getComments()
+    {
+        $comments = new \Doctrine\Common\Collections\ArrayCollection();
+        foreach($this->organization_comments as $organization_comment) {
+            $comments->add($organization_comment->getComment());
+        }
+        return $comments;
     }
 
 }

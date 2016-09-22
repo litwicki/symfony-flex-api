@@ -43,6 +43,11 @@ class Tag extends AccountEntity implements AccountEntityInterface
     protected $expense_tags;
 
     /**
+     * @ORM\OneToMany(targetEntity="Tavro\Bundle\CoreBundle\Entity\RevenueTag", mappedBy="tag", cascade={"remove"})
+     */
+    protected $revenue_tags;
+
+    /**
      * Set tag
      *
      * @param string $tag

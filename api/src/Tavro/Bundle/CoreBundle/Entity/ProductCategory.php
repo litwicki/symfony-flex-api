@@ -28,6 +28,12 @@ class ProductCategory extends AccountEntity implements AccountEntityInterface
 {
 
     /**
+     * @ORM\OneToMany(targetEntity="Tavro\Bundle\CoreBundle\Entity\Product", mappedBy="category")
+     * @ORM\OrderBy({"id" = "DESC"})
+     */
+    protected $products;
+
+    /**
      * Set body
      *
      * @param string $body

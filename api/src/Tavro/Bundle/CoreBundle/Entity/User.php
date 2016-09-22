@@ -114,10 +114,40 @@ class User extends Entity implements UserInterface, \Serializable
     protected $user_agent;
 
     /**
+     * @ORM\OneToMany(targetEntity="Tavro\Bundle\CoreBundle\Entity\Expense", mappedBy="user")
+     * @ORM\OrderBy({"id" = "DESC"})
+     */
+    protected $expenses;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Tavro\Bundle\CoreBundle\Entity\Revenue", mappedBy="user")
+     * @ORM\OrderBy({"id" = "DESC"})
+     */
+    protected $revenues;
+
+    /**
      * @ORM\OneToMany(targetEntity="Tavro\Bundle\CoreBundle\Entity\Node", mappedBy="user")
      * @ORM\OrderBy({"id" = "DESC"})
      */
     protected $nodes;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Tavro\Bundle\CoreBundle\Entity\Account", mappedBy="user")
+     * @ORM\OrderBy({"id" = "DESC"})
+     */
+    protected $accounts;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Tavro\Bundle\CoreBundle\Entity\AccountGroup", mappedBy="user")
+     * @ORM\OrderBy({"id" = "DESC"})
+     */
+    protected $account_groups;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Tavro\Bundle\CoreBundle\Entity\AccountGroupUser", mappedBy="user")
+     * @ORM\OrderBy({"id" = "DESC"})
+     */
+    protected $account_group_users;
 
     /**
      * @ORM\OneToMany(targetEntity="Tavro\Bundle\CoreBundle\Entity\Comment", mappedBy="user")
@@ -158,10 +188,7 @@ class User extends Entity implements UserInterface, \Serializable
     protected $avatar;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Tavro\Bundle\CoreBundle\Entity\Person")
-     * @ORM\JoinColumn(name="person_id", referencedColumnName="id", nullable=TRUE)
-     * @Groups({"api", "detail", "simple"})
-     * @MaxDepth(1)
+     * @ORM\OneToOne(targetEntity="Tavro\Bundle\CoreBundle\Entity\Person", mappedBy="user", cascade={"remove"})
      */
     protected $person;
 

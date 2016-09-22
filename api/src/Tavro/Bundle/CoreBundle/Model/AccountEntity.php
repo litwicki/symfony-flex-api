@@ -24,8 +24,8 @@ class AccountEntity extends Entity implements EntityInterface
 {
 
     /**
-     * @ORM\ManyToOne(targetEntity="Tavro\Bundle\CoreBundle\Entity\Account", inversedBy="accounts")
-     * @ORM\JoinColumn(name="account_id", referencedColumnName="id", nullable=false)
+     * @ORM\ManyToOne(targetEntity="Tavro\Bundle\CoreBundle\Entity\Account")
+     * @ORM\JoinColumn(name="account_id", referencedColumnName="id", nullable=FALSE)
      * @Groups({"detail"})
      * @MaxDepth(1)
      */
