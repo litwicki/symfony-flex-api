@@ -75,7 +75,7 @@ class AccountController extends ApiController
                 $items[] = $entity->getAccountGroup();
             }
 
-            $data = $this->serialize($items, $_format, $group = 'simple');
+            $data = $this->serialize($items, $_format);
             $response = $this->apiResponse($data, $_format);
             return $response;
 
@@ -142,28 +142,27 @@ class AccountController extends ApiController
             $data = json_decode($request->getContent(), TRUE);
 
             $handler = $this->getHandler('account_groups');
-            $account_group = $handler->post($request, $data);
+            $entity = $handler->post($request, $data);
 
             /**
              * Attach the AccountGroup to the Account
              */
             $this->getHandler('account_groups')->post($request, array(
-                'account_group' => $account_group->getId(),
+                'account_group' => $entity->getId(),
                 'account' => $account->getId()
             ));
 
-        }
-        catch(\Exception $e) {
-            throw $e;
-        }
-        finally {
             $routeOptions = array(
                 'entity'  => 'account_groups',
-                'id'      => $account_group->getId(),
+                'id'      => $entity->getId(),
                 'format'  => $_format,
             );
 
             return $this->forward('TavroApiBundle:Default:get', $routeOptions);
+
+        }
+        catch(\Exception $e) {
+            throw $e;
         }
 
     }

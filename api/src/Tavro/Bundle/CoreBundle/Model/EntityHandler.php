@@ -621,7 +621,7 @@ class EntityHandler implements EntityHandlerInterface
         $map = array(
             'Tavro\Bundle\CoreBundle\Entity\Account'                    => 'Tavro\Bundle\CoreBundle\Form\AccountType',
             'Tavro\Bundle\CoreBundle\Entity\AccountUser'                => 'Tavro\Bundle\CoreBundle\Form\AccountUserType',
-            'Tavro\Bundle\CoreBundle\Entity\AccountGroup'               => 'Tavro\Bundle\CoreBundle\Form\AccountGroup',
+            'Tavro\Bundle\CoreBundle\Entity\AccountGroup'               => 'Tavro\Bundle\CoreBundle\Form\AccountGroupType',
             'Tavro\Bundle\CoreBundle\Entity\AccountGroupUser'           => 'Tavro\Bundle\CoreBundle\Form\AccountGroupUserType',
             'Tavro\Bundle\CoreBundle\Entity\OrganizationComment'        => 'Tavro\Bundle\CoreBundle\Form\OrganizationCommentType',
             'Tavro\Bundle\CoreBundle\Entity\Customer'                   => 'Tavro\Bundle\CoreBundle\Form\CustomerType',

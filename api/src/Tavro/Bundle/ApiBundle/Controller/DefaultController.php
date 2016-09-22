@@ -27,19 +27,27 @@ class DefaultController extends Controller
      * @return \Symfony\Component\HttpFoundation\Response
      * @throws \Exception
      */
-    public function apiResponse($data, $format = 'json', $code = 200)
+    public function apiResponse($data, $format = 'json', $code = 200, $message = 'Tavro Api Request Successful')
     {
         try {
 
-            $response = new Response($data);
+            $response = new Response();
+
+            $obj = [
+                'message' => $message,
+                'data' => $data
+            ];
 
             if($format == 'json') {
                 $response->headers->set('Content-Type', 'application/json');
+                $responseData = json_encode($obj);
             }
             else {
                 $response->headers->set('Content-Type', 'application/xml');
+                $responseData = $this->toXml($obj);
             }
 
+            $response->setContent($responseData);
             $response->setStatusCode($code);
 
         }

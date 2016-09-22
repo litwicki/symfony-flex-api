@@ -53,9 +53,9 @@ api_account_users:
         _format: json|xml
 
 api_account_user_new:
-    path: /accounts/{account}/newUser.{_format}
+    path: /accounts/{account}/users.{_format}
     defaults: { _controller: TavroApiBundle:Account:newUser, _format: json}
-    methods: GET
+    methods: POST
     requirements:
         account: \d+
         _format: json|xml
@@ -77,9 +77,9 @@ api_account_groups:
         _format: json|xml
 
 api_account_group_new:
-    path: /accounts/{account}/newGroup.{_format}
+    path: /accounts/{account}/groups.{_format}
     defaults: { _controller: TavroApiBundle:Account:newGroup, _format: json}
-    methods: GET
+    methods: POST
     requirements:
         account: \d+
         _format: json|xml

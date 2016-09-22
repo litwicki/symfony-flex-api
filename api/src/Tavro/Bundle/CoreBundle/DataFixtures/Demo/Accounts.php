@@ -108,6 +108,10 @@ class Accounts extends AbstractFixture implements OrderedFixtureInterface, Conta
         $manager->persist($account);
         $manager->flush();
 
+        /**
+         * Create some basic Groups
+         */
+
     }
 
     /**
