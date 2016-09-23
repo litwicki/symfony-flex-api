@@ -61,20 +61,20 @@ interface AccountEntityInterface
      */
     public function getUpdateDate();
 
-    /**
-     * Set account
-     *
-     * @param \Tavro\Bundle\CoreBundle\Entity\Account $account
-     *
-     * @return \Tavro\Bundle\CoreBundle\Entity\Account
-     */
-    public function setAccount(\Tavro\Bundle\CoreBundle\Entity\Account $account);
-
-    /**
-     * Get account
-     *
-     * @return \Tavro\Bundle\CoreBundle\Entity\Account
-     */
-    public function getAccount();
+//    /**
+//     * Set account
+//     *
+//     * @param \Tavro\Bundle\CoreBundle\Entity\Account $account
+//     *
+//     * @return \Tavro\Bundle\CoreBundle\Entity\Account
+//     */
+//    public function setAccount(\Tavro\Bundle\CoreBundle\Entity\Account $account);
+//
+//    /**
+//     * Get account
+//     *
+//     * @return \Tavro\Bundle\CoreBundle\Entity\Account
+//     */
+//    public function getAccount();
 
 }

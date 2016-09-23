@@ -14,7 +14,7 @@ use JMS\Serializer\Annotation\SerializedName;
 use Doctrine\ORM\Mapping\Table;
 use Symfony\Component\Validator\Constraints as Assert;
 
-use Tavro\Bundle\CoreBundle\Model\AccountEntity;
+use Tavro\Bundle\CoreBundle\Model\Entity;
 use Tavro\Bundle\CoreBundle\Model\AccountEntityInterface;
 
 /**
@@ -24,8 +24,16 @@ use Tavro\Bundle\CoreBundle\Model\AccountEntityInterface;
  * @ORM\Table(name="tavro_service_category")
  *
  */
-class ServiceCategory extends AccountEntity implements AccountEntityInterface
+class ServiceCategory extends Entity implements AccountEntityInterface
 {
+    /**
+     * @ORM\ManyToOne(targetEntity="Tavro\Bundle\CoreBundle\Entity\Account", inversedBy="service_categories")
+     * @ORM\JoinColumn(name="account_id", referencedColumnName="id", nullable=FALSE)
+     * @Groups({"detail"})
+     * @MaxDepth(1)
+     */
+    protected $account;
+
     /**
      * @ORM\OneToMany(targetEntity="Tavro\Bundle\CoreBundle\Entity\Service", mappedBy="category")
      * @ORM\OrderBy({"id" = "DESC"})
@@ -54,5 +62,63 @@ class ServiceCategory extends AccountEntity implements AccountEntityInterface
     public function getBody()
     {
         return $this->body;
+    }
+
+    /**
+     * Set account
+     *
+     * @param \Tavro\Bundle\CoreBundle\Entity\Account $account
+     *
+     * @return ServiceCategory
+     */
+    public function setAccount(\Tavro\Bundle\CoreBundle\Entity\Account $account)
+    {
+        $this->account = $account;
+
+        return $this;
+    }
+
+    /**
+     * Get account
+     *
+     * @return \Tavro\Bundle\CoreBundle\Entity\Account
+     */
+    public function getAccount()
+    {
+        return $this->account;
+    }
+
+    /**
+     * Add service
+     *
+     * @param \Tavro\Bundle\CoreBundle\Entity\Service $service
+     *
+     * @return ServiceCategory
+     */
+    public function addService(\Tavro\Bundle\CoreBundle\Entity\Service $service)
+    {
+        $this->services[] = $service;
+
+        return $this;
+    }
+
+    /**
+     * Remove service
+     *
+     * @param \Tavro\Bundle\CoreBundle\Entity\Service $service
+     */
+    public function removeService(\Tavro\Bundle\CoreBundle\Entity\Service $service)
+    {
+        $this->services->removeElement($service);
+    }
+
+    /**
+     * Get services
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getServices()
+    {
+        return $this->services;
     }
 }

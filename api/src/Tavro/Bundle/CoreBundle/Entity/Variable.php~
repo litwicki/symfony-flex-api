@@ -12,7 +12,7 @@ use JMS\Serializer\Annotation\MaxDepth;
 use JMS\Serializer\Annotation\Groups;
 use Doctrine\ORM\Mapping\Table;
 
-use Tavro\Bundle\CoreBundle\Model\AccountEntity;
+use Tavro\Bundle\CoreBundle\Model\Entity;
 use Tavro\Bundle\CoreBundle\Model\AccountEntityInterface;
 
 /**
@@ -20,8 +20,16 @@ use Tavro\Bundle\CoreBundle\Model\AccountEntityInterface;
  * @ORM\Entity(repositoryClass="Tavro\Bundle\CoreBundle\Repository\VariableRepository")
  * @Table(name="tavro_variable")
  */
-class Variable extends AccountEntity implements AccountEntityInterface
+class Variable extends Entity implements AccountEntityInterface
 {
+    /**
+     * @ORM\ManyToOne(targetEntity="Tavro\Bundle\CoreBundle\Entity\Account", inversedBy="account_groups")
+     * @ORM\JoinColumn(name="account_id", referencedColumnName="id", nullable=FALSE)
+     * @Groups({"detail"})
+     * @MaxDepth(1)
+     */
+    protected $account;
+
     /**
      * @ORM\Column(type="string", length=100, nullable=FALSE)
      */
@@ -73,5 +81,29 @@ class Variable extends AccountEntity implements AccountEntityInterface
     public function getBody()
     {
         return $this->body;
+    }
+
+    /**
+     * Set account
+     *
+     * @param \Tavro\Bundle\CoreBundle\Entity\Account $account
+     *
+     * @return Variable
+     */
+    public function setAccount(\Tavro\Bundle\CoreBundle\Entity\Account $account)
+    {
+        $this->account = $account;
+
+        return $this;
+    }
+
+    /**
+     * Get account
+     *
+     * @return \Tavro\Bundle\CoreBundle\Entity\Account
+     */
+    public function getAccount()
+    {
+        return $this->account;
     }
 }

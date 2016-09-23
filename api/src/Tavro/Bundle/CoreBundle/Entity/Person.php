@@ -18,11 +18,10 @@ use Doctrine\ORM\Mapping\Table;
 
 use Symfony\Component\Validator\Constraints as Assert;
 
-use Tavro\Bundle\CoreBundle\Model\AccountEntity;
-use Tavro\Bundle\CoreBundle\Model\AccountEntityInterface;
-use Tavro\Bundle\CoreBundle\Model\UserInterface;
 use Tavro\Bundle\CoreBundle\Model\Entity;
 use Tavro\Bundle\CoreBundle\Model\EntityInterface;
+use Tavro\Bundle\CoreBundle\Model\UserInterface;
+
 use JMS\Serializer\Annotation\MaxDepth;
 
 /**

@@ -14,7 +14,7 @@ use JMS\Serializer\Annotation\SerializedName;
 use Doctrine\ORM\Mapping\Table;
 use Symfony\Component\Validator\Constraints as Assert;
 
-use Tavro\Bundle\CoreBundle\Model\AccountEntity;
+use Tavro\Bundle\CoreBundle\Model\Entity;
 use Tavro\Bundle\CoreBundle\Model\AccountEntityInterface;
 
 /**
@@ -24,8 +24,16 @@ use Tavro\Bundle\CoreBundle\Model\AccountEntityInterface;
  * @ORM\Table(name="tavro_service")
  *
  */
-class Service extends AccountEntity implements AccountEntityInterface
+class Service extends Entity implements AccountEntityInterface
 {
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Tavro\Bundle\CoreBundle\Entity\Account", inversedBy="services")
+     * @ORM\JoinColumn(name="account_id", referencedColumnName="id", nullable=FALSE)
+     * @Groups({"detail"})
+     * @MaxDepth(1)
+     */
+    protected $account;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=FALSE)
@@ -263,5 +271,29 @@ class Service extends AccountEntity implements AccountEntityInterface
     public function getName()
     {
         return $this->name;
+    }
+
+    /**
+     * Set account
+     *
+     * @param \Tavro\Bundle\CoreBundle\Entity\Account $account
+     *
+     * @return Service
+     */
+    public function setAccount(\Tavro\Bundle\CoreBundle\Entity\Account $account)
+    {
+        $this->account = $account;
+
+        return $this;
+    }
+
+    /**
+     * Get account
+     *
+     * @return \Tavro\Bundle\CoreBundle\Entity\Account
+     */
+    public function getAccount()
+    {
+        return $this->account;
     }
 }

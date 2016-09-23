@@ -14,10 +14,8 @@ use JMS\Serializer\Annotation\SerializedName;
 use Doctrine\ORM\Mapping\Table;
 use Symfony\Component\Validator\Constraints as Assert;
 
-use Tavro\Bundle\CoreBundle\Model\AccountEntity;
-use Tavro\Bundle\CoreBundle\Model\AccountEntityInterface;
 use Tavro\Bundle\CoreBundle\Model\Entity;
-use Tavro\Bundle\CoreBundle\Model\EntityInterface;
+use Tavro\Bundle\CoreBundle\Model\AccountEntityInterface;
 
 /**
  * @ORM\Entity
@@ -26,8 +24,16 @@ use Tavro\Bundle\CoreBundle\Model\EntityInterface;
  * @ORM\Table(name="tavro_expense")
  *
  */
-class Expense extends AccountEntity implements AccountEntityInterface
+class Expense extends Entity implements AccountEntityInterface
 {
+    /**
+     * @ORM\ManyToOne(targetEntity="Tavro\Bundle\CoreBundle\Entity\Account", inversedBy="expenses")
+     * @ORM\JoinColumn(name="account_id", referencedColumnName="id", nullable=FALSE)
+     * @Groups({"detail"})
+     * @MaxDepth(1)
+     */
+    protected $account;
+
     /**
      * @ORM\Column(type="string", length=8000, nullable=TRUE)
      * @Groups({"api", "detail", "simple"})
@@ -270,5 +276,29 @@ class Expense extends AccountEntity implements AccountEntityInterface
     public function getExpenseTags()
     {
         return $this->expense_tags;
+    }
+
+    /**
+     * Set account
+     *
+     * @param \Tavro\Bundle\CoreBundle\Entity\Account $account
+     *
+     * @return Expense
+     */
+    public function setAccount(\Tavro\Bundle\CoreBundle\Entity\Account $account)
+    {
+        $this->account = $account;
+
+        return $this;
+    }
+
+    /**
+     * Get account
+     *
+     * @return \Tavro\Bundle\CoreBundle\Entity\Account
+     */
+    public function getAccount()
+    {
+        return $this->account;
     }
 }

@@ -14,7 +14,7 @@ use JMS\Serializer\Annotation\SerializedName;
 use Doctrine\ORM\Mapping\Table;
 use Symfony\Component\Validator\Constraints as Assert;
 
-use Tavro\Bundle\CoreBundle\Model\AccountEntity;
+use Tavro\Bundle\CoreBundle\Model\Entity;
 use Tavro\Bundle\CoreBundle\Model\AccountEntityInterface;
 
 /**
@@ -24,8 +24,16 @@ use Tavro\Bundle\CoreBundle\Model\AccountEntityInterface;
  * @ORM\Table(name="tavro_revenue_category")
  *
  */
-class RevenueCategory extends AccountEntity implements AccountEntityInterface
+class RevenueCategory extends Entity implements AccountEntityInterface
 {
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Tavro\Bundle\CoreBundle\Entity\Account", inversedBy="revenue_categories")
+     * @ORM\JoinColumn(name="account_id", referencedColumnName="id", nullable=FALSE)
+     * @Groups({"detail"})
+     * @MaxDepth(1)
+     */
+    protected $account;
 
     /**
      * @ORM\OneToMany(targetEntity="Tavro\Bundle\CoreBundle\Entity\Revenue", mappedBy="category")
@@ -55,5 +63,63 @@ class RevenueCategory extends AccountEntity implements AccountEntityInterface
     public function getBody()
     {
         return $this->body;
+    }
+
+    /**
+     * Set account
+     *
+     * @param \Tavro\Bundle\CoreBundle\Entity\Account $account
+     *
+     * @return RevenueCategory
+     */
+    public function setAccount(\Tavro\Bundle\CoreBundle\Entity\Account $account)
+    {
+        $this->account = $account;
+
+        return $this;
+    }
+
+    /**
+     * Get account
+     *
+     * @return \Tavro\Bundle\CoreBundle\Entity\Account
+     */
+    public function getAccount()
+    {
+        return $this->account;
+    }
+
+    /**
+     * Add revenue
+     *
+     * @param \Tavro\Bundle\CoreBundle\Entity\Revenue $revenue
+     *
+     * @return RevenueCategory
+     */
+    public function addRevenue(\Tavro\Bundle\CoreBundle\Entity\Revenue $revenue)
+    {
+        $this->revenues[] = $revenue;
+
+        return $this;
+    }
+
+    /**
+     * Remove revenue
+     *
+     * @param \Tavro\Bundle\CoreBundle\Entity\Revenue $revenue
+     */
+    public function removeRevenue(\Tavro\Bundle\CoreBundle\Entity\Revenue $revenue)
+    {
+        $this->revenues->removeElement($revenue);
+    }
+
+    /**
+     * Get revenues
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getRevenues()
+    {
+        return $this->revenues;
     }
 }

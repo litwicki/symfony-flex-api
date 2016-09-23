@@ -86,10 +86,10 @@ class Nodes extends AbstractFixture implements OrderedFixtureInterface, Containe
         $size = 10;
 
         $accounts = $manager->getRepository('TavroCoreBundle:Account')->findAll();
+        $tags = $manager->getRepository('TavroCoreBundle:Tag')->findAll();
 
         foreach($accounts as $account) {
 
-            $tags = $account->getTags()->toArray();
             $users = $account->getUsers()->toArray();
 
             $nodeTypes = array(

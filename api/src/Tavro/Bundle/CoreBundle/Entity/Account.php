@@ -53,6 +53,26 @@ class Account extends Entity implements EntityInterface
     protected $funding_rounds;
 
     /**
+     * @ORM\OneToMany(targetEntity="Tavro\Bundle\CoreBundle\Entity\File", mappedBy="account", cascade={"remove"})
+     */
+    protected $files;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Tavro\Bundle\CoreBundle\Entity\Image", mappedBy="account", cascade={"remove"})
+     */
+    protected $images;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Tavro\Bundle\CoreBundle\Entity\Node", mappedBy="account", cascade={"remove"})
+     */
+    protected $nodes;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Tavro\Bundle\CoreBundle\Entity\Contact", mappedBy="account", cascade={"remove"})
+     */
+    protected $contacts;
+
+    /**
      * @ORM\OneToMany(targetEntity="Tavro\Bundle\CoreBundle\Entity\Service", mappedBy="account", cascade={"remove"})
      */
     protected $services;
@@ -71,11 +91,6 @@ class Account extends Entity implements EntityInterface
      * @ORM\OneToMany(targetEntity="Tavro\Bundle\CoreBundle\Entity\Expense", mappedBy="account", cascade={"remove"})
      */
     protected $expenses;
-
-    /**
-     * @ORM\OneToMany(targetEntity="Tavro\Bundle\CoreBundle\Entity\Tag", mappedBy="account", cascade={"remove"})
-     */
-    protected $tags;
 
     /**
      * @ORM\Column(type="string", unique=TRUE, length=500, nullable=FALSE)
@@ -341,40 +356,6 @@ class Account extends Entity implements EntityInterface
     public function getOrganizations()
     {
         return $this->organizations;
-    }
-
-    /**
-     * Add tag
-     *
-     * @param \Tavro\Bundle\CoreBundle\Entity\Tag $tag
-     *
-     * @return Account
-     */
-    public function addTag(\Tavro\Bundle\CoreBundle\Entity\Tag $tag)
-    {
-        $this->tags[] = $tag;
-
-        return $this;
-    }
-
-    /**
-     * Remove tag
-     *
-     * @param \Tavro\Bundle\CoreBundle\Entity\Tag $tag
-     */
-    public function removeTag(\Tavro\Bundle\CoreBundle\Entity\Tag $tag)
-    {
-        $this->tags->removeElement($tag);
-    }
-
-    /**
-     * Get tags
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getTags()
-    {
-        return $this->tags;
     }
 
     /**
@@ -731,5 +712,141 @@ class Account extends Entity implements EntityInterface
             }
         }
         return $items;
+    }
+
+    /**
+     * Add file
+     *
+     * @param \Tavro\Bundle\CoreBundle\Entity\File $file
+     *
+     * @return Account
+     */
+    public function addFile(\Tavro\Bundle\CoreBundle\Entity\File $file)
+    {
+        $this->files[] = $file;
+
+        return $this;
+    }
+
+    /**
+     * Remove file
+     *
+     * @param \Tavro\Bundle\CoreBundle\Entity\File $file
+     */
+    public function removeFile(\Tavro\Bundle\CoreBundle\Entity\File $file)
+    {
+        $this->files->removeElement($file);
+    }
+
+    /**
+     * Get files
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getFiles()
+    {
+        return $this->files;
+    }
+
+    /**
+     * Add image
+     *
+     * @param \Tavro\Bundle\CoreBundle\Entity\Image $image
+     *
+     * @return Account
+     */
+    public function addImage(\Tavro\Bundle\CoreBundle\Entity\Image $image)
+    {
+        $this->images[] = $image;
+
+        return $this;
+    }
+
+    /**
+     * Remove image
+     *
+     * @param \Tavro\Bundle\CoreBundle\Entity\Image $image
+     */
+    public function removeImage(\Tavro\Bundle\CoreBundle\Entity\Image $image)
+    {
+        $this->images->removeElement($image);
+    }
+
+    /**
+     * Get images
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getImages()
+    {
+        return $this->images;
+    }
+
+    /**
+     * Add node
+     *
+     * @param \Tavro\Bundle\CoreBundle\Entity\Node $node
+     *
+     * @return Account
+     */
+    public function addNode(\Tavro\Bundle\CoreBundle\Entity\Node $node)
+    {
+        $this->nodes[] = $node;
+
+        return $this;
+    }
+
+    /**
+     * Remove node
+     *
+     * @param \Tavro\Bundle\CoreBundle\Entity\Node $node
+     */
+    public function removeNode(\Tavro\Bundle\CoreBundle\Entity\Node $node)
+    {
+        $this->nodes->removeElement($node);
+    }
+
+    /**
+     * Get nodes
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getNodes()
+    {
+        return $this->nodes;
+    }
+
+    /**
+     * Add contact
+     *
+     * @param \Tavro\Bundle\CoreBundle\Entity\Contact $contact
+     *
+     * @return Account
+     */
+    public function addContact(\Tavro\Bundle\CoreBundle\Entity\Contact $contact)
+    {
+        $this->contacts[] = $contact;
+
+        return $this;
+    }
+
+    /**
+     * Remove contact
+     *
+     * @param \Tavro\Bundle\CoreBundle\Entity\Contact $contact
+     */
+    public function removeContact(\Tavro\Bundle\CoreBundle\Entity\Contact $contact)
+    {
+        $this->contacts->removeElement($contact);
+    }
+
+    /**
+     * Get contacts
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getContacts()
+    {
+        return $this->contacts;
     }
 }

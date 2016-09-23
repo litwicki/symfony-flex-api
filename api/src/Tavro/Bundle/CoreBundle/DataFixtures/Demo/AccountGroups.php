@@ -81,6 +81,13 @@ class AccountGroups extends AbstractFixture implements OrderedFixtureInterface, 
                 'Combaticons',
                 'Stunticons',
                 'Predacons',
+            ],
+            'Zoadilack' => [
+                'Executives',
+                'Managers',
+                'Developers',
+                'Contractors',
+                'Interns',
             ]
         ];
 

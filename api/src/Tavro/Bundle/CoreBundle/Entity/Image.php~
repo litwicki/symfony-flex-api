@@ -9,10 +9,11 @@ use JMS\Serializer\Annotation\ExclusionPolicy;
 use JMS\Serializer\Annotation\Expose;
 use JMS\Serializer\Annotation\Type;
 use JMS\Serializer\Annotation\VirtualProperty;
+use JMS\Serializer\Annotation\MaxDepth;
 use JMS\Serializer\Annotation\Groups;
 use Doctrine\ORM\Mapping\Table;
 
-use Tavro\Bundle\CoreBundle\Model\AccountEntity;
+use Tavro\Bundle\CoreBundle\Model\Entity;
 use Tavro\Bundle\CoreBundle\Model\AccountEntityInterface;
 use Tavro\Bundle\CoreBundle\Model\S3EntityInterface;
 
@@ -23,8 +24,16 @@ use Tavro\Bundle\CoreBundle\Model\S3EntityInterface;
  * @Table(name="tavro_image")
  *
  */
-class Image extends AccountEntity implements S3EntityInterface, AccountEntityInterface
+class Image extends Entity implements S3EntityInterface, AccountEntityInterface
 {
+    /**
+     * @ORM\ManyToOne(targetEntity="Tavro\Bundle\CoreBundle\Entity\Account", inversedBy="images")
+     * @ORM\JoinColumn(name="account_id", referencedColumnName="id", nullable=FALSE)
+     * @Groups({"detail"})
+     * @MaxDepth(1)
+     */
+    protected $account;
+
     /**
      * @ORM\Column(type="string", length=500, nullable=FALSE)
      * @Groups({"api", "detail"})
@@ -423,5 +432,29 @@ class Image extends AccountEntity implements S3EntityInterface, AccountEntityInt
     public function getBody()
     {
         return $this->body;
+    }
+
+    /**
+     * Set account
+     *
+     * @param \Tavro\Bundle\CoreBundle\Entity\Account $account
+     *
+     * @return Image
+     */
+    public function setAccount(\Tavro\Bundle\CoreBundle\Entity\Account $account)
+    {
+        $this->account = $account;
+
+        return $this;
+    }
+
+    /**
+     * Get account
+     *
+     * @return \Tavro\Bundle\CoreBundle\Entity\Account
+     */
+    public function getAccount()
+    {
+        return $this->account;
     }
 }

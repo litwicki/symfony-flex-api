@@ -68,12 +68,12 @@ class Expenses extends AbstractFixture implements OrderedFixtureInterface, Conta
         $size = 10;
 
         $accounts = $manager->getRepository('TavroCoreBundle:Account')->findAll();
+        $tags = $manager->getRepository('TavroCoreBundle:Tag')->findAll();
 
         foreach($accounts as $account) {
 
             $expenseCategories = $account->getExpenseCategories()->toArray();
             $users = $account->getUsers()->toArray();
-            $tags = $account->getTags()->toArray();
 
             $expenses = array();
 

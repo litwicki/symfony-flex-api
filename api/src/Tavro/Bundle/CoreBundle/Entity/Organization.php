@@ -14,7 +14,7 @@ use JMS\Serializer\Annotation\SerializedName;
 use Doctrine\ORM\Mapping\Table;
 use Symfony\Component\Validator\Constraints as Assert;
 
-use Tavro\Bundle\CoreBundle\Model\AccountEntity;
+use Tavro\Bundle\CoreBundle\Model\Entity;
 use Tavro\Bundle\CoreBundle\Model\AccountEntityInterface;
 
 /**
@@ -24,8 +24,16 @@ use Tavro\Bundle\CoreBundle\Model\AccountEntityInterface;
  * @ORM\Table(name="tavro_organization")
  *
  */
-class Organization extends AccountEntity implements AccountEntityInterface
+class Organization extends Entity implements AccountEntityInterface
 {
+    /**
+     * @ORM\ManyToOne(targetEntity="Tavro\Bundle\CoreBundle\Entity\Account", inversedBy="organizations")
+     * @ORM\JoinColumn(name="account_id", referencedColumnName="id", nullable=FALSE)
+     * @Groups({"detail"})
+     * @MaxDepth(1)
+     */
+    protected $account;
+
     /**
      * @ORM\Column(type="integer", length=255, unique=TRUE, nullable=TRUE)
      * @Groups({"api", "detail", "simple"})
@@ -360,4 +368,62 @@ class Organization extends AccountEntity implements AccountEntityInterface
 
     }
 
+
+    /**
+     * Set account
+     *
+     * @param \Tavro\Bundle\CoreBundle\Entity\Account $account
+     *
+     * @return Organization
+     */
+    public function setAccount(\Tavro\Bundle\CoreBundle\Entity\Account $account)
+    {
+        $this->account = $account;
+
+        return $this;
+    }
+
+    /**
+     * Get account
+     *
+     * @return \Tavro\Bundle\CoreBundle\Entity\Account
+     */
+    public function getAccount()
+    {
+        return $this->account;
+    }
+
+    /**
+     * Add organizationComment
+     *
+     * @param \Tavro\Bundle\CoreBundle\Entity\OrganizationComment $organizationComment
+     *
+     * @return Organization
+     */
+    public function addOrganizationComment(\Tavro\Bundle\CoreBundle\Entity\OrganizationComment $organizationComment)
+    {
+        $this->organization_comments[] = $organizationComment;
+
+        return $this;
+    }
+
+    /**
+     * Remove organizationComment
+     *
+     * @param \Tavro\Bundle\CoreBundle\Entity\OrganizationComment $organizationComment
+     */
+    public function removeOrganizationComment(\Tavro\Bundle\CoreBundle\Entity\OrganizationComment $organizationComment)
+    {
+        $this->organization_comments->removeElement($organizationComment);
+    }
+
+    /**
+     * Get organizationComments
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getOrganizationComments()
+    {
+        return $this->organization_comments;
+    }
 }

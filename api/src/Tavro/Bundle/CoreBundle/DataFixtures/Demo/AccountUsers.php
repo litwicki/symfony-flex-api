@@ -147,6 +147,17 @@ class AccountUsers extends AbstractFixture implements OrderedFixtureInterface, C
                     'Rampage',
                     'Tantrum'
                 ]
+            ],
+
+            'Zoadilack' => [
+                'Executives' => [
+                    'hutch.white',
+                    'jake.litwicki',
+                ],
+                'Developers' => [
+                    'hutch.white',
+                    'jake.litwicki'
+                ]
             ]
         ];
 

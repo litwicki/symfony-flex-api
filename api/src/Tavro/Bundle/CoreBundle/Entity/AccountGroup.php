@@ -13,7 +13,7 @@ use JMS\Serializer\Annotation\Groups;
 use Doctrine\ORM\Mapping\Table;
 use JMS\Serializer\Annotation\MaxDepth;
 
-use Tavro\Bundle\CoreBundle\Model\AccountEntity;
+use Tavro\Bundle\CoreBundle\Model\Entity;
 use Tavro\Bundle\CoreBundle\Model\AccountEntityInterface;
 
 /**
@@ -22,8 +22,16 @@ use Tavro\Bundle\CoreBundle\Model\AccountEntityInterface;
  * @ORM\HasLifecycleCallbacks
  * @Table(name="tavro_account_group")
  */
-class AccountGroup extends AccountEntity implements AccountEntityInterface
+class AccountGroup extends Entity implements AccountEntityInterface
 {
+    /**
+     * @ORM\ManyToOne(targetEntity="Tavro\Bundle\CoreBundle\Entity\Account", inversedBy="account_groups")
+     * @ORM\JoinColumn(name="account_id", referencedColumnName="id", nullable=FALSE)
+     * @Groups({"detail"})
+     * @MaxDepth(1)
+     */
+    protected $account;
+
     /**
      * @ORM\ManyToOne(targetEntity="Tavro\Bundle\CoreBundle\Entity\User", inversedBy="account_groups")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id", nullable=FALSE)
@@ -163,5 +171,63 @@ class AccountGroup extends AccountEntity implements AccountEntityInterface
     public function getUser()
     {
         return $this->user;
+    }
+
+    /**
+     * Set account
+     *
+     * @param \Tavro\Bundle\CoreBundle\Entity\Account $account
+     *
+     * @return AccountGroup
+     */
+    public function setAccount(\Tavro\Bundle\CoreBundle\Entity\Account $account)
+    {
+        $this->account = $account;
+
+        return $this;
+    }
+
+    /**
+     * Get account
+     *
+     * @return \Tavro\Bundle\CoreBundle\Entity\Account
+     */
+    public function getAccount()
+    {
+        return $this->account;
+    }
+
+    /**
+     * Add accountGroupUser
+     *
+     * @param \Tavro\Bundle\CoreBundle\Entity\AccountGroupUser $accountGroupUser
+     *
+     * @return AccountGroup
+     */
+    public function addAccountGroupUser(\Tavro\Bundle\CoreBundle\Entity\AccountGroupUser $accountGroupUser)
+    {
+        $this->account_group_users[] = $accountGroupUser;
+
+        return $this;
+    }
+
+    /**
+     * Remove accountGroupUser
+     *
+     * @param \Tavro\Bundle\CoreBundle\Entity\AccountGroupUser $accountGroupUser
+     */
+    public function removeAccountGroupUser(\Tavro\Bundle\CoreBundle\Entity\AccountGroupUser $accountGroupUser)
+    {
+        $this->account_group_users->removeElement($accountGroupUser);
+    }
+
+    /**
+     * Get accountGroupUsers
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getAccountGroupUsers()
+    {
+        return $this->account_group_users;
     }
 }

@@ -14,8 +14,8 @@ use JMS\Serializer\Annotation\SerializedName;
 use Doctrine\ORM\Mapping\Table;
 use Symfony\Component\Validator\Constraints as Assert;
 
-use Tavro\Bundle\CoreBundle\Model\AccountEntity;
-use Tavro\Bundle\CoreBundle\Model\AccountEntityInterface;
+use Tavro\Bundle\CoreBundle\Model\Entity;
+use Tavro\Bundle\CoreBundle\Model\EntityInterface;
 
 /**
  * @ORM\Entity
@@ -24,7 +24,7 @@ use Tavro\Bundle\CoreBundle\Model\AccountEntityInterface;
  * @ORM\Table(name="tavro_tag")
  *
  */
-class Tag extends AccountEntity implements AccountEntityInterface
+class Tag extends Entity implements EntityInterface
 {
     /**
      * @ORM\Column(type="string", length=30, nullable=FALSE)
@@ -41,6 +41,11 @@ class Tag extends AccountEntity implements AccountEntityInterface
      * @ORM\OneToMany(targetEntity="Tavro\Bundle\CoreBundle\Entity\ExpenseTag", mappedBy="tag", cascade={"remove"})
      */
     protected $expense_tags;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Tavro\Bundle\CoreBundle\Entity\RevenueTag", mappedBy="tag", cascade={"remove"})
+     */
+    protected $revenue_tags;
 
     /**
      * Set tag
@@ -157,4 +162,38 @@ class Tag extends AccountEntity implements AccountEntityInterface
         return $this->expense_tags;
     }
 
+
+    /**
+     * Add revenueTag
+     *
+     * @param \Tavro\Bundle\CoreBundle\Entity\RevenueTag $revenueTag
+     *
+     * @return Tag
+     */
+    public function addRevenueTag(\Tavro\Bundle\CoreBundle\Entity\RevenueTag $revenueTag)
+    {
+        $this->revenue_tags[] = $revenueTag;
+
+        return $this;
+    }
+
+    /**
+     * Remove revenueTag
+     *
+     * @param \Tavro\Bundle\CoreBundle\Entity\RevenueTag $revenueTag
+     */
+    public function removeRevenueTag(\Tavro\Bundle\CoreBundle\Entity\RevenueTag $revenueTag)
+    {
+        $this->revenue_tags->removeElement($revenueTag);
+    }
+
+    /**
+     * Get revenueTags
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getRevenueTags()
+    {
+        return $this->revenue_tags;
+    }
 }

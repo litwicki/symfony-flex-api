@@ -75,7 +75,7 @@ class Organizations extends AbstractFixture implements OrderedFixtureInterface, 
 
         foreach($accounts as $account) {
 
-            $users = $account->getUsers();
+            $users = $account->getUsers()->toArray();
 
             for($i=0;$i<rand(1,$size);$i++) {
 
@@ -95,7 +95,7 @@ class Organizations extends AbstractFixture implements OrderedFixtureInterface, 
 
                 for($i=0;$i<rand(1,$size);$i++) {
                     $comment = new Comment();
-                    $comment->setUser($users[array_rand($users)]);
+                    $comment->setUser($users[array_rand($users, 1)]);
                     $comment->setBody($faker->text(rand(100,1000)));
                     $comment->setStatus(rand(0,1));
                     $manager->persist($comment);

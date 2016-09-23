@@ -991,4 +991,174 @@ class User extends Entity implements UserInterface, \Serializable
     {
         return $this->account_users;
     }
+
+    /**
+     * Add expense
+     *
+     * @param \Tavro\Bundle\CoreBundle\Entity\Expense $expense
+     *
+     * @return User
+     */
+    public function addExpense(\Tavro\Bundle\CoreBundle\Entity\Expense $expense)
+    {
+        $this->expenses[] = $expense;
+
+        return $this;
+    }
+
+    /**
+     * Remove expense
+     *
+     * @param \Tavro\Bundle\CoreBundle\Entity\Expense $expense
+     */
+    public function removeExpense(\Tavro\Bundle\CoreBundle\Entity\Expense $expense)
+    {
+        $this->expenses->removeElement($expense);
+    }
+
+    /**
+     * Get expenses
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getExpenses()
+    {
+        return $this->expenses;
+    }
+
+    /**
+     * Add revenue
+     *
+     * @param \Tavro\Bundle\CoreBundle\Entity\Revenue $revenue
+     *
+     * @return User
+     */
+    public function addRevenue(\Tavro\Bundle\CoreBundle\Entity\Revenue $revenue)
+    {
+        $this->revenues[] = $revenue;
+
+        return $this;
+    }
+
+    /**
+     * Remove revenue
+     *
+     * @param \Tavro\Bundle\CoreBundle\Entity\Revenue $revenue
+     */
+    public function removeRevenue(\Tavro\Bundle\CoreBundle\Entity\Revenue $revenue)
+    {
+        $this->revenues->removeElement($revenue);
+    }
+
+    /**
+     * Get revenues
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getRevenues()
+    {
+        return $this->revenues;
+    }
+
+    /**
+     * Add account
+     *
+     * @param \Tavro\Bundle\CoreBundle\Entity\Account $account
+     *
+     * @return User
+     */
+    public function addAccount(\Tavro\Bundle\CoreBundle\Entity\Account $account)
+    {
+        $this->accounts[] = $account;
+
+        return $this;
+    }
+
+    /**
+     * Remove account
+     *
+     * @param \Tavro\Bundle\CoreBundle\Entity\Account $account
+     */
+    public function removeAccount(\Tavro\Bundle\CoreBundle\Entity\Account $account)
+    {
+        $this->accounts->removeElement($account);
+    }
+
+    /**
+     * Get accounts
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getAccounts()
+    {
+        return $this->accounts;
+    }
+
+    /**
+     * Add accountGroup
+     *
+     * @param \Tavro\Bundle\CoreBundle\Entity\AccountGroup $accountGroup
+     *
+     * @return User
+     */
+    public function addAccountGroup(\Tavro\Bundle\CoreBundle\Entity\AccountGroup $accountGroup)
+    {
+        $this->account_groups[] = $accountGroup;
+
+        return $this;
+    }
+
+    /**
+     * Remove accountGroup
+     *
+     * @param \Tavro\Bundle\CoreBundle\Entity\AccountGroup $accountGroup
+     */
+    public function removeAccountGroup(\Tavro\Bundle\CoreBundle\Entity\AccountGroup $accountGroup)
+    {
+        $this->account_groups->removeElement($accountGroup);
+    }
+
+    /**
+     * Get accountGroups
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getAccountGroups()
+    {
+        return $this->account_groups;
+    }
+
+    /**
+     * Add accountGroupUser
+     *
+     * @param \Tavro\Bundle\CoreBundle\Entity\AccountGroupUser $accountGroupUser
+     *
+     * @return User
+     */
+    public function addAccountGroupUser(\Tavro\Bundle\CoreBundle\Entity\AccountGroupUser $accountGroupUser)
+    {
+        $this->account_group_users[] = $accountGroupUser;
+
+        return $this;
+    }
+
+    /**
+     * Remove accountGroupUser
+     *
+     * @param \Tavro\Bundle\CoreBundle\Entity\AccountGroupUser $accountGroupUser
+     */
+    public function removeAccountGroupUser(\Tavro\Bundle\CoreBundle\Entity\AccountGroupUser $accountGroupUser)
+    {
+        $this->account_group_users->removeElement($accountGroupUser);
+    }
+
+    /**
+     * Get accountGroupUsers
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getAccountGroupUsers()
+    {
+        return $this->account_group_users;
+    }
 }

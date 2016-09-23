@@ -15,7 +15,6 @@ use Doctrine\ORM\Mapping\Table;
 use Symfony\Component\Validator\Constraints as Assert;
 
 use Tavro\Bundle\CoreBundle\Model\Entity;
-use Tavro\Bundle\CoreBundle\Model\AccountEntity;
 use Tavro\Bundle\CoreBundle\Model\AccountEntityInterface;
 
 /**
@@ -25,8 +24,16 @@ use Tavro\Bundle\CoreBundle\Model\AccountEntityInterface;
  * @ORM\Table(name="tavro_expense_category")
  *
  */
-class ExpenseCategory extends AccountEntity implements AccountEntityInterface
+class ExpenseCategory extends Entity implements AccountEntityInterface
 {
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Tavro\Bundle\CoreBundle\Entity\Account", inversedBy="expense_categories")
+     * @ORM\JoinColumn(name="account_id", referencedColumnName="id", nullable=FALSE)
+     * @Groups({"detail"})
+     * @MaxDepth(1)
+     */
+    protected $account;
 
     /**
      * @ORM\OneToMany(targetEntity="Tavro\Bundle\CoreBundle\Entity\Expense", mappedBy="category")
@@ -56,5 +63,63 @@ class ExpenseCategory extends AccountEntity implements AccountEntityInterface
     public function getBody()
     {
         return $this->body;
+    }
+
+    /**
+     * Set account
+     *
+     * @param \Tavro\Bundle\CoreBundle\Entity\Account $account
+     *
+     * @return ExpenseCategory
+     */
+    public function setAccount(\Tavro\Bundle\CoreBundle\Entity\Account $account)
+    {
+        $this->account = $account;
+
+        return $this;
+    }
+
+    /**
+     * Get account
+     *
+     * @return \Tavro\Bundle\CoreBundle\Entity\Account
+     */
+    public function getAccount()
+    {
+        return $this->account;
+    }
+
+    /**
+     * Add expense
+     *
+     * @param \Tavro\Bundle\CoreBundle\Entity\Expense $expense
+     *
+     * @return ExpenseCategory
+     */
+    public function addExpense(\Tavro\Bundle\CoreBundle\Entity\Expense $expense)
+    {
+        $this->expenses[] = $expense;
+
+        return $this;
+    }
+
+    /**
+     * Remove expense
+     *
+     * @param \Tavro\Bundle\CoreBundle\Entity\Expense $expense
+     */
+    public function removeExpense(\Tavro\Bundle\CoreBundle\Entity\Expense $expense)
+    {
+        $this->expenses->removeElement($expense);
+    }
+
+    /**
+     * Get expenses
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getExpenses()
+    {
+        return $this->expenses;
     }
 }

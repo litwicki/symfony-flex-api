@@ -49,7 +49,6 @@ class Role extends Entity implements RoleInterface, EntityInterface, \Serializab
     {
         parent::__construct();
         $this->users = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->status = self::STATUS_ENABLED;
     }
 
     public function __toString()
