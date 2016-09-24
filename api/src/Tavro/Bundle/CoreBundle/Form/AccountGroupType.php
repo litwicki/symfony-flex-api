@@ -30,6 +30,11 @@ class AccountGroupType extends AbstractType
                 'choice_label' => 'User',
                 'invalid_message' => 'Please enter a valid User',
             ])
+            ->add('account', EntityType::class, [
+                'class' => 'TavroCoreBundle:Account',
+                'choice_label' => 'Account',
+                'invalid_message' => 'Please enter a valid Account',
+            ])
             ->add('submit', SubmitType::class)
         ;
     }

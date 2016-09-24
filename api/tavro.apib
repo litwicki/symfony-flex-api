@@ -70,7 +70,7 @@ API for working with tavro.io.
 + username: username
 + email: user@example.com
 
-## Customer User (object)
+## Contact User (object)
 + id: 2 (number, required)
 + username: zachary (string, required)
 + salt (string)
@@ -86,7 +86,7 @@ API for working with tavro.io.
 + birthday (string)
 + avatar
 
-## Customer2 User (object)
+## Contact2 User (object)
 + id: 20 (number, required)
 + username: zachary (string, required)
 + salt (string)
@@ -139,7 +139,7 @@ API for working with tavro.io.
 + title: DC Comics (string, required)
 + body: Nah-nah nah-nah nah-nah nah-nah... BATMAN! (string)
 
-## Customer (object)
+## Contact (object)
 + id: 42 (number, required)
 + create_date: `2015-08-05T08:40:51.620Z` (string, required)
 + update_date: `2015-08-05T08:40:51.620Z` (string, optional)
@@ -154,11 +154,11 @@ API for working with tavro.io.
 + zip: 98065 (string, required)
 + email: zachary@tavro.io (string, required)
 + phone: 555-867-5309 (string, optional)
-+ user (Customer User)
++ user (Contact User)
 + organization (Marvel Organization)
 + comments (array)
 
-## Customer2 (object)
+## Contact2 (object)
 + id: 50 (number, required)
 + create_date: `2015-08-05T08:40:51.620Z` (string, required)
 + update_date: `2015-08-05T08:40:51.620Z` (string, optional)
@@ -177,7 +177,7 @@ API for working with tavro.io.
 + organization (Marvel Organization)
 + comments (array)
 
-## Customer3 (object)
+## Contact3 (object)
 + id: 13 (number, required)
 + create_date: `2015-08-05T08:40:51.620Z` (string, required)
 + update_date: `2015-08-05T08:40:51.620Z` (string, optional)
@@ -196,7 +196,7 @@ API for working with tavro.io.
 + organization (DC Comics Organization)
 + comments (array)
 
-## Customer4 (object)
+## Contact4 (object)
 + id: 43 (number, required)
 + create_date: `2015-08-05T08:40:51.620Z` (string, required)
 + update_date: `2015-08-05T08:40:51.620Z` (string, optional)
@@ -220,7 +220,7 @@ API for working with tavro.io.
 + create_date: `2015-08-05T08:40:51.620Z` (string, required)
 + update_date: `2015-08-05T08:40:51.620Z` (string, required)
 + body: Boba Fett
-+ status: id (number, required)
++ status: 1 (number, required)
 + user (User)
 
 ## Expense (object)
@@ -230,7 +230,7 @@ API for working with tavro.io.
 + expense_date
 + category (Expense Category)
 + user (User)
-+ customer (Customer)
++ customer (Contact)
 
 ## Funding Round (object)
 + id: `1` (number, required)
@@ -293,7 +293,7 @@ API for working with tavro.io.
 + cost: 35.95 (number)
 + category (ProductCategory)
 + organization (Organization)
-+ images: [(Product Image)]
++ images [(Product Image)]
 
 ## Revenue (object)
 + id: 1 (number)
@@ -320,7 +320,7 @@ API for working with tavro.io.
 + price: 150 (number)
 + category (ServiceCategory)
 + organization (Organization)
-+ images: [(Service Image)]
++ images [(Service Image)]
 
 ## Shareholder (object)
 + id: 1 (number)
@@ -378,6 +378,90 @@ API for working with tavro.io.
 + body
 + organization (Organization)
 
+## Account [/accounts]
+
+### Create Account [POST /accounts]
+
++ Request (application/json)
+
+        {
+            "body": "This round is ideally for friends and family!",
+            "user": 1
+        }
+
++ Response 201 (application/json)
+
+    + Headers
+
+            Location: /accounts/1
+
+### Add Account User [POST /accounts/{id}/users]
+
++ Request (application/json)
+
+        {
+            "body": "This round is ideally for friends and family!",
+            "user": 1
+        }
+
++ Response 201 (application/json)
+
+    + Headers
+
+            Location: /users/{id}
+
+### Edit Account [PATCH /accounts/{id}]
+
++ Parameters
+    + id: `1` (number, required) - ID of the Account in the form of an integer
+
++ Request (application/json)
+
+        {
+            "body": "This round of funding is exclusive to friends and family.",
+            "status": 1
+        }
+
++ Response 204 (application/json)
+
+## AccountGroup [/account_groups]
+
+### Create AccountGroup [POST /{object}/{id}/account_groups]
+
++ Request (application/json)
+
+        {
+            "body": "This round is ideally for friends and family!",
+            "user": 1
+        }
+
++ Response 201 (application/json)
+
+    + Headers
+
+            Location: /account_groups/1
+
+### Edit AccountGroup [PATCH /account_groups/{id}]
+
++ Parameters
+    + id: `1` (number, required) - ID of the AccountGroup in the form of an integer
+
++ Request (application/json)
+
+        {
+            "body": "This round of funding is exclusive to friends and family.",
+            "status": 1
+        }
+
++ Response 204 (application/json)
+
+### Delete AccountGroup [DELETE /account_groups/{id}]
+
++ Parameters
+    + id: `1` (number, required) - ID of the AccountGroup in the form of an integer
+
++ Response 204 (application/json)
+
 ## Comment [/comments]
 
 ### Create Comment [POST /{object}/{id}/comments]
@@ -385,7 +469,7 @@ API for working with tavro.io.
 Comments can be created for `customer`, `expense`, `funding_round`, `node`, and `revenue` objects.
 
 + Parameters
-    + object: `node` (string, required) - The object to attach the comment to: customers, funding_rounds, nodes, revenue
+    + object: `node` (string, required) - The object to attach the comment to: contacts, funding_rounds, nodes, revenue
     + id: `1` (number, required) - ID of the `PARENT OBJECT` in the form of an integer
 
 + Request (application/json)
@@ -426,29 +510,29 @@ Regardless of what object the comment is attached to, you simply delete it by it
 
 + Response 204 (application/json)
 
-## Customer [/customers]
+## Contact [/contacts]
 
-### All Customers [GET]
+### All Contacts [GET]
 
-Return all `Customer` objects for all `Organizations`. The response will be keyed by `organization_id`.
+Return all `Contact` objects for all `Organizations`. The response will be keyed by `organization_id`.
 
 + Response 200 (application/json)
 
-    + Attributes (array[Customer2, Customer4])
+    + Attributes (array[Contact2, Contact4])
 
-### View Customer [GET /customers/{id}]
+### View Contact [GET /contacts/{id}]
 
 + Parameters
-    + id: `1` (number, required) - ID of the Customer in the form of an integer
+    + id: `1` (number, required) - ID of the Contact in the form of an integer
 
 + Response 200 (application/json)
 
     + Attributes
         + data (array) - Response data
-            + (Customer)
-        + message: Customer retrieved successfully.
+            + (Contact)
+        + message: Contact retrieved successfully.
 
-### Create Customer [POST]
+### Create Contact [POST]
 
 + Request (application/json)
 
@@ -471,12 +555,12 @@ Return all `Customer` objects for all `Organizations`. The response will be keye
 
     + Headers
 
-            Location: /customers/1
+            Location: /contacts/1
 
-### Edit Customer [PATCH /customers/{id}]
+### Edit Contact [PATCH /contacts/{id}]
 
 + Parameters
-    + id: `1` (number, required) - ID of the Customer in the form of an integer
+    + id: `1` (number, required) - ID of the Contact in the form of an integer
 
 + Request (application/json)
 
@@ -500,12 +584,12 @@ Return all `Customer` objects for all `Organizations`. The response will be keye
 
     + Headers
 
-            Location: /customers/1
+            Location: /contacts/1
 
-### Delete Customer [DELETE /customers/{id}]
+### Delete Contact [DELETE /contacts/{id}]
 
 + Parameters
-    + id: `1` (number, required) - ID of the Customer in the form of an integer
+    + id: `1` (number, required) - ID of the Contact in the form of an integer
 
 + Response 204 (application/json)
 
@@ -529,7 +613,7 @@ Return all `Customer` objects for all `Organizations`. The response will be keye
             "amount": 1.00
             "expense_date": "2009-02-03",
             "category": 3,
-            "customer": 10
+            "organization": 10
             "organization": 1
         }
 
@@ -1034,7 +1118,7 @@ To create a `Revenue` you must also include the associated `Product` and `Servic
             "body": "This is our first official product sale as a new business!",
             "category": 1,
             "organization": 1,
-            "customer": 13,
+            "organization": 13,
             "user": 43
         }
 
@@ -1058,7 +1142,7 @@ Editing a `Revenue` object only edits the core data of that object, not its asso
             "body": "This is our first official product sale as a new business!",
             "category": 1,
             "organization": 1,
-            "customer": 13,
+            "organization": 13,
             "user": 43
         }
 
@@ -1311,7 +1395,7 @@ Creating a `Shareholder` requires all personal data, as well as the `funding_rou
 Comments can be created for `expense`, `node` and `revenue` objects.
 
 + Parameters
-    + object: `node` (string, required) - The object to attach the comment to: customers, funding_rounds, nodes, revenue
+    + object: `node` (string, required) - The object to attach the comment to: contacts, funding_rounds, nodes, revenue
     + id: `1` (number, required) - ID of the `PARENT OBJECT` in the form of an integer
 
 + Request (application/json)

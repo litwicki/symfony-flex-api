@@ -37,7 +37,6 @@ class OrganizationTest extends TavroTest
         $data = array(
             'title' => 'Organization Name',
             'body' => 'Organization body..',
-            'owner' => 1,
             'account' => 1
         );
 

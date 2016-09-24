@@ -22,10 +22,11 @@ class NodeType extends AbstractType
         $builder
             ->add('type', ChoiceType::class, [
                 'choices' => array(
-                    'article' => 'Article',
-                    'page' => 'Page',
-                    'press' => 'Press Release',
-                    'node' => 'Node'
+                    'Article' => 'article',
+                    'Node' => 'node',
+                    'Page' => 'page',
+                    'Press Release' => 'press',
+                    'Wiki'  => 'wiki'
                 ),
                 'invalid_message' => 'Please enter a valid Node type: article, page, press, node'
             ])

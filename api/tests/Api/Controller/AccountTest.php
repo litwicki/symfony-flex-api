@@ -56,6 +56,7 @@ class AccountTest extends TavroTest
 
         $json = $response->getBody(true);
         $body = json_decode($json, true);
+
         $this->assertEquals(200, $response->getStatusCode());
 
     }

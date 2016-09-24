@@ -44,11 +44,6 @@ class ContactType extends AbstractType
                 'choice_label' => 'Person',
                 'invalid_message' => 'Please enter a valid Person'
             ])
-            ->add('account', EntityType::class, [
-                'class' => 'TavroCoreBundle:Account',
-                'choice_label' => 'Account',
-                'invalid_message' => 'Please enter a valid Account'
-            ])
             ->add('submit', SubmitType::class)
         ;
     }

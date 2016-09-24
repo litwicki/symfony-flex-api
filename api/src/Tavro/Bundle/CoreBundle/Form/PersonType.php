@@ -27,22 +27,21 @@ class PersonType extends AbstractType
             ->add('suffix')
             ->add('gender', ChoiceType::class, [
                 'choices' => array(
-                    'male' => 'Male',
-                    'female' => 'Female'
+                    'Male' => 'male',
+                    'Female' => 'female',
+                    'Other' => 'other'
                 ),
             ])
             ->add('birthday', DateType::class, [
-                'invalid_message' => 'Please enter a valid date birthday: Y-m-d',
+                'invalid_message' => 'Please enter a valid date birthday: yyyy-MM-dd',
                 'widget' => 'single_text',
-                'format' => 'Y-m-d',
+                'format' => 'yyyy-MM-dd',
             ])
             ->add('address')
             ->add('address2')
             ->add('city')
             ->add('state')
-            ->add('zip', IntegerType::class, [
-                'invalid_message' => 'Please enter a valid integer postal code'
-            ])
+            ->add('zip')
             ->add('email', EmailType::class, [
                 'invalid_message' => 'Invalid email address'
             ])

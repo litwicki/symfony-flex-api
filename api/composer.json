@@ -53,7 +53,8 @@
         "symfony/phpunit-bridge": "^2.7",
         "symfony/var-dumper": "^3.0",
         "apoutchika/loremipsum-bundle": "^1.0",
-        "fzaninotto/faker": "^1.6"
+        "fzaninotto/faker": "^1.6",
+        "ddelnano/dredd-hooks-php": "^1.1"
     },
     "scripts": {
         "post-install-cmd": [

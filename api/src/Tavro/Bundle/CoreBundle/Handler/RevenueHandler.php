@@ -25,12 +25,14 @@ use Tavro\Bundle\CoreBundle\Entity\RevenueCategory;
 
 use Tavro\Bundle\CoreBundle\Component\Form\FormErrors;
 
+use Tavro\Bundle\CoreBundle\Model\AccountEntityHandler;
+
 /**
  * Class RevenueHandler
  *
  * @package Tavro\Bundle\CoreBundle\Handler
  */
-class RevenueHandler extends EntityHandler
+class RevenueHandler extends AccountEntityHandler
 {
 
     /**
@@ -137,65 +139,7 @@ class RevenueHandler extends EntityHandler
         }
     }
 
-    /**
-     * Find all Entities (limit the response size)
-     * Optionally page the result set by LIMIT and OFFSET.
-     *
-     * @param array $params
-     *
-     * @throws \Tavro\Bundle\CoreBundle\Exception\Api\ApiAccessDeniedException
-     * @throws \Exception
-     * @return array|void
-     */
-    public function findAll(array $params = array())
-    {
-        try {
 
-            $organizations = $this->getMyAccounts();
-
-            $page = isset($params['page']) ? $params['page'] : 1;
-            $size = isset($params['size']) ? $params['size'] : self::PAGE_SIZE;
-
-            $sort = (isset($params['sort'])) ? $params['sort'] : 'desc';
-            $orderBy = (isset($params['orderBy'])) ? $params['orderBy'] : 'views';
-
-            $sortOrder = array($orderBy => $sort);
-
-            $offset = ($page - 1) * $size;
-
-            $params = $this->filterParams($params);
-
-            //default the status to ACTIVE
-            if(!isset($params['status'])) {
-                $params['status'] = self::STATUS_ACTIVE;
-            }
-
-            $entities = $this->repository->findAllByOrganization($organizations, $size, $offset, $params);
-
-            $items = array();
-            $count = 0;
-
-            foreach($entities as $entity) {
-                if($this->auth->isGranted('view', $entity)) {
-                    $id = $entity->getOrganization()->getId();
-                    $items[$id][] = $entity;
-                    $count++;
-                }
-            }
-
-            return array(
-                'data' => $items,
-                'message' => sprintf('%s Revenues retrieved.', $count),
-            );
-
-        }
-        catch(ApiAccessDeniedException $e) {
-            throw $e;
-        }
-        catch(\Exception $e) {
-            throw new ApiException($e->getMessage());
-        }
-    }
 
     /**
      * @param \Tavro\Bundle\CoreBundle\Entity\Revenue $revenue

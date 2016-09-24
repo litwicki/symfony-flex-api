@@ -19,12 +19,14 @@ use Tavro\Bundle\CoreBundle\Exception\InvalidUsernameException;
 use Symfony\Component\Debug\Exception\ContextErrorException;
 use Symfony\Component\HttpFoundation\Request;
 
+use Tavro\Bundle\CoreBundle\Model\AccountEntityHandler;
+
 /**
  * Class VariableHandler
  *
  * @package Tavro\Bundle\CoreBundle\Handler
  */
-class VariableHandler extends EntityHandler
+class VariableHandler extends AccountEntityHandler
 {
 
 }

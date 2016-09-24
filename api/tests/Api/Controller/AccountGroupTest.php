@@ -38,6 +38,9 @@ class AccountGroupTest extends TavroTest
 
         $data = array(
             'name' => $faker->company,
+            'body' => $faker->text(rand(100,1000)),
+            'account' => 1,
+            'user' => 1
         );
 
         $url = 'http://api.tavro.dev/api/v1/accounts/1/groups';
@@ -54,7 +57,7 @@ class AccountGroupTest extends TavroTest
 
         $json = $response->getBody(true);
         $body = json_decode($json, true);
-        die(var_dump($body));
+
         $this->assertEquals(200, $response->getStatusCode());
 
     }

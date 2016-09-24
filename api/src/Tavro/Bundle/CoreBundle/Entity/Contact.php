@@ -20,7 +20,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 use Tavro\Bundle\CoreBundle\Model\UserInterface;
 use Tavro\Bundle\CoreBundle\Model\Entity;
-use Tavro\Bundle\CoreBundle\Model\AccountEntityInterface;
+use Tavro\Bundle\CoreBundle\Model\EntityInterface;
 use JMS\Serializer\Annotation\MaxDepth;
 
 /**
@@ -31,17 +31,8 @@ use JMS\Serializer\Annotation\MaxDepth;
  * @XmlRoot("shareholder")
  * @XmlNamespace(uri="http://tavro.io/api/shareholders")
  */
-class Contact extends Entity implements AccountEntityInterface
+class Contact extends Entity implements EntityInterface
 {
-
-    /**
-     * @ORM\ManyToOne(targetEntity="Tavro\Bundle\CoreBundle\Entity\Account", inversedBy="contacts")
-     * @ORM\JoinColumn(name="account_id", referencedColumnName="id", nullable=FALSE)
-     * @Groups({"detail"})
-     * @MaxDepth(1)
-     */
-    protected $account;
-
     /**
      * @ORM\Column(type="string", length=255, nullable=TRUE)
      * @Groups({"api", "detail", "simple", "typeahead"})
@@ -257,27 +248,4 @@ class Contact extends Entity implements AccountEntityInterface
         return $this->organization;
     }
 
-    /**
-     * Set account
-     *
-     * @param \Tavro\Bundle\CoreBundle\Entity\Account $account
-     *
-     * @return Contact
-     */
-    public function setAccount(\Tavro\Bundle\CoreBundle\Entity\Account $account)
-    {
-        $this->account = $account;
-
-        return $this;
-    }
-
-    /**
-     * Get account
-     *
-     * @return \Tavro\Bundle\CoreBundle\Entity\Account
-     */
-    public function getAccount()
-    {
-        return $this->account;
-    }
 }

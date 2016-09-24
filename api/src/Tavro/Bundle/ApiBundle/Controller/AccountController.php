@@ -144,14 +144,6 @@ class AccountController extends ApiController
             $handler = $this->getHandler('account_groups');
             $entity = $handler->post($request, $data);
 
-            /**
-             * Attach the AccountGroup to the Account
-             */
-            $this->getHandler('account_groups')->post($request, array(
-                'account_group' => $entity->getId(),
-                'account' => $account->getId()
-            ));
-
             $routeOptions = array(
                 'entity'  => 'account_groups',
                 'id'      => $entity->getId(),

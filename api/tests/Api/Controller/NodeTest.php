@@ -65,7 +65,7 @@ class NodeTest extends TavroTest
 
     }
 
-    public function testNodeCreateBadOrganization()
+    public function testNodeCreateBadAccount()
     {
 
         $token = $this->authorize();
@@ -79,7 +79,7 @@ class NodeTest extends TavroTest
             'views' => 1,
             'display_date' => $faker->dateTimeThisMonth->format('Y-m-d h:i:s'),
             'user' => 1,
-            'organization' => -1
+            'account' => -1
         );
 
         $url = 'http://api.tavro.dev/api/v1/nodes';
@@ -98,7 +98,7 @@ class NodeTest extends TavroTest
         $body = json_decode($json, true);
 
         $this->assertEquals(500, $response->getStatusCode());
-        $this->assertEquals(1, preg_match('/Please enter a valid Organization/', $body['message']));
+        $this->assertEquals(1, preg_match('/Please enter a valid Account/', $body['message']));
 
     }
 

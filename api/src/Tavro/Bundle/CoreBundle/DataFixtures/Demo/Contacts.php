@@ -77,6 +77,8 @@ class Contacts extends AbstractFixture implements OrderedFixtureInterface, Conta
 
         foreach($accounts as $account) {
 
+            $users = $account->getUsers()->toArray();
+
             $organizations = $account->getOrganizations();
 
             foreach($organizations as $organization) {
@@ -105,7 +107,6 @@ class Contacts extends AbstractFixture implements OrderedFixtureInterface, Conta
 
                     $contact = new Contact();
                     $contact->setStatus(rand(0,1));
-                    $contact->setAccount($account);
                     $contact->setOrganization($organization);
                     $contact->setPerson($person);
                     $contact->setJobTitle($faker->jobTitle);

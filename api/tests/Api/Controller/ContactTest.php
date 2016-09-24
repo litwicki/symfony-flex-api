@@ -37,8 +37,44 @@ class ContactTest extends TavroTest
         $faker = \Faker\Factory::create('en_EN');
 
         $data = array(
-            'name' => 'Contact Name',
-            'body' => 'Contact body description.',
+            'job_title' => $faker->jobTitle,
+            'email' => $faker->email,
+            'phone' => $faker->phoneNumber,
+            'person' => 1,
+            'organization' => 1
+        );
+
+        $url = 'http://api.tavro.dev/api/v1/contacts';
+
+        $client = new Client($url, array(
+            'request.options' => array(
+                'exceptions' => false,
+            )
+        ));
+
+        $request = $client->post($url, null, json_encode($data));
+        $request->addHeader('Authorization', sprintf('Bearer %s', $token));
+        $response = $request->send();
+
+        $json = $response->getBody(true);
+        $body = json_decode($json, true);
+
+        $this->assertEquals(200, $response->getStatusCode());
+
+    }
+
+    public function testContactCreateWithUser()
+    {
+
+        $token = $this->authorize();
+
+        $faker = \Faker\Factory::create('en_EN');
+
+        $data = array(
+            'job_title' => $faker->jobTitle,
+            'email' => $faker->email,
+            'phone' => $faker->phoneNumber,
+            'person' => 1,
             'user' => 1,
             'organization' => 1
         );

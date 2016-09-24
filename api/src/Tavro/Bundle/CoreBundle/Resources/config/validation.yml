@@ -6,8 +6,8 @@ Tavro\Bundle\CoreBundle\Entity\Account:
                 match:   true
                 message: "Account name may only contain numbers, letters, spaces, and dashes"
         status:
-            - Tegex:
-                pattern: ''
+            - Regex:
+                pattern: '/^([0-2])$/'
                 match: true
                 message: "Invalid Status; 0 = Disabled, 1 = Enabled, 2 = Pending"
 
@@ -19,8 +19,8 @@ Tavro\Bundle\CoreBundle\Entity\AccountGroup:
                 match:   true
                 message: "Account Group name may only contain numbers, letters, spaces, and dashes"
         status:
-            - Tegex:
-                pattern: ''
+            - Regex:
+                pattern: '/^([0-2])$/'
                 match: true
                 message: "Invalid Status; 0 = Disabled, 1 = Enabled, 2 = Pending"
 
@@ -33,7 +33,7 @@ Tavro\Bundle\CoreBundle\Entity\Contact:
                 message: "Phone number must match accepted format"
         email:
             - Regex:
-                pattern: '/^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/'
+                pattern: '/^[a-zA-Z0-9.!#$%&’*+\/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/'
                 match: true
                 message: "Please enter a valid RFC 5322 email address"
 
@@ -43,8 +43,8 @@ Tavro\Bundle\CoreBundle\Entity\Contact:
                 match: true
                 message: "Job title may only contain numbers, letters, spaces, and dashes"
         status:
-            - Tegex:
-                pattern: ''
+            - Regex:
+                pattern: '/^([0-2])$/'
                 match: true
                 message: "Invalid Status; 0 = Disabled, 1 = Enabled, 2 = Pending"
 
@@ -56,8 +56,8 @@ Tavro\Bundle\CoreBundle\Entity\Expense:
                 match: true
                 message: "Expense amount must be a positive decimal number"
         status:
-            - Tegex:
-                pattern: ''
+            - Regex:
+                pattern: '/^([0-2])$/'
                 match: true
                 message: "Invalid Status; 0 = Disabled, 1 = Enabled, 2 = Pending"
 
@@ -69,8 +69,8 @@ Tavro\Bundle\CoreBundle\Entity\File:
                 match: true
                 message: "File Filesize must be a positive integer greater than zero"
         status:
-            - Tegex:
-                pattern: ''
+            - Regex:
+                pattern: '/^([0-2])$/'
                 match: true
                 message: "Invalid Status; 0 = Disabled, 1 = Enabled, 2 = Pending"
         aws_url:
@@ -112,8 +112,8 @@ Tavro\Bundle\CoreBundle\Entity\FundingRound:
                 match: true
                 message: "Share Price must be a positive integer greater than zero"
         status:
-            - Tegex:
-                pattern: ''
+            - Regex:
+                pattern: '/^([0-2])$/'
                 match: true
                 message: "Invalid Status; 0 = Disabled, 1 = Enabled, 2 = Pending"
 
@@ -150,18 +150,13 @@ Tavro\Bundle\CoreBundle\Entity\Image:
                 match: true
                 message: "Image AWS URL may only contain numbers, letters, spaces, and dashes"
         status:
-            - Tegex:
-                pattern: ''
+            - Regex:
+                pattern: '/^([0-2])$/'
                 match: true
                 message: "Invalid Status; 0 = Disabled, 1 = Enabled, 2 = Pending"
 
 Tavro\Bundle\CoreBundle\Entity\Node:
     properties:
-        type:
-            - Regex:
-                pattern: '/^(node|press|article|wiki)*$/'
-                match: true
-                message: "Node type must match: node, press, article, wiki"
         title:
             - Regex:
                 pattern: '/[A-Za-z0-9\s\-]/'
@@ -172,14 +167,9 @@ Tavro\Bundle\CoreBundle\Entity\Node:
                 pattern: '/[1-9][0-9]*/'
                 match: true
                 message: "Node Views must be a positive integer greater than zero"
-        aws_url:
-            - Regex:
-                pattern: '/[A-Za-z0-9\s\-]/'
-                match: true
-                message: "Image AWS URL may only contain numbers, letters, spaces, and dashes"
         status:
-            - Tegex:
-                pattern: ''
+            - Regex:
+                pattern: '/^([0-2])$/'
                 match: true
                 message: "Invalid Status; 0 = Disabled, 1 = Enabled, 2 = Pending"
 
@@ -201,16 +191,16 @@ Tavro\Bundle\CoreBundle\Entity\Organization:
                 match: true
                 message: "Node Views must be a positive integer greater than zero"
         status:
-            - Tegex:
-                pattern: ''
+            - Regex:
+                pattern: '/^([0-2])$/'
                 match: true
                 message: "Invalid Status; 0 = Disabled, 1 = Enabled, 2 = Pending"
 
 Tavro\Bundle\CoreBundle\Entity\Person:
     properties:
         status:
-            - Tegex:
-                pattern: ''
+            - Regex:
+                pattern: '/^([0-2])$/'
                 match: true
                 message: "Invalid Status; 0 = Disabled, 1 = Enabled, 2 = Pending"
         first_name:
@@ -260,15 +250,15 @@ Tavro\Bundle\CoreBundle\Entity\Person:
                 message: "Phone number must match accepted format"
         email:
             - Regex:
-                pattern: '/^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/'
+                pattern: '/^[a-zA-Z0-9.!#$%&’*+\/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/'
                 match: true
                 message: "Please enter a valid RFC 5322 email address"
 
 Tavro\Bundle\CoreBundle\Entity\Product:
     properties:
         status:
-            - Tegex:
-                pattern: ''
+            - Regex:
+                pattern: '/^([0-2])$/'
                 match: true
                 message: "Invalid Status; 0 = Disabled, 1 = Enabled, 2 = Pending"
         name:
@@ -290,8 +280,8 @@ Tavro\Bundle\CoreBundle\Entity\Product:
 Tavro\Bundle\CoreBundle\Entity\Revenue:
     properties:
         status:
-            - Tegex:
-                pattern: ''
+            - Regex:
+                pattern: '/^([0-2])$/'
                 match: true
                 message: "Invalid Status; 0 = Disabled, 1 = Enabled, 2 = Pending"
         type:
@@ -303,8 +293,8 @@ Tavro\Bundle\CoreBundle\Entity\Revenue:
 Tavro\Bundle\CoreBundle\Entity\Role:
     properties:
         status:
-            - Tegex:
-                pattern: ''
+            - Regex:
+                pattern: '/^([0-2])$/'
                 match: true
                 message: "Invalid Status; 0 = Disabled, 1 = Enabled, 2 = Pending"
         name:
@@ -321,8 +311,8 @@ Tavro\Bundle\CoreBundle\Entity\Role:
 Tavro\Bundle\CoreBundle\Entity\Service:
     properties:
         status:
-            - Tegex:
-                pattern: ''
+            - Regex:
+                pattern: '/^([0-2])$/'
                 match: true
                 message: "Invalid Status; 0 = Disabled, 1 = Enabled, 2 = Pending"
         name:
@@ -344,8 +334,8 @@ Tavro\Bundle\CoreBundle\Entity\Service:
 Tavro\Bundle\CoreBundle\Entity\Tag:
     properties:
         status:
-            - Tegex:
-                pattern: ''
+            - Regex:
+                pattern: '/^([0-2])$/'
                 match: true
                 message: "Invalid Status; 0 = Disabled, 1 = Enabled, 2 = Pending"
         tag:
@@ -357,8 +347,8 @@ Tavro\Bundle\CoreBundle\Entity\Tag:
 Tavro\Bundle\CoreBundle\Entity\User:
     properties:
         status:
-            - Tegex:
-                pattern: ''
+            - Regex:
+                pattern: '/^([0-2])$/'
                 match: true
                 message: "Invalid Status; 0 = Disabled, 1 = Enabled, 2 = Pending"
         username:
@@ -370,8 +360,8 @@ Tavro\Bundle\CoreBundle\Entity\User:
 Tavro\Bundle\CoreBundle\Entity\Variable:
     properties:
         status:
-            - Tegex:
-                pattern: ''
+            - Regex:
+                pattern: '/^([0-2])$/'
                 match: true
                 message: "Invalid Status; 0 = Disabled, 1 = Enabled, 2 = Pending"
         name:

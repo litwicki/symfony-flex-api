@@ -120,7 +120,7 @@ class CommentTest extends TavroTest
 
     }
 
-    public function testCommentCreateCustomerComment()
+    public function testCommentCreateOrganizationComment()
     {
         $token = $this->authorize();
 
@@ -129,7 +129,7 @@ class CommentTest extends TavroTest
             'user' => 1
         );
 
-        $url = 'http://api.tavro.dev/api/v1/customers/1/comments';
+        $url = 'http://api.tavro.dev/api/v1/organizations/1/comments';
 
         $client = new Client($url, array(
             'request.options' => array(
