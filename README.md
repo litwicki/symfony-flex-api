@@ -49,9 +49,9 @@ Workflow and useful 'stuff' for developing in Tavro.
 
 ### Testing with PHPUnit
 
-**NOTE** Tests will be run before every commit regardless!
+Unit tests are executed using PHPUnit, and coverage analysis report is available at [phpunit.tavro.dev](http://phpunit.tavro.dev)
 
-    $ cd /var/www/tavro/api && phpunit
+    $ php symfony tavro:testing
     
 ### Setting up Keys for JWT
 
