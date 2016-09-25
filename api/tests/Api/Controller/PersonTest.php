@@ -43,7 +43,7 @@ class PersonTest extends TavroTest
             'body' => $faker->text(500),
             'email' => $faker->email,
             'gender' => $gender,
-            'phone' => $faker->phoneNumber,
+            'phone' => '555-867-5309',
             'address' => $faker->address,
             'city' => $faker->city,
             'state' => $faker->state,
@@ -81,7 +81,7 @@ class PersonTest extends TavroTest
             'body' => $faker->text(500),
             'email' => $faker->email,
             'gender' => 'gremlin',
-            'phone' => $faker->phoneNumber,
+            'phone' => '555-867-5309',
             'address' => $faker->address,
             'city' => $faker->city,
             'state' => $faker->state,
@@ -103,8 +103,7 @@ class PersonTest extends TavroTest
         $json = $response->getBody(true);
         $body = json_decode($json, true);
 
-
-        $this->assertEquals(1, preg_match('/Choose a valid gender/', $body['message']));
+        $this->assertEquals(1, preg_match('/valid gender/', $body['message']));
 
     }
 

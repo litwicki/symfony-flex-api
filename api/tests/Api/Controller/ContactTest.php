@@ -39,7 +39,7 @@ class ContactTest extends TavroTest
         $data = array(
             'job_title' => $faker->jobTitle,
             'email' => $faker->email,
-            'phone' => $faker->phoneNumber,
+            'phone' => '555-867-5309',
             'person' => 1,
             'organization' => 1
         );
@@ -73,7 +73,7 @@ class ContactTest extends TavroTest
         $data = array(
             'job_title' => $faker->jobTitle,
             'email' => $faker->email,
-            'phone' => $faker->phoneNumber,
+            'phone' => '555-867-5309',
             'person' => 1,
             'user' => 1,
             'organization' => 1
@@ -106,8 +106,10 @@ class ContactTest extends TavroTest
         $faker = \Faker\Factory::create('en_EN');
 
         $data = array(
-            'name' => 'Contact Name',
-            'body' => 'Contact body description.',
+            'job_title' => $faker->jobTitle,
+            'email' => $faker->email,
+            'phone' => '555-867-5309',
+            'person' => 1,
             'user' => 1,
             'organization' => -1
         );

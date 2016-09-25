@@ -23,11 +23,6 @@ class TagType extends AbstractType
             ->add('status', IntegerType::class, [
                 'invalid_message' => 'Invalid status, only 0, 1, 2 allowed'
             ])
-            ->add('account', EntityType::class, [
-                'class' => 'TavroCoreBundle:Account',
-                'choice_label' => 'Account',
-                'invalid_message' => 'Please enter a valid Account'
-            ])
             ->add('submit', SubmitType::class)
         ;
     }

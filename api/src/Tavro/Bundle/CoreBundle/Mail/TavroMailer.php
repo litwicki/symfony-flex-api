@@ -90,7 +90,6 @@ class TavroMailer implements ContainerAwareInterface
                 ))
                 ->setTo($params['recipients'])
                 ->setBody($body, $contentType);
-
             $this->mailer->send($message);
 
         }

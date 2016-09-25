@@ -37,10 +37,10 @@ class ServiceTest extends TavroTest
         $faker = \Faker\Factory::create('en_EN');
 
         $data = array(
-            'type' => 'hour',
+            'type' => 'hourly',
+            'name' => $faker->name,
             'body' => $faker->text(500),
             'price' => 100,
-            'status' => 1,
             'category' => 1,
             'account' => 1
         );
@@ -73,9 +73,9 @@ class ServiceTest extends TavroTest
 
         $data = array(
             'type' => 'butts',
+            'name' => $faker->name,
             'body' => $faker->text(500),
             'price' => 100,
-            'status' => 1,
             'category' => 1,
             'account' => 1
         );
@@ -96,7 +96,7 @@ class ServiceTest extends TavroTest
         $body = json_decode($json, true);
 
         $this->assertEquals(500, $response->getStatusCode());
-        $this->assertEquals(1, preg_match('/Choose a valid service type./', $body['message']));
+        $this->assertEquals(1, preg_match('/Service type must match/', $body['message']));
 
     }
 

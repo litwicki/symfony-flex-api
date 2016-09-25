@@ -283,12 +283,12 @@ Tavro\Bundle\CoreBundle\Entity\Revenue:
             - Regex:
                 pattern: '/^([0-2])$/'
                 match: true
-                message: "Invalid Status; 0 = Disabled, 1 = Enabled, 2 = Pending"
+                message: "Invalid Status; 0 = Disabled, 1 = Enabled, 2 = Pending."
         type:
             - Regex:
                 pattern: '/^(subscription|service|sale|other)*$/'
                 match: true
-                message: "Service type must match: subscription, service, sale, other"
+                message: "Revenue type must match: subscription, service, sale, other."
 
 Tavro\Bundle\CoreBundle\Entity\Role:
     properties:
@@ -301,7 +301,7 @@ Tavro\Bundle\CoreBundle\Entity\Role:
             - Regex:
                 pattern: '/^(subscription|service|sale|other)*$/'
                 match: true
-                message: "Service type must match: subscription, service, sale, other"
+                message: "Service type must match: subscription, service, sale, other."
         role:
             - Regex:
                 pattern: '/^ROLE_[A-Z]+?$/'
@@ -314,12 +314,7 @@ Tavro\Bundle\CoreBundle\Entity\Service:
             - Regex:
                 pattern: '/^([0-2])$/'
                 match: true
-                message: "Invalid Status; 0 = Disabled, 1 = Enabled, 2 = Pending"
-        name:
-            - Regex:
-                pattern: '/^(subscription|service|sale|other)*$/'
-                match: true
-                message: "Service type must match: subscription, service, sale, other"
+                message: "Invalid Status; 0 = Disabled, 1 = Enabled, 2 = Pending."
         price:
             - Regex:
                 pattern: '/^(?:[1-9]\d*|0)?(?:\.\d+)?$/'
@@ -329,7 +324,7 @@ Tavro\Bundle\CoreBundle\Entity\Service:
             - Regex:
                 pattern: '/^(hourly|retainer|fixed|other)*$/'
                 match: true
-                message: "Service type must match: hourly, retainer, fixed, other"
+                message: "Service type must match: hourly, retainer, fixed, other."
 
 Tavro\Bundle\CoreBundle\Entity\Tag:
     properties:
@@ -338,11 +333,11 @@ Tavro\Bundle\CoreBundle\Entity\Tag:
                 pattern: '/^([0-2])$/'
                 match: true
                 message: "Invalid Status; 0 = Disabled, 1 = Enabled, 2 = Pending"
-        tag:
-            - Regex:
-                pattern: '/[A-Za-z0-9\s\-]{,30}/'
-                match: true
-                message: "Tag value must be less than 30 lowercase letters or digits only"
+#        tag:
+#            - Regex:
+#                pattern: '/^([a-zA-Z0-9_-\.]){3,30}$/'
+#                match: true
+#                message: "Tag value must be less than 30 lowercase letters or digits only"
 
 Tavro\Bundle\CoreBundle\Entity\User:
     properties:

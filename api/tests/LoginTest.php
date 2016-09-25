@@ -66,8 +66,10 @@ class LoginTest extends \PHPUnit_Framework_TestCase
         $response = $request->send();
 
         $json = $response->getBody(true);
+        $body = json_decode($json, true);
 
         $this->assertEquals(401, $response->getStatusCode());
+        $this->assertEquals(1, preg_match('/You must be authorized to access this resource/', $body['message']));
     }
 
 }

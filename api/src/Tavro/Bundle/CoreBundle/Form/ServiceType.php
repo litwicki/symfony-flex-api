@@ -19,7 +19,7 @@ class ServiceType extends AbstractType
     {
         $builder
             ->add('body')
-            ->add('title')
+            ->add('name')
             ->add('price', MoneyType::class, [
                 'invalid_message' => 'Invalid `price` please enter a valid number'
             ])

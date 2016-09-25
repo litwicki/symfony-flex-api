@@ -37,10 +37,12 @@ class UserTest extends TavroTest
 
         $faker = \Faker\Factory::create('en_EN');
 
+        $email = $faker->safeEmail;
+
         $data = array(
             'first_name' => $faker->firstName,
             'last_name' => $faker->lastName,
-            'email' => $faker->email,
+            'email' => $email,
             'username' => md5(time()),
             'signature' => $faker->text(100),
             'password' => 'Password1!'

@@ -37,8 +37,7 @@ class TagTest extends TavroTest
         $faker = \Faker\Factory::create('en_EN');
 
         $data = array(
-            'tag' => $faker->text(5),
-            'account' => 1
+            'tag' => 'tag'
         );
 
         $url = 'http://api.tavro.dev/api/v1/tags';

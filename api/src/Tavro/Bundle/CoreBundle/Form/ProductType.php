@@ -10,6 +10,7 @@ use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\MoneyType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Doctrine\DBAL\Types\StringType;
 
 class ProductType extends AbstractType
 {
@@ -21,22 +22,26 @@ class ProductType extends AbstractType
     {
         $builder
             ->add('body')
-            ->add('title')
+            ->add('name')
             ->add('status', IntegerType::class, [
                 'invalid_message' => 'Invalid status, only 0, 1, 2 allowed'
             ])
             ->add('cost', MoneyType::class, [
+                'required' => true,
                 'invalid_message' => 'Invalid `cost` please enter a valid number'
             ])
             ->add('price', MoneyType::class, [
+                'required' => true,
                 'invalid_message' => 'Invalid `price` please enter a valid number'
             ])
             ->add('category', EntityType::class, [
+                'required' => true,
                 'class' => 'TavroCoreBundle:ProductCategory',
                 'choice_label' => 'Category',
                 'invalid_message' => 'Please enter a valid Product Category'
             ])
             ->add('account', EntityType::class, [
+                'required' => true,
                 'class' => 'TavroCoreBundle:Account',
                 'choice_label' => 'Account',
                 'invalid_message' => 'Please enter a valid Account'

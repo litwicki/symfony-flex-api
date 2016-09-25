@@ -31,14 +31,15 @@ class ProductTest extends TavroTest
 
     public function testProductCreate()
     {
+        $faker = \Faker\Factory::create('en_EN');
+
         $token = $this->authorize();
 
         $data = array(
-            'title' => 'Product Name',
-            'body' => 'Product body description.',
+            'name' => $faker->text(rand(10,100)),
+            'body' => $faker->text(rand(100,1000)),
             'price' => 100,
             'cost' => 75,
-            'status' => 1,
             'category' => 1,
             'account' => 1
         );

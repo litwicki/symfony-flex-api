@@ -33,11 +33,6 @@ class RevenueType extends AbstractType
                 'choice_label' => 'User',
                 'invalid_message' => 'Please enter a valid User'
             ])
-            ->add('customer', EntityType::class, [
-                'class' => 'TavroCoreBundle:Customer',
-                'choice_label' => 'Customer',
-                'invalid_message' => 'Please enter a valid Customer'
-            ])
             ->add('account', EntityType::class, [
                 'class' => 'TavroCoreBundle:Account',
                 'choice_label' => 'Account',

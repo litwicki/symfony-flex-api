@@ -82,11 +82,6 @@ class UserController extends ApiController
 
             $newUser = $userHandler->post($request, $userData);
 
-            /**
-             * New User created, send a generic message notifying them.
-             */
-            $this->container->get('tavro.mailer')->sendActivation($newUser);
-
             $em->commit();
 
             //send the response

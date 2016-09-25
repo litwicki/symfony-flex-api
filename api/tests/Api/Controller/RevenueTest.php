@@ -38,7 +38,6 @@ class RevenueTest extends TavroTest
             'type' => 'service',
             'category' => 1,
             'user' => 1,
-            'customer' => 1,
             'services' => array(1,2,3),
             'account' => 1
         );
@@ -68,10 +67,9 @@ class RevenueTest extends TavroTest
         $token = $this->authorize();
 
         $data = array(
-            'type' => 'service',
+            'type' => 'sale',
             'category' => 1,
             'user' => 1,
-            'customer' => 1,
             'products' => array(1,2,3),
             'account' => 1
         );

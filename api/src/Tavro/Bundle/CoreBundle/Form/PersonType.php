@@ -31,6 +31,7 @@ class PersonType extends AbstractType
                     'Female' => 'female',
                     'Other' => 'other'
                 ),
+                'invalid_message' => 'Please enter a valid gender.'
             ])
             ->add('birthday', DateType::class, [
                 'invalid_message' => 'Please enter a valid date birthday: yyyy-MM-dd',
