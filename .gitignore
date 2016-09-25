@@ -100,8 +100,9 @@ sftp-config.json
 /sami/build/*
 /sami/cache/*
 
-api/var/cache/
-api/var/logs/
-angular2-sample-app-master/web/assets/
-sami/build/
-sami/cache/
+/api/var/cache/
+/api/var/logs/
+/sami/build/
+/sami/cache/
+/phpunit
+/*.log
