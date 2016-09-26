@@ -1,4 +1,4 @@
-<?php namespace Tests\App\Controller;
+<?php namespace Tavro\Tests\App\Controller;
 
 use Guzzle\Http\Client;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;

@@ -163,7 +163,7 @@ class UserHandler extends EntityHandler
                 }
 
                 if (isset($parameters['password'])) {
-                    $password = $this->encoderFactory->getEncoder($entity)->encodePassword($parameters['password'], $entity->getSalt());
+                    $password = $this->setPassword($parameters['password']);
                     $entity->setPassword($password);
                 }
 
@@ -571,7 +571,7 @@ class UserHandler extends EntityHandler
      * @return \Tavro\Bundle\CoreBundle\Model\EntityInterface
      * @throws \Exception
      */
-    public function resetPassword(Request $request, User $user, $parameters)
+    public function resetPassword(Request $request, User $user, $parameters = array())
     {
         try {
 
@@ -583,13 +583,15 @@ class UserHandler extends EntityHandler
                 throw new \Exception('New password not defined and/or matched!');
             }
 
-            $parameters = [
-                'password_token'        => null,
-                'password_token_expire' => null,
-                'password'              => $parameters['password'],
-            ];
+            $user->setPasswordTokenExpire(null);
+            $user->setPasswordToken(null);
+            $user->setPassword($this->setPassword($parameters['password']));
+            $this->om->persist($user);
+            $this->om->flush();
 
-            return $this->patch($request, $user, $parameters);
+            /**
+             * @TODO: send reset password email..
+             */
 
         } catch (\Exception $e) {
             throw $e;
@@ -829,17 +831,32 @@ class UserHandler extends EntityHandler
             $dt = new \DateTime();
             $dt->modify("+30 minutes");
 
-            $parameters = [
-                'password_token_expire' => $dt,
-                'password_token' => Uuid::uuid4()
-            ];
+            $user->setPasswordTokenExpire($dt);
+            $user->setPasswordToken(Uuid::uuid4());
+            $this->om->persist($user);
+            $this->om->flush();
 
-            $this->patch($request, $user, $parameters);
+            /**
+             * @TODO: send password forgot email..
+             */
 
         }
         catch (\Exception $e) {
             throw $e;
         }
+    }
+
+    /**
+     * Set (encode) the User's password.
+     *
+     * @param \Tavro\Bundle\CoreBundle\Entity\User $user
+     * @param $password
+     *
+     * @return string
+     */
+    public function setPassword(User $user, $password)
+    {
+        return $this->encoderFactory->getEncoder($user)->encodePassword($password, $user->getSalt());
     }
 
 }

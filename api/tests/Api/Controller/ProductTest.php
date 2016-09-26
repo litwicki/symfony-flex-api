@@ -1,4 +1,4 @@
-<?php namespace Tests\Api\Controller;
+<?php namespace Tavro\Tests\Api\Controller;
 
 use Guzzle\Http\Client;
 use Tavro\Bundle\CoreBundle\Testing\TavroTest;

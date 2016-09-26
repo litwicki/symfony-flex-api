@@ -13,6 +13,8 @@ use Tavro\Bundle\CoreBundle\Exception\Api\ApiRequestLimitException;
 use Tavro\Bundle\CoreBundle\Exception\Api\ApiAccessDeniedException;
 use Tavro\Bundle\CoreBundle\Exception\Form\InvalidFormException;
 
+use Tavro\Bundle\CoreBundle\Entity\Person;
+
 use Doctrine\Common\Inflector\Inflector;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 
@@ -57,17 +59,37 @@ class AuthController extends ApiController
      * By design, only allow the current user to do this for his/her self.
      *
      * @param \Symfony\Component\HttpFoundation\Request $request
-     * @param $format
      *
+     * @return \Symfony\Component\HttpFoundation\Response
      * @throws \Exception
      */
-    public function resetAction(Request $request, $format)
+    public function resetAction(Request $request)
     {
         try {
-            $handler = $this->container->get('tavro.handler.users');
-            $user = $this->getUser();
+
             $data = json_decode($request->getContent(), TRUE);
-            $handler->resetPassword($user, $data);
+
+            $person = $this->getDoctrine()->getRepository('TavroCoreBundle:Person')->findOneBy([
+               'email' => $data['email']
+            ]);
+
+            if(!$person instanceof Person) {
+                throw new \Exception('We are unable to process your forgot password request.');
+            }
+
+            $user = $person->getUser();
+
+            if(!$user instanceof User) {
+                throw new \Exception('We are unable to process your forgot password request.');
+            }
+
+            $handler = $this->getHandler('users');
+            $handler->resetPassword($request, $user, $data);
+
+            return $this->apiResponse($user, [
+                'message' => sprintf('An email has been sent to %s', $data['email']),
+            ]);
+
         }
         catch(ApiAccessDeniedException $e) {
             throw $e;
@@ -82,21 +104,36 @@ class AuthController extends ApiController
      * them to verify themselves before allowing the actual reset to complete.
      *
      * @param \Symfony\Component\HttpFoundation\Request $request
-     * @param $format
      *
+     * @return \Symfony\Component\HttpFoundation\Response
      * @throws \Exception
      */
-    public function forgotAction(Request $request, $format)
+    public function forgotAction(Request $request)
     {
         try {
 
-            //set the password tokens etc.
-            $handler = $this->container->get('tavro.handler.users');
-            $user = $this->getUser();
-            $handler->forgotPassword($user);
+            $data = json_decode($request->getContent(), TRUE);
 
-            //email the user the link to reset their password
-            $this->getContainer()->get('mailer')->sendPasswordReset($user);
+            $person = $this->getDoctrine()->getRepository('TavroCoreBundle:Person')->findOneBy([
+               'email' => $data['email']
+            ]);
+
+            if(!$person instanceof Person) {
+                throw new \Exception('We are unable to process your forgot password request.');
+            }
+
+            $user = $person->getUser();
+
+            if(!$user instanceof User) {
+                throw new \Exception('We are unable to process your forgot password request.');
+            }
+
+            $handler = $this->getHandler('users');
+            $handler->forgotPassword($request, $user);
+
+            return $this->apiResponse($user, [
+                'message' => sprintf('An email has been sent to %s', $data['email']),
+            ]);
 
         }
         catch(ApiAccessDeniedException $e) {

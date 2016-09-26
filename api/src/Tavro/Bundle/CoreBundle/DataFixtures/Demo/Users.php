@@ -274,7 +274,7 @@ class Users extends AbstractFixture implements OrderedFixtureInterface, Containe
             $faker = \Faker\Factory::create('en_EN');
 
             $password = isset($parameters['password']) ? $parameters['password'] : 'Password1!';
-            $email = isset($parameters['email']) ? $parameters['email'] : sprintf('%s@tavro.io', $parameters['username']);
+            $email = isset($parameters['email']) ? $parameters['email'] : $faker->safeEmail;
 
             $firstname = isset($parameters['first_name']) ? $parameters['first_name'] : $faker->firstName;
             $lastname = isset($parameters['last_name']) ? $parameters['last_name'] : $faker->lastName;
@@ -283,8 +283,6 @@ class Users extends AbstractFixture implements OrderedFixtureInterface, Containe
             $salt = md5($email);
             $encoder = $this->container->get('tavro.password_encoder');
             $password = $encoder->encodePassword($password, $salt);
-
-            $email = $faker->email;
 
             $person = new Person();
             $person->setFirstName($firstname);
