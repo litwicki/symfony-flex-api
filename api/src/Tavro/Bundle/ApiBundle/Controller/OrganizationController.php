@@ -37,9 +37,9 @@ class OrganizationController extends ApiController
 
             $entities = $organization->getContacts();
 
-            $data = $this->serialize($entities, $_format, $group = 'simple');
-            $response = $this->apiResponse($data, $_format);
-            return $response;
+            return $this->apiResponse($entities, [
+                'format' => $_format,
+            ]);
 
         }
         catch(\Exception $e) {
@@ -70,14 +70,14 @@ class OrganizationController extends ApiController
                 $items[] = $entity->getComment();
             }
 
+            return $this->apiResponse($entities, [
+                'format' => $_format,
+                'group' => 'simple'
+            ]);
+
         }
         catch(\Exception $e) {
             throw $e;
-        }
-        finally {
-            $data = $this->serialize($items, $_format, $group = 'simple');
-            $response = $this->apiResponse($data, $_format);
-            return $response;
         }
     }
 
@@ -106,11 +106,6 @@ class OrganizationController extends ApiController
                 'organization' => $organization->getId()
             ));
 
-        }
-        catch(\Exception $e) {
-            throw $e;
-        }
-        finally {
             $routeOptions = array(
                 'entity'  => 'comments',
                 'id'      => $comment->getId(),
@@ -118,6 +113,10 @@ class OrganizationController extends ApiController
             );
 
             return $this->forward('TavroApiBundle:Default:get', $routeOptions);
+
+        }
+        catch(\Exception $e) {
+            throw $e;
         }
 
     }

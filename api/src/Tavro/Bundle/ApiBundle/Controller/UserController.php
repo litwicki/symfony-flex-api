@@ -84,9 +84,10 @@ class UserController extends ApiController
 
             $em->commit();
 
-            //send the response
-            $data = $this->serialize($newUser, $_format);
-            return $this->apiResponse($data, $_format);
+            return $this->apiResponse($newUser, [
+                'format' => $_format,
+                'group' => 'simple'
+            ]);
 
         }
         catch(\Exception $e) {
@@ -114,8 +115,11 @@ class UserController extends ApiController
             $params = $request->query->all();
             $handler = $this->getHandler($entity);
             $items = $handler->findAll($params);
-            $data = $this->serialize($items, $_format);
-            return $this->apiResponse($data, $_format);
+
+            return $this->apiResponse($items, [
+                'format' => $_format,
+                'group' => 'simple'
+            ]);
         }
         catch(\Exception $e) {
             throw $e;
@@ -199,9 +203,10 @@ class UserController extends ApiController
             $items[$entity->getId()] = $entity;
         }
 
-        $data = $this->serialize($items, $_format);
-        $response = $this->apiResponse($data, $_format);
-        return $response;
+        return $this->apiResponse($items, [
+            'format' => $_format,
+            'group' => 'simple'
+        ]);
 
     }
 
@@ -215,9 +220,11 @@ class UserController extends ApiController
     public function nodesAction(Request $request, User $user, $_format)
     {
         $nodes = $user->getNodes();
-        $data = $this->serialize($nodes, $_format);
-        $response = $this->apiResponse($data, $_format);
-        return $response;
+
+        return $this->apiResponse($nodes, [
+            'format' => $_format,
+            'group' => 'simple'
+        ]);
     }
 
 }

@@ -235,7 +235,7 @@ class HubspotController extends ApiController
 
                         }
 
-                        $import['data'][] = $contact;
+                        $import[] = $contact;
 
                     }
 
@@ -243,10 +243,10 @@ class HubspotController extends ApiController
 
             }
 
-            $import['message'] = sprintf('%s Organizations and %s People imported, %s Contacts added.', $orgCount, $personCount, $contactCount);
-
-            $data = $this->serialize($import, $_format);
-            return $this->apiResponse($data, $_format);
+            return $this->apiResponse($import, [
+                'format' => $_format,
+                'message' => sprintf('%s Organizations and %s People imported, %s Contacts added.', $orgCount, $personCount, $contactCount)
+            ]);
 
         }
         catch(\Exception $e) {

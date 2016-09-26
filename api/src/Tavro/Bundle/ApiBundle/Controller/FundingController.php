@@ -46,9 +46,9 @@ class FundingController extends ApiController
                 $items[] = $entity->getComment();
             }
 
-            $data = $this->serialize($items, $_format, $group = 'simple');
-            $response = $this->apiResponse($data, $_format);
-            return $response;
+            return $this->apiResponse($items, [
+                'format' => $_format,
+            ]);
 
         }
         catch(\Exception $e) {
@@ -117,9 +117,9 @@ class FundingController extends ApiController
                 $items[] = $entity->getShareholder();
             }
 
-            $data = $this->serialize($items, $_format, $group = 'simple');
-            $response = $this->apiResponse($data, $_format);
-            return $response;
+            return $this->apiResponse($items, [
+                'format' => $_format,
+            ]);
 
         }
         catch(\Exception $e) {
@@ -152,7 +152,7 @@ class FundingController extends ApiController
                 'format'  => $_format,
             );
 
-            return $this->get($routeOptions);
+            return $this->forward('TavroApiBundle:Default:get', $routeOptions);
 
         }
         catch(\Exception $e) {

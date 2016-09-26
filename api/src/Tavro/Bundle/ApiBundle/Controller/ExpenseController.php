@@ -46,9 +46,10 @@ class ExpenseController extends ApiController
                 $items[] = $entity->getComment();
             }
 
-            $data = $this->serialize($items, $_format, $group = 'simple');
-            $response = $this->apiResponse($data, $_format);
-            return $response;
+            return $this->apiResponse($items, [
+                'format' => $_format,
+                'group' => 'simple'
+            ]);
 
         }
         catch(\Exception $e) {
@@ -119,14 +120,13 @@ class ExpenseController extends ApiController
                 $items[] = $entity->getTag();
             }
 
+            return $this->apiResponse($items, [
+                'format' => $_format,
+            ]);
+
         }
         catch(\Exception $e) {
             throw $e;
-        }
-        finally {
-            $data = $this->serialize($items, $_format, $group = 'simple');
-            $response = $this->apiResponse($data, $_format);
-            return $response;
         }
     }
 
@@ -155,18 +155,17 @@ class ExpenseController extends ApiController
                 'expense' => $expense->getId()
             ));
 
-        }
-        catch(\Exception $e) {
-            throw $e;
-        }
-        finally {
             $routeOptions = array(
                 'entity'  => 'tags',
                 'id'      => $tag->getId(),
                 'format'  => $_format,
             );
 
-            return $this->get($routeOptions);
+            return $this->forward('TavroApiBundle:Default:get', $routeOptions);
+
+        }
+        catch(\Exception $e) {
+            throw $e;
         }
     }
 

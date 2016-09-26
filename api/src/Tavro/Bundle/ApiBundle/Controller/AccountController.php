@@ -44,9 +44,10 @@ class AccountController extends ApiController
                 $items[] = $entity->getUser();
             }
 
-            $data = $this->serialize($items, $_format, $group = 'simple');
-            $response = $this->apiResponse($data, $_format);
-            return $response;
+            return $this->apiResponse($items, [
+                'format' => $_format,
+                'group' => 'simple'
+            ]);
 
         }
         catch(\Exception $e) {
@@ -75,9 +76,10 @@ class AccountController extends ApiController
                 $items[] = $entity->getAccountGroup();
             }
 
-            $data = $this->serialize($items, $_format);
-            $response = $this->apiResponse($data, $_format);
-            return $response;
+            return $this->apiResponse($items, [
+                'format' => $_format,
+                'group' => 'simple'
+            ]);
 
         }
         catch(\Exception $e) {
@@ -171,14 +173,14 @@ class AccountController extends ApiController
     {
         try {
             $entities = $account->getServices();
+
+            return $this->apiResponse($entities, [
+                'format' => $_format,
+                'group' => 'simple'
+            ]);
         }
         catch(\Exception $e) {
             throw $e;
-        }
-        finally {
-            $data = $this->serialize($entities, $_format, $group = 'simple');
-            $response = $this->apiResponse($data, $_format);
-            return $response;
         }
     }
 
@@ -194,14 +196,14 @@ class AccountController extends ApiController
     {
         try {
             $entities = $account->getServiceCategories();
+
+            return $this->apiResponse($entities, [
+                'format' => $_format,
+                'group' => 'simple'
+            ]);
         }
         catch(\Exception $e) {
             throw $e;
-        }
-        finally {
-            $data = $this->serialize($entities, $_format, $group = 'simple');
-            $response = $this->apiResponse($data, $_format);
-            return $response;
         }
     }
 
@@ -217,14 +219,14 @@ class AccountController extends ApiController
     {
         try {
             $entities = $account->getProducts();
+
+            return $this->apiResponse($entities, [
+                'format' => $_format,
+                'group' => 'simple'
+            ]);
         }
         catch(\Exception $e) {
             throw $e;
-        }
-        finally {
-            $data = $this->serialize($entities, $_format, $group = 'simple');
-            $response = $this->apiResponse($data, $_format);
-            return $response;
         }
     }
 
@@ -240,14 +242,14 @@ class AccountController extends ApiController
     {
         try {
             $entities = $account->getProductCategories();
+
+            return $this->apiResponse($entities, [
+                'format' => $_format,
+                'group' => 'simple'
+            ]);
         }
         catch(\Exception $e) {
             throw $e;
-        }
-        finally {
-            $data = $this->serialize($entities, $_format, $group = 'simple');
-            $response = $this->apiResponse($data, $_format);
-            return $response;
         }
     }
 
@@ -263,14 +265,14 @@ class AccountController extends ApiController
     {
         try {
             $entities = $account->getRevenues();
+
+            return $this->apiResponse($entities, [
+                'format' => $_format,
+                'group' => 'simple'
+            ]);
         }
         catch(\Exception $e) {
             throw $e;
-        }
-        finally {
-            $data = $this->serialize($entities, $_format, $group = 'simple');
-            $response = $this->apiResponse($data, $_format);
-            return $response;
         }
     }
 
@@ -286,14 +288,14 @@ class AccountController extends ApiController
     {
         try {
             $entities = $account->getRevenueCategories();
+
+            return $this->apiResponse($entities, [
+                'format' => $_format,
+                'group' => 'simple'
+            ]);
         }
         catch(\Exception $e) {
             throw $e;
-        }
-        finally {
-            $data = $this->serialize($entities, $_format, $group = 'simple');
-            $response = $this->apiResponse($data, $_format);
-            return $response;
         }
     }
 
@@ -309,14 +311,14 @@ class AccountController extends ApiController
     {
         try {
             $entities = $account->getExpenses();
+
+            return $this->apiResponse($entities, [
+                'format' => $_format,
+                'group' => 'simple'
+            ]);
         }
         catch(\Exception $e) {
             throw $e;
-        }
-        finally {
-            $data = $this->serialize($entities, $_format, $group = 'simple');
-            $response = $this->apiResponse($data, $_format);
-            return $response;
         }
     }
 
@@ -332,14 +334,14 @@ class AccountController extends ApiController
     {
         try {
             $entities = $account->getExpenseCategories();
+
+            return $this->apiResponse($entities, [
+                'format' => $_format,
+                'group' => 'simple'
+            ]);
         }
         catch(\Exception $e) {
             throw $e;
-        }
-        finally {
-            $data = $this->serialize($entities, $_format, $group = 'simple');
-            $response = $this->apiResponse($data, $_format);
-            return $response;
         }
     }
 
@@ -355,14 +357,14 @@ class AccountController extends ApiController
     {
         try {
             $entities = $account->getNodes();
+
+            return $this->apiResponse($entities, [
+                'format' => $_format,
+                'group' => 'simple'
+            ]);
         }
         catch(\Exception $e) {
             throw $e;
-        }
-        finally {
-            $data = $this->serialize($entities, $_format, $group = 'simple');
-            $response = $this->apiResponse($data, $_format);
-            return $response;
         }
     }
 
@@ -378,14 +380,14 @@ class AccountController extends ApiController
     {
         try {
             $entities = $account->getFundingRounds();
+
+            return $this->apiResponse($entities, [
+                'format' => $_format,
+                'group' => 'simple'
+            ]);
         }
         catch(\Exception $e) {
             throw $e;
-        }
-        finally {
-            $data = $this->serialize($entities, $_format);
-            $response = $this->apiResponse($data, $_format);
-            return $response;
         }
     }
 
@@ -401,9 +403,11 @@ class AccountController extends ApiController
     {
         try {
             $entities = $account->getShareholders();
-            $data = $this->serialize($entities, $_format);
-            $response = $this->apiResponse($data, $_format);
-            return $response;
+
+            return $this->apiResponse($entities, [
+                'format' => $_format,
+                'group' => 'simple'
+            ]);
         }
         catch(\Exception $e) {
             throw $e;
@@ -422,14 +426,14 @@ class AccountController extends ApiController
     {
         try {
             $entities = $account->getOrganizations();
+
+            return $this->apiResponse($entities, [
+                'format' => $_format,
+                'group' => 'simple'
+            ]);
         }
         catch(\Exception $e) {
             throw $e;
-        }
-        finally {
-            $data = $this->serialize($entities, $_format, $group = 'simple');
-            $response = $this->apiResponse($data, $_format);
-            return $response;
         }
     }
 }
