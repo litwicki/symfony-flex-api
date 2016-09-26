@@ -47,7 +47,7 @@ Vagrant.configure(2) do |config|
   end
 
   config.vm.provision "ansible" do |ansible|
-      ansible.playbook = "ansible/provision.yml"
+      ansible.playbook = "provisioning/vagrant.yml"
       ansible.extra_vars = {
           hostname: hostname,
           appname: appname,

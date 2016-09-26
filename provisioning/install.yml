@@ -1,0 +1,25 @@
+---
+- hosts: all
+
+  become: true
+  become_user: root
+
+  vars:
+    api_root: "/var/www/tavro/api/"
+    fixture_path: "src/Tavro/Bundle/CoreBundle/DataFixtures/"
+    fixture_name: "Core"
+
+  tasks:
+    - name: drop database
+      shell: php {{api_root}}bin/console doctrine:database:drop --force
+
+    - name: recreate database
+      shell: php {{api_root}}bin/console doctrine:database:create
+
+    - name: execute migrations
+      shell: php {{api_root}}bin/console doctrine:migrations:migrate --no-interaction
+
+    - name: install core data
+      shell: php {{api_root}}bin/console doctrine:fixtures:load --fixtures={{api_root}}{{fixture_path}}{{fixture_name}} --append
+
+    - debug: msg="Tavro Core Installation Complete on {{ inventory_hostname }}"

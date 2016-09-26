@@ -67,20 +67,26 @@ Unit tests are executed using PHPUnit, and coverage analysis report is available
 
     $ curl -X POST http://api.tavro.dev/api/v1/users -d '{"first_name": "John", "last_name": "Doe", "email": "johndoe@example.com"}' --header "Authorization: Bearer {JWT_TOKEN_PAYLOAD}"
 
-### Scripts
+### Provisioning
 
-These scripts all require you first login to the VM via SSH:
+These scripts are to be executed on specific servers. You can provision a new server, setup a demo app, or simply reinstall a clean local instance.
 
-    $ cd /path/to/tavro
-    $ vagrant ssh
+`{ENVIRONMENT_NAME}` should be replaced with the environment you wish to execute upon.
+
+#### Install Clean Demo Environment
+
+    $ ansible-playbook -i /path/to/tavro/provisioning/inventories/{ENVIRONMENT_NAME} /path/to/tavro/provisioning/install-demo.yml
+
+#### Install Fresh Application (Core Only)
+
+    $ ansible-playbook -i /path/to/tavro/provisioning/inventories/{ENVIRONMENT_NAME} /path/to/tavro/provisioning/install.yml
+
+#### ** USE WITH CAUTION FOR DEVELOPMENT PURPOSES ONLY!! ***
+
+This will rebase the migrations and schema of Tavro from the specified environment database.
+
+    $ ansible-playbook -i /path/to/tavro/provisioning/inventories/{ENVIRONMENT_NAME} /path/to/tavro/provisioning/rebase.yml
     
-#### Restore to a Clean Database
-
-    $ sudo bash /var/www/tavro/scripts/reset-clean.sh
-   
-#### Restore to Development "dummy" data
-
-    $ sudo bash /var/www/tavro/scripts/reset-dev.sh
     
 ### Documentation
 
