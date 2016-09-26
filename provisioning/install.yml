@@ -11,7 +11,7 @@
 
   tasks:
     - name: drop database
-      shell: php {{api_root}}bin/console doctrine:database:drop --force
+      shell: php {{api_root}}bin/console doctrine:database:drop --if-exists --force
 
     - name: recreate database
       shell: php {{api_root}}bin/console doctrine:database:create
