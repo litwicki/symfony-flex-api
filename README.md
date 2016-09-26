@@ -71,7 +71,11 @@ Replace `{JWT_TOKEN_PAYLOAD}` with the token response from the JWT Token Request
 
 ### Testing with Postman
 
+#### Sample "Login" (Get a JWT Token)
+![alt text](http://i.imgur.com/LJ5PfHz.png "Postman Auth Request")
 
+#### Sample User `GET` Request
+![alt text](http://i.imgur.com/UGzBx0V.png "Postman User Request")
 
 ### Provisioning
 
