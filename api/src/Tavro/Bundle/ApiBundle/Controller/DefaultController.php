@@ -20,31 +20,33 @@ use Litwicki\Common\Common;
 class DefaultController extends Controller
 {
     /**
-     * @param $data
-     * @param string $format
-     * @param int $code
+     * @param $raw
+     * @param array $options
      *
      * @return \Symfony\Component\HttpFoundation\Response
      * @throws \Exception
      */
-    public function apiResponse($data, $format = 'json', $code = 200, $message = 'Tavro Api Request Successful')
+    public function apiResponse($raw, array $options = array())
     {
         try {
 
-            $response = new Response();
+            $format = isset($options['format']) ? $options['format'] : 'json';
+            $group = isset($options['group']) ? $options['group'] : 'api';
+            $code = isset($options['code']) ? $options['code'] : 200;
+            $message = isset($options['message']) ? $options['message'] : '';
 
-            $obj = [
-                'message' => $message,
-                'data' => $data
-            ];
+            $response = new Response();
 
             if($format == 'json') {
                 $response->headers->set('Content-Type', 'application/json');
-                $responseData = json_encode($obj);
+                $responseData = $this->serialize([
+                    'message' => $message,
+                    'data' => $raw,
+                ], $format, $group);
             }
             else {
                 $response->headers->set('Content-Type', 'application/xml');
-                $responseData = $this->toXml($obj);
+                $responseData = [];
             }
 
             $response->setContent($responseData);
@@ -197,8 +199,10 @@ class DefaultController extends Controller
             $params = $request->query->all();
             $handler = $this->getHandler($entity);
             $items = $handler->typeahead($params);
-            $data = $this->serialize($items, $_format, 'typeahead');
-            return $this->apiResponse($data, $_format);
+            return $this->apiResponse($items, [
+                'format' => $_format,
+                'group' => 'typeahead'
+            ]);
         }
         catch(\Exception $e) {
             throw $e;
@@ -220,8 +224,9 @@ class DefaultController extends Controller
             $params = $request->query->all();
             $handler = $this->getHandler($entity);
             $items = $handler->findAll($params);
-            $data = $this->serialize($items, $_format);
-            return $this->apiResponse($data, $_format);
+            return $this->apiResponse($items, [
+                'format' => $_format
+            ]);
         }
         catch(\Exception $e) {
             throw $e;
@@ -243,8 +248,9 @@ class DefaultController extends Controller
         try {
             $handler = $this->getHandler($entity);
             $item = $handler->find($id);
-            $data = $this->serialize($item, $_format, $group = 'detail');
-            return $this->apiResponse($data, $_format);
+            return $this->apiResponse($item, [
+                'format' => $_format
+            ]);
         }
         catch(ApiAccessDeniedException $e) {
             throw $e;
@@ -359,9 +365,10 @@ class DefaultController extends Controller
 
             $handler->patch($request, $object, $patch);
 
-            $mod = $handler->find($id);
-            $data = $this->serialize($mod, 'json');
-            return $this->apiResponse($data);
+            $entity = $handler->find($id);
+            return $this->apiResponse($entity, [
+                'format' => $_format
+            ]);
 
         }
         catch (InvalidFormException $e) {
@@ -399,16 +406,15 @@ class DefaultController extends Controller
                 $message = sprintf('%s %s deleted.', $class, $id);
             }
             else {
-                $code = 400;
+                $code = 404;
                 $message = sprintf('%s object not found.', $class);
             }
 
-            $data = array(
+            return $this->apiResponse($data, [
+                'format' => $_format,
                 'code' => $code,
                 'message' => $message
-            );
-
-            return $this->apiResponse($_format == 'json' ? json_encode($data) : $data, $_format, $code);
+            ]);
 
         }
         catch (InvalidFormException $e) {

@@ -63,9 +63,15 @@ Unit tests are executed using PHPUnit, and coverage analysis report is available
 
     $ curl -X POST http://api.tavro.dev/api/v1/auth -d username=tavrobot -d password=Password1!
 
-### Testing CURL Api Request
+### Sample CURL Api Request
+
+Replace `{JWT_TOKEN_PAYLOAD}` with the token response from the JWT Token Request (above)
 
     $ curl -X POST http://api.tavro.dev/api/v1/users -d '{"first_name": "John", "last_name": "Doe", "email": "johndoe@example.com"}' --header "Authorization: Bearer {JWT_TOKEN_PAYLOAD}"
+
+### Testing with Postman
+
+
 
 ### Provisioning
 
@@ -86,7 +92,6 @@ These scripts are to be executed on specific servers. You can provision a new se
 This will rebase the migrations and schema of Tavro from the specified environment database.
 
     $ ansible-playbook -i /path/to/tavro/provisioning/inventories/{ENVIRONMENT_NAME} /path/to/tavro/provisioning/rebase.yml
-    
     
 ### Documentation
 
