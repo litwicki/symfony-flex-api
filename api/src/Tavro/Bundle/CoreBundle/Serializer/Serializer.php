@@ -47,11 +47,6 @@ class Serializer
                 ->enableMaxDepthChecks()
             );
 
-//            $string = $this->serializer->serialize(
-//                $data,
-//                $format
-//            );
-
             return $string;
 
         }
@@ -71,8 +66,7 @@ class Serializer
     public function deserialize($string, $format, $typeName)
     {
         try {
-            $data = $this->serializer->deserialize($string, $typeName, $format);
-            return $data;
+            return $this->serializer->deserialize($string, $typeName, $format);
         }
         catch(\Exception $e) {
             throw $e;

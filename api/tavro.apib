@@ -3,384 +3,141 @@ HOST: http://api.tavro.dev/api/v1
 
 # tavro.io api
 
-API for working with tavro.io.
+Private API Documentation.
 
 # Data Structures
 
-## Role (object)
+## Account1 (object)
 + id: 1 (number)
++ name: Autobots
++ name_clean: autobots
++ create_date: `2015-08-05T08:40:51.620Z` (string, required)
++ update_date: `2015-08-05T08:40:51.620Z` (string, required)
+
+## Account2 (object)
++ id: 2 (number)
++ name: Decepticons
++ name_clean: decepticons
++ create_date: `2015-08-05T08:40:51.620Z` (string, required)
++ update_date: `2015-08-05T08:40:51.620Z` (string, required)
+
+## AccountGroup1 (object)
++ id: 1 (number)
++ name: Primes
++ account (Account1)
++ user (User1)
++ create_date: `2015-08-05T08:40:51.620Z` (string, required)
++ update_date: `2015-08-05T08:40:51.620Z` (string, required)
+
+## AccountGroup2 (object)
++ id: 2 (number)
++ name: Leaders
++ account (Account2)
++ user (User1)
++ create_date: `2015-08-05T08:40:51.620Z` (string, required)
++ update_date: `2015-08-05T08:40:51.620Z` (string, required)
+
+## AccountGroup3 (object)
++ id: 3 (number)
++ name: Cars
++ account (Account1)
++ user (User2)
++ create_date: `2015-08-05T08:40:51.620Z` (string, required)
++ update_date: `2015-08-05T08:40:51.620Z` (string, required)
+
+## AccountUser1 (object)
++ id: 1 (number)
++ account (Account1)
++ user (User1)
+
+## AccountUser2 (object)
++ id: 2 (number)
++ create_date: `2015-08-05T08:40:51.620Z` (string, required)
++ update_date: `2015-08-05T08:40:51.620Z` (string, required)
++ account (Account1)
++ user (User2)
+
+## AccountUser3 (object)
++ id: 3 (number)
++ create_date: `2015-08-05T08:40:51.620Z` (string, required)
++ update_date: `2015-08-05T08:40:51.620Z` (string, required)
++ account (Account2)
++ user (User3)
+
+## AccountGroupUser1 (object)
++ id: 1 (number)
++ create_date: `2015-08-05T08:40:51.620Z` (string, required)
++ update_date: `2015-08-05T08:40:51.620Z` (string, required)
++ account_group (AccountGroup1)
++ user (User1)
+
+## AccountGroupUser2 (object)
++ id: 2 (number)
++ create_date: `2015-08-05T08:40:51.620Z` (string, required)
++ update_date: `2015-08-05T08:40:51.620Z` (string, required)
++ account_group (AccountGroup2)
++ user (User2)
+
+## AccountGroupUser3 (object)
++ id: 3 (number)
++ create_date: `2015-08-05T08:40:51.620Z` (string, required)
++ update_date: `2015-08-05T08:40:51.620Z` (string, required)
++ account_group (AccountGroup3)
++ user (User3)
+
+## RoleAdmin (object)
++ id: 1 (number)
++ create_date: `2015-08-05T08:40:51.620Z` (string, required)
++ update_date: `2015-08-05T08:40:51.620Z` (string, required)
 + name: Administrator (string, required)
 + role: ROLE_ADMIN (string, required)
 + body: Administrators do what they want! (string, required)
 
-## Product Image (object)
-+ id: 4 (number)
-+ aws_url: https://s3.amazonaws.com/s3bucket/images/products/UfjnDUqN2057.jpg (string)
-+ bucket: s3-bucket (string)
-+ directory: images (string)
-+ aws_key: UfjnDUqN2057.jpg (string)
-+ original_filename: filename.jpg (string)
-+ mime_type: image/jpeg (string)
-+ filesize: 3456543 (number)
-+ height: 750 (number)
-+ width: 750 (number)
-
-## Service Image (object)
-+ id: 11 (number)
-+ aws_url: https://s3.amazonaws.com/s3bucket/images/services/ZfjnEFqN1257.jpg (string)
-+ bucket: s3-bucket (string)
-+ directory: images (string)
-+ aws_key: ZfjnEFqN1257.jpg (string)
-+ original_filename: symfony.jpg (string)
-+ mime_type: image/jpeg (string)
-+ filesize: 3456543 (number)
-+ height: 500 (number)
-+ width: 500 (number)
-
-## Avatar (object)
-+ id: 3 (number)
-+ aws_url: https://s3.amazonaws.com/s3bucket/images/avatars/4GjxlgWh8dfM.jpg (string)
-+ bucket: s3-bucket (string)
-+ directory: images (string)
-+ aws_key: 4GjxlgWh8dfM.jpg (string)
-+ original_filename: jake2016.jpg (string)
-+ mime_type: image/jpeg (string)
-+ filesize: 3456543 (number)
-+ height: 250 (number)
-+ width: 250 (number)
-
-## User (object)
-+ id: 1 (number, required)
-+ username: montoya (string, required)
-+ salt (string)
-+ email: user@tavro.io
-+ signature (string)
-+ last_online_date: `2015-08-05T08:40:51.620Z` (string, required)
-+ api_key (string)
-+ api_enabled (boolean)
-+ guid (string)
-+ user_ip (string)
-+ gender (string)
-+ user_agent (string)
-+ birthday (string)
-+ avatar (Avatar)
-
-## Simple User (object)
-+ id: 100
-+ username: username
-+ email: user@example.com
-
-## Contact User (object)
-+ id: 2 (number, required)
-+ username: zachary (string, required)
-+ salt (string)
-+ email: zack@acme.co
-+ signature (string)
-+ last_online_date: `2015-08-05T08:40:51.620Z` (string, required)
-+ api_key (string)
-+ api_enabled (boolean)
-+ guid (string)
-+ user_ip (string)
-+ gender (string)
-+ user_agent (string)
-+ birthday (string)
-+ avatar
-
-## Contact2 User (object)
-+ id: 20 (number, required)
-+ username: zachary (string, required)
-+ salt (string)
-+ email: aiden@ninja.com
-+ signature (string)
-+ last_online_date: `2015-08-05T08:40:51.620Z` (string, required)
-+ api_key (string)
-+ api_enabled (boolean)
-+ guid (string)
-+ user_ip (string)
-+ gender (string)
-+ user_agent (string)
-+ birthday (string)
-+ avatar
-
-## Organization (object)
-+ id: 1 (number, required)
-+ status (number)
-+ create_date: `2015-08-05T08:40:51.620Z` (string, required)
-+ update_date: `2015-08-05T08:40:51.620Z` (string, required)
-+ title: Zoadilack (string, required)
-+ body: Zoadilack writes beautiful code. (string)
-+ owner (User)
-+ nodes (array)
-+ tags (array)
-+ users (array)
-+ service_categories (array)
-+ expense_categories (array)
-+ product_categories (array)
-+ revenue_categories (array)
-+ services (array)
-+ expenses (array)
-+ products (array)
-+ funding_rounds (array)
-+ shareholders (array)
-
-## Marvel Organization (object)
-+ id: 2 (number, required)
-+ status (number)
-+ create_date: `2015-08-05T08:40:51.620Z` (string, required)
-+ update_date: `2015-08-05T08:40:51.620Z` (string, required)
-+ title: Marvel Entertainment (string, required)
-+ body: Spiderman, Spiderman, Does whatever a spider can Spins a web, any size, Catches thieves just like flies Look Out! Here comes the Spiderman. (string)
-
-## DC Comics Organization (object)
-+ id: 3 (number, required)
-+ status (number)
-+ create_date: `2015-08-05T08:40:51.620Z` (string, required)
-+ update_date: `2015-08-05T08:40:51.620Z` (string, required)
-+ title: DC Comics (string, required)
-+ body: Nah-nah nah-nah nah-nah nah-nah... BATMAN! (string)
-
-## Contact (object)
-+ id: 42 (number, required)
-+ create_date: `2015-08-05T08:40:51.620Z` (string, required)
-+ update_date: `2015-08-05T08:40:51.620Z` (string, optional)
-+ status: 1 (number, required)
-+ first_name: Zachary (string, required)
-+ last_name:  Litwicki (string, required)
-+ title:  CEO (string, optional)
-+ address: 123 Main St (string, required)
-+ address2: null (string, optional)
-+ city: Maple Valley (string)
-+ state: WA (string, required)
-+ zip: 98065 (string, required)
-+ email: zachary@tavro.io (string, required)
-+ phone: 555-867-5309 (string, optional)
-+ user (Contact User)
-+ organization (Marvel Organization)
-+ comments (array)
-
-## Contact2 (object)
-+ id: 50 (number, required)
-+ create_date: `2015-08-05T08:40:51.620Z` (string, required)
-+ update_date: `2015-08-05T08:40:51.620Z` (string, optional)
-+ status: 1 (number, required)
-+ first_name: Zoë (string, required)
-+ last_name:  Litwicki (string, required)
-+ title:  CEO (string, optional)
-+ address: 123 Main St (string, required)
-+ address2: null (string, optional)
-+ city: Maple Valley (string)
-+ state: WA (string, required)
-+ zip: 98065 (string, required)
-+ email: jane.doe@tavro.io (string, required)
-+ phone: 555-867-5309 (string, optional)
-+ user 
-+ organization (Marvel Organization)
-+ comments (array)
-
-## Contact3 (object)
-+ id: 13 (number, required)
-+ create_date: `2015-08-05T08:40:51.620Z` (string, required)
-+ update_date: `2015-08-05T08:40:51.620Z` (string, optional)
-+ status: 1 (number, required)
-+ first_name: Bruce (string, required)
-+ last_name:  Wayne (string, required)
-+ title:  CEO (string, optional)
-+ address: 123 Main St (string, required)
-+ address2: null (string, optional)
-+ city: Gotham (string)
-+ state: New York (string, required)
-+ zip: 12345 (string, required)
-+ email: batman@tavro.io (string, required)
-+ phone: 555-867-5309 (string, optional)
-+ user (Simple User)
-+ organization (DC Comics Organization)
-+ comments (array)
-
-## Contact4 (object)
-+ id: 43 (number, required)
-+ create_date: `2015-08-05T08:40:51.620Z` (string, required)
-+ update_date: `2015-08-05T08:40:51.620Z` (string, optional)
-+ status: 1 (number, required)
-+ first_name: Peter (string, required)
-+ last_name:  Parker (string, required)
-+ title:  Spiderman (string, optional)
-+ address: 123 Main St (string, required)
-+ address2: null (string, optional)
-+ city: New York (string)
-+ state: NY (string, required)
-+ zip: 10001 (string, required)
-+ email: spiderman@tavro.io (string, required)
-+ phone: 555-867-5309 (string, optional)
-+ user (Simple User)
-+ organization (Marvel Organization)
-+ comments (array)
-
-## Comment (object)
-+ id: 13 (number, required)
-+ create_date: `2015-08-05T08:40:51.620Z` (string, required)
-+ update_date: `2015-08-05T08:40:51.620Z` (string, required)
-+ body: Boba Fett
-+ status: 1 (number, required)
-+ user (User)
-
-## Expense (object)
-+ id
-+ body
-+ amount
-+ expense_date
-+ category (Expense Category)
-+ user (User)
-+ customer (Contact)
-
-## Funding Round (object)
-+ id: `1` (number, required)
-+ status: 1 (number)
-+ create_date: `2015-08-05T08:40:51.620Z` (string, required)
-+ update_date: `2015-08-05T08:40:51.620Z` (string, required)
-+ body: Series A funding round led by Angel Investors Corporation. (string)
-+ type: series-a (string)
-+ prospectus: /s3-bucket/docs/zoadilack-prospectus.pdf (string)
-+ share_price: 43.00 (number)
-+ total_shares: 1000000 (number)
-+ organization (Organization)
-+ shareholders: [] Shareholders on this Funding Round.
-+ comments: [] Comments on this Funding Round.
-
-## Node (object)
+## RoleUser (object)
 + id: 1 (number)
-+ status: 1 (number)
 + create_date: `2015-08-05T08:40:51.620Z` (string, required)
 + update_date: `2015-08-05T08:40:51.620Z` (string, required)
-+ body: A brief overview of Zoadilack's founding. (string)
-+ type: blog (string)
-+ display_date: `2016-08-05T08:40:51.620Z` (string)
-+ views: 0 (number)
-+ user (Simple User)
-+ organization (Marvel Organization)
-+ comments: [] Comments on this Node.
-+ tags: [] Tags on this Node.
-+ reads: [] Users who have read this Node.
++ name: User (string, required)
++ role: ROLE_USER (string, required)
++ body: Users do what they want! (string, required)
 
-## Simple Node (object)
-+ id: 2 (number)
-+ status: 1 (number)
-+ create_date: `2015-08-05T08:40:51.620Z` (string, required)
-+ update_date: `2015-08-05T08:40:51.620Z` (string, required)
-+ body: How to create a new Organization in Tavro. (string)
-+ type: article (string)
-+ display_date: `2016-08-05T08:40:51.620Z` (string)
-+ views: 0 (number)
-+ user (Simple User)
-
-## Simple Node2 (object)
-+ id: 3 (number)
-+ status: 1 (number)
-+ create_date: `2015-08-05T08:40:51.620Z` (string, required)
-+ update_date: `2015-08-05T08:40:51.620Z` (string, required)
-+ body: How one company used Tavro to go public! (string)
-+ type: blog (string)
-+ display_date: `2016-08-05T08:40:51.620Z` (string)
-+ views: 0 (number)
-+ user (Simple User)
-
-## Product (object)
-+ id: `1` (number, required)
-+ status: 1 (number)
-+ create_date: `2015-08-05T08:40:51.620Z` (string, required)
-+ update_date: `2015-08-05T08:40:51.620Z` (string, required)
-+ body: A brief product description. (string)
-+ price: 24.99 (number)
-+ cost: 35.95 (number)
-+ category (ProductCategory)
-+ organization (Organization)
-+ images [(Product Image)]
-
-## Revenue (object)
+## RoleDeveloper (object)
 + id: 1 (number)
-+ status: 1 (number)
 + create_date: `2015-08-05T08:40:51.620Z` (string, required)
 + update_date: `2015-08-05T08:40:51.620Z` (string, required)
-+ body: Our first big sale! (string)
-+ type (string)
-+ category (RevenueCategory)
-+ user (User)
-+ comments: []
-+ servics: []
-+ products: []
-+ tags: []
-+ organization (Organization)
++ name: Developer (string, required)
++ role: ROLE_DEVELOPER (string, required)
++ body: Developers do what they want! (string, required)
 
-## Service (object)
+## Comment1 (object)
 + id: 1 (number)
-+ status: 1 (number)
 + create_date: `2015-08-05T08:40:51.620Z` (string, required)
 + update_date: `2015-08-05T08:40:51.620Z` (string, required)
-+ body: Software Development (string)
-+ type: hourly (string)
-+ price: 150 (number)
-+ category (ServiceCategory)
-+ organization (Organization)
-+ images [(Service Image)]
++ user (User1)
++ body: "Before time began, there was the Cube. We know not where it comes from, only that it holds the power to create worlds and fill them with life. That is how our race was born. For a time, we lived in harmony. But like all great power, some wanted it for good, others for evil. And so began the war. A war that ravaged our planet until it was consumed by death, and the Cube was lost to the far reaches of space. We scattered across the galaxy, hoping to find it and rebuild our home. Searching every star, every world. And just when all hope seemed lost, message of a new discovery drew us to an unknown planet called... Earth."
 
-## Shareholder (object)
+## Comment2 (object)
 + id: 1 (number)
-+ status: 1 (number)
 + create_date: `2015-08-05T08:40:51.620Z` (string, required)
 + update_date: `2015-08-05T08:40:51.620Z` (string, required)
-+ first_name: Jake (string)
-+ last_name: Litwicki (string)
-+ title: Co-Founder (string)
-+ address: 123 Main Street (string)
-+ address2: null (string)
-+ city: Seattle (string)
-+ state: WA (string)
-+ zip: 98065 (number)
-+ email: jake.litwicki@gmail.com (string)
-+ phone: 555-867-5309 (string)
-+ notes: Jake purcahsed his shares in pennies! (string)
-+ user (User)
++ user (User2)
++ body: "Legendary warriors, the powers that created us now want us all extinguished. We must join forces, or else we'll all be their slaves. So today you stand with us... or you stand against me."
 
-## Tag (object)
+## Comment3 (object)
 + id: 1 (number)
-+ status: 1 (number)
 + create_date: `2015-08-05T08:40:51.620Z` (string, required)
 + update_date: `2015-08-05T08:40:51.620Z` (string, required)
-+ tag: something (string)
-+ body: Software Development (string)
-+ organization (Organization)
++ user (User3)
++ body: "There are mysteries to the universe we were never meant to solve. But who we are and why we are here, are not among them. Those answers we carry inside. I am Optimus Prime, and this message is to my Creators: leave planet Earth alone, 'cause I'm coming for you!"
 
-## Variable (object)
+## Contact1 (object)
 + id: 1 (number)
-+ status: 1 (number)
 + create_date: `2015-08-05T08:40:51.620Z` (string, required)
 + update_date: `2015-08-05T08:40:51.620Z` (string, required)
-+ name: variable-name (string)
-+ body: The value or somesuch information. (string)
-+ organization (Organization)
-
-## Expense Category (object)
-+ id
-+ body
-+ organization (Organization)
-
-## ProductCategory (object)
-+ id
-+ body
-+ organization (Organization)
-
-## RevenueCategory (object)
-+ id
-+ body
-+ organization (Organization)
-
-## ServiceCategory (object)
-+ id
-+ body
-+ organization (Organization)
 
 ## Account [/accounts]
 
-### Create Account [POST /accounts]
+### Create [POST /accounts]
 
 + Request (application/json)
 
@@ -395,22 +152,7 @@ API for working with tavro.io.
 
             Location: /accounts/1
 
-### Add Account User [POST /accounts/{id}/users]
-
-+ Request (application/json)
-
-        {
-            "body": "This round is ideally for friends and family!",
-            "user": 1
-        }
-
-+ Response 201 (application/json)
-
-    + Headers
-
-            Location: /users/{id}
-
-### Edit Account [PATCH /accounts/{id}]
+### Edit [PATCH /accounts/{id}]
 
 + Parameters
     + id: `1` (number, required) - ID of the Account in the form of an integer
@@ -424,9 +166,17 @@ API for working with tavro.io.
 
 + Response 204 (application/json)
 
-## AccountGroup [/account_groups]
+### Delete [DELETE /accounts/{id}]
 
-### Create AccountGroup [POST /{object}/{id}/account_groups]
++ Parameters
+    + id: `1` (number, required) - ID of the Account in the form of an integer
+
++ Response 204 (application/json)
+
+### Add User [POST /accounts/{id}/users]
+
++ Parameters
+    + id: `1` (number, required) - ID of the Account in the form of an integer
 
 + Request (application/json)
 
@@ -439,12 +189,12 @@ API for working with tavro.io.
 
     + Headers
 
-            Location: /account_groups/1
+            Location: /accounts/1
 
-### Edit AccountGroup [PATCH /account_groups/{id}]
+### Get Users [GET /accounts/{id}/users]
 
 + Parameters
-    + id: `1` (number, required) - ID of the AccountGroup in the form of an integer
+    + id: `1` (number, required) - ID of the Account in the form of an integer
 
 + Request (application/json)
 
@@ -453,24 +203,40 @@ API for working with tavro.io.
             "status": 1
         }
 
-+ Response 204 (application/json)
++ Response 200 (application/json)
 
-### Delete AccountGroup [DELETE /account_groups/{id}]
+    + Attributes (array[User1, User2])
 
-+ Parameters
-    + id: `1` (number, required) - ID of the AccountGroup in the form of an integer
-
-+ Response 204 (application/json)
-
-## Comment [/comments]
-
-### Create Comment [POST /{object}/{id}/comments]
-
-Comments can be created for `customer`, `expense`, `funding_round`, `node`, and `revenue` objects.
+### Remove User [DELETE /accounts/{account_id}/users/{user_id}]
 
 + Parameters
-    + object: `node` (string, required) - The object to attach the comment to: contacts, funding_rounds, nodes, revenue
-    + id: `1` (number, required) - ID of the `PARENT OBJECT` in the form of an integer
+    + account_id: `1` (number, required) - ID of the Account in the form of an integer
+    + user_id: `1` (number, required) - ID of the User in the form of an integer
+
++ Response 204 (application/json)
+
+### Get Groups [GET /accounts/{id}/groups]
+
++ Parameters
+    + id: `1` (number, required) - ID of the Account in the form of an integer
+
++ Request (application/json)
+
+        {
+            "body": "This round of funding is exclusive to friends and family.",
+            "status": 1
+        }
+
++ Response 200 (application/json)
+
+    + Attributes (array[User1, User2])
+
+## Account Group [/account_groups]
+
+### Create [POST /accounts/{id}/groups]
+
++ Parameters
+    + id: `1` (number, required) - ID of the Account in the form of an integer
 
 + Request (application/json)
 
@@ -483,11 +249,60 @@ Comments can be created for `customer`, `expense`, `funding_round`, `node`, and 
 
     + Headers
 
-            Location: /comments/1
+            Location: /accounts/1
+
+### Delete [DELETE /groups/{id}]
+
++ Parameters
+    + id: `1` (number, required) - ID of the Account Group in the form of an integer
+
++ Response 204 (application/json)
+
+### Add User [POST /account_groups/{id}/users]
+
++ Parameters
+    + id: `1` (number, required) - ID of the Account in the form of an integer
+
++ Request (application/json)
+
+        {
+            "body": "This round is ideally for friends and family!",
+            "user": 1
+        }
+
++ Response 201 (application/json)
+
+    + Headers
+
+            Location: /accounts/1
+
+### Get Users [GET /account_groups/{id}/users]
+
++ Parameters
+    + id: `1` (number, required) - ID of the Account in the form of an integer
+
++ Request (application/json)
+
+        {
+            "body": "This round of funding is exclusive to friends and family.",
+            "status": 1
+        }
+
++ Response 200 (application/json)
+
+    + Attributes (array[User1, User2])
+
+### Remove User [DELETE /account_groups/{group_id}/users/{user_id}]
+
++ Parameters
+    + group_id: `1` (number, required) - ID of the Account Group in the form of an integer
+    + user_id: `1` (number, required) - ID of the User in the form of an integer
+
++ Response 204 (application/json)
+
+## Comment [/comments]
 
 ### Edit Comment [PATCH /comments/{id}]
-
-To "remove" a Comment, pass a `status` of `0`.
 
 + Parameters
     + id: `1` (number, required) - ID of the Comment in the form of an integer
@@ -503,8 +318,6 @@ To "remove" a Comment, pass a `status` of `0`.
 
 ### Delete Comment [DELETE /comments/{id}]
 
-Regardless of what object the comment is attached to, you simply delete it by its `id`.
-
 + Parameters
     + id: `1` (number, required) - ID of the Comment in the form of an integer
 
@@ -513,8 +326,6 @@ Regardless of what object the comment is attached to, you simply delete it by it
 ## Contact [/contacts]
 
 ### All Contacts [GET]
-
-Return all `Contact` objects for all `Organizations`. The response will be keyed by `organization_id`.
 
 + Response 200 (application/json)
 
@@ -630,62 +441,64 @@ Return all `Contact` objects for all `Organizations`. The response will be keyed
 
 + Response 204 (application/json)
 
-## Expense Category [/expense_categories]
-
-`Expense Category` objects live in isolate by `Organization` and can only be associated to an `Expense`.
-
-### View Expense Category [GET /expense_categories/{id}]
+### Tag [POST /expenses/{id}/tags]
 
 + Parameters
-    + id: `1` (number, required) - ID of the Expense Category in the form of an integer
+    + id: `1` (number, required) - ID of the Expense in the form of an integer
+
++ Request (application/json)
+
+        {
+            "tag": "tags are always lowercased"
+        }
+
++ Response 201 (application/json)
+
+    + Headers
+
+            Location: /tags/1
+
+## File [/files]
+
+### Create [POST /files]
+
++ Request (multipart/form-data; boundary=---BOUNDARY)
+
+        -----BOUNDARY
+        Content-Disposition: form-data; name="files[file]"; filename="document.pdf"
+        Content-Type: applicationpdf
+        Content-Transfer-Encoding: base64
+
+        /9j/4AAQSkZJRgABAQEAYABgAAD/2wBDAAgGBgcGBQgHBwcJCQgKDBQNDAsLDBkSEw8UHRofHh0a
+        HBwgJC4nICIsIxwcKDcpLDAxNDQ0Hyc5PTgyPC4zNDL/2wBDAQkJCQwLDBgNDRgyIRwhMjIyMjIy
+        MjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjL/wAARCAABAAEDASIA
+        AhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAf/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFAEB
+        AAAAAAAAAAAAAAAAAAAAAP/EABQRAQAAAAAAAAAAAAAAAAAAAAD/2gAMAwEAAhEDEQA/AL+AD//Z
+        -----BOUNDARY
+
++ Response 201 (application/json)
+
+    + Headers
+
+            Location: /files/{id}
+
+### View File [GET /files/{id}]
+
++ Parameters
+    + id: `1` (number, required) - ID of the File in the form of an integer
 
 + Response 200 (application/json)
 
-    + Attributes (array[Expense Category])
+    + Attributes (array[File])
 
-### Create Expense Category [POST /expense_categories]
-
-+ Request (application/json)
-
-        {
-            "body": "Subscriptions",
-            "organization": 1
-        }
-
-+ Response 201 (application/json)
-
-    + Headers
-
-            Location: /expenses/1
-
-### Edit Expense Category [PATCH /expense_categories/{id}]
+### Delete File [DELETE /files/{id}]
 
 + Parameters
-    + id: `1` (number, required) - ID of the Expense Category in the form of an integer
-
-+ Request (application/json)
-
-        {
-            "body": "Subscriptions",
-            "organization": 1
-        }
-
-+ Response 201 (application/json)
-
-    + Headers
-
-            Location: /expense_categories/1
-
-### Delete Expense Category [DELETE /expense_categories/{id}]
-
-+ Parameters
-    + id: `1` (number, required) - ID of the Expense Category in the form of an integer
+    + id: `1` (number, required) - ID of the File in the form of an integer
 
 + Response 204 (application/json)
 
 ## Funding Round [/funding_rounds]
-
-An `Organization` can have multiple `Funding Rounds`, each with their own `Shareholders` of whom can be participants in one or more `Funding Rounds` themselves.
 
 ### View Funding Round [GET /funding_rounds/{id}]
 
@@ -733,34 +546,6 @@ An `Organization` can have multiple `Funding Rounds`, each with their own `Share
 
             Location: /funding_rounds/1
 
-
-### Add File [POST /funding_rounds/{id}/files]
-
-Images are uploaded and stored as a separate object that can be viewed separately as `/images/{id}`
-
-+ Parameters
-    + id: `1` (number, required) - ID of the Funding Round in the form of an integer
-
-+ Request (multipart/form-data; boundary=---BOUNDARY)
-
-        -----BOUNDARY
-        Content-Disposition: form-data; name="files[file]"; filename="document.pdf"
-        Content-Type: applicationpdf
-        Content-Transfer-Encoding: base64
-
-        /9j/4AAQSkZJRgABAQEAYABgAAD/2wBDAAgGBgcGBQgHBwcJCQgKDBQNDAsLDBkSEw8UHRofHh0a
-        HBwgJC4nICIsIxwcKDcpLDAxNDQ0Hyc5PTgyPC4zNDL/2wBDAQkJCQwLDBgNDRgyIRwhMjIyMjIy
-        MjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjL/wAARCAABAAEDASIA
-        AhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAf/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFAEB
-        AAAAAAAAAAAAAAAAAAAAAP/EABQRAQAAAAAAAAAAAAAAAAAAAAD/2gAMAwEAAhEDEQA/AL+AD//Z
-        -----BOUNDARY
-
-+ Response 201 (application/json)
-
-    + Headers
-
-            Location: /images/{id}
-
 ### Delete Funding Round [DELETE /funding_rounds/{id}]
 
 + Parameters
@@ -788,11 +573,7 @@ Images are uploaded and stored as a separate object that can be viewed separatel
 
 ## Node [/nodes]
 
-Acceptable `type` is `article`, `blog`, `wiki`, or `node`.
-
 ### All Nodes [GET /nodes]
-
-Nodes are keyed by `organization` based on what you have access to.
 
 + Response 200 (application/json)
 
@@ -809,8 +590,9 @@ Nodes are keyed by `organization` based on what you have access to.
 
 ### Create Node [POST]
 
-- `display_date` will be defaulted to `create_date` unless specified, and cannot be a date in the past.
-- `type` will be defaulted to `node` unless specified. Grouping/filtering happens automatically.
+- `display_date` will be defaulted to `create_date` unless specified
+- `display_date` cannot be a date in the past
+- `type` will be defaulted to `node` unless specified
 
 + Request (application/json)
 
@@ -827,8 +609,6 @@ Nodes are keyed by `organization` based on what you have access to.
             Location: /nodes/{id}
 
 ### Edit Node [PATCH /nodes/{id}]
-
-You can change the `type` of a node, but it will be recategorized appropriately on the frontend.
 
 + Parameters
     + id: `1` (number, required) - ID of the Node in the form of an integer
@@ -847,6 +627,22 @@ You can change the `type` of a node, but it will be recategorized appropriately 
 
             Location: /nodes/{id}
 
+### Tag [POST /nodes/{id}/tags]
+
++ Parameters
+    + id: `1` (number, required) - ID of the Node in the form of an integer
+
++ Request (application/json)
+
+        {
+            "tag": "tags are always lowercased"
+        }
+
++ Response 201 (application/json)
+
+    + Headers
+
+            Location: /tags/1
 
 ### Delete Node [DELETE /nodes/{id}]
 
@@ -865,8 +661,6 @@ You can change the `type` of a node, but it will be recategorized appropriately 
 
 ### View Organization [GET /organizations/{id}]
 
-Viewing a single Organization will return it and **all** of its associated objects.
-
 + Parameters
     + id: `1` (number, required) - ID of the Organization in the form of an integer
 
@@ -875,8 +669,6 @@ Viewing a single Organization will return it and **all** of its associated objec
     + Attributes (array[Organization])
 
 ### Create Organization [POST]
-
-An `array` of User `id` can be passed to add Users to an Organization.
 
 + Request (application/json)
 
@@ -893,9 +685,6 @@ An `array` of User `id` can be passed to add Users to an Organization.
             Location: /organizations/{id}
 
 ### Edit Organization [PATCH /organizations/{id}]
-
-- Changing the status of an Organization to `0 (disabled)` will disallow the creation of all content on that Organization.
-- Passing an array of User `ids` can manage the assigned Users.
 
 + Parameters
     + id: `1` (number, required) - ID of the Organization in the form of an integer
@@ -918,8 +707,6 @@ An `array` of User `id` can be passed to add Users to an Organization.
 
 ### Delete Organization [DELETE /organizations/{id}]
 
-Deleting an Organization will remove it and all of the associated objects. This can only be done by the Owner (User) of the Organization.
-
 + Parameters
     + id: `1` (number, required) - ID of the Organization in the form of an integer
 
@@ -929,15 +716,11 @@ Deleting an Organization will remove it and all of the associated objects. This 
 
 ### All Products [GET]
 
-Products are keyed by `Organization` you have access to, and given a limited serialization data set.
-
 + Response 200 (application/json)
 
     + Attributes (array[Product])
 
 ### View Product [GET /products/{id}]
-
-Viewing a single `Product` yields a full serialized data set.
 
 + Parameters
     + id: `1` (number, required) - ID of the Organization in the form of an integer
@@ -947,8 +730,6 @@ Viewing a single `Product` yields a full serialized data set.
     + Attributes (array[Product])
 
 ### Create Product [POST /products]
-
-Category must be the `id` of a `ProductCategory`
 
 + Request (application/json)
 
@@ -967,8 +748,6 @@ Category must be the `id` of a `ProductCategory`
             Location: /products/{id}
 
 ### Edit Product [PATCH /products/{id}]
-
-A `status` of `0` will result in the Product no longer being available for association.
 
 + Parameters
     + id: `1` (number, required) - ID of the Product in the form of an integer
@@ -991,9 +770,24 @@ A `status` of `0` will result in the Product no longer being available for assoc
 
             Location: /products/{id}
 
-### Add Image [POST /products/{id}/images]
+### Tag [POST /products/{id}/tags]
 
-Images are uploaded and stored as a separate object that can be viewed separately as `/images/{id}`
++ Parameters
+    + id: `1` (number, required) - ID of the Product in the form of an integer
+
++ Request (application/json)
+
+        {
+            "tag": "tags are always lowercased"
+        }
+
++ Response 201 (application/json)
+
+    + Headers
+
+            Location: /tags/1
+
+### Add Image [POST /products/{id}/images]
 
 + Parameters
     + id: `1` (number, required) - ID of the Product in the form of an integer
@@ -1020,69 +814,8 @@ Images are uploaded and stored as a separate object that can be viewed separatel
 
 ### Delete Product [DELETE /products/{id}]
 
-You can only `DELETE` a product that has not been associated with any `Revenue` objects.
-
 + Parameters
     + id: `1` (number, required) - ID of the Product in the form of an integer
-
-+ Response 204 (application/json)
-
-## Product Category [/product_categories]
-
-`Product Category` objects live in isolate by `Organization` and can only be associated to an `Product`.
-
-### All Product Categories [GET]
-
-+ Response 200 (application/json)
-
-    + Attributes (array[Product Category])
-
-### View Product Category [GET /product_categories/{id}]
-
-+ Parameters
-    + id: `1` (number, required) - ID of the Product Category in the form of an integer
-
-+ Response 200 (application/json)
-
-    + Attributes (array[Expense Category])
-
-### Create Product Category [POST /product_categories]
-
-+ Request (application/json)
-
-        {
-            "body": "Printed Material",
-            "organization": 1
-        }
-
-+ Response 201 (application/json)
-
-    + Headers
-
-            Location: /product_categories/{id}
-
-### Edit Product Category [PATCH /product_categories/{id}]
-
-+ Parameters
-    + id: `1` (number, required) - ID of the Product Category in the form of an integer
-
-+ Request (application/json)
-
-        {
-            "body": "Prints",
-            "organization": 1
-        }
-
-+ Response 201 (application/json)
-
-    + Headers
-
-            Location: /product_categories/{id}
-
-### Delete Product Category [DELETE /product_categories/{id}]
-
-+ Parameters
-    + id: `1` (number, required) - ID of the Product Category in the form of an integer
 
 + Response 204 (application/json)
 
@@ -1090,15 +823,11 @@ You can only `DELETE` a product that has not been associated with any `Revenue` 
 
 ### All Revenue [GET]
 
-Revenues are keyed by `Organization` you have access to, and given a limited serialization data set.
-
 + Response 200 (application/json)
 
     + Attributes (array[Revenue])
 
 ### View Revenue [GET /revenue/{id}]
-
-View a `Revenue` object, and all the associated `Revenue Project` and `Revenue Service` objects.
 
 + Parameters
     + id: `1` (number, required) - ID of the Revenue in the form of an integer
@@ -1108,8 +837,6 @@ View a `Revenue` object, and all the associated `Revenue Project` and `Revenue S
     + Attributes (array[Revenue])
 
 ### Create Revenue [POST /revenue]
-
-To create a `Revenue` you must also include the associated `Product` and `Service` objects on this `Revenue` object to calculate its total value.
 
 + Request (application/json)
 
@@ -1129,8 +856,6 @@ To create a `Revenue` you must also include the associated `Product` and `Servic
             Location: /revenue/{id}
 
 ### Edit Revenue [PATCH /revenue/{id}]
-
-Editing a `Revenue` object only edits the core data of that object, not its associated objects.
 
 + Parameters
     + id: `1` (number, required) - ID of the Revenue in the form of an integer
@@ -1159,68 +884,7 @@ Editing a `Revenue` object only edits the core data of that object, not its asso
 
 + Response 204 (application/json)
 
-## Revenue Category [/revenue_categories]
-
-`Revenue Category` objects live in isolate by `Organization` and can only be associated to an `Revenue`.
-
-### All Revenue Categories [GET]
-
-+ Response 200 (application/json)
-
-    + Attributes (array[Product Category])
-
-### View Revenue Category [GET /revenue_categories/{id}]
-
-+ Parameters
-    + id: `1` (number, required) - ID of the Revenue Category in the form of an integer
-
-+ Response 200 (application/json)
-
-    + Attributes (array[Revenue Category])
-
-### Create Revenue Category [POST /revenue_categories]
-
-+ Request (application/json)
-
-        {
-            "body": "Revenue type",
-            "organization": 1
-        }
-
-+ Response 201 (application/json)
-
-    + Headers
-
-            Location: /revenue_categories/{id}
-
-### Edit Revenue Category [PATCH /revenue_categories/{id}]
-
-+ Parameters
-    + id: `1` (number, required) - ID of the Revenue Category in the form of an integer
-
-+ Request (application/json)
-
-        {
-            "body": "Revenue type",
-            "organization": 1
-        }
-
-+ Response 201 (application/json)
-
-    + Headers
-
-            Location: /revenue_categories/{id}
-
-### Delete Product Category [DELETE /revenue_categories/{id}]
-
-+ Parameters
-    + id: `1` (number, required) - ID of the Product Category in the form of an integer
-
-+ Response 204 (application/json)
-
 ## Service [/services]
-
-Services are keyed by `Organization` you have access to, and given a limited serialization data set.
 
 ### All Services [GET]
 
@@ -1257,8 +921,6 @@ Services are keyed by `Organization` you have access to, and given a limited ser
             Location: /services/{id}
 
 ### Add Image [POST /services/{id}/images]
-
-Images are uploaded and stored as a separate object that can be viewed separately as `/images/{id}`
 
 + Parameters
     + id: `1` (number, required) - ID of the Service in the form of an integer
@@ -1310,8 +972,6 @@ Images are uploaded and stored as a separate object that can be viewed separatel
 
 ## Shareholder [/shareholders]
 
-Shareholders are keyed by `Organization` you have access to, and given a limited serialization data set.
-
 ### All Shareholders [GET]
 
 + Response 200 (application/json)
@@ -1328,8 +988,6 @@ Shareholders are keyed by `Organization` you have access to, and given a limited
     + Attributes (array[Shareholder])
 
 ### Create Shareholder [POST /shareholders]
-
-Creating a `Shareholder` requires all personal data, as well as the `funding_round_id`.
 
 + Request (application/json)
 
@@ -1390,26 +1048,6 @@ Creating a `Shareholder` requires all personal data, as well as the `funding_rou
 
 ## Tag [/tags]
 
-### Create Tag [POST /{object}/{id}/tags]
-
-Comments can be created for `expense`, `node` and `revenue` objects.
-
-+ Parameters
-    + object: `node` (string, required) - The object to attach the comment to: contacts, funding_rounds, nodes, revenue
-    + id: `1` (number, required) - ID of the `PARENT OBJECT` in the form of an integer
-
-+ Request (application/json)
-
-        {
-            "tag": "tags are always lowercased"
-        }
-
-+ Response 201 (application/json)
-
-    + Headers
-
-            Location: /tags/1
-
 ### Edit Tag [PATCH /tags/{id}]
 
 + Parameters
@@ -1426,16 +1064,12 @@ Comments can be created for `expense`, `node` and `revenue` objects.
 
 ### Delete Tag [DELETE /tags/{id}]
 
-Regardless of what object the `Tag` is attached to, you simply delete it by its `id`.
-
 + Parameters
     + id: `1` (number, required) - ID of the Tag in the form of an integer
 
 + Response 204 (application/json)
 
 ## Variable [/variables]
-
-Variables cannot be created or deleted, and only their `body` updated.
 
 ### Edit Variable [PATCH /variables/{id}]
 

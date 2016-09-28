@@ -27,6 +27,7 @@ class Entity implements EntityInterface
 
     /**
      * @ORM\Id
+     * @Type("integer")
      * @ORM\Column(type="integer")
      * @ORM\GeneratedValue(strategy="AUTO")
      * @Groups({"api", "detail", "simple", "typeahead"})
@@ -34,24 +35,28 @@ class Entity implements EntityInterface
     protected $id;
 
     /**
+     * @Type("string")
      * @ORM\Column(type="string", length=8000, nullable=true)
      * @Groups({"api", "detail", "simple"})
      */
     protected $body;
 
     /**
+     * @Type("integer")
      * @ORM\Column(type="integer", nullable=FALSE, options={"default" = 1})
      * @Groups({"api", "detail"})
      */
     protected $status = self::STATUS_ENABLED;
 
     /**
+     * @Type("datetime")
      * @ORM\Column(type="datetime", length=1000, nullable=FALSE)
      * @Groups({"api", "detail"})
      */
     protected $create_date;
 
     /**
+     * @Type("datetime")
      * @ORM\Column(type="datetime", length=1000, nullable=true)
      * @Groups({"api", "detail"})
      */
