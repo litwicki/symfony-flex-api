@@ -611,6 +611,86 @@ Private API Documentation.
 + body: "Cool Products" (string)
 + account (Account2)
 
+## Revenue1 (object)
++ id: 1 (number)
++ status: 1 (integer)
++ create_date: `2015-08-05T08:40:51.620Z` (string, required)
++ update_date: `2015-08-05T08:40:51.620Z` (string, required)
++ account (Account2)
++ body: "Description of this revenue item" (string)
++ type: "consulting" (string)
++ user (User1)
++ category (RevenueCategory1)
++ products [Array()]
++ services [Array()]
++ tags [Array(Tag1, Tag2)]
+
+## Revenue2 (object)
++ id: 2 (number)
++ status: 1 (integer)
++ create_date: `2015-08-05T08:40:51.620Z` (string, required)
++ update_date: `2015-08-05T08:40:51.620Z` (string, required)
++ account (Account2)
++ body: "Description of this revenue item" (string)
++ type: "sale" (string)
++ user (User2)
++ category (RevenueCategory1)
++ products [Array(Product3)]
++ services [Array()]
++ tags [Array(Tag3)]
+
+## RevenueCategory1 (object)
++ id: 1 (number)
++ status: 1 (integer)
++ create_date: `2015-08-05T08:40:51.620Z` (string, required)
++ update_date: `2015-08-05T08:40:51.620Z` (string, required)
++ body: "Annual Services" (string)
++ account (Account1)
+
+## RevenueCategory2 (object)
++ id: 2 (number)
++ status: 1 (integer)
++ create_date: `2015-08-05T08:40:51.620Z` (string, required)
++ update_date: `2015-08-05T08:40:51.620Z` (string, required)
++ body: "SaaS" (string)
++ account (Account1)
+
+## RevenueCategory3 (object)
++ id: 3 (number)
++ status: 1 (integer)
++ create_date: `2015-08-05T08:40:51.620Z` (string, required)
++ update_date: `2015-08-05T08:40:51.620Z` (string, required)
++ body: "Consulting" (string)
++ account (Account2)
+
+## RevenueCategory4 (object)
++ id: 4 (number)
++ status: 1 (integer)
++ create_date: `2015-08-05T08:40:51.620Z` (string, required)
++ update_date: `2015-08-05T08:40:51.620Z` (string, required)
++ body: "Subscription" (string)
++ account (Account2)
+
+## AdminRole (object)
++ id: 1 (number)
++ status: 1 (integer)
++ create_date: `2015-08-05T08:40:51.620Z` (string, required)
++ role: "ROLE_ADMIN" (string, required)
++ name: "Administrator" (string, required)
+
+## DeveloperRole (object)
++ id: 2 (number)
++ status: 1 (integer)
++ create_date: `2015-08-05T08:40:51.620Z` (string, required)
++ role: "ROLE_DEVELOPER" (string, required)
++ name: "Developer" (string, required)
+
+## UserRole (object)
++ id: 3 (number)
++ status: 3 (integer)
++ create_date: `2015-08-05T08:40:51.620Z` (string, required)
++ role: "ROLE_USER" (string, required)
++ name: "User" (string, required)
 
 ## Account [/accounts]
 
