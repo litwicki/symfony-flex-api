@@ -9,6 +9,7 @@ Private API Documentation.
 
 ## Account1 (object)
 + id: 10001 (number)
++ status: 1 (integer)
 + name: Autobots
 + name_clean: autobots
 + create_date: `2015-08-05T08:40:51.620Z` (string, required)
@@ -16,6 +17,7 @@ Private API Documentation.
 
 ## Account2 (object)
 + id: 10002 (number)
++ status: 1 (integer)
 + name: Decepticons
 + name_clean: decepticons
 + create_date: `2015-08-05T08:40:51.620Z` (string, required)
@@ -23,6 +25,7 @@ Private API Documentation.
 
 ## AccountGroup1 (object)
 + id: 1 (number)
++ status: 1 (integer)
 + name: Primes
 + account (Account1)
 + user (User1)
@@ -31,6 +34,7 @@ Private API Documentation.
 
 ## AccountGroup2 (object)
 + id: 2 (number)
++ status: 1 (integer)
 + name: Leaders
 + account (Account2)
 + user (User1)
@@ -39,6 +43,7 @@ Private API Documentation.
 
 ## AccountGroup3 (object)
 + id: 3 (number)
++ status: 1 (integer)
 + name: Cars
 + account (Account1)
 + user (User2)
@@ -47,11 +52,13 @@ Private API Documentation.
 
 ## AccountUser1 (object)
 + id: 1 (number)
++ status: 1 (integer)
 + account (Account1)
 + user (User1)
 
 ## AccountUser2 (object)
 + id: 2 (number)
++ status: 1 (integer)
 + create_date: `2015-08-05T08:40:51.620Z` (string, required)
 + update_date: `2015-08-05T08:40:51.620Z` (string, required)
 + account (Account1)
@@ -59,6 +66,7 @@ Private API Documentation.
 
 ## AccountUser3 (object)
 + id: 3 (number)
++ status: 1 (integer)
 + create_date: `2015-08-05T08:40:51.620Z` (string, required)
 + update_date: `2015-08-05T08:40:51.620Z` (string, required)
 + account (Account2)
@@ -66,6 +74,7 @@ Private API Documentation.
 
 ## AccountGroupUser1 (object)
 + id: 1 (number)
++ status: 1 (integer)
 + create_date: `2015-08-05T08:40:51.620Z` (string, required)
 + update_date: `2015-08-05T08:40:51.620Z` (string, required)
 + account_group (AccountGroup1)
@@ -73,6 +82,7 @@ Private API Documentation.
 
 ## AccountGroupUser2 (object)
 + id: 2 (number)
++ status: 1 (integer)
 + create_date: `2015-08-05T08:40:51.620Z` (string, required)
 + update_date: `2015-08-05T08:40:51.620Z` (string, required)
 + account_group (AccountGroup2)
@@ -80,6 +90,7 @@ Private API Documentation.
 
 ## AccountGroupUser3 (object)
 + id: 3 (number)
++ status: 1 (integer)
 + create_date: `2015-08-05T08:40:51.620Z` (string, required)
 + update_date: `2015-08-05T08:40:51.620Z` (string, required)
 + account_group (AccountGroup3)
@@ -87,6 +98,7 @@ Private API Documentation.
 
 ## RoleAdmin (object)
 + id: 1 (number)
++ status: 1 (integer)
 + create_date: `2015-08-05T08:40:51.620Z` (string, required)
 + update_date: `2015-08-05T08:40:51.620Z` (string, required)
 + name: Administrator (string, required)
@@ -95,6 +107,7 @@ Private API Documentation.
 
 ## RoleUser (object)
 + id: 1 (number)
++ status: 1 (integer)
 + create_date: `2015-08-05T08:40:51.620Z` (string, required)
 + update_date: `2015-08-05T08:40:51.620Z` (string, required)
 + name: User (string, required)
@@ -103,6 +116,7 @@ Private API Documentation.
 
 ## RoleDeveloper (object)
 + id: 1 (number)
++ status: 1 (integer)
 + create_date: `2015-08-05T08:40:51.620Z` (string, required)
 + update_date: `2015-08-05T08:40:51.620Z` (string, required)
 + name: Developer (string, required)
@@ -111,6 +125,7 @@ Private API Documentation.
 
 ## Comment1 (object)
 + id: 1 (number)
++ status: 1 (integer)
 + create_date: `2015-08-05T08:40:51.620Z` (string, required)
 + update_date: `2015-08-05T08:40:51.620Z` (string, required)
 + user (User1)
@@ -118,6 +133,7 @@ Private API Documentation.
 
 ## Comment2 (object)
 + id: 1 (number)
++ status: 1 (integer)
 + create_date: `2015-08-05T08:40:51.620Z` (string, required)
 + update_date: `2015-08-05T08:40:51.620Z` (string, required)
 + user (User2)
@@ -125,6 +141,7 @@ Private API Documentation.
 
 ## Comment3 (object)
 + id: 1 (number)
++ status: 1 (integer)
 + create_date: `2015-08-05T08:40:51.620Z` (string, required)
 + update_date: `2015-08-05T08:40:51.620Z` (string, required)
 + user (User3)
@@ -132,6 +149,7 @@ Private API Documentation.
 
 ## Contact1 (object)
 + id: 1 (number)
++ status: 1 (integer)
 + create_date: `2015-08-05T08:40:51.620Z` (string, required)
 + update_date: `2015-08-05T08:40:51.620Z` (string, required)
 + job_title: Job Title
@@ -143,6 +161,7 @@ Private API Documentation.
 
 ## Contact2 (object)
 + id: 2 (number)
++ status: 1 (integer)
 + create_date: `2015-08-05T08:40:51.620Z` (string, required)
 + update_date: `2015-08-05T08:40:51.620Z` (string, required)
 + job_title: Executive
@@ -154,6 +173,7 @@ Private API Documentation.
 
 ## Contact3 (object)
 + id: 3 (number)
++ status: 1 (integer)
 + create_date: `2015-08-05T08:40:51.620Z` (string, required)
 + update_date: `2015-08-05T08:40:51.620Z` (string, required)
 + job_title: Mechanic
@@ -165,6 +185,7 @@ Private API Documentation.
 
 ## Expense1 (object)
 + id: 1 (number)
++ status: 1 (integer)
 + create_date: `2015-08-05T08:40:51.620Z` (string, required)
 + update_date: `2015-08-05T08:40:51.620Z` (string, required)
 + expense_date: `2015-08-05T08:40:51.620Z` (string, required)
@@ -179,6 +200,7 @@ Private API Documentation.
 
 ## Expense2 (object)
 + id: 2 (number)
++ status: 1 (integer)
 + create_date: `2015-08-05T08:40:51.620Z` (string, required)
 + update_date: `2015-08-05T08:40:51.620Z` (string, required)
 + expense_date: `2015-08-05T08:40:51.620Z` (string, required)
@@ -193,6 +215,7 @@ Private API Documentation.
 
 ## Expense3 (object)
 + id: 2 (number)
++ status: 1 (integer)
 + create_date: `2015-08-05T08:40:51.620Z` (string, required)
 + update_date: `2015-08-05T08:40:51.620Z` (string, required)
 + expense_date: `2015-08-05T08:40:51.620Z` (string, required)
@@ -207,6 +230,7 @@ Private API Documentation.
 
 ## ExpenseCategory1 (object)
 + id: 1 (number)
++ status: 1 (integer)
 + create_date: `2015-08-05T08:40:51.620Z` (string, required)
 + update_date: `2015-08-05T08:40:51.620Z` (string, required)
 + body: "Expense Category Name"
@@ -214,6 +238,7 @@ Private API Documentation.
 
 ## ExpenseCategory2 (object)
 + id: 2 (number)
++ status: 1 (integer)
 + create_date: `2015-08-05T08:40:51.620Z` (string, required)
 + update_date: `2015-08-05T08:40:51.620Z` (string, required)
 + body: "Another Expense Category Name"
@@ -221,6 +246,7 @@ Private API Documentation.
 
 ## ExpenseCategory3 (object)
 + id: 3 (number)
++ status: 1 (integer)
 + create_date: `2015-08-05T08:40:51.620Z` (string, required)
 + update_date: `2015-08-05T08:40:51.620Z` (string, required)
 + body: "Category Name"
@@ -228,6 +254,7 @@ Private API Documentation.
 
 ## File1 (object)
 + id: 1 (number)
++ status: 1 (integer)
 + create_date: `2015-08-05T08:40:51.620Z` (string, required)
 + update_date: `2015-08-05T08:40:51.620Z` (string, required)
 + account (Account1)
@@ -240,6 +267,7 @@ Private API Documentation.
 
 ## File2 (object)
 + id: 2 (number)
++ status: 1 (integer)
 + create_date: `2015-08-05T08:40:51.620Z` (string, required)
 + update_date: `2015-08-05T08:40:51.620Z` (string, required)
 + account (Account2)
@@ -252,6 +280,7 @@ Private API Documentation.
 
 ## File3 (object)
 + id: 3 (number)
++ status: 1 (integer)
 + create_date: `2015-08-05T08:40:51.620Z` (string, required)
 + update_date: `2015-08-05T08:40:51.620Z` (string, required)
 + account (Account2)
@@ -264,6 +293,7 @@ Private API Documentation.
 
 ## File4 (object)
 + id: 4 (number)
++ status: 1 (integer)
 + create_date: `2015-08-05T08:40:51.620Z` (string, required)
 + update_date: `2015-08-05T08:40:51.620Z` (string, required)
 + account (Account2)
@@ -276,6 +306,7 @@ Private API Documentation.
 
 ## Funding1 (object)
 + id: 1 (number)
++ status: 1 (integer)
 + create_date: `2015-08-05T08:40:51.620Z` (string, required)
 + update_date: `2015-08-05T08:40:51.620Z` (string, required)
 + account (Account1)
@@ -288,6 +319,7 @@ Private API Documentation.
 
 ## Funding2 (object)
 + id: 2 (number)
++ status: 1 (integer)
 + create_date: `2015-08-05T08:40:51.620Z` (string, required)
 + update_date: `2015-08-05T08:40:51.620Z` (string, required)
 + account (Account2)
@@ -300,6 +332,7 @@ Private API Documentation.
 
 ## Image1 (object)
 + id: 1 (number)
++ status: 1 (integer)
 + create_date: `2015-08-05T08:40:51.620Z` (string, required)
 + update_date: `2015-08-05T08:40:51.620Z` (string, required)
 + account (Account1)
@@ -314,6 +347,7 @@ Private API Documentation.
 
 ## Image2 (object)
 + id: 2 (number)
++ status: 1 (integer)
 + create_date: `2015-08-05T08:40:51.620Z` (string, required)
 + update_date: `2015-08-05T08:40:51.620Z` (string, required)
 + account (Account1)
@@ -328,6 +362,7 @@ Private API Documentation.
 
 ## Image3 (object)
 + id: 3 (number)
++ status: 1 (integer)
 + create_date: `2015-08-05T08:40:51.620Z` (string, required)
 + update_date: `2015-08-05T08:40:51.620Z` (string, required)
 + account (Account1)
@@ -342,6 +377,7 @@ Private API Documentation.
 
 ## Image4 (object)
 + id: 4 (number)
++ status: 1 (integer)
 + create_date: `2015-08-05T08:40:51.620Z` (string, required)
 + update_date: `2015-08-05T08:40:51.620Z` (string, required)
 + account (Account2)
@@ -356,6 +392,7 @@ Private API Documentation.
 
 ## Node1 (object)
 + id: 1 (number)
++ status: 1 (integer)
 + create_date: `2015-08-05T08:40:51.620Z` (string, required)
 + update_date: `2015-08-05T08:40:51.620Z` (string, required)
 + account (Account1)
@@ -369,6 +406,7 @@ Private API Documentation.
 
 ## Node2 (object)
 + id: 2 (number)
++ status: 1 (integer)
 + create_date: `2015-08-05T08:40:51.620Z` (string, required)
 + update_date: `2015-08-05T08:40:51.620Z` (string, required)
 + account (Account2)
@@ -382,6 +420,7 @@ Private API Documentation.
 
 ## Node3 (object)
 + id: 3 (number)
++ status: 1 (integer)
 + create_date: `2015-08-05T08:40:51.620Z` (string, required)
 + update_date: `2015-08-05T08:40:51.620Z` (string, required)
 + account (Account2)
@@ -395,6 +434,7 @@ Private API Documentation.
 
 ## Organization1 (object)
 + id: 1 (number)
++ status: 1 (integer)
 + create_date: `2015-08-05T08:40:51.620Z` (string, required)
 + update_date: `2015-08-05T08:40:51.620Z` (string, required)
 + account (Account1)
@@ -412,6 +452,7 @@ Private API Documentation.
 
 ## Organization2 (object)
 + id: 2 (number)
++ status: 1 (integer)
 + create_date: `2015-08-05T08:40:51.620Z` (string, required)
 + update_date: `2015-08-05T08:40:51.620Z` (string, required)
 + account (Account1)
@@ -429,6 +470,7 @@ Private API Documentation.
 
 ## Organization3 (object)
 + id: 3 (number)
++ status: 1 (integer)
 + create_date: `2015-08-05T08:40:51.620Z` (string, required)
 + update_date: `2015-08-05T08:40:51.620Z` (string, required)
 + account (Account2)
@@ -446,6 +488,7 @@ Private API Documentation.
 
 ## Person1 (object)
 + id: 1 (number)
++ status: 1 (integer)
 + create_date: `2015-08-05T08:40:51.620Z` (string, required)
 + update_date: `2015-08-05T08:40:51.620Z` (string, required)
 + first_name: "John" (string)
@@ -465,6 +508,7 @@ Private API Documentation.
 
 ## Person2 (object)
 + id: 2 (number)
++ status: 1 (integer)
 + create_date: `2015-08-05T08:40:51.620Z` (string, required)
 + update_date: `2015-08-05T08:40:51.620Z` (string, required)
 + first_name: "Sue" (string)
@@ -484,6 +528,7 @@ Private API Documentation.
 
 ## Person3 (object)
 + id: 3 (number)
++ status: 1 (integer)
 + create_date: `2015-08-05T08:40:51.620Z` (string, required)
 + update_date: `2015-08-05T08:40:51.620Z` (string, required)
 + first_name: "Abigail" (string)
@@ -500,6 +545,72 @@ Private API Documentation.
 + phone: (206) 232-5569
 + email: "person3@example.com" (string)
 + user: null
+
+## Product1 (object)
++ id: 1 (number)
++ status: 1 (integer)
++ create_date: `2015-08-05T08:40:51.620Z` (string, required)
++ update_date: `2015-08-05T08:40:51.620Z` (string, required)
++ name: "Something cool" (string, required)
++ price: 99 (float, required)
++ cost: 50 (float, required)
++ category (ProductCategory1)
++ images [Array(Image3, Image4)]
+
+## Product2 (object)
++ id: 2 (number)
++ status: 1 (integer)
++ create_date: `2015-08-05T08:40:51.620Z` (string, required)
++ update_date: `2015-08-05T08:40:51.620Z` (string, required)
++ name: "A thingamajig" (string, required)
++ price: 125.95 (float, required)
++ cost: 56.95 (float, required)
++ category (ProductCategory2)
++ images [Array(Image1)]
+
+## Product3 (object)
++ id: 3 (number)
++ status: 1 (integer)
++ create_date: `2015-08-05T08:40:51.620Z` (string, required)
++ update_date: `2015-08-05T08:40:51.620Z` (string, required)
++ name: "Another Product Name" (string, required)
++ price: 199.95 (float, required)
++ cost: 179.99 (float, required)
++ category (ProductCategory3)
++ images [Array()]
+
+## ProductCategory1 (object)
++ id: 1 (number)
++ status: 1 (integer)
++ create_date: `2015-08-05T08:40:51.620Z` (string, required)
++ update_date: `2015-08-05T08:40:51.620Z` (string, required)
++ body: "A Product Category" (string)
++ account (Account1)
+
+## ProductCategory2 (object)
++ id: 2 (number)
++ status: 1 (integer)
++ create_date: `2015-08-05T08:40:51.620Z` (string, required)
++ update_date: `2015-08-05T08:40:51.620Z` (string, required)
++ body: "Another product category" (string)
++ account (Account1)
+
+## ProductCategory3 (object)
++ id: 3 (number)
++ status: 1 (integer)
++ create_date: `2015-08-05T08:40:51.620Z` (string, required)
++ update_date: `2015-08-05T08:40:51.620Z` (string, required)
++ body: "Hot Sellers" (string)
++ account (Account2)
+
+## ProductCategory4 (object)
++ id: 4 (number)
++ status: 1 (integer)
++ create_date: `2015-08-05T08:40:51.620Z` (string, required)
++ update_date: `2015-08-05T08:40:51.620Z` (string, required)
++ body: "Cool Products" (string)
++ account (Account2)
+
 
 ## Account [/accounts]
 
