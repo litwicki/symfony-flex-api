@@ -675,6 +675,7 @@ Private API Documentation.
 + id: 1 (number)
 + status: 1 (integer)
 + create_date: `2015-08-05T08:40:51.620Z` (string, required)
++ update_date: `2015-08-05T08:40:51.620Z` (string, required)
 + role: "ROLE_ADMIN" (string, required)
 + name: "Administrator" (string, required)
 
@@ -682,15 +683,85 @@ Private API Documentation.
 + id: 2 (number)
 + status: 1 (integer)
 + create_date: `2015-08-05T08:40:51.620Z` (string, required)
++ update_date: `2015-08-05T08:40:51.620Z` (string, required)
 + role: "ROLE_DEVELOPER" (string, required)
 + name: "Developer" (string, required)
 
 ## UserRole (object)
 + id: 3 (number)
-+ status: 3 (integer)
++ status: 1 (integer)
 + create_date: `2015-08-05T08:40:51.620Z` (string, required)
++ update_date: `2015-08-05T08:40:51.620Z` (string, required)
 + role: "ROLE_USER" (string, required)
 + name: "User" (string, required)
+
+## Service1 (object)
++ id: 1 (number)
++ status: 1 (integer)
++ create_date: `2015-08-05T08:40:51.620Z` (string, required)
++ update_date: `2015-08-05T08:40:51.620Z` (string, required)
++ name: "QA Work" (string, required)
++ body: "Service description..."
++ type: "hourly" (string, required)
++ price: 100 (float, required)
++ account (Account1)
++ images [Array()]
+
+## Service2 (object)
++ id: 2 (number)
++ status: 1 (integer)
++ create_date: `2015-08-05T08:40:51.620Z` (string, required)
++ update_date: `2015-08-05T08:40:51.620Z` (string, required)
++ name: "Service" (string, required)
++ body: "Service description..."
++ type: "retainer" (string, required)
++ price: 10000 (float, required)
++ account (Account1)
++ images [Array(Image2)]
+
+## Service3 (object)
++ id: 3 (number)
++ status: 1 (integer)
++ create_date: `2015-08-05T08:40:51.620Z` (string, required)
++ update_date: `2015-08-05T08:40:51.620Z` (string, required)
++ name: "Softare Development" (string, required)
++ body: "Service description..."
++ type: "hourly" (string, required)
++ price: 250 (float, required)
++ account (Account2)
++ images [Array()]
+
+## ServiceCategory1 (object)
++ id: 1 (number)
++ status: 1 (integer)
++ create_date: `2015-08-05T08:40:51.620Z` (string, required)
++ update_date: `2015-08-05T08:40:51.620Z` (string, required)
++ body: "Service Category" (string)
++ account (Account1)
+
+## ServiceCategory2 (object)
++ id: 2 (number)
++ status: 1 (integer)
++ create_date: `2015-08-05T08:40:51.620Z` (string, required)
++ update_date: `2015-08-05T08:40:51.620Z` (string, required)
++ body: "Hourly" (string)
++ account (Account1)
+
+## ServiceCategory3 (object)
++ id: 3 (number)
++ status: 1 (integer)
++ create_date: `2015-08-05T08:40:51.620Z` (string, required)
++ update_date: `2015-08-05T08:40:51.620Z` (string, required)
++ body: "Consulting" (string)
++ account (Account2)
+
+## ServiceCategory4 (object)
++ id: 4 (number)
++ status: 1 (integer)
++ create_date: `2015-08-05T08:40:51.620Z` (string, required)
++ update_date: `2015-08-05T08:40:51.620Z` (string, required)
++ body: "Retainer" (string)
++ account (Account2)
 
 ## Account [/accounts]
 
