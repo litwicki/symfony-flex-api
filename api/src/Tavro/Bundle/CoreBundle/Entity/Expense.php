@@ -35,12 +35,6 @@ class Expense extends Entity implements AccountEntityInterface
     protected $account;
 
     /**
-     * @ORM\Column(type="string", length=8000, nullable=TRUE)
-     * @Groups({"api", "detail", "simple"})
-     */
-    protected $body;
-
-    /**
      * @ORM\Column(type="float", nullable=FALSE)
      * @Groups({"api", "detail", "simple"})
      */

@@ -13,6 +13,7 @@ use JMS\Serializer\Annotation\MaxDepth;
 use JMS\Serializer\Annotation\Groups;
 use Doctrine\ORM\Mapping\Table;
 
+use Tavro\Bundle\CoreBundle\Entity\File;
 use Tavro\Bundle\CoreBundle\Model\Entity;
 use Tavro\Bundle\CoreBundle\Model\AccountEntityInterface;
 use Tavro\Bundle\CoreBundle\Model\S3EntityInterface;
@@ -24,7 +25,7 @@ use Tavro\Bundle\CoreBundle\Model\S3EntityInterface;
  * @Table(name="tavro_image")
  *
  */
-class Image extends Entity implements S3EntityInterface, AccountEntityInterface
+class Image extends File implements S3EntityInterface, AccountEntityInterface
 {
     /**
      * @ORM\ManyToOne(targetEntity="Tavro\Bundle\CoreBundle\Entity\Account", inversedBy="images")
@@ -33,48 +34,6 @@ class Image extends Entity implements S3EntityInterface, AccountEntityInterface
      * @MaxDepth(1)
      */
     protected $account;
-
-    /**
-     * @ORM\Column(type="string", length=500, nullable=FALSE)
-     * @Groups({"api", "detail"})
-     */
-    protected $aws_url;
-
-    /**
-     * @ORM\Column(type="string", length=32, nullable=FALSE)
-     * @Groups({"detail"})
-     */
-    protected $bucket;
-
-    /**
-     * @ORM\Column(type="string", length=32, nullable=FALSE)
-     * @Groups({"detail"})
-     */
-    protected $directory;
-
-    /**
-     * @ORM\Column(type="string", length=500, nullable=FALSE)
-     * @Groups({"api", "detail", "simple"})
-     */
-    protected $aws_key;
-
-    /**
-     * @ORM\Column(type="string", length=500, nullable=FALSE)
-     * @Groups({"api", "detail", "simple"})
-     */
-    protected $original_filename;
-
-    /**
-     * @ORM\Column(type="string", length=500, nullable=FALSE)
-     * @Groups({"api", "detail"})
-     */
-    protected $mime_type;
-
-    /**
-     * @ORM\Column(type="integer", nullable=FALSE)
-     * @Groups({"api", "detail"})
-     */
-    protected $filesize;
 
     /**
      * @ORM\Column(type="integer", nullable=FALSE)
@@ -100,6 +59,9 @@ class Image extends Entity implements S3EntityInterface, AccountEntityInterface
 
     public function __toString()
     {
+        /**
+         * @TODO: This is probably not very helpful..
+         */
         return $this->original_filename;
     }
 
