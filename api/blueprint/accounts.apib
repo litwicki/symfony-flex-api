@@ -1,0 +1,172 @@
+## Account [/accounts]
+
+### GET [GET /accounts/{id}]
+
++ Parameters
+    + id: `1` (number, required) - ID of the Account in the form of an integer
+
++ Response 201 (application/json)
+
+    + Body
+
+### Create [POST /accounts]
+
++ Request (application/json)
+
+    + Headers
+
+        Authorization: Bearer {JSON_WEB_TOKEN}
+
+    + Body
+
+        {
+            "body": "Account Name",
+            "user": 1
+        }
+
++ Response 200 (application/json)
+
+    + Attributes (Account1)
+
+### Edit [PATCH /accounts/{id}]
+
++ Parameters
+    + id: `1` (number, required) - ID of the Account in the form of an integer
+
++ Request (application/json)
+
+        {
+            "body": "Account Name",
+            "status": 1,
+            "user": 1
+        }
+
++ Response 200 (application/json)
+
+    + Attributes (Account1)
+
+### Delete [DELETE /accounts/{id}]
+
++ Parameters
+    + id: `1` (number, required) - ID of the Account in the form of an integer
+
++ Response 204 (application/json)
+
+### Add User [POST /accounts/{id}/users]
+
++ Parameters
+    + id: `1` (number, required) - ID of the Account in the form of an integer
+
++ Request (application/json)
+
+        {
+            "body": "Account Name",
+            "user": 1,
+            "status": 1
+        }
+
++ Response 200 (application/json)
+
+    + Attributes (Account1)
+
+### Get Users [GET /accounts/{id}/users]
+
++ Parameters
+    + id: `1` (number, required) - ID of the Account in the form of an integer
+
++ Response 200 (application/json)
+
+    + Attributes (array[User1, User2])
+
+### Remove User [DELETE /accounts/{account_id}/users/{user_id}]
+
++ Parameters
+    + account_id: `1` (number, required) - ID of the Account in the form of an integer
+    + user_id: `1` (number, required) - ID of the User in the form of an integer
+
++ Response 204 (application/json)
+
+### Get Groups [GET /accounts/{id}/groups]
+
++ Parameters
+    + id: `1` (number, required) - ID of the Account in the form of an integer
+
++ Request (application/json)
+
+        {
+            "body": "This round of funding is exclusive to friends and family.",
+            "status": 1
+        }
+
++ Response 200 (application/json)
+
+    + Attributes (array[User1, User2])
+
+## Account Group [/account_groups]
+
+### Create [POST /accounts/{id}/groups]
+
++ Parameters
+    + id: `1` (number, required) - ID of the Account in the form of an integer
+
++ Request (application/json)
+
+        {
+            "body": "This round is ideally for friends and family!",
+            "user": 1
+        }
+
++ Response 201 (application/json)
+
+    + Headers
+
+            Location: /accounts/1
+
+### Delete [DELETE /groups/{id}]
+
++ Parameters
+    + id: `1` (number, required) - ID of the Account Group in the form of an integer
+
++ Response 204 (application/json)
+
+### Add User [POST /account_groups/{id}/users]
+
++ Parameters
+    + id: `1` (number, required) - ID of the Account in the form of an integer
+
++ Request (application/json)
+
+        {
+            "body": "This round is ideally for friends and family!",
+            "user": 1
+        }
+
++ Response 201 (application/json)
+
+    + Headers
+
+            Location: /accounts/1
+
+### Get Users [GET /account_groups/{id}/users]
+
++ Parameters
+    + id: `1` (number, required) - ID of the Account in the form of an integer
+
++ Request (application/json)
+
+        {
+            "body": "This round of funding is exclusive to friends and family.",
+            "status": 1
+        }
+
++ Response 200 (application/json)
+
+    + Attributes (array[User1, User2])
+
+### Remove User [DELETE /account_groups/{group_id}/users/{user_id}]
+
++ Parameters
+    + group_id: `1` (number, required) - ID of the Account Group in the form of an integer
+    + user_id: `1` (number, required) - ID of the User in the form of an integer
+
++ Response 204 (application/json)
