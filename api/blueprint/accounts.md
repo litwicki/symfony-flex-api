@@ -93,6 +93,8 @@
 
 + Response 204 (application/json)
 
+Virtually all entities are related to a particular `Account` and as such retrieving "all" records of a specific type funnels through the `account_id` in question.
+
 ### Get Groups [GET /accounts/{id}/groups]
 
 + Parameters
