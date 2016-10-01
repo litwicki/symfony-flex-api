@@ -14,6 +14,10 @@ Private API Documentation.
 + name_clean: autobots
 + create_date: `2015-08-05T08:40:51.620Z` (string, required)
 + update_date: `2015-08-05T08:40:51.620Z` (string, required)
++ service_categories (array[ServiceCategory1,ServiceCategory2])
++ product_categories (array[ProductCategory1,ProductCategory2])
++ expense_categories (array[ExpenseCategory1,ExpenseCategory2])
++ revenue_categories (array[RevenueCategory1,RevenueCategory2])
 
 ## Account2 (object)
 + id: 10002 (number)
@@ -22,8 +26,12 @@ Private API Documentation.
 + name_clean: decepticons
 + create_date: `2015-08-05T08:40:51.620Z` (string, required)
 + update_date: `2015-08-05T08:40:51.620Z` (string, required)
++ service_categories (array[ServiceCategory3])
++ product_categories (array[ProductCategory3])
++ expense_categories (array[ExpenseCategory3])
++ revenue_categories (array[RevenueCategory3])
 
-## AccountGroup1 (object)
+## Group1 (object)
 + id: 1 (number)
 + status: 1 (number)
 + name: Primes
@@ -32,7 +40,7 @@ Private API Documentation.
 + create_date: `2015-08-05T08:40:51.620Z` (string, required)
 + update_date: `2015-08-05T08:40:51.620Z` (string, required)
 
-## AccountGroup2 (object)
+## Group2 (object)
 + id: 2 (number)
 + status: 1 (number)
 + name: Leaders
@@ -41,7 +49,7 @@ Private API Documentation.
 + create_date: `2015-08-05T08:40:51.620Z` (string, required)
 + update_date: `2015-08-05T08:40:51.620Z` (string, required)
 
-## AccountGroup3 (object)
+## Group3 (object)
 + id: 3 (number)
 + status: 1 (number)
 + name: Cars
@@ -72,28 +80,28 @@ Private API Documentation.
 + account (Account2)
 + user (User3)
 
-## AccountGroupUser1 (object)
+## GroupUser1 (object)
 + id: 1 (number)
 + status: 1 (number)
 + create_date: `2015-08-05T08:40:51.620Z` (string, required)
 + update_date: `2015-08-05T08:40:51.620Z` (string, required)
-+ account_group (AccountGroup1)
++ account_group (Group1)
 + user (User1)
 
-## AccountGroupUser2 (object)
+## GroupUser2 (object)
 + id: 2 (number)
 + status: 1 (number)
 + create_date: `2015-08-05T08:40:51.620Z` (string, required)
 + update_date: `2015-08-05T08:40:51.620Z` (string, required)
-+ account_group (AccountGroup2)
++ account_group (Group2)
 + user (User2)
 
-## AccountGroupUser3 (object)
+## GroupUser3 (object)
 + id: 3 (number)
 + status: 1 (number)
 + create_date: `2015-08-05T08:40:51.620Z` (string, required)
 + update_date: `2015-08-05T08:40:51.620Z` (string, required)
-+ account_group (AccountGroup3)
++ account_group (Group3)
 + user (User3)
 
 ## RoleAdmin (object)
