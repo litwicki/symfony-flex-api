@@ -25,6 +25,9 @@
 - name: copy api config
   template: src=api.conf.j2 dest=/etc/nginx/sites-available/api.conf owner=www-data group=www-data mode=0644
 
+- name: copy admin config
+  template: src=admin.conf.j2 dest=/etc/nginx/sites-available/admin.conf owner=www-data group=www-data mode=0644
+
 - name: copy app config
   template: src=app.conf.j2 dest=/etc/nginx/sites-available/app.conf owner=www-data group=www-data mode=0644
 
@@ -38,6 +41,12 @@
   file:
     src: /etc/nginx/sites-available/api.conf
     dest: /etc/nginx/sites-enabled/api.conf
+    state: link
+
+- name: enable admin vhost
+  file:
+    src: /etc/nginx/sites-available/admin.conf
+    dest: /etc/nginx/sites-enabled/admin.conf
     state: link
 
 - name: enable app vhost
