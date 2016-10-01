@@ -22,13 +22,14 @@ class AppKernel extends Kernel
             new Liip\ImagineBundle\LiipImagineBundle(),
             new Knp\Bundle\GaufretteBundle\KnpGaufretteBundle(),
             new Gregwar\CaptchaBundle\GregwarCaptchaBundle(),
-            new Lexik\Bundle\JWTAuthenticationBundle\LexikJWTAuthenticationBundle(),
+            new Lexik\Bundle\JWTAuthenticationBundle\LexikJWTAuthenticationBundle()
         );
 
         $tavro = array(
             new Tavro\Bundle\CoreBundle\TavroCoreBundle(),
             new Tavro\Bundle\AppBundle\TavroAppBundle(),
             new Tavro\Bundle\ApiBundle\TavroApiBundle(),
+            new Tavro\Bundle\AdminBundle\TavroAdminBundle()
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
