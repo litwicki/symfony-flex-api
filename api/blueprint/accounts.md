@@ -105,6 +105,18 @@
             + (Group2)
         + message: {GROUP_COUNT} Group(s) retrieved successfully.
 
+### Get Contacts [GET /accounts/{id}/contacts]
+
++ Parameters
+    + id: `1` (number, required) - ID of the Account in the form of an integer
+
++ Response 200 (application/json)
+    + Attributes
+        + data (array) - Response data
+            + (Contact1)
+            + (Contact2)
+        + message: {CONTACT_COUNT} Contact(s) retrieved successfully.
+
 ### Get Organizations [GET /accounts/{id}/groups]
 
 + Parameters
@@ -125,8 +137,8 @@
 + Response 200 (application/json)
     + Attributes
         + data (array) - Response data
-            + (Node)
-            + (Node)
+            + (Node1)
+            + (Node2)
         + message: {ITEM_COUNT} Node(s) retrieved successfully.
 
 ### Get Expenses [GET /accounts/{id}/expenses]
@@ -137,9 +149,21 @@
 + Response 200 (application/json)
     + Attributes
         + data (array) - Response data
-            + (Expense)
-            + (Expense)
+            + (Expense1)
+            + (Expense2)
         + message: {ITEM_COUNT} Expense(s) retrieved successfully.
+
+### Get Funding [GET /accounts/{id}/funding]
+
++ Parameters
+    + id: `1` (number, required) - ID of the Account in the form of an integer
+
++ Response 200 (application/json)
+    + Attributes
+        + data (array) - Response data
+            + (Funding1)
+            + (Funding2)
+        + message: {FUNDING_COUNT} Funding rounds retrieved successfully.
 
 ### Get Products [GET /accounts/{id}/products]
 
@@ -149,8 +173,8 @@
 + Response 200 (application/json)
     + Attributes
         + data (array) - Response data
-            + (Product)
-            + (Product)
+            + (Product1)
+            + (Product2)
         + message: {ITEM_COUNT} Product(s) retrieved successfully.
 
 ### Get Revenue [GET /accounts/{id}/revenue]
@@ -161,8 +185,8 @@
 + Response 200 (application/json)
     + Attributes
         + data (array) - Response data
-            + (Revenue)
-            + (Revenue)
+            + (Revenue1)
+            + (Revenue2)
         + message: {ITEM_COUNT} Revenue(s) retrieved successfully.
 
 ### Get Services [GET /accounts/{id}/services]
@@ -173,6 +197,18 @@
 + Response 200 (application/json)
     + Attributes
         + data (array) - Response data
-            + (Service)
-            + (Service)
+            + (Service1)
+            + (Service2)
         + message: {ITEM_COUNT} Service(s) retrieved successfully.
+
+### Get Shareholders [GET /accounts/{id}/shareholders]
+
++ Parameters
+    + id: `1` (number, required) - ID of the Account in the form of an integer
+
++ Response 200 (application/json)
+    + Attributes
+        + data (array) - Response data
+            + (Shareholder1)
+            + (Shareholder2)
+        + message: {ITEM_COUNT} Shareholder(s) retrieved successfully.
