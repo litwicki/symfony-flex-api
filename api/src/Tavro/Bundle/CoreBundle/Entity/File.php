@@ -77,161 +77,35 @@ class File extends Entity implements S3EntityInterface, AccountEntityInterface
     protected $filesize;
 
 
-    public function __toString()
-    {
-        return $this->original_filename;
-    }
-    
     /**
-     * Set aws_url
+     * Set awsUrl
      *
-     * @param string $aws_url
+     * @param string $awsUrl
+     *
      * @return File
      */
-    public function setPath($aws_url)
+    public function setAwsUrl($awsUrl)
     {
-        $this->aws_url = $aws_url;
+        $this->aws_url = $awsUrl;
 
         return $this;
     }
 
     /**
-     * Get aws_url
+     * Get awsUrl
      *
-     * @return string 
+     * @return string
      */
-    public function getPath()
+    public function getAwsUrl()
     {
         return $this->aws_url;
-    }
-
-    /**
-     * Set original_filename
-     *
-     * @param string $originalFilename
-     * @return File
-     */
-    public function setOriginalFilename($originalFilename)
-    {
-        $this->original_filename = $originalFilename;
-
-        return $this;
-    }
-
-    /**
-     * Get original_filename
-     *
-     * @return string 
-     */
-    public function getOriginalFilename()
-    {
-        return $this->original_filename;
-    }
-
-    /**
-     * Set mime_type
-     *
-     * @param string $mimeType
-     * @return File
-     */
-    public function setMimeType($mimeType)
-    {
-        $this->mime_type = $mimeType;
-
-        return $this;
-    }
-
-    /**
-     * Get mime_type
-     *
-     * @return string 
-     */
-    public function getMimeType()
-    {
-        return $this->mime_type;
-    }
-
-    /**
-     * Set filesize
-     *
-     * @param integer $filesize
-     * @return File
-     */
-    public function setFilesize($filesize)
-    {
-        $this->filesize = $filesize;
-
-        return $this;
-    }
-
-    /**
-     * Get filesize
-     *
-     * @return integer 
-     */
-    public function getFilesize()
-    {
-        return $this->filesize;
-    }
-
-    /**
-     * Set height
-     *
-     * @param integer $height
-     * @return File
-     */
-    public function setHeight($height)
-    {
-        $this->height = $height;
-
-        return $this;
-    }
-
-    /**
-     * Get height
-     *
-     * @return integer 
-     */
-    public function getHeight()
-    {
-        return $this->height;
-    }
-
-    /**
-     * Set width
-     *
-     * @param integer $width
-     * @return File
-     */
-    public function setWidth($width)
-    {
-        $this->width = $width;
-
-        return $this;
-    }
-
-    /**
-     * Get width
-     *
-     * @return integer 
-     */
-    public function getWidth()
-    {
-        return $this->width;
-    }
-
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->mod_images = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
      * Set bucket
      *
      * @param string $bucket
+     *
      * @return File
      */
     public function setBucket($bucket)
@@ -244,7 +118,7 @@ class File extends Entity implements S3EntityInterface, AccountEntityInterface
     /**
      * Get bucket
      *
-     * @return string 
+     * @return string
      */
     public function getBucket()
     {
@@ -252,55 +126,10 @@ class File extends Entity implements S3EntityInterface, AccountEntityInterface
     }
 
     /**
-     * Set aws_url
-     *
-     * @param string $awsUrl
-     * @return File
-     */
-    public function setAwsUrl($awsUrl)
-    {
-        $this->aws_url = $awsUrl;
-
-        return $this;
-    }
-
-    /**
-     * Get aws_url
-     *
-     * @return string 
-     */
-    public function getAwsUrl()
-    {
-        return $this->aws_url;
-    }
-
-    /**
-     * Set aws_key
-     *
-     * @param string $awsKey
-     * @return File
-     */
-    public function setAwsKey($awsKey)
-    {
-        $this->aws_key = $awsKey;
-
-        return $this;
-    }
-
-    /**
-     * Get aws_key
-     *
-     * @return string 
-     */
-    public function getAwsKey()
-    {
-        return $this->aws_key;
-    }
-
-    /**
      * Set directory
      *
      * @param string $directory
+     *
      * @return File
      */
     public function setDirectory($directory)
@@ -313,13 +142,108 @@ class File extends Entity implements S3EntityInterface, AccountEntityInterface
     /**
      * Get directory
      *
-     * @return string 
+     * @return string
      */
     public function getDirectory()
     {
         return $this->directory;
     }
 
+    /**
+     * Set awsKey
+     *
+     * @param string $awsKey
+     *
+     * @return File
+     */
+    public function setAwsKey($awsKey)
+    {
+        $this->aws_key = $awsKey;
+
+        return $this;
+    }
+
+    /**
+     * Get awsKey
+     *
+     * @return string
+     */
+    public function getAwsKey()
+    {
+        return $this->aws_key;
+    }
+
+    /**
+     * Set originalFilename
+     *
+     * @param string $originalFilename
+     *
+     * @return File
+     */
+    public function setOriginalFilename($originalFilename)
+    {
+        $this->original_filename = $originalFilename;
+
+        return $this;
+    }
+
+    /**
+     * Get originalFilename
+     *
+     * @return string
+     */
+    public function getOriginalFilename()
+    {
+        return $this->original_filename;
+    }
+
+    /**
+     * Set mimeType
+     *
+     * @param string $mimeType
+     *
+     * @return File
+     */
+    public function setMimeType($mimeType)
+    {
+        $this->mime_type = $mimeType;
+
+        return $this;
+    }
+
+    /**
+     * Get mimeType
+     *
+     * @return string
+     */
+    public function getMimeType()
+    {
+        return $this->mime_type;
+    }
+
+    /**
+     * Set filesize
+     *
+     * @param integer $filesize
+     *
+     * @return File
+     */
+    public function setFilesize($filesize)
+    {
+        $this->filesize = $filesize;
+
+        return $this;
+    }
+
+    /**
+     * Get filesize
+     *
+     * @return integer
+     */
+    public function getFilesize()
+    {
+        return $this->filesize;
+    }
 
     /**
      * Set body

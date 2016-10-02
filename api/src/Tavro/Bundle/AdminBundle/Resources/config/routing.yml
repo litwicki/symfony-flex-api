@@ -1,3 +1,24 @@
 tavro_admin_homepage:
     path:     /
     defaults: { _controller: TavroAdminBundle:Default:index }
+
+tavro_admin_accounts_index:
+    path:     /accounts
+    defaults: { _controller: TavroAdminBundle:Accounts:index }
+
+tavro_admin_account_view:
+    path:     /accounts/{account}
+    defaults: { _controller: TavroAdminBundle:Accounts:view }
+
+tavro_admin_account_save:
+    path:     /accounts/{account}
+    defaults: { _controller: TavroAdminBundle:Accounts:save }
+    methods: POST
+
+tavro_admin_users_index:
+    path:     /users
+    defaults: { _controller: TavroAdminBundle:Users:index }
+
+tavro_admin_user_view:
+    path:     /users/{user}
+    defaults: { _controller: TavroAdminBundle:Users:view }

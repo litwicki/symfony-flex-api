@@ -188,7 +188,10 @@ class User extends Entity implements UserInterface, \Serializable
     protected $avatar;
 
     /**
-     * @ORM\OneToOne(targetEntity="Tavro\Bundle\CoreBundle\Entity\Person", mappedBy="user", cascade={"remove"})
+     * @ORM\OneToOne(targetEntity="Tavro\Bundle\CoreBundle\Entity\Person", mappedBy="user")
+     * @ORM\JoinColumn(name="person_id", referencedColumnName="id", nullable=FALSE)
+     * @Groups({"api", "detail", "simple"})
+     * @MaxDepth(1)
      */
     protected $person;
 

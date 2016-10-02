@@ -1,0 +1,45 @@
+{% extends 'TavroAdminBundle:Default:base.html.twig' %}
+
+{% set page_title = 'Accounts' %}
+
+{% block title_block %}
+
+    <div class="page-header" style="margin-top: 80px;">
+        <h1>Accounts</h1>
+        <p class="lead"><i class="fa fa-fw fa-lock"></i> This page is an overview of <strong>all</strong> Tavro accounts.</p>
+    </div>
+
+{% endblock %}
+
+{% block body %}
+
+<table class="table table-responsive table-striped table-hover">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Create Date</th>
+            <th>Name</th>
+            <th>Users</th>
+            <th>Status</th>
+            <th>Last Payment</th>
+            <th>{#Manage#}</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for account in accounts %}
+            <tr>
+                <td>{{ account.id }}</td>
+                <td>{{ account.createDate|date("m/d/Y") }}</td>
+                <td>{{ account.name }}</td>
+                <td>{{ account.users|length }}</td>
+                <td></td>
+                <td></td>
+                <th><a class="btn btn-xs btn-primary" href="{{ url('tavro_admin_account_view', {'account': account.id}) }}"><i class="fa fa-fw fa-pencil-square-o"></i> Manage</a></th>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% include 'TavroAdminBundle:Default:pagination.html.twig' %}
+
+{% endblock %}

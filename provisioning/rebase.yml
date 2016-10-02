@@ -1,14 +1,15 @@
 ---
 # Do not let this run on any environment except development!
-- hosts: dev
+- hosts: vagrant
 
   become: true
   become_user: root
 
   vars:
-    api_root: "/var/www/tavro/api/"
-    fixture_path: "src/Tavro/Bundle/CoreBundle/DataFixtures/"
-    fixture_name: "Core"
+      api_root: "/var/www/tavro/api/"
+      migrations_dir: "{{api_root}}/app/DoctrineMigrations"
+      fixture_path: "src/Tavro/Bundle/CoreBundle/DataFixtures/"
+      fixture_name: "Core"
 
   tasks:
     - name: drop database
@@ -17,11 +18,16 @@
     - name: recreate database
       shell: php {{api_root}}bin/console doctrine:database:create
 
+    - name: remove old migrations file
+      shell: find . -type f -not -name "Version1.php" -exec rm -rf {} \;
+      args:
+          chdir: "{{ migrations_dir }}"
+
     - name: rebuild migrations
       shell: php {{api_root}}bin/console doctrine:migrations:diff
 
     - name: run migrations
-      shell: php {{api_root}bin/console doctrine:migrations:migrate --no-interaction
+      shell: php {{api_root}}bin/console doctrine:migrations:migrate --no-interaction
 
     - name: install core data
       shell: php {{api_root}}bin/console doctrine:fixtures:load --fixtures={{api_root}}{{fixture_path}}{{fixture_name}} --append

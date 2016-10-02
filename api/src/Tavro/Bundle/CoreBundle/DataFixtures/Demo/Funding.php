@@ -69,7 +69,7 @@ class Funding extends AbstractFixture implements OrderedFixtureInterface, Contai
         $size = 10;
 
         $accounts = $manager->getRepository('TavroCoreBundle:Account')->findAll();
-        $users = $manager->getRepository('TavroCoreBundle:User')->findAllNonAdmin();
+        $users = $manager->getRepository('TavroCoreBundle:User')->findAll();
         $shareholders = $manager->getRepository('TavroCoreBundle:Shareholder')->findAll();
 
         foreach($accounts as $account) {

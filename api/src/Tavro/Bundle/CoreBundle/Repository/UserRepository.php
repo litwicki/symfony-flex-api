@@ -1,17 +1,10 @@
 <?php namespace Tavro\Bundle\CoreBundle\Repository;
 
-use Doctrine\ORM\EntityRepository;
+use Tavro\Bundle\CoreBundle\Repository\TavroRepository;
+use Doctrine\ORM\Tools\Pagination\Paginator;
+use Doctrine\ORM\Query;
 
-class UserRepository extends EntityRepository
+class UserRepository extends TavroRepository
 {
-
-    public function findAllNonAdmin()
-    {
-        return $this->getEntityManager()
-                    ->createQuery(
-                        "SELECT u FROM TavroCoreBundle:User u JOIN u.roles r WHERE r.role NOT IN('ROLE_ADMIN')"
-                    )
-                    ->getResult();
-    }
 
 }

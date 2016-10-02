@@ -224,7 +224,7 @@ class Users extends AbstractFixture implements OrderedFixtureInterface, Containe
                     'email' => $email,
                     'password' => $username,
                     'first_name' => $fullname[0],
-                    'last_name' => isset($fullname[1]) ? $fullname[1] : NULL,
+                    'last_name' => isset($fullname[1]) ? $fullname[1] : '',
                     'gender' => 'autobot',
                 ]);
             }
@@ -241,7 +241,7 @@ class Users extends AbstractFixture implements OrderedFixtureInterface, Containe
                     'email'      => $email,
                     'password'   => $username,
                     'first_name' => $fullname[0],
-                    'last_name'  => isset($fullname[1]) ? $fullname[1] : NULL,
+                    'last_name'  => isset($fullname[1]) ? $fullname[1] : '',
                     'gender'     => 'decepticon',
                 ]);
             }
@@ -250,19 +250,25 @@ class Users extends AbstractFixture implements OrderedFixtureInterface, Containe
         //create tavrobot!
         $this->create($manager, $admin, [
             'username' => 'tavrobot',
-            'email' => 'dev@zoadilack.com'
+            'email' => 'dev@zoadilack.com',
+            'first_name' => 'Tavro',
+            'last_name' => 'Bot'
         ]);
 
         //create hutch!
         $this->create($manager, $developer, [
             'username' => 'hutch.white',
-            'email' => 'hutch@zoadilack.com'
+            'email' => 'hutch@zoadilack.com',
+            'first_name' => 'Hutch',
+            'last_name' => 'White'
         ]);
 
         //create jake!
         $this->create($manager, $developer, [
             'username' => 'jake.litwicki',
-            'email' => 'jake@zoadilack.com'
+            'email' => 'jake@zoadilack.com',
+            'first_name' => 'Jake',
+            'last_name' => 'Litwicki'
         ]);
 
     }

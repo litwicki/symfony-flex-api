@@ -65,7 +65,7 @@ class Categories extends AbstractFixture implements OrderedFixtureInterface, Con
     public function load(ObjectManager $manager)
     {
         $accounts = $manager->getRepository('TavroCoreBundle:Account')->findAll();
-        $users = $manager->getRepository('TavroCoreBundle:User')->findAllNonAdmin();
+        $users = $manager->getRepository('TavroCoreBundle:User')->findAll();
 
         $faker = \Faker\Factory::create('en_EN');
 

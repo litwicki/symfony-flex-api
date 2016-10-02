@@ -1,0 +1,129 @@
+{% extends 'TavroAdminBundle:Default:base.html.twig' %}
+
+{% set page_title = 'Manage Account' %}
+
+{% block title_block %}
+
+    <div class="page-header" style="margin-top: 80px;">
+        <h1>{{ account.name }}</h1>
+        <p class="lead text-warning"><i class="fa fa-fw fa-lock"></i> Manage the details and/or status of this Account.</p>
+    </div>
+
+{% endblock %}
+
+{% block body %}
+<form method="post" action="{{ url('tavro_admin_account_save', {'account': account.id}) }}">
+<fieldset>
+
+    <div class="row">
+        <div class="col-lg-6">
+
+            <div class="panel panel-primary">
+                <div class="panel-heading">Account Detail</div>
+                <div class="panel-body">
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input id="name" type="text" class="form-control" value="{{ account.name }}" />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="created">Created</label>
+                        <p class="text-muted">{{ account.createDate|date("Y-m-d h:i:s A") }}</p>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="updated">Last Updated</label>
+                        <p class="text-muted">{{ account.updatedDate|date("Y-m-d h:i:s A") }}</p>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="owner">Owner</label>
+                        <input id="owner" type="text" class="form-control" value="{{ account.user.username }}" />
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel panel-warning">
+                <div class="panel-heading">
+                    <i class="fa fw-fw fa-info-circle"></i> Changing the Account Status has immediate effect. Proceed carefully!
+                </div>
+                <div class="panel-body">
+                    <div class="form-group">
+                        <select id="status" name="status" class="form-control">
+                            <option value="">Select One</option>
+                            <option value="0">Suspended</option>
+                            <option value="1">Active</option>
+                            <option value="2">Pending</option>
+                            <option value="3">Processing</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-lg-4 col-lg-offset-2">
+
+            <div class="panel panel-primary">
+                <div class="panel-heading">Account Data</div>
+
+                    <table class="table table-striped table-hover">
+                        <tbody>
+                            <tr>
+                                <th>Users</th>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <th>Organizations</th>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <th>Contacts</th>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <th>Expenses</th>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <th>Products</th>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <th>Services</th>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <th>Revenue</th>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <th>Funding</th>
+                                <td></td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+            </div>
+
+        </div>
+    </div>
+
+    <div class="row">
+
+        <hr />
+
+        <div class="form-actions">
+            <button type="submit" class="btn btn-primary">
+                <i class="fa fa-fw fa-check"></i> Save
+            </button>
+            <strong class="text-muted">&nbsp;&nbsp;<a href="{{ url('tavro_admin_account_view', {'account': account.id}) }}">Nevermind </a></strong>
+            <button onclick="return confirm('This cannot be undone, and is permanent, are you positive?');" type="submit" class="btn btn-danger pull-right">
+                <i class="fa fa-fw fa-close"></i> Delete Account
+            </button>
+        </div>
+    </div>
+
+</fieldset>
+</form>
+
+{% endblock %}

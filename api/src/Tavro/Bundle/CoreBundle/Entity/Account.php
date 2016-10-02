@@ -68,11 +68,6 @@ class Account extends Entity implements EntityInterface
     protected $nodes;
 
     /**
-     * @ORM\OneToMany(targetEntity="Tavro\Bundle\CoreBundle\Entity\Contact", mappedBy="account", cascade={"remove"})
-     */
-    protected $contacts;
-
-    /**
      * @ORM\OneToMany(targetEntity="Tavro\Bundle\CoreBundle\Entity\Service", mappedBy="account", cascade={"remove"})
      */
     protected $services;

@@ -1,0 +1,121 @@
+{% extends 'TavroAdminBundle:Default:base.html.twig' %}
+
+{% set page_title = 'Manage Account' %}
+
+{% block title_block %}
+
+    <div class="page-header" style="margin-top: 80px;">
+        <h1>{{ user.name }}</h1>
+        <p class="lead text-warning"><i class="fa fa-fw fa-lock"></i> Manage the details and/or status of this Account.</p>
+    </div>
+
+{% endblock %}
+
+{% block body %}
+<form method="post" action="{{ url('tavro_admin_account_save', {'account': user.id}) }}">
+<fieldset>
+
+    <div class="row">
+        <div class="col-lg-6">
+
+            <div class="panel panel-primary">
+                <div class="panel-heading">User Detail</div>
+                <div class="panel-body">
+
+                    <div class="form-group">
+                        <label for="first_name">First Name</label>
+                        <input id="first_name" type="text" class="form-control" value="{{ user.person.firstName }}" />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="last_name">Last Name</label>
+                        <input id="last_name" type="text" class="form-control" value="{{ user.person.lastName }}" />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="username">Username</label>
+                        <input id="username" type="text" class="form-control" value="{{ user.username }}" />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="created">Joined</label>
+                        <p class="text-muted">{{ user.createDate|date("Y-m-d h:i:s A") }}</p>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="updated">Last Updated</label>
+                        <p class="text-muted">{{ user.updatedDate|date("Y-m-d h:i:s A") }}</p>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="updated">Last Online</label>
+                        <p class="text-muted">{{ user.lastOnlineDate|date("Y-m-d h:i:s A") }}</p>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="panel panel-warning">
+                <div class="panel-heading">
+                    <i class="fa fw-fw fa-info-circle"></i> Changing the User's Status has immediate effect. Proceed carefully!
+                </div>
+                <div class="panel-body">
+                    <div class="form-group">
+                        <select id="status" name="status" class="form-control">
+                            <option value="">Select One</option>
+                            <option value="0">Suspended</option>
+                            <option value="1">Active</option>
+                            <option value="2">Pending</option>
+                            <option value="3">Processing</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-lg-4 col-lg-offset-2">
+
+            <div class="panel panel-primary">
+                <div class="panel-heading">User Data</div>
+
+                    <table class="table table-striped table-hover">
+                        <tbody>
+                            <tr>
+                                <th>Accounts</th>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <th>Accounts Owned</th>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <th>Nodes</th>
+                                <td></td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+            </div>
+
+        </div>
+    </div>
+
+    <div class="row">
+
+        <hr />
+
+        <div class="form-actions">
+            <button type="submit" class="btn btn-primary">
+                <i class="fa fa-fw fa-check"></i> Save
+            </button>
+            <strong class="text-muted">&nbsp;&nbsp;<a href="{{ url('tavro_admin_user_view', {'user': user.id}) }}">Nevermind </a></strong>
+            <button onclick="return confirm('This cannot be undone, and is permanent, are you positive?');" type="submit" class="btn btn-danger pull-right">
+                <i class="fa fa-fw fa-close"></i> Delete User
+            </button>
+        </div>
+    </div>
+
+</fieldset>
+</form>
+
+{% endblock %}

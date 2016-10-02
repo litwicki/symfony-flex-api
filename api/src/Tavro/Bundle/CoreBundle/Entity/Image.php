@@ -25,7 +25,7 @@ use Tavro\Bundle\CoreBundle\Model\S3EntityInterface;
  * @Table(name="tavro_image")
  *
  */
-class Image extends File implements S3EntityInterface, AccountEntityInterface
+class Image extends Entity implements S3EntityInterface, AccountEntityInterface
 {
     /**
      * @ORM\ManyToOne(targetEntity="Tavro\Bundle\CoreBundle\Entity\Account", inversedBy="images")
@@ -34,6 +34,48 @@ class Image extends File implements S3EntityInterface, AccountEntityInterface
      * @MaxDepth(1)
      */
     protected $account;
+
+    /**
+     * @ORM\Column(type="string", length=500, nullable=FALSE)
+     * @Groups({"api", "detail"})
+     */
+    protected $aws_url;
+
+    /**
+     * @ORM\Column(type="string", length=32, nullable=FALSE)
+     * @Groups({"detail"})
+     */
+    protected $bucket;
+
+    /**
+     * @ORM\Column(type="string", length=32, nullable=FALSE)
+     * @Groups({"detail"})
+     */
+    protected $directory;
+
+    /**
+     * @ORM\Column(type="string", length=500, nullable=FALSE)
+     * @Groups({"api", "detail", "simple"})
+     */
+    protected $aws_key;
+
+    /**
+     * @ORM\Column(type="string", length=500, nullable=FALSE)
+     * @Groups({"api", "detail", "simple"})
+     */
+    protected $original_filename;
+
+    /**
+     * @ORM\Column(type="string", length=500, nullable=FALSE)
+     * @Groups({"api", "detail"})
+     */
+    protected $mime_type;
+
+    /**
+     * @ORM\Column(type="integer", nullable=FALSE)
+     * @Groups({"api", "detail"})
+     */
+    protected $filesize;
 
     /**
      * @ORM\Column(type="integer", nullable=FALSE)
@@ -57,164 +99,44 @@ class Image extends File implements S3EntityInterface, AccountEntityInterface
      */
     protected $service_images;
 
-    public function __toString()
-    {
-        /**
-         * @TODO: This is probably not very helpful..
-         */
-        return $this->original_filename;
-    }
-
-    /**
-     * Set aws_url
-     *
-     * @param string $aws_url
-     * @return Image
-     */
-    public function setPath($aws_url)
-    {
-        $this->aws_url = $aws_url;
-
-        return $this;
-    }
-
-    /**
-     * Get aws_url
-     *
-     * @return string 
-     */
-    public function getPath()
-    {
-        return $this->aws_url;
-    }
-
-    /**
-     * Set original_filename
-     *
-     * @param string $originalFilename
-     * @return Image
-     */
-    public function setOriginalFilename($originalFilename)
-    {
-        $this->original_filename = $originalFilename;
-
-        return $this;
-    }
-
-    /**
-     * Get original_filename
-     *
-     * @return string 
-     */
-    public function getOriginalFilename()
-    {
-        return $this->original_filename;
-    }
-
-    /**
-     * Set mime_type
-     *
-     * @param string $mimeType
-     * @return Image
-     */
-    public function setMimeType($mimeType)
-    {
-        $this->mime_type = $mimeType;
-
-        return $this;
-    }
-
-    /**
-     * Get mime_type
-     *
-     * @return string 
-     */
-    public function getMimeType()
-    {
-        return $this->mime_type;
-    }
-
-    /**
-     * Set filesize
-     *
-     * @param integer $filesize
-     * @return Image
-     */
-    public function setFilesize($filesize)
-    {
-        $this->filesize = $filesize;
-
-        return $this;
-    }
-
-    /**
-     * Get filesize
-     *
-     * @return integer 
-     */
-    public function getFilesize()
-    {
-        return $this->filesize;
-    }
-
-    /**
-     * Set height
-     *
-     * @param integer $height
-     * @return Image
-     */
-    public function setHeight($height)
-    {
-        $this->height = $height;
-
-        return $this;
-    }
-
-    /**
-     * Get height
-     *
-     * @return integer 
-     */
-    public function getHeight()
-    {
-        return $this->height;
-    }
-
-    /**
-     * Set width
-     *
-     * @param integer $width
-     * @return Image
-     */
-    public function setWidth($width)
-    {
-        $this->width = $width;
-
-        return $this;
-    }
-
-    /**
-     * Get width
-     *
-     * @return integer 
-     */
-    public function getWidth()
-    {
-        return $this->width;
-    }
-
     /**
      * Constructor
      */
     public function __construct()
     {
-        $this->mod_images = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->product_images = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->service_images = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Set awsUrl
+     *
+     * @param string $awsUrl
+     *
+     * @return Image
+     */
+    public function setAwsUrl($awsUrl)
+    {
+        $this->aws_url = $awsUrl;
+
+        return $this;
+    }
+
+    /**
+     * Get awsUrl
+     *
+     * @return string
+     */
+    public function getAwsUrl()
+    {
+        return $this->aws_url;
     }
 
     /**
      * Set bucket
      *
      * @param string $bucket
+     *
      * @return Image
      */
     public function setBucket($bucket)
@@ -227,7 +149,7 @@ class Image extends File implements S3EntityInterface, AccountEntityInterface
     /**
      * Get bucket
      *
-     * @return string 
+     * @return string
      */
     public function getBucket()
     {
@@ -235,55 +157,10 @@ class Image extends File implements S3EntityInterface, AccountEntityInterface
     }
 
     /**
-     * Set aws_url
-     *
-     * @param string $awsUrl
-     * @return Image
-     */
-    public function setAwsUrl($awsUrl)
-    {
-        $this->aws_url = $awsUrl;
-
-        return $this;
-    }
-
-    /**
-     * Get aws_url
-     *
-     * @return string 
-     */
-    public function getAwsUrl()
-    {
-        return $this->aws_url;
-    }
-
-    /**
-     * Set aws_key
-     *
-     * @param string $awsKey
-     * @return Image
-     */
-    public function setAwsKey($awsKey)
-    {
-        $this->aws_key = $awsKey;
-
-        return $this;
-    }
-
-    /**
-     * Get aws_key
-     *
-     * @return string 
-     */
-    public function getAwsKey()
-    {
-        return $this->aws_key;
-    }
-
-    /**
      * Set directory
      *
      * @param string $directory
+     *
      * @return Image
      */
     public function setDirectory($directory)
@@ -296,13 +173,180 @@ class Image extends File implements S3EntityInterface, AccountEntityInterface
     /**
      * Get directory
      *
-     * @return string 
+     * @return string
      */
     public function getDirectory()
     {
         return $this->directory;
     }
 
+    /**
+     * Set awsKey
+     *
+     * @param string $awsKey
+     *
+     * @return Image
+     */
+    public function setAwsKey($awsKey)
+    {
+        $this->aws_key = $awsKey;
+
+        return $this;
+    }
+
+    /**
+     * Get awsKey
+     *
+     * @return string
+     */
+    public function getAwsKey()
+    {
+        return $this->aws_key;
+    }
+
+    /**
+     * Set originalFilename
+     *
+     * @param string $originalFilename
+     *
+     * @return Image
+     */
+    public function setOriginalFilename($originalFilename)
+    {
+        $this->original_filename = $originalFilename;
+
+        return $this;
+    }
+
+    /**
+     * Get originalFilename
+     *
+     * @return string
+     */
+    public function getOriginalFilename()
+    {
+        return $this->original_filename;
+    }
+
+    /**
+     * Set mimeType
+     *
+     * @param string $mimeType
+     *
+     * @return Image
+     */
+    public function setMimeType($mimeType)
+    {
+        $this->mime_type = $mimeType;
+
+        return $this;
+    }
+
+    /**
+     * Get mimeType
+     *
+     * @return string
+     */
+    public function getMimeType()
+    {
+        return $this->mime_type;
+    }
+
+    /**
+     * Set filesize
+     *
+     * @param integer $filesize
+     *
+     * @return Image
+     */
+    public function setFilesize($filesize)
+    {
+        $this->filesize = $filesize;
+
+        return $this;
+    }
+
+    /**
+     * Get filesize
+     *
+     * @return integer
+     */
+    public function getFilesize()
+    {
+        return $this->filesize;
+    }
+
+    /**
+     * Set height
+     *
+     * @param integer $height
+     *
+     * @return Image
+     */
+    public function setHeight($height)
+    {
+        $this->height = $height;
+
+        return $this;
+    }
+
+    /**
+     * Get height
+     *
+     * @return integer
+     */
+    public function getHeight()
+    {
+        return $this->height;
+    }
+
+    /**
+     * Set width
+     *
+     * @param integer $width
+     *
+     * @return Image
+     */
+    public function setWidth($width)
+    {
+        $this->width = $width;
+
+        return $this;
+    }
+
+    /**
+     * Get width
+     *
+     * @return integer
+     */
+    public function getWidth()
+    {
+        return $this->width;
+    }
+
+    /**
+     * Set account
+     *
+     * @param \Tavro\Bundle\CoreBundle\Entity\Account $account
+     *
+     * @return Image
+     */
+    public function setAccount(\Tavro\Bundle\CoreBundle\Entity\Account $account)
+    {
+        $this->account = $account;
+
+        return $this;
+    }
+
+    /**
+     * Get account
+     *
+     * @return \Tavro\Bundle\CoreBundle\Entity\Account
+     */
+    public function getAccount()
+    {
+        return $this->account;
+    }
 
     /**
      * Add productImage
@@ -370,53 +414,5 @@ class Image extends File implements S3EntityInterface, AccountEntityInterface
     public function getServiceImages()
     {
         return $this->service_images;
-    }
-
-    /**
-     * Set body
-     *
-     * @param string $body
-     *
-     * @return Image
-     */
-    public function setBody($body)
-    {
-        $this->body = $body;
-
-        return $this;
-    }
-
-    /**
-     * Get body
-     *
-     * @return string
-     */
-    public function getBody()
-    {
-        return $this->body;
-    }
-
-    /**
-     * Set account
-     *
-     * @param \Tavro\Bundle\CoreBundle\Entity\Account $account
-     *
-     * @return Image
-     */
-    public function setAccount(\Tavro\Bundle\CoreBundle\Entity\Account $account)
-    {
-        $this->account = $account;
-
-        return $this;
-    }
-
-    /**
-     * Get account
-     *
-     * @return \Tavro\Bundle\CoreBundle\Entity\Account
-     */
-    public function getAccount()
-    {
-        return $this->account;
     }
 }

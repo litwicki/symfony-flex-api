@@ -28,6 +28,7 @@ use JMS\Serializer\Annotation\MaxDepth;
  * @ORM\Entity
  * @ORM\Entity(repositoryClass="Tavro\Bundle\CoreBundle\Repository\PersonRepository")
  * @ORM\Table(name="tavro_person", indexes={@ORM\Index(name="PERSON", columns={"id"})})
+ * @ORM\Table(name="tavro_person", indexes={@ORM\Index(name="USER", columns={"user_id"})})
  *
  * @XmlRoot("person")
  * @XmlNamespace(uri="http://tavro.io/api/people")
