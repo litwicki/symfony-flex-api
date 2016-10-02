@@ -78,15 +78,35 @@
             <div class="panel panel-primary">
                 <div class="panel-heading">User Data</div>
 
-                    <table class="table table-striped table-hover">
+                    <table class="table table-responsive">
                         <tbody>
                             <tr>
-                                <th>Accounts</th>
-                                <td></td>
+                                <th>Accounts (Owned)</th>
+                                <td>
+                                    {% if user.accounts|length > 0 %}
+                                        <div class="list-group">
+                                        {% for entity in user.accounts %}
+                                            <a class="list-group-item" href="{{ url('tavro_admin_account_view', {'account': entity.id}) }}">{{ entity.name }}</a>
+                                        {% endfor %}
+                                        </div>
+                                    {% else %}
+                                        <strong class="text-muted">{{ user.person.firstName }} does not own any Accounts.</strong>
+                                    {% endif %}
+                                </td>
                             </tr>
                             <tr>
-                                <th>Accounts Owned</th>
-                                <td></td>
+                                <th>Accounts (Member)</th>
+                                <td>
+                                    {% if user.accountUsers|length > 0 %}
+                                        <div class="list-group">
+                                        {% for entity in user.accountUsers %}
+                                            <a class="list-group-item" href="{{ url('tavro_admin_account_view', {'account': entity.account.id}) }}">{{ entity.account.name }}</a>
+                                        {% endfor %}
+                                        </div>
+                                    {% else %}
+                                        <strong class="text-muted">{{ user.person.firstName }} does not have access to any Accounts.</strong>
+                                    {% endif %}
+                                </td>
                             </tr>
                             <tr>
                                 <th>Nodes</th>
