@@ -18,13 +18,6 @@ tavro_api:
         api_host: %api_hostname%
     prefix: /api/v1
 
-tavro_admin:
-    resource: "@TavroAdminBundle/Resources/config/routing.yml"
-    requirements:
-        api_host: ^(admin_hostname%|admin.localhost)$
-    defaults:
-        api_host: %admin_hostname%
-
 # =======================
 # CONTRIB BUNDLE ROUTING
 # =======================
