@@ -35,6 +35,7 @@ parameters:
 
     app_hostname: tavro.dev
     api_hostname: api.tavro.dev
+    admin_hostname: admin.tavro.dev
 
     jwt_token_passphrase: ''
     jwt_token_ttl:        86400
