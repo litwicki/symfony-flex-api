@@ -19,3 +19,4 @@ mysql_users:
     host: "%"
     password: "{{ appname }}"
     priv: "{{ appname }}.*:ALL"
+host_names: "{{ hostname }} api.{{ hostname }} docs.{{ hostname }} phpunit.{{ hostname }}"

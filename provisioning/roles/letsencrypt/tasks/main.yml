@@ -18,7 +18,7 @@
 
 - name: build letsencrypt command
   set_fact:
-    letsencrypt_command: XDG_DATA_HOME=/opt /usr/local/bin/certbot-auto run -m dev@zoadilack.com -d {{ host_name }} {{ redirect_domains | length | ternary('-d ','') }}{{ redirect_domains | join(' -d ') }} --agree-tos --expand --no-redirect --apache --text --keep-until-expiring --no-self-upgrade
+    letsencrypt_command: XDG_DATA_HOME=/opt /usr/local/bin/certbot-auto run -m dev@zoadilack.com -d {{ host_names }} --agree-tos --expand --no-redirect --apache --text --keep-until-expiring --no-self-upgrade
 
 - name: install SSL certificate
   command: "{{ letsencrypt_command }}"
