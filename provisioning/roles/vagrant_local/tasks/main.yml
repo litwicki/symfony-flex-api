@@ -9,3 +9,15 @@
 
 - name: Update /etc/hosts
   lineinfile: dest=/etc/hosts regexp='^127\.0\.0\.1' line='127.0.0.1 localhost {{ vagrant_local.vm.hostname }}' owner=root group=root mode=0644
+
+- name: make ssl dir
+  file: dest=/etc/nginx/ssl state=directory mode=0755 owner=www-data group=www-data
+
+- name: create self-signed SSL cert
+  command: openssl req -new -nodes -x509 -subj "/C=US/ST=Oregon/L=Portland/O=IT/CN=${ansible_fqdn}" -days 3650 -keyout /etc/nginx/ssl/{{appname}}.key -out /etc/nginx/ssl/{{appname}}.crt -extensions v3_ca creates=/etc/nginx/ssl/{{appname}}.crt
+
+- name: restart nginx
+  service: name=nginx state=restarted
+
+- name: restart php7.0-fpm
+  service: name=php7.0-fpm state=restarted

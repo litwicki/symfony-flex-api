@@ -25,9 +25,6 @@
 - name: copy api config
   template: src=api.conf.j2 dest=/etc/nginx/sites-available/api.conf owner=www-data group=www-data mode=0644
 
-- name: copy app config
-  template: src=app.conf.j2 dest=/etc/nginx/sites-available/app.conf owner=www-data group=www-data mode=0644
-
 - name: copy docs config
   template: src=docs.conf.j2 dest=/etc/nginx/sites-available/docs.conf owner=www-data group=www-data mode=0644
 
@@ -38,12 +35,6 @@
   file:
     src: /etc/nginx/sites-available/api.conf
     dest: /etc/nginx/sites-enabled/api.conf
-    state: link
-
-- name: enable app vhost
-  file:
-    src: /etc/nginx/sites-available/app.conf
-    dest: /etc/nginx/sites-enabled/app.conf
     state: link
 
 - name: enable docs vhost

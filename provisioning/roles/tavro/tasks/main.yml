@@ -1,6 +1,20 @@
 ---
+- name: remove old sami build docs
+  file: dest="/var/www/{{appname}}/sami/build" state=absent
+
+- name: remove old sami cache
+  file: dest="/var/www/{{appname}}/sami/cache" state=absent
+
 - name: regenerate docs
-  command: bash /var/www/{{appname}}/scripts/regenerate-docs.sh
+  command: php /var/www/{{appname}}/sami/sami update /var/www/{{appname}}/sami/config.php
+  args:
+      chdir: "/var/www/{{appname}}sami"
+
+- name: restart nginx
+  service: name=nginx state=restarted
+
+- name: restart php7.0-fpm
+  service: name=php7.0-fpm state=restarted
 
 - name: Copy AWS json API config..
   template: src=aws.json.j2 dest=/var/www/{{appname}}/api/aws.json
@@ -10,3 +24,9 @@
 
 - name: setup symfony binary alias
   file: src=/var/www/{{appname}}/api/bin/console dest=/var/www/{{appname}}/api/symfony state=link
+
+- name: restart nginx
+  service: name=nginx state=restarted
+
+- name: restart php7.0-fpm
+  service: name=php7.0-fpm state=restarted
