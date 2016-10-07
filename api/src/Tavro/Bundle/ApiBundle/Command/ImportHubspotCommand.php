@@ -60,7 +60,9 @@ class ImportHubspotCommand extends ContainerAwareCommand
             $accountId = $input->getOption('account');
         }
 
-        $var = $this->getDoctrine()->getRepository('TavroCoreBundle:Variable')->findOneBy([
+        $em = $this->getContainer()->get('doctrine')->getEntityManager();
+
+        $var = $em->getRepository('TavroCoreBundle:Variable')->findOneBy([
             'name' => 'hubspot.hapikey',
             'account' => $accountId
         ]);
@@ -255,11 +257,11 @@ class ImportHubspotCommand extends ContainerAwareCommand
 
         }
 
+        $message = '';
+
         return array(
             'data' => $import,
-            'orgCount' => $orgCount,
-            'personCount' => $personCount,
-            'contactCount' => $contactCount
+            'message' => $message
         );
 
     }
