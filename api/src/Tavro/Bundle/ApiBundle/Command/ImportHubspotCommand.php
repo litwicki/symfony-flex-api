@@ -45,7 +45,7 @@ class ImportHubspotCommand extends ContainerAwareCommand
     {
 
         $import = array();
-        
+
         $accountId = 0;
 
         /**
@@ -69,7 +69,9 @@ class ImportHubspotCommand extends ContainerAwareCommand
             throw new \Exception(sprintf('Error loading Hubspot Api Key for Account %s', $accountId));
         }
 
-        $url = sprintf('https://api.hubapi.com/companies/v2/companies?hapikey=%s', $var->getValue());
+        $hapiKey = $var->getValue();
+
+        $url = sprintf('https://api.hubapi.com/companies/v2/companies?hapikey=%s', $hapiKey);
 
         $curl = new cURL();
         $curl->get($url);
@@ -231,7 +233,7 @@ class ImportHubspotCommand extends ContainerAwareCommand
                                 'email' => $contact['email'],
                                 'person' => $person->getId(),
                                 'organization' => $organization->getId(),
-                                'account' => $account->getId()
+                                'account' => $accountId
                             ]);
 
                             $output->writeln(sprintf('Creating new Contact from Person with email %s', $contact['email']));
