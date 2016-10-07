@@ -25,27 +25,88 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 
 use Tavro\Bundle\CoreBundle\Common\Curl;
 use Tavro\Bundle\CoreBundle\Entity\Organization;
+
+use Symfony\Bundle\FrameworkBundle\Console\Application;
+use Symfony\Component\Console\Input\ArrayInput;
+use Symfony\Component\Console\Output\BufferedOutput;
+
 use Tavro\Bundle\ApiBundle\Controller\DefaultController as ApiController;
 
-class HubspotController extends ApiController
+class CommandController extends ApiController
 {
 
     /**
-     * @return string
+     * @param \Symfony\Component\HttpFoundation\Request $request
+     * @param \Tavro\Bundle\CoreBundle\Entity\Account $account
+     * @param $_format
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     * @throws \Exception
      */
-    protected function getQboKey()
+    public function hubspotImportAction(Request $request, Account $account, $_format)
     {
-        return '9df40eef-9d0f-40cd-9634-78df871d8803';
+        try {
+
+            $kernel = $this->get('kernel');
+            $application = new Application($kernel);
+            $application->setAutoExit(false);
+
+            $input = new ArrayInput(array(
+               'command' => 'tavro:import:hubspot',
+               '--account' => $account->getId(),
+            ));
+
+            $output = new BufferedOutput();
+            $application->run($input, $output);
+
+            $content = $output->fetch();
+
+            return $this->apiResponse($content['data'], [
+                'format' => $_format,
+                'message' => sprintf('%s Organizations and %s People imported, %s Contacts added.', $content['orgCount'], $content['personCount'], $content['contactCount'])
+            ]);
+
+        }
+        catch(\Exception $e) {
+            throw $e;
+        }
     }
 
     /**
-     * @return string
+     * @param \Symfony\Component\HttpFoundation\Request $request
+     * @param \Tavro\Bundle\CoreBundle\Entity\Account $account
+     * @param $_format
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     * @throws \Exception
      */
-    protected function getUri()
+    public function qboImportAction(Request $request, Account $account, $_format)
     {
-        $hapiKey = $this->getQboKey();
+        try {
 
-        return 'https://api.hubapi.com/integrations/v1/tavro/timeline/event-types?hapikey={HAPIKEY}&userId={USERID}';
+            $kernel = $this->get('kernel');
+            $application = new Application($kernel);
+            $application->setAutoExit(false);
+
+            $input = new ArrayInput(array(
+               'command' => 'tavro:import:qbo',
+               '--account' => $account->getId(),
+            ));
+
+            $output = new BufferedOutput();
+            $application->run($input, $output);
+
+            $content = $output->fetch();
+
+            return $this->apiResponse($content['data'], [
+                'format' => $_format,
+                'message' => '',
+            ]);
+
+        }
+        catch(\Exception $e) {
+            throw $e;
+        }
     }
 
 }
