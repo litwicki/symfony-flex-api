@@ -6,9 +6,9 @@
   file: dest="/var/www/{{appname}}/sami/cache" state=absent
 
 - name: regenerate docs
-  command: php /var/www/{{appname}}/sami/sami update /var/www/{{appname}}/sami/config.php
+  command: php sami update /var/www/{{appname}}/sami/config.php
   args:
-      chdir: "/var/www/{{appname}}sami"
+      chdir: "/var/www/{{appname}}/sami"
 
 - name: restart nginx
   service: name=nginx state=restarted

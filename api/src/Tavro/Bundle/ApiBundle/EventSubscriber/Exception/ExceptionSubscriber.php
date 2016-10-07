@@ -1,6 +1,6 @@
 <?php
 
-namespace Tavro\Bundle\CoreBundle\EventSubscriber\Exception;
+namespace Tavro\Bundle\ApiBundle\EventSubscriber\Exception;
 
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\Response;

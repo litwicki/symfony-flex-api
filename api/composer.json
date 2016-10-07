@@ -38,7 +38,6 @@
         "stof/doctrine-extensions-bundle": "~1.1@dev",
         "liip/imagine-bundle": "^1.3",
         "cocur/slugify": "^1.4",
-        "litwicki/common": "^1.0",
         "knplabs/knp-gaufrette-bundle": "^0.3.0",
         "gregwar/captcha-bundle": "^2.0",
         "moontoast/math" : "^1.1",
@@ -46,7 +45,10 @@
         "doctrine/doctrine-fixtures-bundle": "^2.3",
         "twig/extensions": "^1.3",
         "lexik/jwt-authentication-bundle": "^1.6",
-        "zoadilack/tavro-core": "dev-master"
+        "zoadilack/tavro-core": "dev-master",
+        "litwicki/common": "^1.0",
+        "litwicki/qbo-bundle": "dev-master",
+        "litwicki/chargify-bundle": "dev-master"
     },
     "repositories": [
         {
