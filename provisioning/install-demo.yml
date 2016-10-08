@@ -6,7 +6,7 @@
 
   vars:
     api_root: "/var/www/tavro/api/"
-    fixture_path: "src/Tavro/Bundle/CoreBundle/DataFixtures/"
+    fixture_path: "vendor/zoadilack/tavro-core/Tavro/Bundle/CoreBundle/DataFixtures/"
     core_fixture_name: "Core"
     demo_fixture_name: "Demo"
 

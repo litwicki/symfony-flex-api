@@ -47,8 +47,8 @@
         "lexik/jwt-authentication-bundle": "^1.6",
         "zoadilack/tavro-core": "dev-master",
         "litwicki/common": "^1.0",
-        "litwicki/qbo-bundle": "dev-master",
-        "litwicki/chargify-bundle": "dev-master"
+        "guzzlehttp/guzzle": "^5.0",
+        "commerceguys/guzzle-oauth2-plugin": "2.1.1"
     },
     "repositories": [
         {
