@@ -106,3 +106,5 @@ sftp-config.json
 /sami/cache/
 /phpunit
 /*.log
+
+/api/src/Litwicki

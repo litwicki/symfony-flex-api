@@ -70,15 +70,7 @@ class ImportQuickbooksOnlineCommand extends ContainerAwareCommand
 
         }
 
-        $uri = sprintf('%s/%s', $this->getUri(), $configs['RealmID']);
-
-        //        <add key="AccessToken" value="qyprdBEjbHRQ385zcxsONA3kFLRYjhvaaj6Jh8yUg6L5ntoI" />
-        //        <add key="AccessTokenSecret" value="BKOKIqK2yL2ixHoBXUDylb1S3cSjojPH4VndDMn1" />
-        //        <add key="ConsumerKey" value="qyprdhtIFrV109VHku2kVAv9B02K6u" />
-        //        <add key="ConsumerSecret" value="PqofHTPE6GT65EqaX0nPQwGVghmv3C4RZQZfeIeX" />
-        //        <add key="RealmID" value="123145809324582" />
-
-        $output->writeln('');
+        $baseUri = sprintf('%s/%s', $this->getUri(), $configs['RealmID']);
 
         $oauth = new \OAuth($configs['ConsumerKey'], $configs['ConsumerSecret']);
         $oauth->setToken($configs['AccessToken'], $configs['AccessTokenSecret']);
@@ -88,14 +80,7 @@ class ImportQuickbooksOnlineCommand extends ContainerAwareCommand
 
         $headers = array('accept' => 'application/json');
 
-        /**
-         * @TODO: build the requestBody
-         *      for example: $requestBody = 'SELECT * FROM Customer';
-         */
-
-        $uri = sprintf('%s/%s?query=%s');
-
-        $oauth->fetch($uri, null, OAUTH_HTTP_METHOD_GET, $headers);
+        $response = $oauth->fetch($uri, null, OAUTH_HTTP_METHOD_GET, $headers);
 
         return array(
             'data'    => $import,
