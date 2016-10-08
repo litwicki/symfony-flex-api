@@ -97,7 +97,8 @@ class ImportQuickbooksOnlineCommand extends ContainerAwareCommand
         $oauth = new \OAuth($configs['ConsumerKey'], $configs['ConsumerSecret'], OAUTH_SIG_METHOD_HMACSHA1, OAUTH_AUTH_TYPE_URI);
         $oauth->enableDebug();
         $oauth->disableSSLChecks();
-        $requestToken = $oauth->getRequestToken( 'https://oauth.intuit.com/oauth/v1/get_request_token', 'http://api.tavro.dev' );
+        die('test');
+        $requestToken = $oauth->getRequestToken( 'https://oauth.intuit.com/oauth/v1/get_request_token', 'https://api.tavro.dev' );
 
         $client   = $this->getContainer()->get('guzzle.client');
 

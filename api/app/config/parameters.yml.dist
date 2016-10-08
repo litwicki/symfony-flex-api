@@ -49,3 +49,8 @@ parameters:
     asset_bucket: tavro-assets-dev
     file_bucket: tavro-files-dev
     amazon_s3_url: 'https://s3.amazonaws.com'
+
+    # Quickbooks Online
+    qbo_request_token_uri: ~
+    qbo_access_token_uri: ~
+    qbo_request_uri: ~
