@@ -73,9 +73,10 @@ class ImportQuickbooksOnlineCommand extends ContainerAwareCommand
             $configs = [
                 'ConsumerKey'       => 'qyprdGN04Ss2F4XEidMdT6YzY1EFBU',
                 'ConsumerSecret'    => 'EkQ6VmzrqZYgmDhKZ8AeUzW8rHYIpGPZHla4KU4i',
-                'AccessToken'       => 'lvprd9YuaBzqaS5mTRhptPyghRXbgismAdIhiUpu0hnT93po',
-                'AccessTokenSecret' => 'c8OnwLWIhhI02ZvrekxJ6xDQtl8ndYZINGby7AZB',
-                'RealmID'           => '123145724021387'
+                'AccessToken'       => 'lvprdBVOnMwVECd7t8ANXVoCD0IRpW1u1pqyEXma6AnymkvT',
+                'AccessTokenSecret' => 'IqySLEZz5m2yuFDhid3Xvj69T3S9jSllWEcFzIKC',
+                'RealmID'           => '123145724021387',
+                'DataSource'        => 'QBO'
             ];
 
         }
@@ -94,50 +95,60 @@ class ImportQuickbooksOnlineCommand extends ContainerAwareCommand
 
         }
 
-        $oauth = new \OAuth($configs['ConsumerKey'], $configs['ConsumerSecret'], OAUTH_SIG_METHOD_HMACSHA1, OAUTH_AUTH_TYPE_URI);
-        $oauth->enableDebug();
-        $oauth->disableSSLChecks();
-        die('test');
-        $requestToken = $oauth->getRequestToken( 'https://oauth.intuit.com/oauth/v1/get_request_token', 'https://api.tavro.dev' );
-
-        $client   = $this->getContainer()->get('guzzle.client');
-
-        // GET request with parameters
-        $tokenRequestUri = sprintf('https://appcenter.intuit.com/Connect/Begin?oauth_token=%s', $requestToken);
-        $response = $client->get($tokenRequestUri);
-        $code = $response->getStatusCode();
-        $body = $response->getBody();
-
-        die(dump($body));
-
-        $oauth->setToken($configs['AccessToken'], $configs['AccessTokenSecret']);
-        $oauth->enableDebug();
-        $oauth->setAuthType(OAUTH_AUTH_TYPE_AUTHORIZATION);
-        $oauth->disableSSLChecks();
-
         /**
-         * @TODO: build the requestBody
-         *      for example: $requestBody = 'SELECT * FROM Customer';
+         * @TODO: The application needs to store the AccessToken and AccessTokenSecret for
+         * a particular account, so we can then automate the execution of this command.
+         *
+         * That part of the OAuth process is handled outside of this command as it requires
+         * User interaction via OAuth 1.0 and Quckbooks Online Authorization.
          */
 
-        $query = 'SELECT * FROM Customer';
+        $qboItems = [
 
-        $uri = sprintf('%s/%s/query?query=%s',
-            $this->getUri($debug),
-            $configs['RealmID'],
-            urlencode(str_replace('+', '%20', $query))
-        );
+            'Account',
+            'Attachable',
+            'Batch',
+            'Bill',
+            'BillPayment',
+            'Budget',
+            'ChangeDataCapture',
+            'Class',
+            'CompanyInfo',
+            'CreditMemo',
+            'Customer',
+            'Department',
+            'Deposit',
+            'Employee',
+            'Estimate',
+            'Invoice',
+            'Item',
+            'JournalEntry',
+            'Payment',
+            'PaymentMethod',
+            'Preferences',
+            'Purchase',
+            'PurchaseOrder',
+            'RefundReceipt',
+            'Reports',
+            'SalesReceipt',
+            'TaxAgency',
+            'TaxCode',
+            'TaxRate',
+            'TaxService',
+            'Term',
+            'TimeActivity',
+            'Transfer',
+            'Vendor',
+            'VendorCredit'
 
-        //$url = 'https://sandbox-quickbooks.api.intuit.com/v3/company/123145724021387/query?query=SELECT%20%2A%20FROM%20Customer&minorversion=4';
+        ];
 
-        $result = $oauth->fetch($uri, null, OAUTH_HTTP_METHOD_GET, [
-            'accept' => 'application/json'
-        ]);
-
-        $response = $oauth->getLastResponse();
-
-        dump([$uri, json_decode($response, true)]);
-        die(__METHOD__);
+        foreach($qboItems as $qboItem) {
+            $handler = $this->getContainer()->get(sprintf('qbo.handler.%s', $qboItem));
+            $response = $handler->import($accountId);
+            $messages[] = $response['message'];
+            $output->writeln($message);
+        }
 
         return array(
             'data'    => $import,
