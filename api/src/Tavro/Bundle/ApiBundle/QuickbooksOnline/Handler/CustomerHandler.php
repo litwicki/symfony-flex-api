@@ -9,7 +9,15 @@ use Tavro\Bundle\CoreBundle\Entity\Contact;
 
 use Tavro\Bundle\ApiBundle\QuickbooksOnline\QboApiService;
 
-class VendorHandler extends QboApiService
+/**
+ * Class CustomerHandler
+ *
+ * This package handles the processing of Customers, which we import
+ * as Person, Customer, and Organization Entities where applicable.
+ *
+ * @package Tavro\Bundle\ApiBundle\QuickbooksOnline\Handler
+ */
+class CustomerHandler extends QboApiService
 {
 
     public function import($id, $debug = true)

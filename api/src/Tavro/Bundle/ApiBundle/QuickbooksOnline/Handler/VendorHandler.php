@@ -3,12 +3,17 @@
 use Doctrine\ORM\EntityManager;
 use \OAuth;
 
-use Tavro\Bundle\CoreBundle\Entity\Account;
-use Tavro\Bundle\CoreBundle\Entity\Service;
-use Tavro\Bundle\CoreBundle\Entity\Product;
+use Tavro\Bundle\CoreBundle\Entity\Organization;
 
 use Tavro\Bundle\ApiBundle\QuickbooksOnline\QboApiService;
 
+/**
+ * Class VendorHandler
+ *
+ * Parse Vendors into Organizations
+ *
+ * @package Tavro\Bundle\ApiBundle\QuickbooksOnline\Handler
+ */
 class VendorHandler extends QboApiService
 {
 
@@ -44,13 +49,17 @@ class VendorHandler extends QboApiService
                 'qbo_id' => $id
             ]);
 
-            $entities[] = $this->container->get('tavro.handler.organizations')->create([
+            if(!$entity instanceof Organization) {
 
-                'name' => $vendor['DisplayName'],
-                'account' => $account->getId(),
-                'qbo_id' => $id
+                $entities[] = $this->container->get('tavro.handler.organizations')->create([
 
-            ]);
+                    'name' => $vendor['DisplayName'],
+                    'account' => $account->getId(),
+                    'qbo_id' => $id
+
+                ]);
+
+            }
 
         }
 

@@ -7,6 +7,13 @@ use Tavro\Bundle\CoreBundle\Entity\Expense;
 
 use Tavro\Bundle\ApiBundle\QuickbooksOnline\QboApiService;
 
+/**
+ * Class PurchaseHandler
+ *
+ * Parse Purchases into Expense Entities
+ *
+ * @package Tavro\Bundle\ApiBundle\QuickbooksOnline\Handler
+ */
 class PurchaseHandler extends QboApiService
 {
 

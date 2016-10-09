@@ -7,8 +7,17 @@ use Tavro\Bundle\CoreBundle\Entity\Account;
 use Tavro\Bundle\CoreBundle\Entity\Service;
 use Tavro\Bundle\CoreBundle\Entity\Product;
 
+use Tavro\Bundle\ApiBundle\QuickbooksOnline\Handler\ItemHandler;
+
 use Tavro\Bundle\ApiBundle\QuickbooksOnline\QboApiService;
 
+/**
+ * Class SalesReceiptHandler
+ *
+ * Parse SalesReceipts into Services, Products, and Revenue
+ *
+ * @package Tavro\Bundle\ApiBundle\QuickbooksOnline\Handler
+ */
 class SalesReceiptHandler extends QboApiService
 {
 
@@ -68,25 +77,11 @@ class SalesReceiptHandler extends QboApiService
 
                     if($taxCodeRef == 'NON') {
 
-                        $service = $this->em->getRepository('TavroCoreBundle:Service')->findOneBy([
-                            'account' => $account->getId(),
-                            'qbo_id' => $lineItem['Id'],
-                        ]);
-
                         /**
                          * If we can't find a Service by this name, create a new one.
                          */
-                        if(!$service instanceof Service) {
-
-                            $service = $this->container->get('tavro.handler.services')->create([
-                                'name' => $name,
-                                'type' => 'QBO',
-                                'price' => $salesItemLineDetail['UnitPrice'],
-                                'account' => $account->getId(),
-                                'category' => 1,
-                                'qbo_id' => $lineItem['Id']
-                            ]);
-
+                        if(!ItemHandler::checkService($account, $lineItem['Id'])) {
+                            $service = ItemHandler::createService($account, $lineItem);
                         }
 
                     }
@@ -95,6 +90,11 @@ class SalesReceiptHandler extends QboApiService
                     $serviceCount++;
 
                 }
+
+                /**
+                 * @TODO: find a way to distinguish Products..
+                 */
+
 
                 if( $type == 'DiscountLineDetail' ) {
 
@@ -108,11 +108,6 @@ class SalesReceiptHandler extends QboApiService
                      */
 
                 }
-
-                /**
-                 * @TODO: find a way to distinguish Products..
-                 */
-
 
             }
 
