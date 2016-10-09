@@ -94,6 +94,9 @@ class SalesReceiptHandler extends QboApiService
                 /**
                  * @TODO: find a way to distinguish Products..
                  */
+                if( $type == 'asdf' ) {
+
+                }
 
 
                 if( $type == 'DiscountLineDetail' ) {
