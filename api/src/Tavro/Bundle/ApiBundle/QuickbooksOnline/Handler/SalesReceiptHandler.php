@@ -37,6 +37,8 @@ class SalesReceiptHandler extends QboApiService
 
         foreach($salesReceipts as $item) {
 
+            $discountAmount = $discountPercent = 0;
+
             /**
              * For Each SalesReceipt we need to parse out the Revenue by determining what
              * Products and/or Services went into the Sale; or in our case Revenue
@@ -94,6 +96,19 @@ class SalesReceiptHandler extends QboApiService
 
                 }
 
+                if( $type == 'DiscountLineDetail' ) {
+
+                    $discount = $lineItem['DiscountLineDetail'];
+                    if($discount['PercentBased'] == 'true') {
+                        $discountPercent = $discount['DiscountPercent'];
+                    }
+
+                    /**
+                     * @TODO: factor in a Discount Amount
+                     */
+
+                }
+
                 /**
                  * @TODO: find a way to distinguish Products..
                  */
@@ -110,6 +125,8 @@ class SalesReceiptHandler extends QboApiService
                 'body' => $item['Description'],
                 'type' => '',
                 'category' => '',
+                'discount_amount' => $discountAmount,
+                'discount_percent' => $discountPercent,
                 'user' => $user,
                 'services' => $services,
                 'products' => $products

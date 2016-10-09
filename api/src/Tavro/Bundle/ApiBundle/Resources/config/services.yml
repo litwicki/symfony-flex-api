@@ -18,11 +18,11 @@ services:
     tavro_qbo.handler.qbo_api_service:
         class: Tavro\Bundle\ApiBundle\QuickbooksOnline\QboApiService
         calls:
-            - [setContainer, [@service_container]]
+            - [setContainer, ['@service_container']]
         arguments: ['@doctrine.orm.entity_manager', '@security.token_storage']
 
     tavro_qbo.handler.sales_receipts:
         class: Tavro\Bundle\ApiBundle\QuickbooksOnline\Handler\SalesReceiptHandler
         calls:
-            - [setContainer, [@service_container]]
+            - [setContainer, ['@service_container']]
         arguments: ['@doctrine.orm.entity_manager', '@security.token_storage']
