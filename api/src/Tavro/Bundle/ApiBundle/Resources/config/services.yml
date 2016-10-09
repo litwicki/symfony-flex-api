@@ -13,7 +13,7 @@ services:
         class: Tavro\Bundle\ApiBundle\EventSubscriber\Exception\ExceptionSubscriber
         tags:
             - { name: kernel.event_subscriber }
-        arguments: ["%kernel.debug%", "@serializer"]
+        arguments: ["%kernel.debug%", "@serializer", "@logger"]
 
     tavro_qbo.handler.qbo_api_service:
         class: Tavro\Bundle\ApiBundle\QuickbooksOnline\QboApiService
