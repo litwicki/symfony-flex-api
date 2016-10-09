@@ -1,26 +1,57 @@
 <?php namespace Tavro\Bundle\ApiBundle\QuickbooksOnline;
 
 use Doctrine\ORM\EntityManager;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
+use Symfony\Component\DependencyInjection\ContainerAwareInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
+
 use \OAuth;
 
 use Tavro\Bundle\CoreBundle\Entity\Account;
 
-class QboApiService
+class QboApiService implements ContainerAwareInterface
 {
-    protected $em;
-    protected $object = 'SalesReceipt';
-    protected $realmId;
+    protected $container;
 
-    public function __construct(EntityManager $em)
+    protected $em;
+    protected $realmId;
+    protected $tokenStorage;
+
+    /**
+     * QboApiService constructor.
+     *
+     * @param \Doctrine\ORM\EntityManager $em
+     */
+    public function __construct(EntityManager $em, TokenStorage $tokenStorage)
     {
         $this->em = $em;
+        $this->tokenStorage = $tokenStorage;
     }
 
+    /**
+     * @param ContainerInterface $container
+     */
+    public function setContainer(ContainerInterface $container = null)
+    {
+        $this->container = $container;
+    }
+
+    /**
+     * @param bool $debug
+     *
+     * @return string
+     */
     public function getBaseUrl($debug = false)
     {
         return $debug ? 'https://sandbox-quickbooks.api.intuit.com/v3/' : 'https://quickbooks.api.intuit.com/v3/';
     }
 
+    /**
+     * @param \Tavro\Bundle\CoreBundle\Entity\Account $account
+     *
+     * @return \OAuth
+     * @throws \Exception
+     */
     public function connect(Account $account)
     {
 
@@ -60,11 +91,21 @@ class QboApiService
 
     }
 
+    /**
+     * @param $query
+     *
+     * @return mixed|string
+     */
     public function buildQuery($query)
     {
         $query = urlencode($query);
         $query = str_replace('+', '%20', $query);
         return $query;
+    }
+
+    public function getUser()
+    {
+        return $this->tokenStorage->getToken()->getUser();
     }
 
 }
