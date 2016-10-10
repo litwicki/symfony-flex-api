@@ -54,3 +54,11 @@ parameters:
     qbo_request_token_uri: ~
     qbo_access_token_uri: ~
     qbo_request_uri: ~
+
+    # Slack
+    slack_api_token: ~
+    slack_channel_name: "#tavro-dev"
+
+    # Logentries
+    logentries_token: ~
+    logentries_key: ~

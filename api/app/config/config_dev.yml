@@ -5,6 +5,13 @@ parameters:
     assetic.filter.compass.images_dir: %kernel.root_dir%/../web/images
     assetic.filter.compass.http_path:  /images
 
+# Monolog Configuration
+monolog:
+    handlers:
+        logentries:
+            type: service
+            id: '@monolog.handler.logentries'
+            level: debug
 twig:
     debug:            %kernel.debug%
     strict_variables: %kernel.debug%
