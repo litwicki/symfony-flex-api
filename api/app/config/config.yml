@@ -147,4 +147,18 @@ lexik_jwt_authentication:
     token_ttl: %jwt_token_ttl%
     public_key_path: ~
     private_key_path: ~
-    
+
+aws:
+    version: latest
+    region: us-west-2
+    credentials:
+        key: ~
+        secret: '%secret%'
+    DynamoDb:
+        region: us-west-2
+        credentials: "@tavro.aws_credentials"
+    S3:
+        version: '2006-03-01'
+        credentials: "@tavro.aws_credentials"
+    Sqs:
+        credentials: "@tavro.aws_credentials"
