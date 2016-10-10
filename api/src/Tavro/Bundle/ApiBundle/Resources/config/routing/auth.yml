@@ -13,9 +13,9 @@ api_auth_reset_password:
     defaults: { _controller: TavroApiBundle:Auth:reset }
     methods: POST
 
-api_auth_forgot_password:
+api_auth_send_reset_password:
     path: /auth/forgot
-    defaults: { _controller: TavroApiBundle:Auth:forgot }
+    defaults: { _controller: TavroApiBundle:Auth:sendReset }
     methods: POST
 
 api_auth_confirm_email:

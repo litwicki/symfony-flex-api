@@ -108,7 +108,7 @@ class AuthController extends ApiController
      * @return \Symfony\Component\HttpFoundation\Response
      * @throws \Exception
      */
-    public function forgotAction(Request $request)
+    public function sendResetTokenAction(Request $request)
     {
         try {
 

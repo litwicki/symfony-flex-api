@@ -84,7 +84,6 @@ sftp-config.json
 /api/var/bootstrap.php.cache
 /api/app/config/parameters.yml
 /api/vendor
-/api/vendor/*
 /api/npm-debug.log
 /api/aws.json
 /api/ansible/vars/env.yml

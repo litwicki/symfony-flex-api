@@ -78,11 +78,18 @@ class ExceptionSubscriber implements EventSubscriberInterface
 
     public function logException(GetResponseForExceptionEvent $event)
     {
-        // ...
+
     }
 
     public function notifyException(GetResponseForExceptionEvent $event)
     {
-        // ...
+        /**
+         * If this is a particularly egregious exception, notify the administration
+         * team so they are immediately made aware!
+         */
+
+        /**
+         * @TODO: the logic for determining what's particularly bad :)
+         */
     }
 }

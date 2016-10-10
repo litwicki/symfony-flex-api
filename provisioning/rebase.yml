@@ -8,7 +8,7 @@
   vars:
       api_root: "/var/www/tavro/api/"
       migrations_dir: "{{api_root}}/app/DoctrineMigrations"
-      fixture_path: "src/Tavro/Bundle/CoreBundle/DataFixtures/"
+      fixture_path: "vendor/zoadilack/tavro-core/Tavro/Bundle/CoreBundle/DataFixtures/"
       fixture_name: "Core"
 
   tasks:
