@@ -23,6 +23,9 @@
       args:
           chdir: "{{ migrations_dir }}"
 
+    - name: regenerate entities
+      shell: php {{api_root}}bin/console doctrine:generate:entities TavroCoreBundle
+
     - name: rebuild migrations
       shell: php {{api_root}}bin/console doctrine:migrations:diff
 
@@ -31,5 +34,8 @@
 
     - name: install core data
       shell: php {{api_root}}bin/console doctrine:fixtures:load --fixtures={{api_root}}{{fixture_path}}{{fixture_name}} --append
+
+    - name: clear caches
+      shell: php {{api_root}}bin/console cache:clear --env=dev
 
     - debug: msg="Tavro Application Database Rebase Complete on {{ inventory_hostname }}"

@@ -1,0 +1,124 @@
+api_get_forecast:
+    path: /forecasts/{id}.{_format}
+    defaults: { _controller: TavroApiBundle:Forecast:get, _format: json, entity: "forecasts" }
+    methods: GET
+    requirements:
+        id: \d+
+        _format:  json|xml
+
+api_get_all_forecasts:
+    path:  /forecasts.{_format}
+    defaults: { _controller: TavroApiBundle:Forecast:getAll, _format: json, entity: "forecasts" }
+    methods: GET
+    requirements:
+        _format:  json|xml
+
+api_post_forecast:
+    path:  /forecasts.{_format}
+    defaults: { _controller: TavroApiBundle:Forecast:post, _format: json, entity: "forecasts" }
+    methods: POST
+    requirements:
+        _format:  json|xml
+
+api_patch_forecast:
+    path:  /forecasts/{id}.{_format}
+    defaults: { _controller: TavroApiBundle:Forecast:patch, _format: json, entity: "forecasts" }
+    methods: PATCH
+    requirements:
+        id: \d+
+        _format:  json|xml
+
+api_put_forecast:
+    path:  /forecasts/{id}.{_format}
+    defaults: { _controller: TavroApiBundle:Forecast:put, _format: json, entity: "forecasts" }
+    methods: PUT
+    requirements:
+        id: \d+
+        _format:  json|xml
+
+api_delete_forecast:
+    path:  /forecasts/{id}.{_format}
+    defaults: { _controller: TavroApiBundle:Forecast:delete, _format: json, entity: "forecasts" }
+    methods: DELETE
+    requirements:
+        id: \d+
+        _format:  json|xml
+
+api_delete_forecast_tag:
+    path:  /forecasts/{forecast}/tags/{tag}.{_format}
+    defaults: { _controller: TavroApiBundle:Forecast:deleteTag, _format: json }
+    methods: DELETE
+    requirements:
+        id: \d+
+        _format:  json|xml
+
+api_typeahead_forecasts:
+    path:  /typeahead/forecasts.{_format}
+    defaults: { _controller: TavroApiBundle:Forecast:typeahead, _format: json }
+    methods: GET
+    requirements:
+        _format:  json|xml
+
+api_forecast_comments:
+    path: /forecasts/{forecast}/comments.{_format}
+    defaults: { _controller: TavroApiBundle:Forecast:comments, _format: json}
+    methods: GET
+    requirements:
+        organization: \d+
+        _format: json|xml
+
+api_new_forecast_comment:
+    path: /forecasts/{forecast}/comments.{_format}
+    defaults: { _controller: TavroApiBundle:Forecast:newComment, _format: json}
+    methods: POST
+    requirements:
+        organization: \d+
+        _format: json|xml
+
+api_forecast_revenues:
+    path: /forecasts/{forecast}/revenues.{_format}
+    defaults: { _controller: TavroApiBundle:Forecast:revenues, _format: json}
+    methods: GET
+    requirements:
+        organization: \d+
+        _format: json|xml
+
+api_new_forecast_comment:
+    path: /forecasts/{forecast}/revenues.{_format}
+    defaults: { _controller: TavroApiBundle:Forecast:newRevenue, _format: json}
+    methods: POST
+    requirements:
+        organization: \d+
+        _format: json|xml
+
+api_forecast_expenses:
+    path: /forecasts/{forecast}/expenses.{_format}
+    defaults: { _controller: TavroApiBundle:Forecast:expenses, _format: json}
+    methods: GET
+    requirements:
+        organization: \d+
+        _format: json|xml
+
+api_new_forecast_expense:
+    path: /forecasts/{forecast}/comments.{_format}
+    defaults: { _controller: TavroApiBundle:Forecast:newExpense, _format: json}
+    methods: POST
+    requirements:
+        organization: \d+
+        _format: json|xml
+
+api_forecast_staff_person:
+    path: /forecasts/{forecast}/staff_persons.{_format}
+    defaults: { _controller: TavroApiBundle:Forecast:staffPersons, _format: json}
+    methods: GET
+    requirements:
+        organization: \d+
+        _format: json|xml
+
+api_new_forecast_staff_person:
+    path: /forecasts/{forecast}/staff_persons.{_format}
+    defaults: { _controller: TavroApiBundle:Forecast:newStaffPerson, _format: json}
+    methods: POST
+    requirements:
+        organization: \d+
+        _format: json|xml
