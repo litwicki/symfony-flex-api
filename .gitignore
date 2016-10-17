@@ -107,3 +107,4 @@ sftp-config.json
 /*.log
 
 /api/src/Litwicki
+/api/blueprint/__tavro.md
