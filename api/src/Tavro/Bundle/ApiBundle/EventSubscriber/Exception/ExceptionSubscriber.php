@@ -15,11 +15,13 @@ class ExceptionSubscriber implements EventSubscriberInterface
 {
     protected $debug;
     protected $serializer;
+    protected $logger;
 
-    public function __construct($debug, $serializer)
+    public function __construct($debug, $serializer, $logger)
     {
         $this->debug = $debug;
         $this->serializer = $serializer;
+        $this->logger = $logger;
     }
 
     public static function getSubscribedEvents()
