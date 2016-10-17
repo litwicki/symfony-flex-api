@@ -1,5 +1,7 @@
 # TAVRO.io
 
+This file is a concatenation of all `blueprint/*.md` blueprint files.
+
 This is the core application for tavro.io. For more detailed information on various components, see the sections below:
 
 * [Log Management](https://logentries.com/app/63de346d#/log/bac80635/?last=Last%2020%20Mins&log_q=)
