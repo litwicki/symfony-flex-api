@@ -91,9 +91,13 @@ class ImportQuickbooksOnlineCommand extends ContainerAwareCommand
                     ->setParameter('key', $key)
                     ->getSingleScalarResult();
 
+
             }
 
         }
+
+
+        $response = $oauth->fetch($uri, null, OAUTH_HTTP_METHOD_GET, $headers);
 
         /**
          * @TODO: The application needs to store the AccessToken and AccessTokenSecret for
