@@ -1,17 +1,17 @@
-## Revenue [/forecast]
+## Forecast [/forecast]
 
-### View Revenue [GET /forecast/{id}]
+### View Forecast [GET /forecast/{id}]
 
 + Parameters
-    + id: `1` (number, required) - ID of the Revenue in the form of an integer
+    + id: `1` (number, required) - ID of the Forecast in the form of an integer
 
 + Response 200 (application/json)
     + Attributes
         + data (array) - Response data
-            + (Revenue1)
+            + (Forecast1)
         + message: {REVENUE_NAME} retrieved successfully.
 
-### Create new Revenue [POST /forecast]
+### Create new Forecast [POST /forecast]
 
 + Request (application/json)
 
@@ -20,20 +20,19 @@
             "body": "This is our first official product sale as a new business!",
             "category": 1,
             "organization": 1,
-            "organization": 13,
             "user": 43
         }
 
 + Response 200 (application/json)
     + Attributes
         + data (array) - Response data
-            + (Revenue1)
+            + (Forecast1)
         + message: {REVENUE_NAME} created successfully.
 
-### Edit Revenue [PATCH /forecast/{id}]
+### Edit Forecast [PATCH /forecast/{id}]
 
 + Parameters
-    + id: `1` (number, required) - ID of the Revenue in the form of an integer
+    + id: `1` (number, required) - ID of the Forecast in the form of an integer
 
 + Request (application/json)
 
@@ -42,20 +41,19 @@
             "body": "This is our first official product sale as a new business!",
             "category": 1,
             "organization": 1,
-            "organization": 13,
             "user": 43
         }
 
 + Response 200 (application/json)
     + Attributes
         + data (array) - Response data
-            + (Revenue1)
+            + (Forecast1)
         + message: {REVENUE_NAME} updated successfully.
 
-### Delete Revenue [DELETE /forecast/{id}]
+### Delete Forecast [DELETE /forecast/{id}]
 
 + Parameters
-    + id: `1` (number, required) - ID of the Revenue in the form of an integer
+    + id: `1` (number, required) - ID of the Forecast in the form of an integer
 
 + Response 200 (application/json)
     + Attributes

@@ -20,7 +20,6 @@
             "body": "This is our first official product sale as a new business!",
             "category": 1,
             "organization": 1,
-            "organization": 13,
             "user": 43
         }
 
@@ -42,7 +41,6 @@
             "body": "This is our first official product sale as a new business!",
             "category": 1,
             "organization": 1,
-            "organization": 13,
             "user": 43
         }
 

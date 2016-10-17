@@ -312,6 +312,33 @@ Private API Documentation.
 + mime_type: "application/pdf" (string, required)
 + filesize: 69876789098 (number, required)
 
+## Forecast1 (object)
++ id: 1 (number)
++ status: 1 (number)
++ create_date: `2015-08-05T08:40:51.620Z` (string, required)
++ update_date: `2015-08-05T08:40:51.620Z` (string, required)
++ title: "My Forecast"
++ account (Account1)
++ user (User1)
+
+## Forecast2 (object)
++ id: 2 (number)
++ status: 1 (number)
++ create_date: `2015-08-05T08:40:51.620Z` (string, required)
++ update_date: `2015-08-05T08:40:51.620Z` (string, required)
++ title: "Seed Round Projections"
++ account (Account2)
++ user (User1)
+
+## Forecast3 (object)
++ id: 3 (number)
++ status: 1 (number)
++ create_date: `2015-08-05T08:40:51.620Z` (string, required)
++ update_date: `2015-08-05T08:40:51.620Z` (string, required)
++ title: "Series A Forecast Numbers"
++ account (Account2)
++ user (User3)
+
 ## Funding1 (object)
 + id: 1 (number)
 + status: 1 (number)
@@ -833,6 +860,24 @@ Private API Documentation.
 + update_date: `2015-08-05T08:40:51.620Z` (string, required)
 + person (Person1)
 + shares (array[])
+
+## Syndicate1 (object)
++ id: 1 (number)
++ status: 1 (number)
++ create_date: `2015-08-05T08:40:51.620Z` (string, required)
++ update_date: `2015-08-05T08:40:51.620Z` (string, required)
++ name: "Bellevue Angels"
++ leader (User1)
++ investors (array[User1, User2, User3])
+
+## Syndicate2 (object)
++ id: 2 (number)
++ status: 1 (number)
++ create_date: `2015-08-05T08:40:51.620Z` (string, required)
++ update_date: `2015-08-05T08:40:51.620Z` (string, required)
++ name: "Washington Angels"
++ leader (User2)
++ investors (array[User2, User3])
 
 ## Tag1 (object)
 + id: 1 (number)

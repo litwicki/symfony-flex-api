@@ -1,0 +1,45 @@
+api_get_syndicate:
+    path: /syndicates/{id}.{_format}
+    defaults: { _controller: TavroApiBundle:Node:get, _format: json, entity: "syndicates" }
+    methods: GET
+    requirements:
+        id: \d+
+        _format:  json|xml
+
+api_get_all_syndicates:
+    path:  /syndicates.{_format}
+    defaults: { _controller: TavroApiBundle:Node:getAll, _format: json, entity: "syndicates" }
+    methods: GET
+    requirements:
+        _format:  json|xml
+
+api_post_syndicate:
+    path:  /syndicates.{_format}
+    defaults: { _controller: TavroApiBundle:Node:post, _format: json, entity: "syndicates" }
+    methods: POST
+    requirements:
+        _format:  json|xml
+
+api_patch_syndicate:
+    path:  /syndicates/{id}.{_format}
+    defaults: { _controller: TavroApiBundle:Node:patch, _format: json, entity: "syndicates" }
+    methods: PATCH
+    requirements:
+        id: \d+
+        _format:  json|xml
+
+api_put_syndicate:
+    path:  /syndicates/{id}.{_format}
+    defaults: { _controller: TavroApiBundle:Node:put, _format: json, entity: "syndicates" }
+    methods: PUT
+    requirements:
+        id: \d+
+        _format:  json|xml
+
+api_delete_syndicate:
+    path:  /syndicates/{id}.{_format}
+    defaults: { _controller: TavroApiBundle:Node:delete, _format: json, entity: "syndicates" }
+    methods: DELETE
+    requirements:
+        id: \d+
+        _format:  json|xml
