@@ -1,7 +1,7 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
-ip_address = "10.1.1.1"
+ip_address = "10.1.1.10"
 appname = "tavro"
 hostname = appname + ".dev"
 
