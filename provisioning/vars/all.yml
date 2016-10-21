@@ -8,7 +8,7 @@ server:
     php7_packages: [php7.0-fpm,php7.0-cli,php7.0-curl,php7.0-common,php7.0-json,php7.0-opcache,php7.0-mysql,php7.0-phpdbg,php7.0-gd,php7.0-imap,php7.0-ldap,php7.0-pgsql,php7.0-pspell,php7.0-recode,php7.0-snmp,php7.0-tidy,php7.0-dev,php7.0-intl,php7.0-mbstring,php7.0-bcmath]
 vagrant_local:
     install: '1'
-    vm: { base_box: xenial64, hostname: tavro.dev, ip: 192.168.50.33, memory: '1024', sharedfolder: ./, useVagrantCloud: '1', syncType: nfs }
+    vm: { base_box: xenial64, hostname: tavro.dev, ip: 10.1.1.1, memory: '1024', sharedfolder: ./, useVagrantCloud: '1', syncType: nfs }
 mysql_root_password: "{{ mysql_root_password }}"
 mysql_databases:
   - name: "{{ appname }}"
