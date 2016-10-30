@@ -31,7 +31,7 @@
         "twig/twig": "^1.24",
         "jms/serializer": "^1.0.0",
         "jms/serializer-bundle": "^1.1",
-        "ramsey/uuid": "2.7.1",
+        "ramsey/uuid": "^2.7",
         "aws/aws-sdk-php-symfony": "~1.0",
         "mjohnson/decoda": "6.*",
         "knplabs/github-api": "1.5.*",
@@ -48,12 +48,16 @@
         "zoadilack/tavro-core": "dev-master",
         "litwicki/common": "^1.0",
         "guzzlehttp/guzzle": "^5.0",
-        "commerceguys/guzzle-oauth2-plugin": "2.1.1"
+        "commerceguys/guzzle-oauth2-plugin": "^2.1"
     },
     "repositories": [
         {
             "type": "vcs",
             "url":  "git@bitbucket.org:zoadilack/tavro-core.git"
+        },
+        {
+            "type": "composer",
+            "url": "https://packagist.org"
         }
     ],
     "require-dev": {
