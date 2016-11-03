@@ -8,7 +8,7 @@ use Doctrine\DBAL\Schema\Schema;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-class Version20161030214742 extends AbstractMigration
+class Version20161103041253 extends AbstractMigration
 {
     /**
      * @param Schema $schema
@@ -31,6 +31,8 @@ class Version20161030214742 extends AbstractMigration
         $this->addSql('CREATE TABLE tavro_account_user (id INT AUTO_INCREMENT NOT NULL, account_id INT NOT NULL, user_id INT NOT NULL, body VARCHAR(8000) DEFAULT NULL, status INT DEFAULT 1 NOT NULL, create_date DATETIME NOT NULL, update_date DATETIME DEFAULT NULL, INDEX IDX_FDD3EF999B6B5FBA (account_id), INDEX IDX_FDD3EF99A76ED395 (user_id), UNIQUE INDEX account_user (account_id, user_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE = InnoDB');
         $this->addSql('CREATE TABLE tavro_comment (id INT AUTO_INCREMENT NOT NULL, user_id INT DEFAULT NULL, body VARCHAR(8000) DEFAULT NULL, status INT DEFAULT 1 NOT NULL, create_date DATETIME NOT NULL, update_date DATETIME DEFAULT NULL, INDEX IDX_24219FEFA76ED395 (user_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE = InnoDB');
         $this->addSql('CREATE TABLE tavro_contact (id INT AUTO_INCREMENT NOT NULL, user_id INT DEFAULT NULL, organization_id INT NOT NULL, person_id INT NOT NULL, job_title VARCHAR(255) DEFAULT NULL, email VARCHAR(255) DEFAULT NULL, phone VARCHAR(255) DEFAULT NULL, body VARCHAR(8000) DEFAULT NULL, status INT DEFAULT 1 NOT NULL, create_date DATETIME NOT NULL, update_date DATETIME DEFAULT NULL, INDEX IDX_FC372BBBA76ED395 (user_id), INDEX IDX_FC372BBB32C8A3DE (organization_id), INDEX IDX_FC372BBB217BBB47 (person_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE = InnoDB');
+        $this->addSql('CREATE TABLE tavro_dashboard (id INT AUTO_INCREMENT NOT NULL, account_id INT NOT NULL, name VARCHAR(255) NOT NULL, body VARCHAR(8000) DEFAULT NULL, status INT DEFAULT 1 NOT NULL, create_date DATETIME NOT NULL, update_date DATETIME DEFAULT NULL, INDEX IDX_A9EF3A289B6B5FBA (account_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE = InnoDB');
+        $this->addSql('CREATE TABLE tavro_dashboard_read (id INT AUTO_INCREMENT NOT NULL, metric_id INT NOT NULL, dashboard_id INT NOT NULL, body VARCHAR(8000) DEFAULT NULL, status INT DEFAULT 1 NOT NULL, create_date DATETIME NOT NULL, update_date DATETIME DEFAULT NULL, INDEX IDX_762EDD41A952D583 (metric_id), INDEX IDX_762EDD41B9D04D2B (dashboard_id), UNIQUE INDEX DASHBOARD_METRIC (metric_id, dashboard_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE = InnoDB');
         $this->addSql('CREATE TABLE tavro_expense (id INT AUTO_INCREMENT NOT NULL, account_id INT NOT NULL, category_id INT NOT NULL, user_id INT NOT NULL, amount DOUBLE PRECISION DEFAULT \'0\' NOT NULL, expense_date DATETIME NOT NULL, body VARCHAR(8000) DEFAULT NULL, status INT DEFAULT 1 NOT NULL, create_date DATETIME NOT NULL, update_date DATETIME DEFAULT NULL, INDEX IDX_9D6F40259B6B5FBA (account_id), INDEX IDX_9D6F402512469DE2 (category_id), INDEX IDX_9D6F4025A76ED395 (user_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE = InnoDB');
         $this->addSql('CREATE TABLE tavro_expense_category (id INT AUTO_INCREMENT NOT NULL, account_id INT NOT NULL, body VARCHAR(8000) DEFAULT NULL, status INT DEFAULT 1 NOT NULL, create_date DATETIME NOT NULL, update_date DATETIME DEFAULT NULL, INDEX IDX_157160319B6B5FBA (account_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE = InnoDB');
         $this->addSql('CREATE TABLE tavro_expense_comment (id INT AUTO_INCREMENT NOT NULL, comment_id INT NOT NULL, expense_id INT NOT NULL, body VARCHAR(8000) DEFAULT NULL, status INT DEFAULT 1 NOT NULL, create_date DATETIME NOT NULL, update_date DATETIME DEFAULT NULL, INDEX IDX_C595F474F8697D13 (comment_id), INDEX IDX_C595F474F395DB7B (expense_id), INDEX NODE_COMMENT (comment_id, expense_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE = InnoDB');
@@ -45,6 +47,7 @@ class Version20161030214742 extends AbstractMigration
         $this->addSql('CREATE TABLE tavro_funding_round_comment (id INT AUTO_INCREMENT NOT NULL, comment_id INT NOT NULL, funding_round_id INT NOT NULL, body VARCHAR(8000) DEFAULT NULL, status INT DEFAULT 1 NOT NULL, create_date DATETIME NOT NULL, update_date DATETIME DEFAULT NULL, INDEX IDX_9AD42CA2F8697D13 (comment_id), INDEX IDX_9AD42CA2D01758B0 (funding_round_id), INDEX FUNDING_ROUND_COMMENT (comment_id, funding_round_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE = InnoDB');
         $this->addSql('CREATE TABLE tavro_funding_round_shareholder (id INT AUTO_INCREMENT NOT NULL, shareholder_id INT NOT NULL, funding_round_id INT NOT NULL, shares INT DEFAULT 0, body VARCHAR(8000) DEFAULT NULL, status INT DEFAULT 1 NOT NULL, create_date DATETIME NOT NULL, update_date DATETIME DEFAULT NULL, INDEX IDX_54BC254D9D59475 (shareholder_id), INDEX IDX_54BC254DD01758B0 (funding_round_id), INDEX FUNDING_ROUND_SHAREHOLDER (shareholder_id, funding_round_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE = InnoDB');
         $this->addSql('CREATE TABLE tavro_image (id INT AUTO_INCREMENT NOT NULL, account_id INT NOT NULL, aws_url VARCHAR(500) NOT NULL, bucket VARCHAR(32) NOT NULL, directory VARCHAR(32) NOT NULL, aws_key VARCHAR(500) NOT NULL, original_filename VARCHAR(500) NOT NULL, mime_type VARCHAR(500) NOT NULL, filesize INT NOT NULL, height INT NOT NULL, width INT NOT NULL, body VARCHAR(8000) DEFAULT NULL, status INT DEFAULT 1 NOT NULL, create_date DATETIME NOT NULL, update_date DATETIME DEFAULT NULL, INDEX IDX_F5ACA60D9B6B5FBA (account_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE = InnoDB');
+        $this->addSql('CREATE TABLE tavro_metric (id INT AUTO_INCREMENT NOT NULL, account_id INT NOT NULL, name VARCHAR(255) NOT NULL, chart VARCHAR(8000) NOT NULL, body VARCHAR(8000) DEFAULT NULL, status INT DEFAULT 1 NOT NULL, create_date DATETIME NOT NULL, update_date DATETIME DEFAULT NULL, INDEX IDX_2838F999B6B5FBA (account_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE = InnoDB');
         $this->addSql('CREATE TABLE tavro_node (id INT AUTO_INCREMENT NOT NULL, account_id INT NOT NULL, user_id INT NOT NULL, title VARCHAR(255) NOT NULL, type VARCHAR(255) DEFAULT NULL, display_date DATETIME DEFAULT NULL, views INT DEFAULT 0, body VARCHAR(8000) DEFAULT NULL, status INT DEFAULT 1 NOT NULL, create_date DATETIME NOT NULL, update_date DATETIME DEFAULT NULL, INDEX IDX_A12253AA9B6B5FBA (account_id), INDEX IDX_A12253AAA76ED395 (user_id), INDEX NODE_TYPE (type), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE = InnoDB');
         $this->addSql('CREATE TABLE tavro_node_comment (id INT AUTO_INCREMENT NOT NULL, comment_id INT NOT NULL, node_id INT NOT NULL, body VARCHAR(8000) DEFAULT NULL, status INT DEFAULT 1 NOT NULL, create_date DATETIME NOT NULL, update_date DATETIME DEFAULT NULL, INDEX IDX_CEAFA964F8697D13 (comment_id), INDEX IDX_CEAFA964460D9FD7 (node_id), INDEX NODE_COMMENT (comment_id, node_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE = InnoDB');
         $this->addSql('CREATE TABLE tavro_node_read (id INT AUTO_INCREMENT NOT NULL, user_id INT NOT NULL, node_id INT NOT NULL, body VARCHAR(8000) DEFAULT NULL, status INT DEFAULT 1 NOT NULL, create_date DATETIME NOT NULL, update_date DATETIME DEFAULT NULL, INDEX IDX_AA880921A76ED395 (user_id), INDEX IDX_AA880921460D9FD7 (node_id), UNIQUE INDEX USER_NODE_READ (user_id, node_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE = InnoDB');
@@ -91,6 +94,9 @@ class Version20161030214742 extends AbstractMigration
         $this->addSql('ALTER TABLE tavro_contact ADD CONSTRAINT FK_FC372BBBA76ED395 FOREIGN KEY (user_id) REFERENCES tavro_user (id)');
         $this->addSql('ALTER TABLE tavro_contact ADD CONSTRAINT FK_FC372BBB32C8A3DE FOREIGN KEY (organization_id) REFERENCES tavro_organization (id)');
         $this->addSql('ALTER TABLE tavro_contact ADD CONSTRAINT FK_FC372BBB217BBB47 FOREIGN KEY (person_id) REFERENCES tavro_person (id)');
+        $this->addSql('ALTER TABLE tavro_dashboard ADD CONSTRAINT FK_A9EF3A289B6B5FBA FOREIGN KEY (account_id) REFERENCES tavro_account (id)');
+        $this->addSql('ALTER TABLE tavro_dashboard_read ADD CONSTRAINT FK_762EDD41A952D583 FOREIGN KEY (metric_id) REFERENCES tavro_metric (id)');
+        $this->addSql('ALTER TABLE tavro_dashboard_read ADD CONSTRAINT FK_762EDD41B9D04D2B FOREIGN KEY (dashboard_id) REFERENCES tavro_dashboard (id)');
         $this->addSql('ALTER TABLE tavro_expense ADD CONSTRAINT FK_9D6F40259B6B5FBA FOREIGN KEY (account_id) REFERENCES tavro_account (id)');
         $this->addSql('ALTER TABLE tavro_expense ADD CONSTRAINT FK_9D6F402512469DE2 FOREIGN KEY (category_id) REFERENCES tavro_expense_category (id)');
         $this->addSql('ALTER TABLE tavro_expense ADD CONSTRAINT FK_9D6F4025A76ED395 FOREIGN KEY (user_id) REFERENCES tavro_user (id)');
@@ -118,6 +124,7 @@ class Version20161030214742 extends AbstractMigration
         $this->addSql('ALTER TABLE tavro_funding_round_shareholder ADD CONSTRAINT FK_54BC254D9D59475 FOREIGN KEY (shareholder_id) REFERENCES tavro_shareholder (id)');
         $this->addSql('ALTER TABLE tavro_funding_round_shareholder ADD CONSTRAINT FK_54BC254DD01758B0 FOREIGN KEY (funding_round_id) REFERENCES tavro_funding_round (id)');
         $this->addSql('ALTER TABLE tavro_image ADD CONSTRAINT FK_F5ACA60D9B6B5FBA FOREIGN KEY (account_id) REFERENCES tavro_account (id)');
+        $this->addSql('ALTER TABLE tavro_metric ADD CONSTRAINT FK_2838F999B6B5FBA FOREIGN KEY (account_id) REFERENCES tavro_account (id)');
         $this->addSql('ALTER TABLE tavro_node ADD CONSTRAINT FK_A12253AA9B6B5FBA FOREIGN KEY (account_id) REFERENCES tavro_account (id)');
         $this->addSql('ALTER TABLE tavro_node ADD CONSTRAINT FK_A12253AAA76ED395 FOREIGN KEY (user_id) REFERENCES tavro_user (id)');
         $this->addSql('ALTER TABLE tavro_node_comment ADD CONSTRAINT FK_CEAFA964F8697D13 FOREIGN KEY (comment_id) REFERENCES tavro_comment (id)');
@@ -181,12 +188,14 @@ class Version20161030214742 extends AbstractMigration
         $this->addSql('ALTER TABLE tavro_account_recurly DROP FOREIGN KEY FK_7EE475C19B6B5FBA');
         $this->addSql('ALTER TABLE tavro_account_stripe DROP FOREIGN KEY FK_7ACCD10D9B6B5FBA');
         $this->addSql('ALTER TABLE tavro_account_user DROP FOREIGN KEY FK_FDD3EF999B6B5FBA');
+        $this->addSql('ALTER TABLE tavro_dashboard DROP FOREIGN KEY FK_A9EF3A289B6B5FBA');
         $this->addSql('ALTER TABLE tavro_expense DROP FOREIGN KEY FK_9D6F40259B6B5FBA');
         $this->addSql('ALTER TABLE tavro_expense_category DROP FOREIGN KEY FK_157160319B6B5FBA');
         $this->addSql('ALTER TABLE tavro_file DROP FOREIGN KEY FK_A8C28DFF9B6B5FBA');
         $this->addSql('ALTER TABLE tavro_forecast DROP FOREIGN KEY FK_5E9DFF139B6B5FBA');
         $this->addSql('ALTER TABLE tavro_funding_round DROP FOREIGN KEY FK_F2ADB75B9B6B5FBA');
         $this->addSql('ALTER TABLE tavro_image DROP FOREIGN KEY FK_F5ACA60D9B6B5FBA');
+        $this->addSql('ALTER TABLE tavro_metric DROP FOREIGN KEY FK_2838F999B6B5FBA');
         $this->addSql('ALTER TABLE tavro_node DROP FOREIGN KEY FK_A12253AA9B6B5FBA');
         $this->addSql('ALTER TABLE tavro_organization DROP FOREIGN KEY FK_3D3DDD069B6B5FBA');
         $this->addSql('ALTER TABLE tavro_product DROP FOREIGN KEY FK_631FC92E9B6B5FBA');
@@ -203,6 +212,7 @@ class Version20161030214742 extends AbstractMigration
         $this->addSql('ALTER TABLE tavro_node_comment DROP FOREIGN KEY FK_CEAFA964F8697D13');
         $this->addSql('ALTER TABLE tavro_organization_comment DROP FOREIGN KEY FK_D12B057F8697D13');
         $this->addSql('ALTER TABLE tavro_revenue_comment DROP FOREIGN KEY FK_6645878CF8697D13');
+        $this->addSql('ALTER TABLE tavro_dashboard_read DROP FOREIGN KEY FK_762EDD41B9D04D2B');
         $this->addSql('ALTER TABLE tavro_expense_comment DROP FOREIGN KEY FK_C595F474F395DB7B');
         $this->addSql('ALTER TABLE tavro_expense_tag DROP FOREIGN KEY FK_C54FE424F395DB7B');
         $this->addSql('ALTER TABLE tavro_expense DROP FOREIGN KEY FK_9D6F402512469DE2');
@@ -216,6 +226,7 @@ class Version20161030214742 extends AbstractMigration
         $this->addSql('ALTER TABLE tavro_product_image DROP FOREIGN KEY FK_D44D349F3DA5256D');
         $this->addSql('ALTER TABLE tavro_service_image DROP FOREIGN KEY FK_DC63A2243DA5256D');
         $this->addSql('ALTER TABLE tavro_user DROP FOREIGN KEY FK_A9CE6DA65C18B4B1');
+        $this->addSql('ALTER TABLE tavro_dashboard_read DROP FOREIGN KEY FK_762EDD41A952D583');
         $this->addSql('ALTER TABLE tavro_node_comment DROP FOREIGN KEY FK_CEAFA964460D9FD7');
         $this->addSql('ALTER TABLE tavro_node_read DROP FOREIGN KEY FK_AA880921460D9FD7');
         $this->addSql('ALTER TABLE tavro_node_tag DROP FOREIGN KEY FK_4AD12AF460D9FD7');
@@ -274,6 +285,8 @@ class Version20161030214742 extends AbstractMigration
         $this->addSql('DROP TABLE tavro_account_user');
         $this->addSql('DROP TABLE tavro_comment');
         $this->addSql('DROP TABLE tavro_contact');
+        $this->addSql('DROP TABLE tavro_dashboard');
+        $this->addSql('DROP TABLE tavro_dashboard_read');
         $this->addSql('DROP TABLE tavro_expense');
         $this->addSql('DROP TABLE tavro_expense_category');
         $this->addSql('DROP TABLE tavro_expense_comment');
@@ -288,6 +301,7 @@ class Version20161030214742 extends AbstractMigration
         $this->addSql('DROP TABLE tavro_funding_round_comment');
         $this->addSql('DROP TABLE tavro_funding_round_shareholder');
         $this->addSql('DROP TABLE tavro_image');
+        $this->addSql('DROP TABLE tavro_metric');
         $this->addSql('DROP TABLE tavro_node');
         $this->addSql('DROP TABLE tavro_node_comment');
         $this->addSql('DROP TABLE tavro_node_read');
