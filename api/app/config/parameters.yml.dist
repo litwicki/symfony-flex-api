@@ -13,12 +13,6 @@ parameters:
     app_email: info@tavro.io
     app_email_name: Tavro
 
-    status_pending: 2
-    status_active: 1
-    status_disabled: 0
-
-    page_size: 25
-
     mailer_host: smtp.mailgun.org
     mailer_user: postmaster@zoadilack.com
     mailer_transport: smtp
@@ -49,11 +43,6 @@ parameters:
     asset_bucket: tavro-assets-dev
     file_bucket: tavro-files-dev
     amazon_s3_url: 'https://s3.amazonaws.com'
-
-    # Quickbooks Online
-    qbo_request_token_uri: ~
-    qbo_access_token_uri: ~
-    qbo_request_uri: ~
 
     # Slack
     slack_api_token: ~

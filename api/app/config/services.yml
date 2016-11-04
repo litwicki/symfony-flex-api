@@ -14,6 +14,16 @@ services:
                 version: %aws_sdk_version%
                 credentials: "@tavro.aws_credentials"
 
+    tavro.aws_sns:
+        class: Aws\S3\SnsClient
+        arguments:
+            -
+                #key: %aws_access_key_id%
+                #secret: %aws_secret_access_key%
+                region: %aws_s3_region%
+                version: %aws_sdk_version%
+                credentials: "@tavro.aws_credentials"
+
     get_set_method_normalizer:
         class: Symfony\Component\Serializer\Normalizer\GetSetMethodNormalizer
         tags:

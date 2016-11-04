@@ -162,3 +162,5 @@ aws:
         credentials: "@tavro.aws_credentials"
     Sqs:
         credentials: "@tavro.aws_credentials"
+    Sns:
+        credentials: "@tavro.aws_credentials"
