@@ -45,7 +45,7 @@
         "doctrine/doctrine-fixtures-bundle": "^2.3",
         "twig/extensions": "^1.3",
         "lexik/jwt-authentication-bundle": "^1.6",
-        "zoadilack/tavro-core": "^1.0",
+        "zoadilack/tavro-core": "dev-master",
         "litwicki/common": "^1.0",
         "guzzlehttp/guzzle": "^5.0",
         "commerceguys/guzzle-oauth2-plugin": "^2.1"
