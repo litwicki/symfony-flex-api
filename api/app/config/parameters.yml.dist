@@ -24,6 +24,7 @@ parameters:
     mailgun_api_key: ~
 
     locale: en
+    timezone: 'America/Los_Angeles'
     # A secret key that's used to generate certain security-related tokens
     secret: 8E75RYcBW$sIJf0C1IslAh1EuHqUJxIH6^i40eFzNqe5Fe%$OJf!WfP#QTp!2qLj
 
