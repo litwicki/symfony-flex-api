@@ -7,11 +7,12 @@ parameters:
 
 # Monolog Configuration
 monolog:
+    use_microseconds: false
     handlers:
         logentries:
             type: service
             id: '@monolog.handler.logentries'
-            level: debug
+
 twig:
     debug:            %kernel.debug%
     strict_variables: %kernel.debug%
