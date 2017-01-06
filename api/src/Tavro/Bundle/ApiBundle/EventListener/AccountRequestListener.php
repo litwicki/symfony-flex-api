@@ -9,10 +9,18 @@ use Tavro\Bundle\CoreBundle\Exception\Entity\Account\AccountStatusInvalidExcepti
 use Tavro\Bundle\CoreBundle\Exception\Entity\Account\AccountStatusOtherException;
 use Tavro\Bundle\CoreBundle\Exception\Entity\Account\AccountStatusPendingException;
 use Tavro\Bundle\CoreBundle\Model\EntityInterface\AccountEntityInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 use Tavro\Bundle\CoreBundle\Entity\Account;
 
 class AccountRequestListener
 {
+    private $container;
+
+    public function setContainer (ContainerInterface $container)
+    {
+        $this->container = $container;
+    }
+
     public function onKernelRequest(GetResponseEvent $event)
     {
         if (!$event->isMasterRequest()) {
@@ -35,8 +43,7 @@ class AccountRequestListener
 
             try {
 
-                //@TODO: get the entity manager:
-                $em = '';
+                $em = $this->container->get('doctrine')->getEntityManager();
 
                 $account = $em->getRepository('TavroCoreBundle:Account')->find($accountId);
 

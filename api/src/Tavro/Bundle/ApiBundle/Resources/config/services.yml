@@ -17,3 +17,10 @@ services:
         tags:
             - { name: kernel.event_subscriber }
         arguments: ["%kernel.debug%", "@serializer", "@logger"]
+
+    tavro_api.account_request_listener:
+        class: Tavro\Bundle\ApiBundle\EventListener\AccountRequestListener
+        calls:
+            - [setContainer, ["@service_container"]]
+        tags:
+            - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest }
