@@ -27,9 +27,6 @@ twig:
         app_debug: %kernel.debug%
         amazon_s3_url: %amazon_s3_url%
         asset_bucket: %asset_bucket%
-        qbo_request_token_uri: %qbo_request_token_uri%
-        qbo_access_token_uri: %qbo_access_token_uri%
-        qbo_request_uri: %qbo_request_uri%
 
 framework:
     router:
@@ -43,7 +40,7 @@ web_profiler:
 
 swiftmailer:
     disable_delivery: false
-    delivery_address: jake.litwicki@gmail.com
+    delivery_address: %debug_email%
 
 lexik_jwt_authentication:
     pass_phrase: %jwt_token_passphrase%
