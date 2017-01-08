@@ -49,9 +49,6 @@ parameters:
     asset_bucket: tavro-assets-dev
     file_bucket: tavro-files-dev
     amazon_s3_url: 'https://s3.amazonaws.com'
-    redis_username: ~
-    redis_password: ~
-    redis_hostname: ~
 
     # Quickbooks Online
     qbo_request_token_uri: ~
