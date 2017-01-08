@@ -41,7 +41,7 @@ web_profiler:
 
 swiftmailer:
     disable_delivery: false
-    delivery_address: jake.litwicki@gmail.com
+    delivery_address: %debug_email%
 
 lexik_jwt_authentication:
     pass_phrase: %jwt_token_passphrase%

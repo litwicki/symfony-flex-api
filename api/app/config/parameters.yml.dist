@@ -22,6 +22,7 @@ parameters:
     mailer_password: ~
     mailgun_url: https://api.mailgun.net/v3/zoadilack.com
     mailgun_api_key: ~
+    debug_email: ~
 
     locale: en
     timezone: 'America/Los_Angeles'
