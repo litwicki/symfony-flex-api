@@ -6,16 +6,16 @@ framework:
         engines: ['twig']
     test: ~
 
-# Monolog Configuration
 monolog:
+    use_microseconds: false
     handlers:
         logentries:
             type: service
             id: '@monolog.handler.logentries'
-            level: debug
+
 swiftmailer:
     disable_delivery: false
-    delivery_address: jake.litwicki@gmail.com
+    delivery_address: %debug_email%
 
 monolog:
     handlers:

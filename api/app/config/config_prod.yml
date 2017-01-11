@@ -1,6 +1,13 @@
 imports:
     - { resource: config.yml }
 
+monolog:
+    use_microseconds: false
+    handlers:
+        logentries:
+            type: service
+            id: '@monolog.handler.logentries'
+
 framework:
     #esi:             ~
     #translator:      { fallbacks: ["%locale%"] }
