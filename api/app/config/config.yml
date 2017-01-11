@@ -8,6 +8,22 @@ imports:
 # http://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
     locale: en
+    
+twig:
+    debug:            %kernel.debug%
+    strict_variables: %kernel.debug%
+    cache:  false
+    form_themes:
+        - 'bootstrap_3_layout.html.twig'
+    globals:
+        app_version: %app_version%
+        app_hostname: %app_hostname%
+        api_hostname: %api_hostname%
+        app_email: %app_email%
+        app_email_name: %app_email_name%
+        app_debug: %kernel.debug%
+        amazon_s3_url: %amazon_s3_url%
+        asset_bucket: %asset_bucket%
 
 framework:
     #esi:             ~
@@ -34,15 +50,6 @@ framework:
         enabled: true
     fragments:       ~
     http_method_override: true
-
-# Monolog Configuration
-monolog:
-    use_microseconds: false
-    handlers:
-        logentries:
-            type: service
-            id: '@monolog.handler.logentries'
-            level: error
 
 # Twig Configuration
 twig:
