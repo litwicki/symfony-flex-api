@@ -8,7 +8,7 @@ use Doctrine\DBAL\Schema\Schema;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-class Version20170111230901 extends AbstractMigration
+class Version20170112052718 extends AbstractMigration
 {
     /**
      * @param Schema $schema
@@ -16,7 +16,7 @@ class Version20170111230901 extends AbstractMigration
     public function up(Schema $schema)
     {
         // this up() migration is auto-generated, please modify it to your needs
-        $this->abortIf($this->connection->getDatabasePlatform()->getName() != 'mysql', 'Migration can only be executed safely on \'mysql\'.');
+        $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
         $this->addSql('CREATE TABLE tavro_account (id INT AUTO_INCREMENT NOT NULL, user_id INT NOT NULL, guid VARCHAR(255) NOT NULL, trial_start_date DATETIME DEFAULT NULL, trial_end_date DATETIME DEFAULT NULL, name VARCHAR(500) NOT NULL, name_clean VARCHAR(500) NOT NULL, is_receiving_marketing_emails TINYINT(1) NOT NULL, is_receiving_security_emails TINYINT(1) NOT NULL, is_receiving_marketplace_emails TINYINT(1) NOT NULL, is_receiving_activity_emails TINYINT(1) NOT NULL, is_receiving_general_emails TINYINT(1) NOT NULL, body VARCHAR(8000) DEFAULT NULL, status INT DEFAULT 1 NOT NULL, create_date DATETIME NOT NULL, update_date DATETIME DEFAULT NULL, UNIQUE INDEX UNIQ_CD639B275E237E06 (name), UNIQUE INDEX UNIQ_CD639B273F96FF0C (name_clean), INDEX IDX_CD639B27A76ED395 (user_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE = InnoDB');
         $this->addSql('CREATE TABLE tavro_account_chargify (id INT AUTO_INCREMENT NOT NULL, account_id INT NOT NULL, api_key VARCHAR(255) NOT NULL, api_password VARCHAR(255) NOT NULL, body VARCHAR(8000) DEFAULT NULL, status INT DEFAULT 1 NOT NULL, create_date DATETIME NOT NULL, update_date DATETIME DEFAULT NULL, UNIQUE INDEX UNIQ_95BE76F0C912ED9D (api_key), UNIQUE INDEX UNIQ_95BE76F0E6F98C5A (api_password), UNIQUE INDEX UNIQ_95BE76F09B6B5FBA (account_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE = InnoDB');
@@ -177,7 +177,7 @@ class Version20170111230901 extends AbstractMigration
     public function down(Schema $schema)
     {
         // this down() migration is auto-generated, please modify it to your needs
-        $this->abortIf($this->connection->getDatabasePlatform()->getName() != 'mysql', 'Migration can only be executed safely on \'mysql\'.');
+        $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
         $this->addSql('ALTER TABLE tavro_account_chargify DROP FOREIGN KEY FK_95BE76F09B6B5FBA');
         $this->addSql('ALTER TABLE tavro_account_freshbooks DROP FOREIGN KEY FK_BDD935769B6B5FBA');
