@@ -78,6 +78,11 @@ class ExceptionSubscriber implements EventSubscriberInterface
 
     }
 
+    /**
+     * @param \Symfony\Component\HttpKernel\Event\GetResponseForExceptionEvent $event
+     *
+     * @throws \Exception
+     */
     public function logException(GetResponseForExceptionEvent $event)
     {
         try {
@@ -108,6 +113,9 @@ class ExceptionSubscriber implements EventSubscriberInterface
         }
     }
 
+    /**
+     * @param \Symfony\Component\HttpKernel\Event\GetResponseForExceptionEvent $event
+     */
     public function notifyException(GetResponseForExceptionEvent $event)
     {
         /**
