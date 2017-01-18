@@ -83,8 +83,22 @@ doctrine:
     orm:
         default_entity_manager: main
         auto_generate_proxy_classes: %kernel.debug%
+        metadata_cache_driver: apc
+        query_cache_driver: apc
         mappings:
             TavroCoreBundle: ~
+
+doctrine_cache:
+    aliases:
+        query_cache: apc_query_cache
+        metadata_cache: apc_metadata_cache
+    providers:
+        apc_metadata_cache:
+            type: apc
+            namespace: metadata_cache_ns
+        apc_query_cache:
+            namespace: query_cache_ns
+            apc: ~
 
 # Swiftmailer Configuration
 swiftmailer:
