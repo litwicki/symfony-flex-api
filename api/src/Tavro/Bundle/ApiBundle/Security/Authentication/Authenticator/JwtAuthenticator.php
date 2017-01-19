@@ -3,33 +3,31 @@
 namespace Tavro\Bundle\ApiBundle\Security\Authentication\Authenticator;
 
 use Doctrine\ORM\EntityManager;
-use Lexik\Bundle\JWTAuthenticationBundle\Encoder\JWTEncoder;
+use Lexik\Bundle\JWTAuthenticationBundle\Encoder\DefaultEncoder;
+use Lexik\Bundle\JWTAuthenticationBundle\Exception\JWTDecodeFailureException;
 use Lexik\Bundle\JWTAuthenticationBundle\TokenExtractor\AuthorizationHeaderTokenExtractor;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
 use Symfony\Component\Security\Guard\AbstractGuardAuthenticator;
-use Lexik\Bundle\JWTAuthenticationBundle\Exception\JWTDecodeFailureException;
+use Tavro\Bundle\ApiBundle\Exception\JWT\JWTExpiredTokenException;
+use Tavro\Bundle\ApiBundle\Exception\JWT\JWTInvalidTokenException;
+use Tavro\Bundle\ApiBundle\Exception\JWT\JWTUnverfiedTokenException;
 
 class JwtAuthenticator extends AbstractGuardAuthenticator
 {
     private $em;
     private $jwtEncoder;
+    private $timezone;
 
-    /**
-     * JwtAuthenticator constructor.
-     *
-     * @param \Doctrine\ORM\EntityManager $em
-     * @param \Lexik\Bundle\JWTAuthenticationBundle\Encoder\JWTEncoder $jwtEncoder
-     */
-    public function __construct(EntityManager $em, JWTEncoder $jwtEncoder)
+    public function __construct(EntityManager $em, DefaultEncoder $jwtEncoder, $timezone)
     {
         $this->em = $em;
         $this->jwtEncoder = $jwtEncoder;
+        $this->timezone = $timezone;
     }
 
     /**
@@ -53,18 +51,15 @@ class JwtAuthenticator extends AbstractGuardAuthenticator
     public function getCredentials(Request $request)
     {
 
-        if(!$request->headers->has('Authorization')) {
+        if ( ! $request->headers->has('Authorization')) {
             return;
         }
 
-        $extractor = new AuthorizationHeaderTokenExtractor(
-            'Bearer',
-            'Authorization'
-        );
+        $extractor = new AuthorizationHeaderTokenExtractor('Bearer', 'Authorization');
 
         $token = $extractor->extract($request);
 
-        if(!$token) {
+        if ( ! $token) {
             return;
         }
 
@@ -72,26 +67,37 @@ class JwtAuthenticator extends AbstractGuardAuthenticator
     }
 
     /**
-     * Get the User Object from the Token.
+     * Get the User from the Token.
      *
      * @param mixed $credentials
      * @param \Symfony\Component\Security\Core\User\UserProviderInterface $userProvider
      *
      * @return null|object|void
+     * @throws \Lexik\Bundle\JWTAuthenticationBundle\Exception\JWTDecodeFailureException
      */
     public function getUser($credentials, UserProviderInterface $userProvider)
     {
         try {
             $data = $this->jwtEncoder->decode($credentials);
-        } catch (JWTDecodeFailureException $e) {
-            // if you want to, use can use $e->getReason() to find out which of the 3 possible things went wrong
-            // and tweak the message accordingly
-            // https://github.com/lexik/LexikJWTAuthenticationBundle/blob/05e15967f4dab94c8a75b275692d928a2fbf6d18/Exception/JWTDecodeFailureException.php
+        }
+        catch (JWTDecodeFailureException $e) {
 
-            throw new CustomUserMessageAuthenticationException('Invalid Token');
+            switch($e->getReason()) {
+
+                case 'invalid_token':
+                    throw new JWTInvalidTokenException($e->getMessage());
+                case 'unverified_token':
+                    throw new JWTUnverfiedTokenException($e->getMessage());
+                case 'expired_token':
+                    throw new JWTExpiredTokenException($e->getMessage());
+                default:
+                    throw $e;
+
+            }
+
         }
 
-        if(!$data) {
+        if ( ! $data) {
             return;
         }
 
@@ -99,7 +105,7 @@ class JwtAuthenticator extends AbstractGuardAuthenticator
 
         $user = $this->em->getRepository('TavroCoreBundle:User')->findOneBy(['username' => $username]);
 
-        if(!$user) {
+        if ( ! $user) {
             return;
         }
 
@@ -114,16 +120,18 @@ class JwtAuthenticator extends AbstractGuardAuthenticator
      */
     public function checkCredentials($credentials, UserInterface $user)
     {
-        return TRUE;
+        return true;
     }
 
     /**
-     * On Authentication Failure, return a response, increment, and log the failed attempt.
+     * On Authentication Failure, return a response, increment, and log the
+     * failed attempt.
      *
      * @param \Symfony\Component\HttpFoundation\Request $request
      * @param \Symfony\Component\Security\Core\Exception\AuthenticationException $exception
      *
      * @return \Symfony\Component\HttpFoundation\JsonResponse
+     * @throws \Exception
      */
     public function onAuthenticationFailure(Request $request, AuthenticationException $exception)
     {
@@ -138,6 +146,7 @@ class JwtAuthenticator extends AbstractGuardAuthenticator
      * @param string $providerKey
      *
      * @return null|\Symfony\Component\HttpFoundation\Response|void
+     * @throws \Exception
      */
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, $providerKey)
     {
@@ -151,7 +160,7 @@ class JwtAuthenticator extends AbstractGuardAuthenticator
      */
     public function supportsRememberMe()
     {
-        return FALSE;
+        return false;
     }
 
 }

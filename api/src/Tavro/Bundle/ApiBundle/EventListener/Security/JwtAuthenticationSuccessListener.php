@@ -3,7 +3,7 @@
 namespace Tavro\Bundle\ApiBundle\EventListener\Security;
 
 use Lexik\Bundle\JWTAuthenticationBundle\Event\AuthenticationSuccessEvent;
-use Tavro\Bundle\CoreBundle\Model\UserInterface;
+use Tavro\Bundle\CoreBundle\Model\EntityInterface\UserInterface;
 
 class JwtAuthenticationSuccessListener
 {
