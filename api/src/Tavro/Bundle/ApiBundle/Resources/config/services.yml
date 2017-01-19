@@ -10,7 +10,7 @@ services:
 
     tavro.jwt_token_authenticator:
         class: Tavro\Bundle\ApiBundle\Security\Authentication\Authenticator\JwtAuthenticator
-        arguments: ['@doctrine.orm.entity_manager', '@lexik_jwt_authentication.encoder']
+        arguments: ['@doctrine.orm.entity_manager', '@lexik_jwt_authentication.encoder', '%timezone%']
 
     tavro_api.subscriber.exception:
         class: Tavro\Bundle\ApiBundle\EventSubscriber\Exception\ExceptionSubscriber
