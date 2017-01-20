@@ -26,6 +26,8 @@ parameters:
 
     locale: en
     timezone: 'America/Los_Angeles'
+    login_attempt_minutes: 15
+    max_login_attempts: 3
     # A secret key that's used to generate certain security-related tokens
     secret: 8E75RYcBW$sIJf0C1IslAh1EuHqUJxIH6^i40eFzNqe5Fe%$OJf!WfP#QTp!2qLj
 
