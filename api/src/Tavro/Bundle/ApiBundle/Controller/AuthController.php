@@ -31,84 +31,21 @@ class AuthController extends ApiController
     /**
      * @param \Symfony\Component\HttpFoundation\Request $request
      *
-     * @throws \Exception
-     */
-    public function logLoginAttempt(Request $request)
-    {
-        try {
-
-            $now = new \DateTime();
-            $now->setTimezone(new \DateTimeZone($this->container->getParameter('timezone')));
-
-            $conn = $this->getDoctrine()->getEntityManager()->getConnection();
-            $conn->insert('login_attempts', [
-                'ip_addr' => $request->getClientIp(),
-                'user_agent' => $request->headers->get('User-Agent'),
-                'login_timestamp' => $now->format('Y-m-d H:i:s')
-            ]);
-
-        }
-        catch(\Exception $e) {
-            throw $e;
-        }
-    }
-
-    /**
-     * @param \Symfony\Component\HttpFoundation\Request $request
-     *
-     * @throws \Exception
-     */
-    public function deleteLoginAttempts(Request $request)
-    {
-        try {
-            $sql = "DELETE FROM login_attempts WHERE ip_addr = :ip_addr";
-
-            $params = array('ip_addr' => $request->getClientIp());
-            $stmt   = $this->getDoctrine()->getEntityManager()->getConnection()->prepare($sql);
-            $stmt->execute($params);
-        }
-        catch(\Exception $e) {
-            throw $e;
-        }
-    }
-
-    /**
-     * @param \Symfony\Component\HttpFoundation\Request $request
-     *
      * @return \Symfony\Component\HttpFoundation\JsonResponse
      * @throws \Exception
      */
     public function tokenAuthenticateAction(Request $request)
     {
+        $loginAttemptHandler = $this->container->get('tavro.auth.login_attempts');
+
         $username = $request->request->get('username');
         $password = $request->request->get('password');
 
-        /**
-         * If after three attempts you've still failed, you'll have to wait
-         * 15 minutes to attempt to login again..
-         */
-        $conn = $this->getDoctrine()->getEntityManager()->getConnection();
-        $sql = 'SELECT * FROM login_attempts WHERE ip_addr = :ip_addr';
-        $params = array('ip_addr' => $request->getClientIp());
-        $stmt = $conn->prepare($sql);
-        $stmt->execute($params);
-        $attempts = $stmt->fetchAll();
-
-        $now = new \DateTime();
-        $now->setTimezone(new \DateTimeZone($this->container->getParameter('timezone')));
-
-        foreach($attempts as $attempt) {
-            $timestamp = $attempt['login_timestamp'];
-            $loginAttempt = new \DateTime($timestamp);
-            $interval = $now->diff($loginAttempt);
-            $minutes = $interval->format('%i');
-        }
-
-        if(count($attempts) >= 3 && $minutes <= 15) {
+        if($loginAttemptHandler->lock($request)) {
             throw new JWTMaximumLoginAttemptsException('You have reached the maximum number of login attempts. Please try again in 15 minutes.');
         }
-        elseif(count($attempts) > 3 && $minutes > 15) {
-            $this->deleteLoginAttempts($request);
+        elseif($loginAttemptHandler->unlock($request)) {
+            $loginAttemptHandler->clear($request);
         }
 
         $user = $this->getDoctrine()->getRepository('TavroCoreBundle:User')->findOneBy(['username' => $username]);
@@ -119,16 +56,14 @@ class AuthController extends ApiController
 
         // password check
         if(!$this->get('security.password_encoder')->isPasswordValid($user, $password)) {
-            $this->logLoginAttempt($request);
+            $loginAttemptHandler->log($request);
             throw $this->createAccessDeniedException();
         }
 
         // Use LexikJWTAuthenticationBundle to create JWT token that hold only information about user name
         $token = $this->get('lexik_jwt_authentication.encoder')->encode(['username' => $user->getUsername()]);
 
-        if(count($attempts)) {
-            $this->deleteLoginAttempts($request);
-        }
+        $loginAttemptHandler->clear($request);
 
         // Return genereted tocken
         return new JsonResponse(['token' => $token]);
