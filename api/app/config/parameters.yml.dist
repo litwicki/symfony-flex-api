@@ -48,8 +48,6 @@ parameters:
     aws_access_key_id: ~
     aws_secret_access_key: ~
     aws_s3_region: us-east-1
-    image_bucket: tavro-images-dev
-    document_bucket: tavro-docs-dev
     asset_bucket: tavro-assets-dev
     file_bucket: tavro-files-dev
     amazon_s3_url: 'https://s3.amazonaws.com'
