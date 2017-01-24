@@ -50,29 +50,29 @@ liip_imagine:
 services:
 
     ### RESOLVERS ###
-    avatars.liip_imagine.cache.resolver.amazon_s3:
+    files.liip_imagine.cache.resolver.amazon_s3:
         class: Liip\ImagineBundle\Imagine\Cache\Resolver\AwsS3Resolver
         arguments:
             - "@tavro.aws_s3"
-            - "%image_bucket%"
+            - "%file_bucket%"
         tags:
-            - { name: 'liip_imagine.cache.resolver', resolver: 'avatars' }
+            - { name: 'liip_imagine.cache.resolver', resolver: 'files' }
 
     images.liip_imagine.cache.resolver.amazon_s3:
         class: Liip\ImagineBundle\Imagine\Cache\Resolver\AwsS3Resolver
         arguments:
             - "@tavro.aws_s3"
-            - "%image_bucket%"
+            - "%file_bucket%"
         tags:
             - { name: 'liip_imagine.cache.resolver', resolver: 'images' }
 
     ### DATA LOADERS ###
-    liip_imagine.binary.loader.tavro.data_loader.avatars:
+    liip_imagine.binary.loader.tavro.data_loader.files:
         class: "%liip_imagine.binary.loader.stream.class%"
         arguments:
-            - 'tavro://avatars/'
+            - 'tavro://files/'
         tags:
-            - { name: 'liip_imagine.binary.loader', loader: 'tavro.data_loader.avatars' }
+            - { name: 'liip_imagine.binary.loader', loader: 'tavro.data_loader.files' }
 
     liip_imagine.binary.loader.tavro.data_loader.images:
         class: "%liip_imagine.binary.loader.stream.class%"
