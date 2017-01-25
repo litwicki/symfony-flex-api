@@ -2,23 +2,19 @@
 
 namespace Tavro\Bundle\ApiBundle\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-use Symfony\Component\Security\Core\Exception\AccessDeniedException;
-use Tavro\Bundle\CoreBundle\Exception\Api\ApiException;
-use Tavro\Bundle\CoreBundle\Exception\Api\ApiNotFoundException;
-use Tavro\Bundle\CoreBundle\Exception\Api\ApiRequestLimitException;
-use Tavro\Bundle\CoreBundle\Exception\Api\ApiAccessDeniedException;
-use Tavro\Bundle\CoreBundle\Exception\Form\InvalidFormException;
+use Tavro\Bundle\ApiBundle\Controller\DefaultController;
 
-use Doctrine\Common\Inflector\Inflector;
-
-use Litwicki\Common\Common;
-
-class DefaultController extends Controller
+class LogController extends DefaultController
 {
+    /**
+     * @param Request $request
+     * @param $_format
+     * @return Response
+     * @throws \Exception
+     */
     public function create(Request $request, $_format)
     {
         try {
