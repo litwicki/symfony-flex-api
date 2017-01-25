@@ -57,10 +57,12 @@ class LogController extends DefaultController
                     ));
 
                     $now = new \DateTime();
-                    $now->setTimezone(new \DateTimeZone($this->container->getParameter('timezone')));
+                    $now->setTimezone(new \DateTimeZone($this->getParameter('timezone')));
 
-                    $this->container->get('tavro_mailer')->send([
-                       'subject' => sprintf('%s - Emergency Log Entry', $now->format('Y-m-d h:i:s'))
+                    $this->get('tavro_mailer')->send([
+                        'subject' => sprintf('%s - Emergency Log Entry', $now->format('Y-m-d h:i:s')),
+                        'recipients' => $this->getParameter('app_email'),
+                        'message' => $data['message']
                     ]);
 
                     break;
