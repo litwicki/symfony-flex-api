@@ -7,5 +7,5 @@ pipelines:
         script:
           - composer --version
           - phpunit --version
-          - cd api && composer install
+          - cd api && composer install --prefer-dist -n
           - cd api && phpunit --configuration api/phpunit.xml
