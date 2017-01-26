@@ -1,16 +1,11 @@
-image: php:7.0-cli
-
+# You can use a Docker image from Docker Hub or your own container registry
+image: phpunit/phpunit:5.0.3
+   
 pipelines:
-  branches:
-    master:
-      - step:
-          script:
-            - ansible-playbook ansible/tests.yml
-      - step:
-          script:
-            - sudo apt-get install software-properties-common
-            - sudo apt-add-repository ppa:ansible/ansible
-            - sudo apt-get update
-            - sudo apt-get install ansible zip -y
-            - zip -r app /tmp/app-{date}.zip * # package up the application for deployment
-            - ansible-playbook ansible/deploy.yml
+  default:
+    - step:
+        script:
+          - composer --version
+          - phpunit --version
+          - composer install
+          - phpunit --configuration api/phpunit.xml
