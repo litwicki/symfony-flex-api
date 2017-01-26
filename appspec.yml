@@ -1,0 +1,10 @@
+version: 0.0
+os: linux
+files:
+  - source: api
+    destination: /var/www/tavro/api
+hooks:
+  AfterInstall:
+    - location: /var/www/tavro/api/bin/console doctrine:migrations:migrate
+      timeout: 300
+      runas: www-data
