@@ -1,18 +1,11 @@
 # You can use a Docker image from Docker Hub or your own container registry
-image: php:7.0-cli
+image: epcallan/phpunit-php7
    
 pipelines:
   default:
     - step:
         script:
-          - php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
-          - php -r "if (hash_file('SHA384', 'composer-setup.php') === '55d6ead61b29c7bdee5cccfb50076874187bd9f21f65d8991d46ec5cc90518f447387fb9f76ebae1fbbacf329e583e30') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;"
-          - php composer-setup.php
-          - php -r "unlink('composer-setup.php');"
           - composer --version
-          - $ wget https://phar.phpunit.de/phpunit.phar
-          - chmod +x phpunit.phar
-          - sudo mv phpunit.phar phpunit
           - phpunit --version
           - mkdir ~/.ssh
           - echo $TAVRO_CORE_DEPLOYMENT_KEY > ~/.ssh/id_rsa.tmp # note: assumes base64 encoded ssh key without a passphrase
