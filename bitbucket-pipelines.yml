@@ -5,6 +5,12 @@ pipelines:
   default:
     - step:
         script:
+          - mkdir ~/.ssh
+          - echo $DEPLOYMENT_KEY > ~/.ssh/id_rsa.tmp # note: assumes base64 encoded ssh key without a passphrase
+          - base64 -d ~/.ssh/id_rsa.tmp > ~/.ssh/id_rsa
+          - chmod 600 ~/.ssh/id_rsa
+          - base64 ~/.ssh/id_rsa
+          - 'echo -e "Host *\n StrictHostKeyChecking no\n UserKnownHostsFile=/dev/null" > ~/.ssh/config'
           - composer --version
           - phpunit --version
           - cd api && composer install --prefer-dist -n
