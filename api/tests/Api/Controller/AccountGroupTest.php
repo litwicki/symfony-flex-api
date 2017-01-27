@@ -51,7 +51,7 @@ class AccountGroupTest extends TavroTest
             )
         ));
 
-        $request = $client->post($url, ['verify' => false], json_encode($data));
+        $request = $client->post($url, null, json_encode($data), ['verify' => false]);
         $request->addHeader('Authorization', sprintf('Bearer %s', $token));
         $response = $request->send();
 
