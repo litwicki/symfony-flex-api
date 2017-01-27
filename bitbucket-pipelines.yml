@@ -1,5 +1,5 @@
 # You can use a Docker image from Docker Hub or your own container registry
-image: php/7-fpm
+image: php/7-cli
    
 pipelines:
   default:
@@ -13,5 +13,3 @@ pipelines:
           - chmod 600 ~/.ssh/id_rsa
           - base64 ~/.ssh/id_rsa
           - 'echo -e "Host *\n StrictHostKeyChecking no\n UserKnownHostsFile=/dev/null" > ~/.ssh/config'
-          - cd api && composer install --prefer-dist -n
-          - cd api && phpunit --configuration api/phpunit.xml
