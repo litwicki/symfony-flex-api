@@ -32,9 +32,6 @@ class UserTest extends TavroTest
 
     public function testUserCreate()
     {
-
-        return;
-
         $token = $this->authorize();
 
         $faker = \Faker\Factory::create('en_EN');
