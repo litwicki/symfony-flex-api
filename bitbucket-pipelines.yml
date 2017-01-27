@@ -5,8 +5,6 @@ pipelines:
   default:
     - step:
         script:
-          - composer --version
-          - phpunit --version
           - mkdir ~/.ssh
           - echo $TAVRO_CORE_DEPLOYMENT_KEY > ~/.ssh/id_rsa.tmp # note: assumes base64 encoded ssh key without a passphrase
           - base64 -d ~/.ssh/id_rsa.tmp > ~/.ssh/id_rsa
