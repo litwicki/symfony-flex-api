@@ -1,5 +1,5 @@
 # You can use a Docker image from Docker Hub or your own container registry
-image: zoadilack/tavro-api
+image: php/7-fpm
    
 pipelines:
   default:
