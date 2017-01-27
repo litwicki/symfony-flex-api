@@ -1,7 +1,7 @@
 version: 0.0
 os: linux
 files:
-  - source: api
+  - source: api/api
     destination: /var/www/tavro/api
 hooks:
   AfterInstall:
