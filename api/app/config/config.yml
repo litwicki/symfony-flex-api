@@ -10,20 +10,20 @@ parameters:
     locale: en
     
 twig:
-    debug:            %kernel.debug%
-    strict_variables: %kernel.debug%
+    debug:            "%kernel.debug%"
+    strict_variables: "%kernel.debug%"
     cache:  false
     form_themes:
         - 'bootstrap_3_layout.html.twig'
     globals:
-        app_version: %app_version%
-        app_hostname: %app_hostname%
-        api_hostname: %api_hostname%
-        app_email: %app_email%
-        app_email_name: %app_email_name%
-        app_debug: %kernel.debug%
-        amazon_s3_url: %amazon_s3_url%
-        asset_bucket: %asset_bucket%
+        app_version: "%app_version%"
+        app_hostname: "%app_hostname%"
+        api_hostname: "%api_hostname%"
+        app_email: "%app_email%"
+        app_email_name: "%app_email_name%"
+        app_debug: "%kernel.debug%"
+        amazon_s3_url: "%amazon_s3_url%"
+        asset_bucket: "%asset_bucket%"
 
 framework:
     #esi:             ~
@@ -46,27 +46,8 @@ framework:
         handler_id:  session.handler.mongo
         cookie_lifetime: 2592000 # optional, it is set to 30 days here
         gc_maxlifetime: 2592000 # optional, it is set to 30 days here
-    serializer:
-        enabled: true
     fragments:       ~
     http_method_override: true
-
-# Twig Configuration
-twig:
-    debug:            %kernel.debug%
-    strict_variables: %kernel.debug%
-    cache:  false
-    form_themes:
-        - 'bootstrap_3_layout.html.twig'
-    globals:
-        app_version: %app_version%
-        app_hostname: %app_hostname%
-        api_hostname: %api_hostname%
-        app_email: %app_email%
-        app_email_name: %app_email_name%
-        app_debug: %kernel.debug%
-        amazon_s3_url: %amazon_s3_url%
-        asset_bucket: %asset_bucket%
 
 # Doctrine Configuration
 doctrine:
@@ -82,7 +63,7 @@ doctrine:
 
     orm:
         default_entity_manager: main
-        auto_generate_proxy_classes: %kernel.debug%
+        auto_generate_proxy_classes: "%kernel.debug%"
         #metadata_cache_driver: apc
         #query_cache_driver: apc
         mappings:
@@ -102,11 +83,11 @@ doctrine:
 
 # Swiftmailer Configuration
 swiftmailer:
-    transport: %mailer_transport%
-    username: %mailer_user%
-    password: %mailer_password%
-    host: %mailer_host%
-    port: %mailer_port%
+    transport: "%mailer_transport%"
+    username: "%mailer_user%"
+    password: "%mailer_password%"
+    host: "%mailer_host%"
+    port: "%mailer_port%"
 
 stof_doctrine_extensions:
     default_locale: en_US
@@ -114,7 +95,7 @@ stof_doctrine_extensions:
     # Only used if you activated the Uploadable extension
     uploadable:
         # Default file path: This is one of the three ways you can configure the path for the Uploadable extension
-        default_file_path:       %kernel.root_dir%/../web/uploads
+        default_file_path:       "%kernel.root_dir%/../web/uploads"
 
         # Mime type guesser class: Optional. By default, we provide an adapter for the one present in the HttpFoundation component of Symfony
         mime_type_guesser_class: Stof\DoctrineExtensionsBundle\Uploadable\MimeTypeGuesserAdapter
@@ -132,14 +113,14 @@ knp_gaufrette:
         assets:
             aws_s3:
                 service_id: tavro.aws_s3
-                bucket_name: %asset_bucket%
+                bucket_name: "%asset_bucket%"
                 options:
                     create: true
                     acl: public-read
         files:
             aws_s3:
                 service_id: tavro.aws_s3
-                bucket_name: %file_bucket%
+                bucket_name: "%file_bucket%"
                 options:
                     create: true
                     acl: public-read
@@ -153,8 +134,8 @@ knp_gaufrette:
             alias:      files_filesystem
 
 lexik_jwt_authentication:
-    pass_phrase: %jwt_token_passphrase%
-    token_ttl: %jwt_token_ttl%
+    pass_phrase: "%jwt_token_passphrase%"
+    token_ttl: "%jwt_token_ttl%"
     public_key_path: ~
     private_key_path: ~
 
@@ -163,7 +144,7 @@ aws:
     region: us-west-2
     credentials:
         key: ~
-        secret: '%secret%'
+        secret: "%secret%"
     DynamoDb:
         region: us-west-2
         credentials: "@tavro.aws_credentials"

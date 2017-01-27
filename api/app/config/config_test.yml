@@ -6,19 +6,16 @@ framework:
         engines: ['twig']
     test: ~
 
+swiftmailer:
+    disable_delivery: false
+    delivery_address: "%debug_email%"
+
 monolog:
     use_microseconds: false
     handlers:
         logentries:
             type: service
             id: '@monolog.handler.logentries'
-
-swiftmailer:
-    disable_delivery: false
-    delivery_address: %debug_email%
-
-monolog:
-    handlers:
         main:
             type:   stream
             path:   "%kernel.logs_dir%/%kernel.environment%.log"
@@ -40,7 +37,7 @@ monolog:
             channels: ["doctrine"]
 
 lexik_jwt_authentication:
-    pass_phrase: %jwt_token_passphrase%
-    token_ttl: %jwt_token_ttl%
-    public_key_path: '%kernel.root_dir%/keys/public.pem'
-    private_key_path: '%kernel.root_dir%/keys/private.pem'
+    pass_phrase: "%jwt_token_passphrase%"
+    token_ttl: "%jwt_token_ttl%"
+    public_key_path: "%kernel.root_dir%/keys/public.pem"
+    private_key_path: "%kernel.root_dir%/keys/private.pem"
