@@ -8,7 +8,7 @@ class RevenueTest extends TavroTest
 
     public function testRevenueRoute()
     {
-        $client = new Client('http://api.tavro.dev/api/v1', array(
+        $client = new Client('https://api.tavro.dev/api/v1', array(
             'request.options' => array(
                 'exceptions' => false,
             )
@@ -16,9 +16,9 @@ class RevenueTest extends TavroTest
 
         $token = $this->authorize();
 
-        $url = 'http://api.tavro.dev/api/v1/revenues';
+        $url = 'https://api.tavro.dev/api/v1/revenues';
 
-        $request = $client->get($url);
+        $request = $client->get($url, null, ['verify' => false]);
         $request->addHeader('Authorization', sprintf('Bearer %s', $token));
         $response = $request->send();
 
@@ -42,7 +42,7 @@ class RevenueTest extends TavroTest
             'account' => 1
         );
 
-        $url = 'http://api.tavro.dev/api/v1/revenues';
+        $url = 'https://api.tavro.dev/api/v1/revenues';
 
         $client = new Client($url, array(
             'request.options' => array(
@@ -50,7 +50,7 @@ class RevenueTest extends TavroTest
             )
         ));
 
-        $request = $client->post($url, null, json_encode($data));
+        $request = $client->post($url, null, json_encode($data), ['verify' => false]);
         $request->addHeader('Authorization', sprintf('Bearer %s', $token));
         $response = $request->send();
 
@@ -74,7 +74,7 @@ class RevenueTest extends TavroTest
             'account' => 1
         );
 
-        $url = 'http://api.tavro.dev/api/v1/revenues';
+        $url = 'https://api.tavro.dev/api/v1/revenues';
 
         $client = new Client($url, array(
             'request.options' => array(
@@ -82,7 +82,7 @@ class RevenueTest extends TavroTest
             )
         ));
 
-        $request = $client->post($url, null, json_encode($data));
+        $request = $client->post($url, null, json_encode($data), ['verify' => false]);
         $request->addHeader('Authorization', sprintf('Bearer %s', $token));
         $response = $request->send();
 

@@ -8,7 +8,7 @@ class FundingRoundTest extends TavroTest
 
     public function testFundingRoundRoute()
     {
-        $client = new Client('http://api.tavro.dev/api/v1', array(
+        $client = new Client('https://api.tavro.dev/api/v1', array(
             'request.options' => array(
                 'exceptions' => false,
             )
@@ -16,9 +16,9 @@ class FundingRoundTest extends TavroTest
 
         $token = $this->authorize();
 
-        $url = 'http://api.tavro.dev/api/v1/funding';
+        $url = 'https://api.tavro.dev/api/v1/funding';
 
-        $request = $client->get($url);
+        $request = $client->get($url, null, ['verify' => false]);
         $request->addHeader('Authorization', sprintf('Bearer %s', $token));
         $response = $request->send();
 
@@ -32,7 +32,7 @@ class FundingRoundTest extends TavroTest
     public function testFundingRoundCreate()
     {
         // create our http client (Guzzle)
-        $client = new Client('http://api.tavro.dev/api/v1', array(
+        $client = new Client('https://api.tavro.dev/api/v1', array(
             'request.options' => array(
                 'exceptions' => false,
             )
@@ -46,7 +46,7 @@ class FundingRoundTest extends TavroTest
             'account' => 1
         );
 
-        $url = 'http://api.tavro.dev/api/v1/funding';
+        $url = 'https://api.tavro.dev/api/v1/funding';
 
         $client = new Client($url, array(
             'request.options' => array(
@@ -54,7 +54,7 @@ class FundingRoundTest extends TavroTest
             )
         ));
 
-        $request = $client->post($url, null, json_encode($data));
+        $request = $client->post($url, null, json_encode($data), ['verify' => false]);
         $request->addHeader('Authorization', sprintf('Bearer %s', $token));
         $response = $request->send();
 

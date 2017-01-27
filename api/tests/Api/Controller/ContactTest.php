@@ -8,7 +8,7 @@ class ContactTest extends TavroTest
 
     public function testContactRoute()
     {
-        $client = new Client('http://api.tavro.dev/api/v1', array(
+        $client = new Client('https://api.tavro.dev/api/v1', array(
             'request.options' => array(
                 'exceptions' => false,
             )
@@ -16,9 +16,9 @@ class ContactTest extends TavroTest
 
         $token = $this->authorize();
 
-        $url = 'http://api.tavro.dev/api/v1/contacts';
+        $url = 'https://api.tavro.dev/api/v1/contacts';
 
-        $request = $client->get($url);
+        $request = $client->get($url, null, ['verify' => false]);
         $request->addHeader('Authorization', sprintf('Bearer %s', $token));
         $response = $request->send();
 
@@ -44,7 +44,7 @@ class ContactTest extends TavroTest
             'organization' => 1
         );
 
-        $url = 'http://api.tavro.dev/api/v1/contacts';
+        $url = 'https://api.tavro.dev/api/v1/contacts';
 
         $client = new Client($url, array(
             'request.options' => array(
@@ -52,7 +52,7 @@ class ContactTest extends TavroTest
             )
         ));
 
-        $request = $client->post($url, null, json_encode($data));
+        $request = $client->post($url, null, json_encode($data), ['verify' => false]);
         $request->addHeader('Authorization', sprintf('Bearer %s', $token));
         $response = $request->send();
 
@@ -79,7 +79,7 @@ class ContactTest extends TavroTest
             'organization' => 1
         );
 
-        $url = 'http://api.tavro.dev/api/v1/contacts';
+        $url = 'https://api.tavro.dev/api/v1/contacts';
 
         $client = new Client($url, array(
             'request.options' => array(
@@ -87,7 +87,7 @@ class ContactTest extends TavroTest
             )
         ));
 
-        $request = $client->post($url, null, json_encode($data));
+        $request = $client->post($url, null, json_encode($data), ['verify' => false]);
         $request->addHeader('Authorization', sprintf('Bearer %s', $token));
         $response = $request->send();
 
@@ -114,7 +114,7 @@ class ContactTest extends TavroTest
             'organization' => -1
         );
 
-        $url = 'http://api.tavro.dev/api/v1/contacts';
+        $url = 'https://api.tavro.dev/api/v1/contacts';
 
         $client = new Client($url, array(
             'request.options' => array(
@@ -122,7 +122,7 @@ class ContactTest extends TavroTest
             )
         ));
 
-        $request = $client->post($url, null, json_encode($data));
+        $request = $client->post($url, null, json_encode($data), ['verify' => false]);
         $request->addHeader('Authorization', sprintf('Bearer %s', $token));
         $response = $request->send();
 
@@ -137,7 +137,7 @@ class ContactTest extends TavroTest
     public function testContactCreateBadUser()
     {
         // create our http client (Guzzle)
-        $client = new Client('http://api.tavro.dev/api/v1', array(
+        $client = new Client('https://api.tavro.dev/api/v1', array(
             'request.options' => array(
                 'exceptions' => false,
             )
@@ -154,7 +154,7 @@ class ContactTest extends TavroTest
             'organization' => 1
         );
 
-        $url = 'http://api.tavro.dev/api/v1/contacts';
+        $url = 'https://api.tavro.dev/api/v1/contacts';
 
         $client = new Client($url, array(
             'request.options' => array(
@@ -162,7 +162,7 @@ class ContactTest extends TavroTest
             )
         ));
 
-        $request = $client->post($url, null, json_encode($data));
+        $request = $client->post($url, null, json_encode($data), ['verify' => false]);
         $request->addHeader('Authorization', sprintf('Bearer %s', $token));
         $response = $request->send();
 

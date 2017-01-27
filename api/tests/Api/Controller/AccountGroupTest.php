@@ -8,7 +8,7 @@ class AccountGroupTest extends TavroTest
 
     public function testAccountGroupRoute()
     {
-        $client = new Client('http://api.tavro.dev/api/v1', array(
+        $client = new Client('https://api.tavro.dev/api/v1', array(
             'request.options' => array(
                 'exceptions' => false,
             )
@@ -16,9 +16,9 @@ class AccountGroupTest extends TavroTest
 
         $token = $this->authorize();
 
-        $url = 'http://api.tavro.dev/api/v1/accounts/1/groups';
+        $url = 'https://api.tavro.dev/api/v1/accounts/1/groups';
 
-        $request = $client->get($url);
+        $request = $client->get($url, null, ['verify' => false]);
         $request->addHeader('Authorization', sprintf('Bearer %s', $token));
         $response = $request->send();
 
@@ -43,7 +43,7 @@ class AccountGroupTest extends TavroTest
             'user' => 1
         );
 
-        $url = 'http://api.tavro.dev/api/v1/accounts/1/groups';
+        $url = 'https://api.tavro.dev/api/v1/accounts/1/groups';
 
         $client = new Client($url, array(
             'request.options' => array(
@@ -51,7 +51,7 @@ class AccountGroupTest extends TavroTest
             )
         ));
 
-        $request = $client->post($url, null, json_encode($data));
+        $request = $client->post($url, ['verify' => false], json_encode($data));
         $request->addHeader('Authorization', sprintf('Bearer %s', $token));
         $response = $request->send();
 
