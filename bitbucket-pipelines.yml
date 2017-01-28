@@ -12,6 +12,6 @@ pipelines:
           - base64 ~/.ssh/id_rsa
           - 'echo -e "Host *\n StrictHostKeyChecking no\n UserKnownHostsFile=/dev/null" > ~/.ssh/config'
           - composer --version
-          - cd api && composer install --prefer-dist -d
+          - composer install --prefer-dist -d
           - phpunit --version
-          - cd api && phpunit
+          - phpunit
