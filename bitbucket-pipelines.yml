@@ -12,7 +12,7 @@ pipelines:
           - base64 ~/.ssh/id_rsa
           - 'echo -e "Host *\n StrictHostKeyChecking no\n UserKnownHostsFile=/dev/null" > ~/.ssh/config'
           - cp api/app/config/parameters.vars api/app/config/parameters.yml
-          - sed -ie 's/{DATABASE_DRIVER}/$DB_DRIVER/g' api/app/config/parameters.yml
+          - sed -ie 's/{DATABASE_DRIVER}/$DATABASE_DRIVER/g' api/app/config/parameters.yml
           - sed -ie 's/{DATABASE_HOST}/$DATABASE_HOST/g' api/app/config/parameters.yml
           - sed -ie 's/{DATABASE_PORT}/$DATABASE_PORT/g' api/app/config/parameters.yml
           - sed -ie 's/{DATABASE_NAME}/$DATABASE_NAME/g' api/app/config/parameters.yml
