@@ -49,7 +49,3 @@ services:
         class: Monolog\Handler\LogEntriesHandler
         arguments:
             token: %logentries_token%
-
-    session.handler.mongo:
-        class: Symfony\Component\HttpFoundation\Session\Storage\Handler\MongoDbSessionHandler
-        arguments: ['@mongo_client', '%mongo.session.options%']
