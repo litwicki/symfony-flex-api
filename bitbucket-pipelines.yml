@@ -23,7 +23,7 @@ pipelines:
           - sed -ie 's/{APP_EMAIL}/$APP_EMAIL/g' api/app/config/parameters.yml
           - sed -ie 's/{APP_EMAIL_NAME}/$APP_EMAIL_NAME/g' api/app/config/parameters.yml
           - sed -ie 's/{MAILER_HOST}/$MAILER_HOST/g' api/app/config/parameters.yml
-          - sed -ie 's/{$MAILER_USERNAME}/$MAILER_USERNAME/g' api/app/config/parameters.yml
+          - sed -ie 's/{MAILER_USERNAME}/$MAILER_USERNAME/g' api/app/config/parameters.yml
           - sed -ie 's/{MAILER_TRANSPORT}/$MAILER_TRANSPORT/g' api/app/config/parameters.yml
           - sed -ie 's/{MAILER_PORT}/$MAILER_PORT/g' api/app/config/parameters.yml
           - sed -ie 's/{MAILER_ENCRYPTION}/$MAILER_ENCRYPTION/g' api/app/config/parameters.yml
