@@ -143,7 +143,7 @@ class CommentTest extends TavroTest
 
         $json = $response->getBody(true);
         $body = json_decode($json, true);
-
+die(var_dump($body));
         $this->assertEquals(200, $response->getStatusCode());
 
     }

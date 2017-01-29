@@ -89,7 +89,7 @@ class AccountTest extends TavroTest
         $body = json_decode($json, true);
 
         $this->assertEquals(500, $response->getStatusCode());
-        $this->assertEquals(1, preg_match('/Please enter a valid User/', $body['message']));
+        $this->assertEquals(1, preg_match('/This value is not valid./', $body['message']));
 
     }
 

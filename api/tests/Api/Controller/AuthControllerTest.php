@@ -72,9 +72,13 @@ class LoginTest extends \PHPUnit_Framework_TestCase
             )
         ));
 
-        $request = $client->post('https://api.tavro.dev/api/v1/auth/reset', null, json_encode([
+        $data = [
             'email' => 'dev@zoadilack.com',
-        ]), ['verify' => false]);
+            'new_password' => 'Password1!',
+            'new_password_confirm' => 'Password1!'
+        ];
+
+        $request = $client->post('https://api.tavro.dev/api/v1/auth/reset', null, json_encode($data), ['verify' => false]);
 
         $response = $request->send();
 
