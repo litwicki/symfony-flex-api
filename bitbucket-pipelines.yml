@@ -13,10 +13,10 @@ pipelines:
           - 'echo -e "Host *\n StrictHostKeyChecking no\n UserKnownHostsFile=/dev/null" > ~/.ssh/config'
           - cp api/app/config/parameters.vars api/app/config/parameters.yml
           - sed -ie 's/{DATABASE_DRIVER}/$DB_DRIVER/g' api/app/config/parameters.yml
-          - sed -ie 's/{DATABASE_HOST}/$DB_HOST/g' api/app/config/parameters.yml
-          - sed -ie 's/{DATABASE_PORT}/$DB_PORT/g' api/app/config/parameters.yml
-          - sed -ie 's/{DATABASE_NAME}/$DB_NAME/g' api/app/config/parameters.yml
-          - sed -ie 's/{DATABASE_USER}/$DB_USER/g' api/app/config/parameters.yml
+          - sed -ie 's/{DATABASE_HOST}/$DATABASE_HOST/g' api/app/config/parameters.yml
+          - sed -ie 's/{DATABASE_PORT}/$DATABASE_PORT/g' api/app/config/parameters.yml
+          - sed -ie 's/{DATABASE_NAME}/$DATABASE_NAME/g' api/app/config/parameters.yml
+          - sed -ie 's/{DATABASE_USER}/$DATABASE_USER/g' api/app/config/parameters.yml
           - sed -ie 's/{DATABASE_PASSWORD}/$DB_PASS/g' api/app/config/parameters.yml
           - sed -ie 's/{APP_NAME}/$APP_NAME/g' api/app/config/parameters.yml
           - sed -ie 's/{APP_VERSION}/$APP_VERSION/g' api/app/config/parameters.yml
