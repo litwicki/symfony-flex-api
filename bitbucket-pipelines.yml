@@ -46,7 +46,7 @@ pipelines:
           - sed -ie 's/{AWS_ACCESS_KEY_ID}/$AWS_ACCESS_KEY_ID/g' api/app/config/parameters.yml
           - sed -ie 's/{AWS_SECRET_ACCESS_KEY}/$AWS_SECRET_ACCESS_KEY/g' api/app/config/parameters.yml
           - sed -ie 's/{AWS_S3_REGION}/$AWS_S3_REGION/g' api/app/config/parameters.yml
-          - sed -ie 's/{ASSET_BUCKET}/$AWS_S3_ASSET_BUCKET/g' api/app/config/parameters.yml
+          - sed -ie 's/{AWS_S3_ASSET_BUCKET}/$AWS_S3_ASSET_BUCKET/g' api/app/config/parameters.yml
           - sed -ie 's/{FILE_BUCKET}/$AWS_S3_FILE_BUCKET/g' api/app/config/parameters.yml
           - sed -ie 's/{SLACK_API_TOKEN}/$SLACK_API_TOKEN/g' api/app/config/parameters.yml
           - sed -ie 's/{SLACK_CHANNEL_NAME}/$SLACK_CHANNEL_NAME/g' api/app/config/parameters.yml
