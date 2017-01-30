@@ -36,7 +36,7 @@ pipelines:
           - sed -ie 's/{TIMEZONE}/$TIMEZONE/g' api/app/config/parameters.yml
           - sed -ie 's/{LOGIN_ATTEMPT_MINUTES}/$LOGIN_ATTEMPT_MINUTES/g' api/app/config/parameters.yml
           - sed -ie 's/{MAX_LOGIN_ATTEMPTS}/$MAX_LOGIN_ATTEMPTS/g' api/app/config/parameters.yml
-          - sed -ie 's/{SECRET}/$SECRET/g' api/app/config/parameters.yml
+          - sed -ie 's/{SECRET}/$API_SECRET/g' api/app/config/parameters.yml
           - sed -ie 's/{APP_HOSTNAME}/$APP_HOSTNAME/g' api/app/config/parameters.yml
           - sed -ie 's/{API_HOSTNAME}/$API_HOSTNAME/g' api/app/config/parameters.yml
           - sed -ie 's/{ADMIN_HOSTNAME}/$ADMIN_HOSTNAME/g' api/app/config/parameters.yml
