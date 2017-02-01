@@ -2,6 +2,7 @@
 
 use Guzzle\Http\Client;
 use Tavro\Bundle\CoreBundle\Testing\TavroTest;
+use Symfony\Component\HttpFoundation\Response;
 
 class AccountGroupTest extends TavroTest
 {
@@ -58,7 +59,7 @@ class AccountGroupTest extends TavroTest
         $json = $response->getBody(true);
         $body = json_decode($json, true);
 
-        $this->assertEquals(200, $response->getStatusCode());
+        $this->assertEquals(Response::HTTP_CREATED, $response->getStatusCode());
 
     }
 
