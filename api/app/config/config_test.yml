@@ -15,7 +15,7 @@ monolog:
 
 swiftmailer:
     disable_delivery: false
-    delivery_address: %debug_email%
+    delivery_address: "%debug_email%"
 
 monolog:
     handlers:
@@ -40,7 +40,7 @@ monolog:
             channels: ["doctrine"]
 
 lexik_jwt_authentication:
-    pass_phrase: %jwt_token_passphrase%
-    token_ttl: %jwt_token_ttl%
+    pass_phrase: "%jwt_token_passphrase%"
+    token_ttl: "%jwt_token_ttl%"
     public_key_path: '%kernel.root_dir%/keys/public.pem'
     private_key_path: '%kernel.root_dir%/keys/private.pem'

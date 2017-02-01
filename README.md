@@ -1,3 +1,9 @@
-# TAVRO.io
+# TAVRO.io API
 
-Full documentation available here: [https://sites.google.com/a/zoadilack.com/tavro/](https://sites.google.com/a/zoadilack.com/tavro/)
+Full documentation available on Confluence:[https://zoadilack.atlassian.net/wiki/display/TAV/API](https://zoadilack.atlassian.net/wiki/display/TAV/API)
+
+## Access
+
+- Development: [https://api.tavro.dev](https://api.tavro.dev)
+- Staging: [https://staging-api.tavro.com](https://staging-api.tavro.com)
+- Production: [https://api.tavro.com](https://api.tavro.com)

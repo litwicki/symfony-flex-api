@@ -1,0 +1,6 @@
+api_create_log_entry:
+    path:  /logs.{_format}
+    defaults: { _controller: TavroApiBundle:Log:create, _format: json }
+    methods: POST
+    requirements:
+        _format:  json|xml
