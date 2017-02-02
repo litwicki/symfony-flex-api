@@ -40,8 +40,8 @@ pipelines:
           - sed -ie 's/{APP_HOSTNAME}/$APP_HOSTNAME/g' api/app/config/parameters.yml
           - sed -ie 's/{API_HOSTNAME}/$API_HOSTNAME/g' api/app/config/parameters.yml
           - sed -ie 's/{ADMIN_HOSTNAME}/$ADMIN_HOSTNAME/g' api/app/config/parameters.yml
-          #- sed -ie 's/{JWT_TOKEN_PASSPHRASE}/$JWT_TOKEN_PASSPHRASE/g' api/app/config/parameters.yml
-          #- sed -ie 's/{JWT_TOKEN_TTL}/$JWT_TOKEN_TTL/g' api/app/config/parameters.yml
+          - sed -ie 's/{JWT_TOKEN_PASSPHRASE}/$JWT_TOKEN_PASSPHRASE/g' api/app/config/parameters.yml
+          - sed -ie 's/{JWT_TOKEN_TTL}/$JWT_TOKEN_TTL/g' api/app/config/parameters.yml
           - sed -ie 's/{AWS_SDK_VERSION}/$AWS_SDK_VERSION/g' api/app/config/parameters.yml
           - sed -ie 's/{AWS_ACCESS_KEY_ID}/$AWS_ACCESS_KEY_ID/g' api/app/config/parameters.yml
           - sed -ie 's/{AWS_SECRET_ACCESS_KEY}/$AWS_SECRET_ACCESS_KEY/g' api/app/config/parameters.yml
