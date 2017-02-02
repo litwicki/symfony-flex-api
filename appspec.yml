@@ -3,12 +3,16 @@ os: linux
 files:
   - source: api/api
     destination: /var/www/tavro
+  - source: composer/
+    destination: /usr/bin/composer
+permissions:
+  - object: /var/www/tavro/api
+    owner: www-data
+    group: www-data
+    mode: 755
+    type:
+      - file
 hooks:
-  AfterInstall:
-    - location: /var/www/tavro/api/bin/console doctrine:migrations:migrate
-      timeout: 300
-      runas: www-data
-  AfterInstall:
-    - location: /var/www/tavro/api/bin/console cache:clear
-      timeout: 300
-      runas: www-data
+  BeforeInstall:
+    - location: deploy/build.sh
+      runas: root
