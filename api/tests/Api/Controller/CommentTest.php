@@ -8,17 +8,17 @@ class CommentTest extends TavroTest
 
     public function testCommentRoute()
     {
-        $url = 'http://api.tavro.dev/api/v1/comments/1';
+        $url = 'https://api.tavro.dev/api/v1/comments/1';
 
         $token = $this->authorize();
 
-        $client = new Client('http://api.tavro.dev/api/v1', array(
+        $client = new Client('https://api.tavro.dev/api/v1', array(
             'request.options' => array(
                 'exceptions' => false,
             )
         ));
 
-        $request = $client->get($url);
+        $request = $client->get($url, null, ['verify' => false]);
         $request->addHeader('Authorization', sprintf('Bearer %s', $token));
         $response = $request->send();
 
@@ -40,7 +40,7 @@ class CommentTest extends TavroTest
                 'user' => 1
             ];
 
-            $url = 'http://api.tavro.dev/api/v1/revenues/1/comments';
+            $url = 'https://api.tavro.dev/api/v1/revenues/1/comments';
 
             $client = new Client($url, array(
                 'request.options' => array(
@@ -48,7 +48,7 @@ class CommentTest extends TavroTest
                 )
             ));
 
-            $request = $client->post($url, NULL, json_encode($data));
+            $request = $client->post($url, null, json_encode($data), ['verify' => false]);
             $request->addHeader('Authorization', sprintf('Bearer %s', $token));
             $response = $request->send();
 
@@ -73,7 +73,7 @@ class CommentTest extends TavroTest
             'user' => 1
         );
 
-        $url = 'http://api.tavro.dev/api/v1/nodes/1/comments';
+        $url = 'https://api.tavro.dev/api/v1/nodes/1/comments';
 
         $client = new Client($url, array(
             'request.options' => array(
@@ -81,7 +81,7 @@ class CommentTest extends TavroTest
             )
         ));
 
-        $request = $client->post($url, null, json_encode($data));
+        $request = $client->post($url, null, json_encode($data), ['verify' => false]);
         $request->addHeader('Authorization', sprintf('Bearer %s', $token));
         $response = $request->send();
 
@@ -101,7 +101,7 @@ class CommentTest extends TavroTest
             'user' => 1
         );
 
-        $url = 'http://api.tavro.dev/api/v1/expenses/1/comments';
+        $url = 'https://api.tavro.dev/api/v1/expenses/1/comments';
 
         $client = new Client($url, array(
             'request.options' => array(
@@ -109,7 +109,7 @@ class CommentTest extends TavroTest
             )
         ));
 
-        $request = $client->post($url, null, json_encode($data));
+        $request = $client->post($url, null, json_encode($data), ['verify' => false]);
         $request->addHeader('Authorization', sprintf('Bearer %s', $token));
         $response = $request->send();
 
@@ -129,7 +129,7 @@ class CommentTest extends TavroTest
             'user' => 1
         );
 
-        $url = 'http://api.tavro.dev/api/v1/organizations/1/comments';
+        $url = 'https://api.tavro.dev/api/v1/organizations/1/comments';
 
         $client = new Client($url, array(
             'request.options' => array(
@@ -137,13 +137,13 @@ class CommentTest extends TavroTest
             )
         ));
 
-        $request = $client->post($url, null, json_encode($data));
+        $request = $client->post($url, null, json_encode($data), ['verify' => false]);
         $request->addHeader('Authorization', sprintf('Bearer %s', $token));
         $response = $request->send();
 
         $json = $response->getBody(true);
         $body = json_decode($json, true);
-
+die(var_dump($body));
         $this->assertEquals(200, $response->getStatusCode());
 
     }

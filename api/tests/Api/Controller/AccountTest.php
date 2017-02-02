@@ -8,7 +8,7 @@ class AccountTest extends TavroTest
 
     public function testAccountRoute()
     {
-        $client = new Client('http://api.tavro.dev/api/v1', array(
+        $client = new Client('https://api.tavro.dev/api/v1', array(
             'request.options' => array(
                 'exceptions' => false,
             )
@@ -16,9 +16,9 @@ class AccountTest extends TavroTest
 
         $token = $this->authorize();
 
-        $url = 'http://api.tavro.dev/api/v1/accounts';
+        $url = 'https://api.tavro.dev/api/v1/accounts';
 
-        $request = $client->get($url);
+        $request = $client->get($url, null, ['verify' => false]);
         $request->addHeader('Authorization', sprintf('Bearer %s', $token));
         $response = $request->send();
 
@@ -42,7 +42,7 @@ class AccountTest extends TavroTest
             'user' => 1
         );
 
-        $url = 'http://api.tavro.dev/api/v1/accounts';
+        $url = 'https://api.tavro.dev/api/v1/accounts';
 
         $client = new Client($url, array(
             'request.options' => array(
@@ -50,7 +50,7 @@ class AccountTest extends TavroTest
             )
         ));
 
-        $request = $client->post($url, null, json_encode($data));
+        $request = $client->post($url, null, json_encode($data), ['verify' => false]);
         $request->addHeader('Authorization', sprintf('Bearer %s', $token));
         $response = $request->send();
 
@@ -73,7 +73,7 @@ class AccountTest extends TavroTest
             'user' => -1,
         );
 
-        $url = 'http://api.tavro.dev/api/v1/accounts';
+        $url = 'https://api.tavro.dev/api/v1/accounts';
 
         $client = new Client($url, array(
             'request.options' => array(
@@ -81,7 +81,7 @@ class AccountTest extends TavroTest
             )
         ));
 
-        $request = $client->post($url, null, json_encode($data));
+        $request = $client->post($url, null, json_encode($data), ['verify' => false]);
         $request->addHeader('Authorization', sprintf('Bearer %s', $token));
         $response = $request->send();
 
@@ -89,7 +89,7 @@ class AccountTest extends TavroTest
         $body = json_decode($json, true);
 
         $this->assertEquals(500, $response->getStatusCode());
-        $this->assertEquals(1, preg_match('/Please enter a valid User/', $body['message']));
+        $this->assertEquals(1, preg_match('/This value is not valid./', $body['message']));
 
     }
 

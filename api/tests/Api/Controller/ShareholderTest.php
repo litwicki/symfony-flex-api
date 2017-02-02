@@ -8,7 +8,7 @@ class ShareholderTest extends TavroTest
 
     public function testShareholderRoute()
     {
-        $client = new Client('http://api.tavro.dev/api/v1', array(
+        $client = new Client('https://api.tavro.dev/api/v1', array(
             'request.options' => array(
                 'exceptions' => false,
             )
@@ -16,9 +16,9 @@ class ShareholderTest extends TavroTest
 
         $token = $this->authorize();
 
-        $url = 'http://api.tavro.dev/api/v1/shareholders';
+        $url = 'https://api.tavro.dev/api/v1/shareholders';
 
-        $request = $client->get($url);
+        $request = $client->get($url, null, ['verify' => false]);
         $request->addHeader('Authorization', sprintf('Bearer %s', $token));
         $response = $request->send();
 
@@ -40,7 +40,7 @@ class ShareholderTest extends TavroTest
             'body' => $faker->text(500),
         );
 
-        $url = 'http://api.tavro.dev/api/v1/shareholders';
+        $url = 'https://api.tavro.dev/api/v1/shareholders';
 
         $client = new Client($url, array(
             'request.options' => array(
@@ -48,7 +48,7 @@ class ShareholderTest extends TavroTest
             )
         ));
 
-        $request = $client->post($url, null, json_encode($data));
+        $request = $client->post($url, null, json_encode($data), ['verify' => false]);
         $request->addHeader('Authorization', sprintf('Bearer %s', $token));
         $response = $request->send();
 
