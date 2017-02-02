@@ -6,14 +6,6 @@ parameters:
     database_user: tavro
     database_password: tavro
 
-    mongo.session.options:
-        database: session_db # your MongoDB database name
-        collection: session  # your MongoDB collection name
-    mongodb_host: ~
-    mongodb_port: ~
-    mongodb_username: ~
-    mongodb_password: ~
-
     app_name: Tavro
     app_version: 0.1-BETA
     app_email: info@tavro.io

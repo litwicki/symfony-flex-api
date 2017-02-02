@@ -48,8 +48,7 @@
         "zoadilack/tavro-core": "dev-master",
         "litwicki/common": "^1.0",
         "guzzlehttp/guzzle": "^5.0",
-        "commerceguys/guzzle-oauth2-plugin": "^2.1",
-        "mongodb/mongodb": "^1.1"
+        "commerceguys/guzzle-oauth2-plugin": "^2.1"
     },
     "repositories": [
         {

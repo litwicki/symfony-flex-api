@@ -11,11 +11,7 @@ swiftmailer:
     delivery_address: "%debug_email%"
 
 monolog:
-    use_microseconds: false
     handlers:
-        logentries:
-            type: service
-            id: '@monolog.handler.logentries'
         main:
             type:   stream
             path:   "%kernel.logs_dir%/%kernel.environment%.log"
