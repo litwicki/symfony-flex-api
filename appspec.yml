@@ -3,8 +3,6 @@ os: linux
 files:
   - source: api/api
     destination: /var/www/tavro
-  - source: composer/
-    destination: /usr/bin/composer
 permissions:
   - object: /var/www/tavro/api
     owner: www-data
