@@ -52,3 +52,7 @@ pipelines:
           - sed -ie 's/{SLACK_CHANNEL_NAME}/$SLACK_CHANNEL_NAME/g' api/app/config/parameters.yml
           - sed -ie 's/{LOGENTRIES_TOKEN}/$LOGENTRIES_TOKEN/g' api/app/config/parameters.yml
           - sed -ie 's/{LOGENTRIES_KEY}/$LOGENTRIES_KEY/g' api/app/config/parameters.yml
+          - composer --version
+          - cd api && composer install --prefer-dist
+          - zip artifact.zip api/*
+          - python deploy/aws_codedeploy.yml

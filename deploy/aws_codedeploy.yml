@@ -21,7 +21,7 @@ import boto3
 from botocore.exceptions import ClientError
 
 VERSION_LABEL = strftime("%Y%m%d%H%M%S")
-BUCKET_KEY = os.getenv('APPLICATION_NAME') + '/' + VERSION_LABEL + \
+BUCKET_KEY = os.getenv('APP_NAME') + '/' + VERSION_LABEL + \
     '-bitbucket_builds.zip'
 
 def upload_to_s3(artifact):
@@ -36,7 +36,7 @@ def upload_to_s3(artifact):
     try:
         client.put_object(
             Body=open(artifact, 'rb'),
-            Bucket=os.getenv('S3_BUCKET'),
+            Bucket=os.getenv('S3_CODEDEPLOY_BUCKET'),
             Key=BUCKET_KEY
         )
     except ClientError as err:
@@ -59,12 +59,12 @@ def deploy_new_revision():
 
     try:
         response = client.create_deployment(
-            applicationName=str(os.getenv('APPLICATION_NAME')),
+            applicationName=str(os.getenv('APP_NAME')),
             deploymentGroupName=str(os.getenv('DEPLOYMENT_GROUP_NAME')),
             revision={
                 'revisionType': 'S3',
                 's3Location': {
-                    'bucket': os.getenv('S3_BUCKET'),
+                    'bucket': os.getenv('S3_CODEDEPLOY_BUCKET'),
                     'key': BUCKET_KEY,
                     'bundleType': 'zip'
                 }
