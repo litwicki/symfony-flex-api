@@ -6,4 +6,3 @@ pipelines:
     - step:
         script:
           - phpunit --version
-          - cd api && phpunit
