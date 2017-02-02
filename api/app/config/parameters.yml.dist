@@ -45,7 +45,7 @@ parameters:
     amazon_s3_url: 'https://s3.amazonaws.com'
 
     # Slack
-    slack_api_token: ~
+    slack_webhook_url: "https://hooks.slack.com/services/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"
     slack_channel_name: "#tavro-dev"
 
     # Logentries
