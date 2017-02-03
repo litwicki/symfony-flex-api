@@ -56,6 +56,7 @@ pipelines:
           - openssl genrsa -out api/app/keys/private.pem -aes256 -passout pass:$JWT_TOKEN_PASSPHRASE 4096
           - openssl rsa -passin pass:$JWT_TOKEN_PASSPHRASE -pubout -in api/app/keys/private.pem -out api/app/keys/public.pem
           - composer --version
+          - composer clear-cache
           - cd api && composer install --no-interaction --prefer-dist --no-scripts --ignore-platform-reqs --no-suggest
           - tar -czf artifact.tar.gz app bin src var web
           - python deploy/aws_codedeploy.yml
