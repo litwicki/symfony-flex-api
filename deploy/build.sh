@@ -47,4 +47,4 @@ sed -ie 's/{SLACK_CHANNEL_NAME}/$SLACK_CHANNEL_NAME/g' api/app/config/parameters
 sed -ie 's/{LOGENTRIES_TOKEN}/$LOGENTRIES_TOKEN/g' api/app/config/parameters.yml
 sed -ie 's/{LOGENTRIES_KEY}/$LOGENTRIES_KEY/g' api/app/config/parameters.yml
 composer --version
-cd api && composer install --prefer-dist --no-scripts
+cd api && composer install --no-interaction --prefer-dist --no-scripts --ignore-platform-reqs --no-dev --no-suggest
