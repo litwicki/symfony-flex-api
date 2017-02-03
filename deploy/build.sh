@@ -4,7 +4,7 @@ echo $TAVRO_CORE_DEPLOYMENT_KEY > ~/.ssh/id_rsa.tmp # note: assumes base64 encod
 base64 -d ~/.ssh/id_rsa.tmp > ~/.ssh/id_rsa
 chmod 600 ~/.ssh/id_rsa
 base64 ~/.ssh/id_rsa
-touch ~/.ssh/config
+( [ -e "~/.ssh/config" ] || touch "~/.ssh/config" ) && [ ! -w "~/.ssh/config" ] && echo cannot write to ~/.ssh/config && exit 1
 echo -e "Host *\n StrictHostKeyChecking no\n UserKnownHostsFile=/dev/null" > ~/.ssh/config
 cp api/app/config/parameters.pipelines api/app/config/parameters.yml
 sed -ie 's/{DATABASE_DRIVER}/$DATABASE_DRIVER/g' api/app/config/parameters.yml
