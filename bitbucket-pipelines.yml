@@ -59,4 +59,4 @@ pipelines:
           - composer clear-cache
           - cd api && composer install --no-interaction --prefer-dist --no-scripts --ignore-platform-reqs --no-suggest
           - tar -czf artifact.tar.gz app bin src var web
-          - python deploy/aws_codedeploy.yml
+          - cd ../ && python deploy/aws_codedeploy.yml
