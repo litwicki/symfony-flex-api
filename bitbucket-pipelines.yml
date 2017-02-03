@@ -52,7 +52,10 @@ pipelines:
           - sed -ie 's/{SLACK_CHANNEL_NAME}/$SLACK_CHANNEL_NAME/g' api/app/config/parameters.yml
           - sed -ie 's/{LOGENTRIES_TOKEN}/$LOGENTRIES_TOKEN/g' api/app/config/parameters.yml
           - sed -ie 's/{LOGENTRIES_KEY}/$LOGENTRIES_KEY/g' api/app/config/parameters.yml
+          - mkdir -p api/app/keys
+          - openssl genrsa -out api/app/keys/private.pem -aes256 -passout pass:$JWT_TOKEN_PASSPHRASE 4096
+          - openssl rsa -passin pass:$JWT_TOKEN_PASSPHRASE -pubout -in api/app/keys/private.pem -out api/app/keys/public.pem
           - composer --version
           - cd api && composer install --no-interaction --prefer-dist --no-scripts --ignore-platform-reqs --no-suggest
-          - tar -czf artifact.tar.gz api/app api/bin api/src api/var api/web
+          - tar -czf artifact.tar.gz app bin src var web
           - python deploy/aws_codedeploy.yml
