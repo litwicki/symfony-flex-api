@@ -53,6 +53,6 @@ pipelines:
           - sed -ie 's/{LOGENTRIES_TOKEN}/$LOGENTRIES_TOKEN/g' api/app/config/parameters.yml
           - sed -ie 's/{LOGENTRIES_KEY}/$LOGENTRIES_KEY/g' api/app/config/parameters.yml
           - composer --version
-          - cd api && composer install --prefer-dist --no-scripts
+          - cd api && composer install --no-interaction --prefer-dist --no-scripts --ignore-platform-reqs --no-suggest
           - zip -r /tmp/artifact.zip api/*
           - python deploy/aws_codedeploy.yml
