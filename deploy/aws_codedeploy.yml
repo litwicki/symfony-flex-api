@@ -101,8 +101,10 @@ def deploy_new_revision():
 
 def main():
     if not upload_to_s3('/tmp/artifact.tar.gz'):
+        print("Error uploading to S3")
         sys.exit(1)
     if not deploy_new_revision():
+        print("Error uploading new Revision to S3")
         sys.exit(1)
 
 if __name__ == "__main__":
