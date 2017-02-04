@@ -52,13 +52,7 @@
     "repositories": [
         {
             "type": "vcs",
-            "url": "git@bitbucket.org:zoadilack/tavro-core.git",
-            "options": {
-                "ssh2": {
-                    "pubkey_file": "~/.ssh/zoadilack.pub",
-                    "privkey_file": "~/.ssh/zoadilack"
-                }
-            }
+            "url": "git@bitbucket.org:zoadilack/tavro-core.git"
         }
     ],
     "require-dev": {
