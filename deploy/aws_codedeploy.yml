@@ -21,8 +21,8 @@ import boto3
 from botocore.exceptions import ClientError
 
 VERSION_LABEL = strftime("%Y%m%d%H%M%S")
-BUCKET_KEY = os.getenv('APPLICATION_NAME') + '/' + str(VERSION_LABEL) + \
-    '-tavro-api.zip'
+app_name = os.getenv('APP_NAME')
+BUCKET_KEY = app_name.lower + '_' + str(VERSION_LABEL) + '.zip'
 
 def upload_to_s3(artifact):
     """
@@ -59,7 +59,7 @@ def deploy_new_revision():
 
     try:
         response = client.create_deployment(
-            applicationName=str(os.getenv('APPLICATION_NAME')),
+            applicationName=str(os.getenv('APP_NAME')),
             deploymentGroupName=str(os.getenv('DEPLOYMENT_GROUP_NAME')),
             revision={
                 'revisionType': 'S3',
