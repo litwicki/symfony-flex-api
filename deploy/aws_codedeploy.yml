@@ -22,7 +22,7 @@ from botocore.exceptions import ClientError
 
 VERSION_LABEL = strftime("%Y%m%d%H%M%S")
 app_name = os.getenv('APP_NAME')
-BUCKET_KEY = app_name.lower + '_' + str(VERSION_LABEL) + '.zip'
+BUCKET_KEY = app_name.lower + '_' + VERSION_LABEL + '.zip'
 
 def upload_to_s3(artifact):
     """
