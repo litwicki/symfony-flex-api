@@ -1,6 +1,6 @@
 <?php
 
-namespace Tavro\Bundle\ApiBundle\Controller\Api;
+namespace Tavro\Bundle\ApiBundle\Controller\Entity;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -15,31 +15,34 @@ use Doctrine\Common\Inflector\Inflector;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 
 use Tavro\Bundle\CoreBundle\Entity\Account;
-use Tavro\Bundle\CoreBundle\Entity\Expense;
-use Tavro\Bundle\CoreBundle\Entity\ExpenseComment;
+use Tavro\Bundle\CoreBundle\Entity\Node;
+use Tavro\Bundle\CoreBundle\Entity\Tag;
+use Tavro\Bundle\CoreBundle\Entity\NodeTag;
+use Tavro\Bundle\CoreBundle\Entity\User;
+use Tavro\Bundle\CoreBundle\Entity\NodeComment;
 use Symfony\Component\HttpFoundation\Cookie;
 
 use Litwicki\Common\Common;
 use Tavro\Bundle\ApiBundle\Controller\Api\ApiController as ApiController;
 
-class ExpenseController extends ApiController
+class NodeController extends ApiController
 {
 
     /**
-     * Display all Comments for this Expense.
+     * Display all Comments for this Node.
      *
      * @param \Symfony\Component\HttpFoundation\Request $request
-     * @param \Tavro\Bundle\CoreBundle\Entity\Expense $expense
+     * @param \Tavro\Bundle\CoreBundle\Entity\Node $node
      * @param $_format
      *
      * @return \Symfony\Component\HttpFoundation\Response
      * @throws \Exception
      */
-    public function commentsAction(Request $request, Expense $expense, $_format)
+    public function commentsAction(Request $request, Node $node, $_format)
     {
         try {
 
-            $entities = $expense->getExpenseComments();
+            $entities = $node->getNodeComments();
 
             $items = array();
 
@@ -47,7 +50,7 @@ class ExpenseController extends ApiController
                 $items[] = $entity->getComment();
             }
 
-            return $this->apiResponse($items, [
+            return $this->apiResponse($entities, [
                 'format' => $_format,
                 'group' => 'simple'
             ]);
@@ -56,18 +59,17 @@ class ExpenseController extends ApiController
         catch(\Exception $e) {
             throw $e;
         }
-
     }
 
     /**
      * @param \Symfony\Component\HttpFoundation\Request $request
-     * @param \Tavro\Bundle\CoreBundle\Entity\Expense $expense
+     * @param \Tavro\Bundle\CoreBundle\Entity\Node $node
      * @param $_format
      *
      * @return \Symfony\Component\HttpFoundation\Response
      * @throws \Exception
      */
-    public function newCommentAction(Request $request, Expense $expense, $_format)
+    public function newCommentAction(Request $request, Node $node, $_format)
     {
         try {
 
@@ -77,11 +79,11 @@ class ExpenseController extends ApiController
             $comment = $handler->post($request, $data);
 
             /**
-             * Attach the Comment to the Expense
+             * Attach the Comment to the Node
              */
-            $this->getHandler('expense_comments')->post($request, array(
+            $this->getHandler('node_comments')->post($request, array(
                 'comment' => $comment->getId(),
-                'expense' => $expense->getId()
+                'node' => $node->getId()
             ));
 
             $routeOptions = array(
@@ -100,20 +102,20 @@ class ExpenseController extends ApiController
     }
 
     /**
-     * Display all Tags for this Expense.
+     * Display all Tags for this Node.
      *
      * @param \Symfony\Component\HttpFoundation\Request $request
-     * @param \Tavro\Bundle\CoreBundle\Entity\Expense $expense
+     * @param \Tavro\Bundle\CoreBundle\Entity\Node $node
      * @param $_format
      *
      * @return \Symfony\Component\HttpFoundation\Response
      * @throws \Exception
      */
-    public function tagsAction(Request $request, Expense $expense, $_format)
+    public function tagsAction(Request $request, Node $node, $_format)
     {
         try {
 
-            $entities = $expense->getExpenseTags();
+            $entities = $node->getNodeTags();
 
             $items = array();
 
@@ -121,8 +123,9 @@ class ExpenseController extends ApiController
                 $items[] = $entity->getTag();
             }
 
-            return $this->apiResponse($items, [
+            return $this->apiResponse($entities, [
                 'format' => $_format,
+                'group' => 'simple'
             ]);
 
         }
@@ -133,13 +136,13 @@ class ExpenseController extends ApiController
 
     /**
      * @param \Symfony\Component\HttpFoundation\Request $request
-     * @param \Tavro\Bundle\CoreBundle\Entity\Expense $expense
+     * @param \Tavro\Bundle\CoreBundle\Entity\Node $node
      * @param $_format
      *
      * @return \Symfony\Component\HttpFoundation\Response
      * @throws \Exception
      */
-    public function newTagAction(Request $request, Expense $expense, $_format)
+    public function newTagAction(Request $request, Node $node, $_format)
     {
         try {
 
@@ -149,25 +152,68 @@ class ExpenseController extends ApiController
             $tag = $handler->post($request, $data);
 
             /**
-             * Attach the Comment to the Expense
+             * Attach the Comment to the Node
              */
-            $this->getHandler('expense_tags')->post($request, array(
-                'tag' => $tag->getId(),
-                'expense' => $expense->getId()
+            $this->getHandler('node_tags')->post($request, array(
+                'comment' => $tag->getId(),
+                'node' => $node->getId()
             ));
 
-            $routeOptions = array(
-                'entity'  => 'tags',
-                'id'      => $tag->getId(),
-                'format'  => $_format,
-            );
-
-            return $this->forward('TavroApiBundle:Default:get', $routeOptions);
+            return $this->delete($request, 'tags', $tag->getId(), $_format);
 
         }
         catch(\Exception $e) {
             throw $e;
         }
+    }
+
+    /**
+     * Delete a Tag from a Node, but not physically itself.
+     *
+     * @param \Symfony\Component\HttpFoundation\Request $request
+     * @param \Tavro\Bundle\CoreBundle\Entity\Node $node
+     * @param $_format
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     * @throws \Exception
+     */
+    public function deleteTagAction(Request $request, Node $node, Tag $tag, $_format)
+    {
+        try {
+
+            $entity = $this->getDoctrine()->getManager()->getRepository('TavroApiBundle:NodeTag')->findOneBy(array(
+                'node' => $node,
+                'tag' => $tag,
+            ));
+
+            if(!$entity instanceof NodeTag) {
+                throw new ApiException('There is no Tag to delete for this Node.');
+            }
+
+            return $this->deleteAction($request, 'node_tags', $entity->getId(), $_format);
+
+        }
+        catch(\Exception $e) {
+            throw $e;
+        }
+
+    }
+
+    /**
+     * @param \Symfony\Component\HttpFoundation\Request $request
+     * @param \Tavro\Bundle\CoreBundle\Entity\User $user
+     * @param $_format
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function byUserAction(Request $request, User $user, $_format)
+    {
+        $nodes = $user->getNodes();
+
+        return $this->apiResponse($nodes, [
+            'format' => $_format,
+            'group' => 'simple'
+        ]);
     }
 
     /**
@@ -182,7 +228,7 @@ class ExpenseController extends ApiController
     {
         try {
 
-            $entities = $account->getExpenses();
+            $entities = $account->getNodes();
 
             return $this->apiResponse($entities, [
                 'format' => $_format,

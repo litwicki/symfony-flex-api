@@ -1,6 +1,6 @@
 api_get_forecast_staff:
     path: /forecasts/{forecast}/staff_persons.{_format}
-    defaults: { _controller: TavroApiBundle:Api\ForecastStaffPerson:byForecast, _format: json}
+    defaults: { _controller: TavroApiBundle:Entity\ForecastStaffPerson:byForecast, _format: json}
     methods: GET
     requirements:
         organization: \d+

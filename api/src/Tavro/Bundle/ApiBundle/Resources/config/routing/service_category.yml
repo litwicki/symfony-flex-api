@@ -1,6 +1,6 @@
 api_get_service_category:
     path: /service_categories/{id}.{_format}
-    defaults: { _controller: TavroApiBundle:Api\ServiceCategory:get, _format: json, entity: "service_categories" }
+    defaults: { _controller: TavroApiBundle:Entity\ServiceCategory:get, _format: json, entity: "service_categories" }
     methods: GET
     requirements:
         id: \d+
@@ -8,21 +8,21 @@ api_get_service_category:
 
 api_get_all_service_categories:
     path:  /service_categories.{_format}
-    defaults: { _controller: TavroApiBundle:Api\ServiceCategory:getAll, _format: json, entity: "service_categories" }
+    defaults: { _controller: TavroApiBundle:Entity\ServiceCategory:getAll, _format: json, entity: "service_categories" }
     methods: GET
     requirements:
         _format:  json|xml
 
 api_post_service_category:
     path:  /service_categories.{_format}
-    defaults: { _controller: TavroApiBundle:Api\ServiceCategory:post, _format: json, entity: "service_categories" }
+    defaults: { _controller: TavroApiBundle:Entity\ServiceCategory:post, _format: json, entity: "service_categories" }
     methods: POST
     requirements:
         _format:  json|xml
 
 api_patch_service_category:
     path:  /service_categories/{id}.{_format}
-    defaults: { _controller: TavroApiBundle:Api\ServiceCategory:patch, _format: json, entity: "service_categories" }
+    defaults: { _controller: TavroApiBundle:Entity\ServiceCategory:patch, _format: json, entity: "service_categories" }
     methods: PATCH
     requirements:
         id: \d+
@@ -30,7 +30,7 @@ api_patch_service_category:
 
 api_put_service_category:
     path:  /service_categories/{id}.{_format}
-    defaults: { _controller: TavroApiBundle:Api\ServiceCategory:put, _format: json, entity: "service_categories" }
+    defaults: { _controller: TavroApiBundle:Entity\ServiceCategory:put, _format: json, entity: "service_categories" }
     methods: PUT
     requirements:
         id: \d+
@@ -38,7 +38,7 @@ api_put_service_category:
 
 api_delete_service_category:
     path:  /service_categories/{id}.{_format}
-    defaults: { _controller: TavroApiBundle:Api\ServiceCategory:delete, _format: json, entity: "service_categories" }
+    defaults: { _controller: TavroApiBundle:Entity\ServiceCategory:delete, _format: json, entity: "service_categories" }
     methods: DELETE
     requirements:
         id: \d+
@@ -46,7 +46,7 @@ api_delete_service_category:
 
 api_account_service_categories:
     path: /accounts/{account}/services/categories.{_format}
-    defaults: { _controller: TavroApiBundle:Api\ServiceCategory:byAccount, _format: json}
+    defaults: { _controller: TavroApiBundle:Entity\ServiceCategory:byAccount, _format: json}
     methods: GET
     requirements:
         account: \d+

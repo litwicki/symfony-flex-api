@@ -1,11 +1,11 @@
 <?php
 
-namespace Tavro\Bundle\ApiBundle\Controller\Api;
+namespace Tavro\Bundle\ApiBundle\Controller\Entity;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-use Tavro\Bundle\ApiBundle\Controller\Api\ApiController;
+use Tavro\Bundle\ApiBundle\Controller\Api\ApiController as ApiController;
 
 class LogController extends ApiController
 {

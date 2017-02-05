@@ -1,6 +1,6 @@
 <?php
 
-namespace Tavro\Bundle\ApiBundle\Controller\Api;
+namespace Tavro\Bundle\ApiBundle\Controller\Entity;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -16,6 +16,7 @@ use Symfony\Component\EventDispatcher\EventDispatcher;
 use Doctrine\Common\Inflector\Inflector;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 
+use Tavro\Bundle\CoreBundle\Entity\Person;
 use Tavro\Bundle\CoreBundle\Entity\User;
 use Symfony\Component\HttpFoundation\Cookie;
 use Symfony\Component\HttpFoundation\JsonResponse;

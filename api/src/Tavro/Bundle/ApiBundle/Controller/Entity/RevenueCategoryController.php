@@ -1,6 +1,6 @@
 <?php
 
-namespace Tavro\Bundle\ApiBundle\Controller\Api;
+namespace Tavro\Bundle\ApiBundle\Controller\Entity;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -22,7 +22,7 @@ use Symfony\Component\HttpFoundation\Cookie;
 use Litwicki\Common\Common;
 use Tavro\Bundle\ApiBundle\Controller\Api\ApiController as ApiController;
 
-class ProductCategoryController extends ApiController
+class RevenueCategoryController extends ApiController
 {
     /**
      * @param \Symfony\Component\HttpFoundation\Request $request
@@ -36,7 +36,7 @@ class ProductCategoryController extends ApiController
     {
         try {
 
-            $entities = $account->getProductCategories();
+            $entities = $account->getRevenueCategories();
 
             return $this->apiResponse($entities, [
                 'format' => $_format,

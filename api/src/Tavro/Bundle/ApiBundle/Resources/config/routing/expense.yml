@@ -1,6 +1,6 @@
 api_get_expense:
     path: /expenses/{id}.{_format}
-    defaults: { _controller: TavroApiBundle:Api\Expense:get, _format: json, entity: "expenses" }
+    defaults: { _controller: TavroApiBundle:Entity\Expense:get, _format: json, entity: "expenses" }
     methods: GET
     requirements:
         id: \d+
@@ -8,21 +8,21 @@ api_get_expense:
 
 api_get_all_expenses:
     path:  /expenses.{_format}
-    defaults: { _controller: TavroApiBundle:Api\Expense:getAll, _format: json, entity: "expenses" }
+    defaults: { _controller: TavroApiBundle:Entity\Expense:getAll, _format: json, entity: "expenses" }
     methods: GET
     requirements:
         _format:  json|xml
 
 api_post_expense:
     path:  /expenses.{_format}
-    defaults: { _controller: TavroApiBundle:Api\Expense:post, _format: json, entity: "expenses" }
+    defaults: { _controller: TavroApiBundle:Entity\Expense:post, _format: json, entity: "expenses" }
     methods: POST
     requirements:
         _format:  json|xml
 
 api_patch_expense:
     path:  /expenses/{id}.{_format}
-    defaults: { _controller: TavroApiBundle:Api\Expense:patch, _format: json, entity: "expenses" }
+    defaults: { _controller: TavroApiBundle:Entity\Expense:patch, _format: json, entity: "expenses" }
     methods: PATCH
     requirements:
         id: \d+
@@ -30,7 +30,7 @@ api_patch_expense:
 
 api_put_expense:
     path:  /expenses/{id}.{_format}
-    defaults: { _controller: TavroApiBundle:Api\Expense:put, _format: json, entity: "expenses" }
+    defaults: { _controller: TavroApiBundle:Entity\Expense:put, _format: json, entity: "expenses" }
     methods: PUT
     requirements:
         id: \d+
@@ -38,7 +38,7 @@ api_put_expense:
 
 api_delete_expense:
     path:  /expenses/{id}.{_format}
-    defaults: { _controller: TavroApiBundle:Api\Expense:delete, _format: json, entity: "expenses" }
+    defaults: { _controller: TavroApiBundle:Entity\Expense:delete, _format: json, entity: "expenses" }
     methods: DELETE
     requirements:
         id: \d+
@@ -46,14 +46,14 @@ api_delete_expense:
 
 api_typeahead_expenses:
     path:  /typeahead/expenses.{_format}
-    defaults: { _controller: TavroApiBundle:Api\Expense:typeahead, _format: json, entity: "expenses" }
+    defaults: { _controller: TavroApiBundle:Entity\Expense:typeahead, _format: json, entity: "expenses" }
     methods: GET
     requirements:
         _format:  json|xml
         
 api_expense_tags:
     path: /expenses/{expense}/tags.{_format}
-    defaults: { _controller: TavroApiBundle:Api\Expense:tags, _format: json }
+    defaults: { _controller: TavroApiBundle:Entity\Expense:tags, _format: json }
     methods: GET
     requirements:
         organization: \d+
@@ -61,7 +61,7 @@ api_expense_tags:
 
 api_new_expense_tag:
     path: /expenses/{expense}/tags.{_format}
-    defaults: { _controller: TavroApiBundle:Api\Expense:newTag, _format: json }
+    defaults: { _controller: TavroApiBundle:Entity\Expense:newTag, _format: json }
     methods: POST
     requirements:
         organization: \d+
@@ -69,7 +69,7 @@ api_new_expense_tag:
 
 api_expense_comments:
     path: /expenses/{expense}/comments.{_format}
-    defaults: { _controller: TavroApiBundle:Api\Expense:comments, _format: json }
+    defaults: { _controller: TavroApiBundle:Entity\Expense:comments, _format: json }
     methods: GET
     requirements:
         organization: \d+
@@ -77,7 +77,7 @@ api_expense_comments:
 
 api_new_expense_comment:
     path: /expenses/{expense}/comments.{_format}
-    defaults: { _controller: TavroApiBundle:Api\Expense:newComment, _format: json }
+    defaults: { _controller: TavroApiBundle:Entity\Expense:newComment, _format: json }
     methods: POST
     requirements:
         organization: \d+
@@ -85,7 +85,7 @@ api_new_expense_comment:
 
 api_expenses_by_account:
     path: /accounts/{account}/expenses.{_format}
-    defaults: { _controller: TavroApiBundle:Api\Expense:byAccount, _format: json}
+    defaults: { _controller: TavroApiBundle:Entity\Expense:byAccount, _format: json}
     methods: GET
     requirements:
         account: \d+

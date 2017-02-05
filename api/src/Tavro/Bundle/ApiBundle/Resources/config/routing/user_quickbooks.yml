@@ -1,6 +1,6 @@
 api_get_user_quickbooks:
     path: /users/{id}/quickbooks.{_format}
-    defaults: { _controller: TavroApiBundle:Api\UserQuickbooks:get, _format: json, entity: "user_quickbooks" }
+    defaults: { _controller: TavroApiBundle:Entity\UserQuickbooks:get, _format: json, entity: "user_quickbooks" }
     methods: GET
     requirements:
         id: \d+
@@ -8,14 +8,14 @@ api_get_user_quickbooks:
 
 api_post_user_quickbooks:
     path:  /users/{id}/quickbooks.{_format}
-    defaults: { _controller: TavroApiBundle:Api\UserQuickbooks:post, _format: json, entity: "user_quickbooks" }
+    defaults: { _controller: TavroApiBundle:Entity\UserQuickbooks:post, _format: json, entity: "user_quickbooks" }
     methods: POST
     requirements:
         _format:  json|xml
 
 api_patch_user_quickbooks:
     path:  /users/{id}/quickbooks.{_format}
-    defaults: { _controller: TavroApiBundle:Api\UserQuickbooks:patch, _format: json, entity: "user_quickbooks" }
+    defaults: { _controller: TavroApiBundle:Entity\UserQuickbooks:patch, _format: json, entity: "user_quickbooks" }
     methods: PATCH
     requirements:
         id: \d+
@@ -23,7 +23,7 @@ api_patch_user_quickbooks:
 
 api_put_user_quickbooks:
     path:  /users/{id}/quickbooks.{_format}
-    defaults: { _controller: TavroApiBundle:Api\UserQuickbooks:put, _format: json, entity: "user_quickbooks" }
+    defaults: { _controller: TavroApiBundle:Entity\UserQuickbooks:put, _format: json, entity: "user_quickbooks" }
     methods: PUT
     requirements:
         id: \d+
@@ -31,7 +31,7 @@ api_put_user_quickbooks:
 
 api_delete_user_quickbooks:
     path:  /users/{id}/quickbooks.{_format}
-    defaults: { _controller: TavroApiBundle:Api\UserQuickbooks:delete, _format: json, entity: "user_quickbooks" }
+    defaults: { _controller: TavroApiBundle:Entity\UserQuickbooks:delete, _format: json, entity: "user_quickbooks" }
     methods: DELETE
     requirements:
         id: \d+

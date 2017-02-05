@@ -1,6 +1,6 @@
 api_get_account_group:
     path: /accounts/{account}/groups.{_format}
-    defaults: { _controller: TavroApiBundle:Api\AccountGroup:get, _format: json}
+    defaults: { _controller: TavroApiBundle:Entity\AccountGroup:get, _format: json}
     methods: GET
     requirements:
         account: \d+
@@ -8,7 +8,7 @@ api_get_account_group:
 
 api_post_account_group:
     path: /accounts/{account}/groups.{_format}
-    defaults: { _controller: TavroApiBundle:Api\AccountGroup:post, _format: json}
+    defaults: { _controller: TavroApiBundle:Entity\AccountGroup:post, _format: json}
     methods: POST
     requirements:
         account: \d+
@@ -16,7 +16,7 @@ api_post_account_group:
 
 api_remove_group_from_account:
     path:  /accounts/{account}/groups/{id}.{_format}
-    defaults: { _controller: TavroApiBundle:Api\AccountGroup:remove, _format: json, entity: "accounts" }
+    defaults: { _controller: TavroApiBundle:Entity\AccountGroup:remove, _format: json, entity: "accounts" }
     methods: DELETE
     requirements:
         id: \d+
@@ -24,7 +24,7 @@ api_remove_group_from_account:
 
 api_delete_account_group:
     path:  /account_groups/{id}.{_format}
-    defaults: { _controller: TavroApiBundle:Api\AccountGroup:delete, _format: json, entity: "accounts" }
+    defaults: { _controller: TavroApiBundle:Entity\AccountGroup:delete, _format: json, entity: "accounts" }
     methods: DELETE
     requirements:
         id: \d+
@@ -32,7 +32,7 @@ api_delete_account_group:
 
 api_account_groups_by_account:
     path: /accounts/{account}/groups.{_format}
-    defaults: { _controller: TavroApiBundle:Api\AccountGroup:byAccount, _format: json}
+    defaults: { _controller: TavroApiBundle:Entity\AccountGroup:byAccount, _format: json}
     methods: GET
     requirements:
         account: \d+

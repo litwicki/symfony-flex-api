@@ -1,6 +1,6 @@
 api_get_product_category:
     path: /product_categories/{id}.{_format}
-    defaults: { _controller: TavroApiBundle:Api\ProductCategory:get, _format: json, entity: "product_categories" }
+    defaults: { _controller: TavroApiBundle:Entity\ProductCategory:get, _format: json, entity: "product_categories" }
     methods: GET
     requirements:
         id: \d+
@@ -8,21 +8,21 @@ api_get_product_category:
 
 api_get_all_product_categories:
     path:  /product_categories.{_format}
-    defaults: { _controller: TavroApiBundle:Api\ProductCategory:getAll, _format: json, entity: "product_categories" }
+    defaults: { _controller: TavroApiBundle:Entity\ProductCategory:getAll, _format: json, entity: "product_categories" }
     methods: GET
     requirements:
         _format:  json|xml
 
 api_post_product_category:
     path:  /product_categories.{_format}
-    defaults: { _controller: TavroApiBundle:Api\ProductCategory:post, _format: json, entity: "product_categories" }
+    defaults: { _controller: TavroApiBundle:Entity\ProductCategory:post, _format: json, entity: "product_categories" }
     methods: POST
     requirements:
         _format:  json|xml
 
 api_patch_product_category:
     path:  /product_categories/{id}.{_format}
-    defaults: { _controller: TavroApiBundle:Api\ProductCategory:patch, _format: json, entity: "product_categories" }
+    defaults: { _controller: TavroApiBundle:Entity\ProductCategory:patch, _format: json, entity: "product_categories" }
     methods: PATCH
     requirements:
         id: \d+
@@ -30,7 +30,7 @@ api_patch_product_category:
 
 api_put_product_category:
     path:  /product_categories/{id}.{_format}
-    defaults: { _controller: TavroApiBundle:Api\ProductCategory:put, _format: json, entity: "product_categories" }
+    defaults: { _controller: TavroApiBundle:Entity\ProductCategory:put, _format: json, entity: "product_categories" }
     methods: PUT
     requirements:
         id: \d+
@@ -38,7 +38,7 @@ api_put_product_category:
 
 api_delete_product_category:
     path:  /product_categories/{id}.{_format}
-    defaults: { _controller: TavroApiBundle:Api\ProductCategory:delete, _format: json, entity: "product_categories" }
+    defaults: { _controller: TavroApiBundle:Entity\ProductCategory:delete, _format: json, entity: "product_categories" }
     methods: DELETE
     requirements:
         id: \d+
@@ -46,7 +46,7 @@ api_delete_product_category:
 
 api_account_product_categories:
     path: /accounts/{account}/products/categories.{_format}
-    defaults: { _controller: TavroApiBundle:Api\ProductCategory:byACcount, _format: json}
+    defaults: { _controller: TavroApiBundle:Entity\ProductCategory:byACcount, _format: json}
     methods: GET
     requirements:
         account: \d+

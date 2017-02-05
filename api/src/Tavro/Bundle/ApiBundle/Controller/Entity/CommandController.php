@@ -1,4 +1,4 @@
-<?php namespace Tavro\Bundle\ApiBundle\Controller\Api;
+<?php namespace Tavro\Bundle\ApiBundle\Controller\Entity;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;

@@ -1,6 +1,6 @@
 api_get_current_user:
     path: /user.{_format}
-    defaults: { _controller: TavroApiBundle:Api\User:getCurrent, _format: json, entity: "users" }
+    defaults: { _controller: TavroApiBundle:Entity\User:getCurrent, _format: json, entity: "users" }
     methods: GET
     requirements:
         id: \d+
@@ -8,7 +8,7 @@ api_get_current_user:
 
 api_get_user:
     path: /users/{id}.{_format}
-    defaults: { _controller: TavroApiBundle:Api\User:get, _format: json, entity: "users" }
+    defaults: { _controller: TavroApiBundle:Entity\User:get, _format: json, entity: "users" }
     methods: GET
     requirements:
         id: \d+
@@ -16,21 +16,21 @@ api_get_user:
 
 api_get_all_users:
     path:  /users.{_format}
-    defaults: { _controller: TavroApiBundle:Api\User:getAll, _format: json, entity: "users" }
+    defaults: { _controller: TavroApiBundle:Entity\User:getAll, _format: json, entity: "users" }
     methods: GET
     requirements:
         _format:  json|xml
 
 api_user_signup:
     path:  /signup.{_format}
-    defaults: { _controller: TavroApiBundle:Api\User:post, _format: json, entity: "users" }
+    defaults: { _controller: TavroApiBundle:Entity\User:post, _format: json, entity: "users" }
     methods: POST
     requirements:
         _format:  json|xml
 
 api_patch_user:
     path:  /users/{id}.{_format}
-    defaults: { _controller: TavroApiBundle:Api\User:patch, _format: json, entity: "users" }
+    defaults: { _controller: TavroApiBundle:Entity\User:patch, _format: json, entity: "users" }
     methods: PATCH
     requirements:
         id: \d+
@@ -38,7 +38,7 @@ api_patch_user:
 
 api_put_user:
     path:  /users/{id}.{_format}
-    defaults: { _controller: TavroApiBundle:Api\User:put, _format: json, entity: "users" }
+    defaults: { _controller: TavroApiBundle:Entity\User:put, _format: json, entity: "users" }
     methods: PUT
     requirements:
         id: \d+
@@ -46,7 +46,7 @@ api_put_user:
 
 api_delete_user:
     path:  /users/{id}.{_format}
-    defaults: { _controller: TavroApiBundle:Api\User:delete, _format: json, entity: "users" }
+    defaults: { _controller: TavroApiBundle:Entity\User:delete, _format: json, entity: "users" }
     methods: DELETE
     requirements:
         id: \d+
@@ -54,7 +54,7 @@ api_delete_user:
 
 api_user_organizations:
     path: /users/{user}/organizations.{_format}
-    defaults: { _controller: TavroApiBundle:Api\User:organizations, _format: json}
+    defaults: { _controller: TavroApiBundle:Entity\User:organizations, _format: json}
     methods: GET
     requirements:
         user: \d+

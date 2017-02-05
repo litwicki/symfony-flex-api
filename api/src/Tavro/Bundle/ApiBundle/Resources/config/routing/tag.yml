@@ -1,6 +1,6 @@
 api_get_tag:
     path: /tags/{id}.{_format}
-    defaults: { _controller: TavroApiBundle:Api\Tag:get, _format: json, entity: 'tags' }
+    defaults: { _controller: TavroApiBundle:Entity\Tag:get, _format: json, entity: 'tags' }
     methods: GET
     requirements:
         id: \d+
@@ -8,21 +8,21 @@ api_get_tag:
 
 api_get_all_tags:
     path:  /tags.{_format}
-    defaults: { _controller: TavroApiBundle:Api\Tag:getAll, _format: json, entity: 'tags' }
+    defaults: { _controller: TavroApiBundle:Entity\Tag:getAll, _format: json, entity: 'tags' }
     methods: GET
     requirements:
         _format:  json|xml
 
 api_post_tag:
     path:  /tags.{_format}
-    defaults: { _controller: TavroApiBundle:Api\Tag:post, _format: json, entity: 'tags' }
+    defaults: { _controller: TavroApiBundle:Entity\Tag:post, _format: json, entity: 'tags' }
     methods: POST
     requirements:
         _format:  json|xml
 
 api_patch_tag:
     path:  /tags/{id}.{_format}
-    defaults: { _controller: TavroApiBundle:Api\Tag:patch, _format: json, entity: 'tags' }
+    defaults: { _controller: TavroApiBundle:Entity\Tag:patch, _format: json, entity: 'tags' }
     methods: PATCH
     requirements:
         id: \d+
@@ -30,7 +30,7 @@ api_patch_tag:
 
 api_put_tag:
     path:  /tags/{id}.{_format}
-    defaults: { _controller: TavroApiBundle:Api\Tag:put, _format: json, entity: 'tags' }
+    defaults: { _controller: TavroApiBundle:Entity\Tag:put, _format: json, entity: 'tags' }
     methods: PUT
     requirements:
         id: \d+
@@ -38,7 +38,7 @@ api_put_tag:
 
 api_delete_tag:
     path:  /tags/{id}.{_format}
-    defaults: { _controller: TavroApiBundle:Api\Tag:delete, _format: json, entity: 'tags' }
+    defaults: { _controller: TavroApiBundle:Entity\Tag:delete, _format: json, entity: 'tags' }
     methods: DELETE
     requirements:
         id: \d+
@@ -46,7 +46,7 @@ api_delete_tag:
 
 api_typeahead_tags:
     path:  /typeahead/tags.{_format}
-    defaults: { _controller: TavroApiBundle:Api\Tag:typeahead, _format: json }
+    defaults: { _controller: TavroApiBundle:Entity\Tag:typeahead, _format: json }
     methods: GET
     requirements:
         _format:  json|xml

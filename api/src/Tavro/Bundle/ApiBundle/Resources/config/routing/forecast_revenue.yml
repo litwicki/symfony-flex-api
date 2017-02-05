@@ -1,6 +1,6 @@
 api_forecast_revenues:
     path: /forecasts/{forecast}/revenues.{_format}
-    defaults: { _controller: TavroApiBundle:Api\ForecastRevenue:byForecast, _format: json}
+    defaults: { _controller: TavroApiBundle:Entity\ForecastRevenue:byForecast, _format: json}
     methods: GET
     requirements:
         organization: \d+
