@@ -18,47 +18,6 @@ use Tavro\Bundle\ApiBundle\Controller\DefaultController;
 class ApiController extends DefaultController
 {
     /**
-     * @param $raw
-     * @param array $options
-     *
-     * @return \Symfony\Component\HttpFoundation\Response
-     * @throws \Exception
-     */
-    public function apiResponse($raw, array $options = array())
-    {
-        try {
-
-            $format = isset($options['format']) ? $options['format'] : 'json';
-            $group = isset($options['group']) ? $options['group'] : 'api';
-            $code = isset($options['code']) ? $options['code'] : 200;
-            $message = isset($options['message']) ? $options['message'] : '';
-
-            $response = new Response();
-
-            if($format == 'json') {
-                $response->headers->set('Content-Type', 'application/json');
-                $responseData = $this->serialize([
-                    'message' => $message,
-                    'data' => $raw,
-                ], $format, $group);
-            }
-            else {
-                $response->headers->set('Content-Type', 'application/xml');
-                $responseData = [];
-            }
-
-            $response->setContent($responseData);
-            $response->setStatusCode($code);
-
-        }
-        catch(\Exception $e) {
-            throw $e;
-        }
-
-        return $response;
-    }
-
-    /**
      * Get an Entity - forward to the appropriate controller to handle.
      *
      * @param $entity
@@ -123,7 +82,7 @@ class ApiController extends DefaultController
 
     /**
      * PATCH an Entity by forwarding to the Patch Controller.
-     * 
+     *
      * @param $entity
      * @param $id
      * @param $_format

@@ -16,7 +16,7 @@ services:
         class: Tavro\Bundle\ApiBundle\EventSubscriber\Exception\ExceptionSubscriber
         tags:
             - { name: kernel.event_subscriber }
-        arguments: ["%kernel.debug%", "@serializer", "@logger"]
+        arguments: ["%kernel.debug%", "@serializer", "@tavro.logging.exception"]
 
     tavro.auth.login_attempts:
         class: Tavro\Bundle\ApiBundle\Services\LoginAttemptHandler
