@@ -60,4 +60,4 @@ pipelines:
           - composer clear-cache
           - cd api && composer install --no-interaction --prefer-dist --no-scripts --ignore-platform-reqs --no-suggest
           - tar -czf /tmp/artifact.tar.gz app bin src var vendor web
-          - cd ../ && python tavro-provisioning/aws/aws_codedeploy.yml
+          - cd ../ && python tavro-provisioning/aws/codedeploy.yml
