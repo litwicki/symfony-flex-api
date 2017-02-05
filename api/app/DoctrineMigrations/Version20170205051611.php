@@ -17,8 +17,8 @@ class Version20170205051611 extends AbstractMigration
     {
         // this up() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
+        $this->addSql('CREATE TABLE login_attempts (ip_addr VARCHAR(500) DEFAULT NULL COLLATE latin1_swedish_ci, user_agent VARCHAR(500) DEFAULT NULL COLLATE latin1_swedish_ci, login_timestamp DATETIME DEFAULT NULL) DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE = InnoDB');
 
-        $this->addSql('DROP TABLE login_attempts');
     }
 
     /**
@@ -29,6 +29,6 @@ class Version20170205051611 extends AbstractMigration
         // this down() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
-        $this->addSql('CREATE TABLE login_attempts (ip_addr VARCHAR(500) DEFAULT NULL COLLATE latin1_swedish_ci, user_agent VARCHAR(500) DEFAULT NULL COLLATE latin1_swedish_ci, login_timestamp DATETIME DEFAULT NULL) DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE = InnoDB');
+        $this->addSql('DROP TABLE login_attempts');
     }
 }
