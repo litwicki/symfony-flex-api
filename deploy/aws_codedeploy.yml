@@ -13,7 +13,7 @@ def upload_to_s3(artifact):
     Uploads an artifact to Amazon S3
     """
     try:
-        client = boto3.client('s3')
+        client = boto3.client('s3', os.getenv('AWS_S3_REGION'))
     except ClientError as err:
         print("Failed to create boto3 client.\n" + str(err))
         return False
@@ -40,7 +40,7 @@ def deploy_new_revision():
     Deploy a new application revision to AWS CodeDeploy Deployment Group
     """
     try:
-        client = boto3.client('codedeploy')
+        client = boto3.client('codedeploy', os.getenv('AWS_S3_REGION'))
     except ClientError as err:
         print("Failed to create boto3 client.\n" + str(err))
         return False
