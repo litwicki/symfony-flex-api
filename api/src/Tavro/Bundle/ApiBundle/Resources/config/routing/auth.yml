@@ -7,18 +7,3 @@ api_auth_logout:
     path: /auth/logout
     defaults: { _controller: TavroApiBundle:Auth:tokenLogout }
     methods: POST
-
-api_auth_reset_password:
-    path: /auth/reset
-    defaults: { _controller: TavroApiBundle:Auth:reset }
-    methods: POST
-
-api_auth_send_reset_password:
-    path: /auth/forgot
-    defaults: { _controller: TavroApiBundle:Auth:sendResetToken }
-    methods: POST
-
-api_auth_confirm_email:
-    path: /auth/confirm.{format}
-    defaults: { _controller: TavroApiBundle:Auth:confirm }
-    methods: POST

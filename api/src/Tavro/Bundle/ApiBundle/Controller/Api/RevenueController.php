@@ -1,6 +1,6 @@
 <?php
 
-namespace Tavro\Bundle\ApiBundle\Controller;
+namespace Tavro\Bundle\ApiBundle\Controller\Api;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -18,48 +18,50 @@ use Tavro\Bundle\CoreBundle\Entity\Expense;
 use Tavro\Bundle\CoreBundle\Entity\ExpenseComment;
 use Symfony\Component\HttpFoundation\Cookie;
 
-use Litwicki\Common\Common;
-use Tavro\Bundle\ApiBundle\Controller\ApiController as ApiController;
+use Tavro\Bundle\CoreBundle\Entity\Revenue;
 
-class TagController extends ApiController
+use Litwicki\Common\Common;
+use Tavro\Bundle\ApiBundle\Controller\Api\ApiController as ApiController;
+
+class RevenueController extends ApiController
 {
 
     /**
-     * Post (create) a new Tag
-     * But first... see if this Tag already exists, and if it does, return it for use.
-     *
      * @param \Symfony\Component\HttpFoundation\Request $request
-     * @param $entity
+     * @param \Tavro\Bundle\CoreBundle\Entity\Revenue $revenue
      * @param $_format
      *
      * @return \Symfony\Component\HttpFoundation\Response
      * @throws \Exception
      */
-    public function postAction(Request $request, $entity, $_format)
+    public function newCommentAction(Request $request, Revenue $revenue, $_format)
     {
         try {
 
-            $handler = $this->getHandler($entity);
             $data = json_decode($request->getContent(), TRUE);
 
-            $tag = $handler->findByTag($data['tag']);
+            $handler = $this->getHandler('comments');
+            $comment = $handler->post($request, $data);
 
-            $newEntity = $handler->post($request, $data);
+            /**
+             * Attach the Comment to the Revenue
+             */
+            $this->getHandler('revenue_comments')->post($request, array(
+                'comment' => $comment->getId(),
+                'revenue' => $revenue->getId()
+            ));
 
             $routeOptions = array(
-                'entity'  => $entity,
-                'id'      => $newEntity->getId(),
+                'entity'  => 'comments',
+                'id'      => $comment->getId(),
                 'format'  => $_format,
             );
 
             return $this->forward('TavroApiBundle:Default:get', $routeOptions);
-        }
-        catch (InvalidFormException $e) {
-            throw $e;
+
         }
         catch(\Exception $e) {
             throw $e;
         }
     }
-
 }

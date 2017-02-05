@@ -1,6 +1,6 @@
 <?php
 
-namespace Tavro\Bundle\ApiBundle\Controller;
+namespace Tavro\Bundle\ApiBundle\Controller\Api;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -18,27 +18,27 @@ use Tavro\Bundle\CoreBundle\Entity\Expense;
 use Tavro\Bundle\CoreBundle\Entity\ExpenseComment;
 use Symfony\Component\HttpFoundation\Cookie;
 
-use Tavro\Bundle\CoreBundle\Entity\FundingRound;
 use Litwicki\Common\Common;
-use Tavro\Bundle\ApiBundle\Controller\ApiController as ApiController;
+use Tavro\Bundle\ApiBundle\Controller\Api\ApiController as ApiController;
 
-class FundingController extends ApiController
+class ExpenseController extends ApiController
 {
+
     /**
-     * Display all Comments for this Node.
+     * Display all Comments for this Expense.
      *
      * @param \Symfony\Component\HttpFoundation\Request $request
-     * @param \Tavro\Bundle\CoreBundle\Entity\FundingRound $funding_round
+     * @param \Tavro\Bundle\CoreBundle\Entity\Expense $expense
      * @param $_format
      *
      * @return \Symfony\Component\HttpFoundation\Response
      * @throws \Exception
      */
-    public function commentsAction(Request $request, FundingRound $funding_round, $_format)
+    public function commentsAction(Request $request, Expense $expense, $_format)
     {
         try {
 
-            $entities = $funding_round->getFundingRoundComments();
+            $entities = $expense->getExpenseComments();
 
             $items = array();
 
@@ -48,23 +48,25 @@ class FundingController extends ApiController
 
             return $this->apiResponse($items, [
                 'format' => $_format,
+                'group' => 'simple'
             ]);
 
         }
         catch(\Exception $e) {
             throw $e;
         }
+
     }
 
     /**
      * @param \Symfony\Component\HttpFoundation\Request $request
-     * @param \Tavro\Bundle\CoreBundle\Entity\FundingRound $funding_round
+     * @param \Tavro\Bundle\CoreBundle\Entity\Expense $expense
      * @param $_format
      *
      * @return \Symfony\Component\HttpFoundation\Response
      * @throws \Exception
      */
-    public function newCommentAction(Request $request, FundingRound $funding_round, $_format)
+    public function newCommentAction(Request $request, Expense $expense, $_format)
     {
         try {
 
@@ -74,15 +76,15 @@ class FundingController extends ApiController
             $comment = $handler->post($request, $data);
 
             /**
-             * Attach the Comment to the FundingRound
+             * Attach the Comment to the Expense
              */
-            $this->getHandler('funding_round_comments')->post($request, array(
+            $this->getHandler('expense_comments')->post($request, array(
                 'comment' => $comment->getId(),
-                'funding_round' => $funding_round->getId()
+                'expense' => $expense->getId()
             ));
 
             $routeOptions = array(
-                'entity'  => 'comment',
+                'entity'  => 'comments',
                 'id'      => $comment->getId(),
                 'format'  => $_format,
             );
@@ -93,28 +95,29 @@ class FundingController extends ApiController
         catch(\Exception $e) {
             throw $e;
         }
+
     }
 
     /**
-     * Display all Comments for this Node.
+     * Display all Tags for this Expense.
      *
      * @param \Symfony\Component\HttpFoundation\Request $request
-     * @param \Tavro\Bundle\CoreBundle\Entity\FundingRound $funding_round
+     * @param \Tavro\Bundle\CoreBundle\Entity\Expense $expense
      * @param $_format
      *
      * @return \Symfony\Component\HttpFoundation\Response
      * @throws \Exception
      */
-    public function shareholdersAction(Request $request, FundingRound $funding_round, $_format)
+    public function tagsAction(Request $request, Expense $expense, $_format)
     {
         try {
 
-            $entities = $funding_round->getFundingRoundShareholders();
+            $entities = $expense->getExpenseTags();
 
             $items = array();
 
             foreach($entities as $entity) {
-                $items[] = $entity->getShareholder();
+                $items[] = $entity->getTag();
             }
 
             return $this->apiResponse($items, [
@@ -129,26 +132,32 @@ class FundingController extends ApiController
 
     /**
      * @param \Symfony\Component\HttpFoundation\Request $request
-     * @param \Tavro\Bundle\CoreBundle\Entity\FundingRound $funding_round
+     * @param \Tavro\Bundle\CoreBundle\Entity\Expense $expense
      * @param $_format
      *
      * @return \Symfony\Component\HttpFoundation\Response
      * @throws \Exception
      */
-    public function newShareholderAction(Request $request, FundingRound $funding_round, $_format)
+    public function newTagAction(Request $request, Expense $expense, $_format)
     {
         try {
 
             $data = json_decode($request->getContent(), TRUE);
 
-            $handler = $this->getHandler('shareholders');
-            $shareholder = $handler->create(array_merge($data, array(
-               'funding_round' => $funding_round,
-            )));
+            $handler = $this->getHandler('tags');
+            $tag = $handler->post($request, $data);
+
+            /**
+             * Attach the Comment to the Expense
+             */
+            $this->getHandler('expense_tags')->post($request, array(
+                'tag' => $tag->getId(),
+                'expense' => $expense->getId()
+            ));
 
             $routeOptions = array(
-                'entity'  => 'shareholders',
-                'id'      => $shareholder->getId(),
+                'entity'  => 'tags',
+                'id'      => $tag->getId(),
                 'format'  => $_format,
             );
 

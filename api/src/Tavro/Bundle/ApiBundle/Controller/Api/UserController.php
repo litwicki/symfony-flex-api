@@ -1,6 +1,6 @@
 <?php
 
-namespace Tavro\Bundle\ApiBundle\Controller;
+namespace Tavro\Bundle\ApiBundle\Controller\Api;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -21,7 +21,7 @@ use Symfony\Component\HttpFoundation\Cookie;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
 use Litwicki\Common\Common;
-use Tavro\Bundle\ApiBundle\Controller\ApiController as ApiController;
+use Tavro\Bundle\ApiBundle\Controller\Api\ApiController as ApiController;
 
 class UserController extends ApiController
 {
@@ -124,107 +124,6 @@ class UserController extends ApiController
         catch(\Exception $e) {
             throw $e;
         }
-    }
-
-    /**
-     * @param Request $request
-     * @param User $user
-     * @param $_format
-     * @return Response
-     */
-    public function resetApiKeyAction(Request $request, User $user, $_format)
-    {
-        try {
-            $handler = $this->container->get('tavro.handler.users');
-            $handler->resetApiKey($user);
-            $cookie = new Cookie('api_key', $user->getApiKey(), 0, '/', NULL, FALSE, FALSE);
-            $data = $this->serialize($user, $_format);
-            $response = $this->apiResponse($data, $_format);
-            $response->headers->setCookie($cookie);
-            $handler->reauthenticate($user);
-            return $response;
-        }
-        catch(\Exception $e) {
-            throw new ApiException($e->getMessage());
-        }
-    }
-
-    /**
-     * @param Request $request
-     * @param User $user
-     * @param $_format
-     * @return Response
-     */
-    public function resetApiPasswordAction(Request $request, User $user, $_format)
-    {
-        try {
-            $handler = $this->container->get('tavro.handler.users');
-            $handler->resetApiPassword($user);
-            $cookie = new Cookie('api_password', $user->getApiPassword(), 0, '/', NULL, FALSE, FALSE);
-            $data = $this->serialize($user, $_format);
-            $response = $this->apiResponse($data, $_format);
-            $response->headers->setCookie($cookie);
-            $handler->reauthenticate($user);
-            return $response;
-        }
-        catch(\Exception $e) {
-            throw new ApiException($e->getMessage());
-        }
-    }
-
-    /**
-     * @param \Symfony\Component\HttpFoundation\Request $request
-     * @param \Tavro\Bundle\CoreBundle\Entity\User $user
-     * @param $_format
-     *
-     * @return \Symfony\Component\HttpFoundation\Response
-     */
-    public function accountsAction(Request $request, User $user, $_format)
-    {
-
-        $accounts = $user->getUserAccounts();
-
-        $items = array();
-
-        foreach($accounts as $entity) {
-            $account = $entity->getAccount();
-            $items[$account->getId()] = $account;
-        }
-
-        /**
-         * Cross Reference every Organization this User owns but may not be
-         * a "User" of..
-         */
-        $entities = $this->getDoctrine()->getManager()->getRepository('TavroApiBundle:Account')->findBy(array(
-            'user' => $user
-        ));
-
-        foreach($entities as $entity) {
-            $items[$entity->getId()] = $entity;
-        }
-
-        return $this->apiResponse($items, [
-            'format' => $_format,
-            'group' => 'simple'
-        ]);
-
-    }
-
-    /**
-     * @param \Symfony\Component\HttpFoundation\Request $request
-     * @param \Tavro\Bundle\CoreBundle\Entity\User $user
-     * @param $_format
-     *
-     * @return \Symfony\Component\HttpFoundation\Response
-     */
-    public function nodesAction(Request $request, User $user, $_format)
-    {
-        $nodes = $user->getNodes();
-
-        return $this->apiResponse($nodes, [
-            'format' => $_format,
-            'group' => 'simple'
-        ]);
     }
 
     /**

@@ -1,7 +1,5 @@
-<?php
-namespace Tavro\Bundle\ApiBundle\Controller;
+<?php namespace Tavro\Bundle\ApiBundle\Controller\Api;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -15,8 +13,9 @@ use Tavro\Bundle\CoreBundle\Exception\Form\InvalidFormException;
 use Doctrine\Common\Inflector\Inflector;
 
 use Litwicki\Common\Common;
+use Tavro\Bundle\ApiBundle\Controller\DefaultController;
 
-class ApiController extends Controller
+class ApiController extends DefaultController
 {
     /**
      * @param $raw

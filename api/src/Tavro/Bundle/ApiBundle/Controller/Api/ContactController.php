@@ -1,6 +1,6 @@
 <?php
 
-namespace Tavro\Bundle\ApiBundle\Controller;
+namespace Tavro\Bundle\ApiBundle\Controller\Api;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -14,16 +14,16 @@ use Tavro\Bundle\CoreBundle\Exception\Form\InvalidFormException;
 use Doctrine\Common\Inflector\Inflector;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 
-use Tavro\Bundle\CoreBundle\Entity\Node;
-use Tavro\Bundle\CoreBundle\Entity\Tag;
-use Tavro\Bundle\CoreBundle\Entity\NodeTag;
-use Tavro\Bundle\CoreBundle\Entity\NodeComment;
+use Tavro\Bundle\CoreBundle\Entity\Expense;
+use Tavro\Bundle\CoreBundle\Entity\ExpenseComment;
 use Symfony\Component\HttpFoundation\Cookie;
 
-use Litwicki\Common\Common;
-use Tavro\Bundle\ApiBundle\Controller\ApiController as ApiController;
+use Tavro\Bundle\CoreBundle\Entity\Contact;
 
-class SyndicateController extends ApiController
+use Litwicki\Common\Common;
+use Tavro\Bundle\ApiBundle\Controller\Api\ApiController as ApiController;
+
+class ContactController extends ApiController
 {
 
 }

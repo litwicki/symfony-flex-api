@@ -16,9 +16,8 @@ use Tavro\Bundle\CoreBundle\Exception\Form\InvalidFormException;
 use Doctrine\Common\Inflector\Inflector;
 
 use Litwicki\Common\Common;
-use Tavro\Bundle\ApiBundle\Controller\ApiController;
 
-class DefaultController extends ApiController
+class DefaultController extends Controller
 {
 
     /**

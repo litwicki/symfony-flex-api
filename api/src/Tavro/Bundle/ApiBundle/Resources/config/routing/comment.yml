@@ -1,6 +1,6 @@
 api_get_comment:
     path: /{entity}/{id}.{_format}
-    defaults: { _controller: TavroApiBundle:Comment:get, _format: json }
+    defaults: { _controller: TavroApiBundle:Api\Comment:get, _format: json }
     methods: GET
     requirements:
         id: \d+
@@ -8,7 +8,7 @@ api_get_comment:
 
 api_patch_comment:
     path:  /{entity}/{id}.{_format}
-    defaults: { _controller: TavroApiBundle:Comment:patch, _format: json }
+    defaults: { _controller: TavroApiBundle:Api\Comment:patch, _format: json }
     methods: PATCH
     requirements:
         id: \d+
@@ -16,7 +16,7 @@ api_patch_comment:
 
 api_put_comment:
     path:  /{entity}/{id}.{_format}
-    defaults: { _controller: TavroApiBundle:Comment:put, _format: json }
+    defaults: { _controller: TavroApiBundle:Api\Comment:put, _format: json }
     methods: PUT
     requirements:
         id: \d+
@@ -24,7 +24,7 @@ api_put_comment:
 
 api_delete_comment:
     path:  /{entity}/{id}.{_format}
-    defaults: { _controller: TavroApiBundle:Comment:delete, _format: json }
+    defaults: { _controller: TavroApiBundle:Api\Comment:delete, _format: json }
     methods: DELETE
     requirements:
         id: \d+
@@ -32,7 +32,7 @@ api_delete_comment:
 
 api_typeahead_comments:
     path:  /typeahead/{entity}.{_format}
-    defaults: { _controller: TavroApiBundle:Comment:typeahead, _format: json }
+    defaults: { _controller: TavroApiBundle:Api\Comment:typeahead, _format: json }
     methods: GET
     requirements:
         _format:  json|xml

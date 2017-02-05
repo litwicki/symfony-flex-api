@@ -1,6 +1,6 @@
 <?php
 
-namespace Tavro\Bundle\ApiBundle\Controller;
+namespace Tavro\Bundle\ApiBundle\Controller\Api;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -18,7 +18,7 @@ use Tavro\Bundle\CoreBundle\Entity\Organization;
 use Symfony\Component\HttpFoundation\Cookie;
 
 use Litwicki\Common\Common;
-use Tavro\Bundle\ApiBundle\Controller\ApiController as ApiController;
+use Tavro\Bundle\ApiBundle\Controller\Api\ApiController as ApiController;
 
 class OrganizationController extends ApiController
 {

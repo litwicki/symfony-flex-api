@@ -7,6 +7,12 @@ tavro_auth_api:
 tavro_account_api:
     resource: "@TavroApiBundle/Resources/config/routing/account.yml"
 
+tavro_account_group_api:
+    resource: "@TavroApiBundle/Resources/config/routing/account_group.yml"
+
+tavro_account_user_api:
+    resource: "@TavroApiBundle/Resources/config/routing/account_user.yml"
+
 tavro_comment_api:
     resource: "@TavroApiBundle/Resources/config/routing/comment.yml"
 
@@ -57,6 +63,9 @@ tavro_tag_api:
 
 tavro_user_api:
     resource: "@TavroApiBundle/Resources/config/routing/user.yml"
+
+tavro_user_security_api:
+    resource: "@TavroApiBundle/Resources/config/routing/user_security.yml"
 
 tavro_user_quickbooks_api:
     resource: "@TavroApiBundle/Resources/config/routing/user_quickbooks.yml"

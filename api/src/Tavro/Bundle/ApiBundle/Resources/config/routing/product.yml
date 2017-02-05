@@ -1,6 +1,6 @@
 api_get_product:
     path: /products/{id}.{_format}
-    defaults: { _controller: TavroApiBundle:Product:get, _format: json, entity: 'products' }
+    defaults: { _controller: TavroApiBundle:Api\Product:get, _format: json, entity: 'products' }
     methods: GET
     requirements:
         id: \d+
@@ -8,35 +8,35 @@ api_get_product:
 
 api_get_all_product_images:
     path:  /products/{id}/images.{_format}
-    defaults: { _controller: TavroApiBundle:Product:getImages, _format: json, entity: 'products' }
+    defaults: { _controller: TavroApiBundle:Api\Product:getImages, _format: json, entity: 'products' }
     methods: GET
     requirements:
         _format:  json|xml
 
 api_post_product_image:
     path:  /products/{product}/images.{_format}
-    defaults: { _controller: TavroApiBundle:Product:newImage, _format: json, entity: 'products' }
+    defaults: { _controller: TavroApiBundle:Api\Product:newImage, _format: json, entity: 'products' }
     methods: POST
     requirements:
         _format:  json|xml
 
 api_get_all_products:
     path:  /products.{_format}
-    defaults: { _controller: TavroApiBundle:Product:getAll, _format: json, entity: 'products' }
+    defaults: { _controller: TavroApiBundle:Api\Product:getAll, _format: json, entity: 'products' }
     methods: GET
     requirements:
         _format:  json|xml
 
 api_post_product:
     path:  /products.{_format}
-    defaults: { _controller: TavroApiBundle:Product:post, _format: json, entity: 'products' }
+    defaults: { _controller: TavroApiBundle:Api\Product:post, _format: json, entity: 'products' }
     methods: POST
     requirements:
         _format:  json|xml
 
 api_patch_product:
     path:  /products/{id}.{_format}
-    defaults: { _controller: TavroApiBundle:Product:patch, _format: json, entity: 'products' }
+    defaults: { _controller: TavroApiBundle:Api\Product:patch, _format: json, entity: 'products' }
     methods: PATCH
     requirements:
         id: \d+
@@ -44,7 +44,7 @@ api_patch_product:
 
 api_put_product:
     path:  /products/{id}.{_format}
-    defaults: { _controller: TavroApiBundle:Product:put, _format: json, entity: 'products' }
+    defaults: { _controller: TavroApiBundle:Api\Product:put, _format: json, entity: 'products' }
     methods: PUT
     requirements:
         id: \d+
@@ -52,7 +52,7 @@ api_put_product:
 
 api_delete_product:
     path:  /products/{id}.{_format}
-    defaults: { _controller: TavroApiBundle:Product:delete, _format: json, entity: 'products' }
+    defaults: { _controller: TavroApiBundle:Api\Product:delete, _format: json, entity: 'products' }
     methods: DELETE
     requirements:
         id: \d+
@@ -60,7 +60,7 @@ api_delete_product:
 
 api_typeahead_products:
     path:  /typeahead/products.{_format}
-    defaults: { _controller: TavroApiBundle:Product:typeahead, _format: json }
+    defaults: { _controller: TavroApiBundle:Api\Product:typeahead, _format: json }
     methods: GET
     requirements:
         _format:  json|xml

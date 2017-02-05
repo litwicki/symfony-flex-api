@@ -1,6 +1,6 @@
 <?php
 
-namespace Tavro\Bundle\ApiBundle\Controller;
+namespace Tavro\Bundle\ApiBundle\Controller\Api;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -17,11 +17,12 @@ use Doctrine\ORM\Tools\Pagination\Paginator;
 use Tavro\Bundle\CoreBundle\Entity\Node;
 use Tavro\Bundle\CoreBundle\Entity\Tag;
 use Tavro\Bundle\CoreBundle\Entity\NodeTag;
+use Tavro\Bundle\CoreBundle\Entity\User;
 use Tavro\Bundle\CoreBundle\Entity\NodeComment;
 use Symfony\Component\HttpFoundation\Cookie;
 
 use Litwicki\Common\Common;
-use Tavro\Bundle\ApiBundle\Controller\ApiController as ApiController;
+use Tavro\Bundle\ApiBundle\Controller\Api\ApiController as ApiController;
 
 class NodeController extends ApiController
 {
@@ -195,6 +196,23 @@ class NodeController extends ApiController
             throw $e;
         }
 
+    }
+
+    /**
+     * @param \Symfony\Component\HttpFoundation\Request $request
+     * @param \Tavro\Bundle\CoreBundle\Entity\User $user
+     * @param $_format
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function byUserAction(Request $request, User $user, $_format)
+    {
+        $nodes = $user->getNodes();
+
+        return $this->apiResponse($nodes, [
+            'format' => $_format,
+            'group' => 'simple'
+        ]);
     }
 
 }
