@@ -18,18 +18,17 @@ use Doctrine\ORM\Tools\Pagination\Paginator;
 
 use Tavro\Bundle\CoreBundle\Entity\Forecast;
 use Tavro\Bundle\CoreBundle\Entity\Tag;
-use Tavro\Bundle\CoreBundle\Entity\ForecastTag;
 use Tavro\Bundle\CoreBundle\Entity\ForecastComment;
 use Symfony\Component\HttpFoundation\Cookie;
 
 use Litwicki\Common\Common;
 use Tavro\Bundle\ApiBundle\Controller\Api\ApiController as ApiController;
 
-class ForecastController extends ApiController
+class ForecastStaffPersonController extends ApiController
 {
 
     /**
-     * Display all Comments for this Forecast.
+     * Display all Staff for this Forecast.
      *
      * @param \Symfony\Component\HttpFoundation\Request $request
      * @param \Tavro\Bundle\CoreBundle\Entity\Forecast $forecast
@@ -38,27 +37,26 @@ class ForecastController extends ApiController
      * @return \Symfony\Component\HttpFoundation\Response
      * @throws \Exception
      */
-    public function commentsAction(Request $request, Forecast $forecast, $_format)
-    {
+    public function byForecastAction(Request $request, Forecast $forecast, $_format) {
+
         try {
 
-            $entities = $forecast->getForecastComments();
+            $entities = $forecast->getForecastStaffPersons();
 
             $items = array();
 
-            foreach($entities as $entity) {
-                $items[] = $entity->getComment();
+            foreach ($entities as $entity) {
+                $items[] = $entity->getStaffPerson();
             }
 
             return $this->apiResponse($entities, [
                 'format' => $_format,
-                'group' => 'simple'
+                'group'  => 'simple'
             ]);
-
-        }
-        catch(\Exception $e) {
+        } catch (\Exception $e) {
             throw $e;
         }
+
     }
 
     /**
@@ -69,26 +67,22 @@ class ForecastController extends ApiController
      * @return \Symfony\Component\HttpFoundation\Response
      * @throws \Exception
      */
-    public function newCommentAction(Request $request, Forecast $forecast, $_format)
+    public function newStaffPersonAction(Request $request, Forecast $forecast, $_format)
     {
         try {
 
             $data = json_decode($request->getContent(), TRUE);
 
-            $handler = $this->getHandler('comments');
-            $comment = $handler->post($request, $data);
+            if(!$forecast->getId() != $data['forecast_id']) {
+                throw new InvalidFieldException('Invalid or mismatching Forecast Id');
+            }
 
-            /**
-             * Attach the Comment to the Forecast
-             */
-            $this->getHandler('forecast_comments')->post($request, array(
-                'comment' => $comment->getId(),
-                'forecast' => $forecast->getId()
-            ));
+            $handler = $this->getHandler('forecast_staff_persons');
+            $entity = $handler->post($request, $data);
 
             $routeOptions = array(
-                'entity'  => 'comments',
-                'id'      => $comment->getId(),
+                'entity'  => 'forecast_staff_persons',
+                'id'      => $entity->getId(),
                 'format'  => $_format,
             );
 

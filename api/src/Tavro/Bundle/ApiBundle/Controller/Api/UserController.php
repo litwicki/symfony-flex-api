@@ -48,37 +48,15 @@ class UserController extends ApiController
             $userHandler = $this->getHandler('users');
             $personHandler = $this->getHandler('people');
 
-            $personData = [
-                'first_name' => isset($data['first_name']) ? $data['first_name'] : null,
-                'middle_name' => isset($data['middle_name']) ? $data['middle_name'] : null,
-                'last_name' => isset($data['last_name']) ? $data['last_name'] : null,
-                'email' => isset($data['email']) ? $data['email'] : null,
-                'gender' => isset($data['gender']) ? $data['gender'] : null,
-                'suffix' => isset($data['suffix']) ? $data['suffix'] : null,
-                'birthday' => isset($data['birthday']) ? $data['birthday'] : null,
-                'address' => isset($data['address']) ? $data['address'] : null,
-                'address2' => isset($data['address2']) ? $data['address2'] : null,
-                'city' => isset($data['city']) ? $data['city'] : null,
-                'state' => isset($data['state']) ? $data['state'] : null,
-                'zip' => isset($data['zip']) ? $data['zip'] : null,
-                'phone' => isset($data['phone']) ? $data['phone'] : null,
-                'body' => isset($data['body']) ? $data['body'] : null,
-                'status' => isset($data['status']) ? $data['status'] : null,
-            ];
+            $personData = $data['person'];
+            unset($data['person']);
+
+            $userData = $data;
 
             /**
              * Separate the `Person` and `User` data to the separate requests.
              */
-            $newPerson = $personHandler->post($request, $personData);
-
-            $userData = [
-                'person' => $newPerson->getId(),
-                'username' => isset($data['username']) ? $data['username'] : null,
-                'api_enabled' => isset($data['api_enabled']) ? $data['api_enabled'] : FALSE,
-                'signature' => isset($data['signature']) ? $data['signature'] : null,
-                'password' => isset($data['password']) ? $data['password'] : null,
-                'status' => isset($data['status']) ? $data['status'] : null,
-            ];
+            $personHandler->post($request, $personData);
 
             $newUser = $userHandler->post($request, $userData);
 
@@ -124,6 +102,44 @@ class UserController extends ApiController
         catch(\Exception $e) {
             throw $e;
         }
+    }
+
+    /**
+     * @param \Symfony\Component\HttpFoundation\Request $request
+     * @param \Tavro\Bundle\CoreBundle\Entity\User $user
+     * @param $_format
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function accountsAction(Request $request, User $user, $_format)
+    {
+
+        $accounts = $user->getUserAccounts();
+
+        $items = array();
+
+        foreach($accounts as $entity) {
+            $account = $entity->getAccount();
+            $items[$account->getId()] = $account;
+        }
+
+        /**
+         * Cross Reference every Organization this User owns but may not be
+         * a "User" of..
+         */
+        $entities = $this->getDoctrine()->getManager()->getRepository('TavroApiBundle:Account')->findBy(array(
+            'user' => $user
+        ));
+
+        foreach($entities as $entity) {
+            $items[$entity->getId()] = $entity;
+        }
+
+        return $this->apiResponse($items, [
+            'format' => $_format,
+            'group' => 'simple'
+        ]);
+
     }
 
     /**

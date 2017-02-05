@@ -25,6 +25,18 @@ tavro_expense_api:
 tavro_expense_category_api:
     resource: "@TavroApiBundle/Resources/config/routing/expense_category.yml"
 
+tavro_forecast_api:
+    resource: "@TavroApiBundle/Resources/config/routing/forecast.yml"
+
+tavro_forecast_revenue_api:
+    resource: "@TavroApiBundle/Resources/config/routing/forecast_revenue.yml"
+
+tavro_forecast_expense_api:
+    resource: "@TavroApiBundle/Resources/config/routing/forecast_expense.yml"
+
+tavro_forecast_staff_api:
+    resource: "@TavroApiBundle/Resources/config/routing/forecast_staff.yml"
+
 tavro_funding_api:
     resource: "@TavroApiBundle/Resources/config/routing/funding.yml"
 
