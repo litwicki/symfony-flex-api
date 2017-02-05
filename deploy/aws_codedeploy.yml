@@ -21,16 +21,15 @@ import boto3
 from botocore.exceptions import ClientError
 
 VERSION_LABEL = strftime("%Y%m%d%H%M%S")
-BUCKET_KEY = os.getenv(VERSION_LABEL + \
-    '-bitbucket_builds.tar.gz'
-AWS_S3_REGION = os.getenv(AWS_S3_REGION)
+BUCKET_KEY = os.getenv('APPLICATION_NAME') + '/' + VERSION_LABEL + \
+    '-tavro-api.zip'
 
 def upload_to_s3(artifact):
     """
     Uploads an artifact to Amazon S3
     """
     try:
-        client = boto3.client('s3', region_name=AWS_S3_REGION)
+        client = boto3.client('s3')
     except ClientError as err:
         print("Failed to create boto3 client.\n" + str(err))
         return False
@@ -44,7 +43,7 @@ def upload_to_s3(artifact):
         print("Failed to upload artifact to S3.\n" + str(err))
         return False
     except IOError as err:
-        print("Failed to access artifact.tar.gz in this directory.\n" + str(err))
+        print("Failed to access artifact.zip in this directory.\n" + str(err))
         return False
     return True
 
@@ -53,21 +52,21 @@ def deploy_new_revision():
     Deploy a new application revision to AWS CodeDeploy Deployment Group
     """
     try:
-        client = boto3.client('codedeploy', region_name=AWS_S3_REGION)
+        client = boto3.client('codedeploy')
     except ClientError as err:
         print("Failed to create boto3 client.\n" + str(err))
         return False
 
     try:
         response = client.create_deployment(
-            applicationName=str(os.getenv('APP_NAME')),
+            applicationName=str(os.getenv('APPLICATION_NAME')),
             deploymentGroupName=str(os.getenv('DEPLOYMENT_GROUP_NAME')),
             revision={
                 'revisionType': 'S3',
                 's3Location': {
                     'bucket': os.getenv('S3_CODEDEPLOY_BUCKET'),
                     'key': BUCKET_KEY,
-                    'bundleType': 'tgz'
+                    'bundleType': 'zip'
                 }
             },
             deploymentConfigName=str(os.getenv('DEPLOYMENT_CONFIG')),
@@ -101,11 +100,9 @@ def deploy_new_revision():
     return True
 
 def main():
-    if not upload_to_s3('/tmp/artifact.tar.gz'):
-        print("Error uploading to S3")
+    if not upload_to_s3('/tmp/artifact.zip'):
         sys.exit(1)
     if not deploy_new_revision():
-        print("Error uploading new Revision to S3")
         sys.exit(1)
 
 if __name__ == "__main__":
