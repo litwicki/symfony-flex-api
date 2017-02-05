@@ -96,3 +96,11 @@ api_new_funding_round_shareholder:
     methods: POST
     requirements:
         _format:  json|xml
+
+api_funding_by_account:
+    path: /accounts/{account}/funding.{_format}
+    defaults: { _controller: TavroApiBundle:Api\Funding:byAccount, _format: json}
+    methods: GET
+    requirements:
+        account: \d+
+        _format: json|xml

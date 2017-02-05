@@ -43,3 +43,11 @@ api_delete_revenue_category:
     requirements:
         id: \d+
         _format:  json|xml
+
+api_revenue_categories_by_account:
+    path: /accounts/{account}/revenue_categories.{_format}
+    defaults: { _controller: TavroApiBundle:Api\RevenueCategory:byAccount, _format: json}
+    methods: GET
+    requirements:
+        account: \d+
+        _format: json|xml

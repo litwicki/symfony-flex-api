@@ -82,3 +82,11 @@ api_new_expense_comment:
     requirements:
         organization: \d+
         _format: json|xml
+
+api_expenses_by_account:
+    path: /accounts/{account}/expenses.{_format}
+    defaults: { _controller: TavroApiBundle:Api\Expense:byAccount, _format: json}
+    methods: GET
+    requirements:
+        account: \d+
+        _format: json|xml

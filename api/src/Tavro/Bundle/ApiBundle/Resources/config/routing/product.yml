@@ -64,3 +64,11 @@ api_typeahead_products:
     methods: GET
     requirements:
         _format:  json|xml
+
+api_account_products:
+    path: /accounts/{account}/products.{_format}
+    defaults: { _controller: TavroApiBundle:Api\Product:byAccount, _format: json}
+    methods: GET
+    requirements:
+        account: \d+
+        _format: json|xml

@@ -14,6 +14,7 @@ use Tavro\Bundle\CoreBundle\Exception\Form\InvalidFormException;
 use Doctrine\Common\Inflector\Inflector;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 
+use Tavro\Bundle\CoreBundle\Entity\Account;
 use Tavro\Bundle\CoreBundle\Entity\Expense;
 use Tavro\Bundle\CoreBundle\Entity\ExpenseComment;
 use Symfony\Component\HttpFoundation\Cookie;
@@ -163,6 +164,30 @@ class ExpenseController extends ApiController
 
             return $this->forward('TavroApiBundle:Default:get', $routeOptions);
 
+        }
+        catch(\Exception $e) {
+            throw $e;
+        }
+    }
+
+    /**
+     * @param \Symfony\Component\HttpFoundation\Request $request
+     * @param \Tavro\Bundle\CoreBundle\Entity\Account $account
+     * @param $_format
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     * @throws \Exception
+     */
+    public function byAccountAction(Request $request, Account $account, $_format)
+    {
+        try {
+
+            $entities = $account->getExpenses();
+
+            return $this->apiResponse($entities, [
+                'format' => $_format,
+                'group' => 'simple'
+            ]);
         }
         catch(\Exception $e) {
             throw $e;

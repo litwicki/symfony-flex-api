@@ -14,6 +14,7 @@ use Tavro\Bundle\CoreBundle\Exception\Form\InvalidFormException;
 use Doctrine\Common\Inflector\Inflector;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 
+use Tavro\Bundle\CoreBundle\Entity\Account;
 use Tavro\Bundle\CoreBundle\Entity\Organization;
 use Symfony\Component\HttpFoundation\Cookie;
 
@@ -119,6 +120,34 @@ class OrganizationController extends ApiController
             throw $e;
         }
 
+    }
+
+    /**
+     * @param \Symfony\Component\HttpFoundation\Request $request
+     * @param \Tavro\Bundle\CoreBundle\Entity\Account $account
+     * @param $_format
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     * @throws \Exception
+     */
+    public function byAccount(Request $request, Account $account, $_format)
+    {
+        try {
+
+            if(false === $this->isGranted('view', $account)) {
+                throw new ApiAccessDeniedException('You are not authorized to access this Account.');
+            }
+
+            $entities = $account->getOrganizations();
+
+            return $this->apiResponse($entities, [
+                'format' => $_format,
+                'group' => 'simple'
+            ]);
+        }
+        catch(\Exception $e) {
+            throw $e;
+        }
     }
 
 }

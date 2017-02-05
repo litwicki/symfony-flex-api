@@ -1,11 +1,3 @@
-api_get_account_groups:
-    path: /accounts/{account}/groups.{_format}
-    defaults: { _controller: TavroApiBundle:Api\AccountGroup:getAll, _format: json}
-    methods: GET
-    requirements:
-        account: \d+
-        _format: json|xml
-
 api_get_account_group:
     path: /accounts/{account}/groups.{_format}
     defaults: { _controller: TavroApiBundle:Api\AccountGroup:get, _format: json}
@@ -37,3 +29,11 @@ api_delete_account_group:
     requirements:
         id: \d+
         _format:  json|xml
+
+api_account_groups_by_account:
+    path: /accounts/{account}/groups.{_format}
+    defaults: { _controller: TavroApiBundle:Api\AccountGroup:byAccount, _format: json}
+    methods: GET
+    requirements:
+        account: \d+
+        _format: json|xml

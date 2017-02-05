@@ -36,7 +36,7 @@ class AccountGroupController extends ApiController
      * @return \Symfony\Component\HttpFoundation\Response
      * @throws \Exception
      */
-    public function getAll(Request $request, $account, $_format)
+    public function byAccount(Request $request, Account $account, $_format)
     {
         try {
 

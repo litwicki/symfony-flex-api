@@ -96,3 +96,11 @@ api_new_revenue_comment:
     requirements:
         organization: \d+
         _format: json|xml
+
+api_revenue_by_account:
+    path: /accounts/{account}/revenues.{_format}
+    defaults: { _controller: TavroApiBundle:Api\Revenue:byAccount, _format: json}
+    methods: GET
+    requirements:
+        account: \d+
+        _format: json|xml

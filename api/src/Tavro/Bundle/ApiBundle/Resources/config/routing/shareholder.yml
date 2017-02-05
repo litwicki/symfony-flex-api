@@ -50,3 +50,11 @@ api_typeahead_shareholders:
     methods: GET
     requirements:
         _format:  json|xml
+
+api_shareholders_by_account:
+    path: /accounts/{account}/shareholders.{_format}
+    defaults: { _controller: TavroApiBundle:Api\Shareholder:byAccount, _format: json}
+    methods: GET
+    requirements:
+        account: \d+
+        _format: json|xml

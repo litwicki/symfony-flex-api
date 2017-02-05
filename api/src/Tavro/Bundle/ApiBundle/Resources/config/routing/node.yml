@@ -98,3 +98,11 @@ api_user_nodes:
     requirements:
         user: \d+
         _format: json|xml
+
+api_nodes_by_account:
+    path: /accounts/{account}/nodes.{_format}
+    defaults: { _controller: TavroApiBundle:Api\Node:byAccount, _format: json}
+    methods: GET
+    requirements:
+        account: \d+
+        _format: json|xml

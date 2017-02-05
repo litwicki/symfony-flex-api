@@ -43,3 +43,11 @@ api_delete_expense_category:
     requirements:
         id: \d+
         _format:  json|xml
+
+api_expense_categories_by_account:
+    path: /accounts/{account}/expenses/categories.{_format}
+    defaults: { _controller: TavroApiBundle:Api\ExpenseCategory:byAccount, _format: json}
+    methods: GET
+    requirements:
+        account: \d+
+        _format: json|xml
