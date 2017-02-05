@@ -51,7 +51,7 @@ class AuthController extends ApiController
         $user = $this->getDoctrine()->getRepository('TavroCoreBundle:User')->findOneBy(['username' => $username]);
 
         if(!$user) {
-            throw $this->createNotFoundException();
+            throw $this->createNotFoundException('The Username or Password were invalid.');
         }
 
         // password check
