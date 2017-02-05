@@ -227,4 +227,28 @@ class UserController extends ApiController
         ]);
     }
 
+    /**
+     * GET the current user.
+     *
+     * @param \Symfony\Component\HttpFoundation\Request $request
+     * @param $_format
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     * @throws \Exception
+     */
+    public function getCurrentAction(Request $request, $_format)
+    {
+        try {
+            $user = $this->getUser();
+
+            return $this->apiResponse($user, [
+                'format' => $_format,
+                'group' => 'simple'
+            ]);
+        }
+        catch(\Exception $e) {
+            throw $e;
+        }
+    }
+
 }
