@@ -19,7 +19,7 @@ use Tavro\Bundle\CoreBundle\Entity\ExpenseComment;
 use Symfony\Component\HttpFoundation\Cookie;
 
 use Litwicki\Common\Common;
-use Tavro\Bundle\ApiBundle\Controller\DefaultController as ApiController;
+use Tavro\Bundle\ApiBundle\Controller\ApiController as ApiController;
 
 class PersonController extends ApiController
 {

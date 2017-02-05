@@ -5,9 +5,9 @@ namespace Tavro\Bundle\ApiBundle\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-use Tavro\Bundle\ApiBundle\Controller\DefaultController;
+use Tavro\Bundle\ApiBundle\Controller\ApiController;
 
-class LogController extends DefaultController
+class LogController extends ApiController
 {
     /**
      * @param Request $request

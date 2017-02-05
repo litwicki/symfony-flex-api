@@ -21,7 +21,7 @@ use Tavro\Bundle\CoreBundle\Entity\NodeComment;
 use Symfony\Component\HttpFoundation\Cookie;
 
 use Litwicki\Common\Common;
-use Tavro\Bundle\ApiBundle\Controller\DefaultController as ApiController;
+use Tavro\Bundle\ApiBundle\Controller\ApiController as ApiController;
 
 class SyndicateController extends ApiController
 {

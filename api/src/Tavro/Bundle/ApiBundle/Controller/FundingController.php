@@ -20,7 +20,7 @@ use Symfony\Component\HttpFoundation\Cookie;
 
 use Tavro\Bundle\CoreBundle\Entity\FundingRound;
 use Litwicki\Common\Common;
-use Tavro\Bundle\ApiBundle\Controller\DefaultController as ApiController;
+use Tavro\Bundle\ApiBundle\Controller\ApiController as ApiController;
 
 class FundingController extends ApiController
 {

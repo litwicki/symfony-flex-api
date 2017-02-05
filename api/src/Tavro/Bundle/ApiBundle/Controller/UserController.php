@@ -21,7 +21,7 @@ use Symfony\Component\HttpFoundation\Cookie;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
 use Litwicki\Common\Common;
-use Tavro\Bundle\ApiBundle\Controller\DefaultController as ApiController;
+use Tavro\Bundle\ApiBundle\Controller\ApiController as ApiController;
 
 class UserController extends ApiController
 {
