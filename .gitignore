@@ -96,8 +96,9 @@ sftp-config.json
 /app/aws.json
 /app/node_modules
 /app/bower_components
-/sami/build/*
-/sami/cache/*
+/docs/build/*
+/docs/cache/*
+/docs/sami.phar
 
 /api/var/cache/
 /api/var/logs/
@@ -105,6 +106,3 @@ sftp-config.json
 /sami/cache/
 /phpunit
 /*.log
-
-/api/src/Litwicki
-/api/blueprint/__tavro.md
