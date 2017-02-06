@@ -1,7 +1,8 @@
 <?php
 
-namespace Tavro\Bundle\ApiBundle\Controller;
+namespace Tavro\Bundle\ApiBundle\Controller\Entity;
 
+use Symfony\Component\Finder\Exception\AccessDeniedException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -9,60 +10,39 @@ use Tavro\Bundle\CoreBundle\Exception\Api\ApiException;
 use Tavro\Bundle\CoreBundle\Exception\Api\ApiNotFoundException;
 use Tavro\Bundle\CoreBundle\Exception\Api\ApiRequestLimitException;
 use Tavro\Bundle\CoreBundle\Exception\Api\ApiAccessDeniedException;
+use Tavro\Bundle\CoreBundle\Exception\Form\InvalidFieldException;
 use Tavro\Bundle\CoreBundle\Exception\Form\InvalidFormException;
 
 use Doctrine\Common\Inflector\Inflector;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 
-use Tavro\Bundle\CoreBundle\Entity\Organization;
+use Tavro\Bundle\CoreBundle\Entity\Forecast;
+use Tavro\Bundle\CoreBundle\Entity\Tag;
+use Tavro\Bundle\CoreBundle\Entity\ForecastTag;
+use Tavro\Bundle\CoreBundle\Entity\ForecastComment;
 use Symfony\Component\HttpFoundation\Cookie;
 
 use Litwicki\Common\Common;
-use Tavro\Bundle\ApiBundle\Controller\DefaultController as ApiController;
+use Tavro\Bundle\ApiBundle\Controller\Api\ApiController as ApiController;
 
-class OrganizationController extends ApiController
+class ForecastController extends ApiController
 {
 
     /**
+     * Display all Comments for this Forecast.
+     *
      * @param \Symfony\Component\HttpFoundation\Request $request
-     * @param \Tavro\Bundle\CoreBundle\Entity\Organization $organization
+     * @param \Tavro\Bundle\CoreBundle\Entity\Forecast $forecast
      * @param $_format
      *
      * @return \Symfony\Component\HttpFoundation\Response
      * @throws \Exception
      */
-    public function contactsAction(Request $request, Organization $organization, $_format)
+    public function commentsAction(Request $request, Forecast $forecast, $_format)
     {
         try {
 
-            $entities = $organization->getContacts();
-
-            return $this->apiResponse($entities, [
-                'format' => $_format,
-            ]);
-
-        }
-        catch(\Exception $e) {
-            throw $e;
-        }
-
-    }
-    
-    /**
-     * Display all Comments for this Organization.
-     *
-     * @param \Symfony\Component\HttpFoundation\Request $request
-     * @param \Tavro\Bundle\CoreBundle\Entity\Organization $organization
-     * @param $_format
-     *
-     * @return \Symfony\Component\HttpFoundation\Response
-     * @throws \Exception
-     */
-    public function commentsAction(Request $request, Organization $organization, $_format)
-    {
-        try {
-
-            $entities = $organization->getOrganizationComments();
+            $entities = $forecast->getForecastComments();
 
             $items = array();
 
@@ -83,13 +63,13 @@ class OrganizationController extends ApiController
 
     /**
      * @param \Symfony\Component\HttpFoundation\Request $request
-     * @param \Tavro\Bundle\CoreBundle\Entity\Organization $organization
+     * @param \Tavro\Bundle\CoreBundle\Entity\Forecast $forecast
      * @param $_format
      *
      * @return \Symfony\Component\HttpFoundation\Response
      * @throws \Exception
      */
-    public function newCommentAction(Request $request, Organization $organization, $_format)
+    public function newCommentAction(Request $request, Forecast $forecast, $_format)
     {
         try {
 
@@ -99,11 +79,11 @@ class OrganizationController extends ApiController
             $comment = $handler->post($request, $data);
 
             /**
-             * Attach the Comment to the Organization
+             * Attach the Comment to the Forecast
              */
-            $this->getHandler('organization_comments')->post($request, array(
+            $this->getHandler('forecast_comments')->post($request, array(
                 'comment' => $comment->getId(),
-                'organization' => $organization->getId()
+                'forecast' => $forecast->getId()
             ));
 
             $routeOptions = array(

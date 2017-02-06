@@ -1,6 +1,6 @@
 <?php
 
-namespace Tavro\Bundle\ApiBundle\Controller;
+namespace Tavro\Bundle\ApiBundle\Controller\Entity;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -19,9 +19,10 @@ use Tavro\Bundle\CoreBundle\Entity\ExpenseComment;
 use Symfony\Component\HttpFoundation\Cookie;
 
 use Tavro\Bundle\CoreBundle\Entity\Revenue;
+use Tavro\Bundle\CoreBundle\Entity\Account;
 
 use Litwicki\Common\Common;
-use Tavro\Bundle\ApiBundle\Controller\DefaultController as ApiController;
+use Tavro\Bundle\ApiBundle\Controller\Api\ApiController as ApiController;
 
 class RevenueController extends ApiController
 {
@@ -59,6 +60,30 @@ class RevenueController extends ApiController
 
             return $this->forward('TavroApiBundle:Default:get', $routeOptions);
 
+        }
+        catch(\Exception $e) {
+            throw $e;
+        }
+    }
+
+    /**
+     * @param \Symfony\Component\HttpFoundation\Request $request
+     * @param \Tavro\Bundle\CoreBundle\Entity\Account $account
+     * @param $_format
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     * @throws \Exception
+     */
+    public function byAccount(Request $request, Account $account, $_format)
+    {
+        try {
+
+            $entities = $account->getRevenues();
+
+            return $this->apiResponse($entities, [
+                'format' => $_format,
+                'group' => 'simple'
+            ]);
         }
         catch(\Exception $e) {
             throw $e;

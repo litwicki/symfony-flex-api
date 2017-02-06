@@ -1,6 +1,6 @@
 api_import_hubspot:
     path: /accounts/{account}/import/hubspot.{_format}
-    defaults: { _controller: TavroApiBundle:Hubspot:hubspotImport, _format: json}
+    defaults: { _controller: TavroApiBundle:Entity\Hubspot:hubspotImport, _format: json}
     methods: POST
     requirements:
         organization: \d+
@@ -8,7 +8,7 @@ api_import_hubspot:
 
 api_import_qbo:
     path: /accounts/{account}/import/qbo.{_format}
-    defaults: { _controller: TavroApiBundle:Command:qboImport, _format: json}
+    defaults: { _controller: TavroApiBundle:Entity\Command:qboImport, _format: json}
     methods: POST
     requirements:
         organization: \d+

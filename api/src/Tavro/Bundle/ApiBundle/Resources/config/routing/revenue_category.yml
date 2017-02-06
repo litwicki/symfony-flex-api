@@ -1,6 +1,6 @@
 api_get_revenue_category:
     path: /revenue_categories/{id}.{_format}
-    defaults: { _controller: TavroApiBundle:RevenueCategory:get, _format: json, entity: "revenue_categories" }
+    defaults: { _controller: TavroApiBundle:Entity\RevenueCategory:get, _format: json, entity: "revenue_categories" }
     methods: GET
     requirements:
         id: \d+
@@ -8,21 +8,21 @@ api_get_revenue_category:
 
 api_get_all_revenue_categories:
     path:  /revenue_categories.{_format}
-    defaults: { _controller: TavroApiBundle:RevenueCategory:getAll, _format: json, entity: "revenue_categories" }
+    defaults: { _controller: TavroApiBundle:Entity\RevenueCategory:getAll, _format: json, entity: "revenue_categories" }
     methods: GET
     requirements:
         _format:  json|xml
 
 api_post_revenue_category:
     path:  /revenue_categories.{_format}
-    defaults: { _controller: TavroApiBundle:RevenueCategory:post, _format: json, entity: "revenue_categories" }
+    defaults: { _controller: TavroApiBundle:Entity\RevenueCategory:post, _format: json, entity: "revenue_categories" }
     methods: POST
     requirements:
         _format:  json|xml
 
 api_patch_revenue_category:
     path:  /revenue_categories/{id}.{_format}
-    defaults: { _controller: TavroApiBundle:RevenueCategory:patch, _format: json, entity: "revenue_categories" }
+    defaults: { _controller: TavroApiBundle:Entity\RevenueCategory:patch, _format: json, entity: "revenue_categories" }
     methods: PATCH
     requirements:
         id: \d+
@@ -30,7 +30,7 @@ api_patch_revenue_category:
 
 api_put_revenue_category:
     path:  /revenue_categories/{id}.{_format}
-    defaults: { _controller: TavroApiBundle:RevenueCategory:put, _format: json, entity: "revenue_categories" }
+    defaults: { _controller: TavroApiBundle:Entity\RevenueCategory:put, _format: json, entity: "revenue_categories" }
     methods: PUT
     requirements:
         id: \d+
@@ -38,8 +38,16 @@ api_put_revenue_category:
 
 api_delete_revenue_category:
     path:  /revenue_categories/{id}.{_format}
-    defaults: { _controller: TavroApiBundle:RevenueCategory:delete, _format: json, entity: "revenue_categories" }
+    defaults: { _controller: TavroApiBundle:Entity\RevenueCategory:delete, _format: json, entity: "revenue_categories" }
     methods: DELETE
     requirements:
         id: \d+
         _format:  json|xml
+
+api_revenue_categories_by_account:
+    path: /accounts/{account}/revenue_categories.{_format}
+    defaults: { _controller: TavroApiBundle:Entity\RevenueCategory:byAccount, _format: json}
+    methods: GET
+    requirements:
+        account: \d+
+        _format: json|xml

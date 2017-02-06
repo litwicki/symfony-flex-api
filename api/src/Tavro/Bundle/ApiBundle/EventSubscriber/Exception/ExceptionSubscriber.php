@@ -15,13 +15,13 @@ class ExceptionSubscriber implements EventSubscriberInterface
 {
     protected $debug;
     protected $serializer;
-    protected $logger;
+    protected $logService;
 
-    public function __construct($debug, $serializer, $logger)
+    public function __construct($debug, $serializer, $logService)
     {
         $this->debug = $debug;
         $this->serializer = $serializer;
-        $this->logger = $logger;
+        $this->logService = $logService;
     }
 
     public static function getSubscribedEvents()
@@ -86,27 +86,7 @@ class ExceptionSubscriber implements EventSubscriberInterface
     public function logException(GetResponseForExceptionEvent $event)
     {
         try {
-
-            $exception = $event->getException();
-            $code = $exception->getCode();
-            $message = $exception->getMessage();
-
-            switch($code) {
-
-                case 401:
-                case 403:
-                    $this->logger->info($message);
-                    break;
-                case 500:
-                    $this->logger->critical($message, array(
-                        // include extra "context" info in your logs
-                        'cause' => get_class($exception),
-                    ));
-                    break;
-                default:
-                    $this->logger->error($message);
-            }
-
+            $this->logService->logException($event->getException());
         }
         catch(\Exception $e) {
             throw $e;

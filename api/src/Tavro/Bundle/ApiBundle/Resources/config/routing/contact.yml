@@ -1,6 +1,6 @@
 api_get_contact:
     path: /contacts/{id}.{_format}
-    defaults: { _controller: TavroApiBundle:Contact:get, _format: json, entity: "contacts" }
+    defaults: { _controller: TavroApiBundle:Entity\Contact:get, _format: json, entity: "contacts" }
     methods: GET
     requirements:
         id: \d+
@@ -8,21 +8,21 @@ api_get_contact:
 
 api_get_all_contacts:
     path:  /contacts.{_format}
-    defaults: { _controller: TavroApiBundle:Contact:getAll, _format: json, entity: "contacts" }
+    defaults: { _controller: TavroApiBundle:Entity\Contact:getAll, _format: json, entity: "contacts" }
     methods: GET
     requirements:
         _format:  json|xml
 
 api_post_contact:
     path:  /contacts.{_format}
-    defaults: { _controller: TavroApiBundle:Contact:post, _format: json, entity: "contacts" }
+    defaults: { _controller: TavroApiBundle:Entity\Contact:post, _format: json, entity: "contacts" }
     methods: POST
     requirements:
         _format:  json|xml
 
 api_patch_contact:
     path:  /contacts/{id}.{_format}
-    defaults: { _controller: TavroApiBundle:Contact:patch, _format: json, entity: "contacts" }
+    defaults: { _controller: TavroApiBundle:Entity\Contact:patch, _format: json, entity: "contacts" }
     methods: PATCH
     requirements:
         id: \d+
@@ -30,7 +30,7 @@ api_patch_contact:
 
 api_put_contact:
     path:  /contacts/{id}.{_format}
-    defaults: { _controller: TavroApiBundle:Contact:put, _format: json, entity: "contacts" }
+    defaults: { _controller: TavroApiBundle:Entity\Contact:put, _format: json, entity: "contacts" }
     methods: PUT
     requirements:
         id: \d+
@@ -38,7 +38,7 @@ api_put_contact:
 
 api_delete_contact:
     path:  /contacts/{id}.{_format}
-    defaults: { _controller: TavroApiBundle:Contact:delete, _format: json, entity: "contacts" }
+    defaults: { _controller: TavroApiBundle:Entity\Contact:delete, _format: json, entity: "contacts" }
     methods: DELETE
     requirements:
         id: \d+
@@ -46,14 +46,14 @@ api_delete_contact:
 
 api_typeahead_contacts:
     path:  /typeahead/contacts.{_format}
-    defaults: { _controller: TavroApiBundle:Contact:typeahead, _format: json }
+    defaults: { _controller: TavroApiBundle:Entity\Contact:typeahead, _format: json }
     methods: GET
     requirements:
         _format:  json|xml
 
 api_contact_comments:
     path: /contacts/{contact}/comments.{_format}
-    defaults: { _controller: TavroApiBundle:Contact:comments, _format: json}
+    defaults: { _controller: TavroApiBundle:Entity\Contact:comments, _format: json}
     methods: GET
     requirements:
         organization: \d+
@@ -61,7 +61,7 @@ api_contact_comments:
 
 api_new_contact_comment:
     path: /contacts/{contact}/comments.{_format}
-    defaults: { _controller: TavroApiBundle:Contact:newComment, _format: json}
+    defaults: { _controller: TavroApiBundle:Entity\Contact:newComment, _format: json}
     methods: POST
     requirements:
         organization: \d+

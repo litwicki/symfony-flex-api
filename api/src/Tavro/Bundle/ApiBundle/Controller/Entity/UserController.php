@@ -1,6 +1,6 @@
 <?php
 
-namespace Tavro\Bundle\ApiBundle\Controller;
+namespace Tavro\Bundle\ApiBundle\Controller\Entity;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -21,7 +21,7 @@ use Symfony\Component\HttpFoundation\Cookie;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
 use Litwicki\Common\Common;
-use Tavro\Bundle\ApiBundle\Controller\DefaultController as ApiController;
+use Tavro\Bundle\ApiBundle\Controller\Api\ApiController as ApiController;
 
 class UserController extends ApiController
 {
@@ -48,37 +48,15 @@ class UserController extends ApiController
             $userHandler = $this->getHandler('users');
             $personHandler = $this->getHandler('people');
 
-            $personData = [
-                'first_name' => isset($data['first_name']) ? $data['first_name'] : null,
-                'middle_name' => isset($data['middle_name']) ? $data['middle_name'] : null,
-                'last_name' => isset($data['last_name']) ? $data['last_name'] : null,
-                'email' => isset($data['email']) ? $data['email'] : null,
-                'gender' => isset($data['gender']) ? $data['gender'] : null,
-                'suffix' => isset($data['suffix']) ? $data['suffix'] : null,
-                'birthday' => isset($data['birthday']) ? $data['birthday'] : null,
-                'address' => isset($data['address']) ? $data['address'] : null,
-                'address2' => isset($data['address2']) ? $data['address2'] : null,
-                'city' => isset($data['city']) ? $data['city'] : null,
-                'state' => isset($data['state']) ? $data['state'] : null,
-                'zip' => isset($data['zip']) ? $data['zip'] : null,
-                'phone' => isset($data['phone']) ? $data['phone'] : null,
-                'body' => isset($data['body']) ? $data['body'] : null,
-                'status' => isset($data['status']) ? $data['status'] : null,
-            ];
+            $personData = $data['person'];
+            unset($data['person']);
+
+            $userData = $data;
 
             /**
              * Separate the `Person` and `User` data to the separate requests.
              */
-            $newPerson = $personHandler->post($request, $personData);
-
-            $userData = [
-                'person' => $newPerson->getId(),
-                'username' => isset($data['username']) ? $data['username'] : null,
-                'api_enabled' => isset($data['api_enabled']) ? $data['api_enabled'] : FALSE,
-                'signature' => isset($data['signature']) ? $data['signature'] : null,
-                'password' => isset($data['password']) ? $data['password'] : null,
-                'status' => isset($data['status']) ? $data['status'] : null,
-            ];
+            $personHandler->post($request, $personData);
 
             $newUser = $userHandler->post($request, $userData);
 
@@ -127,52 +105,6 @@ class UserController extends ApiController
     }
 
     /**
-     * @param Request $request
-     * @param User $user
-     * @param $_format
-     * @return Response
-     */
-    public function resetApiKeyAction(Request $request, User $user, $_format)
-    {
-        try {
-            $handler = $this->container->get('tavro.handler.users');
-            $handler->resetApiKey($user);
-            $cookie = new Cookie('api_key', $user->getApiKey(), 0, '/', NULL, FALSE, FALSE);
-            $data = $this->serialize($user, $_format);
-            $response = $this->apiResponse($data, $_format);
-            $response->headers->setCookie($cookie);
-            $handler->reauthenticate($user);
-            return $response;
-        }
-        catch(\Exception $e) {
-            throw new ApiException($e->getMessage());
-        }
-    }
-
-    /**
-     * @param Request $request
-     * @param User $user
-     * @param $_format
-     * @return Response
-     */
-    public function resetApiPasswordAction(Request $request, User $user, $_format)
-    {
-        try {
-            $handler = $this->container->get('tavro.handler.users');
-            $handler->resetApiPassword($user);
-            $cookie = new Cookie('api_password', $user->getApiPassword(), 0, '/', NULL, FALSE, FALSE);
-            $data = $this->serialize($user, $_format);
-            $response = $this->apiResponse($data, $_format);
-            $response->headers->setCookie($cookie);
-            $handler->reauthenticate($user);
-            return $response;
-        }
-        catch(\Exception $e) {
-            throw new ApiException($e->getMessage());
-        }
-    }
-
-    /**
      * @param \Symfony\Component\HttpFoundation\Request $request
      * @param \Tavro\Bundle\CoreBundle\Entity\User $user
      * @param $_format
@@ -208,23 +140,6 @@ class UserController extends ApiController
             'group' => 'simple'
         ]);
 
-    }
-
-    /**
-     * @param \Symfony\Component\HttpFoundation\Request $request
-     * @param \Tavro\Bundle\CoreBundle\Entity\User $user
-     * @param $_format
-     *
-     * @return \Symfony\Component\HttpFoundation\Response
-     */
-    public function nodesAction(Request $request, User $user, $_format)
-    {
-        $nodes = $user->getNodes();
-
-        return $this->apiResponse($nodes, [
-            'format' => $_format,
-            'group' => 'simple'
-        ]);
     }
 
     /**
