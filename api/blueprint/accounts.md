@@ -103,9 +103,9 @@ Virtually all entities are related to a particular `Account` and as such retriev
 + Response 200 (application/json)
     + Attributes
         + data (array) - Response data
-            + (Group1)
-            + (Group2)
-        + message: {GROUP_COUNT} Group(s) retrieved successfully.
+            + (AccountGroup1)
+            + (AccountGroup2)
+        + message: {GROUP_COUNT} Groups retrieved successfully.
 
 ### Get Contacts [GET /accounts/{id}/contacts]
 
@@ -117,7 +117,7 @@ Virtually all entities are related to a particular `Account` and as such retriev
         + data (array) - Response data
             + (Contact1)
             + (Contact2)
-        + message: {CONTACT_COUNT} Contact(s) retrieved successfully.
+        + message: {CONTACT_COUNT} Contacts retrieved successfully.
 
 ### Get Organizations [GET /accounts/{id}/groups]
 
@@ -127,9 +127,9 @@ Virtually all entities are related to a particular `Account` and as such retriev
 + Response 200 (application/json)
     + Attributes
         + data (array) - Response data
-            + (Group1)
-            + (Group2)
-        + message: {GROUP_COUNT} Group(s) retrieved successfully.
+            + (AccountGroup1)
+            + (AccountGroup2)
+        + message: {GROUP_COUNT} Groups retrieved successfully.
 
 ### Get Nodes [GET /accounts/{id}/nodes]
 
@@ -141,7 +141,7 @@ Virtually all entities are related to a particular `Account` and as such retriev
         + data (array) - Response data
             + (Node1)
             + (Node2)
-        + message: {ITEM_COUNT} Node(s) retrieved successfully.
+        + message: {ITEM_COUNT} Nodes retrieved successfully.
 
 ### Get Expenses [GET /accounts/{id}/expenses]
 
@@ -153,7 +153,7 @@ Virtually all entities are related to a particular `Account` and as such retriev
         + data (array) - Response data
             + (Expense1)
             + (Expense2)
-        + message: {ITEM_COUNT} Expense(s) retrieved successfully.
+        + message: {ITEM_COUNT} Expenses retrieved successfully.
 
 ### Get Funding [GET /accounts/{id}/funding]
 
@@ -177,7 +177,7 @@ Virtually all entities are related to a particular `Account` and as such retriev
         + data (array) - Response data
             + (Product1)
             + (Product2)
-        + message: {ITEM_COUNT} Product(s) retrieved successfully.
+        + message: {ITEM_COUNT} Products retrieved successfully.
 
 ### Get Revenue [GET /accounts/{id}/revenue]
 
@@ -189,7 +189,7 @@ Virtually all entities are related to a particular `Account` and as such retriev
         + data (array) - Response data
             + (Revenue1)
             + (Revenue2)
-        + message: {ITEM_COUNT} Revenue(s) retrieved successfully.
+        + message: {ITEM_COUNT} Revenues retrieved successfully.
 
 ### Get Services [GET /accounts/{id}/services]
 
@@ -201,7 +201,7 @@ Virtually all entities are related to a particular `Account` and as such retriev
         + data (array) - Response data
             + (Service1)
             + (Service2)
-        + message: {ITEM_COUNT} Service(s) retrieved successfully.
+        + message: {ITEM_COUNT} Services retrieved successfully.
 
 ### Get Shareholders [GET /accounts/{id}/shareholders]
 
@@ -213,4 +213,4 @@ Virtually all entities are related to a particular `Account` and as such retriev
         + data (array) - Response data
             + (Shareholder1)
             + (Shareholder2)
-        + message: {ITEM_COUNT} Shareholder(s) retrieved successfully.
+        + message: {ITEM_COUNT} Shareholders retrieved successfully.
