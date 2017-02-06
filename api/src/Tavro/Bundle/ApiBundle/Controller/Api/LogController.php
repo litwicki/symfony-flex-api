@@ -1,6 +1,6 @@
 <?php
 
-namespace Tavro\Bundle\ApiBundle\Controller\Entity;
+namespace Tavro\Bundle\ApiBundle\Controller\Api;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -22,40 +22,12 @@ class LogController extends ApiController
             $data = json_decode($request->getContent(), TRUE);
             $logger = $this->get('logger');
 
-            switch($data['type']) {
+            if(method_exists($logger, $data['type'])) {
 
-                case 'notice':
-                    $logger->notice($data['message']);
-                    break;
+                $type = $data['type'];
+                $logger->$type($data['message']);
 
-                case 'debug':
-                    $logger->debug($data['message']);
-                    break;
-
-                case 'info':
-                    $logger->info($data['message']);
-                    break;
-
-                case 'warning':
-                    $logger->warning($data['message']);
-                    break;
-
-                case 'error':
-                    $logger->error($data['message']);
-                    break;
-
-                case 'critical':
-                    $logger->critical($data['message'], array(
-                        'cause' => $data['cause']
-                    ));
-                    break;
-
-                case 'emergency':
-
-                    $logger->emergency($data['message'], array(
-                        'cause' => $data['cause']
-                    ));
-
+                if($type == 'emergency') {
                     $now = new \DateTime();
                     $now->setTimezone(new \DateTimeZone($this->getParameter('timezone')));
 
@@ -64,12 +36,11 @@ class LogController extends ApiController
                         'recipients' => $this->getParameter('app_email'),
                         'message' => $data['message']
                     ]);
+                }
 
-                    break;
-
-                default:
-                    break;
-
+            }
+            else {
+                $logger->notice($data['message']);
             }
 
             $data['response'] = 'Log entry was created successfully';
