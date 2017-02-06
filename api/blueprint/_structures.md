@@ -311,7 +311,7 @@ Private API Documentation.
 + update_date: `2015-08-05T08:40:51.620Z` (string, required)
 + account (Account1)
 + expenses (array[ForecastExpense1])
-+ revenues (array[ForecastRevenues1])
++ revenues (array[ForecastRevenue1])
 + staff (array[ForecastStaffPerson1])
 + user (User1)
 
@@ -322,7 +322,7 @@ Private API Documentation.
 + update_date: `2015-08-05T08:40:51.620Z` (string, required)
 + account (Account1)
 + expenses (array[ForecastExpense2])
-+ revenues (array[ForecastRevenues2])
++ revenues (array[ForecastRevenue2])
 + staff (array[ForecastStaffPerson2])
 + user (User1)
 
@@ -333,7 +333,7 @@ Private API Documentation.
 + update_date: `2015-08-05T08:40:51.620Z` (string, required)
 + account (Account2)
 + expenses (array[ForecastExpense3])
-+ revenues (array[ForecastRevenues3])
++ revenues (array[ForecastRevenue3])
 + staff (array[ForecastStaffPerson3])
 + user (User2)
 
