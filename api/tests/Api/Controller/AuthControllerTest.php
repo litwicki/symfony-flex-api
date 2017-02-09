@@ -1,6 +1,6 @@
 <?php namespace Tavro\Tests\Api\Controller;
 
-use Guzzle\Http\Client;
+use GuzzleHttp\Client;;
 
 class LoginTest extends \PHPUnit_Framework_TestCase
 {
