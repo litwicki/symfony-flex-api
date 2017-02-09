@@ -50,7 +50,7 @@ class AccountController extends ApiController
              * Once we have fetched the Account
              */
             $chargify = $this->get('chargify.handler.customer');
-            $customer = $chargify->findByReference($id);
+            $customer = $chargify->find('15769347');
 
             $data = array(
                 'customer' => $customer,
