@@ -99,10 +99,9 @@ sftp-config.json
 /docs/build/*
 /docs/cache/*
 /docs/sami.phar
+/docs/apib.html
 
 /api/var/cache/
 /api/var/logs/
-/sami/build/
-/sami/cache/
 /phpunit
 /*.log

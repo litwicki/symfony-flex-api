@@ -155,3 +155,15 @@ aws:
         credentials: "@tavro.aws_credentials"
     Sns:
         credentials: "@tavro.aws_credentials"
+
+litwicki_chargify:
+    test_mode: "%kernel.debug%"
+    data_format: "json"
+    route_prefix: "/billing"
+    domain: "%chargify_domain%"
+    api_key: "%chargify_api_key%"
+    shared_key: "%chargify_shared_key%"
+    direct:
+        api_id: "%chargify_api_id%"
+        api_secret: "%chargify_api_secret%"
+        api_password: "%chargify_api_password%"
