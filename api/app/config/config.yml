@@ -59,7 +59,7 @@ doctrine:
         user:     "%database_user%"
         password: "%database_password%"
         charset:  UTF8
-        schema_filter: ~^(?!sessions)~
+        schema_filter: ~^(?!sessions|login_attempts)~
 
     orm:
         default_entity_manager: main
