@@ -1,6 +1,6 @@
 <?php namespace Tavro\Tests\Core\Serializer;
 
-use Guzzle\Http\Client;
+use GuzzleHttp\Client;;
 use JMS\Serializer\Serializer;
 use JMS\Serializer\SerializationContext;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;

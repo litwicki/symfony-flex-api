@@ -24,7 +24,8 @@ class AppKernel extends Kernel
             new Knp\Bundle\GaufretteBundle\KnpGaufretteBundle(),
             new Gregwar\CaptchaBundle\GregwarCaptchaBundle(),
             new Lexik\Bundle\JWTAuthenticationBundle\LexikJWTAuthenticationBundle(),
-            new \Aws\Symfony\AwsBundle()
+            new \Aws\Symfony\AwsBundle(),
+            new Litwicki\Bundle\ChargifyBundle\LitwickiChargifyBundle(),
         );
 
         $tavro = array(

@@ -29,4 +29,46 @@ use Tavro\Bundle\ApiBundle\Controller\Api\ApiController as ApiController;
 class AccountController extends ApiController
 {
 
+    /**
+     * Get (find) an Account by Id.
+     *
+     * @param $entity
+     * @param $id
+     * @param $_format
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     * @throws \Exception
+     */
+    public function getAction($entity, $id, $_format)
+    {
+        try {
+
+            $handler = $this->getHandler($entity);
+            $account = $handler->get($id);
+
+            /**
+             * Once we have fetched the Account
+             */
+            $chargify = $this->get('chargify.handler.customer');
+
+            $customer = !is_null($account->getCustomerId()) ? $chargify->get($account->getCustomerId()) : null;
+
+            $data = array(
+                'customer' => $customer,
+                'account' => $account
+            );
+
+            return $this->apiResponse($data, [
+                'format' => $_format
+            ]);
+
+        }
+        catch(ApiAccessDeniedException $e) {
+            throw $e;
+        }
+        catch(\Exception $e) {
+            throw $e;
+        }
+    }
+
 }

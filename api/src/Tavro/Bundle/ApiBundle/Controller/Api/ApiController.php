@@ -73,7 +73,7 @@ class ApiController extends DefaultController
 
             $handler = $this->getHandler($entity);
 
-            if (!($item = $handler->find($id))) {
+            if (!($item = $handler->get($id))) {
                 $item = $handler->post($request, $item, $post);
             }
             else {
@@ -140,7 +140,7 @@ class ApiController extends DefaultController
 
             $params = $request->query->all();
             $handler = $this->getHandler($entity);
-            $items = $handler->findAll($params);
+            $items = $handler->getAll($params);
             return $this->apiResponse($items, [
                 'format' => $_format
             ]);
@@ -164,7 +164,7 @@ class ApiController extends DefaultController
     {
         try {
             $handler = $this->getHandler($entity);
-            $item = $handler->find($id);
+            $item = $handler->get($id);
             return $this->apiResponse($item, [
                 'format' => $_format
             ]);
@@ -195,7 +195,7 @@ class ApiController extends DefaultController
             $class = Inflector::singularize($entity);
             $class = Inflector::classify($class);
 
-            if ($data = $handler->find($id)) {
+            if ($data = $handler->get($id)) {
                 $handler->delete($request, $data);
                 $code = 200;
                 $message = sprintf('%s %s deleted.', $class, $id);

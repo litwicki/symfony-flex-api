@@ -92,7 +92,7 @@ class UserController extends ApiController
 
             $params = $request->query->all();
             $handler = $this->getHandler($entity);
-            $items = $handler->findAll($params);
+            $items = $handler->getAll($params);
 
             return $this->apiResponse($items, [
                 'format' => $_format,

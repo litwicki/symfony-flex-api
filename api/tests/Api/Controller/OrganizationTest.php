@@ -1,6 +1,6 @@
 <?php namespace Tavro\Tests\Api\Controller;
 
-use Guzzle\Http\Client;
+use GuzzleHttp\Client;;
 use Tavro\Bundle\CoreBundle\Testing\TavroTest;
 
 class OrganizationTest extends TavroTest
