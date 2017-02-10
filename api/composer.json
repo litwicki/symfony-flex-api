@@ -46,8 +46,7 @@
     "lexik/jwt-authentication-bundle": "^2.1",
     "zoadilack/tavro-core": "dev-master",
     "litwicki/common": "^1.0",
-    "guzzlehttp/guzzle": "^6.0",
-    "litwicki/chargify-bundle": "dev-master"
+    "guzzlehttp/guzzle": "^6.0"
   },
   "repositories": [
     {

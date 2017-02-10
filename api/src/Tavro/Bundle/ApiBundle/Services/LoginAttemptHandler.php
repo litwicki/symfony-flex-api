@@ -1,15 +1,9 @@
 <?php namespace Tavro\Bundle\ApiBundle\Services;
 
 use Doctrine\ORM\EntityManager;
-use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\Request;
-use Tavro\Bundle\ApiBundle\Exception\JWT\JWTMaximumLoginAttemptsException;
-
-use \OAuth;
-
-use Tavro\Bundle\CoreBundle\Entity\Account;
 
 class LoginAttemptHandler implements ContainerAwareInterface
 {
