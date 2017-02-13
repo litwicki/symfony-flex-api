@@ -8,6 +8,11 @@ imports:
 # http://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
     locale: en
+    tavro_cors:
+      - "%app_hostname%"
+      - "%api_hostname%"
+      - "%admin_hostname%"
+      - "localhost:4000"
     
 twig:
     debug:            "%kernel.debug%"

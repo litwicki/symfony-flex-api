@@ -23,3 +23,10 @@ services:
         calls:
             - [setContainer, ['@service_container']]
         arguments: ['@doctrine.orm.entity_manager', '%login_attempt_minutes%', '%max_login_attempts%']
+
+    tavro.cors_listener:
+        class: Tavro\Bundle\ApiBundle\EventListener\CorsListener
+        arguments: ["%tavro_cors%"]
+        tags:
+            - { name: kernel.event_listener, event: kernel.response, method: onKernelResponse }
+            - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest, priority: 300 }
