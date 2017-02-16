@@ -46,15 +46,7 @@ class AccountController extends ApiController
             $handler = $this->getHandler($entity);
             $account = $handler->get($id);
 
-            /**
-             * Once we have fetched the Account
-             */
-            $chargify = $this->get('chargify.handler.customer');
-
-            $customer = !is_null($account->getCustomerId()) ? $chargify->get($account->getCustomerId()) : null;
-
             $data = array(
-                'customer' => $customer,
                 'account' => $account
             );
 
