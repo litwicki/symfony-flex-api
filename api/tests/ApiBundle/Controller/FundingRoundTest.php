@@ -1,9 +1,9 @@
-<?php namespace Tavro\Tests\Api\Controller;
+<?php namespace Tests\ApiBundle\Controller;
 
 use GuzzleHttp\Client;;
-use Tavro\Bundle\CoreBundle\Testing\TavroTest;
+use Tests\ApiBundle\TavroApiTest;
 
-class FundingRoundTest extends TavroTest
+class FundingRoundTest extends TavroApiTest
 {
 
     public function testFundingRoundRoute()

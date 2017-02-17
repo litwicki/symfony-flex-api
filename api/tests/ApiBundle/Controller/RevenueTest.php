@@ -1,12 +1,12 @@
-<?php namespace Tavro\Tests\Api\Controller;
+<?php namespace Tests\ApiBundle\Controller;
 
 use GuzzleHttp\Client;;
-use Tavro\Bundle\CoreBundle\Testing\TavroTest;
+use Tests\ApiBundle\TavroApiTest;
 
-class ServiceTest extends TavroTest
+class RevenueTest extends TavroApiTest
 {
 
-    public function testServiceRoute()
+    public function testRevenueRoute()
     {
         $client = new Client('https://api.tavro.dev/api/v1', array(
             'request.options' => array(
@@ -16,7 +16,7 @@ class ServiceTest extends TavroTest
 
         $token = $this->authorize();
 
-        $url = 'https://api.tavro.dev/api/v1/services';
+        $url = 'https://api.tavro.dev/api/v1/revenues';
 
         $request = $client->get($url, null, ['verify' => false]);
         $request->addHeader('Authorization', sprintf('Bearer %s', $token));
@@ -29,23 +29,20 @@ class ServiceTest extends TavroTest
 
     }
 
-    public function testServiceCreate()
+    public function testRevenueCreateRevenueWithServices()
     {
 
         $token = $this->authorize();
 
-        $faker = \Faker\Factory::create('en_EN');
-
         $data = array(
-            'type' => 'hourly',
-            'name' => $faker->name,
-            'body' => $faker->text(500),
-            'price' => 100,
+            'type' => 'service',
             'category' => 1,
+            'user' => 1,
+            'services' => array(1,2,3),
             'account' => 1
         );
 
-        $url = 'https://api.tavro.dev/api/v1/services';
+        $url = 'https://api.tavro.dev/api/v1/revenues';
 
         $client = new Client($url, array(
             'request.options' => array(
@@ -64,23 +61,20 @@ class ServiceTest extends TavroTest
 
     }
 
-    public function testServiceCreateBadType()
+    public function testRevenueCreateRevenueWithProducts()
     {
 
         $token = $this->authorize();
 
-        $faker = \Faker\Factory::create('en_EN');
-
         $data = array(
-            'type' => 'butts',
-            'name' => $faker->name,
-            'body' => $faker->text(500),
-            'price' => 100,
+            'type' => 'sale',
             'category' => 1,
+            'user' => 1,
+            'products' => array(1,2,3),
             'account' => 1
         );
 
-        $url = 'https://api.tavro.dev/api/v1/services';
+        $url = 'https://api.tavro.dev/api/v1/revenues';
 
         $client = new Client($url, array(
             'request.options' => array(
@@ -95,8 +89,7 @@ class ServiceTest extends TavroTest
         $json = $response->getBody(true);
         $body = json_decode($json, true);
 
-        $this->assertEquals(500, $response->getStatusCode());
-        $this->assertEquals(1, preg_match('/Service type must match/', $body['message']));
+        $this->assertEquals(200, $response->getStatusCode());
 
     }
 

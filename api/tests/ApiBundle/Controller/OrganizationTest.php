@@ -1,12 +1,12 @@
-<?php namespace Tavro\Tests\Api\Controller;
+<?php namespace Tests\ApiBundle\Controller;
 
 use GuzzleHttp\Client;;
-use Tavro\Bundle\CoreBundle\Testing\TavroTest;
+use Tests\ApiBundle\TavroApiTest;
 
-class ExpenseTest extends TavroTest
+class OrganizationTest extends TavroApiTest
 {
 
-    public function testExpenseRoute()
+    public function testOrganizationRoute()
     {
         $client = new Client('https://api.tavro.dev/api/v1', array(
             'request.options' => array(
@@ -16,7 +16,7 @@ class ExpenseTest extends TavroTest
 
         $token = $this->authorize();
 
-        $url = 'https://api.tavro.dev/api/v1/expenses';
+        $url = 'https://api.tavro.dev/api/v1/organizations';
 
         $request = $client->get($url, null, ['verify' => false]);
         $request->addHeader('Authorization', sprintf('Bearer %s', $token));
@@ -29,23 +29,26 @@ class ExpenseTest extends TavroTest
 
     }
 
-    public function testExpenseCreate()
+    public function testOrganizationCreate()
     {
-
-        $token = $this->authorize();
 
         $faker = \Faker\Factory::create('en_EN');
 
+        $token = $this->authorize();
+
         $data = array(
-            'body' => 'Expense body description.',
-            'amount' => 100,
-            'expense_date' => $faker->dateTimeThisMonth->format('Y-m-d h:i:s'),
-            'user' => 1,
-            'account' => 1,
-            'category' => 1,
+            'name' => $faker->name,
+            'body' => $faker->text(rand(100,1000)),
+            'address' => $faker->address,
+            'city' => $faker->city,
+            'state' => 'WA',
+            'zip' => $faker->postcode,
+            'website' => $faker->url,
+            'phone' => '555-867-5309',
+            'account' => 1
         );
 
-        $url = 'https://api.tavro.dev/api/v1/expenses';
+        $url = 'https://api.tavro.dev/api/v1/organizations';
 
         $client = new Client($url, array(
             'request.options' => array(
@@ -55,6 +58,7 @@ class ExpenseTest extends TavroTest
 
         $request = $client->post($url, null, json_encode($data), ['verify' => false]);
         $request->addHeader('Authorization', sprintf('Bearer %s', $token));
+
         $response = $request->send();
 
         $json = $response->getBody(true);

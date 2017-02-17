@@ -1,12 +1,13 @@
-<?php namespace Tavro\Tests\Api\Controller;
+<?php namespace Tests\ApiBundle\Controller;
 
 use GuzzleHttp\Client;;
-use Tavro\Bundle\CoreBundle\Testing\TavroTest;
+use Tests\ApiBundle\TavroApiTest;
+use Rhumsaa\Uuid\Uuid;
 
-class TagTest extends TavroTest
+class UserTest extends TavroApiTest
 {
 
-    public function testTagRoute()
+    public function testUserRoute()
     {
         $client = new Client('https://api.tavro.dev/api/v1', array(
             'request.options' => array(
@@ -16,7 +17,7 @@ class TagTest extends TavroTest
 
         $token = $this->authorize();
 
-        $url = 'https://api.tavro.dev/api/v1/tags';
+        $url = 'https://api.tavro.dev/api/v1/users';
 
         $request = $client->get($url, null, ['verify' => false]);
         $request->addHeader('Authorization', sprintf('Bearer %s', $token));
@@ -29,18 +30,24 @@ class TagTest extends TavroTest
 
     }
 
-    public function testTagCreate()
+    public function testUserCreate()
     {
-
         $token = $this->authorize();
 
         $faker = \Faker\Factory::create('en_EN');
 
+        $email = $faker->safeEmail;
+
         $data = array(
-            'tag' => 'tag'
+            'first_name' => $faker->firstName,
+            'last_name' => $faker->lastName,
+            'email' => $email,
+            'username' => md5(time()),
+            'signature' => $faker->text(100),
+            'password' => 'Password1!'
         );
 
-        $url = 'https://api.tavro.dev/api/v1/tags';
+        $url = 'https://api.tavro.dev/api/v1/signup';
 
         $client = new Client($url, array(
             'request.options' => array(

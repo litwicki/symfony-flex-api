@@ -1,9 +1,9 @@
-<?php namespace Tavro\Tests\Api\Controller;
+<?php namespace Tests\ApiBundle\Controller;
 
 use GuzzleHttp\Client;;
-use Tavro\Bundle\CoreBundle\Testing\TavroTest;
+use Tests\ApiBundle\TavroApiTest;
 
-class ContactTest extends TavroTest
+class ContactTest extends TavroApiTest
 {
 
     public function testContactRoute()

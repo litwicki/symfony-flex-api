@@ -1,12 +1,12 @@
-<?php namespace Tavro\Tests\Api\Controller;
+<?php namespace Tests\ApiBundle\Controller;
 
 use GuzzleHttp\Client;;
-use Tavro\Bundle\CoreBundle\Testing\TavroTest;
+use Tests\ApiBundle\TavroApiTest;
 
-class ProductTest extends TavroTest
+class TagTest extends TavroApiTest
 {
 
-    public function testProductRoute()
+    public function testTagRoute()
     {
         $client = new Client('https://api.tavro.dev/api/v1', array(
             'request.options' => array(
@@ -16,7 +16,7 @@ class ProductTest extends TavroTest
 
         $token = $this->authorize();
 
-        $url = 'https://api.tavro.dev/api/v1/products';
+        $url = 'https://api.tavro.dev/api/v1/tags';
 
         $request = $client->get($url, null, ['verify' => false]);
         $request->addHeader('Authorization', sprintf('Bearer %s', $token));
@@ -29,22 +29,18 @@ class ProductTest extends TavroTest
 
     }
 
-    public function testProductCreate()
+    public function testTagCreate()
     {
-        $faker = \Faker\Factory::create('en_EN');
 
         $token = $this->authorize();
 
+        $faker = \Faker\Factory::create('en_EN');
+
         $data = array(
-            'name' => $faker->text(rand(10,100)),
-            'body' => $faker->text(rand(100,1000)),
-            'price' => 100,
-            'cost' => 75,
-            'category' => 1,
-            'account' => 1
+            'tag' => 'tag'
         );
 
-        $url = 'https://api.tavro.dev/api/v1/products';
+        $url = 'https://api.tavro.dev/api/v1/tags';
 
         $client = new Client($url, array(
             'request.options' => array(

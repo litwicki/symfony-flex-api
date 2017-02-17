@@ -1,22 +1,22 @@
-<?php namespace Tavro\Tests\Api\Controller;
+<?php namespace Tests\ApiBundle\Controller;
 
 use GuzzleHttp\Client;;
-use Tavro\Bundle\CoreBundle\Testing\TavroTest;
+use Tests\ApiBundle\TavroApiTest;
 
-class NodeTest extends TavroTest
+class CommentTest extends TavroApiTest
 {
 
-    public function testNodeRoute()
+    public function testCommentRoute()
     {
+        $url = 'https://api.tavro.dev/api/v1/comments/1';
+
+        $token = $this->authorize();
+
         $client = new Client('https://api.tavro.dev/api/v1', array(
             'request.options' => array(
                 'exceptions' => false,
             )
         ));
-
-        $token = $this->authorize();
-
-        $url = 'https://api.tavro.dev/api/v1/nodes';
 
         $request = $client->get($url, null, ['verify' => false]);
         $request->addHeader('Authorization', sprintf('Bearer %s', $token));
@@ -29,24 +29,51 @@ class NodeTest extends TavroTest
 
     }
 
-    public function testNodeCreate()
+    public function testCommentCreateRevenueComment()
     {
+        try {
 
+            $token = $this->authorize();
+
+            $data = [
+                'body' => 'Body text..',
+                'user' => 1
+            ];
+
+            $url = 'https://api.tavro.dev/api/v1/revenues/1/comments';
+
+            $client = new Client($url, array(
+                'request.options' => array(
+                    'exceptions' => false,
+                )
+            ));
+
+            $request = $client->post($url, null, json_encode($data), ['verify' => false]);
+            $request->addHeader('Authorization', sprintf('Bearer %s', $token));
+            $response = $request->send();
+
+            $json = $response->getBody(true);
+            $body = json_decode($json, true);
+
+            $this->assertEquals(200, $response->getStatusCode());
+
+        }
+        catch(\Exception $e) {
+            throw $e;
+        }
+
+    }
+
+    public function testCommentCreateNodeComment()
+    {
         $token = $this->authorize();
 
-        $faker = \Faker\Factory::create('en_EN');
-
         $data = array(
-            'title' => 'Node Name',
-            'body' => 'Node body description.',
-            'type' => 'node',
-            'views' => 1,
-            'display_date' => $faker->dateTimeThisMonth->format('Y-m-d h:i:s'),
-            'user' => 1,
-            'account' => 1
+            'body' => 'Body text..',
+            'user' => 1
         );
 
-        $url = 'https://api.tavro.dev/api/v1/nodes';
+        $url = 'https://api.tavro.dev/api/v1/nodes/1/comments';
 
         $client = new Client($url, array(
             'request.options' => array(
@@ -65,24 +92,16 @@ class NodeTest extends TavroTest
 
     }
 
-    public function testNodeCreateBadAccount()
+    public function testCommentCreateExpenseComment()
     {
-
         $token = $this->authorize();
 
-        $faker = \Faker\Factory::create('en_EN');
-
         $data = array(
-            'title' => 'Node Name',
-            'body' => 'Node body description.',
-            'type' => 'node',
-            'views' => 1,
-            'display_date' => $faker->dateTimeThisMonth->format('Y-m-d h:i:s'),
-            'user' => 1,
-            'account' => -1
+            'body' => 'Body text..',
+            'user' => 1
         );
 
-        $url = 'https://api.tavro.dev/api/v1/nodes';
+        $url = 'https://api.tavro.dev/api/v1/expenses/1/comments';
 
         $client = new Client($url, array(
             'request.options' => array(
@@ -97,35 +116,20 @@ class NodeTest extends TavroTest
         $json = $response->getBody(true);
         $body = json_decode($json, true);
 
-        $this->assertEquals(500, $response->getStatusCode());
-        $this->assertEquals(1, preg_match('/Please enter a valid Account/', $body['message']));
+        $this->assertEquals(200, $response->getStatusCode());
 
     }
 
-    public function testNodeCreateBadUser()
+    public function testCommentCreateOrganizationComment()
     {
-        // create our http client (Guzzle)
-        $client = new Client('https://api.tavro.dev/api/v1', array(
-            'request.options' => array(
-                'exceptions' => false,
-            )
-        ));
-
         $token = $this->authorize();
 
-        $faker = \Faker\Factory::create('en_EN');
-
         $data = array(
-            'title' => 'Node Name',
-            'body' => 'Node body description.',
-            'type' => 'node',
-            'views' => 1,
-            'display_date' => $faker->dateTimeThisCentury,
-            'user' => -1,
-            'account' => 1
+            'body' => 'Body text..',
+            'user' => 1
         );
 
-        $url = 'https://api.tavro.dev/api/v1/nodes';
+        $url = 'https://api.tavro.dev/api/v1/organizations/1/comments';
 
         $client = new Client($url, array(
             'request.options' => array(
@@ -139,9 +143,8 @@ class NodeTest extends TavroTest
 
         $json = $response->getBody(true);
         $body = json_decode($json, true);
-
-        $this->assertEquals(500, $response->getStatusCode());
-        $this->assertEquals(1, preg_match('/Please enter a valid User/', $body['message']));
+die(var_dump($body));
+        $this->assertEquals(200, $response->getStatusCode());
 
     }
 
