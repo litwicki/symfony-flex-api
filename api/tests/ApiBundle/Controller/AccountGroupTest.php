@@ -18,7 +18,7 @@ class AccountGroupTest extends TavroApiTest
         $response = $client->request('GET', $url, [
             'headers' => [
                 'Authorization' => sprintf('Bearer %s', $token)
-            ]
+            ],
         ]);
 
         $json = $response->getBody(true);
@@ -29,6 +29,7 @@ class AccountGroupTest extends TavroApiTest
     public function testAccountGroupCreate()
     {
 
+        $client = $this->getApiClient();
         $token = $this->authorize();
 
         $faker = \Faker\Factory::create('en_EN');
@@ -40,17 +41,14 @@ class AccountGroupTest extends TavroApiTest
             'user' => 1
         );
 
-        $url = 'https://api.tavro.dev/api/v1/accounts/1/groups';
+        $url = '/api/v1/accounts/1/groups';
 
-        $client = new Client($url, array(
-            'request.options' => array(
-                'exceptions' => false,
-            )
-        ));
-
-        $request = $client->post($url, null, json_encode($data), ['verify' => false]);
-        $request->addHeader('Authorization', sprintf('Bearer %s', $token));
-        $response = $request->send();
+        $response = $client->post($url, [
+            'headers' => [
+                'Authorization' => sprintf('Bearer %s', $token)
+            ],
+            'json' => $data
+        ]);
 
         $json = $response->getBody(true);
         $body = json_decode($json, true);

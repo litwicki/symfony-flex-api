@@ -27,7 +27,7 @@ class ApiController extends DefaultController
      * @return \Symfony\Component\HttpFoundation\Response
      * @throws \Exception
      */
-    public function post(Request $request, $entity, $_format)
+    public function postAction(Request $request, $entity, $_format)
     {
         try {
 
@@ -41,7 +41,7 @@ class ApiController extends DefaultController
                 'format'  => $_format,
             );
 
-            return $this->forward('TavroApiBundle:Default:get', $routeOptions);
+            return $this->forward('TavroApiBundle:Api\Api:get', $routeOptions);
         }
         catch (InvalidFormException $e) {
             throw $e;
@@ -86,7 +86,7 @@ class ApiController extends DefaultController
                 '_format'  => $_format,
             );
 
-            return $this->forward('TavroApiBundle:Default:get', $routeOptions);
+            return $this->forward('TavroApiBundle:Api\Api:get', $routeOptions);
         }
         catch (InvalidFormException $e) {
             throw $e;
