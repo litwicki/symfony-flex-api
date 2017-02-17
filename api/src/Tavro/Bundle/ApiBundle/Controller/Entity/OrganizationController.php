@@ -130,7 +130,7 @@ class OrganizationController extends ApiController
      * @return \Symfony\Component\HttpFoundation\Response
      * @throws \Exception
      */
-    public function byAccount(Request $request, Account $account, $_format)
+    public function byAccountAction(Request $request, Account $account, $_format)
     {
         try {
 

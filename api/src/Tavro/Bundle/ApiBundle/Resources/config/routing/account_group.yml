@@ -1,10 +1,11 @@
 api_get_account_group:
-    path: /accounts/{account}/groups.{_format}
-    defaults: { _controller: TavroApiBundle:Entity\AccountGroup:get, _format: json}
+    path: /accounts/{account}/groups/{account_group}.{_format}
+    defaults: { _controller: TavroApiBundle:Entity\AccountGroup:get, _format: json, entity: "account_groups" }
     methods: GET
     requirements:
         account: \d+
         _format: json|xml
+
 
 api_post_account_group:
     path: /accounts/{account}/groups.{_format}

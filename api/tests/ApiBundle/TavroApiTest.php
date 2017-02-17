@@ -4,30 +4,52 @@ use GuzzleHttp\Client;
 
 class TavroApiTest extends \PHPUnit_Framework_TestCase
 {
-    public function authorize($username = 'tavrobot', $password = 'Password1!')
+    /**
+     * @return Client
+     */
+    public function getApiClient()
     {
-        $client = new Client(array(
+        return new Client([
+            'base_uri' => 'http://api.tavro.dev',
             'request.options' => array(
                 'exceptions' => FALSE,
             )
-        ));
+        ]);
+    }
+
+    /**
+     * Authorize an Api request and fetch a JWT token.
+     *
+     * @param string $username
+     * @param string $password
+     * @param bool $https
+     *
+     * @return mixed
+     */
+    public function authorize($username = 'tavrobot', $password = 'Password1!', $https = false)
+    {
+        $client = $this->getApiClient();
 
         $data = array(
             'username' => $username,
             'password' => $password
         );
 
-        $request = $client->post('http://api.tavro.dev/api/v1/auth', null, $data);
-        $response = $request->send();
+        $response = $client->request('POST', '/api/v1/auth', [
+            'verify' => $https,
+            'form_params' => $data
+        ]);
 
-        $json = $response->getBody(TRUE);
+        $code = $response->getStatusCode();
 
-        $body = json_decode($json, TRUE);
+        $body = json_decode($response->getBody(), true);
 
-        if(isset($body['token'])) {
+        if($code === 200 && isset($body['token'])) {
             return $body['token'];
         }
 
-        return FALSE;
+        throw new \Exception(
+            sprintf('Unable to authorize Api access with username: `%s`, password: `%s`, https: `%s`', $username, $password, $https)
+        );
     }
 }

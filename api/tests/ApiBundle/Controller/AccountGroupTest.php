@@ -9,23 +9,19 @@ class AccountGroupTest extends TavroApiTest
 
     public function testAccountGroupRoute()
     {
-        $client = new Client(array(
-            'request.options' => array(
-                'exceptions' => false,
-            )
-        ));
+        $client = $this->getApiClient();
 
         $token = $this->authorize();
 
-        $url = 'https://api.tavro.dev/api/v1/accounts/1/groups';
+        $url = '/api/v1/accounts/1/groups';
 
-        $request = $client->get($url, null, ['verify' => false]);
-        $request->addHeader('Authorization', sprintf('Bearer %s', $token));
-        $response = $request->send();
+        $response = $client->request('GET', $url, [
+            'headers' => [
+                'Authorization' => sprintf('Bearer %s', $token)
+            ]
+        ]);
 
         $json = $response->getBody(true);
-        $body = json_decode($json, true);
-
         $this->assertEquals(200, $response->getStatusCode());
 
     }
