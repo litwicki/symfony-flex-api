@@ -8,7 +8,7 @@ class ProductTest extends TavroApiTest
 
     public function testProductRoute()
     {
-        $client = new Client('https://api.tavro.dev/api/v1', array(
+        $client = new Client('/api/v1', array(
             'request.options' => array(
                 'exceptions' => false,
             )
@@ -16,7 +16,7 @@ class ProductTest extends TavroApiTest
 
         $token = $this->authorize();
 
-        $url = 'https://api.tavro.dev/api/v1/products';
+        $url = '/api/v1/products';
 
         $request = $client->get($url, null, ['verify' => false]);
         $request->addHeader('Authorization', sprintf('Bearer %s', $token));
@@ -44,7 +44,7 @@ class ProductTest extends TavroApiTest
             'account' => 1
         );
 
-        $url = 'https://api.tavro.dev/api/v1/products';
+        $url = '/api/v1/products';
 
         $client = new Client($url, array(
             'request.options' => array(

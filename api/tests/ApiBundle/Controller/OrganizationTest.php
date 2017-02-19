@@ -8,7 +8,7 @@ class OrganizationTest extends TavroApiTest
 
     public function testOrganizationRoute()
     {
-        $client = new Client('https://api.tavro.dev/api/v1', array(
+        $client = new Client('/api/v1', array(
             'request.options' => array(
                 'exceptions' => false,
             )
@@ -16,7 +16,7 @@ class OrganizationTest extends TavroApiTest
 
         $token = $this->authorize();
 
-        $url = 'https://api.tavro.dev/api/v1/organizations';
+        $url = '/api/v1/organizations';
 
         $request = $client->get($url, null, ['verify' => false]);
         $request->addHeader('Authorization', sprintf('Bearer %s', $token));
@@ -48,7 +48,7 @@ class OrganizationTest extends TavroApiTest
             'account' => 1
         );
 
-        $url = 'https://api.tavro.dev/api/v1/organizations';
+        $url = '/api/v1/organizations';
 
         $client = new Client($url, array(
             'request.options' => array(

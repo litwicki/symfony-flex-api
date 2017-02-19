@@ -8,7 +8,7 @@ class RevenueTest extends TavroApiTest
 
     public function testRevenueRoute()
     {
-        $client = new Client('https://api.tavro.dev/api/v1', array(
+        $client = new Client('/api/v1', array(
             'request.options' => array(
                 'exceptions' => false,
             )
@@ -16,7 +16,7 @@ class RevenueTest extends TavroApiTest
 
         $token = $this->authorize();
 
-        $url = 'https://api.tavro.dev/api/v1/revenues';
+        $url = '/api/v1/revenues';
 
         $request = $client->get($url, null, ['verify' => false]);
         $request->addHeader('Authorization', sprintf('Bearer %s', $token));
@@ -42,7 +42,7 @@ class RevenueTest extends TavroApiTest
             'account' => 1
         );
 
-        $url = 'https://api.tavro.dev/api/v1/revenues';
+        $url = '/api/v1/revenues';
 
         $client = new Client($url, array(
             'request.options' => array(
@@ -74,7 +74,7 @@ class RevenueTest extends TavroApiTest
             'account' => 1
         );
 
-        $url = 'https://api.tavro.dev/api/v1/revenues';
+        $url = '/api/v1/revenues';
 
         $client = new Client($url, array(
             'request.options' => array(

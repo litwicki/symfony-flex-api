@@ -8,11 +8,11 @@ class CommentTest extends TavroApiTest
 
     public function testCommentRoute()
     {
-        $url = 'https://api.tavro.dev/api/v1/comments/1';
+        $url = '/api/v1/comments/1';
 
         $token = $this->authorize();
 
-        $client = new Client('https://api.tavro.dev/api/v1', array(
+        $client = new Client('/api/v1', array(
             'request.options' => array(
                 'exceptions' => false,
             )
@@ -40,7 +40,7 @@ class CommentTest extends TavroApiTest
                 'user' => 1
             ];
 
-            $url = 'https://api.tavro.dev/api/v1/revenues/1/comments';
+            $url = '/api/v1/revenues/1/comments';
 
             $client = new Client($url, array(
                 'request.options' => array(
@@ -73,7 +73,7 @@ class CommentTest extends TavroApiTest
             'user' => 1
         );
 
-        $url = 'https://api.tavro.dev/api/v1/nodes/1/comments';
+        $url = '/api/v1/nodes/1/comments';
 
         $client = new Client($url, array(
             'request.options' => array(
@@ -101,7 +101,7 @@ class CommentTest extends TavroApiTest
             'user' => 1
         );
 
-        $url = 'https://api.tavro.dev/api/v1/expenses/1/comments';
+        $url = '/api/v1/expenses/1/comments';
 
         $client = new Client($url, array(
             'request.options' => array(
@@ -129,7 +129,7 @@ class CommentTest extends TavroApiTest
             'user' => 1
         );
 
-        $url = 'https://api.tavro.dev/api/v1/organizations/1/comments';
+        $url = '/api/v1/organizations/1/comments';
 
         $client = new Client($url, array(
             'request.options' => array(

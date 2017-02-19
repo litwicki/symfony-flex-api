@@ -5,12 +5,16 @@ use GuzzleHttp\Client;
 class TavroApiTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @return Client
+     * Get a "naked" Api Client.
+     *
+     * @param string $base_uri
+     *
+     * @return \GuzzleHttp\Client
      */
-    public function getApiClient()
+    public function getApiClient($base_uri = 'http://api.tavro.dev')
     {
         return new Client([
-            'base_uri' => 'http://api.tavro.dev',
+            'base_uri' => $base_uri,
             'request.options' => array(
                 'exceptions' => FALSE,
             )
@@ -18,21 +22,23 @@ class TavroApiTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Authorize an Api request and fetch a JWT token.
+     * @param \GuzzleHttp\Client $client
+     * @param array $options
      *
-     * @param string $username
-     * @param string $password
-     * @param bool $https
-     *
-     * @return mixed
+     * @return \GuzzleHttp\Client
+     * @throws \Exception
      */
-    public function authorize($username = 'tavrobot', $password = 'Password1!', $https = false)
+    public function authorize(Client $client, array $options = array())
     {
         $client = $this->getApiClient();
 
+        $username = isset($options['username']) ? $options['username'] : 'tavrobot';
+        $password = isset($options['password']) ? $options['password'] : 'Password1!';
+        $https = isset($options['https']) ? $options['https'] : false;
+
         $data = array(
             'username' => $username,
-            'password' => $password
+            'password' => $password,
         );
 
         $response = $client->request('POST', '/api/v1/auth', [
@@ -45,7 +51,16 @@ class TavroApiTest extends \PHPUnit_Framework_TestCase
         $body = json_decode($response->getBody(), true);
 
         if($code === 200 && isset($body['token'])) {
-            return $body['token'];
+
+            $uri = $client->getConfig('base_uri');
+
+            return new Client([
+                'verify' => $https,
+                'base_uri' => $uri,
+                'request.options' => ['exceptions' => FALSE],
+                'headers' => ['Authorization' => sprintf('Bearer %s', $body['token'])],
+            ]);
+
         }
 
         throw new \Exception(

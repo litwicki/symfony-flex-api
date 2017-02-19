@@ -9,7 +9,7 @@ class UserTest extends TavroApiTest
 
     public function testUserRoute()
     {
-        $client = new Client('https://api.tavro.dev/api/v1', array(
+        $client = new Client('/api/v1', array(
             'request.options' => array(
                 'exceptions' => false,
             )
@@ -17,7 +17,7 @@ class UserTest extends TavroApiTest
 
         $token = $this->authorize();
 
-        $url = 'https://api.tavro.dev/api/v1/users';
+        $url = '/api/v1/users';
 
         $request = $client->get($url, null, ['verify' => false]);
         $request->addHeader('Authorization', sprintf('Bearer %s', $token));
@@ -47,7 +47,7 @@ class UserTest extends TavroApiTest
             'password' => 'Password1!'
         );
 
-        $url = 'https://api.tavro.dev/api/v1/signup';
+        $url = '/api/v1/signup';
 
         $client = new Client($url, array(
             'request.options' => array(

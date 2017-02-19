@@ -8,7 +8,7 @@ class ServiceTest extends TavroApiTest
 
     public function testServiceRoute()
     {
-        $client = new Client('https://api.tavro.dev/api/v1', array(
+        $client = new Client('/api/v1', array(
             'request.options' => array(
                 'exceptions' => false,
             )
@@ -16,7 +16,7 @@ class ServiceTest extends TavroApiTest
 
         $token = $this->authorize();
 
-        $url = 'https://api.tavro.dev/api/v1/services';
+        $url = '/api/v1/services';
 
         $request = $client->get($url, null, ['verify' => false]);
         $request->addHeader('Authorization', sprintf('Bearer %s', $token));
@@ -45,7 +45,7 @@ class ServiceTest extends TavroApiTest
             'account' => 1
         );
 
-        $url = 'https://api.tavro.dev/api/v1/services';
+        $url = '/api/v1/services';
 
         $client = new Client($url, array(
             'request.options' => array(
@@ -80,7 +80,7 @@ class ServiceTest extends TavroApiTest
             'account' => 1
         );
 
-        $url = 'https://api.tavro.dev/api/v1/services';
+        $url = '/api/v1/services';
 
         $client = new Client($url, array(
             'request.options' => array(

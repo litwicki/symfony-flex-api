@@ -8,7 +8,7 @@ class TagTest extends TavroApiTest
 
     public function testTagRoute()
     {
-        $client = new Client('https://api.tavro.dev/api/v1', array(
+        $client = new Client('/api/v1', array(
             'request.options' => array(
                 'exceptions' => false,
             )
@@ -16,7 +16,7 @@ class TagTest extends TavroApiTest
 
         $token = $this->authorize();
 
-        $url = 'https://api.tavro.dev/api/v1/tags';
+        $url = '/api/v1/tags';
 
         $request = $client->get($url, null, ['verify' => false]);
         $request->addHeader('Authorization', sprintf('Bearer %s', $token));
@@ -40,7 +40,7 @@ class TagTest extends TavroApiTest
             'tag' => 'tag'
         );
 
-        $url = 'https://api.tavro.dev/api/v1/tags';
+        $url = '/api/v1/tags';
 
         $client = new Client($url, array(
             'request.options' => array(

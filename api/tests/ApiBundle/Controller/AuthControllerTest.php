@@ -11,7 +11,7 @@ class LoginTest extends \PHPUnit_Framework_TestCase
     public function testTokenAuthenticateAction()
     {
         // create our http client (Guzzle)
-        $client = new Client('https://api.tavro.dev/api/v1', array(
+        $client = new Client('/api/v1', array(
             'request.options' => array(
                 'exceptions' => false,
             )
@@ -22,7 +22,7 @@ class LoginTest extends \PHPUnit_Framework_TestCase
             'password' => 'Password1!'
         );
 
-        $request = $client->post('https://api.tavro.dev/api/v1/auth', null, $data, ['verify' => false]);
+        $request = $client->post('/api/v1/auth', null, $data, ['verify' => false]);
         $response = $request->send();
 
         $json = $response->getBody(true);
@@ -40,13 +40,13 @@ class LoginTest extends \PHPUnit_Framework_TestCase
     public function testForgotAction()
     {
         // create our http client (Guzzle)
-        $client = new Client('https://api.tavro.dev/api/v1', array(
+        $client = new Client('/api/v1', array(
             'request.options' => array(
                 'exceptions' => false,
             )
         ));
 
-        $request = $client->post('https://api.tavro.dev/api/v1/auth/forgot', null, json_encode([
+        $request = $client->post('/api/v1/auth/forgot', null, json_encode([
             'email' => 'dev@zoadilack.com',
         ]), ['verify' => false]);
 
@@ -66,7 +66,7 @@ class LoginTest extends \PHPUnit_Framework_TestCase
     public function testResetAction()
     {
         // create our http client (Guzzle)
-        $client = new Client('https://api.tavro.dev/api/v1', array(
+        $client = new Client('/api/v1', array(
             'request.options' => array(
                 'exceptions' => false,
             )
@@ -78,7 +78,7 @@ class LoginTest extends \PHPUnit_Framework_TestCase
             'new_password_confirm' => 'Password1!'
         ];
 
-        $request = $client->post('https://api.tavro.dev/api/v1/auth/reset', null, json_encode($data), ['verify' => false]);
+        $request = $client->post('/api/v1/auth/reset', null, json_encode($data), ['verify' => false]);
 
         $response = $request->send();
 
@@ -96,7 +96,7 @@ class LoginTest extends \PHPUnit_Framework_TestCase
     public function testBadLogin()
     {
         // create our http client (Guzzle)
-        $client = new Client('https://api.tavro.dev/api/v1', array(
+        $client = new Client('/api/v1', array(
             'request.options' => array(
                 'exceptions' => false,
             )
@@ -107,7 +107,7 @@ class LoginTest extends \PHPUnit_Framework_TestCase
             'password' => 'password'
         );
 
-        $request = $client->post('https://api.tavro.dev/api/v1/auth', null, $data, ['verify' => false]);
+        $request = $client->post('/api/v1/auth', null, $data, ['verify' => false]);
         $response = $request->send();
 
         //using an invalid password/username should yield a 404 Not Found
@@ -121,13 +121,13 @@ class LoginTest extends \PHPUnit_Framework_TestCase
     public function testNotLoggedIn()
     {
         // create our http client (Guzzle)
-        $client = new Client('https://api.tavro.dev/api/v1', array(
+        $client = new Client('/api/v1', array(
             'request.options' => array(
                 'exceptions' => false,
             )
         ));
 
-        $request = $client->get('https://api.tavro.dev/api/v1/users', null, ['verify' => false]);
+        $request = $client->get('/api/v1/users', null, ['verify' => false]);
         $response = $request->send();
 
         $json = $response->getBody(true);

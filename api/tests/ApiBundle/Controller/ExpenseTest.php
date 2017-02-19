@@ -8,7 +8,7 @@ class ExpenseTest extends TavroApiTest
 
     public function testExpenseRoute()
     {
-        $client = new Client('https://api.tavro.dev/api/v1', array(
+        $client = new Client('/api/v1', array(
             'request.options' => array(
                 'exceptions' => false,
             )
@@ -16,7 +16,7 @@ class ExpenseTest extends TavroApiTest
 
         $token = $this->authorize();
 
-        $url = 'https://api.tavro.dev/api/v1/expenses';
+        $url = '/api/v1/expenses';
 
         $request = $client->get($url, null, ['verify' => false]);
         $request->addHeader('Authorization', sprintf('Bearer %s', $token));
@@ -45,7 +45,7 @@ class ExpenseTest extends TavroApiTest
             'category' => 1,
         );
 
-        $url = 'https://api.tavro.dev/api/v1/expenses';
+        $url = '/api/v1/expenses';
 
         $client = new Client($url, array(
             'request.options' => array(

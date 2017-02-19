@@ -35,13 +35,10 @@ class ApiController extends DefaultController
             $handler = $this->getHandler($entity);
             $newEntity = $handler->post($request, $data);
 
-            $routeOptions = array(
-                'entity'  => $entity,
-                'id'      => $newEntity->getId(),
-                'format'  => $_format,
-            );
+            return $this->apiResponse($newEntity, [
+                'code' => Response::HTTP_CREATED,
+            ]);
 
-            return $this->forward('TavroApiBundle:Api\Api:get', $routeOptions);
         }
         catch (InvalidFormException $e) {
             throw $e;
@@ -69,24 +66,23 @@ class ApiController extends DefaultController
     {
         try {
 
-            $post = json_decode($request->getContent(), TRUE);
+            $data = json_decode($request->getContent(), TRUE);
 
             $handler = $this->getHandler($entity);
 
             if (!($item = $handler->get($id))) {
-                $item = $handler->post($request, $item, $post);
+                $item = $handler->post($request, $item, $data);
+                $responseCode = Response::HTTP_CREATED;
             }
             else {
-                $item = $handler->put($request, $item, $post);
+                $item = $handler->put($request, $item, $data);
+                $responseCode = Response::HTTP_OK;
             }
 
-            $routeOptions = array(
-                'entity'  => $entity,
-                'id'      => $item->getId(),
-                '_format'  => $_format,
-            );
+            return $this->apiResponse($item, [
+                'code' => $responseCode,
+            ]);
 
-            return $this->forward('TavroApiBundle:Api\Api:get', $routeOptions);
         }
         catch (InvalidFormException $e) {
             throw $e;

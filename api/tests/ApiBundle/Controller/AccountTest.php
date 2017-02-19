@@ -8,19 +8,11 @@ class AccountTest extends TavroApiTest
 
     public function testAccountRoute()
     {
-        $client = new Client('https://api.tavro.dev/api/v1', array(
-            'request.options' => array(
-                'exceptions' => false,
-            )
-        ));
+        $client = $this->authorize($this->getApiClient());
 
-        $token = $this->authorize();
+        $url = '/api/v1/accounts';
 
-        $url = 'https://api.tavro.dev/api/v1/accounts';
-
-        $request = $client->get($url, null, ['verify' => false]);
-        $request->addHeader('Authorization', sprintf('Bearer %s', $token));
-        $response = $request->send();
+        $response = $client->get($url);
 
         $json = $response->getBody(true);
         $body = json_decode($json, true);
@@ -32,7 +24,7 @@ class AccountTest extends TavroApiTest
     public function testAccountCreate()
     {
 
-        $token = $this->authorize();
+        $client = $this->authorize($this->getApiClient());
 
         $faker = \Faker\Factory::create('en_EN');
 
@@ -42,17 +34,11 @@ class AccountTest extends TavroApiTest
             'user' => 1
         );
 
-        $url = 'https://api.tavro.dev/api/v1/accounts';
+        $url = '/api/v1/accounts';
 
-        $client = new Client($url, array(
-            'request.options' => array(
-                'exceptions' => false,
-            )
-        ));
-
-        $request = $client->post($url, null, json_encode($data), ['verify' => false]);
-        $request->addHeader('Authorization', sprintf('Bearer %s', $token));
-        $response = $request->send();
+        $response = $client->post($url, [
+            'json' => $data
+        ]);
 
         $json = $response->getBody(true);
         $body = json_decode($json, true);
@@ -63,7 +49,7 @@ class AccountTest extends TavroApiTest
 
     public function testAccountCreateBadUser()
     {
-        $token = $this->authorize();
+        $client = $this->authorize($this->getApiClient());
 
         $faker = \Faker\Factory::create('en_EN');
 
@@ -73,17 +59,11 @@ class AccountTest extends TavroApiTest
             'user' => -1,
         );
 
-        $url = 'https://api.tavro.dev/api/v1/accounts';
+        $url = '/api/v1/accounts';
 
-        $client = new Client($url, array(
-            'request.options' => array(
-                'exceptions' => false,
-            )
-        ));
-
-        $request = $client->post($url, null, json_encode($data), ['verify' => false]);
-        $request->addHeader('Authorization', sprintf('Bearer %s', $token));
-        $response = $request->send();
+        $response = $client->post($url, [
+            'json' => $data
+        ]);
 
         $json = $response->getBody(true);
         $body = json_decode($json, true);

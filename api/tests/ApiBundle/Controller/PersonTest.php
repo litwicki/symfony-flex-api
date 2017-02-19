@@ -8,7 +8,7 @@ class PersonTest extends TavroApiTest
 
     public function testPersonRoute()
     {
-        $client = new Client('https://api.tavro.dev/api/v1', array(
+        $client = new Client('/api/v1', array(
             'request.options' => array(
                 'exceptions' => false,
             )
@@ -16,7 +16,7 @@ class PersonTest extends TavroApiTest
 
         $token = $this->authorize();
 
-        $url = 'https://api.tavro.dev/api/v1/people';
+        $url = '/api/v1/people';
 
         $request = $client->get($url, null, ['verify' => false]);
         $request->addHeader('Authorization', sprintf('Bearer %s', $token));
@@ -50,7 +50,7 @@ class PersonTest extends TavroApiTest
             'zip' => $faker->postcode,
         ];
 
-        $url = 'https://api.tavro.dev/api/v1/people';
+        $url = '/api/v1/people';
 
         $client = new Client($url, array(
             'request.options' => array(
@@ -88,7 +88,7 @@ class PersonTest extends TavroApiTest
             'zip' => $faker->postcode,
         ];
 
-        $url = 'https://api.tavro.dev/api/v1/people';
+        $url = '/api/v1/people';
 
         $client = new Client($url, array(
             'request.options' => array(

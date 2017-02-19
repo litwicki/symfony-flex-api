@@ -9,17 +9,11 @@ class AccountGroupTest extends TavroApiTest
 
     public function testAccountGroupRoute()
     {
-        $client = $this->getApiClient();
-
-        $token = $this->authorize();
+        $client = $this->authorize($this->getApiClient());
 
         $url = '/api/v1/accounts/1/groups';
 
-        $response = $client->request('GET', $url, [
-            'headers' => [
-                'Authorization' => sprintf('Bearer %s', $token)
-            ],
-        ]);
+        $response = $client->get($url);
 
         $json = $response->getBody(true);
         $this->assertEquals(200, $response->getStatusCode());
@@ -29,8 +23,7 @@ class AccountGroupTest extends TavroApiTest
     public function testAccountGroupCreate()
     {
 
-        $client = $this->getApiClient();
-        $token = $this->authorize();
+        $client = $this->authorize($this->getApiClient());
 
         $faker = \Faker\Factory::create('en_EN');
 
@@ -44,9 +37,6 @@ class AccountGroupTest extends TavroApiTest
         $url = '/api/v1/accounts/1/groups';
 
         $response = $client->post($url, [
-            'headers' => [
-                'Authorization' => sprintf('Bearer %s', $token)
-            ],
             'json' => $data
         ]);
 

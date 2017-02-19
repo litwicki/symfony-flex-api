@@ -8,7 +8,7 @@ class NodeTest extends TavroApiTest
 
     public function testNodeRoute()
     {
-        $client = new Client('https://api.tavro.dev/api/v1', array(
+        $client = new Client('/api/v1', array(
             'request.options' => array(
                 'exceptions' => false,
             )
@@ -16,7 +16,7 @@ class NodeTest extends TavroApiTest
 
         $token = $this->authorize();
 
-        $url = 'https://api.tavro.dev/api/v1/nodes';
+        $url = '/api/v1/nodes';
 
         $request = $client->get($url, null, ['verify' => false]);
         $request->addHeader('Authorization', sprintf('Bearer %s', $token));
@@ -46,7 +46,7 @@ class NodeTest extends TavroApiTest
             'account' => 1
         );
 
-        $url = 'https://api.tavro.dev/api/v1/nodes';
+        $url = '/api/v1/nodes';
 
         $client = new Client($url, array(
             'request.options' => array(
@@ -82,7 +82,7 @@ class NodeTest extends TavroApiTest
             'account' => -1
         );
 
-        $url = 'https://api.tavro.dev/api/v1/nodes';
+        $url = '/api/v1/nodes';
 
         $client = new Client($url, array(
             'request.options' => array(
@@ -105,7 +105,7 @@ class NodeTest extends TavroApiTest
     public function testNodeCreateBadUser()
     {
         // create our http client (Guzzle)
-        $client = new Client('https://api.tavro.dev/api/v1', array(
+        $client = new Client('/api/v1', array(
             'request.options' => array(
                 'exceptions' => false,
             )
@@ -125,7 +125,7 @@ class NodeTest extends TavroApiTest
             'account' => 1
         );
 
-        $url = 'https://api.tavro.dev/api/v1/nodes';
+        $url = '/api/v1/nodes';
 
         $client = new Client($url, array(
             'request.options' => array(

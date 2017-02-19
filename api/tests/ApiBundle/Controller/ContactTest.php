@@ -8,7 +8,7 @@ class ContactTest extends TavroApiTest
 
     public function testContactRoute()
     {
-        $client = new Client('https://api.tavro.dev/api/v1', array(
+        $client = new Client('/api/v1', array(
             'request.options' => array(
                 'exceptions' => false,
             )
@@ -16,7 +16,7 @@ class ContactTest extends TavroApiTest
 
         $token = $this->authorize();
 
-        $url = 'https://api.tavro.dev/api/v1/contacts';
+        $url = '/api/v1/contacts';
 
         $request = $client->get($url, null, ['verify' => false]);
         $request->addHeader('Authorization', sprintf('Bearer %s', $token));
@@ -44,7 +44,7 @@ class ContactTest extends TavroApiTest
             'organization' => 1
         );
 
-        $url = 'https://api.tavro.dev/api/v1/contacts';
+        $url = '/api/v1/contacts';
 
         $client = new Client($url, array(
             'request.options' => array(
@@ -79,7 +79,7 @@ class ContactTest extends TavroApiTest
             'organization' => 1
         );
 
-        $url = 'https://api.tavro.dev/api/v1/contacts';
+        $url = '/api/v1/contacts';
 
         $client = new Client($url, array(
             'request.options' => array(
@@ -114,7 +114,7 @@ class ContactTest extends TavroApiTest
             'organization' => -1
         );
 
-        $url = 'https://api.tavro.dev/api/v1/contacts';
+        $url = '/api/v1/contacts';
 
         $client = new Client($url, array(
             'request.options' => array(
@@ -137,7 +137,7 @@ class ContactTest extends TavroApiTest
     public function testContactCreateBadUser()
     {
         // create our http client (Guzzle)
-        $client = new Client('https://api.tavro.dev/api/v1', array(
+        $client = new Client('/api/v1', array(
             'request.options' => array(
                 'exceptions' => false,
             )
@@ -154,7 +154,7 @@ class ContactTest extends TavroApiTest
             'organization' => 1
         );
 
-        $url = 'https://api.tavro.dev/api/v1/contacts';
+        $url = '/api/v1/contacts';
 
         $client = new Client($url, array(
             'request.options' => array(
