@@ -11,7 +11,7 @@ class TavroApiTest extends \PHPUnit_Framework_TestCase
      *
      * @return \GuzzleHttp\Client
      */
-    public function getApiClient($base_uri = 'http://api.tavro.dev')
+    public function getApiClient($base_uri = 'http://api.tavro.dev/api/v1')
     {
         return new Client([
             'base_uri' => $base_uri,
@@ -41,9 +41,10 @@ class TavroApiTest extends \PHPUnit_Framework_TestCase
             'password' => $password,
         );
 
-        $response = $client->request('POST', '/api/v1/auth', [
-            'verify' => $https,
-            'form_params' => $data
+        $url = '/api/v1/auth';
+
+        $response = $client->post($url, [
+            'json' => $data
         ]);
 
         $code = $response->getStatusCode();
@@ -57,8 +58,13 @@ class TavroApiTest extends \PHPUnit_Framework_TestCase
             return new Client([
                 'verify' => $https,
                 'base_uri' => $uri,
-                'request.options' => ['exceptions' => FALSE],
-                'headers' => ['Authorization' => sprintf('Bearer %s', $body['token'])],
+                'request.options' => [
+                    'exceptions' => FALSE
+                ],
+                'headers' => [
+                    'Content-Type' => 'application/json',
+                    'Authorization' => sprintf('Bearer %s', $body['token'])
+                ],
             ]);
 
         }

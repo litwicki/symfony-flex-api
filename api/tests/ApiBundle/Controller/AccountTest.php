@@ -1,6 +1,8 @@
 <?php namespace Tests\ApiBundle\Controller;
 
-use GuzzleHttp\Client;;
+use GuzzleHttp\Client;
+use GuzzleHttp\Exception\RequestException;
+use Symfony\Component\HttpFoundation\Response;
 use Tests\ApiBundle\TavroApiTest;
 
 class AccountTest extends TavroApiTest
@@ -14,10 +16,10 @@ class AccountTest extends TavroApiTest
 
         $response = $client->get($url);
 
-        $json = $response->getBody(true);
+        $json = $response->getBody();
         $body = json_decode($json, true);
 
-        $this->assertEquals(200, $response->getStatusCode());
+        $this->assertEquals(Response::HTTP_OK, $response->getStatusCode());
 
     }
 
@@ -40,36 +42,40 @@ class AccountTest extends TavroApiTest
             'json' => $data
         ]);
 
-        $json = $response->getBody(true);
+        $json = $response->getBody();
         $body = json_decode($json, true);
 
-        $this->assertEquals(200, $response->getStatusCode());
+        $this->assertEquals(Response::HTTP_CREATED, $response->getStatusCode());
 
     }
 
     public function testAccountCreateBadUser()
     {
-        $client = $this->authorize($this->getApiClient());
+        try {
 
-        $faker = \Faker\Factory::create('en_EN');
+            $client = $this->authorize($this->getApiClient());
 
-        $data = array(
-            'name' => $faker->company,
-            'body' => $faker->text(rand(100,1000)),
-            'user' => -1,
-        );
+            $faker = \Faker\Factory::create('en_EN');
 
-        $url = '/api/v1/accounts';
+            $data = array(
+                'name' => $faker->company,
+                'body' => $faker->text(rand(100,1000)),
+                'user' => -1,
+            );
 
-        $response = $client->post($url, [
-            'json' => $data
-        ]);
+            $url = '/api/v1/accounts';
 
-        $json = $response->getBody(true);
-        $body = json_decode($json, true);
+            $response = $client->post($url, [
+                'json' => $data
+            ]);
 
-        $this->assertEquals(500, $response->getStatusCode());
-        $this->assertEquals(1, preg_match('/This value is not valid./', $body['message']));
+            $json = $response->getBody();
+            $body = json_decode($json, true);
+
+        }
+        catch(RequestException $e) {
+            $this->assertEquals(Response::HTTP_BAD_REQUEST, $e->getResponse()->getStatusCode());
+        }
 
     }
 

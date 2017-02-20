@@ -29,26 +29,43 @@ class ApiController extends DefaultController
      */
     public function postAction(Request $request, $entity, $_format)
     {
+
+        $data = null;
+
         try {
 
             $data = json_decode($request->getContent(), TRUE);
             $handler = $this->getHandler($entity);
             $newEntity = $handler->post($request, $data);
 
-            return $this->apiResponse($newEntity, [
-                'code' => Response::HTTP_CREATED,
-            ]);
+            $data = $newEntity;
+            $options = [
+                'message' => sprintf('New %s created successfully.', $entity),
+                'code' => Response::HTTP_CREATED
+            ];
 
         }
         catch (InvalidFormException $e) {
-            throw $e;
+            $options = [
+                'code' => Response::HTTP_BAD_REQUEST,
+                'message' => $e->getMessage()
+            ];
         }
         catch (ApiAccessDeniedException $e) {
-            throw $e;
+            $options = [
+                'code' => Response::HTTP_FORBIDDEN,
+                'message' => $e->getMessage()
+            ];
         }
         catch(\Exception $e) {
-            throw $e;
+            $options = [
+                'code' => Response::HTTP_INTERNAL_SERVER_ERROR,
+                'message' => $e->getMessage()
+            ];
         }
+
+        return $this->apiResponse($data, $options);
+
     }
 
     /**
