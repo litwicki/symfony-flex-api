@@ -1,9 +1,9 @@
-<?php namespace Tests\ApiBundle\Controller;
+<?php namespace Tavro\Tests\ApiBundle\Controller;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
 use Symfony\Component\HttpFoundation\Response;
-use Tests\ApiBundle\TavroApiTest;
+use Tavro\Tests\ApiBundle\TavroApiTest;
 
 class AccountTest extends TavroApiTest
 {

@@ -1,7 +1,7 @@
-<?php namespace Tests\ApiBundle\Controller;
+<?php namespace Tavro\Tests\ApiBundle\Controller;
 
 use GuzzleHttp\Client;
-use Tests\ApiBundle\TavroApiTest;
+use Tavro\Tests\ApiBundle\TavroApiTest;
 use Symfony\Component\HttpFoundation\Response;
 
 class AccountGroupTest extends TavroApiTest
