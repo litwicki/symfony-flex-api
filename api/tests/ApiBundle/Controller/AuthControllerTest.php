@@ -1,11 +1,23 @@
 <?php namespace Tests\ApiBundle\Controller;
 
 use GuzzleHttp\Client;
+use GuzzleHttp\Exception\RequestException;
 use Symfony\Component\HttpFoundation\Response;
 use Tests\ApiBundle\TavroApiTest;
 
 class AuthControllerTest extends TavroApiTest
 {
+
+    public function getAuthClient()
+    {
+        return new Client([
+            'verify' => false,
+            'base_uri' => 'http://api.tavro.dev',
+            'request.options' => [
+                'exceptions' => false
+            ]
+        ]);
+    }
 
     /**
      * @group ApiAuth
@@ -21,16 +33,7 @@ class AuthControllerTest extends TavroApiTest
     public function testForgotAction()
     {
 
-        $client = new Client([
-            'verify' => false,
-            'base_uri' => 'http://api.tavro.dev',
-            'request.options' => [
-                'exceptions' => false
-            ],
-            'headers' => [
-                'Content-Type' => 'application/json'
-            ],
-        ]);
+        $client = $this->getAuthClient();
 
         $data = array(
             'email' => 'dev@zoadilack.com'
@@ -55,11 +58,7 @@ class AuthControllerTest extends TavroApiTest
      */
     public function testResetAction()
     {
-        $client = new Client('http://api.tavro.dev', array(
-            'request.options' => array(
-                'exceptions' => false,
-            )
-        ));
+        $client = $this->getAuthClient();
 
         $data = [
             'email' => 'dev@zoadilack.com',
@@ -85,24 +84,24 @@ class AuthControllerTest extends TavroApiTest
      */
     public function testBadLogin()
     {
-        $client = new Client('http://api.tavro.dev', array(
-            'request.options' => array(
-                'exceptions' => false,
-            )
-        ));
+        try {
+            $client = $this->getAuthClient();
 
-        $data = array(
-            'username' => 'user',
-            'password' => 'password'
-        );
+            $data = array(
+                'username' => 'user',
+                'password' => 'password'
+            );
 
-        $response = $client->post('/api/v1/auth', [
-            'verify' => false,
-            'json' => $data
-        ]);
+            $response = $client->post('/api/v1/auth', [
+                'verify' => false,
+                'form_params' => $data
+            ]);
 
-        //using an invalid password/username should yield a 404 Not Found
-        $this->assertEquals(404, $response->getStatusCode());
+        }
+        catch(RequestException $e) {
+            //using an invalid password/username should yield a 404 Not Found
+            $this->assertEquals(Response::HTTP_NOT_FOUND, $e->getResponse()->getStatusCode());
+        }
 
     }
 
@@ -111,19 +110,13 @@ class AuthControllerTest extends TavroApiTest
      */
     public function testNotLoggedIn()
     {
-        $client = new Client('http://api.tavro.dev', array(
-            'request.options' => array(
-                'exceptions' => false,
-            )
-        ));
-
-        $response = $client->get('/api/v1/users');
-
-        $json = $response->getBody();
-        $body = json_decode($json, true);
-
-        $this->assertEquals(401, $response->getStatusCode());
-        $this->assertEquals(1, preg_match('/You must be authorized to access this resource/', $body['message']));
+        try {
+            $client = $this->getAuthClient();
+            $response = $client->get('/api/v1/users');
+        }
+        catch(RequestException $e) {
+            $this->assertEquals(Response::HTTP_UNAUTHORIZED, $e->getResponse()->getStatusCode());
+        }
     }
 
 }
