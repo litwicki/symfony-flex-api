@@ -2,6 +2,8 @@
 
 use GuzzleHttp\Client;;
 use Tests\ApiBundle\TavroApiTest;
+use GuzzleHttp\Exception\RequestException;
+use Symfony\Component\HttpFoundation\Response;
 
 class CommentTest extends TavroApiTest
 {
@@ -10,63 +12,43 @@ class CommentTest extends TavroApiTest
     {
         $url = '/api/v1/comments/1';
 
-        $token = $this->authorize();
+        $client = $this->authorize($this->getApiClient());
 
-        $client = new Client('/api/v1', array(
-            'request.options' => array(
-                'exceptions' => false,
-            )
-        ));
-
-        $request = $client->get($url, null, ['verify' => false]);
-        $request->addHeader('Authorization', sprintf('Bearer %s', $token));
-        $response = $request->send();
+        $response = $client->get($url);
 
         $json = $response->getBody(true);
         $body = json_decode($json, true);
 
-        $this->assertEquals(200, $response->getStatusCode());
+        $this->assertEquals(Response::HTTP_OK, $response->getStatusCode());
 
     }
 
     public function testCommentCreateRevenueComment()
     {
-        try {
 
-            $token = $this->authorize();
+        $client = $this->authorize($this->getApiClient());
 
-            $data = [
-                'body' => 'Body text..',
-                'user' => 1
-            ];
+        $data = [
+            'body' => 'Body text..',
+            'user' => 1
+        ];
 
-            $url = '/api/v1/revenues/1/comments';
+        $url = '/api/v1/revenues/1/comments';
 
-            $client = new Client($url, array(
-                'request.options' => array(
-                    'exceptions' => false,
-                )
-            ));
+        $response = $client->post($url, [
+            'json' => $data
+        ]);
 
-            $request = $client->post($url, null, json_encode($data), ['verify' => false]);
-            $request->addHeader('Authorization', sprintf('Bearer %s', $token));
-            $response = $request->send();
+        $json = $response->getBody(true);
+        $body = json_decode($json, true);
 
-            $json = $response->getBody(true);
-            $body = json_decode($json, true);
-
-            $this->assertEquals(200, $response->getStatusCode());
-
-        }
-        catch(\Exception $e) {
-            throw $e;
-        }
+        $this->assertEquals(Response::HTTP_CREATED, $response->getStatusCode());
 
     }
 
     public function testCommentCreateNodeComment()
     {
-        $token = $this->authorize();
+        $client = $this->authorize($this->getApiClient());
 
         $data = array(
             'body' => 'Body text..',
@@ -75,26 +57,20 @@ class CommentTest extends TavroApiTest
 
         $url = '/api/v1/nodes/1/comments';
 
-        $client = new Client($url, array(
-            'request.options' => array(
-                'exceptions' => false,
-            )
-        ));
-
-        $request = $client->post($url, null, json_encode($data), ['verify' => false]);
-        $request->addHeader('Authorization', sprintf('Bearer %s', $token));
-        $response = $request->send();
+        $response = $client->post($url, [
+            'json' => $data
+        ]);
 
         $json = $response->getBody(true);
         $body = json_decode($json, true);
 
-        $this->assertEquals(200, $response->getStatusCode());
+        $this->assertEquals(Response::HTTP_CREATED, $response->getStatusCode());
 
     }
 
     public function testCommentCreateExpenseComment()
     {
-        $token = $this->authorize();
+        $client = $this->authorize($this->getApiClient());;
 
         $data = array(
             'body' => 'Body text..',
@@ -103,26 +79,21 @@ class CommentTest extends TavroApiTest
 
         $url = '/api/v1/expenses/1/comments';
 
-        $client = new Client($url, array(
-            'request.options' => array(
-                'exceptions' => false,
-            )
-        ));
-
-        $request = $client->post($url, null, json_encode($data), ['verify' => false]);
-        $request->addHeader('Authorization', sprintf('Bearer %s', $token));
-        $response = $request->send();
+        $response = $client->post($url, [
+            'json' => $data
+        ]);
 
         $json = $response->getBody(true);
         $body = json_decode($json, true);
 
-        $this->assertEquals(200, $response->getStatusCode());
+        $this->assertEquals(Response::HTTP_CREATED, $response->getStatusCode());
 
     }
 
     public function testCommentCreateOrganizationComment()
     {
-        $token = $this->authorize();
+
+        $client = $this->authorize($this->getApiClient());;
 
         $data = array(
             'body' => 'Body text..',
@@ -131,20 +102,14 @@ class CommentTest extends TavroApiTest
 
         $url = '/api/v1/organizations/1/comments';
 
-        $client = new Client($url, array(
-            'request.options' => array(
-                'exceptions' => false,
-            )
-        ));
-
-        $request = $client->post($url, null, json_encode($data), ['verify' => false]);
-        $request->addHeader('Authorization', sprintf('Bearer %s', $token));
-        $response = $request->send();
+        $response = $client->post($url, [
+            'json' => $data
+        ]);
 
         $json = $response->getBody(true);
         $body = json_decode($json, true);
-die(var_dump($body));
-        $this->assertEquals(200, $response->getStatusCode());
+
+        $this->assertEquals(Response::HTTP_CREATED, $response->getStatusCode());
 
     }
 

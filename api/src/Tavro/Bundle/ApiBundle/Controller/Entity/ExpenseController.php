@@ -84,13 +84,7 @@ class ExpenseController extends ApiController
                 'expense' => $expense->getId()
             ));
 
-            $routeOptions = array(
-                'entity'  => 'comments',
-                'id'      => $comment->getId(),
-                'format'  => $_format,
-            );
-
-            return $this->forward('TavroApiBundle:Default:get', $routeOptions);
+            return $this->apiResponse($comment);
 
         }
         catch(\Exception $e) {

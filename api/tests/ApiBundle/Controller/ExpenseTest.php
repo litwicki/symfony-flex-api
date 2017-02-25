@@ -14,7 +14,7 @@ class ExpenseTest extends TavroApiTest
             )
         ));
 
-        $token = $this->authorize();
+        $client = $this->authorize($this->getApiClient());;
 
         $url = '/api/v1/expenses';
 
@@ -32,7 +32,7 @@ class ExpenseTest extends TavroApiTest
     public function testExpenseCreate()
     {
 
-        $token = $this->authorize();
+        $client = $this->authorize($this->getApiClient());;
 
         $faker = \Faker\Factory::create('en_EN');
 

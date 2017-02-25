@@ -14,7 +14,7 @@ class RevenueTest extends TavroApiTest
             )
         ));
 
-        $token = $this->authorize();
+        $client = $this->authorize($this->getApiClient());;
 
         $url = '/api/v1/revenues';
 
@@ -32,7 +32,7 @@ class RevenueTest extends TavroApiTest
     public function testRevenueCreateRevenueWithServices()
     {
 
-        $token = $this->authorize();
+        $client = $this->authorize($this->getApiClient());;
 
         $data = array(
             'type' => 'service',
@@ -64,7 +64,7 @@ class RevenueTest extends TavroApiTest
     public function testRevenueCreateRevenueWithProducts()
     {
 
-        $token = $this->authorize();
+        $client = $this->authorize($this->getApiClient());;
 
         $data = array(
             'type' => 'sale',

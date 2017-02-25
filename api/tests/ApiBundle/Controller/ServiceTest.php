@@ -14,7 +14,7 @@ class ServiceTest extends TavroApiTest
             )
         ));
 
-        $token = $this->authorize();
+        $client = $this->authorize($this->getApiClient());;
 
         $url = '/api/v1/services';
 
@@ -32,7 +32,7 @@ class ServiceTest extends TavroApiTest
     public function testServiceCreate()
     {
 
-        $token = $this->authorize();
+        $client = $this->authorize($this->getApiClient());;
 
         $faker = \Faker\Factory::create('en_EN');
 
@@ -67,7 +67,7 @@ class ServiceTest extends TavroApiTest
     public function testServiceCreateBadType()
     {
 
-        $token = $this->authorize();
+        $client = $this->authorize($this->getApiClient());;
 
         $faker = \Faker\Factory::create('en_EN');
 

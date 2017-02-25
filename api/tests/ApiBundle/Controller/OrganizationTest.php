@@ -14,7 +14,7 @@ class OrganizationTest extends TavroApiTest
             )
         ));
 
-        $token = $this->authorize();
+        $client = $this->authorize($this->getApiClient());;
 
         $url = '/api/v1/organizations';
 
@@ -34,7 +34,7 @@ class OrganizationTest extends TavroApiTest
 
         $faker = \Faker\Factory::create('en_EN');
 
-        $token = $this->authorize();
+        $client = $this->authorize($this->getApiClient());;
 
         $data = array(
             'name' => $faker->name,

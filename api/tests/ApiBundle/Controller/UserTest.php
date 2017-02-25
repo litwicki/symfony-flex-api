@@ -15,7 +15,7 @@ class UserTest extends TavroApiTest
             )
         ));
 
-        $token = $this->authorize();
+        $client = $this->authorize($this->getApiClient());;
 
         $url = '/api/v1/users';
 
@@ -32,7 +32,7 @@ class UserTest extends TavroApiTest
 
     public function testUserCreate()
     {
-        $token = $this->authorize();
+        $client = $this->authorize($this->getApiClient());;
 
         $faker = \Faker\Factory::create('en_EN');
 

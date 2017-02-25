@@ -14,7 +14,7 @@ class PersonTest extends TavroApiTest
             )
         ));
 
-        $token = $this->authorize();
+        $client = $this->authorize($this->getApiClient());;
 
         $url = '/api/v1/people';
 
@@ -30,7 +30,7 @@ class PersonTest extends TavroApiTest
 
     public function testPersonCreate()
     {
-        $token = $this->authorize();
+        $client = $this->authorize($this->getApiClient());;
 
         $faker = \Faker\Factory::create('en_EN');
         $genders = array('male', 'female');
@@ -71,7 +71,7 @@ class PersonTest extends TavroApiTest
 
     public function testPersonCreateBadGender()
     {
-        $token = $this->authorize();
+        $client = $this->authorize($this->getApiClient());;
 
         $faker = \Faker\Factory::create('en_EN');
 

@@ -14,7 +14,7 @@ class FundingRoundTest extends TavroApiTest
             )
         ));
 
-        $token = $this->authorize();
+        $client = $this->authorize($this->getApiClient());;
 
         $url = '/api/v1/funding';
 
@@ -38,7 +38,7 @@ class FundingRoundTest extends TavroApiTest
             )
         ));
 
-        $token = $this->authorize();
+        $client = $this->authorize($this->getApiClient());;
 
         $data = array(
             'body' => 'FundingRound body description.',

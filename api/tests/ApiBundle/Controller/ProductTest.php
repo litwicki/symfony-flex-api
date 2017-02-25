@@ -14,7 +14,7 @@ class ProductTest extends TavroApiTest
             )
         ));
 
-        $token = $this->authorize();
+        $client = $this->authorize($this->getApiClient());;
 
         $url = '/api/v1/products';
 
@@ -33,7 +33,7 @@ class ProductTest extends TavroApiTest
     {
         $faker = \Faker\Factory::create('en_EN');
 
-        $token = $this->authorize();
+        $client = $this->authorize($this->getApiClient());;
 
         $data = array(
             'name' => $faker->text(rand(10,100)),

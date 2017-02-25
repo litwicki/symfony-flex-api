@@ -14,7 +14,7 @@ class ShareholderTest extends TavroApiTest
             )
         ));
 
-        $token = $this->authorize();
+        $client = $this->authorize($this->getApiClient());;
 
         $url = '/api/v1/shareholders';
 
@@ -32,7 +32,7 @@ class ShareholderTest extends TavroApiTest
     public function testShareholderCreate()
     {
 
-        $token = $this->authorize();
+        $client = $this->authorize($this->getApiClient());;
         $faker = \Faker\Factory::create('en_EN');
 
         $data = array(

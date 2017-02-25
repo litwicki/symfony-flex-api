@@ -14,7 +14,7 @@ class ContactTest extends TavroApiTest
             )
         ));
 
-        $token = $this->authorize();
+        $client = $this->authorize($this->getApiClient());;
 
         $url = '/api/v1/contacts';
 
@@ -32,7 +32,7 @@ class ContactTest extends TavroApiTest
     public function testContactCreate()
     {
 
-        $token = $this->authorize();
+        $client = $this->authorize($this->getApiClient());;
 
         $faker = \Faker\Factory::create('en_EN');
 
@@ -66,7 +66,7 @@ class ContactTest extends TavroApiTest
     public function testContactCreateWithUser()
     {
 
-        $token = $this->authorize();
+        $client = $this->authorize($this->getApiClient());;
 
         $faker = \Faker\Factory::create('en_EN');
 
@@ -101,7 +101,7 @@ class ContactTest extends TavroApiTest
     public function testContactCreateBadOrganization()
     {
 
-        $token = $this->authorize();
+        $client = $this->authorize($this->getApiClient());;
 
         $faker = \Faker\Factory::create('en_EN');
 
@@ -143,7 +143,7 @@ class ContactTest extends TavroApiTest
             )
         ));
 
-        $token = $this->authorize();
+        $client = $this->authorize($this->getApiClient());;
 
         $faker = \Faker\Factory::create('en_EN');
 

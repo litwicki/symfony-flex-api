@@ -14,7 +14,7 @@ class NodeTest extends TavroApiTest
             )
         ));
 
-        $token = $this->authorize();
+        $client = $this->authorize($this->getApiClient());;
 
         $url = '/api/v1/nodes';
 
@@ -32,7 +32,7 @@ class NodeTest extends TavroApiTest
     public function testNodeCreate()
     {
 
-        $token = $this->authorize();
+        $client = $this->authorize($this->getApiClient());;
 
         $faker = \Faker\Factory::create('en_EN');
 
@@ -68,7 +68,7 @@ class NodeTest extends TavroApiTest
     public function testNodeCreateBadAccount()
     {
 
-        $token = $this->authorize();
+        $client = $this->authorize($this->getApiClient());;
 
         $faker = \Faker\Factory::create('en_EN');
 
@@ -111,7 +111,7 @@ class NodeTest extends TavroApiTest
             )
         ));
 
-        $token = $this->authorize();
+        $client = $this->authorize($this->getApiClient());;
 
         $faker = \Faker\Factory::create('en_EN');
 

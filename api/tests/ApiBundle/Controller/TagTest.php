@@ -14,7 +14,7 @@ class TagTest extends TavroApiTest
             )
         ));
 
-        $token = $this->authorize();
+        $client = $this->authorize($this->getApiClient());;
 
         $url = '/api/v1/tags';
 
@@ -32,7 +32,7 @@ class TagTest extends TavroApiTest
     public function testTagCreate()
     {
 
-        $token = $this->authorize();
+        $client = $this->authorize($this->getApiClient());;
 
         $faker = \Faker\Factory::create('en_EN');
 
