@@ -1,6 +1,8 @@
 <?php namespace Tests\ApiBundle\Controller;
 
-use GuzzleHttp\Client;;
+use GuzzleHttp\Client;
+use GuzzleHttp\Exception\RequestException;
+use Symfony\Component\HttpFoundation\Response;
 use Tests\ApiBundle\TavroApiTest;
 
 class PersonTest extends TavroApiTest
@@ -8,29 +10,22 @@ class PersonTest extends TavroApiTest
 
     public function testPersonRoute()
     {
-        $client = new Client('/api/v1', array(
-            'request.options' => array(
-                'exceptions' => false,
-            )
-        ));
 
         $client = $this->authorize($this->getApiClient());;
 
         $url = '/api/v1/people';
 
-        $request = $client->get($url, null, ['verify' => false]);
-        $request->addHeader('Authorization', sprintf('Bearer %s', $token));
-        $response = $request->send();
+        $response = $client->get($url);
 
         $json = $response->getBody(true);
 
-        $this->assertEquals(200, $response->getStatusCode());
+        $this->assertEquals(Response::HTTP_OK, $response->getStatusCode());
 
     }
 
     public function testPersonCreate()
     {
-        $client = $this->authorize($this->getApiClient());;
+        $client = $this->authorize($this->getApiClient());
 
         $faker = \Faker\Factory::create('en_EN');
         $genders = array('male', 'female');
@@ -52,58 +47,47 @@ class PersonTest extends TavroApiTest
 
         $url = '/api/v1/people';
 
-        $client = new Client($url, array(
-            'request.options' => array(
-                'exceptions' => false,
-            )
-        ));
+        $response = $client->post($url, [
+            'json' => $data
+        ]);
 
-        $request = $client->post($url, null, json_encode($data), ['verify' => false]);
-        $request->addHeader('Authorization', sprintf('Bearer %s', $token));
-        $response = $request->send();
-
-        $json = $response->getBody(true);
-        $body = json_decode($json, true);
-
-        $this->assertEquals(200, $response->getStatusCode());
+        $this->assertEquals(Response::HTTP_CREATED, $response->getStatusCode());
 
     }
 
     public function testPersonCreateBadGender()
     {
-        $client = $this->authorize($this->getApiClient());;
+        try {
 
-        $faker = \Faker\Factory::create('en_EN');
+            $client = $this->authorize($this->getApiClient());;
 
-        $data = [
-            'first_name' => $faker->firstName,
-            'last_name' => $faker->lastName,
-            'body' => $faker->text(500),
-            'email' => $faker->email,
-            'gender' => 'gremlin',
-            'phone' => '555-867-5309',
-            'address' => $faker->address,
-            'city' => $faker->city,
-            'state' => $faker->state,
-            'zip' => $faker->postcode,
-        ];
+            $faker = \Faker\Factory::create('en_EN');
 
-        $url = '/api/v1/people';
+            $data = [
+                'first_name' => $faker->firstName,
+                'last_name' => $faker->lastName,
+                'body' => $faker->text(500),
+                'email' => $faker->email,
+                'gender' => 'gremlin',
+                'phone' => '555-867-5309',
+                'address' => $faker->address,
+                'city' => $faker->city,
+                'state' => $faker->state,
+                'zip' => $faker->postcode,
+            ];
 
-        $client = new Client($url, array(
-            'request.options' => array(
-                'exceptions' => false,
-            )
-        ));
+            $url = '/api/v1/people';
 
-        $request = $client->post($url, null, json_encode($data), ['verify' => false]);
-        $request->addHeader('Authorization', sprintf('Bearer %s', $token));
-        $response = $request->send();
 
-        $json = $response->getBody(true);
-        $body = json_decode($json, true);
+            $response = $client->post($url, [
+                'json' => $data
+            ]);
 
-        $this->assertEquals(1, preg_match('/valid gender/', $body['message']));
+        }
+        catch(RequestException $e) {
+            $this->assertEquals(Response::HTTP_BAD_REQUEST, $e->getResponse()->getStatusCode());
+            $this->assertEquals(1, preg_match('/Please enter a valid gender/', $e->getMessage()));
+        }
 
     }
 

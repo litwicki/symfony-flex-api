@@ -72,6 +72,7 @@ class ExpenseTest extends TavroApiTest
         }
         catch(RequestException $e) {
             $this->assertEquals(Response::HTTP_BAD_REQUEST, $e->getResponse()->getStatusCode());
+            $this->assertEquals(1, preg_match('/Please enter a valid User/', $e->getMessage()));
         }
 
     }
@@ -101,6 +102,7 @@ class ExpenseTest extends TavroApiTest
         }
         catch(RequestException $e) {
             $this->assertEquals(Response::HTTP_BAD_REQUEST, $e->getResponse()->getStatusCode());
+            $this->assertEquals(1, preg_match('/Please enter a valid Account/', $e->getMessage()));
         }
 
     }
@@ -130,6 +132,7 @@ class ExpenseTest extends TavroApiTest
         }
         catch(RequestException $e) {
             $this->assertEquals(Response::HTTP_BAD_REQUEST, $e->getResponse()->getStatusCode());
+            $this->assertEquals(1, preg_match('/Please enter a valid Expense Category/', $e->getMessage()));
         }
 
     }

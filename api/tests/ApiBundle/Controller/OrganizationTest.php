@@ -1,6 +1,8 @@
 <?php namespace Tests\ApiBundle\Controller;
 
-use GuzzleHttp\Client;;
+use GuzzleHttp\Client;
+use GuzzleHttp\Exception\RequestException;
+use Symfony\Component\HttpFoundation\Response;
 use Tests\ApiBundle\TavroApiTest;
 
 class OrganizationTest extends TavroApiTest
@@ -8,24 +10,13 @@ class OrganizationTest extends TavroApiTest
 
     public function testOrganizationRoute()
     {
-        $client = new Client('/api/v1', array(
-            'request.options' => array(
-                'exceptions' => false,
-            )
-        ));
-
-        $client = $this->authorize($this->getApiClient());;
+        $client = $this->authorize($this->getApiClient());
 
         $url = '/api/v1/organizations';
 
-        $request = $client->get($url, null, ['verify' => false]);
-        $request->addHeader('Authorization', sprintf('Bearer %s', $token));
-        $response = $request->send();
+        $response = $client->get($url);
 
-        $json = $response->getBody(true);
-        $body = json_decode($json, true);
-
-        $this->assertEquals(200, $response->getStatusCode());
+        $this->assertEquals(Response::HTTP_OK, $response->getStatusCode());
 
     }
 
@@ -34,7 +25,7 @@ class OrganizationTest extends TavroApiTest
 
         $faker = \Faker\Factory::create('en_EN');
 
-        $client = $this->authorize($this->getApiClient());;
+        $client = $this->authorize($this->getApiClient());
 
         $data = array(
             'name' => $faker->name,
@@ -50,21 +41,45 @@ class OrganizationTest extends TavroApiTest
 
         $url = '/api/v1/organizations';
 
-        $client = new Client($url, array(
-            'request.options' => array(
-                'exceptions' => false,
-            )
-        ));
+        $response = $client->post($url, [
+            'json' => $data
+        ]);
 
-        $request = $client->post($url, null, json_encode($data), ['verify' => false]);
-        $request->addHeader('Authorization', sprintf('Bearer %s', $token));
+        $this->assertEquals(Response::HTTP_CREATED, $response->getStatusCode());
 
-        $response = $request->send();
+    }
 
-        $json = $response->getBody(true);
-        $body = json_decode($json, true);
+    public function testOrganizationCreateBadAccount()
+    {
+        try {
 
-        $this->assertEquals(200, $response->getStatusCode());
+            $client = $this->authorize($this->getApiClient());
+
+            $faker = \Faker\Factory::create('en_EN');
+
+            $data = array(
+                'name' => $faker->name,
+                'body' => $faker->text(rand(100,1000)),
+                'address' => $faker->address,
+                'city' => $faker->city,
+                'state' => 'WA',
+                'zip' => $faker->postcode,
+                'website' => $faker->url,
+                'phone' => '555-867-5309',
+                'account' => -11
+            );
+
+            $url = '/api/v1/organizations';
+
+            $client->post($url, [
+                'json' => $data,
+            ]);
+
+        }
+        catch(RequestException $e) {
+            $this->assertEquals(Response::HTTP_BAD_REQUEST, $e->getResponse()->getStatusCode());
+            $this->assertEquals(1, preg_match('/Please enter a valid Account/', $e->getMessage()));
+        }
 
     }
 
