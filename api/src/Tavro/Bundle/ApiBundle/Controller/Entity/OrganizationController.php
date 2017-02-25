@@ -107,12 +107,35 @@ class OrganizationController extends ApiController
                 'organization' => $organization->getId()
             ));
 
-            return $this->apiResponse($comment);
+            $options = [
+                'format' => $_format,
+                'code' => Response::HTTP_CREATED,
+                'message' => sprintf('Comment %s submitted to Organization %s', $comment->getId(), $organization->getId())
+            ];
+
+            $data = $comment;
 
         }
-        catch(\Exception $e) {
-            throw $e;
+        catch (InvalidFormException $e) {
+            $options = [
+                'code' => Response::HTTP_BAD_REQUEST,
+                'message' => $e->getMessage()
+            ];
         }
+        catch (ApiAccessDeniedException $e) {
+            $options = [
+                'code' => Response::HTTP_FORBIDDEN,
+                'message' => $e->getMessage()
+            ];
+        }
+        catch(\Exception $e) {
+            $options = [
+                'code' => Response::HTTP_INTERNAL_SERVER_ERROR,
+                'message' => $e->getMessage()
+            ];
+        }
+
+        return $this->apiResponse($data, $options);
 
     }
 

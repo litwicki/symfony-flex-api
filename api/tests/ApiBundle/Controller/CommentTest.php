@@ -1,9 +1,10 @@
 <?php namespace Tests\ApiBundle\Controller;
 
-use GuzzleHttp\Client;;
-use Tests\ApiBundle\TavroApiTest;
+use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
 use Symfony\Component\HttpFoundation\Response;
+
+use Tests\ApiBundle\TavroApiTest;
 
 class CommentTest extends TavroApiTest
 {

@@ -52,7 +52,11 @@ class RevenueController extends ApiController
                 'revenue' => $revenue->getId()
             ));
 
-            return $this->apiResponse($comment);
+            return $this->apiResponse($comment, [
+                'format' => $_format,
+                'code' => Response::HTTP_CREATED,
+                'message' => sprintf('Comment %s submitted to Revenue %s', $comment->getId(), $revenue->getId())
+            ]);
 
         }
         catch(\Exception $e) {
