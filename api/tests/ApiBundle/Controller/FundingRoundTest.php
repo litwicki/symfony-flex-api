@@ -1,6 +1,8 @@
 <?php namespace Tests\ApiBundle\Controller;
 
-use GuzzleHttp\Client;;
+use GuzzleHttp\Client;
+use Symfony\Component\HttpFoundation\Response;
+use GuzzleHttp\Exception\RequestException;
 use Tests\ApiBundle\TavroApiTest;
 
 class FundingRoundTest extends TavroApiTest
@@ -8,22 +10,11 @@ class FundingRoundTest extends TavroApiTest
 
     public function testFundingRoundRoute()
     {
-        $client = new Client('/api/v1', array(
-            'request.options' => array(
-                'exceptions' => false,
-            )
-        ));
-
-        $client = $this->authorize($this->getApiClient());;
+        $client = $this->authorize($this->getApiClient());
 
         $url = '/api/v1/funding';
 
-        $request = $client->get($url, null, ['verify' => false]);
-        $request->addHeader('Authorization', sprintf('Bearer %s', $token));
-        $response = $request->send();
-
-        $json = $response->getBody(true);
-        $body = json_decode($json, true);
+        $response = $client->get($url);
 
         $this->assertEquals(200, $response->getStatusCode());
 
@@ -31,37 +22,53 @@ class FundingRoundTest extends TavroApiTest
 
     public function testFundingRoundCreate()
     {
-        // create our http client (Guzzle)
-        $client = new Client('/api/v1', array(
-            'request.options' => array(
-                'exceptions' => false,
-            )
-        ));
+        $client = $this->authorize($this->getApiClient());
 
-        $client = $this->authorize($this->getApiClient());;
+        $faker = \Faker\Factory::create('en_EN');
 
         $data = array(
-            'body' => 'FundingRound body description.',
+            'body' => $faker->text(500),
             'type' => 'funding_round_test',
             'account' => 1
         );
 
         $url = '/api/v1/funding';
 
-        $client = new Client($url, array(
-            'request.options' => array(
-                'exceptions' => false,
-            )
-        ));
-
-        $request = $client->post($url, null, json_encode($data), ['verify' => false]);
-        $request->addHeader('Authorization', sprintf('Bearer %s', $token));
-        $response = $request->send();
+        $response = $client->post($url, [
+            'json' => $data,
+        ]);
 
         $json = $response->getBody(true);
         $body = json_decode($json, true);
 
-        $this->assertEquals(200, $response->getStatusCode());
+        $this->assertEquals(Response::HTTP_CREATED, $response->getStatusCode());
+
+    }
+
+    public function testFundingRoundCreateBadAccount()
+    {
+        try {
+
+            $client = $this->authorize($this->getApiClient());
+
+            $faker = \Faker\Factory::create('en_EN');
+
+            $data = array(
+                'body' => $faker->text(500),
+                'type' => 'funding_round_test',
+                'account' => -1
+            );
+
+            $url = '/api/v1/funding';
+
+            $client->post($url, [
+                'json' => $data,
+            ]);
+
+        }
+        catch(RequestException $e) {
+            $this->assertEquals(Response::HTTP_BAD_REQUEST, $e->getResponse()->getStatusCode());
+        }
 
     }
 

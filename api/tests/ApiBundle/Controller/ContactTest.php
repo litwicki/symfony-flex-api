@@ -1,6 +1,8 @@
 <?php namespace Tests\ApiBundle\Controller;
 
-use GuzzleHttp\Client;;
+use GuzzleHttp\Client;
+use GuzzleHttp\Exception\RequestException;
+use Symfony\Component\HttpFoundation\Response;
 use Tests\ApiBundle\TavroApiTest;
 
 class ContactTest extends TavroApiTest
@@ -8,31 +10,23 @@ class ContactTest extends TavroApiTest
 
     public function testContactRoute()
     {
-        $client = new Client('/api/v1', array(
-            'request.options' => array(
-                'exceptions' => false,
-            )
-        ));
-
-        $client = $this->authorize($this->getApiClient());;
+        $client = $this->authorize($this->getApiClient());
 
         $url = '/api/v1/contacts';
 
-        $request = $client->get($url, null, ['verify' => false]);
-        $request->addHeader('Authorization', sprintf('Bearer %s', $token));
-        $response = $request->send();
+        $response = $client->get($url);
 
         $json = $response->getBody(true);
         $body = json_decode($json, true);
 
-        $this->assertEquals(200, $response->getStatusCode());
+        $this->assertEquals(Response::HTTP_OK, $response->getStatusCode());
 
     }
 
     public function testContactCreate()
     {
 
-        $client = $this->authorize($this->getApiClient());;
+        $client = $this->authorize($this->getApiClient());
 
         $faker = \Faker\Factory::create('en_EN');
 
@@ -46,27 +40,22 @@ class ContactTest extends TavroApiTest
 
         $url = '/api/v1/contacts';
 
-        $client = new Client($url, array(
-            'request.options' => array(
-                'exceptions' => false,
-            )
-        ));
 
-        $request = $client->post($url, null, json_encode($data), ['verify' => false]);
-        $request->addHeader('Authorization', sprintf('Bearer %s', $token));
-        $response = $request->send();
+        $response = $client->post($url, [
+            'json' => $data
+        ]);
 
         $json = $response->getBody(true);
         $body = json_decode($json, true);
 
-        $this->assertEquals(200, $response->getStatusCode());
+        $this->assertEquals(Response::HTTP_CREATED, $response->getStatusCode());
 
     }
 
     public function testContactCreateWithUser()
     {
 
-        $client = $this->authorize($this->getApiClient());;
+        $client = $this->authorize($this->getApiClient());
 
         $faker = \Faker\Factory::create('en_EN');
 
@@ -81,96 +70,73 @@ class ContactTest extends TavroApiTest
 
         $url = '/api/v1/contacts';
 
-        $client = new Client($url, array(
-            'request.options' => array(
-                'exceptions' => false,
-            )
-        ));
-
-        $request = $client->post($url, null, json_encode($data), ['verify' => false]);
-        $request->addHeader('Authorization', sprintf('Bearer %s', $token));
-        $response = $request->send();
+        $response = $client->post($url, [
+            'json' => $data
+        ]);
 
         $json = $response->getBody(true);
         $body = json_decode($json, true);
 
-        $this->assertEquals(200, $response->getStatusCode());
+        $this->assertEquals(Response::HTTP_CREATED, $response->getStatusCode());
 
     }
 
     public function testContactCreateBadOrganization()
     {
 
-        $client = $this->authorize($this->getApiClient());;
+        try {
 
-        $faker = \Faker\Factory::create('en_EN');
+            $client = $this->authorize($this->getApiClient());
 
-        $data = array(
-            'job_title' => $faker->jobTitle,
-            'email' => $faker->email,
-            'phone' => '555-867-5309',
-            'person' => 1,
-            'user' => 1,
-            'organization' => -1
-        );
+            $faker = \Faker\Factory::create('en_EN');
 
-        $url = '/api/v1/contacts';
+            $data = array(
+                'job_title' => $faker->jobTitle,
+                'email' => $faker->email,
+                'phone' => '555-867-5309',
+                'person' => 1,
+                'user' => 1,
+                'organization' => -1
+            );
 
-        $client = new Client($url, array(
-            'request.options' => array(
-                'exceptions' => false,
-            )
-        ));
+            $url = '/api/v1/contacts';
 
-        $request = $client->post($url, null, json_encode($data), ['verify' => false]);
-        $request->addHeader('Authorization', sprintf('Bearer %s', $token));
-        $response = $request->send();
+            $client->post($url, [
+                'json' => $data
+            ]);
 
-        $json = $response->getBody(true);
-        $body = json_decode($json, true);
-
-        $this->assertEquals(500, $response->getStatusCode());
-        $this->assertEquals(1, preg_match('/Please enter a valid Organization/', $body['message']));
+        }
+        catch(RequestException $e) {
+            $this->assertEquals(Response::HTTP_BAD_REQUEST, $e->getResponse()->getStatusCode());
+        }
 
     }
 
     public function testContactCreateBadUser()
     {
-        // create our http client (Guzzle)
-        $client = new Client('/api/v1', array(
-            'request.options' => array(
-                'exceptions' => false,
-            )
-        ));
+        try {
 
-        $client = $this->authorize($this->getApiClient());;
+            $client = $this->authorize($this->getApiClient());
 
-        $faker = \Faker\Factory::create('en_EN');
+           $faker = \Faker\Factory::create('en_EN');
 
-        $data = array(
-            'name' => 'Contact Name',
-            'body' => 'Contact body description.',
-            'user' => -1,
-            'organization' => 1
-        );
+           $data = array(
+               'name' => $faker->name,
+               'body' => $faker->text(500),
+               'user' => -1,
+               'organization' => 1
+           );
 
-        $url = '/api/v1/contacts';
+           $url = '/api/v1/contacts';
 
-        $client = new Client($url, array(
-            'request.options' => array(
-                'exceptions' => false,
-            )
-        ));
+           $client->post($url, [
+               'json' => $data
+           ]);
 
-        $request = $client->post($url, null, json_encode($data), ['verify' => false]);
-        $request->addHeader('Authorization', sprintf('Bearer %s', $token));
-        $response = $request->send();
-
-        $json = $response->getBody(true);
-        $body = json_decode($json, true);
-
-        $this->assertEquals(500, $response->getStatusCode());
-        $this->assertEquals(1, preg_match('/Please enter a valid User/', $body['message']));
+        }
+        catch(RequestException $e) {
+            $this->assertEquals(Response::HTTP_BAD_REQUEST, $e->getResponse()->getStatusCode());
+        }
 
     }
 

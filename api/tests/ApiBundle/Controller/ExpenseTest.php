@@ -1,44 +1,36 @@
 <?php namespace Tests\ApiBundle\Controller;
 
-use GuzzleHttp\Client;;
+use GuzzleHttp\Client;
 use Tests\ApiBundle\TavroApiTest;
+use Symfony\Component\HttpFoundation\Response;
+use GuzzleHttp\Exception\RequestException;
 
 class ExpenseTest extends TavroApiTest
 {
 
     public function testExpenseRoute()
     {
-        $client = new Client('/api/v1', array(
-            'request.options' => array(
-                'exceptions' => false,
-            )
-        ));
 
-        $client = $this->authorize($this->getApiClient());;
+        $client = $this->authorize($this->getApiClient());
 
         $url = '/api/v1/expenses';
 
-        $request = $client->get($url, null, ['verify' => false]);
-        $request->addHeader('Authorization', sprintf('Bearer %s', $token));
-        $response = $request->send();
+        $response = $client->get($url);
 
-        $json = $response->getBody(true);
-        $body = json_decode($json, true);
-
-        $this->assertEquals(200, $response->getStatusCode());
+        $this->assertEquals(Response::HTTP_OK, $response->getStatusCode());
 
     }
 
     public function testExpenseCreate()
     {
 
-        $client = $this->authorize($this->getApiClient());;
+        $client = $this->authorize($this->getApiClient());
 
         $faker = \Faker\Factory::create('en_EN');
 
         $data = array(
-            'body' => 'Expense body description.',
-            'amount' => 100,
+            'body' => $faker->text(500),
+            'amount' => $faker->numberBetween(1,100),
             'expense_date' => $faker->dateTimeThisMonth->format('Y-m-d h:i:s'),
             'user' => 1,
             'account' => 1,
@@ -47,20 +39,98 @@ class ExpenseTest extends TavroApiTest
 
         $url = '/api/v1/expenses';
 
-        $client = new Client($url, array(
-            'request.options' => array(
-                'exceptions' => false,
-            )
-        ));
+        $response = $client->post($url, [
+            'json' => $data
+        ]);
 
-        $request = $client->post($url, null, json_encode($data), ['verify' => false]);
-        $request->addHeader('Authorization', sprintf('Bearer %s', $token));
-        $response = $request->send();
+        $this->assertEquals(Response::HTTP_CREATED, $response->getStatusCode());
 
-        $json = $response->getBody(true);
-        $body = json_decode($json, true);
+    }
 
-        $this->assertEquals(200, $response->getStatusCode());
+    public function testExpenseCreateBadUser()
+    {
+
+        try {
+            $client = $this->authorize($this->getApiClient());
+
+            $faker = \Faker\Factory::create('en_EN');
+
+            $data = array(
+                'body' => $faker->text(500),
+                'amount' => $faker->numberBetween(1,100),
+                'expense_date' => $faker->dateTimeThisMonth->format('Y-m-d h:i:s'),
+                'user' => -1,
+                'account' => 1,
+                'category' => 1,
+            );
+
+            $url = '/api/v1/expenses';
+
+            $client->post($url, [
+                'json' => $data
+            ]);
+        }
+        catch(RequestException $e) {
+            $this->assertEquals(Response::HTTP_BAD_REQUEST, $e->getResponse()->getStatusCode());
+        }
+
+    }
+
+    public function testExpenseCreateBadAccount()
+    {
+
+        try {
+            $client = $this->authorize($this->getApiClient());
+
+            $faker = \Faker\Factory::create('en_EN');
+
+            $data = array(
+                'body' => $faker->text(500),
+                'amount' => $faker->numberBetween(1,100),
+                'expense_date' => $faker->dateTimeThisMonth->format('Y-m-d h:i:s'),
+                'user' => 1,
+                'account' => -1,
+                'category' => 1,
+            );
+
+            $url = '/api/v1/expenses';
+
+            $response = $client->post($url, [
+                'json' => $data
+            ]);
+        }
+        catch(RequestException $e) {
+            $this->assertEquals(Response::HTTP_BAD_REQUEST, $e->getResponse()->getStatusCode());
+        }
+
+    }
+
+    public function testExpenseCreateBadCategory()
+    {
+
+        try {
+            $client = $this->authorize($this->getApiClient());
+
+            $faker = \Faker\Factory::create('en_EN');
+
+            $data = array(
+                'body' => $faker->text(500),
+                'amount' => $faker->numberBetween(1,100),
+                'expense_date' => $faker->dateTimeThisMonth->format('Y-m-d h:i:s'),
+                'user' => 1,
+                'account' => 1,
+                'category' => -1,
+            );
+
+            $url = '/api/v1/expenses';
+
+            $response = $client->post($url, [
+                'json' => $data
+            ]);
+        }
+        catch(RequestException $e) {
+            $this->assertEquals(Response::HTTP_BAD_REQUEST, $e->getResponse()->getStatusCode());
+        }
 
     }
 
