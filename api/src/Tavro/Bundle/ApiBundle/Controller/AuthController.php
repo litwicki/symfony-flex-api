@@ -51,6 +51,8 @@ class AuthController extends DefaultController
         $user = $this->getDoctrine()->getRepository('TavroCoreBundle:User')->findOneBy(['username' => $username]);
 
         if(!$user) {
+            //make this deliberately vague so users don't know if username OR password are invalid
+            //for the purposes of making brut force a bit more difficult..
             throw $this->createNotFoundException('The Username or Password were invalid.');
         }
 

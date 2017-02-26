@@ -23,16 +23,25 @@ class UserTest extends TavroApiTest
 
     public function testUserCreate()
     {
-        $client = $this->authorize($this->getApiClient());
+        $client = new Client([
+            'verify' => false,
+            'base_uri' => 'http://api.tavro.dev',
+            'request.options' => [
+                'exceptions' => FALSE
+            ],
+            'headers' => [
+                'Content-Type' => 'application/json'
+            ],
+        ]);
 
         $faker = \Faker\Factory::create('en_EN');
 
-        $email = $faker->safeEmail;
-
         $data = array(
-            'first_name' => $faker->firstName,
-            'last_name' => $faker->lastName,
-            'email' => $email,
+            'person' => [
+                'first_name' => $faker->firstName,
+                'last_name' => $faker->lastName,
+                'email' => $faker->safeEmail,
+            ],
             'username' => $faker->userName,
             'signature' => $faker->text(100),
             'password' => 'Password1!'
