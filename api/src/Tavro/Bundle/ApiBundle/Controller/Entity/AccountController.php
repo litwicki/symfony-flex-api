@@ -39,43 +39,6 @@ class AccountController extends ApiController
      * @return \Symfony\Component\HttpFoundation\Response
      * @throws \Exception
      */
-    public function getCustomerAction($entity, $id, $_format)
-    {
-        try {
-
-            $handler = $this->getHandler($entity);
-            $account = $handler->get($id);
-
-            /**
-             * Once we have fetched the Account
-             */
-            $chargify = $this->get('chargify.handler.customer');
-
-            $customer = !is_null($account->getCustomerId()) ? $chargify->get($account->getCustomerId()) : null;
-
-            return $this->apiResponse($customer, [
-                'format' => $_format
-            ]);
-
-        }
-        catch(ApiAccessDeniedException $e) {
-            throw $e;
-        }
-        catch(\Exception $e) {
-            throw $e;
-        }
-    }
-
-    /**
-     * Get (find) an Account by Id.
-     *
-     * @param $entity
-     * @param $id
-     * @param $_format
-     *
-     * @return \Symfony\Component\HttpFoundation\Response
-     * @throws \Exception
-     */
     public function getSubscriptionAction($entity, $id, $_format)
     {
         try {

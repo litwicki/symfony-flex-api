@@ -52,13 +52,11 @@ class RevenueController extends ApiController
                 'revenue' => $revenue->getId()
             ));
 
-            $routeOptions = array(
-                'entity'  => 'comments',
-                'id'      => $comment->getId(),
-                'format'  => $_format,
-            );
-
-            return $this->forward('TavroApiBundle:Default:get', $routeOptions);
+            return $this->apiResponse($comment, [
+                'format' => $_format,
+                'code' => Response::HTTP_CREATED,
+                'message' => sprintf('Comment %s submitted to Revenue %s', $comment->getId(), $revenue->getId())
+            ]);
 
         }
         catch(\Exception $e) {
@@ -74,7 +72,7 @@ class RevenueController extends ApiController
      * @return \Symfony\Component\HttpFoundation\Response
      * @throws \Exception
      */
-    public function byAccount(Request $request, Account $account, $_format)
+    public function byAccountAction(Request $request, Account $account, $_format)
     {
         try {
 

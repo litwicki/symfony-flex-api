@@ -84,13 +84,11 @@ class ExpenseController extends ApiController
                 'expense' => $expense->getId()
             ));
 
-            $routeOptions = array(
-                'entity'  => 'comments',
-                'id'      => $comment->getId(),
-                'format'  => $_format,
-            );
-
-            return $this->forward('TavroApiBundle:Default:get', $routeOptions);
+            return $this->apiResponse($comment, [
+                'format' => $_format,
+                'code' => Response::HTTP_CREATED,
+                'message' => sprintf('Comment %s submitted to Expense %s', $comment->getId(), $expense->getId())
+            ]);
 
         }
         catch(\Exception $e) {
@@ -156,13 +154,11 @@ class ExpenseController extends ApiController
                 'expense' => $expense->getId()
             ));
 
-            $routeOptions = array(
-                'entity'  => 'tags',
-                'id'      => $tag->getId(),
-                'format'  => $_format,
-            );
-
-            return $this->forward('TavroApiBundle:Default:get', $routeOptions);
+            return $this->apiResponse($tag, [
+                'format' => $_format,
+                'code' => Response::HTTP_CREATED,
+                'message' => sprintf('Tag %s submitted to Expense %s', $tag->getId(), $expense->getId())
+            ]);
 
         }
         catch(\Exception $e) {

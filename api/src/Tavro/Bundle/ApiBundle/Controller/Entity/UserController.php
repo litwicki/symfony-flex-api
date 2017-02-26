@@ -38,7 +38,7 @@ class UserController extends ApiController
      */
     public function postAction(Request $request, $entity, $_format)
     {
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
 
         try {
 
@@ -56,7 +56,9 @@ class UserController extends ApiController
             /**
              * Separate the `Person` and `User` data to the separate requests.
              */
-            $personHandler->post($request, $personData);
+            $person = $personHandler->post($request, $personData);
+
+            $userData['person'] = $person->getId();
 
             $newUser = $userHandler->post($request, $userData);
 
@@ -64,7 +66,9 @@ class UserController extends ApiController
 
             return $this->apiResponse($newUser, [
                 'format' => $_format,
-                'group' => 'simple'
+                'group' => 'simple',
+                'code' => Response::HTTP_CREATED,
+                'message' => sprintf('User `%s` with email %s signup complete!', $newUser->__toString(), $person->getEmail())
             ]);
 
         }

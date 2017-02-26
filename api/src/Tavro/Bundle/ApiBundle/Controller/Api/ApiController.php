@@ -27,31 +27,45 @@ class ApiController extends DefaultController
      * @return \Symfony\Component\HttpFoundation\Response
      * @throws \Exception
      */
-    public function post(Request $request, $entity, $_format)
+    public function postAction(Request $request, $entity, $_format)
     {
+
+        $data = null;
+
         try {
 
             $data = json_decode($request->getContent(), TRUE);
             $handler = $this->getHandler($entity);
             $newEntity = $handler->post($request, $data);
 
-            $routeOptions = array(
-                'entity'  => $entity,
-                'id'      => $newEntity->getId(),
-                'format'  => $_format,
-            );
+            $data = $newEntity;
+            $options = [
+                'message' => sprintf('New %s created successfully.', $entity),
+                'code' => Response::HTTP_CREATED
+            ];
 
-            return $this->forward('TavroApiBundle:Default:get', $routeOptions);
         }
         catch (InvalidFormException $e) {
-            throw $e;
+            $options = [
+                'code' => Response::HTTP_BAD_REQUEST,
+                'message' => $e->getMessage()
+            ];
         }
         catch (ApiAccessDeniedException $e) {
-            throw $e;
+            $options = [
+                'code' => Response::HTTP_FORBIDDEN,
+                'message' => $e->getMessage()
+            ];
         }
         catch(\Exception $e) {
-            throw $e;
+            $options = [
+                'code' => Response::HTTP_INTERNAL_SERVER_ERROR,
+                'message' => $e->getMessage()
+            ];
         }
+
+        return $this->apiResponse($data, $options);
+
     }
 
     /**
@@ -69,24 +83,23 @@ class ApiController extends DefaultController
     {
         try {
 
-            $post = json_decode($request->getContent(), TRUE);
+            $data = json_decode($request->getContent(), TRUE);
 
             $handler = $this->getHandler($entity);
 
             if (!($item = $handler->get($id))) {
-                $item = $handler->post($request, $item, $post);
+                $item = $handler->post($request, $item, $data);
+                $responseCode = Response::HTTP_CREATED;
             }
             else {
-                $item = $handler->put($request, $item, $post);
+                $item = $handler->put($request, $item, $data);
+                $responseCode = Response::HTTP_OK;
             }
 
-            $routeOptions = array(
-                'entity'  => $entity,
-                'id'      => $item->getId(),
-                '_format'  => $_format,
-            );
+            return $this->apiResponse($item, [
+                'code' => $responseCode,
+            ]);
 
-            return $this->forward('TavroApiBundle:Default:get', $routeOptions);
         }
         catch (InvalidFormException $e) {
             throw $e;
@@ -140,10 +153,16 @@ class ApiController extends DefaultController
 
             $params = $request->query->all();
             $handler = $this->getHandler($entity);
-            $items = $handler->getAll($params);
+            $response = $handler->getAll($params);
+
+            $items = $response['data'];
+            $message = $response['message'];
+
             return $this->apiResponse($items, [
-                'format' => $_format
+                'format' => $_format,
+                'message' => $message,
             ]);
+
         }
         catch(\Exception $e) {
             throw $e;

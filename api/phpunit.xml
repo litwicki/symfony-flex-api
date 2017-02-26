@@ -1,21 +1,37 @@
-<phpunit xsi:noNamespaceSchemaLocation="http://schema.phpunit.de/4.8/phpunit.xsd" backupGlobals="false" colors="true" bootstrap="app/autoload.php" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-<php>
-    <ini name="error_reporting" value="-1"/>
-    <server name="KERNEL_DIR" value="app/"/>
-</php>
-<testsuites>
-    <testsuite name="Tavro Test Suite">
-        <directory>tests</directory>
-    </testsuite>
-</testsuites>
-<filter>
-    <whitelist>
-        <directory>src</directory>
-        <exclude>
-            <directory>src/*Bundle/Resources</directory>
-            <directory>src/*/*Bundle/Resources</directory>
-            <directory>src/*/Bundle/*Bundle/Resources</directory>
-        </exclude>
-    </whitelist>
-</filter>
+<?xml version="1.0" encoding="UTF-8"?>
+
+<phpunit
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="http://schema.phpunit.de/4.5/phpunit.xsd"
+         bootstrap="app/autoload.php"
+         colors="true"
+         stopOnFailure="true"
+         verbose="true"
+>
+    <php>
+        <ini name="error_reporting" value="-1" />
+        <ini name="intl.default_locale" value="en" />
+        <ini name="intl.error_level" value="0" />
+        <ini name="memory_limit" value="-1" />
+    </php>
+
+    <testsuites>
+        <testsuite name="integration">
+            <directory suffix=".php">tests/ApiBundle/Controller</directory>
+        </testsuite>
+        <testsuite name="unit">
+            <directory suffix=".php">tests/ApiBundle/Security</directory>
+        </testsuite>
+    </testsuites>
+
+    <filter>
+        <whitelist>
+            <directory>src</directory>
+            <exclude>
+                <directory>src/*Bundle/Resources</directory>
+                <directory>src/*/*Bundle/Resources</directory>
+                <directory>src/*/Bundle/*Bundle/Resources</directory>
+            </exclude>
+        </whitelist>
+    </filter>
 </phpunit>

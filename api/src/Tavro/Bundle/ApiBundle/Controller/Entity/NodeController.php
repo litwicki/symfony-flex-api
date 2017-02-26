@@ -86,13 +86,10 @@ class NodeController extends ApiController
                 'node' => $node->getId()
             ));
 
-            $routeOptions = array(
-                'entity'  => 'comments',
-                'id'      => $comment->getId(),
-                'format'  => $_format,
-            );
-
-            return $this->forward('TavroApiBundle:Default:get', $routeOptions);
+            return $this->apiResponse($comment, [
+                'code' => Response::HTTP_CREATED,
+                'message' => sprintf('Comment %s submitted to Node %s', $comment->getId(), $node->getId())
+            ]);
 
         }
         catch(\Exception $e) {
@@ -159,7 +156,11 @@ class NodeController extends ApiController
                 'node' => $node->getId()
             ));
 
-            return $this->delete($request, 'tags', $tag->getId(), $_format);
+            return $this->apiResponse($tag, [
+                'format' => $_format,
+                'code' => Response::HTTP_CREATED,
+                'message' => sprintf('Tag %s submitted to Node %s', $tag->getId(), $node->getId())
+            ]);
 
         }
         catch(\Exception $e) {

@@ -1,19 +1,11 @@
 # ======================================
 # APPLICATION FRONTEND (ANGULAR et-all)
 # ======================================
-tavro_core:
-    host: %api_hostname%
-    resource: "@TavroCoreBundle/Resources/config/routing.yml"
-    requirements:
-        api_host: ^(api_hostname%|api.localhost)$
-    defaults:
-        api_host: %api_hostname%
-
 tavro_api:
     host: %api_hostname%
     resource: "@TavroApiBundle/Resources/config/routing.yml"
     requirements:
-        api_host: ^(api_hostname%|api.localhost)$
+        api_host: ^(api_hostname%|localhost)$
     defaults:
         api_host: %api_hostname%
     prefix: /api/v1

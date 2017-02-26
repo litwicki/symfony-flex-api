@@ -107,18 +107,35 @@ class OrganizationController extends ApiController
                 'organization' => $organization->getId()
             ));
 
-            $routeOptions = array(
-                'entity'  => 'comments',
-                'id'      => $comment->getId(),
-                'format'  => $_format,
-            );
+            $options = [
+                'format' => $_format,
+                'code' => Response::HTTP_CREATED,
+                'message' => sprintf('Comment %s submitted to Organization %s', $comment->getId(), $organization->getId())
+            ];
 
-            return $this->forward('TavroApiBundle:Default:get', $routeOptions);
+            $data = $comment;
 
+        }
+        catch (InvalidFormException $e) {
+            $options = [
+                'code' => Response::HTTP_BAD_REQUEST,
+                'message' => $e->getMessage()
+            ];
+        }
+        catch (ApiAccessDeniedException $e) {
+            $options = [
+                'code' => Response::HTTP_FORBIDDEN,
+                'message' => $e->getMessage()
+            ];
         }
         catch(\Exception $e) {
-            throw $e;
+            $options = [
+                'code' => Response::HTTP_INTERNAL_SERVER_ERROR,
+                'message' => $e->getMessage()
+            ];
         }
+
+        return $this->apiResponse($data, $options);
 
     }
 
@@ -130,7 +147,7 @@ class OrganizationController extends ApiController
      * @return \Symfony\Component\HttpFoundation\Response
      * @throws \Exception
      */
-    public function byAccount(Request $request, Account $account, $_format)
+    public function byAccountAction(Request $request, Account $account, $_format)
     {
         try {
 
