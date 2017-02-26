@@ -1,6 +1,8 @@
 <?php namespace Tests\ApiBundle\Controller;
 
-use GuzzleHttp\Client;;
+use GuzzleHttp\Client;
+use GuzzleHttp\Exception\RequestException;
+use Symfony\Component\HttpFoundation\Response;
 use Tests\ApiBundle\TavroApiTest;
 
 class TagTest extends TavroApiTest
@@ -8,54 +10,33 @@ class TagTest extends TavroApiTest
 
     public function testTagRoute()
     {
-        $client = new Client('/api/v1', array(
-            'request.options' => array(
-                'exceptions' => false,
-            )
-        ));
-
-        $client = $this->authorize($this->getApiClient());;
+        $client = $this->authorize($this->getApiClient());
 
         $url = '/api/v1/tags';
 
-        $request = $client->get($url, null, ['verify' => false]);
-        $request->addHeader('Authorization', sprintf('Bearer %s', $token));
-        $response = $request->send();
+        $response = $client->get($url);
 
-        $json = $response->getBody(true);
-        $body = json_decode($json, true);
-
-        $this->assertEquals(200, $response->getStatusCode());
+        $this->assertEquals(Response::HTTP_OK, $response->getStatusCode());
 
     }
 
     public function testTagCreate()
     {
-
-        $client = $this->authorize($this->getApiClient());;
+        $client = $this->authorize($this->getApiClient());
 
         $faker = \Faker\Factory::create('en_EN');
 
         $data = array(
-            'tag' => 'tag'
+            'tag' => $faker->text(20)
         );
 
         $url = '/api/v1/tags';
 
-        $client = new Client($url, array(
-            'request.options' => array(
-                'exceptions' => false,
-            )
-        ));
+        $response = $client->post($url, [
+            'json' => $data
+        ]);
 
-        $request = $client->post($url, null, json_encode($data), ['verify' => false]);
-        $request->addHeader('Authorization', sprintf('Bearer %s', $token));
-        $response = $request->send();
-
-        $json = $response->getBody(true);
-        $body = json_decode($json, true);
-
-        $this->assertEquals(200, $response->getStatusCode());
+        $this->assertEquals(Response::HTTP_CREATED, $response->getStatusCode());
 
     }
 

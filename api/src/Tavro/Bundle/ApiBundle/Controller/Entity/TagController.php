@@ -18,6 +18,8 @@ use Tavro\Bundle\CoreBundle\Entity\Expense;
 use Tavro\Bundle\CoreBundle\Entity\ExpenseComment;
 use Symfony\Component\HttpFoundation\Cookie;
 
+use Tavro\Bundle\CoreBundle\Entity\Tag;
+
 use Litwicki\Common\Common;
 use Tavro\Bundle\ApiBundle\Controller\Api\ApiController as ApiController;
 
@@ -44,15 +46,19 @@ class TagController extends ApiController
 
             $tag = $handler->findByTag($data['tag']);
 
-            $newEntity = $handler->post($request, $data);
+            if(!$tag instanceof Tag) {
+                $tag = $handler->post($request, $data);
+                $message = sprintf('Tag `%s` already exists, we fetched it for you.', $data['tag']);
+            }
+            else {
+                $message = sprintf('Tag `%s` created!', $data['tag']);
+            }
 
-            $routeOptions = array(
-                'entity'  => $entity,
-                'id'      => $newEntity->getId(),
-                'format'  => $_format,
-            );
-
-            return $this->forward('TavroApiBundle:Default:get', $routeOptions);
+            return $this->apiResponse($tag, [
+                'format' => $_format,
+                'code' => Response::HTTP_CREATED,
+                'message' => $message,
+            ]);
         }
         catch (InvalidFormException $e) {
             throw $e;

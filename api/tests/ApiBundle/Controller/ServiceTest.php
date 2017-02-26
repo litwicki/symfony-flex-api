@@ -1,6 +1,8 @@
 <?php namespace Tests\ApiBundle\Controller;
 
-use GuzzleHttp\Client;;
+use GuzzleHttp\Client;
+use GuzzleHttp\Exception\RequestException;
+use Symfony\Component\HttpFoundation\Response;
 use Tests\ApiBundle\TavroApiTest;
 
 class ServiceTest extends TavroApiTest
@@ -8,36 +10,28 @@ class ServiceTest extends TavroApiTest
 
     public function testServiceRoute()
     {
-        $client = new Client('/api/v1', array(
-            'request.options' => array(
-                'exceptions' => false,
-            )
-        ));
 
-        $client = $this->authorize($this->getApiClient());;
+        $client = $this->authorize($this->getApiClient());
 
         $url = '/api/v1/services';
 
-        $request = $client->get($url, null, ['verify' => false]);
-        $request->addHeader('Authorization', sprintf('Bearer %s', $token));
-        $response = $request->send();
+        $response = $client->get($url);
 
         $json = $response->getBody(true);
         $body = json_decode($json, true);
 
-        $this->assertEquals(200, $response->getStatusCode());
+        $this->assertEquals(Response::HTTP_OK, $response->getStatusCode());
 
     }
 
     public function testServiceCreate()
     {
 
-        $client = $this->authorize($this->getApiClient());;
+        $client = $this->authorize($this->getApiClient());
 
         $faker = \Faker\Factory::create('en_EN');
 
         $data = array(
-            'type' => 'hourly',
             'name' => $faker->name,
             'body' => $faker->text(500),
             'price' => 100,
@@ -46,57 +40,107 @@ class ServiceTest extends TavroApiTest
         );
 
         $url = '/api/v1/services';
-
-        $client = new Client($url, array(
-            'request.options' => array(
-                'exceptions' => false,
-            )
-        ));
-
-        $request = $client->post($url, null, json_encode($data), ['verify' => false]);
-        $request->addHeader('Authorization', sprintf('Bearer %s', $token));
-        $response = $request->send();
+        $response = $client->post($url, [
+            'json' => $data
+        ]);
 
         $json = $response->getBody(true);
         $body = json_decode($json, true);
 
-        $this->assertEquals(200, $response->getStatusCode());
+        $this->assertEquals(Response::HTTP_CREATED, $response->getStatusCode());
 
     }
 
-    public function testServiceCreateBadType()
+    public function testServiceCreateBadCategory()
     {
 
-        $client = $this->authorize($this->getApiClient());;
+        try {
 
-        $faker = \Faker\Factory::create('en_EN');
+            $client = $this->authorize($this->getApiClient());
 
-        $data = array(
-            'type' => 'butts',
-            'name' => $faker->name,
-            'body' => $faker->text(500),
-            'price' => 100,
-            'category' => 1,
-            'account' => 1
-        );
+            $faker = \Faker\Factory::create('en_EN');
 
-        $url = '/api/v1/services';
+            $data = array(
+                'name' => $faker->name,
+                'body' => $faker->text(500),
+                'price' => 100,
+                'category' => -1,
+                'account' => 1
+            );
 
-        $client = new Client($url, array(
-            'request.options' => array(
-                'exceptions' => false,
-            )
-        ));
+            $url = '/api/v1/services';
 
-        $request = $client->post($url, null, json_encode($data), ['verify' => false]);
-        $request->addHeader('Authorization', sprintf('Bearer %s', $token));
-        $response = $request->send();
+            $client->post($url, [
+                'json' => $data
+            ]);
 
-        $json = $response->getBody(true);
-        $body = json_decode($json, true);
+        }
+        catch(RequestException $e) {
+            $this->assertEquals(Response::HTTP_BAD_REQUEST, $e->getResponse()->getStatusCode());
+            $this->assertEquals(1, preg_match('/Please enter a valid Service Category/', $e->getMessage()));
+        }
 
-        $this->assertEquals(500, $response->getStatusCode());
-        $this->assertEquals(1, preg_match('/Service type must match/', $body['message']));
+    }
+
+    public function testServiceCreateBadAccount()
+    {
+
+        try {
+
+            $client = $this->authorize($this->getApiClient());
+
+            $faker = \Faker\Factory::create('en_EN');
+
+            $data = array(
+                'name' => $faker->name,
+                'body' => $faker->text(500),
+                'price' => 100,
+                'category' => 1,
+                'account' => -1
+            );
+
+            $url = '/api/v1/services';
+
+            $client->post($url, [
+                'json' => $data
+            ]);
+
+        }
+        catch(RequestException $e) {
+            $this->assertEquals(Response::HTTP_BAD_REQUEST, $e->getResponse()->getStatusCode());
+            $this->assertEquals(1, preg_match('/Please enter a valid Account/', $e->getMessage()));
+        }
+
+    }
+
+    public function testServiceCreateBadPrice()
+    {
+
+        try {
+
+            $client = $this->authorize($this->getApiClient());
+
+            $faker = \Faker\Factory::create('en_EN');
+
+            $data = array(
+                'name' => $faker->name,
+                'body' => $faker->text(500),
+                'price' => 0,
+                'category' => 1,
+                'account' => 1
+            );
+
+            $url = '/api/v1/services';
+
+            $client->post($url, [
+                'json' => $data
+            ]);
+
+        }
+        catch(RequestException $e) {
+            $this->assertEquals(Response::HTTP_BAD_REQUEST, $e->getResponse()->getStatusCode());
+            $this->assertEquals(1, preg_match('/Price must be greater than 0/', $e->getMessage()));
+        }
 
     }
 

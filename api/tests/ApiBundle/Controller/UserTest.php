@@ -1,6 +1,8 @@
 <?php namespace Tests\ApiBundle\Controller;
 
-use GuzzleHttp\Client;;
+use GuzzleHttp\Client;
+use GuzzleHttp\Exception\RequestException;
+use Symfony\Component\HttpFoundation\Response;
 use Tests\ApiBundle\TavroApiTest;
 use Rhumsaa\Uuid\Uuid;
 
@@ -9,30 +11,19 @@ class UserTest extends TavroApiTest
 
     public function testUserRoute()
     {
-        $client = new Client('/api/v1', array(
-            'request.options' => array(
-                'exceptions' => false,
-            )
-        ));
-
-        $client = $this->authorize($this->getApiClient());;
+        $client = $this->authorize($this->getApiClient());
 
         $url = '/api/v1/users';
 
-        $request = $client->get($url, null, ['verify' => false]);
-        $request->addHeader('Authorization', sprintf('Bearer %s', $token));
-        $response = $request->send();
+        $response = $client->get($url);
 
-        $json = $response->getBody(true);
-        $body = json_decode($json, true);
-
-        $this->assertEquals(200, $response->getStatusCode());
+        $this->assertEquals(Response::HTTP_OK, $response->getStatusCode());
 
     }
 
     public function testUserCreate()
     {
-        $client = $this->authorize($this->getApiClient());;
+        $client = $this->authorize($this->getApiClient());
 
         $faker = \Faker\Factory::create('en_EN');
 
@@ -42,27 +33,21 @@ class UserTest extends TavroApiTest
             'first_name' => $faker->firstName,
             'last_name' => $faker->lastName,
             'email' => $email,
-            'username' => md5(time()),
+            'username' => $faker->userName,
             'signature' => $faker->text(100),
             'password' => 'Password1!'
         );
 
         $url = '/api/v1/signup';
 
-        $client = new Client($url, array(
-            'request.options' => array(
-                'exceptions' => false,
-            )
-        ));
-
-        $request = $client->post($url, null, json_encode($data), ['verify' => false]);
-        $request->addHeader('Authorization', sprintf('Bearer %s', $token));
-        $response = $request->send();
+        $response = $client->post($url, [
+            'json' => $data
+        ]);
 
         $json = $response->getBody(true);
         $body = json_decode($json, true);
 
-        $this->assertEquals(200, $response->getStatusCode());
+        $this->assertEquals(Response::HTTP_CREATED, $response->getStatusCode());
 
     }
 
