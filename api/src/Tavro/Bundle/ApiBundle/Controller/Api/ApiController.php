@@ -153,10 +153,16 @@ class ApiController extends DefaultController
 
             $params = $request->query->all();
             $handler = $this->getHandler($entity);
-            $items = $handler->getAll($params);
+            $response = $handler->getAll($params);
+
+            $items = $response['data'];
+            $message = $response['message'];
+
             return $this->apiResponse($items, [
-                'format' => $_format
+                'format' => $_format,
+                'message' => $message,
             ]);
+
         }
         catch(\Exception $e) {
             throw $e;

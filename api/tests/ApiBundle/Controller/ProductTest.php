@@ -1,6 +1,8 @@
 <?php namespace Tests\ApiBundle\Controller;
 
-use GuzzleHttp\Client;;
+use GuzzleHttp\Client;
+use GuzzleHttp\Exception\RequestException;
+use Symfony\Component\HttpFoundation\Response;
 use Tests\ApiBundle\TavroApiTest;
 
 class ProductTest extends TavroApiTest
@@ -8,24 +10,13 @@ class ProductTest extends TavroApiTest
 
     public function testProductRoute()
     {
-        $client = new Client('/api/v1', array(
-            'request.options' => array(
-                'exceptions' => false,
-            )
-        ));
-
-        $client = $this->authorize($this->getApiClient());;
+        $client = $this->authorize($this->getApiClient());
 
         $url = '/api/v1/products';
 
-        $request = $client->get($url, null, ['verify' => false]);
-        $request->addHeader('Authorization', sprintf('Bearer %s', $token));
-        $response = $request->send();
+        $response = $client->get($url);
 
-        $json = $response->getBody(true);
-        $body = json_decode($json, true);
-
-        $this->assertEquals(200, $response->getStatusCode());
+        $this->assertEquals(Response::HTTP_OK, $response->getStatusCode());
 
     }
 
@@ -33,7 +24,7 @@ class ProductTest extends TavroApiTest
     {
         $faker = \Faker\Factory::create('en_EN');
 
-        $client = $this->authorize($this->getApiClient());;
+        $client = $this->authorize($this->getApiClient());
 
         $data = array(
             'name' => $faker->text(rand(10,100)),
@@ -46,20 +37,69 @@ class ProductTest extends TavroApiTest
 
         $url = '/api/v1/products';
 
-        $client = new Client($url, array(
-            'request.options' => array(
-                'exceptions' => false,
-            )
-        ));
+        $response = $client->post($url, [
+            'json' => $data
+        ]);
 
-        $request = $client->post($url, null, json_encode($data), ['verify' => false]);
-        $request->addHeader('Authorization', sprintf('Bearer %s', $token));
-        $response = $request->send();
+        $this->assertEquals(Response::HTTP_CREATED, $response->getStatusCode());
 
-        $json = $response->getBody(true);
-        $body = json_decode($json, true);
+    }
 
-        $this->assertEquals(200, $response->getStatusCode());
+    public function testProductCreateBadAccount()
+    {
+        try {
+            $faker = \Faker\Factory::create('en_EN');
+
+            $client = $this->authorize($this->getApiClient());
+
+            $data = array(
+                'name' => $faker->text(rand(10,100)),
+                'body' => $faker->text(rand(100,1000)),
+                'price' => 100,
+                'cost' => 75,
+                'category' => 1,
+                'account' => -1
+            );
+
+            $url = '/api/v1/products';
+
+            $client->post($url, [
+                'json' => $data
+            ]);
+        }
+        catch(RequestException $e) {
+            $this->assertEquals(Response::HTTP_BAD_REQUEST, $e->getResponse()->getStatusCode());
+            $this->assertEquals(1, preg_match('/Please enter a valid Account/', $e->getMessage()));
+        }
+
+    }
+
+    public function testProductCreateBadCategory()
+    {
+        try {
+            $faker = \Faker\Factory::create('en_EN');
+
+            $client = $this->authorize($this->getApiClient());
+
+            $data = array(
+                'name' => $faker->text(rand(10,100)),
+                'body' => $faker->text(rand(100,1000)),
+                'price' => 100,
+                'cost' => 75,
+                'category' => -1,
+                'account' => 1
+            );
+
+            $url = '/api/v1/products';
+
+            $client->post($url, [
+                'json' => $data
+            ]);
+        }
+        catch(RequestException $e) {
+            $this->assertEquals(Response::HTTP_BAD_REQUEST, $e->getResponse()->getStatusCode());
+            $this->assertEquals(1, preg_match('/Please enter a valid Product Category/', $e->getMessage()));
+        }
 
     }
 

@@ -49,7 +49,7 @@ class AuthControllerTest extends TavroApiTest
 
         $body = json_decode($json, true);
 
-        $this->assertEquals(200, $response->getStatusCode());
+        $this->assertEquals(Response::HTTP_OK, $response->getStatusCode());
         $this->assertTrue(isset($body['message']));
     }
 
@@ -75,7 +75,7 @@ class AuthControllerTest extends TavroApiTest
 
         $body = json_decode($json, true);
 
-        $this->assertEquals(200, $response->getStatusCode());
+        $this->assertEquals(Response::HTTP_OK, $response->getStatusCode());
         $this->assertTrue(isset($body['message']));
     }
 
