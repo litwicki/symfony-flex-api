@@ -47,7 +47,8 @@
     "zoadilack/tavro-core": "dev-master",
     "litwicki/common": "dev-master",
     "guzzlehttp/guzzle": "^6.0",
-    "litwicki/chargify-bundle": "dev-master"
+    "litwicki/chargify-bundle": "dev-master",
+    "nelmio/cors-bundle": "^1.5"
   },
   "repositories": [
     {

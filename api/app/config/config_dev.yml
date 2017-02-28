@@ -27,3 +27,13 @@ lexik_jwt_authentication:
     token_ttl: "%jwt_token_ttl%"
     public_key_path: "%kernel.root_dir%/keys/public.pem"
     private_key_path: "%kernel.root_dir%/keys/private.pem"
+
+nelmio_cors:
+    defaults:
+        allow_credentials: false
+        allow_origin: ['*']
+        allow_headers: ['X-Custom-Auth']
+        allow_methods: ['POST', 'PUT', 'GET', 'DELETE']
+        max_age: 3600
+        hosts: []
+        origin_regex: false
