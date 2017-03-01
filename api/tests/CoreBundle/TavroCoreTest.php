@@ -1,4 +1,4 @@
-<?php namespace Tavro\Bundle\CoreBundle\Tests;
+<?php namespace Tests\CoreBundle;
 
 use GuzzleHttp\Client;
 

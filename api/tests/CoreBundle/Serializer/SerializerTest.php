@@ -2,7 +2,7 @@
 
 use GuzzleHttp\Client;
 use Tavro\Bundle\CoreBundle\Entity\User;
-use Tavro\Bundle\CoreBundle\Tests\TavroCoreTest;
+use Tests\CoreBundle\TavroCoreTest;
 use Tests\SymfonyKernel;
 
 class SerializerTest extends TavroCoreTest
