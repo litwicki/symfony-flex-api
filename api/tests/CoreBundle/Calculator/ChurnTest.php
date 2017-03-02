@@ -1,4 +1,4 @@
-<?php namespace Tests\CoreBundle\Serializer;
+<?php namespace Tests\CoreBundle\Calculator;
 
 use GuzzleHttp\Client;
 use Tavro\Bundle\CoreBundle\Calculator\Churn;
