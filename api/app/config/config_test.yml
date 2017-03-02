@@ -7,8 +7,7 @@ framework:
     test: ~
 
 swiftmailer:
-    disable_delivery: false
-    delivery_address: "%debug_email%"
+    disable_delivery:  true
 
 monolog:
     handlers:

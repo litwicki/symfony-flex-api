@@ -42,7 +42,7 @@ class UserTest extends TavroApiTest
                 'last_name' => $faker->lastName,
                 'email' => $faker->safeEmail,
             ],
-            'username' => $faker->userName,
+            'username' => preg_replace('/[^A-Za-z0-9-_]/', '', $faker->userName),
             'signature' => $faker->text(100),
             'password' => 'Password1!'
         );

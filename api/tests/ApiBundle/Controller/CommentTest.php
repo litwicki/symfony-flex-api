@@ -71,7 +71,7 @@ class CommentTest extends TavroApiTest
 
     public function testCommentCreateExpenseComment()
     {
-        $client = $this->authorize($this->getApiClient());;
+        $client = $this->authorize($this->getApiClient());
 
         $data = array(
             'body' => 'Body text..',
@@ -94,7 +94,7 @@ class CommentTest extends TavroApiTest
     public function testCommentCreateOrganizationComment()
     {
 
-        $client = $this->authorize($this->getApiClient());;
+        $client = $this->authorize($this->getApiClient());
 
         $data = array(
             'body' => 'Body text..',

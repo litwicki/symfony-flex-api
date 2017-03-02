@@ -22,6 +22,9 @@
         <testsuite name="unit">
             <directory suffix=".php">tests/ApiBundle/Security</directory>
         </testsuite>
+        <testsuite name="core-unit">
+            <directory suffix=".php">tests/CoreBundle/Serializer</directory>
+        </testsuite>
     </testsuites>
 
     <filter>
