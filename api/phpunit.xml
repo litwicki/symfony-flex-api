@@ -24,6 +24,7 @@
         </testsuite>
         <testsuite name="core-unit">
             <directory suffix=".php">tests/CoreBundle/Serializer</directory>
+            <directory suffix=".php">tests/CoreBundle/Calculator</directory>
         </testsuite>
     </testsuites>
 
