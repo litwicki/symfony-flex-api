@@ -22,7 +22,7 @@ class SerializerTest extends TavroCoreTest
         $user = new User();
         $serializer = $this->container->get('tavro_serializer');
         $json = $serializer->serialize($user, 'json');
-        $entity = $serializer->deserialize($json, 'Tavro\CoreBundle\Entity\User', 'json');
+        $entity = $serializer->deserialize($json, 'Tavro\Bundle\CoreBundle\Entity\User', 'json');
         $this->assertTrue(($entity instanceof User));
     }
 
@@ -30,16 +30,26 @@ class SerializerTest extends TavroCoreTest
     {
         $user = new User();
         $serializer = $this->container->get('tavro_serializer');
-        $json = $serializer->serialize($user, 'xml');
-        $this->assertTrue((json_last_error() === JSON_ERROR_NONE));
+        $xml = $serializer->serialize($user, 'xml');
+
+        libxml_use_internal_errors( true );
+
+        $doc = new \DOMDocument('1.0', 'utf-8');
+
+        $doc->loadXML( $xml );
+
+        $errors = libxml_get_errors();
+
+        $this->assertEmpty($errors, 'There should be no XML errors serializing an Entity to XML.');
+
     }
 
     public function testDeserializeXml()
     {
         $user = new User();
         $serializer = $this->container->get('tavro_serializer');
-        $json = $serializer->serialize($user, 'xml');
-        $entity = $serializer->deserialize($json, 'Tavro\CoreBundle\Entity\User', 'json');
+        $xml = $serializer->serialize($user, 'xml');
+        $entity = $serializer->deserialize($xml, 'Tavro\Bundle\CoreBundle\Entity\User', 'xml');
         $this->assertTrue(($entity instanceof User));
     }
 

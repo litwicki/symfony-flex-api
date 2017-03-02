@@ -1,30 +1,34 @@
-<?php namespace Tavro\Tests\Core\Serializer;
+<?php namespace Tests\CoreBundle\Serializer;
 
-use GuzzleHttp\Client;;
-use JMS\Serializer\Serializer;
-use JMS\Serializer\SerializationContext;
-use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
+use GuzzleHttp\Client;
 use Tavro\Bundle\CoreBundle\Entity\User;
+use Tests\CoreBundle\TavroCoreTest;
+use Tests\SymfonyKernel;
 
-class JsonSerializationVisitorTest extends KernelTestCase
+class JsonSerializationVisitorTest extends TavroCoreTest
 {
 
-    private $container;
-
-    public function setUp()
-    {
-        self::bootKernel();
-        $this->container = self::$kernel->getContainer();
-    }
+    use SymfonyKernel;
 
     /**
      * @group Core
      */
     public function testGetResult()
     {
+
+        $data = [
+            'foo' => [
+                'bar' => 'foobar',
+            ]
+        ];
+
+        $result = @json_encode((array) $data);
+
         /**
-         * @TODO: write this actual test..
+         * @TODO: we need to actually verify that the root node of the json string
+         *      is an array and not an object when returned to the browser.
          */
-        $this->assertTrue(true);
+        $this->assertTrue((json_last_error() === JSON_ERROR_NONE));
+
     }
 }
