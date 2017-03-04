@@ -26,8 +26,6 @@ use Tavro\Bundle\ApiBundle\Controller\Api\ApiController as ApiController;
 
 class UserSecurityController extends ApiController
 {
-
-
     /**
      * By design, only allow the current user to do this for his/her self.
      *
@@ -60,7 +58,7 @@ class UserSecurityController extends ApiController
             $handler->resetPassword($request, $user, $data);
 
             return $this->apiResponse($user, [
-                'message' => sprintf('An email has been sent to %s', $data['email']),
+                'message' => sprintf('Password reset for user with email `%s`', $data['email']),
             ]);
 
         }
@@ -105,7 +103,7 @@ class UserSecurityController extends ApiController
             $handler->forgotPassword($request, $user);
 
             return $this->apiResponse($user, [
-                'message' => sprintf('An email has been sent to %s', $data['email']),
+                'message' => sprintf('An email has been sent to `%s` to reset your password.', $data['email']),
             ]);
 
         }

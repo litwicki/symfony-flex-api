@@ -28,6 +28,11 @@ api_user_signup:
     requirements:
         _format:  json|xml
 
+api_user_change_password:
+    path: /change-password
+    defaults: { _controller: TavroApiBundle:Entity\User:changePassword, _format: json, entity: "users" }
+    methods: POST
+
 api_patch_user:
     path:  /users/{id}.{_format}
     defaults: { _controller: TavroApiBundle:Entity\User:patch, _format: json, entity: "users" }
