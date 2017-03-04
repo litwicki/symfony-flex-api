@@ -35,8 +35,6 @@ class TavroMailerTest extends TavroCoreTest
             'name' => $name
         ]);
 
-        $raw = sprintf('<html><head><title>Hello %s</title></head><body><p>Hello %s</p></body></html>', $name, $name);
-
         $this->assertNotNull($body, 'Body cannot be NULL');
         $this->assertContains($name, $body, sprintf('Body expected to contain replaced string %s.', $name));
     }
@@ -78,6 +76,18 @@ class TavroMailerTest extends TavroCoreTest
     {
         $template = __DIR__ . '/twig/email.txt.twig';
         $this->assertTrue(true === $this->container->get('templating')->exists($template), 'Expecting Twig to verify existence of plain-text template.');
+    }
+
+    public function testPrepareRecipients()
+    {
+        $faker = \Faker\Factory::create('en_EN');
+
+        $recipients = [
+            $faker->safeEmail,
+        ];
+
+        $this->assertTrue(is_array($recipients), 'Recipients must be array.');
+        $this->assertNotEmpty($recipients, 'Recipients cannot be an empty array.');
     }
 
 }
