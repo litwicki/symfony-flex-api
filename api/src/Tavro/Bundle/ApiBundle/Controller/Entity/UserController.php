@@ -118,7 +118,7 @@ class UserController extends ApiController
     public function accountsAction(Request $request, User $user, $_format)
     {
 
-        $accounts = $user->getUserAccounts();
+        $accounts = $user->getAccountUsers();
 
         $items = array();
 

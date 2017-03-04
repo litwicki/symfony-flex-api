@@ -26,8 +26,6 @@ use Tavro\Bundle\ApiBundle\Controller\Api\ApiController as ApiController;
 
 class UserSecurityController extends ApiController
 {
-
-
     /**
      * By design, only allow the current user to do this for his/her self.
      *
