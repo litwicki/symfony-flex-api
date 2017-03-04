@@ -86,6 +86,38 @@ class UserController extends ApiController
      * @return \Symfony\Component\HttpFoundation\Response
      * @throws \Exception
      */
+    public function changePasswordAction(Request $request, $entity, $_format)
+    {
+        try {
+
+            $data = json_decode($request->getContent(), TRUE);
+            $handler = $this->getHandler($entity);
+            $user = $handler->changePassword($request, $data);
+
+            $data = [
+                'token' => $this->get('lexik_jwt_authentication.encoder')->encode(['username' => $user->getUsername()])
+            ];
+
+            return $this->apiResponse($data, [
+                'message' => sprintf('Password changed for User %s', $user->__toString()),
+                'code' => Response::HTTP_OK,
+                'format' => $_format
+            ]);
+
+        }
+        catch(\Exception $e) {
+            throw $e;
+        }
+    }
+
+    /**
+     * @param \Symfony\Component\HttpFoundation\Request $request
+     * @param $entity
+     * @param $_format
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     * @throws \Exception
+     */
     public function getAllAction(Request $request, $entity, $_format)
     {
         if(!$this->isGranted('ROLE_ADMIN')) {
