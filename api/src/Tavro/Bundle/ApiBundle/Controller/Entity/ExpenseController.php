@@ -37,25 +37,33 @@ class ExpenseController extends ApiController
      */
     public function commentsAction(Request $request, Expense $expense, $_format)
     {
+        $data = null;
+
         try {
 
             $entities = $expense->getExpenseComments();
 
-            $items = array();
+            $data = array();
 
             foreach($entities as $entity) {
-                $items[] = $entity->getComment();
+                $data[] = $entity->getComment();
             }
 
-            return $this->apiResponse($items, [
+            $options = [
                 'format' => $_format,
                 'group' => 'simple'
-            ]);
+            ];
 
         }
         catch(\Exception $e) {
-            throw $e;
+            $options = [
+                'format' => $_format,
+                'code' => $e->getCode(),
+                'message' => $e->getMessage()
+            ];
         }
+
+        return $this->apiResponse($data, $options);
 
     }
 
@@ -69,6 +77,8 @@ class ExpenseController extends ApiController
      */
     public function newCommentAction(Request $request, Expense $expense, $_format)
     {
+        $data = null;
+
         try {
 
             $data = json_decode($request->getContent(), TRUE);
@@ -84,16 +94,24 @@ class ExpenseController extends ApiController
                 'expense' => $expense->getId()
             ));
 
-            return $this->apiResponse($comment, [
+            $data = $comment;
+
+            $options = [
                 'format' => $_format,
                 'code' => Response::HTTP_CREATED,
                 'message' => sprintf('Comment %s submitted to Expense %s', $comment->getId(), $expense->getId())
-            ]);
+            ];
 
         }
         catch(\Exception $e) {
-            throw $e;
+            $options = [
+                'format' => $_format,
+                'code' => $e->getCode(),
+                'message' => $e->getMessage()
+            ];
         }
+
+        return $this->apiResponse($data, $options);
 
     }
 
@@ -109,24 +127,32 @@ class ExpenseController extends ApiController
      */
     public function tagsAction(Request $request, Expense $expense, $_format)
     {
+        $data = null;
+
         try {
 
             $entities = $expense->getExpenseTags();
 
-            $items = array();
+            $data = array();
 
             foreach($entities as $entity) {
-                $items[] = $entity->getTag();
+                $data[] = $entity->getTag();
             }
 
-            return $this->apiResponse($items, [
+            $options = [
                 'format' => $_format,
-            ]);
+            ];
 
         }
         catch(\Exception $e) {
-            throw $e;
+            $options = [
+                'format' => $_format,
+                'code' => $e->getCode(),
+                'message' => $e->getMessage()
+            ];
         }
+
+        return $this->apiResponse($data, $options);
     }
 
     /**
@@ -139,6 +165,8 @@ class ExpenseController extends ApiController
      */
     public function newTagAction(Request $request, Expense $expense, $_format)
     {
+        $data = null;
+
         try {
 
             $data = json_decode($request->getContent(), TRUE);
@@ -154,16 +182,24 @@ class ExpenseController extends ApiController
                 'expense' => $expense->getId()
             ));
 
-            return $this->apiResponse($tag, [
+            $data = $tag;
+
+            $options = [
                 'format' => $_format,
                 'code' => Response::HTTP_CREATED,
                 'message' => sprintf('Tag %s submitted to Expense %s', $tag->getId(), $expense->getId())
-            ]);
+            ];
 
         }
         catch(\Exception $e) {
-            throw $e;
+            $options = [
+                'format' => $_format,
+                'code' => $e->getCode(),
+                'message' => $e->getMessage()
+            ];
         }
+
+        return $this->apiResponse($data, $options);
     }
 
     /**
@@ -176,18 +212,22 @@ class ExpenseController extends ApiController
      */
     public function byAccountAction(Request $request, Account $account, $_format)
     {
+        $data = null;
+
         try {
 
-            $entities = $account->getExpenses();
+            $data = $account->getExpenses();
 
-            return $this->apiResponse($entities, [
+            $options = [
                 'format' => $_format,
                 'group' => 'simple'
-            ]);
+            ];
         }
         catch(\Exception $e) {
-            throw $e;
+            $options = $this->getExceptionOptions($e, $_format);
         }
+
+        return $this->apiResponse($data, $options);
     }
 
 }

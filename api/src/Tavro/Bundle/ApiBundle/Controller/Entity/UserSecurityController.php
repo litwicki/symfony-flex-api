@@ -34,7 +34,7 @@ class UserSecurityController extends ApiController
      * @return \Symfony\Component\HttpFoundation\Response
      * @throws \Exception
      */
-    public function resetAction(Request $request)
+    public function resetAction(Request $request, $_format)
     {
         try {
 
@@ -57,17 +57,19 @@ class UserSecurityController extends ApiController
             $handler = $this->getHandler('users');
             $handler->resetPassword($request, $user, $data);
 
-            return $this->apiResponse($user, [
+            $data = $user;
+
+            $options = [
+                'format' => $_format,
                 'message' => sprintf('Password reset for user with email `%s`', $data['email']),
-            ]);
+            ];
 
         }
-        catch(ApiAccessDeniedException $e) {
-            throw $e;
-        }
         catch(\Exception $e) {
-            throw $e;
+            $options = $this->getExceptionOptions($e, $_format);
         }
+
+        return $this->apiResponse($data, $options);
     }
 
     /**
@@ -79,8 +81,10 @@ class UserSecurityController extends ApiController
      * @return \Symfony\Component\HttpFoundation\Response
      * @throws \Exception
      */
-    public function sendResetTokenAction(Request $request)
+    public function sendResetTokenAction(Request $request, $_format)
     {
+        $data = null;
+
         try {
 
             $data = json_decode($request->getContent(), TRUE);
@@ -102,63 +106,19 @@ class UserSecurityController extends ApiController
             $handler = $this->getHandler('users');
             $handler->forgotPassword($request, $user);
 
-            return $this->apiResponse($user, [
+            $data = $user;
+
+            $options = [
+                'format' => $_format,
                 'message' => sprintf('An email has been sent to `%s` to reset your password.', $data['email']),
-            ]);
+            ];
 
         }
-        catch(ApiAccessDeniedException $e) {
-            throw $e;
-        }
         catch(\Exception $e) {
-            throw $e;
+            $options = $this->getExceptionOptions($e, $_format);
         }
-    }
 
-    /**
-     * @param Request $request
-     * @param User $user
-     * @param $_format
-     * @return Response
-     */
-    public function resetApiKeyAction(Request $request, User $user, $_format)
-    {
-        try {
-            $handler = $this->container->get('tavro.handler.users');
-            $handler->resetApiKey($user);
-            $cookie = new Cookie('api_key', $user->getApiKey(), 0, '/', NULL, FALSE, FALSE);
-            $data = $this->serialize($user, $_format);
-            $response = $this->apiResponse($data, $_format);
-            $response->headers->setCookie($cookie);
-            $handler->reauthenticate($user);
-            return $response;
-        }
-        catch(\Exception $e) {
-            throw new ApiException($e->getMessage());
-        }
-    }
-
-    /**
-     * @param Request $request
-     * @param User $user
-     * @param $_format
-     * @return Response
-     */
-    public function resetApiPasswordAction(Request $request, User $user, $_format)
-    {
-        try {
-            $handler = $this->container->get('tavro.handler.users');
-            $handler->resetApiPassword($user);
-            $cookie = new Cookie('api_password', $user->getApiPassword(), 0, '/', NULL, FALSE, FALSE);
-            $data = $this->serialize($user, $_format);
-            $response = $this->apiResponse($data, $_format);
-            $response->headers->setCookie($cookie);
-            $handler->reauthenticate($user);
-            return $response;
-        }
-        catch(\Exception $e) {
-            throw new ApiException($e->getMessage());
-        }
+        return $this->apiResponse($data, $options);
     }
 
 }

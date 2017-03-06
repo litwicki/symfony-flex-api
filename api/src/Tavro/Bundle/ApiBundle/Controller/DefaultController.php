@@ -28,7 +28,7 @@ class DefaultController extends Controller
      */
     protected function findOr404($entity, $id)
     {
-        if (!($entity = $this->container->get('tavro.handler.' . $entity)->get($id))) {
+        if (!($entity = $this->get('tavro.handler.' . $entity)->get($id))) {
             throw new ApiNotFoundException(sprintf('The resource \'%s\' was not found.', $id));
         }
 
@@ -50,7 +50,7 @@ class DefaultController extends Controller
     public function serialize($data, $format = 'json', $group = 'api')
     {
         try {
-            $serializer = $this->container->get('tavro_serializer');
+            $serializer = $this->get('tavro_serializer');
             return $serializer->serialize($data, $format, $group);
         }
         catch(\Exception $e) {
@@ -63,14 +63,13 @@ class DefaultController extends Controller
      *
      * @param $entityName
      *
-     * @return \Tavro\Bundle\CoreBundle\Handler\
+     * @return \Tavro\Bundle\CoreBundle\Model\HandlerInterface\EntityHandlerInterface
      * @throws \Exception
      */
     public function getHandler($entityName)
     {
         try {
-            $service = sprintf('tavro.handler.%s', $entityName);
-            return $this->container->get($service);
+            return $this->get(sprintf('tavro.handler.%s', $entityName));
         }
         catch(\Exception $e) {
             throw $e;
@@ -86,36 +85,51 @@ class DefaultController extends Controller
      */
     public function apiResponse($raw, array $options = array())
     {
-        try {
 
-            $format = isset($options['format']) ? $options['format'] : 'json';
-            $group = isset($options['group']) ? $options['group'] : 'api';
-            $code = isset($options['code']) ? $options['code'] : 200;
-            $message = isset($options['message']) ? $options['message'] : '';
+        $format = isset($options['format']) ? $options['format'] : 'json';
+        $group = isset($options['group']) ? $options['group'] : 'api';
+        $code = isset($options['code']) ? $options['code'] : Response::HTTP_OK;
+        $message = isset($options['message']) ? $options['message'] : '';
 
-            $response = new Response();
+        $response = new Response();
 
-            if($format == 'json') {
-                $response->headers->set('Content-Type', 'application/json');
-                $responseData = $this->serialize([
-                    'message' => $message,
-                    'data' => $raw,
-                ], $format, $group);
-            }
-            else {
-                $response->headers->set('Content-Type', 'application/xml');
-                $responseData = [];
-            }
-
-            $response->setContent($responseData);
-            $response->setStatusCode($code);
-
+        if($format == 'json') {
+            $response->headers->set('Content-Type', 'application/json');
+            $responseData = $this->serialize([
+                'message' => $message,
+                'data' => $raw,
+            ], $format, $group);
         }
-        catch(\Exception $e) {
-            throw $e;
+        else {
+            $response->headers->set('Content-Type', 'application/xml');
+            $responseData = [];
         }
+
+        $response->setContent($responseData);
+        $response->setStatusCode($code);
 
         return $response;
+    }
+
+    /**
+     * Process the response code for the Exception.
+     *
+     * @param $exception
+     * @param string $_format
+     *
+     * @return array
+     */
+    public function getExceptionOptions($exception, $_format = 'json')
+    {
+
+        $code = method_exists($exception, 'getStatusCode') ? $exception->getStatusCode() : Response::HTTP_BAD_REQUEST;
+
+        return array(
+            'format' => $_format,
+            'code' => $code,
+            'message' => $exception->getMessage()
+        );
+
     }
 
 }

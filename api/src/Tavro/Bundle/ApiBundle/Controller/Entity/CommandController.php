@@ -43,6 +43,8 @@ class CommandController extends ApiController
      */
     public function hubspotImportAction(Request $request, Account $account, $_format)
     {
+        $data = null;
+
         try {
 
             $kernel = $this->get('kernel');
@@ -58,16 +60,19 @@ class CommandController extends ApiController
             $application->run($input, $output);
 
             $content = $output->fetch();
+            $data = $content['data'];
 
-            return $this->apiResponse($content['data'], [
+            $options = [
                 'format' => $_format,
                 'message' => sprintf('%s Organizations and %s People imported, %s Contacts added.', $content['orgCount'], $content['personCount'], $content['contactCount'])
-            ]);
+            ];
 
         }
         catch(\Exception $e) {
-            throw $e;
+            $options = $this->getExceptionOptions($e, $_format);
         }
+
+        return $this->apiResponse($data, $options);
     }
 
     /**
@@ -80,6 +85,8 @@ class CommandController extends ApiController
      */
     public function qboImportAction(Request $request, Account $account, $_format)
     {
+        $data = null;
+
         try {
 
             $kernel = $this->get('kernel');
@@ -95,16 +102,19 @@ class CommandController extends ApiController
             $application->run($input, $output);
 
             $content = $output->fetch();
+            $data = $content['data'];
 
-            return $this->apiResponse($content['data'], [
+            $options = [
                 'format' => $_format,
                 'message' => '',
-            ]);
+            ];
 
         }
         catch(\Exception $e) {
-            throw $e;
+            $options = $this->getExceptionOptions($e, $_format);
         }
+
+        return $this->apiResponse($data, $options);
     }
 
 }

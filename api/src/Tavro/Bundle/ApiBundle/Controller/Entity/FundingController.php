@@ -37,24 +37,33 @@ class FundingController extends ApiController
      */
     public function commentsAction(Request $request, FundingRound $funding_round, $_format)
     {
+        $data = null;
+
         try {
 
             $entities = $funding_round->getFundingRoundComments();
 
-            $items = array();
+            $data = array();
 
             foreach($entities as $entity) {
-                $items[] = $entity->getComment();
+                $data[] = $entity->getComment();
             }
 
-            return $this->apiResponse($items, [
+            $options = [
+                'code' => Response::HTTP_OK,
                 'format' => $_format,
-            ]);
+            ];
 
         }
         catch(\Exception $e) {
-            throw $e;
+            $options = [
+                'format' => $_format,
+                'code' => $e->getCode(),
+                'message' => $e->getMessage()
+            ];
         }
+
+        return $this->apiResponse($data, $options);
     }
 
     /**
@@ -67,6 +76,8 @@ class FundingController extends ApiController
      */
     public function newCommentAction(Request $request, FundingRound $funding_round, $_format)
     {
+        $data = null;
+
         try {
 
             $data = json_decode($request->getContent(), TRUE);
@@ -82,18 +93,23 @@ class FundingController extends ApiController
                 'funding_round' => $funding_round->getId()
             ));
 
-            $routeOptions = array(
-                'entity'  => 'comment',
-                'id'      => $comment->getId(),
-                'format'  => $_format,
-            );
+            $data = $comment;
 
-            return $this->forward('TavroApiBundle:Default:get', $routeOptions);
+            $options = [
+                'code' => Response::HTTP_CREATED,
+                'format' => $_format,
+            ];
 
         }
         catch(\Exception $e) {
-            throw $e;
+            $options = [
+                'format' => $_format,
+                'code' => $e->getCode(),
+                'message' => $e->getMessage()
+            ];
         }
+
+        return $this->apiResponse($data, $options);
     }
 
     /**
@@ -108,24 +124,32 @@ class FundingController extends ApiController
      */
     public function shareholdersAction(Request $request, FundingRound $funding_round, $_format)
     {
+        $data = null;
+
         try {
 
             $entities = $funding_round->getFundingRoundShareholders();
 
-            $items = array();
+            $data = array();
 
             foreach($entities as $entity) {
-                $items[] = $entity->getShareholder();
+                $data[] = $entity->getShareholder();
             }
 
-            return $this->apiResponse($items, [
+            $options = [
                 'format' => $_format,
-            ]);
+            ];
 
         }
         catch(\Exception $e) {
-            throw $e;
+            $options = [
+                'format' => $_format,
+                'code' => $e->getCode(),
+                'message' => $e->getMessage()
+            ];
         }
+
+        return $this->apiResponse($data, $options);
     }
 
     /**
@@ -138,6 +162,8 @@ class FundingController extends ApiController
      */
     public function newShareholderAction(Request $request, FundingRound $funding_round, $_format)
     {
+        $data = null;
+
         try {
 
             $data = json_decode($request->getContent(), TRUE);
@@ -147,18 +173,23 @@ class FundingController extends ApiController
                'funding_round' => $funding_round,
             )));
 
-            $routeOptions = array(
-                'entity'  => 'shareholders',
-                'id'      => $shareholder->getId(),
-                'format'  => $_format,
-            );
+            $data = $shareholder;
 
-            return $this->forward('TavroApiBundle:Default:get', $routeOptions);
+            $options = [
+                'code' => Response::HTTP_CREATED,
+                'format' => $_format
+            ];
 
         }
         catch(\Exception $e) {
-            throw $e;
+            $options = [
+                'format' => $_format,
+                'code' => $e->getCode(),
+                'message' => $e->getMessage()
+            ];
         }
+
+        return $this->apiResponse($data, $options);
     }
 
     /**
@@ -171,18 +202,23 @@ class FundingController extends ApiController
      */
     public function byAccountAction(Request $request, Account $account, $_format)
     {
+        $data = null;
+
         try {
 
-            $entities = $account->getFundingRounds();
+            $data = $account->getFundingRounds();
 
-            return $this->apiResponse($entities, [
+            $options = [
                 'format' => $_format,
                 'group' => 'simple'
-            ]);
+            ];
+
         }
         catch(\Exception $e) {
-            throw $e;
+            $options = $this->getExceptionOptions($e, $_format);
         }
+
+        return $this->apiResponse($data, $options);
     }
 
 }

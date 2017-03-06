@@ -40,23 +40,28 @@ class ForecastExpenseController extends ApiController
      */
     public function byForecast(Request $request, Forecast $forecast, $_format)
     {
+        $data = null;
+
         try {
 
             $entities = $forecast->getForecastExpenses();
 
-            $items = array();
+            $data = array();
 
             foreach ($entities as $entity) {
-                $items[] = $entity->getExpense();
+                $data[] = $entity->getExpense();
             }
 
-            return $this->apiResponse($entities, [
+            $options = [
                 'format' => $_format,
                 'group'  => 'simple'
-            ]);
-        } catch (\Exception $e) {
-            throw $e;
+            ];
         }
+        catch(\Exception $e) {
+            $options = $this->getExceptionOptions($e, $_format);
+        }
+
+        return $this->apiResponse($data, $options);
     }
 
 

@@ -34,17 +34,21 @@ class ProductCategoryController extends ApiController
      */
     public function byAccountAction(Request $request, Account $account, $_format)
     {
+        $data = null;
+
         try {
 
-            $entities = $account->getProductCategories();
+            $data = $account->getProductCategories();
 
-            return $this->apiResponse($entities, [
+            $options = [
                 'format' => $_format,
                 'group' => 'simple'
-            ]);
+            ];
         }
         catch(\Exception $e) {
-            throw $e;
+            $options = $this->getExceptionOptions($e, $_format);
         }
+
+        return $this->apiResponse($data, $options);
     }
 }

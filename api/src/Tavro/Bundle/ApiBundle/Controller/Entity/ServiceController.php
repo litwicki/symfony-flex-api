@@ -22,17 +22,21 @@ class ServiceController extends ApiController
      */
     public function byAccountAction(Request $request, Account $account, $_format)
     {
+        $data = null;
+
         try {
 
-            $entities = $account->getServices();
+            $data = $account->getServices();
 
-            return $this->apiResponse($entities, [
+            $options = [
                 'format' => $_format,
                 'group' => 'simple'
-            ]);
+            ];
         }
         catch(\Exception $e) {
-            throw $e;
+            $options = $this->getExceptionOptions($e, $_format);
         }
+
+        return $this->apiResponse($data, $options);
     }
 }

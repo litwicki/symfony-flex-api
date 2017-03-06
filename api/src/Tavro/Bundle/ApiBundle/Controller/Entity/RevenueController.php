@@ -37,6 +37,8 @@ class RevenueController extends ApiController
      */
     public function newCommentAction(Request $request, Revenue $revenue, $_format)
     {
+        $data = null;
+
         try {
 
             $data = json_decode($request->getContent(), TRUE);
@@ -52,16 +54,20 @@ class RevenueController extends ApiController
                 'revenue' => $revenue->getId()
             ));
 
-            return $this->apiResponse($comment, [
+            $data = $comment;
+
+            $options = [
                 'format' => $_format,
                 'code' => Response::HTTP_CREATED,
                 'message' => sprintf('Comment %s submitted to Revenue %s', $comment->getId(), $revenue->getId())
-            ]);
+            ];
 
         }
         catch(\Exception $e) {
-            throw $e;
+            $options = $this->getExceptionOptions($e, $_format);
         }
+
+        return $this->apiResponse($data, $options);
     }
 
     /**
@@ -74,17 +80,21 @@ class RevenueController extends ApiController
      */
     public function byAccountAction(Request $request, Account $account, $_format)
     {
+        $data = null;
+
         try {
 
-            $entities = $account->getRevenues();
+            $data = $account->getRevenues();
 
-            return $this->apiResponse($entities, [
+            $options = [
                 'format' => $_format,
                 'group' => 'simple'
-            ]);
+            ];
         }
         catch(\Exception $e) {
-            throw $e;
+            $options = $this->getExceptionOptions($e, $_format);
         }
+
+        return $this->apiResponse($data, $options);
     }
 }
