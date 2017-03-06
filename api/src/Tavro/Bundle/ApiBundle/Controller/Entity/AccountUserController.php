@@ -60,44 +60,4 @@ class AccountUserController extends ApiController
 
     }
 
-    /**
-     * @param \Symfony\Component\HttpFoundation\Request $request
-     * @param \Tavro\Bundle\CoreBundle\Entity\Account $account
-     * @param $_format
-     *
-     * @return \Symfony\Component\HttpFoundation\Response
-     * @throws \Exception
-     */
-    public function removeAction(Request $request, $account, $_format)
-    {
-        try {
-
-            $data = json_decode($request->getContent(), TRUE);
-
-            $handler = $this->getHandler('users');
-            $user = $handler->post($request, $data);
-
-            /**
-             * Attach the User to the Account
-             */
-            $this->getHandler('account_users')->post($request, array(
-                'user' => $user->getId(),
-                'account' => $account->getId()
-            ));
-
-            $routeOptions = array(
-                'entity'  => 'comments',
-                'id'      => $user->getId(),
-                'format'  => $_format,
-            );
-
-            return $this->forward('TavroApiBundle:Default:get', $routeOptions);
-
-        }
-        catch(\Exception $e) {
-            throw $e;
-        }
-
-    }
-
 }

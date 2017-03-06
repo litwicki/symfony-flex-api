@@ -63,14 +63,13 @@ class DefaultController extends Controller
      *
      * @param $entityName
      *
-     * @return \Tavro\Bundle\CoreBundle\Handler\
+     * @return \Tavro\Bundle\CoreBundle\Model\HandlerInterface\EntityHandlerInterface
      * @throws \Exception
      */
     public function getHandler($entityName)
     {
         try {
-            $service = sprintf('tavro.handler.%s', $entityName);
-            return $this->get($service);
+            return $this->get(sprintf('tavro.handler.%s', $entityName));
         }
         catch(\Exception $e) {
             throw $e;
@@ -86,34 +85,28 @@ class DefaultController extends Controller
      */
     public function apiResponse($raw, array $options = array())
     {
-        try {
 
-            $format = isset($options['format']) ? $options['format'] : 'json';
-            $group = isset($options['group']) ? $options['group'] : 'api';
-            $code = isset($options['code']) ? $options['code'] : 200;
-            $message = isset($options['message']) ? $options['message'] : '';
+        $format = isset($options['format']) ? $options['format'] : 'json';
+        $group = isset($options['group']) ? $options['group'] : 'api';
+        $code = isset($options['code']) ? $options['code'] : 200;
+        $message = isset($options['message']) ? $options['message'] : '';
 
-            $response = new Response();
+        $response = new Response();
 
-            if($format == 'json') {
-                $response->headers->set('Content-Type', 'application/json');
-                $responseData = $this->serialize([
-                    'message' => $message,
-                    'data' => $raw,
-                ], $format, $group);
-            }
-            else {
-                $response->headers->set('Content-Type', 'application/xml');
-                $responseData = [];
-            }
-
-            $response->setContent($responseData);
-            $response->setStatusCode($code);
-
+        if($format == 'json') {
+            $response->headers->set('Content-Type', 'application/json');
+            $responseData = $this->serialize([
+                'message' => $message,
+                'data' => $raw,
+            ], $format, $group);
         }
-        catch(\Exception $e) {
-            throw $e;
+        else {
+            $response->headers->set('Content-Type', 'application/xml');
+            $responseData = [];
         }
+
+        $response->setContent($responseData);
+        $response->setStatusCode($code);
 
         return $response;
     }

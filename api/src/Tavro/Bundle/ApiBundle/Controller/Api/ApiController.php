@@ -46,24 +46,10 @@ class ApiController extends DefaultController
             ];
 
         }
-        catch (InvalidFormException $e) {
-            $options = [
-                'format' => $_format,
-                'code' => Response::HTTP_BAD_REQUEST,
-                'message' => $e->getMessage()
-            ];
-        }
-        catch (ApiAccessDeniedException $e) {
-            $options = [
-                'format' => $_format,
-                'code' => Response::HTTP_FORBIDDEN,
-                'message' => $e->getMessage()
-            ];
-        }
         catch(\Exception $e) {
             $options = [
                 'format' => $_format,
-                'code' => Response::HTTP_INTERNAL_SERVER_ERROR,
+                'code' => $e->getCode(),
                 'message' => $e->getMessage()
             ];
         }
@@ -108,24 +94,10 @@ class ApiController extends DefaultController
             ];
 
         }
-        catch (InvalidFormException $e) {
-            $options = [
-                'format' => $_format,
-                'code' => Response::HTTP_BAD_REQUEST,
-                'message' => $e->getMessage()
-            ];
-        }
-        catch (ApiAccessDeniedException $e) {
-            $options = [
-                'format' => $_format,
-                'code' => Response::HTTP_FORBIDDEN,
-                'message' => $e->getMessage()
-            ];
-        }
         catch(\Exception $e) {
             $options = [
                 'format' => $_format,
-                'code' => Response::HTTP_INTERNAL_SERVER_ERROR,
+                'code' => $e->getCode(),
                 'message' => $e->getMessage()
             ];
         }
@@ -162,24 +134,10 @@ class ApiController extends DefaultController
             ];
 
         }
-        catch (InvalidFormException $e) {
-            $options = [
-                'format' => $_format,
-                'code' => Response::HTTP_BAD_REQUEST,
-                'message' => $e->getMessage()
-            ];
-        }
-        catch (ApiAccessDeniedException $e) {
-            $options = [
-                'format' => $_format,
-                'code' => Response::HTTP_FORBIDDEN,
-                'message' => $e->getMessage()
-            ];
-        }
         catch(\Exception $e) {
             $options = [
                 'format' => $_format,
-                'code' => Response::HTTP_INTERNAL_SERVER_ERROR,
+                'code' => $e->getCode(),
                 'message' => $e->getMessage()
             ];
         }
@@ -197,24 +155,34 @@ class ApiController extends DefaultController
      */
     public function getAllAction(Request $request, $entity, $_format)
     {
+
+        $data = null;
+
         try {
 
             $params = $request->query->all();
             $handler = $this->getHandler($entity);
             $response = $handler->getAll($params);
 
-            $items = $response['data'];
+            $data = $response['data'];
             $message = $response['message'];
 
-            return $this->apiResponse($items, [
+            $options = [
                 'format' => $_format,
                 'message' => $message,
-            ]);
+            ];
 
         }
         catch(\Exception $e) {
-            throw $e;
+            $options = [
+                'format' => $_format,
+                'code' => $e->getCode(),
+                'message' => $e->getMessage()
+            ];
         }
+
+        return $this->apiResponse($data, $options);
+
     }
 
     /**
@@ -229,19 +197,25 @@ class ApiController extends DefaultController
      */
     public function getAction($entity, $id, $_format)
     {
+
+        $data = null;
+
         try {
             $handler = $this->getHandler($entity);
-            $item = $handler->get($id);
-            return $this->apiResponse($item, [
+            $data = $handler->get($id);
+            $options = [
                 'format' => $_format
-            ]);
-        }
-        catch(ApiAccessDeniedException $e) {
-            throw $e;
+            ];
         }
         catch(\Exception $e) {
-            throw $e;
+            $options = [
+                'format' => $_format,
+                'code' => $e->getCode(),
+                'message' => $e->getMessage()
+            ];
         }
+
+        return $this->apiResponse($data, $options);
     }
 
     /**
@@ -255,6 +229,9 @@ class ApiController extends DefaultController
      */
     public function deleteAction(Request $request, $entity, $id, $_format)
     {
+
+        $data = null;
+
         try {
 
             $handler = $this->getHandler($entity);
@@ -272,19 +249,26 @@ class ApiController extends DefaultController
                 $message = sprintf('%s object not found.', $class);
             }
 
-            return $this->apiResponse($data, [
+            $data = [
+                'message' => $message
+            ];
+
+            $options = [
                 'format' => $_format,
                 'code' => $code,
                 'message' => $message
-            ]);
+            ];
 
         }
-        catch (InvalidFormException $e) {
-            throw $e;
+        catch(\Exception $e) {
+            $options = [
+                'format' => $_format,
+                'code' => $e->getCode(),
+                'message' => $e->getMessage()
+            ];
         }
-        catch (\Exception $e) {
-            throw $e;
-        }
+
+        return $this->apiResponse($data, $options);
     }
 
 }

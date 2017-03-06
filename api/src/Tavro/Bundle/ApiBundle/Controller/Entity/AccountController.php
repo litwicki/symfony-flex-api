@@ -41,6 +41,8 @@ class AccountController extends ApiController
      */
     public function getSubscriptionAction($entity, $id, $_format)
     {
+        $data = null;
+
         try {
 
             $handler = $this->getHandler($entity);
@@ -57,19 +59,22 @@ class AccountController extends ApiController
              * @TODO: get the subscription id from the customer or account
              */
 
-            $subscription = $chargify->get($subscriptionId);
+            $data = $chargify->get($subscriptionId);
 
-            return $this->apiResponse($subscription, [
+            $options = [
                 'format' => $_format
-            ]);
+            ];
 
-        }
-        catch(ApiAccessDeniedException $e) {
-            throw $e;
         }
         catch(\Exception $e) {
-            throw $e;
+            $options = [
+                'format' => $_format,
+                'code' => $e->getCode(),
+                'message' => $e->getMessage()
+            ];
         }
+
+        return $this->apiResponse($data, $options);
     }
 
 }

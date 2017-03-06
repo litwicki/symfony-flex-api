@@ -17,6 +17,8 @@ class LogController extends ApiController
      */
     public function create(Request $request, $_format)
     {
+        $data = null;
+
         try {
 
             $data = json_decode($request->getContent(), TRUE);
@@ -45,13 +47,19 @@ class LogController extends ApiController
 
             $data['response'] = 'Log entry was created successfully';
 
-            return $this->apiResponse($data, [
+            $options = [
                 'format' => $_format
-            ]);
+            ];
 
         }
         catch(\Exception $e) {
-            throw $e;
+            $options = [
+                'format' => $_format,
+                'code' => $e->getCode(),
+                'message' => $e->getMessage()
+            ];
         }
+
+        return $this->apiResponse($data, $options);
     }
 }
