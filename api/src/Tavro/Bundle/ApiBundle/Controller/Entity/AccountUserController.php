@@ -38,25 +38,29 @@ class AccountUserController extends ApiController
      */
     public function getAll(Request $request, $account, $_format)
     {
+        $data = null;
+
         try {
 
             $entities = $account->getAccountUsers();
 
-            $items = array();
+            $data = array();
 
             foreach($entities as $entity) {
-                $items[] = $entity->getUser();
+                $data[] = $entity->getUser();
             }
 
-            return $this->apiResponse($items, [
+            $options = [
                 'format' => $_format,
                 'group' => 'simple'
-            ]);
+            ];
 
         }
         catch(\Exception $e) {
-            throw $e;
+            $options = $this->getExceptionOptions($e, $_format);
         }
+
+        return $this->apiResponse($data, $options);
 
     }
 

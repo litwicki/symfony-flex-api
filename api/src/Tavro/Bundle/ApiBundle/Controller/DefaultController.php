@@ -88,7 +88,7 @@ class DefaultController extends Controller
 
         $format = isset($options['format']) ? $options['format'] : 'json';
         $group = isset($options['group']) ? $options['group'] : 'api';
-        $code = isset($options['code']) ? $options['code'] : 200;
+        $code = isset($options['code']) ? $options['code'] : Response::HTTP_OK;
         $message = isset($options['message']) ? $options['message'] : '';
 
         $response = new Response();
@@ -109,6 +109,27 @@ class DefaultController extends Controller
         $response->setStatusCode($code);
 
         return $response;
+    }
+
+    /**
+     * Process the response code for the Exception.
+     *
+     * @param $exception
+     * @param string $_format
+     *
+     * @return array
+     */
+    public function getExceptionOptions($exception, $_format = 'json')
+    {
+
+        $code = method_exists($exception, 'getStatusCode') ? $exception->getStatusCode() : Response::HTTP_BAD_REQUEST;
+
+        return array(
+            'format' => $_format,
+            'code' => $code,
+            'message' => $exception->getMessage()
+        );
+
     }
 
 }

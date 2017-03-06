@@ -34,7 +34,7 @@ class UserSecurityController extends ApiController
      * @return \Symfony\Component\HttpFoundation\Response
      * @throws \Exception
      */
-    public function resetAction(Request $request)
+    public function resetAction(Request $request, $_format)
     {
         try {
 
@@ -57,17 +57,19 @@ class UserSecurityController extends ApiController
             $handler = $this->getHandler('users');
             $handler->resetPassword($request, $user, $data);
 
-            return $this->apiResponse($user, [
+            $data = $user;
+
+            $options = [
+                'format' => $_format,
                 'message' => sprintf('Password reset for user with email `%s`', $data['email']),
-            ]);
+            ];
 
         }
-        catch(ApiAccessDeniedException $e) {
-            throw $e;
-        }
         catch(\Exception $e) {
-            throw $e;
+            $options = $this->getExceptionOptions($e, $_format);
         }
+
+        return $this->apiResponse($data, $options);
     }
 
     /**
@@ -79,7 +81,7 @@ class UserSecurityController extends ApiController
      * @return \Symfony\Component\HttpFoundation\Response
      * @throws \Exception
      */
-    public function sendResetTokenAction(Request $request)
+    public function sendResetTokenAction(Request $request, $_format)
     {
         $data = null;
 
@@ -107,16 +109,13 @@ class UserSecurityController extends ApiController
             $data = $user;
 
             $options = [
+                'format' => $_format,
                 'message' => sprintf('An email has been sent to `%s` to reset your password.', $data['email']),
             ];
 
         }
         catch(\Exception $e) {
-            $options = [
-                'format' => $_format,
-                'code' => $e->getCode(),
-                'message' => $e->getMessage()
-            ];
+            $options = $this->getExceptionOptions($e, $_format);
         }
 
         return $this->apiResponse($data, $options);

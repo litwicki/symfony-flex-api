@@ -36,46 +36,39 @@ class AuthController extends DefaultController
      */
     public function tokenAuthenticateAction(Request $request)
     {
-        try {
+        $loginAttemptHandler = $this->container->get('tavro.auth.login_attempts');
 
-            $loginAttemptHandler = $this->get('tavro.auth.login_attempts');
+        $username = $request->request->get('username');
+        $password = $request->request->get('password');
 
-            $username = $request->request->get('username');
-            $password = $request->request->get('password');
-
-            if($loginAttemptHandler->lock($request)) {
-                throw new JWTMaximumLoginAttemptsException('You have reached the maximum number of login attempts. Please try again in 15 minutes.');
-            }
-            elseif($loginAttemptHandler->unlock($request)) {
-                $loginAttemptHandler->clear($request);
-            }
-
-            $user = $this->getDoctrine()->getRepository('TavroCoreBundle:User')->findOneBy(['username' => $username]);
-
-            if(!$user) {
-                //make this deliberately vague so users don't know if username OR password are invalid
-                //for the purposes of making brut force a bit more difficult..
-                throw $this->createNotFoundException('The Username or Password were invalid.');
-            }
-
-            // password check
-            if(!$this->get('security.password_encoder')->isPasswordValid($user, $password)) {
-                $loginAttemptHandler->log($request);
-                throw $this->createAccessDeniedException();
-            }
-
-            // Use LexikJWTAuthenticationBundle to create JWT token that hold only information about user name
-            $token = $this->get('lexik_jwt_authentication.encoder')->encode(['username' => $user->getUsername()]);
-
+        if($loginAttemptHandler->lock($request)) {
+            throw new JWTMaximumLoginAttemptsException('You have reached the maximum number of login attempts. Please try again in 15 minutes.');
+        }
+        elseif($loginAttemptHandler->unlock($request)) {
             $loginAttemptHandler->clear($request);
-
-            // Return genereted tocken
-            return new JsonResponse(['token' => $token]);
-
         }
-        catch(\Exception $e) {
 
+        $user = $this->getDoctrine()->getRepository('TavroCoreBundle:User')->findOneBy(['username' => $username]);
+
+        if(!$user) {
+            //make this deliberately vague so users don't know if username OR password are invalid
+            //for the purposes of making brut force a bit more difficult..
+            throw $this->createNotFoundException('The Username or Password were invalid.');
         }
+
+        // password check
+        if(!$this->get('security.password_encoder')->isPasswordValid($user, $password)) {
+            $loginAttemptHandler->log($request);
+            throw $this->createAccessDeniedException();
+        }
+
+        // Use LexikJWTAuthenticationBundle to create JWT token that hold only information about user name
+        $token = $this->get('lexik_jwt_authentication.encoder')->encode(['username' => $user->getUsername()]);
+
+        $loginAttemptHandler->clear($request);
+
+        // Return genereted tocken
+        return new JsonResponse(['token' => $token]);
     }
 
 

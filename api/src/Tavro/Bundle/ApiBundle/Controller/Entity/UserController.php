@@ -1,27 +1,12 @@
-<?php
-
-namespace Tavro\Bundle\ApiBundle\Controller\Entity;
+<?php namespace Tavro\Bundle\ApiBundle\Controller\Entity;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
-use Tavro\Bundle\CoreBundle\Exception\Api\ApiException;
-use Tavro\Bundle\CoreBundle\Exception\Api\ApiNotFoundException;
-use Tavro\Bundle\CoreBundle\Exception\Api\ApiRequestLimitException;
-use Tavro\Bundle\CoreBundle\Exception\Api\ApiAccessDeniedException;
-use Tavro\Bundle\CoreBundle\Exception\Form\InvalidFormException;
-use Symfony\Component\EventDispatcher\EventDispatcher;
-
-use Doctrine\Common\Inflector\Inflector;
-use Doctrine\ORM\Tools\Pagination\Paginator;
 
 use Tavro\Bundle\CoreBundle\Entity\User;
-use Symfony\Component\HttpFoundation\Cookie;
-use Symfony\Component\HttpFoundation\JsonResponse;
-
-use Litwicki\Common\Common;
 use Tavro\Bundle\ApiBundle\Controller\Api\ApiController as ApiController;
+use Tavro\Bundle\CoreBundle\Exception\UsernameNotUniqueException;
 
 class UserController extends ApiController
 {
@@ -72,11 +57,7 @@ class UserController extends ApiController
 
         }
         catch(\Exception $e) {
-            $options = [
-                'format' => $_format,
-                'code' => $e->getCode(),
-                'message' => $e->getMessage()
-            ];
+            $options = $this->getExceptionOptions($e, $_format);
         }
 
         return $this->apiResponse($data, $options);
@@ -112,11 +93,7 @@ class UserController extends ApiController
 
         }
         catch(\Exception $e) {
-            $options = [
-                'format' => $_format,
-                'code' => $e->getCode(),
-                'message' => $e->getMessage()
-            ];
+            $options = $this->getExceptionOptions($e, $_format);
         }
 
         return $this->apiResponse($data, $options);
@@ -150,11 +127,7 @@ class UserController extends ApiController
             ];
         }
         catch(\Exception $e) {
-            $options = [
-                'format' => $_format,
-                'code' => $e->getCode(),
-                'message' => $e->getMessage()
-            ];
+            $options = $this->getExceptionOptions($e, $_format);
         }
 
         return $this->apiResponse($data, $options);
@@ -202,11 +175,7 @@ class UserController extends ApiController
 
         }
         catch(\Exception $e) {
-            $options = [
-                'format' => $_format,
-                'code' => $e->getCode(),
-                'message' => $e->getMessage()
-            ];
+            $options = $this->getExceptionOptions($e, $_format);
         }
 
         return $this->apiResponse($data, $options);
@@ -235,11 +204,7 @@ class UserController extends ApiController
             ];
         }
         catch(\Exception $e) {
-            $options = [
-                'format' => $_format,
-                'code' => $e->getCode(),
-                'message' => $e->getMessage()
-            ];
+            $options = $this->getExceptionOptions($e, $_format);
         }
 
         return $this->apiResponse($data, $options);

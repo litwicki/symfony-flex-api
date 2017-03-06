@@ -224,11 +224,7 @@ class ExpenseController extends ApiController
             ];
         }
         catch(\Exception $e) {
-            $options = [
-                'format' => $_format,
-                'code' => $e->getCode(),
-                'message' => $e->getMessage()
-            ];
+            $options = $this->getExceptionOptions($e, $_format);
         }
 
         return $this->apiResponse($data, $options);
