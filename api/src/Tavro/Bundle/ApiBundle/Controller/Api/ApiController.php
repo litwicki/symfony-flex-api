@@ -40,6 +40,7 @@ class ApiController extends DefaultController
 
             $data = $newEntity;
             $options = [
+                'format' => $_format,
                 'message' => sprintf('New %s created successfully.', $entity),
                 'code' => Response::HTTP_CREATED
             ];
@@ -47,18 +48,21 @@ class ApiController extends DefaultController
         }
         catch (InvalidFormException $e) {
             $options = [
+                'format' => $_format,
                 'code' => Response::HTTP_BAD_REQUEST,
                 'message' => $e->getMessage()
             ];
         }
         catch (ApiAccessDeniedException $e) {
             $options = [
+                'format' => $_format,
                 'code' => Response::HTTP_FORBIDDEN,
                 'message' => $e->getMessage()
             ];
         }
         catch(\Exception $e) {
             $options = [
+                'format' => $_format,
                 'code' => Response::HTTP_INTERNAL_SERVER_ERROR,
                 'message' => $e->getMessage()
             ];
@@ -81,6 +85,8 @@ class ApiController extends DefaultController
      */
     public function putAction(Request $request, $entity, $id, $_format)
     {
+        $data = null;
+
         try {
 
             $data = json_decode($request->getContent(), TRUE);
@@ -88,28 +94,44 @@ class ApiController extends DefaultController
             $handler = $this->getHandler($entity);
 
             if (!($item = $handler->get($id))) {
-                $item = $handler->post($request, $item, $data);
+                $data = $handler->post($request, $item, $data);
                 $responseCode = Response::HTTP_CREATED;
             }
             else {
-                $item = $handler->put($request, $item, $data);
+                $data = $handler->put($request, $item, $data);
                 $responseCode = Response::HTTP_OK;
             }
 
-            return $this->apiResponse($item, [
-                'code' => $responseCode,
-            ]);
+            $options = [
+                'format' => $_format,
+                'code' => $responseCode
+            ];
 
         }
         catch (InvalidFormException $e) {
-            throw $e;
+            $options = [
+                'format' => $_format,
+                'code' => Response::HTTP_BAD_REQUEST,
+                'message' => $e->getMessage()
+            ];
         }
-        catch(ApiAccessDeniedException $e) {
-            throw $e;
+        catch (ApiAccessDeniedException $e) {
+            $options = [
+                'format' => $_format,
+                'code' => Response::HTTP_FORBIDDEN,
+                'message' => $e->getMessage()
+            ];
         }
         catch(\Exception $e) {
-            throw $e;
+            $options = [
+                'format' => $_format,
+                'code' => Response::HTTP_INTERNAL_SERVER_ERROR,
+                'message' => $e->getMessage()
+            ];
         }
+
+        return $this->apiResponse($data, $options);
+
     }
 
     /**
@@ -125,18 +147,44 @@ class ApiController extends DefaultController
      */
     public function typeaheadAction(Request $request, $entity, $_format)
     {
+
+        $data = null;
+
         try {
+
             $params = $request->query->all();
             $handler = $this->getHandler($entity);
-            $items = $handler->typeahead($params);
-            return $this->apiResponse($items, [
+            $data = $handler->typeahead($params);
+
+            $options = [
                 'format' => $_format,
                 'group' => 'typeahead'
-            ]);
+            ];
+
+        }
+        catch (InvalidFormException $e) {
+            $options = [
+                'format' => $_format,
+                'code' => Response::HTTP_BAD_REQUEST,
+                'message' => $e->getMessage()
+            ];
+        }
+        catch (ApiAccessDeniedException $e) {
+            $options = [
+                'format' => $_format,
+                'code' => Response::HTTP_FORBIDDEN,
+                'message' => $e->getMessage()
+            ];
         }
         catch(\Exception $e) {
-            throw $e;
+            $options = [
+                'format' => $_format,
+                'code' => Response::HTTP_INTERNAL_SERVER_ERROR,
+                'message' => $e->getMessage()
+            ];
         }
+
+        return $this->apiResponse($data, $options);
     }
 
     /**

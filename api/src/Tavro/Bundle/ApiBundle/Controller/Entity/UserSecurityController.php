@@ -124,7 +124,7 @@ class UserSecurityController extends ApiController
     public function resetApiKeyAction(Request $request, User $user, $_format)
     {
         try {
-            $handler = $this->container->get('tavro.handler.users');
+            $handler = $this->get('tavro.handler.users');
             $handler->resetApiKey($user);
             $cookie = new Cookie('api_key', $user->getApiKey(), 0, '/', NULL, FALSE, FALSE);
             $data = $this->serialize($user, $_format);
@@ -147,7 +147,7 @@ class UserSecurityController extends ApiController
     public function resetApiPasswordAction(Request $request, User $user, $_format)
     {
         try {
-            $handler = $this->container->get('tavro.handler.users');
+            $handler = $this->get('tavro.handler.users');
             $handler->resetApiPassword($user);
             $cookie = new Cookie('api_password', $user->getApiPassword(), 0, '/', NULL, FALSE, FALSE);
             $data = $this->serialize($user, $_format);

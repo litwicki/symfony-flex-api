@@ -28,7 +28,7 @@ class DefaultController extends Controller
      */
     protected function findOr404($entity, $id)
     {
-        if (!($entity = $this->container->get('tavro.handler.' . $entity)->get($id))) {
+        if (!($entity = $this->get('tavro.handler.' . $entity)->get($id))) {
             throw new ApiNotFoundException(sprintf('The resource \'%s\' was not found.', $id));
         }
 
@@ -50,7 +50,7 @@ class DefaultController extends Controller
     public function serialize($data, $format = 'json', $group = 'api')
     {
         try {
-            $serializer = $this->container->get('tavro_serializer');
+            $serializer = $this->get('tavro_serializer');
             return $serializer->serialize($data, $format, $group);
         }
         catch(\Exception $e) {
@@ -70,7 +70,7 @@ class DefaultController extends Controller
     {
         try {
             $service = sprintf('tavro.handler.%s', $entityName);
-            return $this->container->get($service);
+            return $this->get($service);
         }
         catch(\Exception $e) {
             throw $e;
