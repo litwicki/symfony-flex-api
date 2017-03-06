@@ -37,25 +37,34 @@ class ForecastStaffPersonController extends ApiController
      * @return \Symfony\Component\HttpFoundation\Response
      * @throws \Exception
      */
-    public function byForecastAction(Request $request, Forecast $forecast, $_format) {
+    public function byForecastAction(Request $request, Forecast $forecast, $_format)
+    {
+        $data = null;
 
         try {
 
             $entities = $forecast->getForecastStaffPersons();
 
-            $items = array();
+            $data = array();
 
             foreach ($entities as $entity) {
-                $items[] = $entity->getStaffPerson();
+                $data[] = $entity->getStaffPerson();
             }
 
-            return $this->apiResponse($entities, [
+            $options = [
                 'format' => $_format,
                 'group'  => 'simple'
-            ]);
-        } catch (\Exception $e) {
-            throw $e;
+            ];
         }
+        catch(\Exception $e) {
+            $options = [
+                'format' => $_format,
+                'code' => $e->getCode(),
+                'message' => $e->getMessage()
+            ];
+        }
+
+        return $this->apiResponse($data, $options);
 
     }
 
@@ -69,29 +78,34 @@ class ForecastStaffPersonController extends ApiController
      */
     public function newStaffPersonAction(Request $request, Forecast $forecast, $_format)
     {
+        $data = null;
+
         try {
 
             $data = json_decode($request->getContent(), TRUE);
 
             if(!$forecast->getId() != $data['forecast_id']) {
-                throw new InvalidFieldException('Invalid or mismatching Forecast Id');
+                throw new InvalidFieldException('Invalid or missing Forecast Id');
             }
 
             $handler = $this->getHandler('forecast_staff_persons');
-            $entity = $handler->post($request, $data);
+            $data = $handler->post($request, $data);
 
-            $routeOptions = array(
-                'entity'  => 'forecast_staff_persons',
-                'id'      => $entity->getId(),
-                'format'  => $_format,
-            );
-
-            return $this->forward('TavroApiBundle:Default:get', $routeOptions);
+            $options = [
+                'code' => Response::HTTP_CREATED,
+                'format' => $_format,
+            ];
 
         }
         catch(\Exception $e) {
-            throw $e;
+            $options = [
+                'format' => $_format,
+                'code' => $e->getCode(),
+                'message' => $e->getMessage()
+            ];
         }
+
+        return $this->apiResponse($data, $options);
 
     }
 

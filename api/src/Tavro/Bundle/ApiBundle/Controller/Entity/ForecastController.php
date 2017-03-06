@@ -40,25 +40,33 @@ class ForecastController extends ApiController
      */
     public function commentsAction(Request $request, Forecast $forecast, $_format)
     {
+        $data = null;
+
         try {
 
             $entities = $forecast->getForecastComments();
 
-            $items = array();
+            $data = array();
 
             foreach($entities as $entity) {
-                $items[] = $entity->getComment();
+                $data[] = $entity->getComment();
             }
 
-            return $this->apiResponse($entities, [
+            $options = [
                 'format' => $_format,
                 'group' => 'simple'
-            ]);
+            ];
 
         }
         catch(\Exception $e) {
-            throw $e;
+            $options = [
+                'format' => $_format,
+                'code' => $e->getCode(),
+                'message' => $e->getMessage()
+            ];
         }
+
+        return $this->apiResponse($data, $options);
     }
 
     /**
@@ -71,6 +79,8 @@ class ForecastController extends ApiController
      */
     public function newCommentAction(Request $request, Forecast $forecast, $_format)
     {
+        $data = null;
+
         try {
 
             $data = json_decode($request->getContent(), TRUE);
@@ -86,18 +96,23 @@ class ForecastController extends ApiController
                 'forecast' => $forecast->getId()
             ));
 
-            $routeOptions = array(
-                'entity'  => 'comments',
-                'id'      => $comment->getId(),
-                'format'  => $_format,
-            );
+            $data = $comment;
 
-            return $this->forward('TavroApiBundle:Default:get', $routeOptions);
+            $options = [
+                'format' => $_format,
+                'code' => Response::HTTP_CREATED
+            ];
 
         }
         catch(\Exception $e) {
-            throw $e;
+            $options = [
+                'format' => $_format,
+                'code' => $e->getCode(),
+                'message' => $e->getMessage()
+            ];
         }
+
+        return $this->apiResponse($data, $options);
 
     }
 

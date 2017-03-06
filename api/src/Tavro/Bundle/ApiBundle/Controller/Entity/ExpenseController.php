@@ -213,7 +213,7 @@ class ExpenseController extends ApiController
     public function byAccountAction(Request $request, Account $account, $_format)
     {
         $data = null;
-        
+
         try {
 
             $data = $account->getExpenses();

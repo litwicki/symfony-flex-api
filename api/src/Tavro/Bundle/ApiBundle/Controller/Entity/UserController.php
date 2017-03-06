@@ -38,11 +38,10 @@ class UserController extends ApiController
      */
     public function postAction(Request $request, $entity, $_format)
     {
-        $em = $this->getDoctrine()->getManager();
+
+        $data = null;
 
         try {
-
-            $em->getConnection()->beginTransaction();
 
             $data = json_decode($request->getContent(), true);
             $userHandler = $this->getHandler('users');
@@ -62,20 +61,25 @@ class UserController extends ApiController
 
             $newUser = $userHandler->post($request, $userData);
 
-            $em->commit();
+            $data = $newUser;
 
-            return $this->apiResponse($newUser, [
+            $options = [
                 'format' => $_format,
                 'group' => 'simple',
                 'code' => Response::HTTP_CREATED,
                 'message' => sprintf('User `%s` with email %s signup complete!', $newUser->__toString(), $person->getEmail())
-            ]);
+            ];
 
         }
         catch(\Exception $e) {
-            $em->getConnection()->rollBack();
-            throw $e;
+            $options = [
+                'format' => $_format,
+                'code' => $e->getCode(),
+                'message' => $e->getMessage()
+            ];
         }
+
+        return $this->apiResponse($data, $options);
     }
 
     /**
@@ -88,6 +92,8 @@ class UserController extends ApiController
      */
     public function changePasswordAction(Request $request, $entity, $_format)
     {
+        $data = null;
+
         try {
 
             $data = json_decode($request->getContent(), TRUE);
@@ -98,16 +104,22 @@ class UserController extends ApiController
                 'token' => $this->get('lexik_jwt_authentication.encoder')->encode(['username' => $user->getUsername()])
             ];
 
-            return $this->apiResponse($data, [
+            $options = [
                 'message' => sprintf('Password changed for User %s', $user->__toString()),
                 'code' => Response::HTTP_OK,
                 'format' => $_format
-            ]);
+            ];
 
         }
         catch(\Exception $e) {
-            throw $e;
+            $options = [
+                'format' => $_format,
+                'code' => $e->getCode(),
+                'message' => $e->getMessage()
+            ];
         }
+
+        return $this->apiResponse($data, $options);
     }
 
     /**
@@ -124,20 +136,28 @@ class UserController extends ApiController
             throw new AccessDeniedException('You do not have permission to perform this action!');
         }
 
+        $data = null;
+
         try {
 
             $params = $request->query->all();
             $handler = $this->getHandler($entity);
-            $items = $handler->getAll($params);
+            $data = $handler->getAll($params);
 
-            return $this->apiResponse($items, [
+            $options = [
                 'format' => $_format,
                 'group' => 'simple'
-            ]);
+            ];
         }
         catch(\Exception $e) {
-            throw $e;
+            $options = [
+                'format' => $_format,
+                'code' => $e->getCode(),
+                'message' => $e->getMessage()
+            ];
         }
+
+        return $this->apiResponse($data, $options);
     }
 
     /**
@@ -150,31 +170,46 @@ class UserController extends ApiController
     public function accountsAction(Request $request, User $user, $_format)
     {
 
-        $accounts = $user->getAccountUsers();
+        $data = null;
 
-        $items = array();
+        try {
 
-        foreach($accounts as $entity) {
-            $account = $entity->getAccount();
-            $items[$account->getId()] = $account;
+            $accounts = $user->getAccountUsers();
+
+            $data = array();
+
+            foreach($accounts as $entity) {
+                $account = $entity->getAccount();
+                $data[$account->getId()] = $account;
+            }
+
+            /**
+             * Cross Reference every Organization this User owns but may not be
+             * a "User" of..
+             */
+            $entities = $this->getDoctrine()->getManager()->getRepository('TavroApiBundle:Account')->findBy(array(
+                'user' => $user
+            ));
+
+            foreach($entities as $entity) {
+                $data[$entity->getId()] = $entity;
+            }
+
+            $options = [
+                'code' => Response::HTTP_OK,
+                'format' => $_format
+            ];
+
+        }
+        catch(\Exception $e) {
+            $options = [
+                'format' => $_format,
+                'code' => $e->getCode(),
+                'message' => $e->getMessage()
+            ];
         }
 
-        /**
-         * Cross Reference every Organization this User owns but may not be
-         * a "User" of..
-         */
-        $entities = $this->getDoctrine()->getManager()->getRepository('TavroApiBundle:Account')->findBy(array(
-            'user' => $user
-        ));
-
-        foreach($entities as $entity) {
-            $items[$entity->getId()] = $entity;
-        }
-
-        return $this->apiResponse($items, [
-            'format' => $_format,
-            'group' => 'simple'
-        ]);
+        return $this->apiResponse($data, $options);
 
     }
 
@@ -189,17 +224,25 @@ class UserController extends ApiController
      */
     public function getCurrentAction(Request $request, $_format)
     {
-        try {
-            $user = $this->getUser();
+        $data = null;
 
-            return $this->apiResponse($user, [
+        try {
+            $data = $this->getUser();
+
+            $options = [
                 'format' => $_format,
                 'group' => 'simple'
-            ]);
+            ];
         }
         catch(\Exception $e) {
-            throw $e;
+            $options = [
+                'format' => $_format,
+                'code' => $e->getCode(),
+                'message' => $e->getMessage()
+            ];
         }
+
+        return $this->apiResponse($data, $options);
     }
 
 }

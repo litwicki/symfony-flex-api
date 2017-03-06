@@ -40,25 +40,33 @@ class NodeController extends ApiController
      */
     public function commentsAction(Request $request, Node $node, $_format)
     {
+        $data = null;
+
         try {
 
             $entities = $node->getNodeComments();
 
-            $items = array();
+            $data = array();
 
             foreach($entities as $entity) {
-                $items[] = $entity->getComment();
+                $data[] = $entity->getComment();
             }
 
-            return $this->apiResponse($entities, [
+            $options = [
                 'format' => $_format,
                 'group' => 'simple'
-            ]);
+            ];
 
         }
         catch(\Exception $e) {
-            throw $e;
+            $options = [
+                'format' => $_format,
+                'code' => $e->getCode(),
+                'message' => $e->getMessage()
+            ];
         }
+
+        return $this->apiResponse($data, $options);
     }
 
     /**
@@ -71,6 +79,8 @@ class NodeController extends ApiController
      */
     public function newCommentAction(Request $request, Node $node, $_format)
     {
+        $data = null;
+
         try {
 
             $data = json_decode($request->getContent(), TRUE);
@@ -86,15 +96,23 @@ class NodeController extends ApiController
                 'node' => $node->getId()
             ));
 
-            return $this->apiResponse($comment, [
+            $data = $comment;
+
+            $options = [
                 'code' => Response::HTTP_CREATED,
                 'message' => sprintf('Comment %s submitted to Node %s', $comment->getId(), $node->getId())
-            ]);
+            ];
 
         }
         catch(\Exception $e) {
-            throw $e;
+            $options = [
+                'format' => $_format,
+                'code' => $e->getCode(),
+                'message' => $e->getMessage()
+            ];
         }
+
+        return $this->apiResponse($data, $options);
 
     }
 
@@ -110,25 +128,33 @@ class NodeController extends ApiController
      */
     public function tagsAction(Request $request, Node $node, $_format)
     {
+        $data = null;
+
         try {
 
             $entities = $node->getNodeTags();
 
-            $items = array();
+            $data = array();
 
             foreach($entities as $entity) {
-                $items[] = $entity->getTag();
+                $data[] = $entity->getTag();
             }
 
-            return $this->apiResponse($entities, [
+            $options = [
                 'format' => $_format,
                 'group' => 'simple'
-            ]);
+            ];
 
         }
         catch(\Exception $e) {
-            throw $e;
+            $options = [
+                'format' => $_format,
+                'code' => $e->getCode(),
+                'message' => $e->getMessage()
+            ];
         }
+
+        return $this->apiResponse($data, $options);
     }
 
     /**
@@ -141,6 +167,8 @@ class NodeController extends ApiController
      */
     public function newTagAction(Request $request, Node $node, $_format)
     {
+        $data = null;
+
         try {
 
             $data = json_decode($request->getContent(), TRUE);
@@ -156,16 +184,24 @@ class NodeController extends ApiController
                 'node' => $node->getId()
             ));
 
-            return $this->apiResponse($tag, [
+            $data = $tag;
+
+            $options = [
                 'format' => $_format,
                 'code' => Response::HTTP_CREATED,
                 'message' => sprintf('Tag %s submitted to Node %s', $tag->getId(), $node->getId())
-            ]);
+            ];
 
         }
         catch(\Exception $e) {
-            throw $e;
+            $options = [
+                'format' => $_format,
+                'code' => $e->getCode(),
+                'message' => $e->getMessage()
+            ];
         }
+
+        return $this->apiResponse($data, $options);
     }
 
     /**
@@ -180,6 +216,8 @@ class NodeController extends ApiController
      */
     public function deleteTagAction(Request $request, Node $node, Tag $tag, $_format)
     {
+        $data = null;
+
         try {
 
             $entity = $this->getDoctrine()->getManager()->getRepository('TavroApiBundle:NodeTag')->findOneBy(array(
@@ -195,8 +233,14 @@ class NodeController extends ApiController
 
         }
         catch(\Exception $e) {
-            throw $e;
+            $options = [
+                'format' => $_format,
+                'code' => $e->getCode(),
+                'message' => $e->getMessage()
+            ];
         }
+
+        return $this->apiResponse($data, $options);
 
     }
 
@@ -209,12 +253,27 @@ class NodeController extends ApiController
      */
     public function byUserAction(Request $request, User $user, $_format)
     {
-        $nodes = $user->getNodes();
+        $data = null;
 
-        return $this->apiResponse($nodes, [
-            'format' => $_format,
-            'group' => 'simple'
-        ]);
+        try {
+
+            $data = $user->getNodes();
+
+            $options = [
+                'format' => $_format,
+                'group' => 'simple'
+            ];
+
+        }
+        catch(\Exception $e) {
+            $options = [
+                'format' => $_format,
+                'code' => $e->getCode(),
+                'message' => $e->getMessage()
+            ];
+        }
+
+        return $this->apiResponse($data, $options);
     }
 
     /**
@@ -227,18 +286,26 @@ class NodeController extends ApiController
      */
     public function byAccountAction(Request $request, Account $account, $_format)
     {
+        $data = null;
+
         try {
 
-            $entities = $account->getNodes();
+            $data = $account->getNodes();
 
-            return $this->apiResponse($entities, [
+            $options = [
                 'format' => $_format,
                 'group' => 'simple'
-            ]);
+            ];
         }
         catch(\Exception $e) {
-            throw $e;
+            $options = [
+                'format' => $_format,
+                'code' => $e->getCode(),
+                'message' => $e->getMessage()
+            ];
         }
+
+        return $this->apiResponse($data, $options);
     }
 
 }

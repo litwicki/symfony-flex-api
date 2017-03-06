@@ -12,19 +12,3 @@ api_user_confirm_email:
     path: /auth/confirm.{format}
     defaults: { _controller: TavroApiBundle:Entity\UserSecurity:confirm }
     methods: POST
-
-api_user_regenerate_api_key:
-    path: /users/{user}/reset/api-key.{_format}
-    defaults: { _controller: TavroApiBundle:Entity\UserSecurity:resetApiKey, _format: json}
-    methods: POST
-    requirements:
-        user: \d+
-        _format: json|xml
-
-api_user_regenerate_api_password:
-    path: /users/{user}/reset/api-password.{_format}
-    defaults: { _controller: TavroApiBundle:Entity\UserSecurity:resetApiPassword, _format: json}
-    methods: POST
-    requirements:
-        user: \d+
-        _format: json|xml

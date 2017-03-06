@@ -34,18 +34,27 @@ class OrganizationController extends ApiController
      */
     public function contactsAction(Request $request, Organization $organization, $_format)
     {
+        $data = null;
+
         try {
 
-            $entities = $organization->getContacts();
+            $data = $organization->getContacts();
 
-            return $this->apiResponse($entities, [
-                'format' => $_format,
-            ]);
+            $options = [
+                'code' => Response::HTTP_OK,
+                'format' => $_format
+            ];
 
         }
         catch(\Exception $e) {
-            throw $e;
+            $options = [
+                'format' => $_format,
+                'code' => $e->getCode(),
+                'message' => $e->getMessage()
+            ];
         }
+
+        return $this->apiResponse($data, $options);
 
     }
     
@@ -61,25 +70,33 @@ class OrganizationController extends ApiController
      */
     public function commentsAction(Request $request, Organization $organization, $_format)
     {
+        $data = null;
+
         try {
 
             $entities = $organization->getOrganizationComments();
 
-            $items = array();
+            $data = array();
 
             foreach($entities as $entity) {
-                $items[] = $entity->getComment();
+                $data[] = $entity->getComment();
             }
 
-            return $this->apiResponse($entities, [
+            $options = [
                 'format' => $_format,
                 'group' => 'simple'
-            ]);
+            ];
 
         }
         catch(\Exception $e) {
-            throw $e;
+            $options = [
+                'format' => $_format,
+                'code' => $e->getCode(),
+                'message' => $e->getMessage()
+            ];
         }
+
+        return $this->apiResponse($data, $options);
     }
 
     /**
@@ -116,21 +133,10 @@ class OrganizationController extends ApiController
             $data = $comment;
 
         }
-        catch (InvalidFormException $e) {
-            $options = [
-                'code' => Response::HTTP_BAD_REQUEST,
-                'message' => $e->getMessage()
-            ];
-        }
-        catch (ApiAccessDeniedException $e) {
-            $options = [
-                'code' => Response::HTTP_FORBIDDEN,
-                'message' => $e->getMessage()
-            ];
-        }
         catch(\Exception $e) {
             $options = [
-                'code' => Response::HTTP_INTERNAL_SERVER_ERROR,
+                'format' => $_format,
+                'code' => $e->getCode(),
                 'message' => $e->getMessage()
             ];
         }
@@ -149,22 +155,30 @@ class OrganizationController extends ApiController
      */
     public function byAccountAction(Request $request, Account $account, $_format)
     {
+        $data = null;
+
         try {
 
             if(false === $this->isGranted('view', $account)) {
                 throw new ApiAccessDeniedException('You are not authorized to access this Account.');
             }
 
-            $entities = $account->getOrganizations();
+            $data = $account->getOrganizations();
 
-            return $this->apiResponse($entities, [
+            $options = [
                 'format' => $_format,
                 'group' => 'simple'
-            ]);
+            ];
         }
         catch(\Exception $e) {
-            throw $e;
+            $options = [
+                'format' => $_format,
+                'code' => $e->getCode(),
+                'message' => $e->getMessage()
+            ];
         }
+
+        return $this->apiResponse($data, $options);
     }
 
 }

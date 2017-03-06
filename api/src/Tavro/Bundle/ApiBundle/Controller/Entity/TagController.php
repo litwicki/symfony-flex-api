@@ -39,6 +39,8 @@ class TagController extends ApiController
      */
     public function postAction(Request $request, $entity, $_format)
     {
+        $data = null;
+
         try {
 
             $handler = $this->getHandler($entity);
@@ -54,18 +56,23 @@ class TagController extends ApiController
                 $message = sprintf('Tag `%s` created!', $data['tag']);
             }
 
-            return $this->apiResponse($tag, [
+            $data = $tag;
+
+            $options = [
                 'format' => $_format,
                 'code' => Response::HTTP_CREATED,
                 'message' => $message,
-            ]);
-        }
-        catch (InvalidFormException $e) {
-            throw $e;
+            ];
         }
         catch(\Exception $e) {
-            throw $e;
+            $options = [
+                'format' => $_format,
+                'code' => $e->getCode(),
+                'message' => $e->getMessage()
+            ];
         }
+
+        return $this->apiResponse($data, $options);
     }
 
 }
