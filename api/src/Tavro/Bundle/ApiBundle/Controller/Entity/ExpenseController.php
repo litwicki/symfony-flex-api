@@ -41,13 +41,8 @@ class ExpenseController extends ApiController
 
         try {
 
-            $entities = $expense->getExpenseComments();
-
-            $data = array();
-
-            foreach($entities as $entity) {
-                $data[] = $entity->getComment();
-            }
+            $handler = $this->getHandler('expenses');
+            $data = $handler->getComments($expense);
 
             $options = [
                 'format' => $_format,
@@ -131,13 +126,8 @@ class ExpenseController extends ApiController
 
         try {
 
-            $entities = $expense->getExpenseTags();
-
-            $data = array();
-
-            foreach($entities as $entity) {
-                $data[] = $entity->getTag();
-            }
+            $handler = $this->getHandler('expenses');
+            $data = $handler->getTags($expense);
 
             $options = [
                 'format' => $_format,

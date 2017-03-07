@@ -44,13 +44,8 @@ class NodeController extends ApiController
 
         try {
 
-            $entities = $node->getNodeComments();
-
-            $data = array();
-
-            foreach($entities as $entity) {
-                $data[] = $entity->getComment();
-            }
+            $handler = $this->getHandler('nodes');
+            $data = $handler->getComments($node);
 
             $options = [
                 'format' => $_format,
@@ -59,10 +54,15 @@ class NodeController extends ApiController
 
         }
         catch(\Exception $e) {
-            $options = $this->getExceptionOptions($e, $_format);
+            $options = [
+                'format' => $_format,
+                'code' => $e->getCode(),
+                'message' => $e->getMessage()
+            ];
         }
 
         return $this->apiResponse($data, $options);
+
     }
 
     /**
@@ -124,22 +124,20 @@ class NodeController extends ApiController
 
         try {
 
-            $entities = $node->getNodeTags();
-
-            $data = array();
-
-            foreach($entities as $entity) {
-                $data[] = $entity->getTag();
-            }
+            $handler = $this->getHandler('nodes');
+            $data = $handler->getTags($node);
 
             $options = [
                 'format' => $_format,
-                'group' => 'simple'
             ];
 
         }
         catch(\Exception $e) {
-            $options = $this->getExceptionOptions($e, $_format);
+            $options = [
+                'format' => $_format,
+                'code' => $e->getCode(),
+                'message' => $e->getMessage()
+            ];
         }
 
         return $this->apiResponse($data, $options);

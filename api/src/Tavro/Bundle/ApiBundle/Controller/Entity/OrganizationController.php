@@ -57,7 +57,7 @@ class OrganizationController extends ApiController
         return $this->apiResponse($data, $options);
 
     }
-    
+
     /**
      * Display all Comments for this Organization.
      *
@@ -74,13 +74,8 @@ class OrganizationController extends ApiController
 
         try {
 
-            $entities = $organization->getOrganizationComments();
-
-            $data = array();
-
-            foreach($entities as $entity) {
-                $data[] = $entity->getComment();
-            }
+            $handler = $this->getHandler('organizations');
+            $data = $handler->getComments($organization);
 
             $options = [
                 'format' => $_format,
@@ -97,6 +92,7 @@ class OrganizationController extends ApiController
         }
 
         return $this->apiResponse($data, $options);
+
     }
 
     /**
