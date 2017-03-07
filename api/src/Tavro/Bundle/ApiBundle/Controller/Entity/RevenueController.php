@@ -97,4 +97,41 @@ class RevenueController extends ApiController
 
         return $this->apiResponse($data, $options);
     }
+
+    /**
+     * Display all Comments for this Expense.
+     *
+     * @param \Symfony\Component\HttpFoundation\Request $request
+     * @param \Tavro\Bundle\CoreBundle\Entity\Expense $revenue
+     * @param $_format
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     * @throws \Exception
+     */
+    public function commentsAction(Request $request, Expense $revenue, $_format)
+    {
+        $data = null;
+
+        try {
+
+            $handler = $this->getHandler('revenues');
+            $data = $handler->getComments($revenue);
+
+            $options = [
+                'format' => $_format,
+                'group' => 'simple'
+            ];
+
+        }
+        catch(\Exception $e) {
+            $options = [
+                'format' => $_format,
+                'code' => $e->getCode(),
+                'message' => $e->getMessage()
+            ];
+        }
+
+        return $this->apiResponse($data, $options);
+
+    }
 }
