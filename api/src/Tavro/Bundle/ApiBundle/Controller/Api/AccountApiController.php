@@ -3,7 +3,8 @@
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
+use Tavro\Bundle\CoreBundle\Entity\Account;
+
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Tavro\Bundle\CoreBundle\Exception\Api\ApiException;
 use Tavro\Bundle\CoreBundle\Exception\Api\ApiNotFoundException;
@@ -14,24 +15,10 @@ use Tavro\Bundle\CoreBundle\Exception\Form\InvalidFormException;
 use Doctrine\Common\Inflector\Inflector;
 
 use Litwicki\Common\Common;
-use Tavro\Bundle\CoreBundle\Entity\Account;
-use Tavro\Bundle\CoreBundle\Model\EntityInterface\EntityInterface;
 use Tavro\Bundle\ApiBundle\Controller\DefaultController;
 
-class ApiController extends DefaultController
+class AccountApiController extends DefaultController
 {
-
-    /**
-     * @param \Tavro\Bundle\CoreBundle\Entity\Account $account
-     * @param \Tavro\Bundle\CoreBundle\Model\EntityInterface\EntityInterface $entity
-     */
-    public function checkAccount(Account $account, EntityInterface $entity)
-    {
-        if(false === ($entity->getAccount()->getId() === $account->getId())) {
-            throw new AccessDeniedHttpException('This entity does not belong to Account being used.');
-        }
-    }
-
     /**
      * Post (create) a new Entity
      *
@@ -42,7 +29,7 @@ class ApiController extends DefaultController
      * @return \Symfony\Component\HttpFoundation\Response
      * @throws \Exception
      */
-    public function postAction(Request $request, $entity, $_format)
+    public function postAction(Request $request, Account $account, $entity, $_format)
     {
 
         $data = null;
@@ -80,7 +67,7 @@ class ApiController extends DefaultController
      * @return \Symfony\Component\HttpFoundation\Response
      * @throws \Exception
      */
-    public function putAction(Request $request, $entity, $id, $_format)
+    public function putAction(Request $request, Account $account, $entity, $id, $_format)
     {
         $data = null;
 
@@ -124,7 +111,7 @@ class ApiController extends DefaultController
      * @return \Symfony\Component\HttpFoundation\Response
      * @throws \Exception
      */
-    public function typeaheadAction(Request $request, $entity, $_format)
+    public function typeaheadAction(Request $request, Account $account, $entity, $_format)
     {
 
         $data = null;
@@ -156,7 +143,7 @@ class ApiController extends DefaultController
      * @return \Symfony\Component\HttpFoundation\Response
      * @throws \Exception
      */
-    public function getAllAction(Request $request, $entity, $_format)
+    public function getAllAction(Request $request, Account $account, $entity, $_format)
     {
 
         $data = null;
@@ -194,7 +181,7 @@ class ApiController extends DefaultController
      * @return \Symfony\Component\HttpFoundation\Response
      * @throws \Exception
      */
-    public function getAction($entity, $id, $_format)
+    public function getAction($entity, Account $account, $id, $_format)
     {
 
         $data = null;
@@ -222,7 +209,7 @@ class ApiController extends DefaultController
      * @return \Symfony\Component\HttpFoundation\Response
      * @throws \Exception
      */
-    public function deleteAction(Request $request, $entity, $id, $_format)
+    public function deleteAction(Request $request, Account $account, $entity, $id, $_format)
     {
 
         $data = null;
