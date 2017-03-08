@@ -12,7 +12,7 @@ use Tavro\Bundle\CoreBundle\Exception\Api\ApiRequestLimitException;
 use Tavro\Bundle\CoreBundle\Exception\Api\ApiAccessDeniedException;
 use Tavro\Bundle\CoreBundle\Exception\Form\InvalidFormException;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
-use Tavro\Bundle\CoreBundle\Model\EntityInterface\EntityInterface;
+use Tavro\Bundle\CoreBundle\Model\EntityInterface\AccountEntityInterface;
 
 use Doctrine\Common\Inflector\Inflector;
 
@@ -25,7 +25,7 @@ class AccountApiController extends ApiController
      * @param \Tavro\Bundle\CoreBundle\Entity\Account $account
      * @param \Tavro\Bundle\CoreBundle\Model\EntityInterface\EntityInterface $entity
      */
-    public function checkAccount(Account $account, EntityInterface $entity)
+    public function checkAccount(Account $account, AccountEntityInterface $entity)
     {
         if(false === ($entity->getAccount()->getId() === $account->getId())) {
             throw new AccessDeniedHttpException(sprintf('%s does not belong to %s.', get_class($entity), $account->__toString()));
