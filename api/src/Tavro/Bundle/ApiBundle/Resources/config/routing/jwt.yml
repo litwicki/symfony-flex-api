@@ -1,0 +1,9 @@
+api_auth_token:
+    path: /auth
+    methods: POST
+    defaults: { _controller: TavroApiBundle:Jwt:tokenAuthenticate }
+
+api_auth_logout:
+    path: /auth/logout
+    defaults: { _controller: TavroApiBundle:Jwt:tokenLogout }
+    methods: POST
