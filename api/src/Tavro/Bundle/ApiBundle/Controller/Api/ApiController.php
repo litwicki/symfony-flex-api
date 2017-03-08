@@ -17,7 +17,7 @@ use Tavro\Bundle\CoreBundle\Model\EntityInterface\EntityInterface;
 use Doctrine\Common\Inflector\Inflector;
 
 use Litwicki\Common\Common;
-use Tavro\Bundle\ApiBundle\Controller\Api\ApiController;
+use Tavro\Bundle\ApiBundle\Controller\DefaultController;
 
 class ApiController extends DefaultController
 {
@@ -31,7 +31,7 @@ class ApiController extends DefaultController
      * @return \Symfony\Component\HttpFoundation\Response
      * @throws \Exception
      */
-    public function post(Request $request, $entity, $_format)
+    public function _post(Request $request, $entity, $_format)
     {
 
         $data = null;
@@ -69,7 +69,7 @@ class ApiController extends DefaultController
      * @return \Symfony\Component\HttpFoundation\Response
      * @throws \Exception
      */
-    public function put(Request $request, $entity, $id, $_format)
+    public function _put(Request $request, $entity, $id, $_format)
     {
         $data = null;
 
@@ -102,6 +102,42 @@ class ApiController extends DefaultController
 
     }
 
+
+    public function _patch(Request $request, $entity, $id, $_format)
+    {
+        $data = null;
+
+        try {
+
+            $data = json_decode($request->getContent(), TRUE);
+            $message = '';
+
+            $handler = $this->getHandler($entity);
+
+            if (!($item = $handler->get($id))) {
+                $message = sprintf('No %s object found with Id %s', $entity, $id);
+                $responseCode = Response::HTTP_NOT_FOUND;
+            }
+            else {
+                $data = $handler->patch($request, $item, $data);
+                $responseCode = Response::HTTP_OK;
+            }
+
+            $options = [
+                'format' => $_format,
+                'code' => $responseCode,
+                'message' => $message,
+            ];
+
+        }
+        catch(\Exception $e) {
+            $options = $this->getExceptionOptions($e, $_format);
+        }
+
+        return $this->apiResponse($data, $options);
+
+    }
+
     /**
      * Fetch a list of entities based on passed parameters that can be displayed
      * in a typeahead autocomplete widget.
@@ -113,7 +149,7 @@ class ApiController extends DefaultController
      * @return \Symfony\Component\HttpFoundation\Response
      * @throws \Exception
      */
-    public function typeahead(Request $request, $entity, $_format)
+    public function _typeahead(Request $request, $entity, $_format)
     {
 
         $data = null;
@@ -145,7 +181,7 @@ class ApiController extends DefaultController
      * @return \Symfony\Component\HttpFoundation\Response
      * @throws \Exception
      */
-    public function getAll(Request $request, $entity, $_format)
+    public function _getAll(Request $request, $entity, $_format)
     {
 
         $data = null;
@@ -183,7 +219,7 @@ class ApiController extends DefaultController
      * @return \Symfony\Component\HttpFoundation\Response
      * @throws \Exception
      */
-    public function get($entity, $id, $_format)
+    public function _get($entity, $id, $_format)
     {
 
         $data = null;
@@ -211,7 +247,7 @@ class ApiController extends DefaultController
      * @return \Symfony\Component\HttpFoundation\Response
      * @throws \Exception
      */
-    public function delete(Request $request, $entity, $id, $_format)
+    public function _delete(Request $request, $entity, $id, $_format)
     {
 
         $data = null;

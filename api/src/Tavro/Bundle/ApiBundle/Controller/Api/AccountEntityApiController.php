@@ -22,8 +22,12 @@ use Tavro\Bundle\ApiBundle\Controller\Api\ApiController;
 class AccountApiController extends ApiController
 {
     /**
+     * Validation on the Account and Entity.
+     *  - Does the entity in question belong to the Account?
+     *  - Does the user have access to this Account?
+     *
      * @param \Tavro\Bundle\CoreBundle\Entity\Account $account
-     * @param \Tavro\Bundle\CoreBundle\Model\EntityInterface\EntityInterface $entity
+     * @param \Tavro\Bundle\CoreBundle\Model\EntityInterface\AccountEntityInterface $entity
      */
     public function checkAccount(Account $account, AccountEntityInterface $entity)
     {
@@ -47,8 +51,13 @@ class AccountApiController extends ApiController
      */
     public function postAction(Request $request, Account $account, $entity, $_format)
     {
-        $this->checkAccount($account, $entity);
-        return $this->post($request, $entity, $_format);
+        try {
+            $this->checkAccount($account, $entity);
+            return $this->apiPost($request, $entity, $_format);
+        }
+        catch(AccessDeniedHttpException $e) {
+            return $this->apiResponse(null, $this->getExceptionOptions($e));
+        }
     }
 
     /**
@@ -62,8 +71,13 @@ class AccountApiController extends ApiController
      */
     public function putAction(Request $request, Account $account, $entity, $id, $_format)
     {
-        $this->checkAccount($account, $entity);
-        return $this->put($request, $entity, $id, $_format);
+        try {
+            $this->checkAccount($account, $entity);
+            return $this->apiPut($request, $entity, $id, $_format);
+        }
+        catch(AccessDeniedHttpException $e) {
+            return $this->apiResponse(null, $this->getExceptionOptions($e));
+        }
     }
 
     /**
@@ -76,8 +90,13 @@ class AccountApiController extends ApiController
      */
     public function typeaheadAction(Request $request, Account $account, $entity, $_format)
     {
-        $this->checkAccount($account, $entity);
-        return $this->typeahead($request, $entity, $_format);
+        try {
+            $this->checkAccount($account, $entity);
+            return $this->typeahead($request, $entity, $_format);
+        }
+        catch(AccessDeniedHttpException $e) {
+            return $this->apiResponse(null, $this->getExceptionOptions($e));
+        }
     }
 
     /**
@@ -90,8 +109,13 @@ class AccountApiController extends ApiController
      */
     public function getAllAction(Request $request, Account $account, $entity, $_format)
     {
-        $this->checkAccount($account, $entity);
-        return $this->getAll($request, $entity, $_format);
+        try {
+            $this->checkAccount($account, $entity);
+            return $this->apiGetAll($request, $entity, $_format);
+        }
+        catch(AccessDeniedHttpException $e) {
+            return $this->apiResponse(null, $this->getExceptionOptions($e));
+        }
     }
 
     /**
@@ -105,8 +129,13 @@ class AccountApiController extends ApiController
      */
     public function getAction(Request $request, Account $account, $entity, $id, $_format)
     {
-        $this->checkAccount($account, $entity);
-        return $this->get($request, $entity, $id, $_format);
+        try {
+            $this->checkAccount($account, $entity);
+            return $this->apiGet($request, $entity, $_format);
+        }
+        catch(AccessDeniedHttpException $e) {
+            return $this->apiResponse(null, $this->getExceptionOptions($e));
+        }
     }
 
     /**
@@ -120,8 +149,13 @@ class AccountApiController extends ApiController
      */
     public function deleteAction(Request $request, Account $account, $entity, $id, $_format)
     {
-        $this->checkAccount($account, $entity);
-        return $this->delete($request, $entity, $id, $_format);
+        try {
+            $this->checkAccount($account, $entity);
+            return $this->apiDelete($request, $entity, $_format);
+        }
+        catch(AccessDeniedHttpException $e) {
+            return $this->apiResponse(null, $this->getExceptionOptions($e));
+        }
     }
 
 

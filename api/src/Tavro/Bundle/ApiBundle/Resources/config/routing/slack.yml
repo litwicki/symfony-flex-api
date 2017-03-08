@@ -1,6 +1,6 @@
-api_post_to_slack:
+api_submit_to_slack:
     path: /slack.{_format}
-    defaults: { _controller: TavroApiBundle:Api\Slack:post, _format: json }
+    defaults: { _controller: TavroApiBundle:Slack:submit, _format: json }
     methods: POST
     requirements:
         id: \d+

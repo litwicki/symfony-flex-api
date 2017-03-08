@@ -22,7 +22,7 @@ class SlackController extends DefaultController
      * @return \Symfony\Component\HttpFoundation\Response
      * @throws \Exception
      */
-    public function postAction(Request $request, $_format)
+    public function submitAction(Request $request, $_format)
     {
         $data = null;
 
