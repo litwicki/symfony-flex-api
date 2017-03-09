@@ -17,15 +17,10 @@
 
     <testsuites>
         <testsuite name="integration">
-            <directory suffix=".php">tests/ApiBundle/Controller</directory>
+            <directory suffix=".php">tests/integration</directory>
         </testsuite>
         <testsuite name="unit">
-            <directory suffix=".php">tests/ApiBundle/Security</directory>
-        </testsuite>
-        <testsuite name="core-unit">
-            <directory suffix=".php">tests/CoreBundle/Serializer</directory>
-            <directory suffix=".php">tests/CoreBundle/Calculator</directory>
-            <directory suffix=".php">tests/CoreBundle/Mail</directory>
+            <directory suffix=".php">tests/unit</directory>
         </testsuite>
     </testsuites>
 

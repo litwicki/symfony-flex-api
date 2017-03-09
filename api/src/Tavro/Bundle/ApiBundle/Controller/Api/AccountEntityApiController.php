@@ -54,7 +54,7 @@ class AccountEntityApiController extends ApiController
     public function postAction(Request $request, Account $account, $entity, $_format)
     {
         try {
-            $this->checkAccount($account, $entity);
+            $this->checkAccount($account);
             return $this->_post($request, $entity, $_format);
         }
         catch(AccessDeniedHttpException $e) {
@@ -74,7 +74,7 @@ class AccountEntityApiController extends ApiController
     public function putAction(Request $request, Account $account, $entity, $id, $_format)
     {
         try {
-            $this->checkAccount($account, $entity);
+            $this->checkAccount($account);
             return $this->_put($request, $entity, $id, $_format);
         }
         catch(AccessDeniedHttpException $e) {
@@ -94,7 +94,7 @@ class AccountEntityApiController extends ApiController
     public function patchAction(Request $request, Account $account, $entity, $id, $_format)
     {
         try {
-            $this->checkAccount($account, $entity);
+            $this->checkAccount($account);
             return $this->_patch($request, $entity, $id, $_format);
         }
         catch(AccessDeniedHttpException $e) {
@@ -113,7 +113,7 @@ class AccountEntityApiController extends ApiController
     public function typeaheadAction(Request $request, Account $account, $entity, $_format)
     {
         try {
-            $this->checkAccount($account, $entity);
+            $this->checkAccount($account);
             return $this->_typeahead($request, $entity, $_format);
         }
         catch(AccessDeniedHttpException $e) {
@@ -172,7 +172,7 @@ class AccountEntityApiController extends ApiController
     public function deleteAction(Request $request, Account $account, $entity, $id, $_format)
     {
         try {
-            $this->checkAccount($account, $entity);
+            $this->checkAccount($account);
             return $this->_delete($request, $entity, $id, $_format);
         }
         catch(AccessDeniedHttpException $e) {
