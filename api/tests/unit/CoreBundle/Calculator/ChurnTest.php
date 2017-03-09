@@ -1,12 +1,12 @@
-<?php namespace Tests\CoreBundle\Calculator;
+<?php namespace Tests\Unit\CoreBundle\Calculator;
 
 use GuzzleHttp\Client;
 use Tavro\Bundle\CoreBundle\Calculator\Churn;
 use Tavro\Bundle\CoreBundle\Entity\User;
-use Tests\CoreBundle\TavroCoreTest;
+
 use Tests\SymfonyKernel;
 
-class ChurnTest extends TavroCoreTest
+class ChurnTest extends \PHPUnit_Framework_TestCase
 {
     use SymfonyKernel;
 

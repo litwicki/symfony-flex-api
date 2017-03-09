@@ -1,4 +1,4 @@
-<?php namespace Tests\Integration\ApiBundle;
+<?php namespace Tests;
 
 use GuzzleHttp\Client;
 

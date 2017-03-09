@@ -3,7 +3,7 @@
 use GuzzleHttp\Client;
 use Symfony\Component\HttpFoundation\Response;
 use GuzzleHttp\Exception\RequestException;
-use Tests\Integration\ApiBundle\TavroApiTest;
+use Tests\TavroApiTest;
 
 class FundingRoundTest extends TavroApiTest
 {

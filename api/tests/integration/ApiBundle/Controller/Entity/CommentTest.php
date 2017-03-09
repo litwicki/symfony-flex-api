@@ -4,7 +4,7 @@ use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
 use Symfony\Component\HttpFoundation\Response;
 
-use Tests\Integration\ApiBundle\TavroApiTest;
+use Tests\TavroApiTest;
 
 class CommentTest extends TavroApiTest
 {

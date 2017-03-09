@@ -1,12 +1,12 @@
-<?php namespace Tests\CoreBundle\Mail;
+<?php namespace Tests\Unit\CoreBundle\Mail;
 
 use GuzzleHttp\Client;
 use Tavro\Bundle\CoreBundle\Calculator\Churn;
 use Tavro\Bundle\CoreBundle\Entity\User;
-use Tests\CoreBundle\TavroCoreTest;
+
 use Tests\SymfonyKernel;
 
-class TavroMailerTest extends TavroCoreTest
+class TavroMailerTest extends \PHPUnit_Framework_TestCase
 {
     use SymfonyKernel;
 

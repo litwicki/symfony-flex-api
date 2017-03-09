@@ -1,11 +1,11 @@
-<?php namespace Tests\CoreBundle\Serializer;
+<?php namespace Tests\Unit\CoreBundle\Serializer;
 
 use GuzzleHttp\Client;
 use Tavro\Bundle\CoreBundle\Entity\User;
-use Tests\CoreBundle\TavroCoreTest;
+
 use Tests\SymfonyKernel;
 
-class JsonSerializationVisitorTest extends TavroCoreTest
+class JsonSerializationVisitorTest extends \PHPUnit_Framework_TestCase
 {
 
     use SymfonyKernel;

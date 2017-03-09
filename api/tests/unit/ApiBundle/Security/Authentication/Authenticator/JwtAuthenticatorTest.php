@@ -1,4 +1,4 @@
-<?php namespace Tests\ApiBundle\Security\Authentication\Authenticator;
+<?php namespace Tests\Unit\ApiBundle\Security\Authentication\Authenticator;
 
 use Lexik\Bundle\JWTAuthenticationBundle\TokenExtractor\AuthorizationHeaderTokenExtractor;
 use Symfony\Component\HttpFoundation\Request;
