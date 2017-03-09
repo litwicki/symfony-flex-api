@@ -1,4 +1,4 @@
-<?php namespace Tests\ApiBundle\Controller;
+<?php namespace Tests\ApiBundle\Controller\AccountEntity;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;

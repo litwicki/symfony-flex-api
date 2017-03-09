@@ -1,46 +1,46 @@
-<?php namespace Tests\ApiBundle\Controller;
+<?php namespace Tests\ApiBundle\Controller\Entity;
 
 use GuzzleHttp\Client;
-use Tests\ApiBundle\TavroApiTest;
+use GuzzleHttp\Exception\RequestException;
 use Symfony\Component\HttpFoundation\Response;
+use Tests\ApiBundle\TavroApiTest;
 
-class AccountGroupTest extends TavroApiTest
+class ShareholderTest extends TavroApiTest
 {
 
-    public function testAccountGroupRoute()
+    public function testShareholderRoute()
     {
         $client = $this->authorize($this->getApiClient());
 
-        $url = '/api/v1/accounts/1/groups';
+        $url = '/api/v1/shareholders';
 
         $response = $client->get($url);
 
-        $json = $response->getBody();
+        $json = $response->getBody(true);
+        $body = json_decode($json, true);
+
         $this->assertEquals(Response::HTTP_OK, $response->getStatusCode());
 
     }
 
-    public function testAccountGroupCreate()
+    public function testShareholderCreate()
     {
 
         $client = $this->authorize($this->getApiClient());
-
         $faker = \Faker\Factory::create('en_EN');
 
         $data = array(
-            'name' => $faker->company,
-            'body' => $faker->text(rand(100,1000)),
-            'account' => 1,
-            'user' => 1
+            'person' => 1,
+            'body' => $faker->text(500),
         );
 
-        $url = '/api/v1/accounts/1/groups';
+        $url = '/api/v1/shareholders';
 
         $response = $client->post($url, [
             'json' => $data
         ]);
 
-        $json = $response->getBody();
+        $json = $response->getBody(true);
         $body = json_decode($json, true);
 
         $this->assertEquals(Response::HTTP_CREATED, $response->getStatusCode());

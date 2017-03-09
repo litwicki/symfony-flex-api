@@ -1,6 +1,6 @@
 <?php
 
-namespace Tavro\Bundle\ApiBundle\Controller\Entity;
+namespace Tavro\Bundle\ApiBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -24,9 +24,9 @@ use Symfony\Component\HttpFoundation\Cookie;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
 use Litwicki\Common\Common;
-use Tavro\Bundle\ApiBundle\Controller\Api\EntityApiController;
+use Tavro\Bundle\ApiBundle\Controller\Api\ApiController;
 
-class UserSecurityController extends EntityApiController
+class SecurityController extends ApiController
 {
 
     public function validateData(array $data = array())

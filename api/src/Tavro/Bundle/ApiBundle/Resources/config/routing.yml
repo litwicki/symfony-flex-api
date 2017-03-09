@@ -10,6 +10,9 @@ tavro_log_api:
 tavro_slack_api:
     resource: "@TavroApiBundle/Resources/config/routing/slack.yml"
 
+tavro_user_security_api:
+    resource: "@TavroApiBundle/Resources/config/routing/security.yml"
+
 # --------------------------------------
 #  Routes that require an Entity
 # --------------------------------------
@@ -33,9 +36,6 @@ tavro_tag_api:
 
 tavro_user_api:
     resource: "@TavroApiBundle/Resources/config/routing/entity/user.yml"
-
-tavro_user_security_api:
-    resource: "@TavroApiBundle/Resources/config/routing/entity/user_security.yml"
 
 tavro_user_quickbooks_api:
     resource: "@TavroApiBundle/Resources/config/routing/entity/user_quickbooks.yml"
