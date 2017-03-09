@@ -18,7 +18,7 @@ use Tavro\Bundle\CoreBundle\Entity\Account;
 use Tavro\Bundle\CoreBundle\Model\EntityInterface\EntityInterface;
 use Tavro\Bundle\ApiBundle\Controller\Api\ApiController;
 
-class DefaultApiController extends ApiController
+class EntityApiController extends ApiController
 {
     /**
      * Post (create) a new Entity
@@ -32,7 +32,7 @@ class DefaultApiController extends ApiController
      */
     public function postAction(Request $request, $entity, $_format)
     {
-        return $this->post($request, $entity, $_format);
+        return $this->_post($request, $entity, $_format);
     }
 
     /**
@@ -48,7 +48,7 @@ class DefaultApiController extends ApiController
      */
     public function putAction(Request $request, $entity, $id, $_format)
     {
-        return $this->put($request, $entity, $id, $_format);
+        return $this->_put($request, $entity, $id, $_format);
     }
 
     /**
@@ -64,7 +64,7 @@ class DefaultApiController extends ApiController
      */
     public function typeaheadAction(Request $request, $entity, $_format)
     {
-        return $this->typeahead($request, $entity, $_format);
+        return $this->_typeahead($request, $entity, $_format);
     }
 
     /**
@@ -77,7 +77,7 @@ class DefaultApiController extends ApiController
      */
     public function getAllAction(Request $request, $entity, $_format)
     {
-        return $this->getAll($request, $entity, $_format);
+        return $this->_getAll($request, $entity, $_format);
     }
 
     /**
@@ -92,7 +92,7 @@ class DefaultApiController extends ApiController
      */
     public function getAction(Request $request, $entity, $id, $_format)
     {
-        return $this->get($request, $entity, $id, $_format);
+        return $this->_get($request, $entity, $id, $_format);
     }
 
     /**
@@ -106,7 +106,7 @@ class DefaultApiController extends ApiController
      */
     public function deleteAction(Request $request, $entity, $id, $_format)
     {
-        return $this->delete($request, $entity, $id, $_format);
+        return $this->_delete($request, $entity, $id, $_format);
     }
 
 }

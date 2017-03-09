@@ -1,6 +1,6 @@
 <?php
 
-namespace Tavro\Bundle\ApiBundle\Controller\Entity;
+namespace Tavro\Bundle\ApiBundle\Controller\AccountEntity;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -20,9 +20,9 @@ use Tavro\Bundle\CoreBundle\Entity\ExpenseComment;
 use Symfony\Component\HttpFoundation\Cookie;
 
 use Litwicki\Common\Common;
-use Tavro\Bundle\ApiBundle\Controller\Api\ApiController as ApiController;
+use Tavro\Bundle\ApiBundle\Controller\Api\AccountEntityApiController;
 
-class ProductController extends ApiController
+class ProductController extends AccountEntityApiController
 {
     /**
      * @param \Symfony\Component\HttpFoundation\Request $request

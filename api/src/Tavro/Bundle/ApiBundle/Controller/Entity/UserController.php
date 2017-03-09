@@ -5,10 +5,10 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 use Tavro\Bundle\CoreBundle\Entity\User;
-use Tavro\Bundle\ApiBundle\Controller\Api\ApiController as ApiController;
+use Tavro\Bundle\ApiBundle\Controller\Api\EntityApiController;
 use Tavro\Bundle\CoreBundle\Exception\UsernameNotUniqueException;
 
-class UserController extends ApiController
+class UserController extends EntityApiController
 {
 
     /**

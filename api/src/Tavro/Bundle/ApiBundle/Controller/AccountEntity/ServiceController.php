@@ -1,14 +1,16 @@
 <?php
 
-namespace Tavro\Bundle\ApiBundle\Controller\Entity;
+namespace Tavro\Bundle\ApiBundle\Controller\AccountEntity;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+
 use Tavro\Bundle\CoreBundle\Entity\Account;
 
-use Tavro\Bundle\ApiBundle\Controller\Api\ApiController as ApiController;
+use Litwicki\Common\Common;
+use Tavro\Bundle\ApiBundle\Controller\Api\AccountEntityApiController;
 
-class ServiceCategoryController extends ApiController
+class ServiceController extends AccountEntityApiController
 {
     /**
      * @param \Symfony\Component\HttpFoundation\Request $request
@@ -24,7 +26,7 @@ class ServiceCategoryController extends ApiController
 
         try {
 
-            $data = $account->getServiceCategories();
+            $data = $account->getServices();
 
             $options = [
                 'format' => $_format,

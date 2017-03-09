@@ -18,7 +18,7 @@ class ExceptionSubscriber implements EventSubscriberInterface
     protected $serializer;
     protected $logger;
 
-    public function __construct($debug, $serializer, Logger $logger)
+    public function __construct($debug, $serializer, $logger)
     {
         $this->debug = $debug;
         $this->serializer = $serializer;

@@ -1,0 +1,45 @@
+api_get_product_category:
+    path: /product_categories/{id}.{_format}
+    defaults: { _controller: TavroApiBundle:AccountEntity\ProductCategory:get, _format: json, entity: "product_categories" }
+    methods: GET
+    requirements:
+        id: \d+
+        _format:  json|xml
+
+api_get_all_product_categories:
+    path:  /product_categories.{_format}
+    defaults: { _controller: TavroApiBundle:AccountEntity\ProductCategory:getAll, _format: json, entity: "product_categories" }
+    methods: GET
+    requirements:
+        _format:  json|xml
+
+api_post_product_category:
+    path:  /product_categories.{_format}
+    defaults: { _controller: TavroApiBundle:AccountEntity\ProductCategory:post, _format: json, entity: "product_categories" }
+    methods: POST
+    requirements:
+        _format:  json|xml
+
+api_patch_product_category:
+    path:  /product_categories/{id}.{_format}
+    defaults: { _controller: TavroApiBundle:AccountEntity\ProductCategory:patch, _format: json, entity: "product_categories" }
+    methods: PATCH
+    requirements:
+        id: \d+
+        _format:  json|xml
+
+api_put_product_category:
+    path:  /product_categories/{id}.{_format}
+    defaults: { _controller: TavroApiBundle:AccountEntity\ProductCategory:put, _format: json, entity: "product_categories" }
+    methods: PUT
+    requirements:
+        id: \d+
+        _format:  json|xml
+
+api_delete_product_category:
+    path:  /product_categories/{id}.{_format}
+    defaults: { _controller: TavroApiBundle:AccountEntity\ProductCategory:delete, _format: json, entity: "product_categories" }
+    methods: DELETE
+    requirements:
+        id: \d+
+        _format:  json|xml

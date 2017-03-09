@@ -25,7 +25,7 @@ use Symfony\Component\HttpFoundation\Cookie;
 use Litwicki\Common\Common;
 use Tavro\Bundle\ApiBundle\Controller\DefaultController;
 
-class AuthController extends DefaultController
+class JwtController extends DefaultController
 {
 
     /**

@@ -1,6 +1,6 @@
 <?php
 
-namespace Tavro\Bundle\ApiBundle\Controller\Entity;
+namespace Tavro\Bundle\ApiBundle\Controller\AccountEntity;
 
 use Symfony\Component\Finder\Exception\AccessDeniedException;
 use Symfony\Component\HttpFoundation\Request;
@@ -23,9 +23,9 @@ use Tavro\Bundle\CoreBundle\Entity\ForecastComment;
 use Symfony\Component\HttpFoundation\Cookie;
 
 use Litwicki\Common\Common;
-use Tavro\Bundle\ApiBundle\Controller\Api\ApiController as ApiController;
+use Tavro\Bundle\ApiBundle\Controller\Api\AccountEntityApiController;
 
-class ForecastController extends ApiController
+class ForecastController extends AccountEntityApiController
 {
 
     /**

@@ -21,9 +21,9 @@ use Symfony\Component\HttpFoundation\Cookie;
 use Tavro\Bundle\CoreBundle\Entity\Contact;
 
 use Litwicki\Common\Common;
-use Tavro\Bundle\ApiBundle\Controller\Api\ApiController as ApiController;
+use Tavro\Bundle\ApiBundle\Controller\Api\EntityApiController;
 
-class ContactController extends ApiController
+class ContactController extends EntityApiController
 {
 
 }

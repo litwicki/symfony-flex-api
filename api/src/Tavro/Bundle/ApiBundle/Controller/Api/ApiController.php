@@ -219,7 +219,7 @@ class ApiController extends DefaultController
      * @return \Symfony\Component\HttpFoundation\Response
      * @throws \Exception
      */
-    public function _get($entity, $id, $_format)
+    public function _get(Request $request, $entity, $id, $_format)
     {
 
         $data = null;

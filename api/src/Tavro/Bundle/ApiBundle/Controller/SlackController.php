@@ -47,7 +47,7 @@ class SlackController extends DefaultController
                 )
             ));
 
-            $request = $client->post($url, null, json_encode($post));
+            $request = $client->post($url, json_encode($post));
             $data = $request->send();
 
             $options = [

@@ -19,7 +19,7 @@ use Doctrine\Common\Inflector\Inflector;
 use Litwicki\Common\Common;
 use Tavro\Bundle\ApiBundle\Controller\Api\ApiController;
 
-class AccountApiController extends ApiController
+class AccountEntityApiController extends ApiController
 {
     /**
      * Validation on the Account and Entity.
@@ -53,7 +53,7 @@ class AccountApiController extends ApiController
     {
         try {
             $this->checkAccount($account, $entity);
-            return $this->apiPost($request, $entity, $_format);
+            return $this->_post($request, $entity, $_format);
         }
         catch(AccessDeniedHttpException $e) {
             return $this->apiResponse(null, $this->getExceptionOptions($e));
@@ -73,7 +73,27 @@ class AccountApiController extends ApiController
     {
         try {
             $this->checkAccount($account, $entity);
-            return $this->apiPut($request, $entity, $id, $_format);
+            return $this->_put($request, $entity, $id, $_format);
+        }
+        catch(AccessDeniedHttpException $e) {
+            return $this->apiResponse(null, $this->getExceptionOptions($e));
+        }
+    }
+
+    /**
+     * @param \Symfony\Component\HttpFoundation\Request $request
+     * @param \Tavro\Bundle\CoreBundle\Entity\Account $account
+     * @param $entity
+     * @param $id
+     * @param $_format
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function patchAction(Request $request, Account $account, $entity, $id, $_format)
+    {
+        try {
+            $this->checkAccount($account, $entity);
+            return $this->_patch($request, $entity, $id, $_format);
         }
         catch(AccessDeniedHttpException $e) {
             return $this->apiResponse(null, $this->getExceptionOptions($e));
@@ -92,7 +112,7 @@ class AccountApiController extends ApiController
     {
         try {
             $this->checkAccount($account, $entity);
-            return $this->typeahead($request, $entity, $_format);
+            return $this->_typeahead($request, $entity, $_format);
         }
         catch(AccessDeniedHttpException $e) {
             return $this->apiResponse(null, $this->getExceptionOptions($e));
@@ -111,7 +131,7 @@ class AccountApiController extends ApiController
     {
         try {
             $this->checkAccount($account, $entity);
-            return $this->apiGetAll($request, $entity, $_format);
+            return $this->_getAll($request, $entity, $_format);
         }
         catch(AccessDeniedHttpException $e) {
             return $this->apiResponse(null, $this->getExceptionOptions($e));
@@ -131,7 +151,7 @@ class AccountApiController extends ApiController
     {
         try {
             $this->checkAccount($account, $entity);
-            return $this->apiGet($request, $entity, $_format);
+            return $this->_get($request, $entity, $_format);
         }
         catch(AccessDeniedHttpException $e) {
             return $this->apiResponse(null, $this->getExceptionOptions($e));
@@ -151,7 +171,7 @@ class AccountApiController extends ApiController
     {
         try {
             $this->checkAccount($account, $entity);
-            return $this->apiDelete($request, $entity, $_format);
+            return $this->_delete($request, $entity, $id, $_format);
         }
         catch(AccessDeniedHttpException $e) {
             return $this->apiResponse(null, $this->getExceptionOptions($e));

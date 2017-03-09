@@ -20,9 +20,9 @@ use Tavro\Bundle\CoreBundle\Entity\ExpenseComment;
 use Symfony\Component\HttpFoundation\Cookie;
 
 use Litwicki\Common\Common;
-use Tavro\Bundle\ApiBundle\Controller\Api\ApiController as ApiController;
+use Tavro\Bundle\ApiBundle\Controller\Api\EntityApiController;
 
-class ShareholderController extends ApiController
+class ShareholderController extends EntityApiController
 {
 
     /**

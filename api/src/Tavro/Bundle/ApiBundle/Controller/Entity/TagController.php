@@ -21,9 +21,9 @@ use Symfony\Component\HttpFoundation\Cookie;
 use Tavro\Bundle\CoreBundle\Entity\Tag;
 
 use Litwicki\Common\Common;
-use Tavro\Bundle\ApiBundle\Controller\Api\ApiController as ApiController;
+use Tavro\Bundle\ApiBundle\Controller\Api\EntityApiController;
 
-class TagController extends ApiController
+class TagController extends EntityApiController
 {
 
     /**
