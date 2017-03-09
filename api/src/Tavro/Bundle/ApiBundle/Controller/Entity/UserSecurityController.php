@@ -26,6 +26,18 @@ use Tavro\Bundle\ApiBundle\Controller\Api\ApiController as ApiController;
 
 class UserSecurityController extends ApiController
 {
+
+    public function validateData(array $data = array())
+    {
+        if(!isset($data['email'])) {
+            throw new \Exception('Email must be provided to send a reset token.');
+        }
+
+        if (!filter_var($data['email'], FILTER_VALIDATE_EMAIL)) {
+            throw new \Exception('Please provide a valid email address.');
+        }
+    }
+
     /**
      * By design, only allow the current user to do this for his/her self.
      *
@@ -39,6 +51,8 @@ class UserSecurityController extends ApiController
         try {
 
             $data = json_decode($request->getContent(), TRUE);
+
+            $this->validateData($data);
 
             $person = $this->getDoctrine()->getRepository('TavroCoreBundle:Person')->findOneBy([
                'email' => $data['email']
@@ -89,8 +103,12 @@ class UserSecurityController extends ApiController
 
             $data = json_decode($request->getContent(), TRUE);
 
+            $this->validateData($data);
+
+            $email = $data['email'];
+
             $person = $this->getDoctrine()->getRepository('TavroCoreBundle:Person')->findOneBy([
-               'email' => $data['email']
+               'email' => $email
             ]);
 
             if(!$person instanceof Person) {
@@ -104,13 +122,11 @@ class UserSecurityController extends ApiController
             }
 
             $handler = $this->getHandler('users');
-            $handler->forgotPassword($request, $user);
-
-            $data = $user;
+            $data = $handler->forgotPassword($request, $user);
 
             $options = [
                 'format' => $_format,
-                'message' => sprintf('An email has been sent to `%s` to reset your password.', $data['email']),
+                'message' => sprintf('An email has been sent to `%s` to reset your password.', $email),
             ];
 
         }
