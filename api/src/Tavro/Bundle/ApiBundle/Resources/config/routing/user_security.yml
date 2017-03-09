@@ -1,14 +1,14 @@
 api_user_reset_password:
     path: /auth/reset
-    defaults: { _controller: TavroApiBundle:Entity\UserSecurity:reset }
+    defaults: { _controller: TavroApiBundle:Entity\UserSecurity:reset, _format: json }
     methods: POST
 
 api_user_send_reset_password:
     path: /auth/forgot
-    defaults: { _controller: TavroApiBundle:Entity\UserSecurity:sendResetToken }
+    defaults: { _controller: TavroApiBundle:Entity\UserSecurity:sendResetToken, _format: json }
     methods: POST
 
 api_user_confirm_email:
     path: /auth/confirm.{format}
-    defaults: { _controller: TavroApiBundle:Entity\UserSecurity:confirm }
+    defaults: { _controller: TavroApiBundle:Entity\UserSecurity:confirm, _format: json }
     methods: POST
