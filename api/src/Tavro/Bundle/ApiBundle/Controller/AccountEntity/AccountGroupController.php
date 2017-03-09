@@ -24,9 +24,9 @@ use Symfony\Component\HttpFoundation\Cookie;
 use Tavro\Bundle\CoreBundle\Entity\Account;
 
 use Litwicki\Common\Common;
-use Tavro\Bundle\ApiBundle\Controller\Api\EntityApiController;
+use Tavro\Bundle\ApiBundle\Controller\Api\AccountEntityApiController;
 
-class AccountGroupController extends EntityApiController
+class AccountGroupController extends AccountEntityApiController
 {
 
 }

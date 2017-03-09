@@ -1,22 +1,22 @@
 api_get_account_users:
-    path: /accounts/{account}/users.{_format}
-    defaults: { _controller: TavroApiBundle:AccountEntity\AccountUser:getAll, _format: json}
+    path: /users.{_format}
+    defaults: { _controller: TavroApiBundle:AccountEntity\AccountUser:getAll, _format: json, entity: "account_users" }
     methods: GET
     requirements:
         account: \d+
         _format: json|xml
 
 api_get_account_user:
-    path: /accounts/{account}/users.{_format}
-    defaults: { _controller: TavroApiBundle:AccountEntity\AccountUser:get, _format: json}
+    path: /account_users/{id}.{_format}
+    defaults: { _controller: TavroApiBundle:AccountEntity\AccountUser:get, _format: json, entity: "account_users" }
     methods: GET
     requirements:
         account: \d+
         _format: json|xml
 
 api_post_account_user:
-    path: /accounts/{account}/users.{_format}
-    defaults: { _controller: TavroApiBundle:AccountEntity\AccountUser:post, _format: json}
+    path: /users.{_format}
+    defaults: { _controller: TavroApiBundle:AccountEntity\AccountUser:post, _format: json, entity: "account_users" }
     methods: POST
     requirements:
         account: \d+
@@ -24,7 +24,7 @@ api_post_account_user:
 
 api_delete_account_user:
     path:  /account_users/{id}.{_format}
-    defaults: { _controller: TavroApiBundle:AccountEntity\AccountUser:delete, _format: json, entity: "accounts" }
+    defaults: { _controller: TavroApiBundle:AccountEntity\AccountUser:delete, _format: json, entity: "account_users" }
     methods: DELETE
     requirements:
         id: \d+

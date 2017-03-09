@@ -57,9 +57,11 @@ tavro_forecast_staff_api:
 # --------------------------------------
 tavro_account_group_api:
     resource: "@TavroApiBundle/Resources/config/routing/account-entity/account_group.yml"
+    prefix: "/accounts/{account}"
 
 tavro_account_user_api:
     resource: "@TavroApiBundle/Resources/config/routing/account-entity/account_user.yml"
+    prefix: "/accounts/{account}"
 
 tavro_expense_api:
     resource: "@TavroApiBundle/Resources/config/routing/account-entity/expense.yml"

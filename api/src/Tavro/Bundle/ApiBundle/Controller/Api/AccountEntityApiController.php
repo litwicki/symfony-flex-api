@@ -29,11 +29,13 @@ class AccountEntityApiController extends ApiController
      * @param \Tavro\Bundle\CoreBundle\Entity\Account $account
      * @param \Tavro\Bundle\CoreBundle\Model\EntityInterface\AccountEntityInterface $entity
      */
-    public function checkAccount(Account $account, AccountEntityInterface $entity)
+    public function checkAccount(Account $account, AccountEntityInterface $entity = null)
     {
-        if(false === ($entity->getAccount()->getId() === $account->getId())) {
-            throw new AccessDeniedHttpException(sprintf('%s does not belong to %s.', get_class($entity), $account->__toString()));
-        }
+//        if(!is_null($entity)) {
+//            if (false === ($entity->getAccount()->getId() === $account->getId())) {
+//                throw new AccessDeniedHttpException(sprintf('%s does not belong to %s.', get_class($entity), $account->__toString()));
+//            }
+//        }
 
         if(false === ($this->isGranted('view', $account))) {
             throw new AccessDeniedHttpException('You are not authorized to this Account.');
@@ -130,7 +132,7 @@ class AccountEntityApiController extends ApiController
     public function getAllAction(Request $request, Account $account, $entity, $_format)
     {
         try {
-            $this->checkAccount($account, $entity);
+            $this->checkAccount($account);
             return $this->_getAll($request, $entity, $_format);
         }
         catch(AccessDeniedHttpException $e) {
@@ -150,8 +152,8 @@ class AccountEntityApiController extends ApiController
     public function getAction(Request $request, Account $account, $entity, $id, $_format)
     {
         try {
-            $this->checkAccount($account, $entity);
-            return $this->_get($request, $entity, $_format);
+            $this->checkAccount($account);
+            return $this->_get($request, $entity, $id, $_format);
         }
         catch(AccessDeniedHttpException $e) {
             return $this->apiResponse(null, $this->getExceptionOptions($e));
