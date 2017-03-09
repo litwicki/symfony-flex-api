@@ -11,10 +11,11 @@
 + Response 200 (application/json)
 
         {
+            message: "A reset password link was emailed to {EMAIL}",
             data: {
+                "password_token": "3cd3ce85-b300-45bd-9469-b58f82f0ebdb",
                 "password_token_expire": `2015-08-05T08:40:51.620Z`
-            },
-            message: "A reset password link was emailed to {EMAIL}"
+            }
         }
 
 ### Reset Password [POST /auth/reset]

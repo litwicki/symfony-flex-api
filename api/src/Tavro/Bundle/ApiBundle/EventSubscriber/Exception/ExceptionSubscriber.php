@@ -6,6 +6,7 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpKernel\Event\GetResponseForExceptionEvent;
+use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Component\Security\Core\Exception\AuthenticationCredentialsNotFoundException;
@@ -45,18 +46,23 @@ class ExceptionSubscriber implements EventSubscriberInterface
     public function processException(GetResponseForExceptionEvent $event)
     {
         $exception = $event->getException();
-        $code = $exception->getCode() == 0 ? 500 : $exception->getCode();
+        $code = $exception->getCode() == 0 ? Response::HTTP_BAD_REQUEST : $exception->getCode();
 
         $message = $exception->getMessage();
 
         if($exception instanceof AuthenticationCredentialsNotFoundException) {
             $message = 'You must be authorized to access this resource.';
-            $code = 401;
+            $code = Response::HTTP_UNAUTHORIZED;
+        }
+
+        if($exception instanceof AccessDeniedHttpException) {
+            $message = 'You do not have permission to access this resource.';
+            $code = Response::HTTP_FORBIDDEN;
         }
 
         if($exception instanceof NotFoundHttpException) {
-            $message = 'The resource you were looking for could not be found in the great abyss.';
-            $code = 404;
+            $message = 'The resource you were looking for could not be found.';
+            $code = Response::HTTP_NOT_FOUND;
         }
 
         $data = [

@@ -6,6 +6,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
+use Tavro\Bundle\ApiBundle\Exception\Security\UserPasswordTokenMissingException;
+use Tavro\Bundle\ApiBundle\Exception\Security\UserPasswordTokenInvalidException;
 use Tavro\Bundle\CoreBundle\Exception\Api\ApiException;
 use Tavro\Bundle\CoreBundle\Exception\Api\ApiNotFoundException;
 use Tavro\Bundle\CoreBundle\Exception\Api\ApiRequestLimitException;
@@ -52,20 +54,29 @@ class UserSecurityController extends EntityApiController
 
             $data = json_decode($request->getContent(), TRUE);
 
+            if(!isset($data['password_token'])) {
+                throw new UserPasswordTokenMissingException('`password_token` is required to update your password.');
+            }
+
             $this->validateData($data);
 
             $person = $this->getDoctrine()->getRepository('TavroCoreBundle:Person')->findOneBy([
                'email' => $data['email']
             ]);
 
+            //deliberately vague error response so as not to alert the User whether or not the email is in use
             if(!$person instanceof Person) {
-                throw new \Exception('We are unable to process your forgot password request.');
+                throw new ApiNotFoundException('We are unable to process your forgot password request.');
             }
 
             $user = $person->getUser();
 
+            if(false === ($user->getPasswordToken() === $data['password_token'])) {
+                throw new UserPasswordTokenInvalidException('Password Token is no longer valid or incorrect.');
+            }
+
             if(!$user instanceof User) {
-                throw new \Exception('We are unable to process your forgot password request.');
+                throw new ApiNotFoundException('We are unable to process your forgot password request.');
             }
 
             $handler = $this->getHandler('users');

@@ -18,6 +18,6 @@ class ApiRequestSizeException extends HttpException
      */
     public function __construct($message = NULL, \Exception $previous = NULL, $code = 400)
     {
-        parent::__construct(500, $message, $previous, array(), $code);
+        parent::__construct(400, $message, $previous, array(), $code);
     }
 }
