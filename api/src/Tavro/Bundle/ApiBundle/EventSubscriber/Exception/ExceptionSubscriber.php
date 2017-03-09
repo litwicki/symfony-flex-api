@@ -10,18 +10,19 @@ use Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Component\Security\Core\Exception\AuthenticationCredentialsNotFoundException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Monolog\Logger;
 
 class ExceptionSubscriber implements EventSubscriberInterface
 {
     protected $debug;
     protected $serializer;
-    protected $logService;
+    protected $logger;
 
-    public function __construct($debug, $serializer, $logService)
+    public function __construct($debug, $serializer, $logger)
     {
         $this->debug = $debug;
         $this->serializer = $serializer;
-        $this->logService = $logService;
+        $this->logger = $logger;
     }
 
     public static function getSubscribedEvents()
@@ -86,7 +87,7 @@ class ExceptionSubscriber implements EventSubscriberInterface
     public function logException(GetResponseForExceptionEvent $event)
     {
         try {
-            $this->logService->logException($event->getException());
+            $this->logger->logException($event->getException());
         }
         catch(\Exception $e) {
             throw $e;

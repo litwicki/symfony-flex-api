@@ -21,16 +21,15 @@ use Tavro\Bundle\CoreBundle\Entity\Account;
 use Symfony\Component\HttpFoundation\Cookie;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
-use Litwicki\Common\cURL;
 use Tavro\Bundle\CoreBundle\Entity\Organization;
 
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Output\BufferedOutput;
 
-use Tavro\Bundle\ApiBundle\Controller\Api\ApiController as ApiController;
+use Tavro\Bundle\ApiBundle\Controller\Api\EntityApiController;
 
-class CommandController extends ApiController
+class CommandController extends EntityApiController
 {
 
     /**

@@ -16,24 +16,10 @@ use Tavro\Bundle\CoreBundle\Exception\Form\InvalidFormException;
 use Doctrine\Common\Inflector\Inflector;
 
 use Litwicki\Common\Common;
+use Tavro\Bundle\CoreBundle\Model\HandlerInterface\EntityHandlerInterface;
 
 class DefaultController extends Controller
 {
-    
-    /**
-     * @param $entity
-     * @param $id
-     *
-     * @return mixed
-     */
-    protected function findOr404($entity, $id)
-    {
-        if (!($entity = $this->get('tavro.handler.' . $entity)->get($id))) {
-            throw new ApiNotFoundException(sprintf('The resource \'%s\' was not found.', $id));
-        }
-
-        return $entity;
-    }
 
     /**
      * Serialize an Entity or array of Entities.
@@ -63,17 +49,20 @@ class DefaultController extends Controller
      *
      * @param $entityName
      *
-     * @return \Tavro\Bundle\CoreBundle\Model\HandlerInterface\EntityHandlerInterface
+     * @return object
      * @throws \Exception
      */
     public function getHandler($entityName)
     {
-        try {
-            return $this->get(sprintf('tavro.handler.%s', $entityName));
+
+        $handler = $this->get(sprintf('tavro.handler.%s', $entityName));
+
+        if(false === ($handler instanceof EntityHandlerInterface)) {
+            throw new ApiException(sprintf('Could not find handler for %s', $entityName));
         }
-        catch(\Exception $e) {
-            throw $e;
-        }
+
+        return $handler;
+
     }
 
     /**

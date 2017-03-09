@@ -2,7 +2,7 @@
 # APPLICATION FRONTEND (ANGULAR et-all)
 # ======================================
 tavro_api:
-    host: %api_hostname%
+    #host: %api_hostname%
     resource: "@TavroApiBundle/Resources/config/routing.yml"
     requirements:
         api_host: ^(api_hostname%|localhost)$

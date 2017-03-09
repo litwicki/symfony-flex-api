@@ -1,6 +1,6 @@
 <?php
 
-namespace Tavro\Bundle\ApiBundle\Controller\Entity;
+namespace Tavro\Bundle\ApiBundle\Controller\AccountEntity;
 
 use Symfony\Component\Finder\Exception\AccessDeniedException;
 use Symfony\Component\HttpFoundation\Request;
@@ -18,17 +18,18 @@ use Doctrine\ORM\Tools\Pagination\Paginator;
 
 use Tavro\Bundle\CoreBundle\Entity\Forecast;
 use Tavro\Bundle\CoreBundle\Entity\Tag;
+use Tavro\Bundle\CoreBundle\Entity\ForecastTag;
 use Tavro\Bundle\CoreBundle\Entity\ForecastComment;
 use Symfony\Component\HttpFoundation\Cookie;
 
 use Litwicki\Common\Common;
-use Tavro\Bundle\ApiBundle\Controller\Api\EntityApiController;
+use Tavro\Bundle\ApiBundle\Controller\Api\AccountEntityApiController;
 
-class ForecastStaffPersonController extends EntityApiController
+class ForecastController extends AccountEntityApiController
 {
 
     /**
-     * Display all Staff for this Forecast.
+     * Display all Comments for this Forecast.
      *
      * @param \Symfony\Component\HttpFoundation\Request $request
      * @param \Tavro\Bundle\CoreBundle\Entity\Forecast $forecast
@@ -37,31 +38,31 @@ class ForecastStaffPersonController extends EntityApiController
      * @return \Symfony\Component\HttpFoundation\Response
      * @throws \Exception
      */
-    public function byForecastAction(Request $request, Forecast $forecast, $_format)
+    public function commentsAction(Request $request, Forecast $forecast, $_format)
     {
         $data = null;
 
         try {
 
-            $entities = $forecast->getForecastStaffPersons();
+            $entities = $forecast->getForecastComments();
 
             $data = array();
 
-            foreach ($entities as $entity) {
-                $data[] = $entity->getStaffPerson();
+            foreach($entities as $entity) {
+                $data[] = $entity->getComment();
             }
 
             $options = [
                 'format' => $_format,
-                'group'  => 'simple'
+                'group' => 'simple'
             ];
+
         }
         catch(\Exception $e) {
             $options = $this->getExceptionOptions($e, $_format);
         }
 
         return $this->apiResponse($data, $options);
-
     }
 
     /**
@@ -72,7 +73,7 @@ class ForecastStaffPersonController extends EntityApiController
      * @return \Symfony\Component\HttpFoundation\Response
      * @throws \Exception
      */
-    public function newStaffPersonAction(Request $request, Forecast $forecast, $_format)
+    public function newCommentAction(Request $request, Forecast $forecast, $_format)
     {
         $data = null;
 
@@ -80,16 +81,22 @@ class ForecastStaffPersonController extends EntityApiController
 
             $data = json_decode($request->getContent(), TRUE);
 
-            if(!$forecast->getId() != $data['forecast_id']) {
-                throw new InvalidFieldException('Invalid or missing Forecast Id');
-            }
+            $handler = $this->getHandler('comments');
+            $comment = $handler->post($request, $data);
 
-            $handler = $this->getHandler('forecast_staff_persons');
-            $data = $handler->post($request, $data);
+            /**
+             * Attach the Comment to the Forecast
+             */
+            $this->getHandler('forecast_comments')->post($request, array(
+                'comment' => $comment->getId(),
+                'forecast' => $forecast->getId()
+            ));
+
+            $data = $comment;
 
             $options = [
-                'code' => Response::HTTP_CREATED,
                 'format' => $_format,
+                'code' => Response::HTTP_CREATED
             ];
 
         }

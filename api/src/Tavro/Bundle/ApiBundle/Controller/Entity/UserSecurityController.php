@@ -22,9 +22,9 @@ use Symfony\Component\HttpFoundation\Cookie;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
 use Litwicki\Common\Common;
-use Tavro\Bundle\ApiBundle\Controller\Api\ApiController as ApiController;
+use Tavro\Bundle\ApiBundle\Controller\Api\EntityApiController;
 
-class UserSecurityController extends ApiController
+class UserSecurityController extends EntityApiController
 {
 
     public function validateData(array $data = array())

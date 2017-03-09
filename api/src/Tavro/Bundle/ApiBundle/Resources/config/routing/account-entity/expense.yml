@@ -1,0 +1,84 @@
+api_get_expense:
+    path: /expenses/{id}.{_format}
+    defaults: { _controller: TavroApiBundle:AccountEntity\Expense:get, _format: json, entity: "expenses" }
+    methods: GET
+    requirements:
+        id: \d+
+        _format:  json|xml
+
+api_get_all_expenses:
+    path:  /expenses.{_format}
+    defaults: { _controller: TavroApiBundle:AccountEntity\Expense:getAll, _format: json, entity: "expenses" }
+    methods: GET
+    requirements:
+        _format:  json|xml
+
+api_post_expense:
+    path:  /expenses.{_format}
+    defaults: { _controller: TavroApiBundle:AccountEntity\Expense:post, _format: json, entity: "expenses" }
+    methods: POST
+    requirements:
+        _format:  json|xml
+
+api_patch_expense:
+    path:  /expenses/{id}.{_format}
+    defaults: { _controller: TavroApiBundle:AccountEntity\Expense:patch, _format: json, entity: "expenses" }
+    methods: PATCH
+    requirements:
+        id: \d+
+        _format:  json|xml
+
+api_put_expense:
+    path:  /expenses/{id}.{_format}
+    defaults: { _controller: TavroApiBundle:AccountEntity\Expense:put, _format: json, entity: "expenses" }
+    methods: PUT
+    requirements:
+        id: \d+
+        _format:  json|xml
+
+api_delete_expense:
+    path:  /expenses/{id}.{_format}
+    defaults: { _controller: TavroApiBundle:AccountEntity\Expense:delete, _format: json, entity: "expenses" }
+    methods: DELETE
+    requirements:
+        id: \d+
+        _format:  json|xml
+
+api_typeahead_expenses:
+    path:  /typeahead/expenses.{_format}
+    defaults: { _controller: TavroApiBundle:AccountEntity\Expense:typeahead, _format: json, entity: "expenses" }
+    methods: GET
+    requirements:
+        _format:  json|xml
+        
+api_expense_tags:
+    path: /expenses/{expense}/tags.{_format}
+    defaults: { _controller: TavroApiBundle:AccountEntity\Expense:tags, _format: json }
+    methods: GET
+    requirements:
+        organization: \d+
+        _format: json|xml
+
+api_new_expense_tag:
+    path: /expenses/{expense}/tags.{_format}
+    defaults: { _controller: TavroApiBundle:AccountEntity\Expense:newTag, _format: json }
+    methods: POST
+    requirements:
+        organization: \d+
+        _format: json|xml
+
+api_expense_comments:
+    path: /expenses/{expense}/comments.{_format}
+    defaults: { _controller: TavroApiBundle:AccountEntity\Expense:comments, _format: json }
+    methods: GET
+    requirements:
+        organization: \d+
+        _format: json|xml
+
+api_new_expense_comment:
+    path: /expenses/{expense}/comments.{_format}
+    defaults: { _controller: TavroApiBundle:AccountEntity\Expense:newComment, _format: json }
+    methods: POST
+    requirements:
+        organization: \d+
+        _format: json|xml
