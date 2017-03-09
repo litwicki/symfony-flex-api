@@ -1,9 +1,9 @@
-<?php namespace Tests\ApiBundle\Controller\AccountEntity;
+<?php namespace Tests\Integration\ApiBundle\Controller\AccountEntity;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
 use Symfony\Component\HttpFoundation\Response;
-use Tests\ApiBundle\TavroApiTest;
+use Tests\Integration\ApiBundle\TavroApiTest;
 
 class OrganizationTest extends TavroApiTest
 {
@@ -12,7 +12,7 @@ class OrganizationTest extends TavroApiTest
     {
         $client = $this->authorize($this->getApiClient());
 
-        $url = '/api/v1/organizations';
+        $url = '/api/v1/accounts/1/organizations';
 
         $response = $client->get($url);
 
@@ -39,7 +39,7 @@ class OrganizationTest extends TavroApiTest
             'account' => 1
         );
 
-        $url = '/api/v1/organizations';
+        $url = '/api/v1/accounts/1/organizations';
 
         $response = $client->post($url, [
             'json' => $data
@@ -69,7 +69,7 @@ class OrganizationTest extends TavroApiTest
                 'account' => -11
             );
 
-            $url = '/api/v1/organizations';
+            $url = '/api/v1/accounts/1/organizations';
 
             $client->post($url, [
                 'json' => $data,

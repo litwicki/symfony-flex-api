@@ -1,9 +1,9 @@
-<?php namespace Tests\ApiBundle\Controller\AccountEntity;
+<?php namespace Tests\Integration\ApiBundle\Controller\AccountEntity;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
 use Symfony\Component\HttpFoundation\Response;
-use Tests\ApiBundle\TavroApiTest;
+use Tests\Integration\ApiBundle\TavroApiTest;
 
 class ServiceTest extends TavroApiTest
 {
@@ -13,7 +13,7 @@ class ServiceTest extends TavroApiTest
 
         $client = $this->authorize($this->getApiClient());
 
-        $url = '/api/v1/services';
+        $url = '/api/v1/accounts/1/services';
 
         $response = $client->get($url);
 
@@ -39,7 +39,7 @@ class ServiceTest extends TavroApiTest
             'account' => 1
         );
 
-        $url = '/api/v1/services';
+        $url = '/api/v1/accounts/1/services';
         $response = $client->post($url, [
             'json' => $data
         ]);
@@ -68,7 +68,7 @@ class ServiceTest extends TavroApiTest
                 'account' => 1
             );
 
-            $url = '/api/v1/services';
+            $url = '/api/v1/accounts/1/services';
 
             $client->post($url, [
                 'json' => $data
@@ -99,7 +99,7 @@ class ServiceTest extends TavroApiTest
                 'account' => -1
             );
 
-            $url = '/api/v1/services';
+            $url = '/api/v1/accounts/1/services';
 
             $client->post($url, [
                 'json' => $data
@@ -130,7 +130,7 @@ class ServiceTest extends TavroApiTest
                 'account' => 1
             );
 
-            $url = '/api/v1/services';
+            $url = '/api/v1/accounts/1/services';
 
             $client->post($url, [
                 'json' => $data

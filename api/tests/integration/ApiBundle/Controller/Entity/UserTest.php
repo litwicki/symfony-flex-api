@@ -1,9 +1,9 @@
-<?php namespace Tests\ApiBundle\Controller\Entity;
+<?php namespace Tests\Integration\ApiBundle\Controller\Entity;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
 use Symfony\Component\HttpFoundation\Response;
-use Tests\ApiBundle\TavroApiTest;
+use Tests\Integration\ApiBundle\TavroApiTest;
 use Rhumsaa\Uuid\Uuid;
 
 class UserTest extends TavroApiTest
