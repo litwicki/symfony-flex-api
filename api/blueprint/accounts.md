@@ -119,7 +119,7 @@ Virtually all entities are related to a particular `Account` and as such retriev
             + (Contact2)
         + message: {CONTACT_COUNT} Contacts retrieved successfully.
 
-### Get Organizations [GET /accounts/{id}/groups]
+### Get Organizations [GET /accounts/{id}/organizations]
 
 + Parameters
     + id: `1` (number, required) - ID of the Account in the form of an integer
