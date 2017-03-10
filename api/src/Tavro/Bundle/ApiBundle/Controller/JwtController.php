@@ -74,10 +74,9 @@ class JwtController extends DefaultController
             throw $this->createAccessDeniedException();
         }
 
-        // Use LexikJWTAuthenticationBundle to create JWT token that hold only information about user name
-        $token = $this->get('lexik_jwt_authentication.encoder')->encode(['username' => $user->getUsername()]);
-
         $loginAttemptHandler->clear($request);
+
+        $token = $this->get('tavro_api.jwt_token_handler')->createToken($user);
 
         // Return genereted tocken
         return new JsonResponse(['token' => $token]);
