@@ -8,7 +8,7 @@ api_get_product_category:
 
 api_get_all_product_categories:
     path:  /product_categories.{_format}
-    defaults: { _controller: TavroApiBundle:AccountEntity\ProductCategory:getAll, _format: json, entity: "product_categories" }
+    defaults: { _controller: TavroApiBundle:AccountEntity\ProductCategory:getAllByAccount, _format: json, entity: "product_categories" }
     methods: GET
     requirements:
         _format:  json|xml

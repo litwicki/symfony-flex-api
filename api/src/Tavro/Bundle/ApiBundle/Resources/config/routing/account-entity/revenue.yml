@@ -8,7 +8,7 @@ api_get_revenue:
 
 api_get_all_revenues:
     path:  /revenues.{_format}
-    defaults: { _controller: TavroApiBundle:AccountEntity\Revenue:getAll, _format: json, entity: 'revenues' }
+    defaults: { _controller: TavroApiBundle:AccountEntity\Revenue:getAllByAccount, _format: json, entity: 'revenues' }
     methods: GET
     requirements:
         _format:  json|xml

@@ -8,7 +8,7 @@ api_get_revenue_category:
 
 api_get_all_revenue_categories:
     path:  /revenue_categories.{_format}
-    defaults: { _controller: TavroApiBundle:AccountEntity\RevenueCategory:getAll, _format: json, entity: "revenue_categories" }
+    defaults: { _controller: TavroApiBundle:AccountEntity\RevenueCategory:getAllByAccount, _format: json, entity: "revenue_categories" }
     methods: GET
     requirements:
         _format:  json|xml

@@ -8,7 +8,7 @@ api_get_expense:
 
 api_get_all_expenses:
     path:  /expenses.{_format}
-    defaults: { _controller: TavroApiBundle:AccountEntity\Expense:getAll, _format: json, entity: "expenses" }
+    defaults: { _controller: TavroApiBundle:AccountEntity\Expense:getAllByAccountByAccount, _format: json, entity: "expenses" }
     methods: GET
     requirements:
         _format:  json|xml

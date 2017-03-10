@@ -22,7 +22,7 @@ api_post_product_image:
 
 api_get_all_products:
     path:  /products.{_format}
-    defaults: { _controller: TavroApiBundle:AccountEntity\Product:getAll, _format: json, entity: 'products' }
+    defaults: { _controller: TavroApiBundle:AccountEntity\Product:getAllByAccount, _format: json, entity: 'products' }
     methods: GET
     requirements:
         _format:  json|xml

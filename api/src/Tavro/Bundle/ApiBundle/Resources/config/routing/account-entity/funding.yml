@@ -8,7 +8,7 @@ api_get_funding_round:
 
 api_get_all_funding:
     path:  /funding.{_format}
-    defaults: { _controller: TavroApiBundle:AccountEntity\Funding:getAll, _format: json, entity: "funding" }
+    defaults: { _controller: TavroApiBundle:AccountEntity\Funding:getAllByAccount, _format: json, entity: "funding" }
     methods: GET
     requirements:
         _format:  json|xml
