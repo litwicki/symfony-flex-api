@@ -9,6 +9,8 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Tavro\Bundle\ApiBundle\Exception\ApiNotAuthorizedException;
 use Tavro\Bundle\ApiBundle\Exception\JWT\JWTMaximumLoginAttemptsException;
+use Tavro\Bundle\ApiBundle\Exception\Security\InvalidCredentialsException;
+use Tavro\Bundle\ApiBundle\Exception\Security\UsernameNotFoundException;
 use Tavro\Bundle\CoreBundle\Exception\Api\ApiException;
 use Tavro\Bundle\CoreBundle\Exception\Api\ApiNotFoundException;
 use Tavro\Bundle\CoreBundle\Exception\Api\ApiRequestLimitException;
@@ -42,6 +44,7 @@ class JwtController extends DefaultController
         $username = $request->request->get('username');
         $password = $request->request->get('password');
         $user = false;
+        $invalidMessage = 'Unable to authenticate, invalid username or password.';
 
         if($loginAttemptHandler->lock($request)) {
             throw new JWTMaximumLoginAttemptsException('You have reached the maximum number of login attempts. Please try again in 15 minutes.');
@@ -56,22 +59,32 @@ class JwtController extends DefaultController
 
         $user = ($person instanceof Person) ? $person->getUser() : false;
 
+        /**
+         * If we're not able to authenticate the User, deliberately respond with a vague
+         * error message so we're not indicating whether or not specifically the `username`
+         * or `password` were invalid in their submission. This is by design.
+         */
+
         if(false === ($user instanceof User)) {
 
             $user = $this->getDoctrine()->getRepository('TavroCoreBundle:User')->findOneBy(['username' => $username]);
 
             if(false === ($user instanceof User)) {
-                //make this deliberately vague so users don't know if username OR password are invalid
-                //for the purposes of making brut force a bit more difficult..
-                throw new ApiNotAuthorizedException('Unable to authorize you: username or password invalid.');
+                $logMessage = sprintf('Username %s could not be found by %s.', $username, $request->getClientIp());
+                $this->get('logger')->info($logMessage);
+                throw new ApiNotAuthorizedException($invalidMessage);
             }
 
         }
 
-        // password check
+        /**
+         * Check the User we have has a password that matches what was submitted.
+         */
         if(!$this->get('security.password_encoder')->isPasswordValid($user, $password)) {
             $loginAttemptHandler->log($request);
-            throw $this->createAccessDeniedException();
+            $logMessage = sprintf('Password for `%s` entered incorrectly by %s.', $username, $request->getClientIp());
+            $this->get('logger')->info($logMessage);
+            throw new ApiNotAuthorizedException($invalidMessage);
         }
 
         $loginAttemptHandler->clear($request);
