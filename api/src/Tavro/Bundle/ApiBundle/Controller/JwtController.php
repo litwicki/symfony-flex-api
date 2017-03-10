@@ -7,6 +7,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
+use Tavro\Bundle\ApiBundle\Exception\ApiNotAuthorizedException;
 use Tavro\Bundle\ApiBundle\Exception\JWT\JWTMaximumLoginAttemptsException;
 use Tavro\Bundle\CoreBundle\Exception\Api\ApiException;
 use Tavro\Bundle\CoreBundle\Exception\Api\ApiNotFoundException;
@@ -40,6 +41,7 @@ class JwtController extends DefaultController
 
         $username = $request->request->get('username');
         $password = $request->request->get('password');
+        $user = false;
 
         if($loginAttemptHandler->lock($request)) {
             throw new JWTMaximumLoginAttemptsException('You have reached the maximum number of login attempts. Please try again in 15 minutes.');
@@ -48,12 +50,22 @@ class JwtController extends DefaultController
             $loginAttemptHandler->clear($request);
         }
 
-        $user = $this->getDoctrine()->getRepository('TavroCoreBundle:User')->findOneBy(['username' => $username]);
+        $person = $this->getDoctrine()->getRepository('TavroCoreBundle:Person')->findOneBy([
+           'email' => $username
+        ]);
 
-        if(!$user) {
-            //make this deliberately vague so users don't know if username OR password are invalid
-            //for the purposes of making brut force a bit more difficult..
-            throw $this->createNotFoundException('The Username or Password were invalid.');
+        $user = ($person instanceof Person) ? $person->getUser() : false;
+
+        if(false === ($user instanceof User)) {
+
+            $user = $this->getDoctrine()->getRepository('TavroCoreBundle:User')->findOneBy(['username' => $username]);
+
+            if(false === ($user instanceof User)) {
+                //make this deliberately vague so users don't know if username OR password are invalid
+                //for the purposes of making brut force a bit more difficult..
+                throw new ApiNotAuthorizedException('Unable to authorize you: username or password invalid.');
+            }
+
         }
 
         // password check
