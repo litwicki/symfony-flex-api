@@ -4,7 +4,7 @@ use Tavro\Bundle\ApiBundle\Exception\ApiException;
 use Tavro\Bundle\CoreBundle\Entity\User;
 use Lexik\Bundle\JWTAuthenticationBundle\Encoder\DefaultEncoder;
 
-class Jwt
+class JwtHandler
 {
     protected $encoder;
 

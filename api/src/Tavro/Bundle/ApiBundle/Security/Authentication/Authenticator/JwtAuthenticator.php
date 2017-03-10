@@ -3,6 +3,8 @@
 namespace Tavro\Bundle\ApiBundle\Security\Authentication\Authenticator;
 
 use Doctrine\ORM\EntityManager;
+use Tavro\Bundle\CoreBundle\Entity\User;
+
 use Lexik\Bundle\JWTAuthenticationBundle\Encoder\DefaultEncoder;
 use Lexik\Bundle\JWTAuthenticationBundle\Exception\JWTDecodeFailureException;
 use Lexik\Bundle\JWTAuthenticationBundle\TokenExtractor\AuthorizationHeaderTokenExtractor;
@@ -72,13 +74,31 @@ class JwtAuthenticator extends AbstractGuardAuthenticator
      * @param mixed $credentials
      * @param \Symfony\Component\Security\Core\User\UserProviderInterface $userProvider
      *
-     * @return null|object|void
+     * @return mixed
      * @throws \Lexik\Bundle\JWTAuthenticationBundle\Exception\JWTDecodeFailureException
      */
     public function getUser($credentials, UserProviderInterface $userProvider)
     {
         try {
+
             $data = $this->jwtEncoder->decode($credentials);
+
+            if(false === (isset($data['username']))) {
+                throw new \Exception('Unable to properly decode credentials from JWT Token.');
+            }
+
+            $username = $data['username'];
+
+            $user = $this->em->getRepository('TavroCoreBundle:User')->findOneBy([
+                'username' => $username
+            ]);
+
+            if(false === ($user instanceof User)) {
+                return null;
+            }
+
+            return $user;
+
         }
         catch (JWTDecodeFailureException $e) {
 
@@ -96,20 +116,6 @@ class JwtAuthenticator extends AbstractGuardAuthenticator
             }
 
         }
-
-        if ( ! $data) {
-            return;
-        }
-
-        $username = $data['username'];
-
-        $user = $this->em->getRepository('TavroCoreBundle:User')->findOneBy(['username' => $username]);
-
-        if ( ! $user) {
-            return;
-        }
-
-        return $user;
     }
 
     /**

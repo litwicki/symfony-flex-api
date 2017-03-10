@@ -9,7 +9,7 @@ services:
             - { name: kernel.event_listener, event: lexik_jwt_authentication.on_authentication_success, method: onAuthenticationSuccessResponse }
 
     tavro_api.jwt_token_handler:
-        class: Tavro\Bundle\ApiBundle\Security\Jwt\Jwt
+        class: Tavro\Bundle\ApiBundle\Security\Jwt\JwtHandler
         arguments: ['@lexik_jwt_authentication.encoder']
 
     tavro.jwt_token_authenticator:

@@ -17,7 +17,9 @@ class JwtAuthenticatorTest extends \PHPUnit_Framework_TestCase
 
     public function createToken($username = 'tavrobot')
     {
-        return $this->container->get('lexik_jwt_authentication.encoder')->encode(['username' => $username]);
+        $user = new User();
+        $user->setUsername($username);
+        return $this->container->get('tavro_api.jwt_token_handler')->createToken($user);
     }
 
     public function testGetCredentials()
@@ -39,21 +41,9 @@ class JwtAuthenticatorTest extends \PHPUnit_Framework_TestCase
         $credentials = $this->createToken();
         $data = $this->container->get('lexik_jwt_authentication.encoder')->decode($credentials);
 
-    }
+        $this->assertArrayHasKey('username', $data, 'Decoded token must contain `username` key.');
+        $this->assertTrue($data['username'] == 'tavrobot', 'Decoded username must match username passed to token creator.');
 
-    public function testGetExpiredUser()
-    {
-        $credentials = $this->createToken('expired');
-    }
-
-    public function testInvalidUser()
-    {
-        $credentials = $this->createToken('invalid');
-    }
-
-    public function testUnverifiedUser()
-    {
-        $credentials = $this->createToken('unverified');
     }
 
 }
