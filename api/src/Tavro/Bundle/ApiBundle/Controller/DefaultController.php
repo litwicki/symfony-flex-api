@@ -27,6 +27,8 @@ class DefaultController extends Controller
      * Handle the payload from the Request and do some checks.
      *
      * @param \Symfony\Component\HttpFoundation\Request $request
+     *
+     * @return mixed
      */
     public function getPayload(Request $request)
     {
@@ -35,6 +37,8 @@ class DefaultController extends Controller
         if(false === (is_array($data))) {
             throw new ApiInvalidPayloadException('Invalid or missing payload in submission.');
         }
+
+        return $data;
 
     }
 
@@ -113,7 +117,7 @@ class DefaultController extends Controller
 
     /**
      * Return a JSON Response.
-     * 
+     *
      * @param $data
      * @param $message
      * @param $code
