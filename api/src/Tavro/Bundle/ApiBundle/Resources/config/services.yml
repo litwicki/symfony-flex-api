@@ -15,7 +15,7 @@ services:
     tavro_api.cors_listener:
         class: Tavro\Bundle\ApiBundle\EventListener\CorsListener
         tags:
-            - { name: kernel.event_listener, event: kernel.response, method: onKernelResponse }
+            - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest }
 
     tavro_api.subscriber.exception:
         class: Tavro\Bundle\ApiBundle\EventSubscriber\Exception\ExceptionSubscriber
