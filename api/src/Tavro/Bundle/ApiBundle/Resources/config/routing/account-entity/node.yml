@@ -8,7 +8,7 @@ api_get_node:
 
 api_get_all_nodes:
     path:  /nodes.{_format}
-    defaults: { _controller: TavroApiBundle:AccountEntity\Node:getAll, _format: json, entity: "nodes" }
+    defaults: { _controller: TavroApiBundle:AccountEntity\Node:getAllByAccount, _format: json, entity: "nodes" }
     methods: GET
     requirements:
         _format:  json|xml

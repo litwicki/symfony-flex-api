@@ -8,7 +8,7 @@ api_get_organization:
 
 api_get_all_organizations:
     path:  /organizations.{_format}
-    defaults: { _controller: TavroApiBundle:AccountEntity\Organization:getAll, _format: json, entity: "organizations" }
+    defaults: { _controller: TavroApiBundle:AccountEntity\Organization:getAllByAccount, _format: json, entity: "organizations" }
     methods: GET
     requirements:
         _format:  json|xml

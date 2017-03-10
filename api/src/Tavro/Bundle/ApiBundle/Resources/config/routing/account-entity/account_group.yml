@@ -1,6 +1,6 @@
 api_account_groups:
     path: /groups.{_format}
-    defaults: { _controller: TavroApiBundle:AccountEntity\AccountGroup:getAll, _format: json, entity: "account_groups" }
+    defaults: { _controller: TavroApiBundle:AccountEntity\AccountGroup:getAllByAccount, _format: json, entity: "account_groups" }
     methods: GET
     requirements:
         account: \d+

@@ -8,7 +8,7 @@ api_get_service_category:
 
 api_get_all_service_categories:
     path:  /service_categories.{_format}
-    defaults: { _controller: TavroApiBundle:AccountEntity\ServiceCategory:getAll, _format: json, entity: "service_categories" }
+    defaults: { _controller: TavroApiBundle:AccountEntity\ServiceCategory:getAllByAccount, _format: json, entity: "service_categories" }
     methods: GET
     requirements:
         _format:  json|xml

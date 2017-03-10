@@ -1,6 +1,6 @@
 api_get_account_users:
     path: /users.{_format}
-    defaults: { _controller: TavroApiBundle:AccountEntity\AccountUser:getAll, _format: json, entity: "account_users" }
+    defaults: { _controller: TavroApiBundle:AccountEntity\AccountUser:getAllByAccount, _format: json, entity: "account_users" }
     methods: GET
     requirements:
         account: \d+

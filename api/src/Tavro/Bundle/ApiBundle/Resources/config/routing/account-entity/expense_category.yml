@@ -8,7 +8,7 @@ api_get_expense_category:
 
 api_get_all_expense_categories:
     path:  /expense_categories.{_format}
-    defaults: { _controller: TavroApiBundle:AccountEntity\ExpenseCategory:getAll, _format: json, entity: "expense_categories" }
+    defaults: { _controller: TavroApiBundle:AccountEntity\ExpenseCategory:getAllByAccount, _format: json, entity: "expense_categories" }
     methods: GET
     requirements:
         _format:  json|xml

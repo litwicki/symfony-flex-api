@@ -13,6 +13,7 @@ use Tavro\Bundle\CoreBundle\Exception\Api\ApiAccessDeniedException;
 use Tavro\Bundle\CoreBundle\Exception\Form\InvalidFormException;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Tavro\Bundle\CoreBundle\Model\EntityInterface\EntityInterface;
+use Tavro\Bundle\CoreBundle\Model\HandlerInterface\AccountEntityHandlerInterface;
 
 use Doctrine\Common\Inflector\Inflector;
 
@@ -181,7 +182,7 @@ class ApiController extends DefaultController
      * @return \Symfony\Component\HttpFoundation\Response
      * @throws \Exception
      */
-    public function _getAll(Request $request, $entity, $_format)
+    public function _getAll(Request $request, $entity, $_format = 'json')
     {
 
         $data = null;
@@ -207,6 +208,45 @@ class ApiController extends DefaultController
 
         return $this->apiResponse($data, $options);
 
+    }
+
+    /**
+     * @param \Symfony\Component\HttpFoundation\Request $request
+     * @param \Tavro\Bundle\CoreBundle\Entity\Account $account
+     * @param $entity
+     * @param string $_format
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function _getAllByAccount(Request $request, Account $account, $entity, $_format = 'json')
+    {
+        $data = null;
+
+        try {
+
+            $params = $request->query->all();
+            $handler = $this->getHandler($entity);
+
+            if(false === ($handler instanceof AccountEntityHandlerInterface)) {
+
+            }
+
+            $response = $handler->getAllByAccount($account, $params);
+
+            $data = $response['data'];
+            $message = $response['message'];
+
+            $options = [
+                'format' => $_format,
+                'message' => $message,
+            ];
+
+        }
+        catch(\Exception $e) {
+            $options = $this->getExceptionOptions($e, $_format);
+        }
+
+        return $this->apiResponse($data, $options);
     }
 
     /**

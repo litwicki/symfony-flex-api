@@ -8,7 +8,7 @@ api_get_forecast:
 
 api_get_all_forecasts:
     path:  /forecasts.{_format}
-    defaults: { _controller: TavroApiBundle:AccountEntity\Forecast:getAll, _format: json, entity: "forecasts" }
+    defaults: { _controller: TavroApiBundle:AccountEntity\Forecast:getAllByAccount, _format: json, entity: "forecasts" }
     methods: GET
     requirements:
         _format:  json|xml

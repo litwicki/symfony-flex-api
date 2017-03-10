@@ -144,6 +144,25 @@ class AccountEntityApiController extends ApiController
      * @param \Symfony\Component\HttpFoundation\Request $request
      * @param \Tavro\Bundle\CoreBundle\Entity\Account $account
      * @param $entity
+     * @param $_format
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function getAllByAccountAction(Request $request, Account $account, $entity, $_format)
+    {
+        try {
+            $this->checkAccount($account);
+            return $this->_getAllByACcount($request, $account, $entity, $_format);
+        }
+        catch(AccessDeniedHttpException $e) {
+            return $this->apiResponse(null, $this->getExceptionOptions($e));
+        }
+    }
+
+    /**
+     * @param \Symfony\Component\HttpFoundation\Request $request
+     * @param \Tavro\Bundle\CoreBundle\Entity\Account $account
+     * @param $entity
      * @param $id
      * @param $_format
      *
