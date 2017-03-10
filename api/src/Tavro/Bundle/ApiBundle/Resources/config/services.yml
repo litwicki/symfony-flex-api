@@ -12,6 +12,12 @@ services:
         class: Tavro\Bundle\ApiBundle\Security\Authentication\Authenticator\JwtAuthenticator
         arguments: ['@doctrine.orm.entity_manager', '@lexik_jwt_authentication.encoder', '%timezone%']
 
+    tavro_api.cors_listener:
+        class: Tavro\Bundle\ApiBundle\EventListener\CorsListener
+        tags:
+            - { name: kernel.event_listener, event: kernel.response, method: onKernelResponse }
+            - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest, priority: 300 }
+
     tavro_api.subscriber.exception:
         class: Tavro\Bundle\ApiBundle\EventSubscriber\Exception\ExceptionSubscriber
         tags:
