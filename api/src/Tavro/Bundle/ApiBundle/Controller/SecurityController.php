@@ -52,7 +52,7 @@ class SecurityController extends ApiController
     {
         try {
 
-            $data = json_decode($request->getContent(), TRUE);
+            $data = $this->getPayload($request);
 
             if(!isset($data['password_token'])) {
                 throw new UserPasswordTokenMissingException('`password_token` is required to update your password.');
@@ -112,7 +112,7 @@ class SecurityController extends ApiController
 
         try {
 
-            $data = json_decode($request->getContent(), TRUE);
+            $data = $this->getPayload($request);
 
             $this->validateData($data);
 

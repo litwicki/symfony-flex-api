@@ -5,8 +5,10 @@ namespace Tavro\Bundle\ApiBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
+use Tavro\Bundle\ApiBundle\Exception\ApiInvalidPayloadException;
 use Tavro\Bundle\CoreBundle\Exception\Api\ApiException;
 use Tavro\Bundle\CoreBundle\Exception\Api\ApiNotFoundException;
 use Tavro\Bundle\CoreBundle\Exception\Api\ApiRequestLimitException;
@@ -20,6 +22,21 @@ use Tavro\Bundle\CoreBundle\Model\HandlerInterface\EntityHandlerInterface;
 
 class DefaultController extends Controller
 {
+
+    /**
+     * Handle the payload from the Request and do some checks.
+     *
+     * @param \Symfony\Component\HttpFoundation\Request $request
+     */
+    public function getPayload(Request $request)
+    {
+        $data = json_decode($request->getContent(), TRUE);
+
+        if(false === (is_array($data))) {
+            throw new ApiInvalidPayloadException('Invalid or missing payload in submission.');
+        }
+
+    }
 
     /**
      * Serialize an Entity or array of Entities.
@@ -80,23 +97,41 @@ class DefaultController extends Controller
         $code = isset($options['code']) ? $options['code'] : Response::HTTP_OK;
         $message = isset($options['message']) ? $options['message'] : '';
 
-        $response = new Response();
-
         if($format == 'json') {
-            $response->headers->set('Content-Type', 'application/json');
-            $responseData = $this->serialize([
-                'message' => $message,
-                'data' => $raw,
-            ], $format, $group);
+            return $this->jsonResponse($raw, $message, $code, $group);
         }
         else {
+            $response = new Response();
             $response->headers->set('Content-Type', 'application/xml');
             $responseData = [];
+            $response->setContent($responseData);
+            $response->setStatusCode($code);
         }
 
-        $response->setContent($responseData);
-        $response->setStatusCode($code);
+        return $response;
+    }
 
+    /**
+     * Return a JSON Response.
+     * 
+     * @param $data
+     * @param $message
+     * @param $code
+     * @param $group
+     *
+     * @return \Symfony\Component\HttpFoundation\JsonResponse
+     */
+    public function jsonResponse($data, $message, $code, $group)
+    {
+        $response = new JsonResponse();
+        $response->headers->set('Content-Type', 'application/json');
+        $responseData = $this->serialize([
+            'message' => $message,
+            'code' => $code,
+            'data' => $data,
+        ], 'json', $group);
+
+        $response->setJson($responseData);
         return $response;
     }
 

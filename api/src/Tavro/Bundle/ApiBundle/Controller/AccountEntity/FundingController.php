@@ -80,7 +80,7 @@ class FundingController extends AccountEntityApiController
 
         try {
 
-            $data = json_decode($request->getContent(), TRUE);
+            $data = $this->getPayload($request);
 
             $handler = $this->getHandler('comments');
             $comment = $handler->post($request, $data);
@@ -166,7 +166,7 @@ class FundingController extends AccountEntityApiController
 
         try {
 
-            $data = json_decode($request->getContent(), TRUE);
+            $data = $this->getPayload($request);
 
             $handler = $this->getHandler('shareholders');
             $shareholder = $handler->create(array_merge($data, array(

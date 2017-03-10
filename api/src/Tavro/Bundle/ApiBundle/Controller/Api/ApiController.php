@@ -38,7 +38,7 @@ class ApiController extends DefaultController
 
         try {
 
-            $data = json_decode($request->getContent(), TRUE);
+            $data = $this->getPayload($request);
             $handler = $this->getHandler($entity);
             $newEntity = $handler->post($request, $data);
 
@@ -75,7 +75,7 @@ class ApiController extends DefaultController
 
         try {
 
-            $data = json_decode($request->getContent(), TRUE);
+            $data = $this->getPayload($request);
 
             $handler = $this->getHandler($entity);
 
@@ -109,7 +109,7 @@ class ApiController extends DefaultController
 
         try {
 
-            $data = json_decode($request->getContent(), TRUE);
+            $data = $this->getPayload($request);
             $message = '';
 
             $handler = $this->getHandler($entity);

@@ -78,7 +78,7 @@ class ForecastStaffPersonController extends EntityApiController
 
         try {
 
-            $data = json_decode($request->getContent(), TRUE);
+            $data = $this->getPayload($request);
 
             if(!$forecast->getId() != $data['forecast_id']) {
                 throw new InvalidFieldException('Invalid or missing Forecast Id');

@@ -44,7 +44,7 @@ class TagController extends EntityApiController
         try {
 
             $handler = $this->getHandler($entity);
-            $data = json_decode($request->getContent(), TRUE);
+            $data = $this->getPayload($request);
 
             $tag = $handler->findByTag($data['tag']);
 

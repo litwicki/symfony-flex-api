@@ -31,7 +31,7 @@ class SlackController extends DefaultController
             $url = $this->getParameter('slack_webhook_url');
             $channel = $this->getParamter('slack_channel');
 
-            $data = json_decode($request->getContent(), TRUE);
+            $data = $this->getPayload($request);
 
             $post = json_decode([
                 'text' => $data['message'],

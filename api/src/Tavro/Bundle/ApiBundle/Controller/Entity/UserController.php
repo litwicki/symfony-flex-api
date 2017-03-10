@@ -77,7 +77,7 @@ class UserController extends EntityApiController
 
         try {
 
-            $data = json_decode($request->getContent(), TRUE);
+            $data = $this->getPayload($request);
             $handler = $this->getHandler($entity);
             $user = $handler->changePassword($request, $data);
 

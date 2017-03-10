@@ -21,7 +21,7 @@ class LogController extends ApiController
 
         try {
 
-            $data = json_decode($request->getContent(), TRUE);
+            $data = $this->getPayload($request);
             $logger = $this->get('logger');
 
             if(method_exists($logger, $data['type'])) {
