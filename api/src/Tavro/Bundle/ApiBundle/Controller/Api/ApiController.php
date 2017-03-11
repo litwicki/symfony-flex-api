@@ -6,12 +6,8 @@ use Symfony\Component\HttpFoundation\Response;
 use Tavro\Bundle\CoreBundle\Entity\Account;
 
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
-use Tavro\Bundle\CoreBundle\Exception\Api\ApiException;
-use Tavro\Bundle\CoreBundle\Exception\Api\ApiNotFoundException;
-use Tavro\Bundle\CoreBundle\Exception\Api\ApiRequestLimitException;
-use Tavro\Bundle\CoreBundle\Exception\Api\ApiAccessDeniedException;
-use Tavro\Bundle\CoreBundle\Exception\Form\InvalidFormException;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
+use Tavro\Bundle\ApiBundle\Exception\ApiNotFoundException;
 use Tavro\Bundle\CoreBundle\Model\EntityInterface\EntityInterface;
 use Tavro\Bundle\CoreBundle\Model\HandlerInterface\AccountEntityHandlerInterface;
 
@@ -103,7 +99,16 @@ class ApiController extends DefaultController
 
     }
 
-
+    /**
+     * PATCH: an entity.
+     *
+     * @param \Symfony\Component\HttpFoundation\Request $request
+     * @param $entity
+     * @param $id
+     * @param $_format
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
     public function _patch(Request $request, $entity, $id, $_format)
     {
         $data = null;
@@ -111,18 +116,15 @@ class ApiController extends DefaultController
         try {
 
             $data = $this->getPayload($request);
-            $message = '';
 
             $handler = $this->getHandler($entity);
 
             if (!($item = $handler->get($id))) {
-                $message = sprintf('No %s object found with Id %s', $entity, $id);
-                $responseCode = Response::HTTP_NOT_FOUND;
+                throw new ApiNotFoundException(sprintf('No % found with Id %s', $entity, $id));
             }
-            else {
-                $data = $handler->patch($request, $item, $data);
-                $responseCode = Response::HTTP_OK;
-            }
+
+            $data = $handler->patch($request, $item, $data);
+            $responseCode = Response::HTTP_OK;
 
             $options = [
                 'format' => $_format,
