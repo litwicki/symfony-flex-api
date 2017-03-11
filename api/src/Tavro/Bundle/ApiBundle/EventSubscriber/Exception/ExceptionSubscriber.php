@@ -12,6 +12,8 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Component\Security\Core\Exception\AuthenticationCredentialsNotFoundException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Monolog\Logger;
+use Tavro\Bundle\CoreBundle\Logging\Exception\TavroExceptionLogger;
+use Tavro\Bundle\CoreBundle\Serializer\Serializer;
 
 class ExceptionSubscriber implements EventSubscriberInterface
 {
@@ -19,7 +21,7 @@ class ExceptionSubscriber implements EventSubscriberInterface
     protected $serializer;
     protected $logger;
 
-    public function __construct($debug, $serializer, $logger)
+    public function __construct($debug, Serializer $serializer, TavroExceptionLogger $logger)
     {
         $this->debug = $debug;
         $this->serializer = $serializer;
@@ -47,40 +49,19 @@ class ExceptionSubscriber implements EventSubscriberInterface
     {
         $exception = $event->getException();
         $code = $exception->getCode() == 0 ? Response::HTTP_BAD_REQUEST : $exception->getCode();
-
-        $message = $exception->getMessage();
-
-        if($exception instanceof AuthenticationCredentialsNotFoundException) {
-            $message = 'You must be authorized to access this resource.';
-            $code = Response::HTTP_UNAUTHORIZED;
-        }
-
-        if($exception instanceof AccessDeniedHttpException) {
-            $message = 'You do not have permission to access this resource.';
-            $code = Response::HTTP_FORBIDDEN;
-        }
-
-        if($exception instanceof NotFoundHttpException) {
-            $message = 'The resource you were looking for could not be found.';
-            $code = Response::HTTP_NOT_FOUND;
-        }
+        $format = preg_match('/\.xml$/', $event->getRequest()->getUri()) ? 'xml' : 'json';
 
         $data = [
             'code' => $code,
-            'message' => $message,
+            'message' => $exception->getMessage()
         ];
 
-        if($this->debug) {
-            $data['debug'] = get_class($exception);
-            $data['trace'] = $exception->getTraceAsString();
-        }
-
-        $format = preg_match('/\.xml$/', $event->getRequest()->getUri()) ? 'xml' : 'json';
+        $content = $this->serializer->serialize($data, $format);
 
         $response = new Response();
         $response->headers->set('Content-Type', sprintf('application/%s', $format));
         $response->setStatusCode($code);
-        $response->setContent($this->serializer->serialize($data, $format));
+        $response->setContent($content);
         $event->setResponse($response);
 
     }
@@ -93,7 +74,7 @@ class ExceptionSubscriber implements EventSubscriberInterface
     public function logException(GetResponseForExceptionEvent $event)
     {
         try {
-            $this->logger->logException($event->getException());
+            $this->logger->log($event->getException());
         }
         catch(\Exception $e) {
             throw $e;

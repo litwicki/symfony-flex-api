@@ -31,3 +31,11 @@ lexik_jwt_authentication:
     private_key_path: "%kernel.root_dir%/keys/private.pem"
 
 nelmio_cors: ~
+
+services:
+
+    tavro_api.subscriber.exception:
+        class: Tavro\Bundle\ApiBundle\EventSubscriber\Exception\Dev\ExceptionSubscriber
+        tags:
+            - { name: kernel.event_subscriber }
+        arguments: ["%kernel.debug%", "@tavro_serializer", "@tavro.logging.exception"]

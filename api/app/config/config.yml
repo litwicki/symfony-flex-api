@@ -167,3 +167,11 @@ litwicki_chargify:
         api_id: "%chargify_api_id%"
         api_secret: "%chargify_api_secret%"
         api_password: "%chargify_api_password%"
+
+services:
+
+    tavro_api.subscriber.exception:
+        class: Tavro\Bundle\ApiBundle\EventSubscriber\Exception\ExceptionSubscriber
+        tags:
+            - { name: kernel.event_subscriber }
+        arguments: ["%kernel.debug%", "@tavro_serializer", "@tavro.logging.exception"]
