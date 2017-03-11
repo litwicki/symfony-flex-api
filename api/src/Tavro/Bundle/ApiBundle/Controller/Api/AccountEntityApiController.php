@@ -2,43 +2,59 @@
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 
 use Tavro\Bundle\CoreBundle\Entity\Account;
-
-use Symfony\Component\Security\Core\Exception\AccessDeniedException;
-use Tavro\Bundle\CoreBundle\Exception\Api\ApiException;
-use Tavro\Bundle\CoreBundle\Exception\Api\ApiNotFoundException;
-use Tavro\Bundle\CoreBundle\Exception\Api\ApiRequestLimitException;
-use Tavro\Bundle\CoreBundle\Exception\Api\ApiAccessDeniedException;
-use Tavro\Bundle\CoreBundle\Exception\Form\InvalidFormException;
-use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
-use Tavro\Bundle\CoreBundle\Model\EntityInterface\AccountEntityInterface;
-
-use Doctrine\Common\Inflector\Inflector;
-
-use Litwicki\Common\Common;
+use Tavro\Bundle\ApiBundle\Exception\ApiAccountPayloadMismatchException;
+use Tavro\Bundle\ApiBundle\Exception\ApiAccountPayloadMissingException;
 use Tavro\Bundle\ApiBundle\Controller\Api\ApiController;
 
 class AccountEntityApiController extends ApiController
 {
     /**
-     * Validation on the Account and Entity.
-     *  - Does the entity in question belong to the Account?
-     *  - Does the user have access to this Account?
+     * Check the permission on the Account.
      *
      * @param \Tavro\Bundle\CoreBundle\Entity\Account $account
-     * @param \Tavro\Bundle\CoreBundle\Model\EntityInterface\AccountEntityInterface $entity
      */
-    public function checkAccount(Account $account, AccountEntityInterface $entity = null)
+    public function isGrantedAccount(Account $account)
     {
-//        if(!is_null($entity)) {
-//            if (false === ($entity->getAccount()->getId() === $account->getId())) {
-//                throw new AccessDeniedHttpException(sprintf('%s does not belong to %s.', get_class($entity), $account->__toString()));
-//            }
-//        }
-
+        /**
+         * If this User isn't allowed to even VIEW the
+         * current (active) Account, then naturally they have no business doing anything here..
+         */
         if(false === ($this->isGranted('view', $account))) {
             throw new AccessDeniedHttpException('You are not authorized to this Account.');
+        }
+    }
+
+    /**
+     * Validation on the Account and Entity.
+     *  - Does the user have access to this Account?
+     *  - Does the payload account_id match the Account provided?
+     *
+     * @param \Tavro\Bundle\CoreBundle\Entity\Account $account
+     * @param array $payload
+     */
+    public function isGrantedAccountAction(Account $account, array $payload = array())
+    {
+        /**
+         * KEEP THIS CHECK FIRST.
+         */
+        $this->isGrantedAccount($account);
+
+        /**
+         * If the payload is missing the `account_id` parameter, thou shall not pass!
+         */
+        if(false === (isset($payload['account_id']))) {
+            throw new ApiAccountPayloadMissingException('Payload must include `account_id` to complete your request.');
+        }
+
+        /**
+         * If the payload has an `account_id` parameter, but it doesn't match the account id from the route
+         * then naturally there is a glitch in the matrix and we cannot proceed.
+         */
+        if(true === (isset($payload['account_id'])) && false === ($account->getId() == $payload['account_id'])) {
+            throw new ApiAccountPayloadMismatchException('Payload account_id must match the current Account.');
         }
 
     }
@@ -54,7 +70,7 @@ class AccountEntityApiController extends ApiController
     public function postAction(Request $request, Account $account, $entity, $_format)
     {
         try {
-            $this->checkAccount($account);
+            $this->isGrantedAccountAction($account, $this->getPayload($request));
             return $this->_post($request, $entity, $_format);
         }
         catch(AccessDeniedHttpException $e) {
@@ -74,7 +90,7 @@ class AccountEntityApiController extends ApiController
     public function putAction(Request $request, Account $account, $entity, $id, $_format)
     {
         try {
-            $this->checkAccount($account);
+            $this->isGrantedAccountAction($account, $this->getPayload($request));
             return $this->_put($request, $entity, $id, $_format);
         }
         catch(AccessDeniedHttpException $e) {
@@ -94,7 +110,7 @@ class AccountEntityApiController extends ApiController
     public function patchAction(Request $request, Account $account, $entity, $id, $_format)
     {
         try {
-            $this->checkAccount($account);
+            $this->isGrantedAccountAction($account, $this->getPayload($request));
             return $this->_patch($request, $entity, $id, $_format);
         }
         catch(AccessDeniedHttpException $e) {
@@ -113,7 +129,7 @@ class AccountEntityApiController extends ApiController
     public function typeaheadAction(Request $request, Account $account, $entity, $_format)
     {
         try {
-            $this->checkAccount($account);
+            $this->isGrantedAccountAction($account, $this->getPayload($request));
             return $this->_typeahead($request, $entity, $_format);
         }
         catch(AccessDeniedHttpException $e) {
@@ -132,7 +148,7 @@ class AccountEntityApiController extends ApiController
     public function getAllAction(Request $request, Account $account, $entity, $_format)
     {
         try {
-            $this->checkAccount($account);
+            $this->isGrantedAccount($account);
             return $this->_getAll($request, $entity, $_format);
         }
         catch(AccessDeniedHttpException $e) {
@@ -151,7 +167,7 @@ class AccountEntityApiController extends ApiController
     public function getAllByAccountAction(Request $request, Account $account, $entity, $_format)
     {
         try {
-            $this->checkAccount($account);
+            $this->isGrantedAccount($account);
             return $this->_getAllByACcount($request, $account, $entity, $_format);
         }
         catch(AccessDeniedHttpException $e) {
@@ -171,7 +187,7 @@ class AccountEntityApiController extends ApiController
     public function getAction(Request $request, Account $account, $entity, $id, $_format)
     {
         try {
-            $this->checkAccount($account);
+            $this->isGrantedAccount($account);
             return $this->_get($request, $entity, $id, $_format);
         }
         catch(AccessDeniedHttpException $e) {
@@ -191,7 +207,7 @@ class AccountEntityApiController extends ApiController
     public function deleteAction(Request $request, Account $account, $entity, $id, $_format)
     {
         try {
-            $this->checkAccount($account);
+            $this->isGrantedAccount($account);
             return $this->_delete($request, $entity, $id, $_format);
         }
         catch(AccessDeniedHttpException $e) {
