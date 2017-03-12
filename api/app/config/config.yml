@@ -8,7 +8,18 @@ imports:
 # http://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
     locale: en
-    
+
+monolog:
+    handlers:
+        logentries:
+          type: "stream"
+          token: "%logentries_token%"
+          use_ssl: false
+          level: "DEBUG"
+          bubble: true
+          timeout: 10
+          connection_timeout: 60
+
 twig:
     debug:            "%kernel.debug%"
     strict_variables: "%kernel.debug%"
@@ -16,6 +27,7 @@ twig:
     form_themes:
         - 'bootstrap_3_layout.html.twig'
     globals:
+        app_name: "%app_name%"
         app_version: "%app_version%"
         app_hostname: "%app_hostname%"
         api_hostname: "%api_hostname%"
