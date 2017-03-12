@@ -19,9 +19,9 @@ web_profiler:
     intercept_redirects: false
 
 swiftmailer:
-    delivery_addresses: ['dev@zoadilack.com']
+    delivery_addresses: ['%debug_email%']
     delivery_whitelist:
-       - '/@zoadilack\.com$/'
+       - '/[^dev]@zoadilack\.com$/'
        - '/^@tavro\.io/'
 
 lexik_jwt_authentication:
