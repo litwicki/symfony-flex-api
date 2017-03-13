@@ -1,29 +1,20 @@
-<?php
-
-namespace Tavro\Bundle\ApiBundle\EventSubscriber\Exception;
+<?php namespace Tavro\Bundle\ApiBundle\EventSubscriber\Exception;
 
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpKernel\Event\GetResponseForExceptionEvent;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
-use Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
-use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Component\Security\Core\Exception\AuthenticationCredentialsNotFoundException;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use Monolog\Logger;
 use Tavro\Bundle\CoreBundle\Logging\Exception\TavroExceptionLogger;
 use Tavro\Bundle\CoreBundle\Serializer\Serializer;
 
 class ExceptionSubscriber implements EventSubscriberInterface
 {
-    protected $debug;
     protected $serializer;
     protected $logger;
 
-    public function __construct($debug, Serializer $serializer, TavroExceptionLogger $logger)
+    public function __construct(Serializer $serializer, TavroExceptionLogger $logger)
     {
-        $this->debug = $debug;
         $this->serializer = $serializer;
         $this->logger = $logger;
     }
@@ -51,9 +42,33 @@ class ExceptionSubscriber implements EventSubscriberInterface
         $code = $exception->getCode() == 0 ? Response::HTTP_BAD_REQUEST : $exception->getCode();
         $format = preg_match('/\.xml$/', $event->getRequest()->getUri()) ? 'xml' : 'json';
 
+        $message = $exception->getMessage();
+
+        /**
+         * For some particular exceptions, we want to give a generic message response.
+         */
+
+        if($exception instanceof AuthenticationCredentialsNotFoundException) {
+            $message = 'You must be authorized to access this resource.';
+            $code = Response::HTTP_UNAUTHORIZED;
+        }
+
+        if($exception instanceof AccessDeniedHttpException) {
+            $message = 'You do not have permission to access this resource.';
+            $code = Response::HTTP_FORBIDDEN;
+        }
+
+        if($code === Response::HTTP_NOT_FOUND) {
+            $message = 'The resource you were looking for could not be found.';
+        }
+
+        if($code === Response::HTTP_INTERNAL_SERVER_ERROR) {
+            $message = 'There was an error completing your request.';
+        }
+
         $data = [
             'code' => $code,
-            'message' => $exception->getMessage()
+            'message' => $message,
         ];
 
         $content = $this->serializer->serialize($data, $format);
