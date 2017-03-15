@@ -1,7 +1,7 @@
 api_get_user_freshbooks:
     path: /users/{id}/freshbooks.{_format}
     defaults: { _controller: TavroApiBundle:Entity\UserQuickbooks:get, _format: json, entity: "user_freshbooks" }
-    methods: GET
+    methods: [GET|OPTIONS]
     requirements:
         id: \d+
         _format:  json|xml
@@ -9,14 +9,14 @@ api_get_user_freshbooks:
 api_post_user_freshbooks:
     path:  /users/{id}/freshbooks.{_format}
     defaults: { _controller: TavroApiBundle:Entity\UserQuickbooks:post, _format: json, entity: "user_freshbooks" }
-    methods: POST
+    methods: [POST|OPTIONS]
     requirements:
         _format:  json|xml
 
 api_patch_user_freshbooks:
     path:  /users/{id}/freshbooks.{_format}
     defaults: { _controller: TavroApiBundle:Entity\UserQuickbooks:patch, _format: json, entity: "user_freshbooks" }
-    methods: PATCH
+    methods: [PATCH|OPTIONS]
     requirements:
         id: \d+
         _format:  json|xml
@@ -24,7 +24,7 @@ api_patch_user_freshbooks:
 api_put_user_freshbooks:
     path:  /users/{id}/freshbooks.{_format}
     defaults: { _controller: TavroApiBundle:Entity\UserQuickbooks:put, _format: json, entity: "user_freshbooks" }
-    methods: PUT
+    methods: [PUT|OPTIONS]
     requirements:
         id: \d+
         _format:  json|xml
@@ -32,7 +32,7 @@ api_put_user_freshbooks:
 api_delete_user_freshbooks:
     path:  /users/{id}/freshbooks.{_format}
     defaults: { _controller: TavroApiBundle:Entity\UserQuickbooks:delete, _format: json, entity: "user_freshbooks" }
-    methods: DELETE
+    methods: [DELETE|OPTIONS]
     requirements:
         id: \d+
         _format:  json|xml

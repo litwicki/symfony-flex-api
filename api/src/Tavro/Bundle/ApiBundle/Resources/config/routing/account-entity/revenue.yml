@@ -1,7 +1,7 @@
 api_get_revenue:
     path: /revenues/{id}.{_format}
     defaults: { _controller: TavroApiBundle:AccountEntity\Revenue:get, _format: json, entity: 'revenues' }
-    methods: GET
+    methods: [GET|OPTIONS]
     requirements:
         id: \d+
         _format:  json|xml
@@ -9,35 +9,35 @@ api_get_revenue:
 api_get_all_revenues:
     path:  /revenues.{_format}
     defaults: { _controller: TavroApiBundle:AccountEntity\Revenue:getAllByAccount, _format: json, entity: 'revenues' }
-    methods: GET
+    methods: [GET|OPTIONS]
     requirements:
         _format:  json|xml
 
 api_post_revenue:
     path:  /revenues.{_format}
     defaults: { _controller: TavroApiBundle:AccountEntity\Revenue:post, _format: json, entity: 'revenues' }
-    methods: POST
+    methods: [POST|OPTIONS]
     requirements:
         _format:  json|xml
 
 api_post_revenue_service:
     path:  /revenues.{_format}
     defaults: { _controller: TavroApiBundle:AccountEntity\Revenue:newService, _format: json, entity: 'revenues' }
-    methods: POST
+    methods: [POST|OPTIONS]
     requirements:
         _format:  json|xml
 
 api_post_revenue_product:
     path:  /revenues.{_format}
     defaults: { _controller: TavroApiBundle:AccountEntity\Revenue:newProduct, _format: json, entity: 'revenues' }
-    methods: POST
+    methods: [POST|OPTIONS]
     requirements:
         _format:  json|xml
 
 api_patch_revenue:
     path:  /revenues/{id}.{_format}
     defaults: { _controller: TavroApiBundle:AccountEntity\Revenue:patch, _format: json, entity: 'revenues' }
-    methods: PATCH
+    methods: [PATCH|OPTIONS]
     requirements:
         id: \d+
         _format:  json|xml
@@ -45,7 +45,7 @@ api_patch_revenue:
 api_put_revenue:
     path:  /revenues/{id}.{_format}
     defaults: { _controller: TavroApiBundle:AccountEntity\Revenue:put, _format: json, entity: 'revenues' }
-    methods: PUT
+    methods: [PUT|OPTIONS]
     requirements:
         id: \d+
         _format:  json|xml
@@ -53,7 +53,7 @@ api_put_revenue:
 api_delete_revenue:
     path:  /revenues/{id}.{_format}
     defaults: { _controller: TavroApiBundle:AccountEntity\Revenue:delete, _format: json, entity: 'revenues' }
-    methods: DELETE
+    methods: [DELETE|OPTIONS]
     requirements:
         id: \d+
         _format:  json|xml
@@ -61,14 +61,14 @@ api_delete_revenue:
 api_typeahead_revenues:
     path:  /typeahead/revenues.{_format}
     defaults: { _controller: TavroApiBundle:AccountEntity\Revenue:typeahead, _format: json }
-    methods: GET
+    methods: [GET|OPTIONS]
     requirements:
         _format:  json|xml
         
 api_revenue_tags:
     path: /revenues/{revenue}/tags.{_format}
     defaults: { _controller: TavroApiBundle:AccountEntity\Revenue:tags, _format: json}
-    methods: GET
+    methods: [GET|OPTIONS]
     requirements:
         organization: \d+
         _format: json|xml
@@ -76,7 +76,7 @@ api_revenue_tags:
 api_new_revenue_tag:
     path: /revenues/{revenue}/tags.{_format}
     defaults: { _controller: TavroApiBundle:AccountEntity\Revenue:newTag, _format: json}
-    methods: POST
+    methods: [POST|OPTIONS]
     requirements:
         organization: \d+
         _format: json|xml
@@ -84,7 +84,7 @@ api_new_revenue_tag:
 api_revenue_comments:
     path: /revenues/{revenue}/comments.{_format}
     defaults: { _controller: TavroApiBundle:AccountEntity\Revenue:comments, _format: json}
-    methods: GET
+    methods: [GET|OPTIONS]
     requirements:
         organization: \d+
         _format: json|xml
@@ -92,7 +92,7 @@ api_revenue_comments:
 api_new_revenue_comment:
     path: /revenues/{revenue}/comments.{_format}
     defaults: { _controller: TavroApiBundle:AccountEntity\Revenue:newComment, _format: json}
-    methods: POST
+    methods: [POST|OPTIONS]
     requirements:
         organization: \d+
         _format: json|xml

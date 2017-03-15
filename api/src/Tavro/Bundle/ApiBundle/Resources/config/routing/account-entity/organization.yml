@@ -1,7 +1,7 @@
 api_get_organization:
     path: /organizations/{id}.{_format}
     defaults: { _controller: TavroApiBundle:AccountEntity\Organization:get, _format: json, entity: "organizations" }
-    methods: GET
+    methods: [GET|OPTIONS]
     requirements:
         id: \d+
         _format:  json|xml
@@ -9,21 +9,21 @@ api_get_organization:
 api_get_all_organizations:
     path:  /organizations.{_format}
     defaults: { _controller: TavroApiBundle:AccountEntity\Organization:getAllByAccount, _format: json, entity: "organizations" }
-    methods: GET
+    methods: [GET|OPTIONS]
     requirements:
         _format:  json|xml
 
 api_post_organization:
     path:  /organizations.{_format}
     defaults: { _controller: TavroApiBundle:AccountEntity\Organization:post, _format: json, entity: "organizations" }
-    methods: POST
+    methods: [POST|OPTIONS]
     requirements:
         _format:  json|xml
 
 api_patch_organization:
     path:  /organizations/{id}.{_format}
     defaults: { _controller: TavroApiBundle:AccountEntity\Organization:patch, _format: json, entity: "organizations" }
-    methods: PATCH
+    methods: [PATCH|OPTIONS]
     requirements:
         id: \d+
         _format:  json|xml
@@ -31,7 +31,7 @@ api_patch_organization:
 api_put_organization:
     path:  /organizations/{id}.{_format}
     defaults: { _controller: TavroApiBundle:AccountEntity\Organization:put, _format: json, entity: "organizations" }
-    methods: PUT
+    methods: [PUT|OPTIONS]
     requirements:
         id: \d+
         _format:  json|xml
@@ -39,7 +39,7 @@ api_put_organization:
 api_delete_organization:
     path:  /organizations/{id}.{_format}
     defaults: { _controller: TavroApiBundle:AccountEntity\Organization:delete, _format: json, entity: "organizations" }
-    methods: DELETE
+    methods: [DELETE|OPTIONS]
     requirements:
         id: \d+
         _format:  json|xml
@@ -47,14 +47,14 @@ api_delete_organization:
 api_typeahead_organizations:
     path:  /typeahead/organizations.{_format}
     defaults: { _controller: TavroApiBundle:AccountEntity\Organization:typeahead, _format: json }
-    methods: GET
+    methods: [GET|OPTIONS]
     requirements:
         _format:  json|xml
         
 api_organization_tags:
     path: /organizations/{organization}/tags.{_format}
     defaults: { _controller: TavroApiBundle:AccountEntity\Organization:tags, _format: json}
-    methods: GET
+    methods: [GET|OPTIONS]
     requirements:
         organization: \d+
         _format: json|xml
@@ -62,7 +62,7 @@ api_organization_tags:
 api_new_organization_tag:
     path: /organizations/{organization}/tags.{_format}
     defaults: { _controller: TavroApiBundle:AccountEntity\Organization:newTag, _format: json}
-    methods: POST
+    methods: [POST|OPTIONS]
     requirements:
         organization: \d+
         _format: json|xml
@@ -70,7 +70,7 @@ api_new_organization_tag:
 api_organization_comments:
     path: /organizations/{organization}/comments.{_format}
     defaults: { _controller: TavroApiBundle:AccountEntity\Organization:comments, _format: json}
-    methods: GET
+    methods: [GET|OPTIONS]
     requirements:
         organization: \d+
         _format: json|xml
@@ -78,7 +78,7 @@ api_organization_comments:
 api_new_organization_comment:
     path: /organizations/{organization}/comments.{_format}
     defaults: { _controller: TavroApiBundle:AccountEntity\Organization:newComment, _format: json}
-    methods: POST
+    methods: [POST|OPTIONS]
     requirements:
         organization: \d+
         _format: json|xml

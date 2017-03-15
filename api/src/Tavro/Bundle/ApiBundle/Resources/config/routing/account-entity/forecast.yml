@@ -1,7 +1,7 @@
 api_get_forecast:
     path: /forecasts/{id}.{_format}
     defaults: { _controller: TavroApiBundle:AccountEntity\Forecast:get, _format: json, entity: "forecasts" }
-    methods: GET
+    methods: [GET|OPTIONS]
     requirements:
         id: \d+
         _format:  json|xml
@@ -9,21 +9,21 @@ api_get_forecast:
 api_get_all_forecasts:
     path:  /forecasts.{_format}
     defaults: { _controller: TavroApiBundle:AccountEntity\Forecast:getAllByAccount, _format: json, entity: "forecasts" }
-    methods: GET
+    methods: [GET|OPTIONS]
     requirements:
         _format:  json|xml
 
 api_post_forecast:
     path:  /forecasts.{_format}
     defaults: { _controller: TavroApiBundle:AccountEntity\Forecast:post, _format: json, entity: "forecasts" }
-    methods: POST
+    methods: [POST|OPTIONS]
     requirements:
         _format:  json|xml
 
 api_patch_forecast:
     path:  /forecasts/{id}.{_format}
     defaults: { _controller: TavroApiBundle:AccountEntity\Forecast:patch, _format: json, entity: "forecasts" }
-    methods: PATCH
+    methods: [PATCH|OPTIONS]
     requirements:
         id: \d+
         _format:  json|xml
@@ -31,7 +31,7 @@ api_patch_forecast:
 api_put_forecast:
     path:  /forecasts/{id}.{_format}
     defaults: { _controller: TavroApiBundle:AccountEntity\Forecast:put, _format: json, entity: "forecasts" }
-    methods: PUT
+    methods: [PUT|OPTIONS]
     requirements:
         id: \d+
         _format:  json|xml
@@ -39,7 +39,7 @@ api_put_forecast:
 api_delete_forecast:
     path:  /forecasts/{id}.{_format}
     defaults: { _controller: TavroApiBundle:AccountEntity\Forecast:delete, _format: json, entity: "forecasts" }
-    methods: DELETE
+    methods: [DELETE|OPTIONS]
     requirements:
         id: \d+
         _format:  json|xml
@@ -47,7 +47,7 @@ api_delete_forecast:
 api_delete_forecast_tag:
     path:  /forecasts/{forecast}/tags/{tag}.{_format}
     defaults: { _controller: TavroApiBundle:AccountEntity\Forecast:deleteTag, _format: json }
-    methods: DELETE
+    methods: [DELETE|OPTIONS]
     requirements:
         id: \d+
         _format:  json|xml
@@ -55,14 +55,14 @@ api_delete_forecast_tag:
 api_typeahead_forecasts:
     path:  /typeahead/forecasts.{_format}
     defaults: { _controller: TavroApiBundle:AccountEntity\Forecast:typeahead, _format: json }
-    methods: GET
+    methods: [GET|OPTIONS]
     requirements:
         _format:  json|xml
 
 api_forecast_comments:
     path: /forecasts/{forecast}/comments.{_format}
     defaults: { _controller: TavroApiBundle:AccountEntity\Forecast:comments, _format: json}
-    methods: GET
+    methods: [GET|OPTIONS]
     requirements:
         organization: \d+
         _format: json|xml
@@ -70,7 +70,7 @@ api_forecast_comments:
 api_new_forecast_comment:
     path: /forecasts/{forecast}/comments.{_format}
     defaults: { _controller: TavroApiBundle:AccountEntity\Forecast:newComment, _format: json}
-    methods: POST
+    methods: [POST|OPTIONS]
     requirements:
         organization: \d+
         _format: json|xml

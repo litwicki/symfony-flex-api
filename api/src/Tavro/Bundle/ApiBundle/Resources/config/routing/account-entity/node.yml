@@ -1,7 +1,7 @@
 api_get_node:
     path: /nodes/{id}.{_format}
     defaults: { _controller: TavroApiBundle:AccountEntity\Node:get, _format: json, entity: "nodes" }
-    methods: GET
+    methods: [GET|OPTIONS]
     requirements:
         id: \d+
         _format:  json|xml
@@ -9,21 +9,21 @@ api_get_node:
 api_get_all_nodes:
     path:  /nodes.{_format}
     defaults: { _controller: TavroApiBundle:AccountEntity\Node:getAllByAccount, _format: json, entity: "nodes" }
-    methods: GET
+    methods: [GET|OPTIONS]
     requirements:
         _format:  json|xml
 
 api_post_node:
     path:  /nodes.{_format}
     defaults: { _controller: TavroApiBundle:AccountEntity\Node:post, _format: json, entity: "nodes" }
-    methods: POST
+    methods: [POST|OPTIONS]
     requirements:
         _format:  json|xml
 
 api_patch_node:
     path:  /nodes/{id}.{_format}
     defaults: { _controller: TavroApiBundle:AccountEntity\Node:patch, _format: json, entity: "nodes" }
-    methods: PATCH
+    methods: [PATCH|OPTIONS]
     requirements:
         id: \d+
         _format:  json|xml
@@ -31,7 +31,7 @@ api_patch_node:
 api_put_node:
     path:  /nodes/{id}.{_format}
     defaults: { _controller: TavroApiBundle:AccountEntity\Node:put, _format: json, entity: "nodes" }
-    methods: PUT
+    methods: [PUT|OPTIONS]
     requirements:
         id: \d+
         _format:  json|xml
@@ -39,7 +39,7 @@ api_put_node:
 api_delete_node:
     path:  /nodes/{id}.{_format}
     defaults: { _controller: TavroApiBundle:AccountEntity\Node:delete, _format: json, entity: "nodes" }
-    methods: DELETE
+    methods: [DELETE|OPTIONS]
     requirements:
         id: \d+
         _format:  json|xml
@@ -47,7 +47,7 @@ api_delete_node:
 api_delete_node_tag:
     path:  /nodes/{node}/tags/{tag}.{_format}
     defaults: { _controller: TavroApiBundle:AccountEntity\Node:deleteTag, _format: json }
-    methods: DELETE
+    methods: [DELETE|OPTIONS]
     requirements:
         id: \d+
         _format:  json|xml
@@ -55,14 +55,14 @@ api_delete_node_tag:
 api_typeahead_nodes:
     path:  /typeahead/nodes.{_format}
     defaults: { _controller: TavroApiBundle:AccountEntity\Node:typeahead, _format: json }
-    methods: GET
+    methods: [GET|OPTIONS]
     requirements:
         _format:  json|xml
         
 api_node_tags:
     path: /nodes/{node}/tags.{_format}
     defaults: { _controller: TavroApiBundle:AccountEntity\Node:tags, _format: json}
-    methods: GET
+    methods: [GET|OPTIONS]
     requirements:
         organization: \d+
         _format: json|xml
@@ -70,7 +70,7 @@ api_node_tags:
 api_new_node_tag:
     path: /nodes/{node}/tags.{_format}
     defaults: { _controller: TavroApiBundle:AccountEntity\Node:newTag, _format: json}
-    methods: POST
+    methods: [POST|OPTIONS]
     requirements:
         organization: \d+
         _format: json|xml
@@ -78,7 +78,7 @@ api_new_node_tag:
 api_node_comments:
     path: /nodes/{node}/comments.{_format}
     defaults: { _controller: TavroApiBundle:AccountEntity\Node:comments, _format: json}
-    methods: GET
+    methods: [GET|OPTIONS]
     requirements:
         organization: \d+
         _format: json|xml
@@ -86,7 +86,7 @@ api_node_comments:
 api_new_node_comment:
     path: /nodes/{node}/comments.{_format}
     defaults: { _controller: TavroApiBundle:AccountEntity\Node:newComment, _format: json}
-    methods: POST
+    methods: [POST|OPTIONS]
     requirements:
         organization: \d+
         _format: json|xml
@@ -94,7 +94,7 @@ api_new_node_comment:
 api_user_nodes:
     path: /users/{user}/nodes.{_format}
     defaults: { _controller: TavroApiBundle:AccountEntity\Node:byUser, _format: json}
-    methods: GET
+    methods: [GET|OPTIONS]
     requirements:
         user: \d+
         _format: json|xml

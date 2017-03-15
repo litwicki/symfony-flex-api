@@ -1,7 +1,7 @@
 api_get_expense_category:
     path: /expense_categories/{id}.{_format}
     defaults: { _controller: TavroApiBundle:AccountEntity\ExpenseCategory:get, _format: json, entity: "expense_categories" }
-    methods: GET
+    methods: [GET|OPTIONS]
     requirements:
         id: \d+
         _format:  json|xml
@@ -9,21 +9,21 @@ api_get_expense_category:
 api_get_all_expense_categories:
     path:  /expense_categories.{_format}
     defaults: { _controller: TavroApiBundle:AccountEntity\ExpenseCategory:getAllByAccount, _format: json, entity: "expense_categories" }
-    methods: GET
+    methods: [GET|OPTIONS]
     requirements:
         _format:  json|xml
 
 api_post_expense_category:
     path:  /expense_categories.{_format}
     defaults: { _controller: TavroApiBundle:AccountEntity\ExpenseCategory:post, _format: json, entity: "expense_categories" }
-    methods: POST
+    methods: [POST|OPTIONS]
     requirements:
         _format:  json|xml
 
 api_patch_expense_category:
     path:  /expense_categories/{id}.{_format}
     defaults: { _controller: TavroApiBundle:AccountEntity\ExpenseCategory:patch, _format: json, entity: "expense_categories" }
-    methods: PATCH
+    methods: [PATCH|OPTIONS]
     requirements:
         id: \d+
         _format:  json|xml
@@ -31,7 +31,7 @@ api_patch_expense_category:
 api_put_expense_category:
     path:  /expense_categories/{id}.{_format}
     defaults: { _controller: TavroApiBundle:AccountEntity\ExpenseCategory:put, _format: json, entity: "expense_categories" }
-    methods: PUT
+    methods: [PUT|OPTIONS]
     requirements:
         id: \d+
         _format:  json|xml
@@ -39,7 +39,7 @@ api_put_expense_category:
 api_delete_expense_category:
     path:  /expense_categories/{id}.{_format}
     defaults: { _controller: TavroApiBundle:AccountEntity\ExpenseCategory:delete, _format: json, entity: "expense_categories" }
-    methods: DELETE
+    methods: [DELETE|OPTIONS]
     requirements:
         id: \d+
         _format:  json|xml

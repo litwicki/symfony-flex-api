@@ -1,7 +1,7 @@
 api_get_person:
     path: /people/{id}.{_format}
     defaults: { _controller: TavroApiBundle:Entity\Person:get, _format: json, entity: 'people' }
-    methods: GET
+    methods: [GET|OPTIONS]
     requirements:
         id: \d+
         _format:  json|xml
@@ -9,35 +9,35 @@ api_get_person:
 api_get_all_person_images:
     path:  /people/{id}/images.{_format}
     defaults: { _controller: TavroApiBundle:Entity\Person:getImages, _format: json, entity: 'people' }
-    methods: GET
+    methods: [GET|OPTIONS]
     requirements:
         _format:  json|xml
 
 api_post_person_image:
     path:  /people/{person}/images.{_format}
     defaults: { _controller: TavroApiBundle:Entity\Person:newImage, _format: json, entity: 'people' }
-    methods: POST
+    methods: [POST|OPTIONS]
     requirements:
         _format:  json|xml
 
 api_get_all_people:
     path:  /people.{_format}
     defaults: { _controller: TavroApiBundle:Entity\Person:getAll, _format: json, entity: 'people' }
-    methods: GET
+    methods: [GET|OPTIONS]
     requirements:
         _format:  json|xml
 
 api_post_person:
     path:  /people.{_format}
     defaults: { _controller: TavroApiBundle:Entity\Person:post, _format: json, entity: 'people' }
-    methods: POST
+    methods: [POST|OPTIONS]
     requirements:
         _format:  json|xml
 
 api_patch_person:
     path:  /people/{id}.{_format}
     defaults: { _controller: TavroApiBundle:Entity\Person:patch, _format: json, entity: 'people' }
-    methods: PATCH
+    methods: [PATCH|OPTIONS]
     requirements:
         id: \d+
         _format:  json|xml
@@ -45,7 +45,7 @@ api_patch_person:
 api_put_person:
     path:  /people/{id}.{_format}
     defaults: { _controller: TavroApiBundle:Entity\Person:put, _format: json, entity: 'people' }
-    methods: PUT
+    methods: [PUT|OPTIONS]
     requirements:
         id: \d+
         _format:  json|xml
@@ -53,7 +53,7 @@ api_put_person:
 api_delete_person:
     path:  /people/{id}.{_format}
     defaults: { _controller: TavroApiBundle:Entity\Person:delete, _format: json, entity: 'people' }
-    methods: DELETE
+    methods: [DELETE|OPTIONS]
     requirements:
         id: \d+
         _format:  json|xml
@@ -61,6 +61,6 @@ api_delete_person:
 api_typeahead_people:
     path:  /typeahead/people.{_format}
     defaults: { _controller: TavroApiBundle:Entity\Person:typeahead, _format: json }
-    methods: GET
+    methods: [GET|OPTIONS]
     requirements:
         _format:  json|xml

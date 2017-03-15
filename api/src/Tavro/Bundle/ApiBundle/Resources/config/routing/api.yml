@@ -1,7 +1,7 @@
 api_get_entity:
     path: /{entity}/{id}.{_format}
     defaults: { _controller: TavroApiBundle:Entity\Default:get, _format: json }
-    methods: GET
+    methods: [GET|OPTIONS]
     requirements:
         id: \d+
         _format:  json|xml
@@ -9,21 +9,21 @@ api_get_entity:
 api_get_all_entities:
     path:  /{entity}.{_format}
     defaults: { _controller: TavroApiBundle:Entity\Default:getAll, _format: json }
-    methods: GET
+    methods: [GET|OPTIONS]
     requirements:
         _format:  json|xml
 
 api_post_entity:
     path:  /{entity}.{_format}
     defaults: { _controller: TavroApiBundle:Entity\Default:post, _format: json }
-    methods: POST
+    methods: [POST|OPTIONS]
     requirements:
         _format:  json|xml
 
 api_patch_entity:
     path:  /{entity}/{id}.{_format}
     defaults: { _controller: TavroApiBundle:Entity\Default:patch, _format: json }
-    methods: PATCH
+    methods: [PATCH|OPTIONS]
     requirements:
         id: \d+
         _format:  json|xml
@@ -31,7 +31,7 @@ api_patch_entity:
 api_put_entity:
     path:  /{entity}/{id}.{_format}
     defaults: { _controller: TavroApiBundle:Entity\Default:put, _format: json }
-    methods: PUT
+    methods: [PUT|OPTIONS]
     requirements:
         id: \d+
         _format:  json|xml
@@ -39,7 +39,7 @@ api_put_entity:
 api_delete_entity:
     path:  /{entity}/{id}.{_format}
     defaults: { _controller: TavroApiBundle:Entity\Default:delete, _format: json }
-    methods: DELETE
+    methods: [DELETE|OPTIONS]
     requirements:
         id: \d+
         _format:  json|xml
@@ -47,6 +47,6 @@ api_delete_entity:
 api_typeahead_entities:
     path:  /typeahead/{entity}.{_format}
     defaults: { _controller: TavroApiBundle:Entity\Default:typeahead, _format: json }
-    methods: GET
+    methods: [GET|OPTIONS]
     requirements:
         _format:  json|xml
