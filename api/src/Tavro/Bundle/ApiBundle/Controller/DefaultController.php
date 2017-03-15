@@ -123,19 +123,23 @@ class DefaultController extends Controller
      * @param $code
      * @param $group
      *
-     * @return \Symfony\Component\HttpFoundation\JsonResponse
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function jsonResponse($data, $message, $code, $group)
     {
-        $response = new JsonResponse();
-        $response->headers->set('Content-Type', 'application/json');
-        $responseData = $this->serialize([
+        $content = [
             'message' => $message,
             'code' => $code,
             'data' => $data,
-        ], 'json', $group);
+        ];
 
-        $response->setJson($responseData);
+        $responseData = $this->serialize($content, 'json', $group);
+
+        $response = new Response();
+        $response->headers->set('Content-Type', 'application/json');
+        $response->setContent($responseData);
+        $response->setStatusCode($code);
+
         return $response;
     }
 

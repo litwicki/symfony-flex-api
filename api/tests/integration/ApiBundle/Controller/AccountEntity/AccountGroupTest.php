@@ -40,9 +40,6 @@ class AccountGroupTest extends TavroApiTest
             'json' => $data
         ]);
 
-        $json = $response->getBody();
-        $body = json_decode($json, true);
-
         $this->assertEquals(Response::HTTP_CREATED, $response->getStatusCode());
 
     }

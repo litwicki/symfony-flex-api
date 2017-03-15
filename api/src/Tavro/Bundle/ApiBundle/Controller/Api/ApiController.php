@@ -128,8 +128,7 @@ class ApiController extends DefaultController
 
             $options = [
                 'format' => $_format,
-                'code' => $responseCode,
-                'message' => $message,
+                'code' => $responseCode
             ];
 
         }

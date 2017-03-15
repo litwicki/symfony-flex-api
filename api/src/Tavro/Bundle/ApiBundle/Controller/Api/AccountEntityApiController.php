@@ -5,8 +5,8 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 
 use Tavro\Bundle\CoreBundle\Entity\Account;
-use Tavro\Bundle\ApiBundle\Exception\ApiAccountPayloadMismatchException;
-use Tavro\Bundle\ApiBundle\Exception\ApiAccountPayloadMissingException;
+use Tavro\Bundle\ApiBundle\Exception\Account\ApiAccountPayloadMismatchException;
+use Tavro\Bundle\ApiBundle\Exception\Account\ApiAccountPayloadMissingException;
 use Tavro\Bundle\ApiBundle\Controller\Api\ApiController;
 
 class AccountEntityApiController extends ApiController
@@ -43,17 +43,17 @@ class AccountEntityApiController extends ApiController
         $this->isGrantedAccount($account);
 
         /**
-         * If the payload is missing the `account_id` parameter, thou shall not pass!
+         * If the payload is missing the `account` parameter, thou shall not pass!
          */
-        if(false === (isset($payload['account_id']))) {
-            throw new ApiAccountPayloadMissingException('Payload must include `account_id` to complete your request.');
+        if(false === (isset($payload['account']))) {
+            throw new ApiAccountPayloadMissingException('Payload must include `account` to complete your request.');
         }
 
         /**
          * If the payload has an `account_id` parameter, but it doesn't match the account id from the route
          * then naturally there is a glitch in the matrix and we cannot proceed.
          */
-        if(true === (isset($payload['account_id'])) && false === ($account->getId() == $payload['account_id'])) {
+        if(true === (isset($payload['account'])) && false === ($account->getId() == $payload['account'])) {
             throw new ApiAccountPayloadMismatchException('Payload account_id must match the current Account.');
         }
 
