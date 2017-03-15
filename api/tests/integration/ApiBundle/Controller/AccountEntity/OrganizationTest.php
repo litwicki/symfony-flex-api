@@ -66,10 +66,10 @@ class OrganizationTest extends TavroApiTest
                 'zip' => $faker->postcode,
                 'website' => $faker->url,
                 'phone' => '555-867-5309',
-                'account' => -11
+                'account' => -1
             );
 
-            $url = '/api/v1/accounts/1/organizations';
+            $url = '/api/v1/accounts/-1/organizations';
 
             $client->post($url, [
                 'json' => $data,
@@ -78,7 +78,7 @@ class OrganizationTest extends TavroApiTest
         }
         catch(RequestException $e) {
             $this->assertEquals(Response::HTTP_BAD_REQUEST, $e->getResponse()->getStatusCode());
-            $this->assertEquals(1, preg_match('/Please enter a valid Account/', $e->getMessage()));
+            $this->assertEquals(1, preg_match('/Account object not found/', $e->getMessage()));
         }
 
     }
