@@ -1,7 +1,7 @@
 api_get_current_user:
     path: /user.{_format}
     defaults: { _controller: TavroApiBundle:Entity\User:getCurrent, _format: json, entity: "users" }
-    methods: GET
+    methods: [GET|OPTIONS]
     requirements:
         id: \d+
         _format:  json|xml

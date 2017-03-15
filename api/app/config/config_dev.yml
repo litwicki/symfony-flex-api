@@ -38,4 +38,4 @@ services:
         class: Tavro\Bundle\ApiBundle\EventSubscriber\Exception\Dev\ExceptionSubscriber
         tags:
             - { name: kernel.event_subscriber }
-        arguments: ["%kernel.debug%", "@tavro_serializer", "@tavro.logging.exception"]
+        arguments: ["@tavro_serializer", "@tavro.logging.exception"]

@@ -1,4 +1,4 @@
-<?php namespace Litwicki\ApiBundle\EventSubscriber\Exception\Dev;
+<?php namespace Tavro\Bundle\ApiBundle\EventSubscriber\Exception\Dev;
 
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Event\GetResponseForExceptionEvent;
@@ -19,7 +19,7 @@ class ExceptionSubscriber extends \Tavro\Bundle\ApiBundle\EventSubscriber\Except
         $data = [
             'code' => $code,
             'message' => $exception->getMessage(),
-            'error' => $exception->getLine(),
+            'error' => sprintf('%s:%s', $exception->getFile(), $exception->getLine()),
             'debug' => $exception->getTraceAsString(),
         ];
 
