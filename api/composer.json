@@ -54,10 +54,6 @@
     {
       "type": "vcs",
       "url": "git@bitbucket.org:zoadilack/tavro-core.git"
-    },
-    {
-      "type": "vcs",
-      "url": "git@github.com:litwicki/chargify-bundle.git"
     }
   ],
   "require-dev": {
