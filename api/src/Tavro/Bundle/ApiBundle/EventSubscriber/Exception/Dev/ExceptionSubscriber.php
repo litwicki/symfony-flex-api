@@ -6,30 +6,19 @@ use Symfony\Component\HttpKernel\Event\GetResponseForExceptionEvent;
 class ExceptionSubscriber extends \Tavro\Bundle\ApiBundle\EventSubscriber\Exception\ExceptionSubscriber
 {
     /**
-     * Process an Exception message.
+     * @param $code
+     * @param $message
+     * @param $exception
      *
-     * @param \Symfony\Component\HttpKernel\Event\GetResponseForExceptionEvent $event
+     * @return array
      */
-    public function processException(GetResponseForExceptionEvent $event)
+    public function formatExceptionResponse($code, $message, $exception)
     {
-        $exception = $event->getException();
-        $code = $exception->getCode() == 0 ? Response::HTTP_BAD_REQUEST : $exception->getCode();
-        $format = preg_match('/\.xml$/', $event->getRequest()->getUri()) ? 'xml' : 'json';
-
-        $data = [
+        return [
             'code' => $code,
-            'message' => $exception->getMessage(),
+            'message' => $message,
             'error' => sprintf('%s:%s', $exception->getFile(), $exception->getLine()),
             'debug' => $exception->getTraceAsString(),
         ];
-
-        $content = $this->serializer->serialize($data, $format);
-
-        $response = new Response();
-        $response->headers->set('Content-Type', sprintf('application/%s', $format));
-        $response->setStatusCode($code);
-        $response->setContent($content);
-        $event->setResponse($response);
-
     }
 }

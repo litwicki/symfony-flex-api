@@ -43,6 +43,10 @@ class ExceptionSubscriber implements EventSubscriberInterface
         $format = preg_match('/\.xml$/', $event->getRequest()->getUri()) ? 'xml' : 'json';
 
         $message = $exception->getMessage();
+        $regex = '/^Tavro.*Entity[\\\\](.*)/';
+        if(preg_match($regex, $message)) {
+            $message = preg_replace($regex, '$1', $message);
+        }
 
         /**
          * For some particular exceptions, we want to give a generic message response.
@@ -66,10 +70,7 @@ class ExceptionSubscriber implements EventSubscriberInterface
             $message = 'There was an error completing your request.';
         }
 
-        $data = [
-            'code' => $code,
-            'message' => $message,
-        ];
+        $data = $this->formatExceptionResponse($code, $message, $exception);
 
         $content = $this->serializer->serialize($data, $format);
 
@@ -109,5 +110,20 @@ class ExceptionSubscriber implements EventSubscriberInterface
         /**
          * @TODO: the logic for determining what's particularly bad :)
          */
+    }
+
+    /**
+     * @param $code
+     * @param $message
+     * @param $exception
+     *
+     * @return array
+     */
+    public function formatExceptionResponse($code, $message, $exception)
+    {
+        return [
+            'code' => $code,
+            'message' => $message
+        ];
     }
 }

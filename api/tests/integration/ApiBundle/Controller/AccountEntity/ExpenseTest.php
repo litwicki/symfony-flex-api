@@ -77,7 +77,7 @@ class ExpenseTest extends TavroApiTest
 
     }
 
-    public function testExpenseCreateBadAccount()
+    public function testExpenseCreateAccountMismatch()
     {
 
         try {
@@ -102,7 +102,37 @@ class ExpenseTest extends TavroApiTest
         }
         catch(RequestException $e) {
             $this->assertEquals(Response::HTTP_BAD_REQUEST, $e->getResponse()->getStatusCode());
-            $this->assertEquals(1, preg_match('/Please enter a valid Account/', $e->getMessage()));
+            $this->assertEquals(1, preg_match('/Payload account must match the current Account/', $e->getMessage()));
+        }
+
+    }
+
+    public function testExpenseCreateBadAccount()
+    {
+
+        try {
+            $client = $this->authorize($this->getApiClient());
+
+            $faker = \Faker\Factory::create('en_EN');
+
+            $data = array(
+                'body' => $faker->text(500),
+                'amount' => $faker->numberBetween(1,100),
+                'expense_date' => $faker->dateTimeThisMonth->format('Y-m-d h:i:s'),
+                'user' => 1,
+                'account' => -1,
+                'category' => 1,
+            );
+
+            $url = '/api/v1/accounts/-1/expenses';
+
+            $response = $client->post($url, [
+                'json' => $data
+            ]);
+        }
+        catch(RequestException $e) {
+            $this->assertEquals(Response::HTTP_BAD_REQUEST, $e->getResponse()->getStatusCode());
+            $this->assertEquals(1, preg_match('/Account object not found/', $e->getMessage()), $e->getMessage());
         }
 
     }

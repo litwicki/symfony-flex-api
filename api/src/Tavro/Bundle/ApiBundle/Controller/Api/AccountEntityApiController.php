@@ -54,7 +54,7 @@ class AccountEntityApiController extends ApiController
          * then naturally there is a glitch in the matrix and we cannot proceed.
          */
         if(true === (isset($payload['account'])) && false === ($account->getId() == $payload['account'])) {
-            throw new ApiAccountPayloadMismatchException('Payload account_id must match the current Account.');
+            throw new ApiAccountPayloadMismatchException('Payload account must match the current Account.');
         }
 
     }
