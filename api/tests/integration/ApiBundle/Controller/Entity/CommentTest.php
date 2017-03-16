@@ -34,7 +34,7 @@ class CommentTest extends TavroApiTest
             'user' => 1
         ];
 
-        $url = '/api/v1/revenues/1/comments';
+        $url = '/api/v1/accounts/1/revenues/1/comments';
 
         $response = $client->post($url, [
             'json' => $data
@@ -56,7 +56,7 @@ class CommentTest extends TavroApiTest
             'user' => 1
         );
 
-        $url = '/api/v1/nodes/1/comments';
+        $url = '/api/v1/accounts/1/nodes/1/comments';
 
         $response = $client->post($url, [
             'json' => $data
@@ -78,7 +78,7 @@ class CommentTest extends TavroApiTest
             'user' => 1
         );
 
-        $url = '/api/v1/expenses/1/comments';
+        $url = '/api/v1/accounts/1/expenses/1/comments';
 
         $response = $client->post($url, [
             'json' => $data
@@ -101,7 +101,7 @@ class CommentTest extends TavroApiTest
             'user' => 1
         );
 
-        $url = '/api/v1/organizations/1/comments';
+        $url = '/api/v1/accounts/1/organizations/1/comments';
 
         $response = $client->post($url, [
             'json' => $data

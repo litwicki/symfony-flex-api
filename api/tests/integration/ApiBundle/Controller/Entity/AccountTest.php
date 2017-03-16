@@ -33,6 +33,7 @@ class AccountTest extends TavroApiTest
         $data = array(
             'name' => $faker->company,
             'body' => $faker->text(rand(100,1000)),
+            'type' => 1,
             'user' => 1
         );
 
@@ -61,6 +62,37 @@ class AccountTest extends TavroApiTest
                 'name' => $faker->company,
                 'body' => $faker->text(rand(100,1000)),
                 'user' => -1,
+            );
+
+            $url = '/api/v1/accounts';
+
+            $response = $client->post($url, [
+                'json' => $data
+            ]);
+
+            $json = $response->getBody();
+            $body = json_decode($json, true);
+
+        }
+        catch(RequestException $e) {
+            $this->assertEquals(Response::HTTP_BAD_REQUEST, $e->getResponse()->getStatusCode());
+        }
+
+    }
+
+    public function testAccountCreateBadType()
+    {
+        try {
+
+            $client = $this->authorize($this->getApiClient());
+
+            $faker = \Faker\Factory::create('en_EN');
+
+            $data = array(
+                'name' => $faker->company,
+                'body' => $faker->text(rand(100,1000)),
+                'user' => 1,
+                'type' => -1
             );
 
             $url = '/api/v1/accounts';

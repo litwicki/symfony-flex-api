@@ -32,7 +32,8 @@ class RevenueTest extends TavroApiTest
             'category' => 1,
             'user' => 1,
             'services' => array(1,2,3),
-            'organization' => 1
+            'organization' => 1,
+            'account' => 1,
         );
 
         $url = '/api/v1/accounts/1/revenues';
@@ -58,7 +59,8 @@ class RevenueTest extends TavroApiTest
                 'category' => 1,
                 'user' => 1,
                 'services' => array(1,2,3),
-                'organization' => -1
+                'organization' => -1,
+                'account' => 1,
             );
 
             $url = '/api/v1/accounts/1/revenues';
@@ -83,7 +85,8 @@ class RevenueTest extends TavroApiTest
             'category' => 1,
             'user' => 1,
             'products' => array(1,2,3),
-            'organization' => 1
+            'organization' => 1,
+            'account' => 1,
         );
 
         $url = '/api/v1/accounts/1/revenues';
