@@ -17,8 +17,11 @@ class ChurnTest extends \PHPUnit_Framework_TestCase
         $churnedCount = 1;
         $totalCount = 10;
 
+        $actual = ($churnedCount / $totalCount);
+        $message = sprintf('Churn rate calculated as CHURNED_COUNT / TOTAL_COUNT; Should be %s', $actual);
+
         $simple = $calculator::simple($churnedCount, $totalCount);
-        $this->assertTrue($simple === ($churnedCount / $totalCount), 'Churn rate calculated as CHURNED_COUNT / TOTAL_COUNT; 1/2 should be .5');
+        $this->assertTrue($simple === $actual, $message);
     }
 
     public function testAdjusted()
@@ -29,14 +32,20 @@ class ChurnTest extends \PHPUnit_Framework_TestCase
         $startCount = 1;
         $endCount = 2;
 
+        $actual = ($churnedCount / ($startCount + $endCount) / 2);
+
+        $message = sprintf('Adjusted Churn rate calculated as $rate = ($churnedCount / ($startCount + $endCount) / 2)', $actual);
+
         $adjusted = $calculator::adjusted($churnedCount, $startCount, $endCount);
-        $this->assertTrue(($adjusted === ($churnedCount / ($startCount + $endCount) / 2)), 'Adjusted Churn rate calculated as $rate = ($churnedCount / ($startCount + $endCount) / 2)');
+        $this->assertTrue(($adjusted === $actual), $message);
 
     }
 
     public function testPredictive()
     {
-        $this->assertTrue(1 === 1, 'This test is placeholder for the real method when its implemented');
+        /**
+         * @TODO: this test.
+         */
     }
 
     public function testAverageAdjusted()
@@ -57,7 +66,9 @@ class ChurnTest extends \PHPUnit_Framework_TestCase
         $calculator = new Churn();
         $churn = $calculator::averageAdjusted($churnedCount, $averageCounts);
 
-        $this->assertTrue($avgAdjusted === $churn, 'Average Adjusted calculated as ($churnedCount / ($sum / $n))');
+        $message = sprintf('Average Adjusted calculated as ($churnedCount / ($sum / $n))', $avgAdjusted);
+
+        $this->assertTrue($avgAdjusted === $churn, $message);
 
     }
 

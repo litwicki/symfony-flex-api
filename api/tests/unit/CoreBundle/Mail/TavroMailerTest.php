@@ -27,31 +27,25 @@ class TavroMailerTest extends \PHPUnit_Framework_TestCase
 
     public function testPrepareBodyHtml()
     {
-        $faker = \Faker\Factory::create('en_EN');
-        $name = $faker->name;
-
-        $template = __DIR__ . '/twig/email.html.twig';
+        $template = 'TavroCoreBundle:Email:default.html.twig';
         $body = $this->container->get('templating')->render($template, [
-            'name' => $name
+            'app_name' => 'Tavro',
+            'message' => 'hello world'
         ]);
 
-        $this->assertNotNull($body, 'Body cannot be NULL');
-        $this->assertContains($name, $body, sprintf('Body expected to contain replaced string %s.', $name));
+        $this->assertContains('hello world', $body, 'Rendered HTML does not contain expected message.');
+        $this->assertTrue($body != strip_tags($body), 'Body should be HTML.');
     }
 
     public function testPrepareBodyTxt()
     {
-        $faker = \Faker\Factory::create('en_EN');
-        $name = $faker->name;
-
-        $template = __DIR__ . '/twig/email.txt.twig';
+        $template = 'TavroCoreBundle:Email:default.html.twig';
         $body = $this->container->get('templating')->render($template, [
-            'name' => $name
+            'app_name' => 'Tavro',
+            'message' => 'hello world'
         ]);
 
-        $this->assertNotNull($body, 'Body cannot be NULL');
-        $this->assertTrue(($body == sprintf('Hello %s', $name)), 'Expecting raw plain text body.');
-        $this->assertContains($name, $body, sprintf('Body expected to contain replaced string %s.', $name));
+        $this->assertContains('hello world', $body, 'Rendered HTML does not contain expected message.');
     }
 
     public function testPrepareSubject()
@@ -68,14 +62,16 @@ class TavroMailerTest extends \PHPUnit_Framework_TestCase
 
     public function testPrepareTemplateHtml()
     {
-        $template = __DIR__ . '/twig/email.html.twig';
-        $this->assertTrue(true === $this->container->get('templating')->exists($template), 'Expecting Twig to verify existence of HTML template.');
+        $template = 'TavroCoreBundle:Email:default.html.twig';
+        $message = sprintf('Could not find %s', $template);
+        $this->assertTrue(true === $this->container->get('templating')->exists($template), $message);
     }
 
     public function testPrepareTemplateTxt()
     {
-        $template = __DIR__ . '/twig/email.txt.twig';
-        $this->assertTrue(true === $this->container->get('templating')->exists($template), 'Expecting Twig to verify existence of plain-text template.');
+        $template = 'TavroCoreBundle:Email:default.html.twig';
+        $message = sprintf('Could not find %s', $template);
+        $this->assertTrue(true === $this->container->get('templating')->exists($template), $message);
     }
 
     public function testPrepareRecipients()
