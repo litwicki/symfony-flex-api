@@ -59,7 +59,7 @@ class FundingRoundTest extends TavroApiTest
                 'account' => -1
             );
 
-            $url = '/api/v1/accounts/1/funding';
+            $url = '/api/v1/accounts/-1/funding';
 
             $client->post($url, [
                 'json' => $data,
@@ -68,7 +68,7 @@ class FundingRoundTest extends TavroApiTest
         }
         catch(RequestException $e) {
             $this->assertEquals(Response::HTTP_BAD_REQUEST, $e->getResponse()->getStatusCode());
-            $this->assertEquals(1, preg_match('/Please enter a valid Account/', $e->getMessage()));
+            $this->assertEquals(1, preg_match('/Account object not found/', $e->getMessage()));
         }
 
     }

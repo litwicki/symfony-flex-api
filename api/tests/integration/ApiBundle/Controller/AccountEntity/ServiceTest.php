@@ -99,7 +99,7 @@ class ServiceTest extends TavroApiTest
                 'account' => -1
             );
 
-            $url = '/api/v1/accounts/1/services';
+            $url = '/api/v1/accounts/-1/services';
 
             $client->post($url, [
                 'json' => $data
@@ -108,7 +108,7 @@ class ServiceTest extends TavroApiTest
         }
         catch(RequestException $e) {
             $this->assertEquals(Response::HTTP_BAD_REQUEST, $e->getResponse()->getStatusCode());
-            $this->assertEquals(1, preg_match('/Please enter a valid Account/', $e->getMessage()));
+            $this->assertEquals(1, preg_match('/Account object not found/', $e->getMessage()));
         }
 
     }
