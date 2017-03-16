@@ -23,32 +23,6 @@ class RevenueTest extends TavroApiTest
 
     }
 
-    public function testRevenueCreateRevenueWithServices()
-    {
-
-        $client = $this->authorize($this->getApiClient());
-
-        $data = array(
-            'category' => 1,
-            'user' => 1,
-            'services' => array(1,2,3),
-            'organization' => 1,
-            'account' => 1,
-        );
-
-        $url = '/api/v1/accounts/1/revenues';
-
-        $response = $client->post($url, [
-            'json' => $data
-        ]);
-
-        $json = $response->getBody(true);
-        $body = json_decode($json, true);
-
-        $this->assertEquals(Response::HTTP_CREATED, $response->getStatusCode());
-
-    }
-
     public function testRevenueCreateRevenueWithBadOrganization()
     {
 
@@ -58,7 +32,7 @@ class RevenueTest extends TavroApiTest
             $data = array(
                 'category' => 1,
                 'user' => 1,
-                'services' => array(1,2,3),
+                'services' => array(1),
                 'organization' => -1,
                 'account' => 1,
             );
@@ -73,32 +47,6 @@ class RevenueTest extends TavroApiTest
             $this->assertEquals(Response::HTTP_BAD_REQUEST, $e->getResponse()->getStatusCode());
             $this->assertEquals(1, preg_match('/Please enter a valid Organization/', $e->getMessage()));
         }
-
-    }
-
-    public function testRevenueCreateRevenueWithProducts()
-    {
-
-        $client = $this->authorize($this->getApiClient());
-
-        $data = array(
-            'category' => 1,
-            'user' => 1,
-            'products' => array(1,2,3),
-            'organization' => 1,
-            'account' => 1,
-        );
-
-        $url = '/api/v1/accounts/1/revenues';
-
-        $response = $client->post($url, [
-            'json' => $data
-        ]);
-
-        $json = $response->getBody(true);
-        $body = json_decode($json, true);
-
-        $this->assertEquals(Response::HTTP_CREATED, $response->getStatusCode());
 
     }
 
