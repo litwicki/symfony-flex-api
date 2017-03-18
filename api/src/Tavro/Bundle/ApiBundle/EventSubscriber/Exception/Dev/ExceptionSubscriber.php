@@ -16,7 +16,7 @@ class ExceptionSubscriber extends \Tavro\Bundle\ApiBundle\EventSubscriber\Except
     {
         return [
             'code' => $code,
-            'message' => $message,
+            'message' => $exception->getMessage(),
             'error' => sprintf('%s:%s', $exception->getFile(), $exception->getLine()),
             'debug' => $exception->getTraceAsString(),
         ];

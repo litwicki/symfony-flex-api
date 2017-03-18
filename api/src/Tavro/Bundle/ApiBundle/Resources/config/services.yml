@@ -20,7 +20,6 @@ services:
         class: Tavro\Bundle\ApiBundle\EventListener\CorsListener
         tags:
             - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest }
-            - { name: kernel.event_listener, event: kernel.response, method: onKernelResponse }
 
     tavro.auth.login_attempts:
         class: Tavro\Bundle\ApiBundle\Services\LoginAttemptHandler
