@@ -6,6 +6,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
+use Tavro\Bundle\ApiBundle\Exception\ApiNotAuthorizedException;
 use Tavro\Bundle\ApiBundle\Exception\Security\UserPasswordTokenMissingException;
 use Tavro\Bundle\ApiBundle\Exception\Security\UserPasswordTokenInvalidException;
 use Tavro\Bundle\CoreBundle\Exception\Api\ApiException;
@@ -29,6 +30,11 @@ use Tavro\Bundle\ApiBundle\Controller\Api\ApiController;
 class SecurityController extends ApiController
 {
 
+    /**
+     * @param array $data
+     *
+     * @throws \Exception
+     */
     public function validateData(array $data = array())
     {
         if(!isset($data['email'])) {
@@ -138,6 +144,41 @@ class SecurityController extends ApiController
             $options = [
                 'format' => $_format,
                 'message' => sprintf('An email has been sent to `%s` to reset your password.', $email),
+            ];
+
+        }
+        catch(\Exception $e) {
+            $options = $this->getExceptionOptions($e, $_format);
+        }
+
+        return $this->apiResponse($data, $options);
+    }
+
+    /**
+     * Activate a User via their GUID.
+     *
+     *  example: https://tavro.io/activate?guid={GUID}
+     *
+     * @param \Symfony\Component\HttpFoundation\Request $request
+     * @param $_format
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function activateAction(Request $request, $_format)
+    {
+        $data = null;
+
+        try {
+
+            $data = $this->getPayload($request);
+
+            $handler = $this->get('tavro.security_handler');
+
+            $data = $handler->activate($request);
+
+            $options = [
+                'format' => $_format,
+                'message' => '',
             ];
 
         }

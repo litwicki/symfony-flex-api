@@ -12,3 +12,8 @@ api_user_confirm_email:
     path: /auth/confirm.{format}
     defaults: { _controller: TavroApiBundle:Security:confirm, _format: json }
     methods: [POST|OPTIONS]
+
+api_user_activate:
+    path: /auth/activate.{format}
+    defaults: { _controller: TavroApiBundle:Security:activate, _format: json }
+    methods: [POST|OPTIONS]
