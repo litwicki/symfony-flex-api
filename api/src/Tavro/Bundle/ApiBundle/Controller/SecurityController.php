@@ -174,12 +174,14 @@ class SecurityController extends ApiController
 
             $handler = $this->get('tavro.security_handler');
 
-            $data = $handler->activate($request);
+            $data = $handler->activate($request, $data);
 
             $options = [
                 'format' => $_format,
-                'message' => '',
+                'message' => $data['message'],
             ];
+
+            $data = null;
 
         }
         catch(\Exception $e) {
