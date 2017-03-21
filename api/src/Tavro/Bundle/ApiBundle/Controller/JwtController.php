@@ -89,7 +89,13 @@ class JwtController extends DefaultController
 
         $loginAttemptHandler->clear($request);
 
-        $token = $this->get('tavro_api.jwt_token_handler')->createToken($user);
+        $jwtHandler = $this->get('tavro_api.jwt_token_handler');
+
+        /**
+         * If the User is not properly activated, do not even respond with a Token.
+         */
+        $user = $jwtHandler->statusCheck($user);
+        $token = $jwtHandler->createToken($user);
 
         // Return genereted tocken
         return new JsonResponse(['token' => $token]);

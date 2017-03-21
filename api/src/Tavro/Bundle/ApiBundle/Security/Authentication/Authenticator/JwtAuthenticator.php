@@ -10,6 +10,7 @@ use Lexik\Bundle\JWTAuthenticationBundle\TokenExtractor\AuthorizationHeaderToken
 
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -21,10 +22,6 @@ use Tavro\Bundle\CoreBundle\Entity\User;
 use Tavro\Bundle\ApiBundle\Exception\JWT\JWTExpiredTokenException;
 use Tavro\Bundle\ApiBundle\Exception\JWT\JWTInvalidTokenException;
 use Tavro\Bundle\ApiBundle\Exception\JWT\JWTUnverfiedTokenException;
-
-use Tavro\Bundle\ApiBundle\Exception\Security\UserStatusNotEnabledException;
-use Tavro\Bundle\ApiBundle\Exception\Security\UserStatusPendingException;
-use Tavro\Bundle\ApiBundle\Exception\Security\UserStatusDisabledException;
 
 class JwtAuthenticator extends AbstractGuardAuthenticator
 {
@@ -47,7 +44,7 @@ class JwtAuthenticator extends AbstractGuardAuthenticator
      */
     public function start(Request $request, AuthenticationException $authException = null)
     {
-        return new JsonResponse('Auth header required', 401);
+        return new JsonResponse('Auth header required', Response::HTTP_UNAUTHORIZED);
     }
 
     /**
@@ -55,13 +52,13 @@ class JwtAuthenticator extends AbstractGuardAuthenticator
      *
      * @param \Symfony\Component\HttpFoundation\Request $request
      *
-     * @return string|void
+     * @return string
      */
     public function getCredentials(Request $request)
     {
 
         if ( ! $request->headers->has('Authorization')) {
-            return;
+            throw new JWTInvalidTokenException('Missing authorization token.');
         }
 
         $extractor = new AuthorizationHeaderTokenExtractor('Bearer', 'Authorization');
@@ -69,7 +66,7 @@ class JwtAuthenticator extends AbstractGuardAuthenticator
         $token = $extractor->extract($request);
 
         if ( ! $token) {
-            return;
+            throw new JWTInvalidTokenException('Invalid authorization token.');
         }
 
         return $token;
@@ -82,6 +79,7 @@ class JwtAuthenticator extends AbstractGuardAuthenticator
      * @param \Symfony\Component\Security\Core\User\UserProviderInterface $userProvider
      *
      * @return mixed
+     * @throws \Exception
      * @throws \Lexik\Bundle\JWTAuthenticationBundle\Exception\JWTDecodeFailureException
      */
     public function getUser($credentials, UserProviderInterface $userProvider)
@@ -108,28 +106,7 @@ class JwtAuthenticator extends AbstractGuardAuthenticator
              * Based on the Status of the User, we may not want to allow
              * them access to Api actions..
              */
-
-            $status = $user->getStatus();
-
-            if(true === ($status == User::STATUS_ENABLED)) {
-                return $user;
-            }
-
-            /**
-             * If we're not "enabled" then let's handle this according to the Status..
-             */
-            switch($status)
-            {
-                case ($status == User::STATUS_DISABLED):
-                    throw new UserStatusDisabledException(sprintf('%s is currently disabled.', $user->__toString()));
-                case ($status == User::STATUS_PENDING):
-                    throw new UserStatusPendingException(sprintf('%s is currently pending and cannot be authorized.', $user->__toString()));
-                case ($status == User::STATUS_OTHER):
-                    throw new UserStatusNotEnabledException(sprintf('Cannot authorize %s, invalid status.', $user->__toString()));
-            }
-
-            //this should never be hit... ever.
-            throw new \LogicException('JWT Authentication failure.');
+            return $this->jwtEncoder->statusCheck($credentials);
 
         }
         catch (JWTDecodeFailureException $e) {
@@ -173,7 +150,7 @@ class JwtAuthenticator extends AbstractGuardAuthenticator
      */
     public function onAuthenticationFailure(Request $request, AuthenticationException $exception)
     {
-        return new JsonResponse(['message' => $exception->getMessage()], 401);
+        return new JsonResponse(['message' => $exception->getMessage()], Response::HTTP_UNAUTHORIZED);
     }
 
     /**
