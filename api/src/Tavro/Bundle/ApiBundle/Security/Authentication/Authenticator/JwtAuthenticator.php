@@ -3,18 +3,22 @@
 namespace Tavro\Bundle\ApiBundle\Security\Authentication\Authenticator;
 
 use Doctrine\ORM\EntityManager;
-use Tavro\Bundle\CoreBundle\Entity\User;
 
 use Lexik\Bundle\JWTAuthenticationBundle\Encoder\DefaultEncoder;
 use Lexik\Bundle\JWTAuthenticationBundle\Exception\JWTDecodeFailureException;
 use Lexik\Bundle\JWTAuthenticationBundle\TokenExtractor\AuthorizationHeaderTokenExtractor;
+
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
 use Symfony\Component\Security\Guard\AbstractGuardAuthenticator;
+
+use Tavro\Bundle\CoreBundle\Entity\User;
+
 use Tavro\Bundle\ApiBundle\Exception\JWT\JWTExpiredTokenException;
 use Tavro\Bundle\ApiBundle\Exception\JWT\JWTInvalidTokenException;
 use Tavro\Bundle\ApiBundle\Exception\JWT\JWTUnverfiedTokenException;
@@ -40,7 +44,7 @@ class JwtAuthenticator extends AbstractGuardAuthenticator
      */
     public function start(Request $request, AuthenticationException $authException = null)
     {
-        return new JsonResponse('Auth header required', 401);
+        return new JsonResponse('Auth header required', Response::HTTP_UNAUTHORIZED);
     }
 
     /**
@@ -48,13 +52,13 @@ class JwtAuthenticator extends AbstractGuardAuthenticator
      *
      * @param \Symfony\Component\HttpFoundation\Request $request
      *
-     * @return string|void
+     * @return string
      */
     public function getCredentials(Request $request)
     {
 
         if ( ! $request->headers->has('Authorization')) {
-            return;
+            throw new JWTInvalidTokenException('Missing authorization token.');
         }
 
         $extractor = new AuthorizationHeaderTokenExtractor('Bearer', 'Authorization');
@@ -62,7 +66,7 @@ class JwtAuthenticator extends AbstractGuardAuthenticator
         $token = $extractor->extract($request);
 
         if ( ! $token) {
-            return;
+            throw new JWTInvalidTokenException('Invalid authorization token.');
         }
 
         return $token;
@@ -75,6 +79,7 @@ class JwtAuthenticator extends AbstractGuardAuthenticator
      * @param \Symfony\Component\Security\Core\User\UserProviderInterface $userProvider
      *
      * @return mixed
+     * @throws \Exception
      * @throws \Lexik\Bundle\JWTAuthenticationBundle\Exception\JWTDecodeFailureException
      */
     public function getUser($credentials, UserProviderInterface $userProvider)
@@ -97,7 +102,11 @@ class JwtAuthenticator extends AbstractGuardAuthenticator
                 return null;
             }
 
-            return $user;
+            /**
+             * Based on the Status of the User, we may not want to allow
+             * them access to Api actions..
+             */
+            return $this->jwtEncoder->statusCheck($credentials);
 
         }
         catch (JWTDecodeFailureException $e) {
@@ -141,7 +150,7 @@ class JwtAuthenticator extends AbstractGuardAuthenticator
      */
     public function onAuthenticationFailure(Request $request, AuthenticationException $exception)
     {
-        return new JsonResponse(['message' => $exception->getMessage()], 401);
+        return new JsonResponse(['message' => $exception->getMessage()], Response::HTTP_UNAUTHORIZED);
     }
 
     /**

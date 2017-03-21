@@ -1,8 +1,12 @@
 <?php namespace Tavro\Bundle\ApiBundle\Security\Jwt;
 
+use Lexik\Bundle\JWTAuthenticationBundle\Encoder\DefaultEncoder;
+
 use Tavro\Bundle\ApiBundle\Exception\ApiException;
 use Tavro\Bundle\CoreBundle\Entity\User;
-use Lexik\Bundle\JWTAuthenticationBundle\Encoder\DefaultEncoder;
+use Tavro\Bundle\ApiBundle\Exception\Security\UserStatusNotEnabledException;
+use Tavro\Bundle\ApiBundle\Exception\Security\UserStatusPendingException;
+use Tavro\Bundle\ApiBundle\Exception\Security\UserStatusDisabledException;
 
 class JwtHandler
 {
@@ -11,6 +15,37 @@ class JwtHandler
     public function __construct(DefaultEncoder $encoder)
     {
         $this->encoder = $encoder;
+    }
+
+    /**
+     * @param \Tavro\Bundle\CoreBundle\Entity\User $user
+     *
+     * @return \Tavro\Bundle\CoreBundle\Entity\User
+     */
+    public function statusCheck(User $user)
+    {
+
+        $status = (int)$user->getStatus();
+
+        //defacto assumption, first to avoid unnecessary checks
+        if (true === ($status == User::STATUS_ENABLED)) {
+            return $user;
+        }
+
+        if (true === ($status == (int)User::STATUS_DISABLED)) {
+            throw new UserStatusDisabledException(sprintf('Your account (%s) is currently `disabled` and will not be authorized.',
+                $user->__toString()));
+        }
+
+        if (true === ($status == (int)User::STATUS_PENDING)) {
+            throw new UserStatusPendingException(sprintf('Your account (%s) is currently `pending` and cannot be authorized until activated.',
+                $user->__toString()));
+        }
+
+        if (true === ($status == (int)User::STATUS_OTHER)) {
+            throw new UserStatusNotEnabledException(sprintf('Cannot authorize your account (%s), invalid status.', $user->__toString()));
+        }
+
     }
 
     /**
