@@ -3,11 +3,11 @@
 namespace Tavro\Bundle\ApiBundle\Security\Authentication\Authenticator;
 
 use Doctrine\ORM\EntityManager;
-use Tavro\Bundle\CoreBundle\Entity\User;
 
 use Lexik\Bundle\JWTAuthenticationBundle\Encoder\DefaultEncoder;
 use Lexik\Bundle\JWTAuthenticationBundle\Exception\JWTDecodeFailureException;
 use Lexik\Bundle\JWTAuthenticationBundle\TokenExtractor\AuthorizationHeaderTokenExtractor;
+
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
@@ -15,9 +15,16 @@ use Symfony\Component\Security\Core\Exception\AuthenticationException;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
 use Symfony\Component\Security\Guard\AbstractGuardAuthenticator;
+
+use Tavro\Bundle\CoreBundle\Entity\User;
+
 use Tavro\Bundle\ApiBundle\Exception\JWT\JWTExpiredTokenException;
 use Tavro\Bundle\ApiBundle\Exception\JWT\JWTInvalidTokenException;
 use Tavro\Bundle\ApiBundle\Exception\JWT\JWTUnverfiedTokenException;
+
+use Tavro\Bundle\ApiBundle\Exception\Security\UserStatusNotEnabledException;
+use Tavro\Bundle\ApiBundle\Exception\Security\UserStatusPendingException;
+use Tavro\Bundle\ApiBundle\Exception\Security\UserStatusDisabledException;
 
 class JwtAuthenticator extends AbstractGuardAuthenticator
 {
@@ -97,7 +104,32 @@ class JwtAuthenticator extends AbstractGuardAuthenticator
                 return null;
             }
 
-            return $user;
+            /**
+             * Based on the Status of the User, we may not want to allow
+             * them access to Api actions..
+             */
+
+            $status = $user->getStatus();
+
+            if(true === ($status == User::STATUS_ENABLED)) {
+                return $user;
+            }
+
+            /**
+             * If we're not "enabled" then let's handle this according to the Status..
+             */
+            switch($status)
+            {
+                case ($status == User::STATUS_DISABLED):
+                    throw new UserStatusDisabledException(sprintf('%s is currently disabled.', $user->__toString()));
+                case ($status == User::STATUS_PENDING):
+                    throw new UserStatusPendingException(sprintf('%s is currently pending and cannot be authorized.', $user->__toString()));
+                case ($status == User::STATUS_OTHER):
+                    throw new UserStatusNotEnabledException(sprintf('Cannot authorize %s, invalid status.', $user->__toString()));
+            }
+
+            //this should never be hit... ever.
+            throw new \LogicException('JWT Authentication failure.');
 
         }
         catch (JWTDecodeFailureException $e) {
