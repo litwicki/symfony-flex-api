@@ -62,6 +62,7 @@ class AuthControllerTest extends TavroApiTest
 
         $data = [
             'email' => 'dev@zoadilack.com',
+            'password_token' => '',
             'new_password' => 'Password1!',
             'new_password_confirm' => 'Password1!'
         ];
