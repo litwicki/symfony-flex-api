@@ -17,6 +17,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
 use Symfony\Component\Security\Guard\AbstractGuardAuthenticator;
 
+use Tavro\Bundle\ApiBundle\Security\Jwt\JwtHandler;
 use Tavro\Bundle\CoreBundle\Entity\User;
 
 use Tavro\Bundle\ApiBundle\Exception\JWT\JWTExpiredTokenException;
@@ -27,12 +28,14 @@ class JwtAuthenticator extends AbstractGuardAuthenticator
 {
     private $em;
     private $jwtEncoder;
+    private $jwtHandler;
     private $timezone;
 
-    public function __construct(EntityManager $em, DefaultEncoder $jwtEncoder, $timezone)
+    public function __construct(EntityManager $em, DefaultEncoder $jwtEncoder, JwtHandler $jwtHandler, $timezone)
     {
         $this->em = $em;
         $this->jwtEncoder = $jwtEncoder;
+        $this->jwtHandler = $jwtHandler;
         $this->timezone = $timezone;
     }
 
@@ -106,7 +109,7 @@ class JwtAuthenticator extends AbstractGuardAuthenticator
              * Based on the Status of the User, we may not want to allow
              * them access to Api actions..
              */
-            return $this->jwtEncoder->statusCheck($credentials);
+            return $this->jwtHandler->statusCheck($user);
 
         }
         catch (JWTDecodeFailureException $e) {

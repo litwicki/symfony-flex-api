@@ -14,7 +14,7 @@ services:
 
     tavro.jwt_token_authenticator:
         class: Tavro\Bundle\ApiBundle\Security\Authentication\Authenticator\JwtAuthenticator
-        arguments: ['@doctrine.orm.entity_manager', '@lexik_jwt_authentication.encoder', '%timezone%']
+        arguments: ['@doctrine.orm.entity_manager', '@lexik_jwt_authentication.encoder', '@tavro_api.jwt_token_handler', '%timezone%']
 
     tavro_api.cors_listener:
         class: Tavro\Bundle\ApiBundle\EventListener\CorsListener
