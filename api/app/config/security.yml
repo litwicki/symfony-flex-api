@@ -20,7 +20,7 @@ security:
 
     firewalls:
         dev:
-            pattern:  ^/(_(profiler|wdt)|css|images|js)/
+            pattern:  ^/(css|images|js)/
             security: false
 
         api:
@@ -37,5 +37,4 @@ security:
         - { path: ^/api/v1/signup, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/api/v1, roles: [ROLE_USER, ROLE_API_USER] }
         - { path: ^/(css|js), roles: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/(_wdt|_profiler), roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/, roles: [ROLE_USER] }

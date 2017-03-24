@@ -25,18 +25,17 @@ class AppKernel extends Kernel
             new Gregwar\CaptchaBundle\GregwarCaptchaBundle(),
             new Lexik\Bundle\JWTAuthenticationBundle\LexikJWTAuthenticationBundle(),
             new \Aws\Symfony\AwsBundle(),
-            new Litwicki\Bundle\ChargifyBundle\LitwickiChargifyBundle(),
         );
 
         $tavro = array(
             new Tavro\Bundle\CoreBundle\TavroCoreBundle(),
             new Tavro\Bundle\ApiBundle\TavroApiBundle(),
+            new Litwicki\Bundle\ChargifyBundle\LitwickiChargifyBundle(),
+            new Nelmio\CorsBundle\NelmioCorsBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
             $bundles[] = new Symfony\Bundle\DebugBundle\DebugBundle();
-            $bundles[] = new Symfony\Bundle\WebProfilerBundle\WebProfilerBundle();
-            $bundles[] = new Nelmio\CorsBundle\NelmioCorsBundle();
         }
 
         return array_merge($bundles, $tavro);
@@ -49,12 +48,20 @@ class AppKernel extends Kernel
 
     public function getCacheDir()
     {
-        return dirname(__DIR__).'/var/cache/'.$this->getEnvironment();
+        if (in_array($this->environment, array('dev', 'test'))) {
+            return '/dev/shm/tavro/cache/' .  $this->environment;
+        }
+
+        return parent::getCacheDir();
     }
 
     public function getLogDir()
     {
-        return dirname(__DIR__).'/var/logs';
+        if (in_array($this->environment, array('dev', 'test'))) {
+            return '/dev/shm/tavro/logs';
+        }
+
+        return parent::getLogDir();
     }
 
     public function registerContainerConfiguration(LoaderInterface $loader)
