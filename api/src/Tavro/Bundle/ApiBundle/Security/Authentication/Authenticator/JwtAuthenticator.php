@@ -102,7 +102,7 @@ class JwtAuthenticator extends AbstractGuardAuthenticator
             ]);
 
             if(false === ($user instanceof User)) {
-                return null;
+                throw new JWTInvalidTokenException('Error loading User from token.');
             }
 
             /**
