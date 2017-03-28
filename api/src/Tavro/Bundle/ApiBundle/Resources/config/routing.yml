@@ -19,6 +19,9 @@ tavro_user_security_api:
 tavro_account_api:
     resource: "@TavroApiBundle/Resources/config/routing/entity/account.yml"
 
+tavro_account_type_api:
+    resource: "@TavroApiBundle/Resources/config/routing/entity/account_type.yml"
+
 tavro_comment_api:
     resource: "@TavroApiBundle/Resources/config/routing/entity/comment.yml"
 
