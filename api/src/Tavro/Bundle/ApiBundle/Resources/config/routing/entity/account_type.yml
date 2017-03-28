@@ -1,4 +1,4 @@
-api_get_account:
+api_get_account_type:
     path: /account_types/{id}.{_format}
     defaults: { _controller: TavroApiBundle:Entity\AccountType:get, _format: json, entity: "account_types" }
     methods: [GET|OPTIONS]
@@ -13,14 +13,14 @@ api_get_all_account_types:
     requirements:
         _format:  json|xml
 
-api_post_account:
+api_post_account_type:
     path:  /account_types.{_format}
     defaults: { _controller: TavroApiBundle:Entity\AccountType:post, _format: json, entity: "account_types" }
     methods: [POST|OPTIONS]
     requirements:
         _format:  json|xml
 
-api_patch_account:
+api_patch_account_type:
     path:  /account_types/{id}.{_format}
     defaults: { _controller: TavroApiBundle:Entity\AccountType:patch, _format: json, entity: "account_types" }
     methods: [PATCH|OPTIONS]
@@ -28,7 +28,7 @@ api_patch_account:
         id: \d+
         _format:  json|xml
 
-api_put_account:
+api_put_account_type:
     path:  /account_types/{id}.{_format}
     defaults: { _controller: TavroApiBundle:Entity\Account:put, _format: json, entity: "account_types" }
     methods: [PUT|OPTIONS]
@@ -36,7 +36,7 @@ api_put_account:
         id: \d+
         _format:  json|xml
 
-api_delete_account:
+api_delete_account_type:
     path:  /account_types/{id}.{_format}
     defaults: { _controller: TavroApiBundle:Entity\Account:delete, _format: json, entity: "account_types" }
     methods: [DELETE|OPTIONS]
