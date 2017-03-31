@@ -3,6 +3,7 @@
   "description": "A small business dashboard application.",
   "license": "proprietary",
   "type": "project",
+  "minimum-stability": "dev",
   "autoload": {
     "psr-4": {
       "": "src/"
@@ -53,7 +54,7 @@
   "repositories": [
       {
           "type": "vcs",
-          "url": "git@github.com:zoadilack/tavro-core.git"
+          "url": "git@github.com:/zoadilack/tavro-core.git"
       }
   ],
   "require-dev": {
