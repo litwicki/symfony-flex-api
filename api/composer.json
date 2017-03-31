@@ -50,6 +50,12 @@
     "litwicki/chargify-bundle": "dev-master",
     "nelmio/cors-bundle": "^1.5"
   },
+  "repositories": [
+      {
+          "type": "vcs",
+          "url": "git@github.com:zoadilack/tavro-core.git"
+      }
+  ],
   "require-dev": {
     "phpunit/phpunit": "5.0.*",
     "symfony/phpunit-bridge": "^2.7",
