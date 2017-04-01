@@ -17,7 +17,7 @@ monolog:
           use_ssl: false
           level: "DEBUG"
           bubble: true
-          timeout: 10
+          timeout: 60
           connection_timeout: 60
 
 twig:
