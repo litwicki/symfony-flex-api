@@ -1,13 +1,15 @@
-# TAVRO.io API
+# Tavro Local Development
 
-Full documentation available on Confluence:[https://zoadilack.atlassian.net/wiki/display/TAV/API](https://zoadilack.atlassian.net/wiki/display/TAV/API)
+This aggregate repository builds a local virtual machine using Virtualbox, Vagrant and Ansible to provision a comprehensive environment with `admin`, `api`, `phpunit`, `docs` and `app` hosts.
 
-## Access
+## Getting Started
 
-- Development: [https://api.tavro.dev](https://api.tavro.dev)
-- Staging: [https://staging-api.tavro.com](https://staging-api.tavro.com)
-- Production: [https://api.tavro.com](https://api.tavro.com)
+    git clone git@github.com:zoadilack/tavro-dev.git && cd tavro-dev && bash setup.sh
+    
+## Wiki
 
-## Rebuild Api Blueprint
-
-    awk 'FNR==1{print ""}1' api/blueprint/* > blueprint.apib
+* [API (tavro-api)](https://github.com/Zoadilack/tavro-api/wiki)
+* [CORE (tavro-core)](https://github.com/Zoadilack/tavro-core/wiki)
+* [ADMIN (tavro-admin)](https://github.com/Zoadilack/tavro-admin/wiki)
+* [APP (tavro-app)](https://github.com/Zoadilack/tavro-app/wiki)
+* [DevOps (tavro-provisioning)](https://github.com/Zoadilack/tavro-provisioning/wiki)
