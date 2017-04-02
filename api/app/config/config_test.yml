@@ -9,28 +9,6 @@ framework:
 swiftmailer:
     disable_delivery:  true
 
-monolog:
-    handlers:
-        main:
-            type:   stream
-            path:   "%kernel.logs_dir%/%kernel.environment%.log"
-            level:  debug
-        console:
-            type:   console
-            bubble: false
-            verbosity_levels:
-                VERBOSITY_VERBOSE: INFO
-                VERBOSITY_VERY_VERBOSE: DEBUG
-            channels: ["!doctrine"]
-        console_very_verbose:
-            type:   console
-            bubble: false
-            verbosity_levels:
-                VERBOSITY_VERBOSE: NOTICE
-                VERBOSITY_VERY_VERBOSE: NOTICE
-                VERBOSITY_DEBUG: DEBUG
-            channels: ["doctrine"]
-
 lexik_jwt_authentication:
     pass_phrase: "%jwt_token_passphrase%"
     token_ttl: "%jwt_token_ttl%"

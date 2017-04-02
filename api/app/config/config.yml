@@ -19,7 +19,6 @@ monolog:
           bubble: true
           timeout: 60
           connection_timeout: 60
-
 twig:
     debug:            "%kernel.debug%"
     strict_variables: "%kernel.debug%"
