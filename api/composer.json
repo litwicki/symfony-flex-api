@@ -54,7 +54,7 @@
   "repositories": [
     {
       "type": "vcs",
-      "url": "git@github.com:/zoadilack/tavro-core.git"
+      "url": "git@github.com:Zoadilack/tavro-core.git"
     }
   ],
   "require-dev": {
