@@ -12,4 +12,10 @@ $iterator = Finder::create()
     ->in(realpath(__DIR__ . '/..').'/api/vendor/zoadilack')
 ;
 
-return new Sami($iterator);
+return new Sami($iterator, array(
+    'theme'                => 'symfony',
+    'title'                => 'Symfony2 API',
+    'build_dir'            => __DIR__.'/build',
+    'cache_dir'            => __DIR__.'/cache',
+    'default_opened_level' => 2,
+));
