@@ -8,8 +8,8 @@ $iterator = Finder::create()
     ->name('*.php')
     ->exclude('Resources')
     ->exclude('Tests')
-    ->in('/var/www/tavro/api/src/Tavro')
-    ->in('/var/www/tavro/api/vendor/zoadilack')
+    ->in(realpath(__DIR__ . '/..').'/api/src/Tavro')
+    ->in(realpath(__DIR__ . '/..').'/api/vendor/zoadilack')
 ;
 
 return new Sami($iterator);
