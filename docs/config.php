@@ -13,8 +13,7 @@ $iterator = Finder::create()
 ;
 
 return new Sami($iterator, array(
-    'theme'                => 'symfony',
-    'title'                => 'Symfony2 API',
+    'title'                => 'Tavro API',
     'build_dir'            => __DIR__.'/build',
     'cache_dir'            => __DIR__.'/cache',
     'default_opened_level' => 2,
