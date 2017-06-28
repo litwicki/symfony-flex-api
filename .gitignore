@@ -6,6 +6,7 @@
 *.box
 composer.lock
 *~
+api/app/cache
 
 
 ## Directory-based project format:
