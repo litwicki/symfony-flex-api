@@ -31,10 +31,10 @@ services:
     pdo:
         class: PDO
         arguments:
-            # dsn:      "mysql:dbname=%database_name%"
-            dsn:      "mysql:host=%database_host%;port=%database_port%;dbname=%database_name%"
-            user:     "%database_user%"
-            password: "%database_password%"
+            -
+                dsn:      "mysql:host=%database_host%;port=%database_port%;dbname=%database_name%"
+                user:     "%database_user%"
+                password: "%database_password%"
         calls:
             - [setAttribute, [3, 2]] # \PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION
 
@@ -47,5 +47,4 @@ services:
 
     monolog.handler.logentries:
         class: Monolog\Handler\LogEntriesHandler
-        arguments:
-            token: "%logentries_token%"
+        arguments: ["%logentries_token%"]
