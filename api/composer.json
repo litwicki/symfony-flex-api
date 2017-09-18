@@ -8,12 +8,6 @@
     }
   ],
   "license": "proprietary",
-  "authors": [
-    {
-      "name": "Jake Litwicki",
-      "email": "jake.litwicki@gmail.com"
-    }
-  ],
   "type": "project",
   "minimum-stability": "dev",
   "prefer-stable": true,
