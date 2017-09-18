@@ -1,6 +1,12 @@
 {
   "name": "zoadilack/tavro-api",
   "description": "A small business dashboard application.",
+  "authors": [
+    {
+      "name": "Jake Litwicki",
+      "email": "jake.litwicki@gmail.com"
+    }
+  ],
   "license": "proprietary",
   "authors": [
     {
