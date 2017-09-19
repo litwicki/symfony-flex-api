@@ -29,9 +29,6 @@ parameters:
     login_attempt_minutes: {LOGIN_ATTEMPT_MINUTES}
     max_login_attempts: {MAX_LOGIN_ATTEMPTS}
     secret: "{SECRET}"
-    app_hostname: "{APP_HOSTNAME}"
-    api_hostname: "{API_HOSTNAME}"
-    admin_hostname: "{ADMIN_HOSTNAME}"
     jwt_token_passphrase: "{JWT_TOKEN_PASSPHRASE}"
     jwt_token_ttl: "{JWT_TOKEN_TTL}"
     aws_sdk_version: "{AWS_SDK_VERSION}"
