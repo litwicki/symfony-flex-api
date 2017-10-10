@@ -28,8 +28,6 @@ twig:
     globals:
         app_name: "%app_name%"
         app_version: "%app_version%"
-        app_hostname: "%app_hostname%"
-        api_hostname: "%api_hostname%"
         app_email: "%app_email%"
         app_email_name: "%app_email_name%"
         app_debug: "%kernel.debug%"
