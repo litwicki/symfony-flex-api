@@ -29,17 +29,18 @@ done
 APP_WEBROOT=${WEBROOT:=/var/www/tavro}
 APP_ENVIRONMENT=${ENV:=dev}
 
-if [[ ! ${APP_ENVIRONMENT} =~ "^[dev|test|prod]$" ]] ; then
+echo APP_WEBROOT = ${APP_WEBROOT}
+echo APP_ENVIRONMENT = ${APP_ENVIRONMENT}
+
+REGEX="(dev|test|prod)$"
+
+if [[ ! $APP_ENVIRONMENT =~ $REGEX ]]
+then
     printf "\n=============================================================================\n\n"
     printf "ERROR:\tOnly acceptable environment values are: dev, test, prod"
     printf "\n\n=============================================================================\n\n"
     exit;
 fi
-
-echo APP_WEBROOT = ${APP_WEBROOT}
-echo APP_ENVIRONMENT = ${APP_ENVIRONMENT}
-
-exit;
 
 # Create the database if it doesn't exist..
 php $WEBROOT/bin/console doctrine:database:create --if-not-exists
