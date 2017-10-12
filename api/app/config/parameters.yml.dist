@@ -2,7 +2,7 @@
 parameters:
     database_driver: pdo_mysql
     # For Docker, `database_host` should point to the `container_name` for the db container
-    database_host: 127.0.0.1
+    database_host: tavro_db
     database_port: 3306
     database_name: tavro
     database_user: root
