@@ -1,0 +1,4 @@
+api_index:
+    path: /
+    defaults: { _controller: TavroApiBundle:Dev\Default:index}
+    methods: [GET]

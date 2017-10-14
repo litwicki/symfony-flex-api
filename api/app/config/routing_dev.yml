@@ -3,3 +3,5 @@ _errors:
     prefix:   /_error
 _main:
     resource: routing.yml
+_index:
+    resource: "@TavroApiBundle/Resources/config/routing_dev.yml"
