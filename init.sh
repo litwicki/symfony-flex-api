@@ -26,15 +26,16 @@ esac
 done
 
 # Assign default values
-APP_WEBROOT=${WEBROOT:=/var/www/tavro}
+APP_WEBROOT=${WEBROOT:=/var/www/tavro/api}
 APP_ENVIRONMENT=${ENV:=dev}
 
 echo APP_WEBROOT = ${APP_WEBROOT}
 echo APP_ENVIRONMENT = ${APP_ENVIRONMENT}
 
 REGEX="(dev|test|prod)$"
+VALID_ENV=$(expr match $APP_ENVIRONMENT $REGEX)
 
-if [[ ! $APP_ENVIRONMENT =~ $REGEX ]]
+if [[ ! $VALID_ENV ]]
 then
     printf "\n=============================================================================\n\n"
     printf "ERROR:\tOnly acceptable environment values are: dev, test, prod"
