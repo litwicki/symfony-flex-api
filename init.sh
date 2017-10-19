@@ -47,7 +47,7 @@ fi
 php $WEBROOT/bin/console doctrine:database:create --if-not-exists
 
 # Execute all migrations..
-php $WEBROOT/bin/console doctrine:migrations:migrate
+php $WEBROOT/bin/console doctrine:migrations:migrate --no-interaction
 
 # Execute fixtures for the environment
 # ** MAKE SURE TO INCLUDE --append OR YOU WILL LOSE EVERYTHING! **
