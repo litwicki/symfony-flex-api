@@ -26,7 +26,7 @@ esac
 done
 
 # Assign default values
-APP_WEBROOT=${WEBROOT:=/var/www/tavro/api}
+APP_WEBROOT=${WEBROOT:=/var/www/api}
 APP_ENVIRONMENT=${ENV:=dev}
 
 echo APP_WEBROOT = ${APP_WEBROOT}
