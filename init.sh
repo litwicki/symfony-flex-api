@@ -1,14 +1,23 @@
 #!/bin/bash
 
+# ------------------------------------------------------------------------------------------------
+# @TODO:    Build a failsafe for this to only execute in non production environments
+#           or better yet, clean ths up with a proper SRE expert who can build this more better!
+# ------------------------------------------------------------------------------------------------
+
 for i in "$@"
 do
 case $i in
     -w=*|--webdir=*)
     WEBROOT="${i#*=}"
-
     ;;
+
     -e=*|--environment=*)
     ENV="${i#*=}"
+    ;;
+
+    -p=*|--pass-phrase=*)
+    TOKEN_PASSWORD="${i#*=}"
     ;;
 
     --default)
@@ -28,6 +37,8 @@ done
 # Assign default values
 APP_WEBROOT=${WEBROOT:=/var/www/api}
 APP_ENVIRONMENT=${ENV:=dev}
+JWT_TOKEN_PASSPHRASE=${TOKEN_PASSWORD:=tavro}
+APP_KEYS_DIR=$APP_WEBROOT/app/keys
 
 echo APP_WEBROOT = ${APP_WEBROOT}
 echo APP_ENVIRONMENT = ${APP_ENVIRONMENT}
@@ -43,19 +54,36 @@ then
     exit;
 fi
 
+# Drop the database to rebuild it from scratch
+php $APP_WEBROOT/bin/console doctrine:database:drop --force
+
 # Create the database if it doesn't exist..
-php $WEBROOT/bin/console doctrine:database:create --if-not-exists
+php $APP_WEBROOT/bin/console doctrine:database:create --if-not-exists
 
 # Execute all migrations..
-php $WEBROOT/bin/console doctrine:migrations:migrate --no-interaction
+php $APP_WEBROOT/bin/console doctrine:migrations:migrate --no-interaction
 
 # Execute fixtures for the environment
 # ** MAKE SURE TO INCLUDE --append OR YOU WILL LOSE EVERYTHING! **
-php $WEBROOT/bin/console doctrine:fixtures:load --fixtures=$WEBROOT/vendor/zoadilack/tavro-core/Tavro/Bundle/CoreBundle/DataFixtures/Core --append
+php $APP_WEBROOT/bin/console doctrine:fixtures:load --fixtures=$APP_WEBROOT/vendor/zoadilack/tavro-core/Tavro/Bundle/CoreBundle/DataFixtures/Core --append
 
 # If we're in DEV, then also run the dev fixtures
-if [ "$ENVIRONMENT" = "dev" ]; then
-    php $WEBROOT/bin/console doctrine:fixtures:load --fixtures=$WEBROOT/vendor/zoadilack/tavro-core/Tavro/Bundle/CoreBundle/DataFixtures/Dev --append
+if [ "$APP_ENVIRONMENT" == "dev" ]; then
+    php $APP_WEBROOT/bin/console doctrine:fixtures:load --fixtures=$APP_WEBROOT/vendor/zoadilack/tavro-core/Tavro/Bundle/CoreBundle/DataFixtures/Dev --append
 fi
 
-php $WEBROOT/bin/console cache:clear --env=${APP_ENVIRONMENT} --no-warmup
+# Remove keys dir if it exists
+if [ -d "$APP_KEYS_DIR" ]; then rm -Rf $APP_KEYS_DIR; fi
+
+# Create keys dir
+mkdir $APP_KEYS_DIR
+
+# Setup permissions for keys dir
+chmod -R 0777 $APP_KEYS_DIR
+
+# Install the public/private keys for jwt tokens
+cd $APP_KEYS_DIR && openssl genrsa -out private.pem -aes256 -passout pass:$JWT_TOKEN_PASSPHRASE 4096
+cd $APP_KEYS_DIR && openssl rsa -passin pass:$JWT_TOKEN_PASSPHRASE -pubout -in private.pem -out public.pem
+
+# Clear the caches!
+php $APP_WEBROOT/bin/console cache:clear --env=${APP_ENVIRONMENT} --no-warmup
