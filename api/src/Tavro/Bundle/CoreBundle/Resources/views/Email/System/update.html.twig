@@ -1,0 +1,9 @@
+{% extends 'TavroCoreBundle:Email:base.html.twig' %}
+
+{% block email_body %}
+{{ app_name }} has been updated to version {{ app_version }}.
+
+Check out the new features, enhancements, and bug fixes:
+
+{% if changelog is defined %}{% include changelog %}{% endif %}
+{% endblock %}

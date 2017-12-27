@@ -1,0 +1,14 @@
+{% extends 'TavroCoreBundle:Email:base.html.twig' %}
+
+{% block email_body %}
+<p>The following {{ users|length }} users have been inactive for at least 30 days:</p>
+
+<div class="list-group">
+    {% foreach user in users %}
+    <a class="list-group-item">
+        <h3 class="list-group-item-heading">{{ user.person.username }} ({{ user.person.firstName }}, expiring {{ user.person.lastName }})</h3>
+        <p class="list-group-item-text">Last Online {{ user.lastOnlineDate|date('Y-m-d') }}</p>
+    </a>
+    {% endfor %}
+</div>
+{% endblock %}

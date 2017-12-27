@@ -1,0 +1,7 @@
+{% extends 'TavroCoreBundle:Email:base.html.twig' %}
+
+{% block email_body %}
+<p>Hi {{ account.user.person.firstName }},</p>
+
+<p>We noticed you hadn't created any Forecasts for your account yet.</p>
+{% endblock %}

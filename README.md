@@ -4,7 +4,7 @@ This aggregate repository builds a local virtual machine using Virtualbox, Vagra
 
 ## Getting Started
 
-    git clone git@github.com:zoadilack/tavro-dev.git && cd tavro-dev && bash setup.sh
+    git clone git@github.com:zoadilack/tavro-api.git && cd tavro-api && bash init.sh
     
 ## Wiki
 

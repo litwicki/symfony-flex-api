@@ -1,0 +1,312 @@
+services:
+
+# =======================================
+# LISTENERS / AUTHENTICATORS / PROVIDERS
+# =======================================
+
+    tavro.api_authenticator:
+        class: Tavro\Bundle\CoreBundle\Security\Authentication\Authenticator\ApiAuthenticator
+        arguments: ['@doctrine.orm.entity_manager']
+
+    tavro.password_encoder:
+        class: Tavro\Bundle\CoreBundle\Security\Encoder\PasswordEncoder
+
+    tavro.user_provider:
+        class: Tavro\Bundle\CoreBundle\Security\Authentication\Provider\UserProvider
+        arguments: ["@doctrine.orm.main_entity_manager"]
+
+    tavro.user_authenticator:
+        class:     Tavro\Bundle\CoreBundle\Security\Authentication\Authenticator\UserAuthenticator
+        arguments: ["@tavro.password_encoder", "@tavro.user_provider"]
+
+    tavro.listener.logout:
+        class:  Tavro\Bundle\CoreBundle\EventListener\Security\LogoutListener
+        arguments:  ["@security.token_storage"]
+
+    tavro.listener.login:
+        class: Tavro\Bundle\CoreBundle\EventListener\Security\LoginListener
+        arguments: ["@security.authorization_checker", "@router", "@doctrine.orm.entity_manager"]
+
+# ==============
+# ENTITY VOTERS
+# ==============
+
+    tavro.voter.account:
+        class: Tavro\Bundle\CoreBundle\Security\Voter\Entity\AccountVoter
+        public: false
+        arguments: ['@security.access.decision_manager']
+        tags:
+           - { name: security.voter }
+
+    tavro.voter.account_user:
+        class: Tavro\Bundle\CoreBundle\Security\Voter\Entity\AccountUserVoter
+        public: false
+        arguments: ['@security.access.decision_manager']
+        tags:
+           - { name: security.voter }
+
+    tavro.voter.account_group:
+        class: Tavro\Bundle\CoreBundle\Security\Voter\Entity\AccountGroupVoter
+        public: false
+        arguments: ['@security.access.decision_manager']
+        tags:
+           - { name: security.voter }
+
+    tavro.voter.account_group_user:
+        class: Tavro\Bundle\CoreBundle\Security\Voter\Entity\AccountGroupUserVoter
+        public: false
+        arguments: ['@security.access.decision_manager']
+        tags:
+           - { name: security.voter }
+
+    tavro.voter.comment:
+        class: Tavro\Bundle\CoreBundle\Security\Voter\Entity\CommentVoter
+        public: false
+        arguments: ['@security.access.decision_manager']
+        tags:
+           - { name: security.voter }
+
+    tavro.voter.dashboard:
+        class: Tavro\Bundle\CoreBundle\Security\Voter\Entity\DashboardVoter
+        public: false
+        arguments: ['@security.access.decision_manager']
+        tags:
+           - { name: security.voter }
+
+    tavro.voter.dashboard_metric:
+        class: Tavro\Bundle\CoreBundle\Security\Voter\Entity\DashboardMetricVoter
+        public: false
+        arguments: ['@security.access.decision_manager']
+        tags:
+           - { name: security.voter }
+
+    tavro.voter.user:
+        class: Tavro\Bundle\CoreBundle\Security\Voter\Entity\UserVoter
+        public: false
+        arguments: ['@security.access.decision_manager']
+        tags:
+            - { name: security.voter }
+
+    tavro.voter.role:
+        class: Tavro\Bundle\CoreBundle\Security\Voter\Entity\RoleVoter
+        public: false
+        arguments: ['@security.access.decision_manager']
+        tags:
+            - { name: security.voter }
+
+    tavro.voter.node:
+        class: Tavro\Bundle\CoreBundle\Security\Voter\Entity\NodeVoter
+        public: false
+        arguments: ['@security.access.decision_manager']
+        tags:
+            - { name: security.voter }
+
+    tavro.voter.image:
+        class: Tavro\Bundle\CoreBundle\Security\Voter\Entity\ImageVoter
+        public: false
+        arguments: ['@security.access.decision_manager']
+        tags:
+            - { name: security.voter }
+
+    tavro.voter.file:
+        class: Tavro\Bundle\CoreBundle\Security\Voter\Entity\FileVoter
+        public: false
+        arguments: ['@security.access.decision_manager']
+        tags:
+            - { name: security.voter }
+
+    tavro.voter.tag:
+        class: Tavro\Bundle\CoreBundle\Security\Voter\Entity\TagVoter
+        public: false
+        arguments: ['@security.access.decision_manager']
+        tags:
+            - { name: security.voter }
+
+    tavro.voter.metric:
+        class: Tavro\Bundle\CoreBundle\Security\Voter\Entity\MetricVoter
+        public: false
+        arguments: ['@security.access.decision_manager']
+        tags:
+           - { name: security.voter }
+
+    tavro.voter.node_tag:
+        class: Tavro\Bundle\CoreBundle\Security\Voter\Entity\NodeTagVoter
+        public: false
+        arguments: ['@security.access.decision_manager']
+        tags:
+            - { name: security.voter }
+
+    tavro.voter.node_read:
+        class: Tavro\Bundle\CoreBundle\Security\Voter\Entity\NodeReadVoter
+        public: false
+        arguments: ['@security.access.decision_manager']
+        tags:
+            - { name: security.voter }
+
+    tavro.voter.organization:
+        class: Tavro\Bundle\CoreBundle\Security\Voter\Entity\OrganizationVoter
+        public: false
+        arguments: ['@security.access.decision_manager']
+        tags:
+            - { name: security.voter }
+
+    tavro.voter.organization_comment:
+        class: Tavro\Bundle\CoreBundle\Security\Voter\Entity\OrganizationCommentVoter
+        public: false
+        arguments: ['@security.access.decision_manager']
+        tags:
+            - { name: security.voter }
+
+    tavro.voter.contact:
+        class: Tavro\Bundle\CoreBundle\Security\Voter\Entity\ContactVoter
+        public: false
+        arguments: ['@security.access.decision_manager']
+        tags:
+            - { name: security.voter }
+
+    tavro.voter.expense_category:
+        class: Tavro\Bundle\CoreBundle\Security\Voter\Entity\ExpenseCategoryVoter
+        public: false
+        arguments: ['@security.access.decision_manager']
+        tags:
+            - { name: security.voter }
+
+    tavro.voter.expense_comment:
+        class: Tavro\Bundle\CoreBundle\Security\Voter\Entity\ExpenseCommentVoter
+        public: false
+        arguments: ['@security.access.decision_manager']
+        tags:
+            - { name: security.voter }
+
+    tavro.voter.expense_tag:
+        class: Tavro\Bundle\CoreBundle\Security\Voter\Entity\ExpenseTagVoter
+        public: false
+        arguments: ['@security.access.decision_manager']
+        tags:
+            - { name: security.voter }
+
+    tavro.voter.expense:
+        class: Tavro\Bundle\CoreBundle\Security\Voter\Entity\ExpenseVoter
+        public: false
+        arguments: ['@security.access.decision_manager']
+        tags:
+            - { name: security.voter }
+
+    tavro.voter.funding_round_comment:
+        class: Tavro\Bundle\CoreBundle\Security\Voter\Entity\FundingRoundCommentVoter
+        public: false
+        arguments: ['@security.access.decision_manager']
+        tags:
+            - { name: security.voter }
+
+    tavro.voter.funding_round_shareholder:
+        class: Tavro\Bundle\CoreBundle\Security\Voter\Entity\FundingRoundShareholderVoter
+        public: false
+        arguments: ['@security.access.decision_manager']
+        tags:
+            - { name: security.voter }
+
+    tavro.voter.funding_round:
+        class: Tavro\Bundle\CoreBundle\Security\Voter\Entity\FundingRoundVoter
+        public: false
+        arguments: ['@security.access.decision_manager']
+        tags:
+            - { name: security.voter }
+
+    tavro.voter.node_comment:
+        class: Tavro\Bundle\CoreBundle\Security\Voter\Entity\NodeCommentVoter
+        public: false
+        arguments: ['@security.access.decision_manager']
+        tags:
+            - { name: security.voter }
+
+    tavro.voter.person:
+        class: Tavro\Bundle\CoreBundle\Security\Voter\Entity\PersonVoter
+        public: false
+        arguments: ['@security.access.decision_manager']
+        tags:
+            - { name: security.voter }
+
+    tavro.voter.product_category:
+        class: Tavro\Bundle\CoreBundle\Security\Voter\Entity\ProductCategoryVoter
+        public: false
+        arguments: ['@security.access.decision_manager']
+        tags:
+            - { name: security.voter }
+
+    tavro.voter.product_image:
+        class: Tavro\Bundle\CoreBundle\Security\Voter\Entity\ProductImageVoter
+        public: false
+        arguments: ['@security.access.decision_manager']
+        tags:
+            - { name: security.voter }
+
+    tavro.voter.product:
+        class: Tavro\Bundle\CoreBundle\Security\Voter\Entity\ProductVoter
+        public: false
+        arguments: ['@security.access.decision_manager']
+        tags:
+            - { name: security.voter }
+
+    tavro.voter.revenue_category:
+        class: Tavro\Bundle\CoreBundle\Security\Voter\Entity\RevenueCategoryVoter
+        public: false
+        arguments: ['@security.access.decision_manager']
+        tags:
+            - { name: security.voter }
+
+    tavro.voter.revenue_comment:
+        class: Tavro\Bundle\CoreBundle\Security\Voter\Entity\RevenueCommentVoter
+        public: false
+        arguments: ['@security.access.decision_manager']
+        tags:
+            - { name: security.voter }
+
+    tavro.voter.revenue_product:
+        class: Tavro\Bundle\CoreBundle\Security\Voter\Entity\RevenueProductVoter
+        public: false
+        arguments: ['@security.access.decision_manager']
+        tags:
+            - { name: security.voter }
+
+    tavro.voter.revenue_service:
+        class: Tavro\Bundle\CoreBundle\Security\Voter\Entity\RevenueServiceVoter
+        public: false
+        arguments: ['@security.access.decision_manager']
+        tags:
+            - { name: security.voter }
+
+    tavro.voter.revenue_tag:
+        class: Tavro\Bundle\CoreBundle\Security\Voter\Entity\RevenueTagVoter
+        public: false
+        arguments: ['@security.access.decision_manager']
+        tags:
+            - { name: security.voter }
+
+    tavro.voter.revenue:
+        class: Tavro\Bundle\CoreBundle\Security\Voter\Entity\RevenueVoter
+        public: false
+        arguments: ['@security.access.decision_manager']
+        tags:
+            - { name: security.voter }
+
+    tavro.voter.service_category:
+        class: Tavro\Bundle\CoreBundle\Security\Voter\Entity\ServiceCategoryVoter
+        public: false
+        arguments: ['@security.access.decision_manager']
+        tags:
+            - { name: security.voter }
+
+    tavro.voter.service:
+        class: Tavro\Bundle\CoreBundle\Security\Voter\Entity\ServiceVoter
+        public: false
+        arguments: ['@security.access.decision_manager']
+        tags:
+            - { name: security.voter }
+
+    tavro.voter.shareholder:
+        class: Tavro\Bundle\CoreBundle\Security\Voter\Entity\ShareholderVoter
+        public: false
+        arguments: ['@security.access.decision_manager']
+        tags:
+            - { name: security.voter }

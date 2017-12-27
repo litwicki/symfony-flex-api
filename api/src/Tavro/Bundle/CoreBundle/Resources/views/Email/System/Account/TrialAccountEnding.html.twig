@@ -1,0 +1,9 @@
+{% extends 'TavroCoreBundle:Email:base.html.twig' %}
+
+{% block email_body %}
+<p>Hi {{ account.user.person.firstName }},</p>
+
+<p>We wanted to briefly remind you that your trial is set to expire {{ account.trialExpirationDate|date('l, F m') }}.</p>
+
+<p>If there is anything we can do to help get you further setup we'd love to, please <a href="mailto:support@tavro.io?Account #{{ account.id }}">let us know</a>!</p>
+{% endblock %}

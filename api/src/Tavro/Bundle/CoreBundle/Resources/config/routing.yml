@@ -1,0 +1,10 @@
+remove_trailing_slash:
+    path: /{url}
+    defaults: { _controller: TavroCoreBundle:Default:removeTrailingSlash }
+    requirements:
+        url: .*/$
+    methods: get
+
+index:
+    path: /
+    defaults: { _controller: "TavroCoreBundle:Default:index" }

@@ -1,0 +1,156 @@
+services:
+
+    tavro.form.account:
+        class: Tavro\Bundle\CoreBundle\Form\Account
+        tags:
+         -  { name: form.type, alias: account_type }
+
+    tavro.form.account_billing_profile:
+        class: Tavro\Bundle\CoreBundle\Form\AccountBillingProfile
+        tags:
+         -  { name: form.type, alias: account_billing_profile_type }
+
+    tavro.form.account_chargify:
+        class: Tavro\Bundle\CoreBundle\Form\AccountChargify
+        tags:
+         -  { name: form.type, alias: account_chargify_type }
+
+    tavro.form.account_user:
+        class: Tavro\Bundle\CoreBundle\Form\AccountUser
+        tags:
+         -  { name: form.type, alias: account_user_type }
+
+    tavro.form.account_freshbooks:
+        class: Tavro\Bundle\CoreBundle\Form\AccountFreshbooks
+        tags:
+         -  { name: form.type, alias: account_freshbooks_type }
+
+    tavro.form.account_harvest:
+        class: Tavro\Bundle\CoreBundle\Form\AccountHarvest
+        tags:
+         -  { name: form.type, alias: account_harvest_type }
+
+    tavro.form.account_hubspot:
+        class: Tavro\Bundle\CoreBundle\Form\AccountHubspot
+        tags:
+         -  { name: form.type, alias: account_hubspot_type }
+
+    tavro.form.account_qbo:
+        class: Tavro\Bundle\CoreBundle\Form\AccountQbo
+        tags:
+         -  { name: form.type, alias: account_qbo_type }
+
+    tavro.form.account_recurly:
+        class: Tavro\Bundle\CoreBundle\Form\AccountRecurly
+        tags:
+         -  { name: form.type, alias: account_recurly_type }
+
+    tavro.form.account_stripe:
+        class: Tavro\Bundle\CoreBundle\Form\AccountStripe
+        tags:
+         -  { name: form.type, alias: account_stripe_type }
+
+    tavro.form.account_group:
+        class: Tavro\Bundle\CoreBundle\Form\AccountGroup
+        tags:
+         -  { name: form.type, alias: account_group_type }
+
+    tavro.form.account_group_user:
+        class: Tavro\Bundle\CoreBundle\Form\AccountGroupUserType
+        tags:
+         -  { name: form.type, alias: account_group_user_type }
+
+    tavro.form.comment:
+        class: Tavro\Bundle\CoreBundle\Form\CommentType
+        tags:
+         -  { name: form.type, alias: comment_type }
+
+    tavro.form.contact:
+        class: Tavro\Bundle\CoreBundle\Form\ContactType
+        tags:
+         -  { name: form.type, alias: contact_type }
+
+    tavro.form.dashboard:
+        class: Tavro\Bundle\CoreBundle\Form\DashboardType
+        tags:
+         -  { name: form.type, alias: dashboard_type }
+
+    tavro.form.dashboard_metric:
+        class: Tavro\Bundle\CoreBundle\Form\DashboardMetricType
+        tags:
+         -  { name: form.type, alias: dashboard_metric_type }
+
+    tavro.form.expense:
+        class: Tavro\Bundle\CoreBundle\Form\ExpenseType
+        tags:
+         -  { name: form.type, alias: expense_type }
+
+    tavro.form.image:
+        class: Tavro\Bundle\CoreBundle\Form\ImageType
+        tags:
+         -  { name: form.type, alias: image_type }
+
+    tavro.form.metric:
+        class: Tavro\Bundle\CoreBundle\Form\MetricType
+        tags:
+         -  { name: form.type, alias: metric_type }
+
+    tavro.form.node:
+        class: Tavro\Bundle\CoreBundle\Form\NodeType
+        tags:
+         -  { name: form.type, alias: node_type }
+
+    tavro.form.node_tag:
+        class: Tavro\Bundle\CoreBundle\Form\NodeTagType
+        tags:
+         -  { name: form.type, alias: node_tag_type }
+
+    tavro.form.organization:
+        class: Tavro\Bundle\CoreBundle\Form\OrganizationType
+        tags:
+         -  { name: form.type, alias: organizaton_type }
+
+    tavro.form.organization_comment:
+        class: Tavro\Bundle\CoreBundle\Form\OrganizationCommentType
+        tags:
+         -  { name: form.type, alias: organization_comment_type }
+
+    tavro.form.tag:
+        class: Tavro\Bundle\CoreBundle\Form\TagType
+        tags:
+         -  { name: form.type, alias: tag_type }
+
+    tavro.form.revenue_comment:
+        class: Tavro\Bundle\CoreBundle\Form\RevenueCommentType
+        tags:
+         -  { name: form.type, alias: revenue_comment_type }
+
+    tavro.form.revenue_service:
+        class: Tavro\Bundle\CoreBundle\Form\RevenueServiceType
+        tags:
+         -  { name: form.type, alias: revenue_service_type }
+
+    tavro.form.revenue_product:
+        class: Tavro\Bundle\CoreBundle\Form\RevenueProductType
+        tags:
+         -  { name: form.type, alias: revenue_product_type }
+
+    tavro.form.role:
+        class: Tavro\Bundle\CoreBundle\Form\RoleType
+        tags:
+         -  { name: form.type, alias: role_type }
+
+    tavro.form.user:
+        class: Tavro\Bundle\CoreBundle\Form\UserType
+        tags:
+         -  { name: form.type, alias: user_type }
+
+    tavro.form.variable:
+        class: Tavro\Bundle\CoreBundle\Form\VariableType
+        tags:
+         -  { name: form.type, alias: variable_type }
+
+    tavro.validator.password_complexity_validator:
+        class: Tavro\Bundle\CoreBundle\Validator\Constraints\PasswordComplexityValidator
+        tags:
+            - { name: validator.constraint_validator, alias: tavro_password_complexity_validator }

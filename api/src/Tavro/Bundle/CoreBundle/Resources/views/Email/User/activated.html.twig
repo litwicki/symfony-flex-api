@@ -1,0 +1,11 @@
+{% extends 'TavroCoreBundle:Email:base.html.twig' %}
+
+{% block email_body %}
+
+  {{ user.person.firstName }} ({{ user.username }}),<br /><br />
+
+  <p>Your account has been activated! You can now create your first account and enjoy all of what Tavro has to offer!</p>
+
+  <p>Login at http://{{ app_hostname }}</p>
+
+{% endblock %}
