@@ -1,0 +1,8 @@
+<?php namespace Tavro\Repository\Entity;
+
+use Tavro\Repository\TavroRepository;
+
+class TagRepository extends TavroRepository
+{
+
+}

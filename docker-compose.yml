@@ -1,0 +1,13 @@
+version: '2'
+
+services:
+
+  tavro_api_solo:
+    container_name: "tavro_api_solo"
+    build: .
+    volumes:
+      - ./tavro:/var/www/html
+    ports:
+      - 80
+    links:
+      - tavro_api_solo
