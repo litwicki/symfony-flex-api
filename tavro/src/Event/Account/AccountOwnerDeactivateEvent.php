@@ -1,9 +1,9 @@
 <?php
 
-namespace Tavro\Event\Account;
+namespace App\Event\Account;
 
 use Symfony\Component\EventDispatcher\Event;
-use Tavro\Entity\Account;
+use App\Entity\Account;
 
 /**
  * Class AccountOwnerDeactivateEvent

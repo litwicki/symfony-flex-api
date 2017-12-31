@@ -1,4 +1,4 @@
-<?php namespace Tavro\Command;
+<?php namespace App\Command;
 
 use PDO;
 use Symfony\Component\Console\Input\InputArgument;
@@ -13,8 +13,8 @@ use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\DriverManager;
 use Doctrine\ORM\EntityManager;
 
-use Tavro\Entity\User;
-use Tavro\Entity\Account;
+use App\Entity\User;
+use App\Entity\Account;
 
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 

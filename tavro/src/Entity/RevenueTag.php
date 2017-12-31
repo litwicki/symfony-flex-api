@@ -1,6 +1,6 @@
 <?php
 
-namespace Tavro\Entity;
+namespace App\Entity;
 
 use Doctrine\ORM\Mapping AS ORM;
 
@@ -13,8 +13,8 @@ use JMS\Serializer\Annotation\Groups;
 use JMS\Serializer\Annotation\MaxDepth;
 use Doctrine\ORM\Mapping\Table;
 
-use Tavro\Model\Entity\Entity;
-use Tavro\Model\EntityInterface\EntityInterface;
+use App\Model\Entity\Entity;
+use App\Model\EntityInterface\EntityInterface;
 
 /**
  * @ORM\Entity
@@ -40,7 +40,7 @@ class RevenueTag extends Entity implements EntityInterface
     /**
      * Set tag
      *
-     * @param \Tavro\Entity\Tag $tag
+     * @param \App\Entity\Tag $tag
      * @return RevenueTag
      */
     public function setTag(\Tavro\Entity\Tag $tag)
@@ -63,7 +63,7 @@ class RevenueTag extends Entity implements EntityInterface
     /**
      * Set Revenue
      *
-     * @param \Tavro\Entity\Revenue $revenue
+     * @param \App\Entity\Revenue $revenue
      * @return RevenueTag
      */
     public function setRevenue(\Tavro\Entity\Revenue $revenue)

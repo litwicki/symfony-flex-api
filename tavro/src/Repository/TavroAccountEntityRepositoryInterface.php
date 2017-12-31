@@ -1,7 +1,7 @@
-<?php namespace Tavro\Repository;
+<?php namespace App\Repository;
 
-use Tavro\Repository\TavroRepositoryInterface;
-use Tavro\Entity\Account;
+use App\Repository\TavroRepositoryInterface;
+use App\Entity\Account;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 use Doctrine\ORM\Query;

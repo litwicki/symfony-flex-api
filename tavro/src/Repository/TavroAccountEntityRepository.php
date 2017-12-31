@@ -1,9 +1,9 @@
-<?php namespace Tavro\Repository;
+<?php namespace App\Repository;
 
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 use Doctrine\ORM\Query;
-use Tavro\Entity\Account;
+use App\Entity\Account;
 
 class TavroAccountEntityRepository extends EntityRepository
 {

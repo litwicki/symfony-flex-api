@@ -1,16 +1,16 @@
-<?php namespace Tavro\Security\Authentication\Authenticator;
+<?php namespace App\Security\Authentication\Authenticator;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\Security\Core\User\EntityInterface\UserInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Guard\AbstractGuardAuthenticator;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
-use Tavro\Entity\User;
+use App\Entity\User;
 use Doctrine\ORM\EntityManager;
 
-class ApiAuthenticator extends AbstractGuardAuthenticator
+abstract class ApiAuthenticator extends AbstractGuardAuthenticator
 {
     private $em;
 

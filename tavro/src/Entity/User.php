@@ -1,6 +1,6 @@
 <?php
 
-namespace Tavro\Entity;
+namespace App\Entity;
 
 use Doctrine\ORM\Mapping AS ORM;
 use Rhumsaa\Uuid\Uuid;
@@ -18,14 +18,14 @@ use Doctrine\ORM\Mapping\Table;
 
 use Symfony\Component\Validator\Constraints as Assert;
 
-use Tavro\Model\EntityInterface\UserInterface;
-use Tavro\Model\Entity\Entity;
-use Tavro\Model\EntityInterface\EntityInterface;
-use Tavro\Model\EventInterface\TavroCreateEventInterface;
-use Tavro\Model\EventInterface\TavroDeleteEventInterface;
-use Tavro\Model\EventInterface\TavroUpdateEventInterface;
+use App\Model\EntityInterface\UserInterface;
+use App\Model\Entity\Entity;
+use App\Model\EntityInterface\EntityInterface;
+use App\Model\EventInterface\TavroCreateEventInterface;
+use App\Model\EventInterface\TavroDeleteEventInterface;
+use App\Model\EventInterface\TavroUpdateEventInterface;
 
-use Tavro\Component\Validator\Constraints as TavroAssert;
+use App\Component\Validator\Constraints as TavroAssert;
 use JMS\Serializer\Annotation\MaxDepth;
 
 /**
@@ -649,7 +649,7 @@ class User extends Entity implements TavroCreateEventInterface, TavroDeleteEvent
     /**
      * Add node
      *
-     * @param \Tavro\Entity\Node $node
+     * @param \App\Entity\Node $node
      * @return User
      */
     public function addNode(\Tavro\Entity\Node $node)
@@ -662,7 +662,7 @@ class User extends Entity implements TavroCreateEventInterface, TavroDeleteEvent
     /**
      * Remove node
      *
-     * @param \Tavro\Entity\Node $node
+     * @param \App\Entity\Node $node
      */
     public function removeNode(\Tavro\Entity\Node $node)
     {
@@ -682,7 +682,7 @@ class User extends Entity implements TavroCreateEventInterface, TavroDeleteEvent
     /**
      * Add comment
      *
-     * @param \Tavro\Entity\Comment $comment
+     * @param \App\Entity\Comment $comment
      * @return User
      */
     public function addComment(\Tavro\Entity\Comment $comment)
@@ -695,7 +695,7 @@ class User extends Entity implements TavroCreateEventInterface, TavroDeleteEvent
     /**
      * Remove comment
      *
-     * @param \Tavro\Entity\Comment $comment
+     * @param \App\Entity\Comment $comment
      */
     public function removeComment(\Tavro\Entity\Comment $comment)
     {
@@ -718,7 +718,7 @@ class User extends Entity implements TavroCreateEventInterface, TavroDeleteEvent
     /**
      * Add role
      *
-     * @param \Tavro\Entity\Role $role
+     * @param \App\Entity\Role $role
      * @return User
      */
     public function addRole(\Tavro\Entity\Role $role)
@@ -731,7 +731,7 @@ class User extends Entity implements TavroCreateEventInterface, TavroDeleteEvent
     /**
      * Remove role
      *
-     * @param \Tavro\Entity\Role $role
+     * @param \App\Entity\Role $role
      */
     public function removeRole(\Tavro\Entity\Role $role)
     {
@@ -761,7 +761,7 @@ class User extends Entity implements TavroCreateEventInterface, TavroDeleteEvent
     /**
      * Add nodes_read
      *
-     * @param \Tavro\Entity\NodeRead $nodesRead
+     * @param \App\Entity\NodeRead $nodesRead
      * @return User
      */
     public function addNodesRead(\Tavro\Entity\NodeRead $nodesRead)
@@ -774,7 +774,7 @@ class User extends Entity implements TavroCreateEventInterface, TavroDeleteEvent
     /**
      * Remove nodes_read
      *
-     * @param \Tavro\Entity\NodeRead $nodesRead
+     * @param \App\Entity\NodeRead $nodesRead
      */
     public function removeNodesRead(\Tavro\Entity\NodeRead $nodesRead)
     {
@@ -950,7 +950,7 @@ class User extends Entity implements TavroCreateEventInterface, TavroDeleteEvent
     /**
      * Set avatar
      *
-     * @param \Tavro\Entity\Image $avatar
+     * @param \App\Entity\Image $avatar
      * @return User
      */
     public function setAvatar(\Tavro\Entity\Image $avatar)
@@ -997,7 +997,7 @@ class User extends Entity implements TavroCreateEventInterface, TavroDeleteEvent
     /**
      * Set person
      *
-     * @param \Tavro\Entity\Person $person
+     * @param \App\Entity\Person $person
      *
      * @return User
      */
@@ -1021,7 +1021,7 @@ class User extends Entity implements TavroCreateEventInterface, TavroDeleteEvent
     /**
      * Add accountUser
      *
-     * @param \Tavro\Entity\AccountUser $accountUser
+     * @param \App\Entity\AccountUser $accountUser
      *
      * @return User
      */
@@ -1035,7 +1035,7 @@ class User extends Entity implements TavroCreateEventInterface, TavroDeleteEvent
     /**
      * Remove accountUser
      *
-     * @param \Tavro\Entity\AccountUser $accountUser
+     * @param \App\Entity\AccountUser $accountUser
      */
     public function removeAccountUser(\Tavro\Entity\AccountUser $accountUser)
     {
@@ -1055,7 +1055,7 @@ class User extends Entity implements TavroCreateEventInterface, TavroDeleteEvent
     /**
      * Add expense
      *
-     * @param \Tavro\Entity\Expense $expense
+     * @param \App\Entity\Expense $expense
      *
      * @return User
      */
@@ -1069,7 +1069,7 @@ class User extends Entity implements TavroCreateEventInterface, TavroDeleteEvent
     /**
      * Remove expense
      *
-     * @param \Tavro\Entity\Expense $expense
+     * @param \App\Entity\Expense $expense
      */
     public function removeExpense(\Tavro\Entity\Expense $expense)
     {
@@ -1089,7 +1089,7 @@ class User extends Entity implements TavroCreateEventInterface, TavroDeleteEvent
     /**
      * Add revenue
      *
-     * @param \Tavro\Entity\Revenue $revenue
+     * @param \App\Entity\Revenue $revenue
      *
      * @return User
      */
@@ -1103,7 +1103,7 @@ class User extends Entity implements TavroCreateEventInterface, TavroDeleteEvent
     /**
      * Remove revenue
      *
-     * @param \Tavro\Entity\Revenue $revenue
+     * @param \App\Entity\Revenue $revenue
      */
     public function removeRevenue(\Tavro\Entity\Revenue $revenue)
     {
@@ -1123,7 +1123,7 @@ class User extends Entity implements TavroCreateEventInterface, TavroDeleteEvent
     /**
      * Add account
      *
-     * @param \Tavro\Entity\Account $account
+     * @param \App\Entity\Account $account
      *
      * @return User
      */
@@ -1137,7 +1137,7 @@ class User extends Entity implements TavroCreateEventInterface, TavroDeleteEvent
     /**
      * Remove account
      *
-     * @param \Tavro\Entity\Account $account
+     * @param \App\Entity\Account $account
      */
     public function removeAccount(\Tavro\Entity\Account $account)
     {
@@ -1157,7 +1157,7 @@ class User extends Entity implements TavroCreateEventInterface, TavroDeleteEvent
     /**
      * Add accountGroup
      *
-     * @param \Tavro\Entity\AccountGroup $accountGroup
+     * @param \App\Entity\AccountGroup $accountGroup
      *
      * @return User
      */
@@ -1171,7 +1171,7 @@ class User extends Entity implements TavroCreateEventInterface, TavroDeleteEvent
     /**
      * Remove accountGroup
      *
-     * @param \Tavro\Entity\AccountGroup $accountGroup
+     * @param \App\Entity\AccountGroup $accountGroup
      */
     public function removeAccountGroup(\Tavro\Entity\AccountGroup $accountGroup)
     {
@@ -1191,7 +1191,7 @@ class User extends Entity implements TavroCreateEventInterface, TavroDeleteEvent
     /**
      * Add accountGroupUser
      *
-     * @param \Tavro\Entity\AccountGroupUser $accountGroupUser
+     * @param \App\Entity\AccountGroupUser $accountGroupUser
      *
      * @return User
      */
@@ -1205,7 +1205,7 @@ class User extends Entity implements TavroCreateEventInterface, TavroDeleteEvent
     /**
      * Remove accountGroupUser
      *
-     * @param \Tavro\Entity\AccountGroupUser $accountGroupUser
+     * @param \App\Entity\AccountGroupUser $accountGroupUser
      */
     public function removeAccountGroupUser(\Tavro\Entity\AccountGroupUser $accountGroupUser)
     {
@@ -1225,7 +1225,7 @@ class User extends Entity implements TavroCreateEventInterface, TavroDeleteEvent
     /**
      * Add syndicate
      *
-     * @param \Tavro\Entity\Syndicate $syndicate
+     * @param \App\Entity\Syndicate $syndicate
      *
      * @return User
      */
@@ -1239,7 +1239,7 @@ class User extends Entity implements TavroCreateEventInterface, TavroDeleteEvent
     /**
      * Remove syndicate
      *
-     * @param \Tavro\Entity\Syndicate $syndicate
+     * @param \App\Entity\Syndicate $syndicate
      */
     public function removeSyndicate(\Tavro\Entity\Syndicate $syndicate)
     {
@@ -1259,7 +1259,7 @@ class User extends Entity implements TavroCreateEventInterface, TavroDeleteEvent
     /**
      * Add forecast
      *
-     * @param \Tavro\Entity\Forecast $forecast
+     * @param \App\Entity\Forecast $forecast
      *
      * @return User
      */
@@ -1273,7 +1273,7 @@ class User extends Entity implements TavroCreateEventInterface, TavroDeleteEvent
     /**
      * Remove forecast
      *
-     * @param \Tavro\Entity\Forecast $forecast
+     * @param \App\Entity\Forecast $forecast
      */
     public function removeForecast(\Tavro\Entity\Forecast $forecast)
     {
@@ -1293,7 +1293,7 @@ class User extends Entity implements TavroCreateEventInterface, TavroDeleteEvent
     /**
      * Add syndicateMembership
      *
-     * @param \Tavro\Entity\Syndicate $syndicateMembership
+     * @param \App\Entity\Syndicate $syndicateMembership
      *
      * @return User
      */
@@ -1307,7 +1307,7 @@ class User extends Entity implements TavroCreateEventInterface, TavroDeleteEvent
     /**
      * Remove syndicateMembership
      *
-     * @param \Tavro\Entity\Syndicate $syndicateMembership
+     * @param \App\Entity\Syndicate $syndicateMembership
      */
     public function removeSyndicateMembership(\Tavro\Entity\Syndicate $syndicateMembership)
     {

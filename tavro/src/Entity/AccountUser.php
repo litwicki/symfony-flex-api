@@ -1,6 +1,6 @@
 <?php
 
-namespace Tavro\Entity;
+namespace App\Entity;
 
 use Doctrine\ORM\Mapping AS ORM;
 
@@ -13,8 +13,8 @@ use JMS\Serializer\Annotation\Groups;
 use JMS\Serializer\Annotation\MaxDepth;
 use Doctrine\ORM\Mapping\Table;
 
-use Tavro\Model\Entity\Entity;
-use Tavro\Model\EntityInterface\AccountEntityInterface;
+use App\Model\Entity\Entity;
+use App\Model\EntityInterface\AccountEntityInterface;
 
 /**
  * @ORM\Entity
@@ -57,7 +57,7 @@ class AccountUser extends Entity implements AccountEntityInterface
     /**
      * Set account
      *
-     * @param \Tavro\Entity\Account $account
+     * @param \App\Entity\Account $account
      * @return AccountUser
      */
     public function setAccount(\Tavro\Entity\Account $account)
@@ -80,7 +80,7 @@ class AccountUser extends Entity implements AccountEntityInterface
     /**
      * Set User
      *
-     * @param \Tavro\Entity\User $user
+     * @param \App\Entity\User $user
      * @return AccountUser
      */
     public function setUser(\Tavro\Entity\User $user)

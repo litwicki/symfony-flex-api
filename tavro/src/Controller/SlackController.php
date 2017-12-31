@@ -1,12 +1,12 @@
 <?php
 
-namespace Tavro\Controller;
+namespace App\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
-use Tavro\Controller\DefaultController;
+use App\Controller\DefaultController;
 use GuzzleHttp\Client;
 
 

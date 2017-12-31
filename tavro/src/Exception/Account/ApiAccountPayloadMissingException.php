@@ -1,6 +1,6 @@
 <?php
 
-namespace Tavro\Exception\Account;
+namespace App\Exception\Account;
 
 use Symfony\Component\HttpKernel\Exception\HttpException;
 

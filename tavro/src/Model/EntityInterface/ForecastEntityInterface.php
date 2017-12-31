@@ -1,6 +1,6 @@
 <?php
 
-namespace Tavro\Model\EntityInterface;
+namespace App\Model\EntityInterface;
 
 /**
  * Interface ForecastEntityInterface
@@ -64,7 +64,7 @@ interface ForecastEntityInterface
     /**
      * Set forecast
      *
-     * @param \Tavro\Entity\Forecast $forecast
+     * @param \App\Entity\Forecast $forecast
      *
      * @return \Tavro\Entity\Forecast
      */

@@ -1,20 +1,20 @@
-<?php namespace Tavro\Controller\Api;
+<?php namespace App\Controller\Api;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 
-use Tavro\Entity\Account;
-use Tavro\Exception\Account\ApiAccountPayloadMismatchException;
-use Tavro\Exception\Account\ApiAccountPayloadMissingException;
-use Tavro\Controller\Api\ApiController;
+use App\Entity\Account;
+use App\Exception\Account\ApiAccountPayloadMismatchException;
+use App\Exception\Account\ApiAccountPayloadMissingException;
+use App\Controller\Api\ApiController;
 
 class AccountEntityApiController extends ApiController
 {
     /**
      * Check the permission on the Account.
      *
-     * @param \Tavro\Entity\Account $account
+     * @param \App\Entity\Account $account
      */
     public function isGrantedAccount(Account $account)
     {
@@ -32,7 +32,7 @@ class AccountEntityApiController extends ApiController
      *  - Does the user have access to this Account?
      *  - Does the payload account_id match the Account provided?
      *
-     * @param \Tavro\Entity\Account $account
+     * @param \App\Entity\Account $account
      * @param array $payload
      */
     public function isGrantedAccountAction(Account $account, array $payload = array())
@@ -61,7 +61,7 @@ class AccountEntityApiController extends ApiController
 
     /**
      * @param \Symfony\Component\HttpFoundation\Request $request
-     * @param \Tavro\Entity\Account $account
+     * @param \App\Entity\Account $account
      * @param $entity
      * @param $_format
      *
@@ -80,7 +80,7 @@ class AccountEntityApiController extends ApiController
 
     /**
      * @param \Symfony\Component\HttpFoundation\Request $request
-     * @param \Tavro\Entity\Account $account
+     * @param \App\Entity\Account $account
      * @param $entity
      * @param $id
      * @param $_format
@@ -100,7 +100,7 @@ class AccountEntityApiController extends ApiController
 
     /**
      * @param \Symfony\Component\HttpFoundation\Request $request
-     * @param \Tavro\Entity\Account $account
+     * @param \App\Entity\Account $account
      * @param $entity
      * @param $id
      * @param $_format
@@ -120,7 +120,7 @@ class AccountEntityApiController extends ApiController
 
     /**
      * @param \Symfony\Component\HttpFoundation\Request $request
-     * @param \Tavro\Entity\Account $account
+     * @param \App\Entity\Account $account
      * @param $entity
      * @param $_format
      *
@@ -139,7 +139,7 @@ class AccountEntityApiController extends ApiController
 
     /**
      * @param \Symfony\Component\HttpFoundation\Request $request
-     * @param \Tavro\Entity\Account $account
+     * @param \App\Entity\Account $account
      * @param $entity
      * @param $_format
      *
@@ -158,7 +158,7 @@ class AccountEntityApiController extends ApiController
 
     /**
      * @param \Symfony\Component\HttpFoundation\Request $request
-     * @param \Tavro\Entity\Account $account
+     * @param \App\Entity\Account $account
      * @param $entity
      * @param $_format
      *
@@ -177,7 +177,7 @@ class AccountEntityApiController extends ApiController
 
     /**
      * @param \Symfony\Component\HttpFoundation\Request $request
-     * @param \Tavro\Entity\Account $account
+     * @param \App\Entity\Account $account
      * @param $entity
      * @param $id
      * @param $_format
@@ -197,7 +197,7 @@ class AccountEntityApiController extends ApiController
 
     /**
      * @param \Symfony\Component\HttpFoundation\Request $request
-     * @param \Tavro\Entity\Account $account
+     * @param \App\Entity\Account $account
      * @param $entity
      * @param $id
      * @param $_format

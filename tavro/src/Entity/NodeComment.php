@@ -1,6 +1,6 @@
 <?php
 
-namespace Tavro\Entity;
+namespace App\Entity;
 
 use Doctrine\ORM\Mapping AS ORM;
 
@@ -13,8 +13,8 @@ use JMS\Serializer\Annotation\Groups;
 use JMS\Serializer\Annotation\MaxDepth;
 use Doctrine\ORM\Mapping\Table;
 
-use Tavro\Model\Entity\Entity;
-use Tavro\Model\EntityInterface\EntityInterface;
+use App\Model\Entity\Entity;
+use App\Model\EntityInterface\EntityInterface;
 
 /**
  * @ORM\Entity
@@ -46,7 +46,7 @@ class NodeComment extends Entity implements EntityInterface
     /**
      * Set comment
      *
-     * @param \Tavro\Entity\Comment $comment
+     * @param \App\Entity\Comment $comment
      * @return NodeComment
      */
     public function setComment(\Tavro\Entity\Comment $comment)
@@ -69,7 +69,7 @@ class NodeComment extends Entity implements EntityInterface
     /**
      * Set Node
      *
-     * @param \Tavro\Entity\Node $node
+     * @param \App\Entity\Node $node
      * @return NodeComment
      */
     public function setNode(\Tavro\Entity\Node $node)

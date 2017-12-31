@@ -1,6 +1,6 @@
 <?php
 
-namespace Tavro\Model\EntityInterface;
+namespace App\Model\EntityInterface;
 
 /**
  * Interface AccountEntityInterface
@@ -64,7 +64,7 @@ interface AccountEntityInterface
     /**
      * Set account
      *
-     * @param \Tavro\Entity\Account $account
+     * @param \App\Entity\Account $account
      *
      * @return \Tavro\Entity\Account
      */

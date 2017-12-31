@@ -1,6 +1,6 @@
 <?php
 
-namespace Tavro\Exception\Form;
+namespace App\Exception\Form;
 
 use Symfony\Component\HttpKernel\Exception\HttpException;
 

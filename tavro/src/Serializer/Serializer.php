@@ -1,6 +1,6 @@
 <?php
 
-namespace Tavro\Serializer;
+namespace App\Serializer;
 
 use JMS\Serializer\SerializationContext;
 use JMS\Serializer\Serializer as JMS_Serializer;

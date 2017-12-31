@@ -1,9 +1,9 @@
-<?php namespace Tavro\EventSubscriber\Exception\Dev;
+<?php namespace App\EventSubscriber\Exception\Dev;
 
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Event\GetResponseForExceptionEvent;
 
-class ExceptionSubscriber extends \Tavro\EventSubscriber\Exception\ExceptionSubscriber
+class ExceptionSubscriber extends \App\EventSubscriber\Exception\ExceptionSubscriber
 {
     /**
      * @param $code

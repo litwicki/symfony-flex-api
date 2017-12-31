@@ -1,6 +1,6 @@
 <?php
 
-namespace Tavro\Security\Authentication\Provider;
+namespace App\Security\Authentication\Provider;
 
 use Symfony\Component\Security\Core\User\UserProviderInterface;
 

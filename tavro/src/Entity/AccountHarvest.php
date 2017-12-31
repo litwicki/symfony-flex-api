@@ -1,5 +1,5 @@
 <?php
-namespace Tavro\Entity;
+namespace App\Entity;
 
 use Doctrine\ORM\Mapping AS ORM;
 
@@ -12,8 +12,8 @@ use JMS\Serializer\Annotation\MaxDepth;
 use JMS\Serializer\Annotation\Groups;
 use Doctrine\ORM\Mapping\Table;
 
-use Tavro\Model\Entity\Entity;
-use Tavro\Model\EntityInterface\AccountEntityInterface;
+use App\Model\Entity\Entity;
+use App\Model\EntityInterface\AccountEntityInterface;
 
 /**
  * @ORM\Entity
@@ -129,7 +129,7 @@ class AccountHarvest extends Entity implements AccountEntityInterface
     /**
      * Set account
      *
-     * @param \Tavro\Entity\Account $account
+     * @param \App\Entity\Account $account
      *
      * @return AccountHarvest
      */

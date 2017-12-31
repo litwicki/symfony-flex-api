@@ -1,6 +1,6 @@
-<?php namespace Tavro\Model\HandlerInterface;
+<?php namespace App\Model\HandlerInterface;
 
-use Tavro\Model\EntityInterface\EntityInterface;
+use App\Model\EntityInterface\EntityInterface;
 
 interface EntityHandlerInterface
 {

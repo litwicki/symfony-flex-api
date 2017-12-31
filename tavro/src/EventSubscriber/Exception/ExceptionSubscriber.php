@@ -1,12 +1,12 @@
-<?php namespace Tavro\EventSubscriber\Exception;
+<?php namespace App\EventSubscriber\Exception;
 
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Event\GetResponseForExceptionEvent;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Symfony\Component\Security\Core\Exception\AuthenticationCredentialsNotFoundException;
-use Tavro\Logging\Exception\TavroExceptionLogger;
-use Tavro\Serializer\Serializer;
+use App\Logging\Exception\TavroExceptionLogger;
+use App\Serializer\Serializer;
 
 class ExceptionSubscriber implements EventSubscriberInterface
 {

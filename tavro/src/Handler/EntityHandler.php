@@ -1,6 +1,6 @@
 <?php
 
-namespace Tavro\Handler;
+namespace App\Handler;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\Common\Inflector\Inflector;
@@ -23,22 +23,22 @@ use Symfony\Component\PropertyAccess\Exception\InvalidPropertyPathException;
 use Symfony\Component\Form\Exception\TransformationFailedException;
 use Symfony\Component\Form\Exception\UnexpectedTypeException;
 
-use Tavro\Exception\Form\InvalidFormException;
-use Tavro\Entity\User;
-use Tavro\Model\EntityInterface\EntityInterface;
-use Tavro\Exception\Api\ApiException;
-use Tavro\Exception\Api\ApiNotFoundException;
-use Tavro\Exception\Api\ApiRequestLimitException;
-use Tavro\Exception\Api\ApiAccessDeniedException;
-use Tavro\Exception\Api\ApiRequestSizeException;
-use Tavro\Model\HandlerInterface\EntityHandlerInterface;
-use Tavro\Component\Form\FormErrors;
-use Tavro\Model\EventInterface\TavroCreateEventInterface;
-use Tavro\Model\EventInterface\TavroUpdateEventInterface;
-use Tavro\Model\EventInterface\TavroDeleteEventInterface;
-use Tavro\Model\EntityInterface\AccountEntityInterface;
-use Tavro\Repository\TavroRepository;
-use Tavro\Repository\TavroRepositoryInterface;
+use App\Exception\Form\InvalidFormException;
+use App\Entity\User;
+use App\Model\EntityInterface\EntityInterface;
+use App\Exception\Api\ApiException;
+use App\Exception\Api\ApiNotFoundException;
+use App\Exception\Api\ApiRequestLimitException;
+use App\Exception\Api\ApiAccessDeniedException;
+use App\Exception\Api\ApiRequestSizeException;
+use App\Model\HandlerInterface\EntityHandlerInterface;
+use App\Component\Form\FormErrors;
+use App\Model\EventInterface\TavroCreateEventInterface;
+use App\Model\EventInterface\TavroUpdateEventInterface;
+use App\Model\EventInterface\TavroDeleteEventInterface;
+use App\Model\EntityInterface\AccountEntityInterface;
+use App\Repository\TavroRepository;
+use App\Repository\TavroRepositoryInterface;
 
 class EntityHandler implements EntityHandlerInterface
 {
@@ -101,7 +101,7 @@ class EntityHandler implements EntityHandlerInterface
     }
 
     /**
-     * @param \Tavro\Model\EventInterface\TavroUpdateEventInterface $entity
+     * @param \App\Model\EventInterface\TavroUpdateEventInterface $entity
      *
      * @throws \Exception
      */
@@ -118,7 +118,7 @@ class EntityHandler implements EntityHandlerInterface
     }
 
     /**
-     * @param \Tavro\Model\EventInterface\TavroCreateEventInterface $entity
+     * @param \App\Model\EventInterface\TavroCreateEventInterface $entity
      *
      * @throws \Exception
      */
@@ -135,7 +135,7 @@ class EntityHandler implements EntityHandlerInterface
     }
 
     /**
-     * @param \Tavro\Model\EventInterface\TavroDeleteEventInterface $entity
+     * @param \App\Model\EventInterface\TavroDeleteEventInterface $entity
      *
      * @throws \Exception
      */
@@ -466,7 +466,7 @@ class EntityHandler implements EntityHandlerInterface
      * Edit an Entity.
      *
      * @param \Symfony\Component\HttpFoundation\Request $request
-     * @param \Tavro\Model\EntityInterface\EntityInterface $entity
+     * @param \App\Model\EntityInterface\EntityInterface $entity
      * @param array $parameters
      *
      * @return \Tavro\Model\EntityInterface\EntityInterface
@@ -496,7 +496,7 @@ class EntityHandler implements EntityHandlerInterface
      * Delete an Entity.
      *
      * @param \Symfony\Component\HttpFoundation\Request $request
-     * @param \Tavro\Model\EntityInterface\EntityInterface $entity
+     * @param \App\Model\EntityInterface\EntityInterface $entity
      *
      * @throws \Exception
      */
@@ -528,7 +528,7 @@ class EntityHandler implements EntityHandlerInterface
 
     /**
      * @param \Symfony\Component\HttpFoundation\Request $request
-     * @param \Tavro\Model\EntityInterface\EntityInterface $entity
+     * @param \App\Model\EntityInterface\EntityInterface $entity
      * @param array $parameters
      *
      * @return \Tavro\Model\EntityInterface\EntityInterface
@@ -562,7 +562,7 @@ class EntityHandler implements EntityHandlerInterface
      * in individual entities without replicating this code repeatedly.
      *
      * @param \Symfony\Component\HttpFoundation\Request $request
-     * @param \Tavro\Model\EntityInterface\EntityInterface $entity
+     * @param \App\Model\EntityInterface\EntityInterface $entity
      * @param array $parameters
      *
      * @return \Tavro\Model\EntityInterface\EntityInterface
@@ -580,7 +580,7 @@ class EntityHandler implements EntityHandlerInterface
 
     /**
      * @param \Symfony\Component\HttpFoundation\Request $request
-     * @param \Tavro\Model\EntityInterface\EntityInterface $entity
+     * @param \App\Model\EntityInterface\EntityInterface $entity
      * @param array $parameters
      * @param string $method
      *
@@ -671,7 +671,7 @@ class EntityHandler implements EntityHandlerInterface
     /**
      * Fail safe validation method for things we cannot (or should not) do in the validation YAML.
      *
-     * @param \Tavro\Model\EntityInterface\EntityInterface $entity
+     * @param \App\Model\EntityInterface\EntityInterface $entity
      * @param array $parameters
      *
      * @internal param $data

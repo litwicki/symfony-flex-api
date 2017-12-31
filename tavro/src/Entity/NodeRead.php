@@ -1,6 +1,6 @@
 <?php
 
-namespace Tavro\Entity;
+namespace App\Entity;
 
 use Doctrine\ORM\Mapping AS ORM;
 
@@ -12,8 +12,8 @@ use JMS\Serializer\Annotation\VirtualProperty;
 use JMS\Serializer\Annotation\Groups;
 use Doctrine\ORM\Mapping\Table;
 
-use Tavro\Model\Entity\Entity;
-use Tavro\Model\EntityInterface\EntityInterface;
+use App\Model\Entity\Entity;
+use App\Model\EntityInterface\EntityInterface;
 
 /**
  * @ORM\Entity
@@ -39,7 +39,7 @@ class NodeRead extends Entity implements EntityInterface
     /**
      * Set user
      *
-     * @param \Tavro\Entity\User $user
+     * @param \App\Entity\User $user
      * @return nodeRead
      */
     public function setUser(\Tavro\Entity\User $user)
@@ -62,7 +62,7 @@ class NodeRead extends Entity implements EntityInterface
     /**
      * Set node
      *
-     * @param \Tavro\Entity\node $node
+     * @param \App\Entity\node $node
      * @return nodeRead
      */
     public function setNode(\Tavro\Entity\Node $node)

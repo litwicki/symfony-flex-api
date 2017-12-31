@@ -1,6 +1,6 @@
 <?php
 
-namespace Tavro\Controller;
+namespace App\Controller;
 
 use Doctrine\ORM\Query\ResultSetMapping;
 use Symfony\Component\HttpFoundation\Request;

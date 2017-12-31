@@ -1,11 +1,11 @@
-<?php namespace Tavro\QuickbooksOnline\Handler;
+<?php namespace App\Integrations\QuickbooksOnline\Handler;
 
 use Doctrine\ORM\EntityManager;
 use \OAuth;
 
-use Tavro\Entity\Organization;
+use App\Entity\Organization;
 
-use Tavro\QuickbooksOnline\QboApiService;
+use App\Integrations\QuickbooksOnline\QboApiService;
 
 /**
  * Class VendorHandler

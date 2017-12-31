@@ -1,6 +1,6 @@
 <?php
 
-namespace Tavro\DataFixtures\Core\v1;
+namespace App\DataFixtures\Core\v1;
 
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
@@ -9,10 +9,10 @@ use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
-use Tavro\Entity\User;
-use Tavro\Entity\Role;
-use Tavro\Entity\Variable;
-use Tavro\Entity\AccountType;
+use App\Entity\User;
+use App\Entity\Role;
+use App\Entity\Variable;
+use App\Entity\AccountType;
 
 use Cocur\Slugify\Slugify;
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace Tavro\Twig\Extensions;
+namespace App\Twig\Extensions;
 
 class TavroConfigExtension extends \Twig_Extension
 {

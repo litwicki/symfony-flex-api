@@ -1,4 +1,4 @@
-<?php namespace Tavro\Security\Firewall;
+<?php namespace App\Security\Firewall;
 
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
@@ -6,7 +6,7 @@ use Symfony\Component\Security\Core\Authentication\AuthenticationManagerInterfac
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
 use Symfony\Component\Security\Http\Firewall\ListenerInterface;
-use Tavro\Security\Authentication\Token\WsseUserToken;
+use App\Security\Authentication\Token\WsseUserToken;
 
 class WsseListener implements ListenerInterface
 {

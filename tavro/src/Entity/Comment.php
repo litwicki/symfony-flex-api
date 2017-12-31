@@ -1,6 +1,6 @@
 <?php
 
-namespace Tavro\Entity;
+namespace App\Entity;
 
 use Doctrine\ORM\Mapping AS ORM;
 
@@ -13,8 +13,8 @@ use JMS\Serializer\Annotation\Groups;
 use Doctrine\ORM\Mapping\Table;
 use JMS\Serializer\Annotation\MaxDepth;
 
-use Tavro\Model\Entity\Entity;
-use Tavro\Model\EntityInterface\EntityInterface;
+use App\Model\Entity\Entity;
+use App\Model\EntityInterface\EntityInterface;
 
 /**
  * @ORM\Entity
@@ -108,7 +108,7 @@ class Comment extends Entity implements EntityInterface
     /**
      * Add node_comments
      *
-     * @param \Tavro\Entity\NodeComment $nodeComments
+     * @param \App\Entity\NodeComment $nodeComments
      * @return Comment
      */
     public function addNodeComment(\Tavro\Entity\NodeComment $nodeComments)
@@ -121,7 +121,7 @@ class Comment extends Entity implements EntityInterface
     /**
      * Remove node_comments
      *
-     * @param \Tavro\Entity\NodeComment $nodeComments
+     * @param \App\Entity\NodeComment $nodeComments
      */
     public function removeNodeComment(\Tavro\Entity\NodeComment $nodeComments)
     {
@@ -141,7 +141,7 @@ class Comment extends Entity implements EntityInterface
     /**
      * Set user
      *
-     * @param \Tavro\Entity\User $user
+     * @param \App\Entity\User $user
      * @return Comment
      */
     public function setUser(\Tavro\Entity\User $user = null)
@@ -164,7 +164,7 @@ class Comment extends Entity implements EntityInterface
     /**
      * Add expenseComment
      *
-     * @param \Tavro\Entity\ExpenseComment $expenseComment
+     * @param \App\Entity\ExpenseComment $expenseComment
      *
      * @return Comment
      */
@@ -178,7 +178,7 @@ class Comment extends Entity implements EntityInterface
     /**
      * Remove expenseComment
      *
-     * @param \Tavro\Entity\ExpenseComment $expenseComment
+     * @param \App\Entity\ExpenseComment $expenseComment
      */
     public function removeExpenseComment(\Tavro\Entity\ExpenseComment $expenseComment)
     {
@@ -198,7 +198,7 @@ class Comment extends Entity implements EntityInterface
     /**
      * Add revenueComment
      *
-     * @param \Tavro\Entity\RevenueComment $revenueComment
+     * @param \App\Entity\RevenueComment $revenueComment
      *
      * @return Comment
      */
@@ -212,7 +212,7 @@ class Comment extends Entity implements EntityInterface
     /**
      * Remove revenueComment
      *
-     * @param \Tavro\Entity\RevenueComment $revenueComment
+     * @param \App\Entity\RevenueComment $revenueComment
      */
     public function removeRevenueComment(\Tavro\Entity\RevenueComment $revenueComment)
     {
@@ -232,7 +232,7 @@ class Comment extends Entity implements EntityInterface
     /**
      * Add funding_roundComment
      *
-     * @param \Tavro\Entity\FundingRoundComment $funding_round_comment
+     * @param \App\Entity\FundingRoundComment $funding_round_comment
      *
      * @return Comment
      */
@@ -246,7 +246,7 @@ class Comment extends Entity implements EntityInterface
     /**
      * Remove funding_roundComment
      *
-     * @param \Tavro\Entity\FundingRoundComment $funding_round_comment
+     * @param \App\Entity\FundingRoundComment $funding_round_comment
      */
     public function removeFundingRoundComment(\Tavro\Entity\FundingRoundComment $funding_round_comment)
     {
@@ -266,7 +266,7 @@ class Comment extends Entity implements EntityInterface
     /**
      * Add OrganizationComment
      *
-     * @param \Tavro\Entity\OrganizationComment $organizationComment
+     * @param \App\Entity\OrganizationComment $organizationComment
      *
      * @return Comment
      */
@@ -280,7 +280,7 @@ class Comment extends Entity implements EntityInterface
     /**
      * Remove OrganizationComment
      *
-     * @param \Tavro\Entity\OrganizationComment $organizationComment
+     * @param \App\Entity\OrganizationComment $organizationComment
      */
     public function removeOrganizationComment(\Tavro\Entity\OrganizationComment $organizationComment)
     {
@@ -300,7 +300,7 @@ class Comment extends Entity implements EntityInterface
     /**
      * Add forecastComment
      *
-     * @param \Tavro\Entity\ForecastComment $forecastComment
+     * @param \App\Entity\ForecastComment $forecastComment
      *
      * @return Comment
      */
@@ -314,7 +314,7 @@ class Comment extends Entity implements EntityInterface
     /**
      * Remove forecastComment
      *
-     * @param \Tavro\Entity\ForecastComment $forecastComment
+     * @param \App\Entity\ForecastComment $forecastComment
      */
     public function removeForecastComment(\Tavro\Entity\ForecastComment $forecastComment)
     {

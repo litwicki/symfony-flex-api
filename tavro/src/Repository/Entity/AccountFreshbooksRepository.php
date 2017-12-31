@@ -1,6 +1,6 @@
-<?php namespace Tavro\Repository\Entity;
+<?php namespace App\Repository\Entity;
 
-use Tavro\Repository\TavroRepository;
+use App\Repository\TavroRepository;
 
 class AccountFreshbooksRepository extends TavroRepository
 {

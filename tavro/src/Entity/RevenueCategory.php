@@ -1,5 +1,5 @@
 <?php
-namespace Tavro\Entity;
+namespace App\Entity;
 
 use Doctrine\ORM\Mapping AS ORM;
 
@@ -14,8 +14,8 @@ use JMS\Serializer\Annotation\SerializedName;
 use Doctrine\ORM\Mapping\Table;
 use Symfony\Component\Validator\Constraints as Assert;
 
-use Tavro\Model\Entity\Entity;
-use Tavro\Model\EntityInterface\AccountEntityInterface;
+use App\Model\Entity\Entity;
+use App\Model\EntityInterface\AccountEntityInterface;
 
 /**
  * @ORM\Entity
@@ -69,7 +69,7 @@ class RevenueCategory extends Entity implements AccountEntityInterface
     /**
      * Set account
      *
-     * @param \Tavro\Entity\Account $account
+     * @param \App\Entity\Account $account
      *
      * @return RevenueCategory
      */
@@ -93,7 +93,7 @@ class RevenueCategory extends Entity implements AccountEntityInterface
     /**
      * Add revenue
      *
-     * @param \Tavro\Entity\Revenue $revenue
+     * @param \App\Entity\Revenue $revenue
      *
      * @return RevenueCategory
      */
@@ -107,7 +107,7 @@ class RevenueCategory extends Entity implements AccountEntityInterface
     /**
      * Remove revenue
      *
-     * @param \Tavro\Entity\Revenue $revenue
+     * @param \App\Entity\Revenue $revenue
      */
     public function removeRevenue(\Tavro\Entity\Revenue $revenue)
     {

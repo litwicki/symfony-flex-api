@@ -1,14 +1,14 @@
-<?php namespace Tavro\QuickbooksOnline\Handler;
+<?php namespace App\Integrations\QuickbooksOnline\Handler;
 
 use Doctrine\ORM\EntityManager;
 use \OAuth;
 
-use Tavro\Entity\Organization;
-use Tavro\Entity\Product;
-use Tavro\Entity\Service;
-use Tavro\Entity\Account;
+use App\Entity\Organization;
+use App\Entity\Product;
+use App\Entity\Service;
+use App\Entity\Account;
 
-use Tavro\QuickbooksOnline\QboApiService;
+use App\Integrations\QuickbooksOnline\QboApiService;
 
 /**
  * Class ItemHandler
@@ -98,7 +98,7 @@ class ItemHandler extends QboApiService
     }
 
     /**
-     * @param \Tavro\Entity\Account $account
+     * @param \App\Entity\Account $account
      * @param array $item
      *
      * @throws \Exception
@@ -144,7 +144,7 @@ class ItemHandler extends QboApiService
     }
 
     /**
-     * @param \Tavro\Entity\Account $account
+     * @param \App\Entity\Account $account
      * @param array $item
      *
      * @throws \Exception

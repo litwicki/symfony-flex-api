@@ -1,20 +1,20 @@
 <?php
 
-namespace Tavro\Controller\AccountEntity;
+namespace App\Controller\AccountEntity;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-use Tavro\Entity\Account;
+use App\Entity\Account;
 
 use Litwicki\Common\Common;
-use Tavro\Controller\Api\AccountEntityApiController;
+use App\Controller\Api\AccountEntityApiController;
 
 class ServiceController extends AccountEntityApiController
 {
     /**
      * @param \Symfony\Component\HttpFoundation\Request $request
-     * @param \Tavro\Entity\Account $account
+     * @param \App\Entity\Account $account
      * @param $_format
      *
      * @return \Symfony\Component\HttpFoundation\Response

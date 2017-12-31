@@ -1,15 +1,15 @@
 <?php
 
-namespace Tavro\EventSubscriber\Syndicate;
+namespace App\EventSubscriber\Syndicate;
 
 use Psr\Log\LoggerInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\Event\FilterResponseEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
 
-use Tavro\Mail\TavroMailer;
-use Tavro\Event\Syndicate\SyndicateCreateEvent;
-use Tavro\Event\Syndicate\SyndicateDeleteEvent;
+use App\Mail\TavroMailer;
+use App\Event\Syndicate\SyndicateCreateEvent;
+use App\Event\Syndicate\SyndicateDeleteEvent;
 
 class SyndicateSubscriber implements EventSubscriberInterface
 {
@@ -48,7 +48,7 @@ class SyndicateSubscriber implements EventSubscriberInterface
      * Send an Email Notification to the Syndicate owner welcoming them.
      * Send an Email Notification to Staff about the new Syndicate.
      *
-     * @param \Tavro\Event\Syndicate\SyndicateCreateEvent $event
+     * @param \App\Event\Syndicate\SyndicateCreateEvent $event
      */
     public function onSyndicateCreate(SyndicateCreateEvent $event)
     {
@@ -84,7 +84,7 @@ class SyndicateSubscriber implements EventSubscriberInterface
     /**
      * When an Syndicate is Deleted..
      *
-     * @param \Tavro\Event\Syndicate\SyndicateCreateEvent $event
+     * @param \App\Event\Syndicate\SyndicateCreateEvent $event
      */
     public function onSyndicateDelete(SyndicateCreateEvent $event)
     {

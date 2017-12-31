@@ -1,5 +1,5 @@
 <?php
-namespace Tavro\Entity;
+namespace App\Entity;
 
 use Doctrine\ORM\Mapping AS ORM;
 
@@ -14,9 +14,9 @@ use JMS\Serializer\Annotation\SerializedName;
 use Doctrine\ORM\Mapping\Table;
 use Symfony\Component\Validator\Constraints as Assert;
 
-use Tavro\Model\Entity\Entity;
-use Tavro\Model\Entity\StaffPersonModel;
-use Tavro\Model\EntityInterface\ForecastEntityInterface;
+use App\Model\Entity\Entity;
+use App\Model\Entity\StaffPersonModel;
+use App\Model\EntityInterface\ForecastEntityInterface;
 
 /**
  * @ORM\Entity
@@ -240,7 +240,7 @@ class ForecastStaffPerson extends StaffPersonModel implements ForecastEntityInte
     /**
      * Set account
      *
-     * @param \Tavro\Entity\Account $account
+     * @param \App\Entity\Account $account
      *
      * @return ForecastStaffPerson
      */
@@ -264,7 +264,7 @@ class ForecastStaffPerson extends StaffPersonModel implements ForecastEntityInte
     /**
      * Set staffPerson
      *
-     * @param \Tavro\Entity\Person $staffPerson
+     * @param \App\Entity\Person $staffPerson
      *
      * @return ForecastStaffPerson
      */
@@ -288,7 +288,7 @@ class ForecastStaffPerson extends StaffPersonModel implements ForecastEntityInte
     /**
      * Set forecast
      *
-     * @param \Tavro\Entity\Forecast $forecast
+     * @param \App\Entity\Forecast $forecast
      *
      * @return ForecastStaffPerson
      */

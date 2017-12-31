@@ -1,6 +1,6 @@
 <?php
 
-namespace Tavro\Security\Encoder;
+namespace App\Security\Encoder;
 
 use Symfony\Component\Security\Core\Encoder\PasswordEncoderInterface;
 

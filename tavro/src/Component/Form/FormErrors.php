@@ -1,4 +1,4 @@
-<?php namespace Tavro\Component\Form;
+<?php namespace App\Component\Form;
 
 /**
  * Class FormErrors

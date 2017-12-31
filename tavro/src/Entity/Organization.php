@@ -1,5 +1,5 @@
 <?php
-namespace Tavro\Entity;
+namespace App\Entity;
 
 use Doctrine\ORM\Mapping AS ORM;
 
@@ -14,8 +14,8 @@ use JMS\Serializer\Annotation\SerializedName;
 use Doctrine\ORM\Mapping\Table;
 use Symfony\Component\Validator\Constraints as Assert;
 
-use Tavro\Model\Entity\Entity;
-use Tavro\Model\EntityInterface\AccountEntityInterface;
+use App\Model\Entity\Entity;
+use App\Model\EntityInterface\AccountEntityInterface;
 
 /**
  * @ORM\Entity
@@ -394,7 +394,7 @@ class Organization extends Entity implements AccountEntityInterface
     /**
      * Set account
      *
-     * @param \Tavro\Entity\Account $account
+     * @param \App\Entity\Account $account
      *
      * @return Organization
      */
@@ -418,7 +418,7 @@ class Organization extends Entity implements AccountEntityInterface
     /**
      * Add organizationComment
      *
-     * @param \Tavro\Entity\OrganizationComment $organizationComment
+     * @param \App\Entity\OrganizationComment $organizationComment
      *
      * @return Organization
      */
@@ -432,7 +432,7 @@ class Organization extends Entity implements AccountEntityInterface
     /**
      * Remove organizationComment
      *
-     * @param \Tavro\Entity\OrganizationComment $organizationComment
+     * @param \App\Entity\OrganizationComment $organizationComment
      */
     public function removeOrganizationComment(\Tavro\Entity\OrganizationComment $organizationComment)
     {
@@ -452,7 +452,7 @@ class Organization extends Entity implements AccountEntityInterface
     /**
      * Add revenue
      *
-     * @param \Tavro\Entity\Revenue $revenue
+     * @param \App\Entity\Revenue $revenue
      *
      * @return Organization
      */
@@ -466,7 +466,7 @@ class Organization extends Entity implements AccountEntityInterface
     /**
      * Remove revenue
      *
-     * @param \Tavro\Entity\Revenue $revenue
+     * @param \App\Entity\Revenue $revenue
      */
     public function removeRevenue(\Tavro\Entity\Revenue $revenue)
     {
@@ -486,7 +486,7 @@ class Organization extends Entity implements AccountEntityInterface
     /**
      * Add contact
      *
-     * @param \Tavro\Entity\Contact $contact
+     * @param \App\Entity\Contact $contact
      *
      * @return Organization
      */
@@ -500,7 +500,7 @@ class Organization extends Entity implements AccountEntityInterface
     /**
      * Remove contact
      *
-     * @param \Tavro\Entity\Contact $contact
+     * @param \App\Entity\Contact $contact
      */
     public function removeContact(\Tavro\Entity\Contact $contact)
     {

@@ -1,22 +1,22 @@
-<?php namespace Tavro\Controller\Api;
+<?php namespace App\Controller\Api;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
-use Tavro\Exception\Api\ApiException;
-use Tavro\Exception\Api\ApiNotFoundException;
-use Tavro\Exception\Api\ApiRequestLimitException;
-use Tavro\Exception\Api\ApiAccessDeniedException;
-use Tavro\Exception\Form\InvalidFormException;
+use App\Exception\Api\ApiException;
+use App\Exception\Api\ApiNotFoundException;
+use App\Exception\Api\ApiRequestLimitException;
+use App\Exception\Api\ApiAccessDeniedException;
+use App\Exception\Form\InvalidFormException;
 
 use Doctrine\Common\Inflector\Inflector;
 
 use Litwicki\Common\Common;
-use Tavro\Entity\Account;
-use Tavro\Model\EntityInterface\EntityInterface;
-use Tavro\Controller\Api\ApiController;
+use App\Entity\Account;
+use App\Model\EntityInterface\EntityInterface;
+use App\Controller\Api\ApiController;
 
 class EntityApiController extends ApiController
 {

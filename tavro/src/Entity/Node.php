@@ -1,5 +1,5 @@
 <?php
-namespace Tavro\Entity;
+namespace App\Entity;
 
 use Doctrine\ORM\Mapping AS ORM;
 
@@ -14,8 +14,8 @@ use JMS\Serializer\Annotation\SerializedName;
 use Doctrine\ORM\Mapping\Table;
 use Symfony\Component\Validator\Constraints as Assert;
 
-use Tavro\Model\Entity\Entity;
-use Tavro\Model\EntityInterface\AccountEntityInterface;
+use App\Model\Entity\Entity;
+use App\Model\EntityInterface\AccountEntityInterface;
 
 /**
  * @ORM\Entity
@@ -139,7 +139,7 @@ class Node extends Entity implements AccountEntityInterface
     /**
      * Set user
      *
-     * @param \Tavro\Entity\User $user
+     * @param \App\Entity\User $user
      * @return Node
      */
     public function setUser(\Tavro\Entity\User $user)
@@ -185,7 +185,7 @@ class Node extends Entity implements AccountEntityInterface
     /**
      * Add images
      *
-     * @param \Tavro\Entity\Node $images
+     * @param \App\Entity\Node $images
      * @return Node
      */
     public function addImage(\Tavro\Entity\Node $images)
@@ -198,7 +198,7 @@ class Node extends Entity implements AccountEntityInterface
     /**
      * Remove images
      *
-     * @param \Tavro\Entity\Node $images
+     * @param \App\Entity\Node $images
      */
     public function removeImage(\Tavro\Entity\Node $images)
     {
@@ -219,7 +219,7 @@ class Node extends Entity implements AccountEntityInterface
     /**
      * Add node_comments
      *
-     * @param \Tavro\Entity\NodeComment $nodeComments
+     * @param \App\Entity\NodeComment $nodeComments
      * @return Node
      */
     public function addNodeComment(\Tavro\Entity\NodeComment $nodeComments)
@@ -232,7 +232,7 @@ class Node extends Entity implements AccountEntityInterface
     /**
      * Remove node_comments
      *
-     * @param \Tavro\Entity\NodeComment $nodeComments
+     * @param \App\Entity\NodeComment $nodeComments
      */
     public function removeNodeComment(\Tavro\Entity\NodeComment $nodeComments)
     {
@@ -252,7 +252,7 @@ class Node extends Entity implements AccountEntityInterface
     /**
      * Add nodes_read
      *
-     * @param \Tavro\Entity\NodeRead $nodesRead
+     * @param \App\Entity\NodeRead $nodesRead
      * @return Node
      */
     public function addNodesRead(\Tavro\Entity\NodeRead $nodesRead)
@@ -265,7 +265,7 @@ class Node extends Entity implements AccountEntityInterface
     /**
      * Remove nodes_read
      *
-     * @param \Tavro\Entity\NodeRead $nodesRead
+     * @param \App\Entity\NodeRead $nodesRead
      */
     public function removeNodesRead(\Tavro\Entity\NodeRead $nodesRead)
     {
@@ -358,7 +358,7 @@ class Node extends Entity implements AccountEntityInterface
     /**
      * Add node_tags
      *
-     * @param \Tavro\Entity\NodeTag $nodeTags
+     * @param \App\Entity\NodeTag $nodeTags
      * @return Node
      */
     public function addNodeTag(\Tavro\Entity\NodeTag $nodeTags)
@@ -371,7 +371,7 @@ class Node extends Entity implements AccountEntityInterface
     /**
      * Remove node_tags
      *
-     * @param \Tavro\Entity\NodeTag $nodeTags
+     * @param \App\Entity\NodeTag $nodeTags
      */
     public function removeNodeTag(\Tavro\Entity\NodeTag $nodeTags)
     {
@@ -416,7 +416,7 @@ class Node extends Entity implements AccountEntityInterface
     /**
      * Set account
      *
-     * @param \Tavro\Entity\Account $account
+     * @param \App\Entity\Account $account
      *
      * @return Node
      */

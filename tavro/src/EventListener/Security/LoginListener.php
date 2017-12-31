@@ -1,6 +1,6 @@
 <?php
 
-namespace Tavro\EventListener\Security;
+namespace App\EventListener\Security;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RedirectResponse;

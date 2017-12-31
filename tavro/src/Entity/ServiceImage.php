@@ -1,6 +1,6 @@
 <?php
 
-namespace Tavro\Entity;
+namespace App\Entity;
 
 use Doctrine\ORM\Mapping AS ORM;
 
@@ -13,8 +13,8 @@ use JMS\Serializer\Annotation\Groups;
 use JMS\Serializer\Annotation\MaxDepth;
 use Doctrine\ORM\Mapping\Table;
 
-use Tavro\Model\Entity\Entity;
-use Tavro\Model\EntityInterface\EntityInterface;
+use App\Model\Entity\Entity;
+use App\Model\EntityInterface\EntityInterface;
 
 /**
  * @ORM\Entity
@@ -40,7 +40,7 @@ class ServiceImage extends Entity implements EntityInterface
     /**
      * Set image
      *
-     * @param \Tavro\Entity\Image $image
+     * @param \App\Entity\Image $image
      * @return ServiceImage
      */
     public function setImage(\Tavro\Entity\Image $image)
@@ -63,7 +63,7 @@ class ServiceImage extends Entity implements EntityInterface
     /**
      * Set Service
      *
-     * @param \Tavro\Entity\Service $service
+     * @param \App\Entity\Service $service
      * @return ServiceImage
      */
     public function setService(\Tavro\Entity\Service $service)

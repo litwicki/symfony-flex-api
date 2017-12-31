@@ -1,6 +1,6 @@
 <?php
 
-namespace Tavro\Entity;
+namespace App\Entity;
 
 use Doctrine\ORM\Mapping AS ORM;
 use Rhumsaa\Uuid\Uuid;
@@ -18,8 +18,8 @@ use Doctrine\ORM\Mapping\Table;
 
 use Symfony\Component\Validator\Constraints as Assert;
 
-use Tavro\Model\Entity\Entity;
-use Tavro\Model\EntityInterface\EntityInterface;
+use App\Model\Entity\Entity;
+use App\Model\EntityInterface\EntityInterface;
 use JMS\Serializer\Annotation\MaxDepth;
 
 /**
@@ -53,7 +53,7 @@ class Shareholder extends Entity implements EntityInterface
     /**
      * Set person
      *
-     * @param \Tavro\Entity\Person $person
+     * @param \App\Entity\Person $person
      *
      * @return Shareholder
      */
@@ -77,7 +77,7 @@ class Shareholder extends Entity implements EntityInterface
     /**
      * Add fundingRoundShareholder
      *
-     * @param \Tavro\Entity\FundingRoundShareholder $fundingRoundShareholder
+     * @param \App\Entity\FundingRoundShareholder $fundingRoundShareholder
      *
      * @return Shareholder
      */
@@ -91,7 +91,7 @@ class Shareholder extends Entity implements EntityInterface
     /**
      * Remove fundingRoundShareholder
      *
-     * @param \Tavro\Entity\FundingRoundShareholder $fundingRoundShareholder
+     * @param \App\Entity\FundingRoundShareholder $fundingRoundShareholder
      */
     public function removeFundingRoundShareholder(\Tavro\Entity\FundingRoundShareholder $fundingRoundShareholder)
     {

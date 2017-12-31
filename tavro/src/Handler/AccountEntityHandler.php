@@ -1,6 +1,6 @@
 <?php
 
-namespace Tavro\Handler;
+namespace App\Handler;
 
 use Symfony\Component\Form\FormError;
 use Symfony\Component\Form\FormErrorIterator;
@@ -22,18 +22,18 @@ use Doctrine\DBAL\Exception\NotNullConstraintViolationException;
 use Symfony\Component\Form\Exception\TransformationFailedException;
 use Symfony\Component\Form\Exception\UnexpectedTypeException;
 
-use Tavro\Entity\Account;
-use Tavro\Exception\Form\InvalidFormException;
-use Tavro\Entity\User;
-use Tavro\Model\EntityInterface\EntityInterface;
-use Tavro\Exception\Api\ApiException;
-use Tavro\Exception\Api\ApiNotFoundException;
-use Tavro\Exception\Api\ApiRequestLimitException;
-use Tavro\Exception\Api\ApiAccessDeniedException;
-use Tavro\Exception\Api\ApiRequestSizeException;
-use Tavro\Component\Form\FormErrors;
-use Tavro\Handler\EntityHandler;
-use Tavro\Repository\TavroRepositoryInterface;
+use App\Entity\Account;
+use App\Exception\Form\InvalidFormException;
+use App\Entity\User;
+use App\Model\EntityInterface\EntityInterface;
+use App\Exception\Api\ApiException;
+use App\Exception\Api\ApiNotFoundException;
+use App\Exception\Api\ApiRequestLimitException;
+use App\Exception\Api\ApiAccessDeniedException;
+use App\Exception\Api\ApiRequestSizeException;
+use App\Component\Form\FormErrors;
+use App\Handler\EntityHandler;
+use App\Repository\TavroRepositoryInterface;
 
 class AccountEntityHandler extends EntityHandler
 {
@@ -53,7 +53,7 @@ class AccountEntityHandler extends EntityHandler
     /**
      * Get all Entities for an Account.
      *
-     * @param \Tavro\Entity\Account $account
+     * @param \App\Entity\Account $account
      * @param array $params
      *
      * @return array

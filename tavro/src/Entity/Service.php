@@ -1,5 +1,5 @@
 <?php
-namespace Tavro\Entity;
+namespace App\Entity;
 
 use Doctrine\ORM\Mapping AS ORM;
 
@@ -14,8 +14,8 @@ use JMS\Serializer\Annotation\SerializedName;
 use Doctrine\ORM\Mapping\Table;
 use Symfony\Component\Validator\Constraints as Assert;
 
-use Tavro\Model\Entity\Entity;
-use Tavro\Model\EntityInterface\AccountEntityInterface;
+use App\Model\Entity\Entity;
+use App\Model\EntityInterface\AccountEntityInterface;
 
 /**
  * @ORM\Entity
@@ -114,7 +114,7 @@ class Service extends Entity implements AccountEntityInterface
     /**
      * Set category
      *
-     * @param \Tavro\Entity\ServiceCategory $category
+     * @param \App\Entity\ServiceCategory $category
      *
      * @return Service
      */
@@ -138,7 +138,7 @@ class Service extends Entity implements AccountEntityInterface
     /**
      * Add revenueService
      *
-     * @param \Tavro\Entity\RevenueService $revenueService
+     * @param \App\Entity\RevenueService $revenueService
      *
      * @return Service
      */
@@ -152,7 +152,7 @@ class Service extends Entity implements AccountEntityInterface
     /**
      * Remove revenueService
      *
-     * @param \Tavro\Entity\RevenueService $revenueService
+     * @param \App\Entity\RevenueService $revenueService
      */
     public function removeRevenueService(\Tavro\Entity\RevenueService $revenueService)
     {
@@ -196,7 +196,7 @@ class Service extends Entity implements AccountEntityInterface
     /**
      * Add serviceImage
      *
-     * @param \Tavro\Entity\ServiceImage $serviceImage
+     * @param \App\Entity\ServiceImage $serviceImage
      *
      * @return Service
      */
@@ -210,7 +210,7 @@ class Service extends Entity implements AccountEntityInterface
     /**
      * Remove serviceImage
      *
-     * @param \Tavro\Entity\ServiceImage $serviceImage
+     * @param \App\Entity\ServiceImage $serviceImage
      */
     public function removeServiceImage(\Tavro\Entity\ServiceImage $serviceImage)
     {
@@ -278,7 +278,7 @@ class Service extends Entity implements AccountEntityInterface
     /**
      * Set account
      *
-     * @param \Tavro\Entity\Account $account
+     * @param \App\Entity\Account $account
      *
      * @return Service
      */

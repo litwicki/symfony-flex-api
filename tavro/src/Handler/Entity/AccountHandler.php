@@ -1,20 +1,20 @@
 <?php
 
-namespace Tavro\Handler\Entity;
+namespace App\Handler\Entity;
 
-use Tavro\Model\EntityInterface\EntityInterface;
-use Tavro\Exception\Api\ApiAccessDeniedException;
-use Tavro\Exception\Api\ApiException;
+use App\Model\EntityInterface\EntityInterface;
+use App\Exception\Api\ApiAccessDeniedException;
+use App\Exception\Api\ApiException;
 
-use Tavro\Entity\User;
-use Tavro\Entity\Comment;
-use Tavro\Entity\NodeComment;
-use Tavro\Entity\Node;
-use Tavro\Entity\Account;
-use Tavro\Handler\EntityHandler;
+use App\Entity\User;
+use App\Entity\Comment;
+use App\Entity\NodeComment;
+use App\Entity\Node;
+use App\Entity\Account;
+use App\Handler\EntityHandler;
 
-use Tavro\Event\Account\AccountOwnerDeactivateEvent;
-use Tavro\Event\Account\AccountDeactivateEvent;
+use App\Event\Account\AccountOwnerDeactivateEvent;
+use App\Event\Account\AccountDeactivateEvent;
 
 use Symfony\Component\HttpFoundation\Request;
 

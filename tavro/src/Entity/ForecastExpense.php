@@ -1,5 +1,5 @@
 <?php
-namespace Tavro\Entity;
+namespace App\Entity;
 
 use Doctrine\ORM\Mapping AS ORM;
 
@@ -14,8 +14,8 @@ use JMS\Serializer\Annotation\SerializedName;
 use Doctrine\ORM\Mapping\Table;
 use Symfony\Component\Validator\Constraints as Assert;
 
-use Tavro\Model\Entity\Entity;
-use Tavro\Model\EntityInterface\ForecastEntityInterface;
+use App\Model\Entity\Entity;
+use App\Model\EntityInterface\ForecastEntityInterface;
 
 /**
  * @ORM\Entity
@@ -143,7 +143,7 @@ class ForecastExpense extends Entity implements ForecastEntityInterface
     /**
      * Set category
      *
-     * @param \Tavro\Entity\ExpenseCategory $category
+     * @param \App\Entity\ExpenseCategory $category
      *
      * @return ForecastExpense
      */
@@ -167,7 +167,7 @@ class ForecastExpense extends Entity implements ForecastEntityInterface
     /**
      * Set user
      *
-     * @param \Tavro\Entity\User $user
+     * @param \App\Entity\User $user
      *
      * @return ForecastExpense
      */
@@ -191,7 +191,7 @@ class ForecastExpense extends Entity implements ForecastEntityInterface
     /**
      * Set forecast
      *
-     * @param \Tavro\Entity\Forecast $forecast
+     * @param \App\Entity\Forecast $forecast
      *
      * @return ForecastExpense
      */

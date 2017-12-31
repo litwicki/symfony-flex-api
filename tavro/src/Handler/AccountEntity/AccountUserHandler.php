@@ -1,6 +1,6 @@
 <?php
 
-namespace Tavro\Handler\AccountEntity;
+namespace App\Handler\AccountEntity;
 
 use Doctrine\DBAL\Exception\NotNullConstraintViolationException;
 use Symfony\Component\Debug\Exception\ContextErrorException;
@@ -9,16 +9,16 @@ use Symfony\Component\PropertyAccess\Exception\InvalidPropertyPathException;
 use Symfony\Component\Form\Exception\TransformationFailedException;
 use Symfony\Component\Form\Exception\UnexpectedTypeException;
 
-use Tavro\Exception\Form\InvalidFormException;
-use Tavro\Entity\User;
-use Tavro\Entity\Account;
-use Tavro\Entity\AccountUser;
-use Tavro\Model\EntityInterface\EntityInterface;
-use Tavro\Exception\Api\ApiException;
-use Tavro\Exception\Api\ApiAccessDeniedException;
-use Tavro\Component\Form\FormErrors;
+use App\Exception\Form\InvalidFormException;
+use App\Entity\User;
+use App\Entity\Account;
+use App\Entity\AccountUser;
+use App\Model\EntityInterface\EntityInterface;
+use App\Exception\Api\ApiException;
+use App\Exception\Api\ApiAccessDeniedException;
+use App\Component\Form\FormErrors;
 
-use Tavro\Handler\EntityHandler;
+use App\Handler\EntityHandler;
 
 /**
  * Class AccountUserHandler
@@ -53,7 +53,7 @@ class AccountUserHandler extends EntityHandler
 
     /**
      * @param \Symfony\Component\HttpFoundation\Request $request
-     * @param \Tavro\Model\EntityInterface\EntityInterface $entity
+     * @param \App\Model\EntityInterface\EntityInterface $entity
      * @param array $parameters
      * @param string $method
      *

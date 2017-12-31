@@ -1,6 +1,6 @@
 <?php
 
-namespace Tavro\EventSubscriber\Account;
+namespace App\EventSubscriber\Account;
 
 use Psr\Log\LoggerInterface;
 
@@ -8,11 +8,11 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\Event\FilterResponseEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
 
-use Tavro\Event\Account\AccountCreateEvent;
-use Tavro\Event\Account\AccountDeactivateEvent;
-use Tavro\Event\Account\AccountDeleteEvent;
-use Tavro\Event\Account\AccountOwnerDeactivateEvent;
-use Tavro\Mail\TavroMailer;
+use App\Event\Account\AccountCreateEvent;
+use App\Event\Account\AccountDeactivateEvent;
+use App\Event\Account\AccountDeleteEvent;
+use App\Event\Account\AccountOwnerDeactivateEvent;
+use App\Mail\TavroMailer;
 
 class AccountSubscriber implements EventSubscriberInterface
 {
@@ -51,7 +51,7 @@ class AccountSubscriber implements EventSubscriberInterface
      * Send an Email Notification to the Account owner welcoming them.
      * Send an Email Notification to Staff about the new Account.
      *
-     * @param \Tavro\Event\Account\AccountCreateEvent $event
+     * @param \App\Event\Account\AccountCreateEvent $event
      */
     public function onAccountCreate(AccountCreateEvent $event)
     {
@@ -87,7 +87,7 @@ class AccountSubscriber implements EventSubscriberInterface
     /**
      * When an Account is Deleted..
      *
-     * @param \Tavro\Event\Account\AccountDeleteEvent $event
+     * @param \App\Event\Account\AccountDeleteEvent $event
      */
     public function onAccountDelete(AccountDeleteEvent $event)
     {
@@ -123,7 +123,7 @@ class AccountSubscriber implements EventSubscriberInterface
     /**
      * When an Account is Deactivated..
      *
-     * @param \Tavro\Event\Account\AccountDeactivateEvent $event
+     * @param \App\Event\Account\AccountDeactivateEvent $event
      */
     public function onAccountDeactivate(AccountDeactivateEvent $event)
     {
@@ -148,7 +148,7 @@ class AccountSubscriber implements EventSubscriberInterface
     /**
      * When an Account is Deactivated by its owner..
      *
-     * @param \Tavro\Event\Account\AccountOwnerDeactivateEvent $event
+     * @param \App\Event\Account\AccountOwnerDeactivateEvent $event
      */
     public function onAccountOwnerDeactivate(AccountOwnerDeactivateEvent $event)
     {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Tavro\Model\EntityInterface;
+namespace App\Model\EntityInterface;
 
 /**
  * Interface S3EntityInterface

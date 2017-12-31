@@ -1,8 +1,8 @@
 <?php
 
-namespace Tavro\Notifications;
+namespace App\Notifications;
 
-use Tavro\Model\Handler\EntityInterface\EntityHandlerInterface;
+use App\Model\HandlerInterface\EntityHandlerInterface;
 use Aws\Sns\SnsClient;
 use Cocur\Slugify\Slugify;
 
@@ -48,6 +48,11 @@ class NotificationHandler implements EntityHandlerInterface
                 'Error Pushing Notification: %s', $message
             ));
         }
+    }
+
+    public function get($id)
+    {
+        //@TODO:
     }
 
 }

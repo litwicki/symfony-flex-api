@@ -1,4 +1,4 @@
-<?php namespace Tavro\Handler;
+<?php namespace App\Handler;
 
 use Faker\Provider\cs_CZ\DateTime;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
@@ -7,8 +7,8 @@ use Symfony\Component\HttpFoundation\Request;
 
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 
-use Tavro\Entity\User;
-use Tavro\Exception\Api\ApiAccessDeniedException;
+use App\Entity\User;
+use App\Exception\Api\ApiAccessDeniedException;
 
 class DateHandler implements ContainerAwareInterface
 {

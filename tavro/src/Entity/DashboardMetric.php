@@ -1,6 +1,6 @@
 <?php
 
-namespace Tavro\Entity;
+namespace App\Entity;
 
 use Doctrine\ORM\Mapping AS ORM;
 
@@ -12,8 +12,8 @@ use JMS\Serializer\Annotation\VirtualProperty;
 use JMS\Serializer\Annotation\Groups;
 use Doctrine\ORM\Mapping\Table;
 
-use Tavro\Model\Entity\Entity;
-use Tavro\Model\EntityInterface\EntityInterface;
+use App\Model\Entity\Entity;
+use App\Model\EntityInterface\EntityInterface;
 
 /**
  * @ORM\Entity
@@ -39,7 +39,7 @@ class DashboardMetric extends Entity implements EntityInterface
     /**
      * Set metric
      *
-     * @param \Tavro\Entity\Metric $metric
+     * @param \App\Entity\Metric $metric
      * @return $this
      */
     public function setMetric(\Tavro\Entity\Metric $metric)
@@ -62,7 +62,7 @@ class DashboardMetric extends Entity implements EntityInterface
     /**
      * Set dashboard
      *
-     * @param \Tavro\Entity\dashboard $dashboard
+     * @param \App\Entity\dashboard $dashboard
      * @return $this
      */
     public function setDashboard(\Tavro\Entity\Dashboard $dashboard)

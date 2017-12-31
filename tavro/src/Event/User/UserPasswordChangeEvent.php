@@ -1,9 +1,9 @@
 <?php
 
-namespace Tavro\Event\User;
+namespace App\Event\User;
 
 use Symfony\Component\EventDispatcher\Event;
-use Tavro\Entity\User;
+use App\Entity\User;
 
 /**
  * Class UserPasswordChangeEvent

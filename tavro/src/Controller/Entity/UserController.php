@@ -1,12 +1,12 @@
-<?php namespace Tavro\Controller\Entity;
+<?php namespace App\Controller\Entity;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
-use Tavro\Entity\User;
-use Tavro\Controller\Api\EntityApiController;
-use Tavro\Exception\UsernameNotUniqueException;
+use App\Entity\User;
+use App\Controller\Api\EntityApiController;
+use App\Exception\UsernameNotUniqueException;
 
 class UserController extends EntityApiController
 {
@@ -135,7 +135,7 @@ class UserController extends EntityApiController
 
     /**
      * @param \Symfony\Component\HttpFoundation\Request $request
-     * @param \Tavro\Entity\User $user
+     * @param \App\Entity\User $user
      * @param $_format
      *
      * @return \Symfony\Component\HttpFoundation\Response

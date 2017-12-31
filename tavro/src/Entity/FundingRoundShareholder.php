@@ -1,6 +1,6 @@
 <?php
 
-namespace Tavro\Entity;
+namespace App\Entity;
 
 use Doctrine\ORM\Mapping AS ORM;
 
@@ -13,8 +13,8 @@ use JMS\Serializer\Annotation\Groups;
 use JMS\Serializer\Annotation\MaxDepth;
 use Doctrine\ORM\Mapping\Table;
 
-use Tavro\Model\Entity\Entity;
-use Tavro\Model\EntityInterface\EntityInterface;
+use App\Model\Entity\Entity;
+use App\Model\EntityInterface\EntityInterface;
 
 /**
  * @ORM\Entity
@@ -49,7 +49,7 @@ class FundingRoundShareholder extends Entity implements EntityInterface
     /**
      * Set shareholder
      *
-     * @param \Tavro\Entity\Shareholder $shareholder
+     * @param \App\Entity\Shareholder $shareholder
      * @return FundingRoundShareholder
      */
     public function setShareholder(\Tavro\Entity\Shareholder $shareholder)
@@ -72,7 +72,7 @@ class FundingRoundShareholder extends Entity implements EntityInterface
     /**
      * Set FundingRound
      *
-     * @param \Tavro\Entity\FundingRound $funding_round
+     * @param \App\Entity\FundingRound $funding_round
      * @return FundingRoundShareholder
      */
     public function setFundingRound(\Tavro\Entity\FundingRound $funding_round)

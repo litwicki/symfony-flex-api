@@ -1,12 +1,12 @@
-<?php namespace Tavro\Security\Jwt;
+<?php namespace App\Security\Jwt;
 
 use Lexik\Bundle\JWTAuthenticationBundle\Encoder\DefaultEncoder;
 
-use Tavro\Exception\ApiException;
-use Tavro\Entity\User;
-use Tavro\Exception\Security\UserStatusNotEnabledException;
-use Tavro\Exception\Security\UserStatusPendingException;
-use Tavro\Exception\Security\UserStatusDisabledException;
+use App\Exception\ApiException;
+use App\Entity\User;
+use App\Exception\Security\UserStatusNotEnabledException;
+use App\Exception\Security\UserStatusPendingException;
+use App\Exception\Security\UserStatusDisabledException;
 
 class JwtHandler
 {
@@ -18,7 +18,7 @@ class JwtHandler
     }
 
     /**
-     * @param \Tavro\Entity\User $user
+     * @param \App\Entity\User $user
      *
      * @return \Tavro\Entity\User
      */

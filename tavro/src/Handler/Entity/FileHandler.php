@@ -1,15 +1,15 @@
 <?php
 
-namespace Tavro\Handler\Entity;
+namespace App\Handler\Entity;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
-use Tavro\Exception\Api\ApiException;
-use Tavro\Handler\S3EntityHandler;
-use Tavro\Model\HandlerInterface\S3EntityHandlerInterface;
-use Tavro\Model\EntityInterface\EntityInterface;
-use Tavro\Exception\Api\ApiAccessDeniedException;
+use App\Exception\Api\ApiException;
+use App\Handler\S3EntityHandler;
+use App\Model\HandlerInterface\S3EntityHandlerInterface;
+use App\Model\EntityInterface\EntityInterface;
+use App\Exception\Api\ApiAccessDeniedException;
 
 use Gaufrette\Adapter\AwsS3;
 
@@ -120,7 +120,7 @@ class FileHandler extends S3EntityHandler implements S3EntityHandlerInterface
 
     /**
      * @param \Symfony\Component\HttpFoundation\Request $request
-     * @param \Tavro\Model\EntityInterface\EntityInterface $entity
+     * @param \App\Model\EntityInterface\EntityInterface $entity
      *
      * @return void
      */

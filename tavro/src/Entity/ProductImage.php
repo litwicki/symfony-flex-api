@@ -1,6 +1,6 @@
 <?php
 
-namespace Tavro\Entity;
+namespace App\Entity;
 
 use Doctrine\ORM\Mapping AS ORM;
 
@@ -13,8 +13,8 @@ use JMS\Serializer\Annotation\Groups;
 use JMS\Serializer\Annotation\MaxDepth;
 use Doctrine\ORM\Mapping\Table;
 
-use Tavro\Model\Entity\Entity;
-use Tavro\Model\EntityInterface\EntityInterface;
+use App\Model\Entity\Entity;
+use App\Model\EntityInterface\EntityInterface;
 
 /**
  * @ORM\Entity
@@ -42,7 +42,7 @@ class ProductImage extends Entity implements EntityInterface
     /**
      * Set image
      *
-     * @param \Tavro\Entity\Image $image
+     * @param \App\Entity\Image $image
      * @return ProductImage
      */
     public function setImage(\Tavro\Entity\Image $image)
@@ -65,7 +65,7 @@ class ProductImage extends Entity implements EntityInterface
     /**
      * Set Product
      *
-     * @param \Tavro\Entity\Product $product
+     * @param \App\Entity\Product $product
      * @return ProductImage
      */
     public function setProduct(\Tavro\Entity\Product $product)

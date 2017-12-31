@@ -1,29 +1,29 @@
 <?php
 
-namespace Tavro\Controller\AccountEntity;
+namespace App\Controller\AccountEntity;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-use Tavro\Exception\Api\ApiException;
-use Tavro\Exception\Api\ApiNotFoundException;
-use Tavro\Exception\Api\ApiRequestLimitException;
-use Tavro\Exception\Api\ApiAccessDeniedException;
-use Tavro\Exception\Form\InvalidFormException;
+use App\Exception\Api\ApiException;
+use App\Exception\Api\ApiNotFoundException;
+use App\Exception\Api\ApiRequestLimitException;
+use App\Exception\Api\ApiAccessDeniedException;
+use App\Exception\Form\InvalidFormException;
 
 use Doctrine\Common\Inflector\Inflector;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 
-use Tavro\Entity\Account;
-use Tavro\Entity\Node;
-use Tavro\Entity\Tag;
-use Tavro\Entity\NodeTag;
-use Tavro\Entity\User;
-use Tavro\Entity\NodeComment;
+use App\Entity\Account;
+use App\Entity\Node;
+use App\Entity\Tag;
+use App\Entity\NodeTag;
+use App\Entity\User;
+use App\Entity\NodeComment;
 use Symfony\Component\HttpFoundation\Cookie;
 
 use Litwicki\Common\Common;
-use Tavro\Controller\Api\AccountEntityApiController;
+use App\Controller\Api\AccountEntityApiController;
 
 class NodeController extends AccountEntityApiController
 {
@@ -32,7 +32,7 @@ class NodeController extends AccountEntityApiController
      * Display all Comments for this Node.
      *
      * @param \Symfony\Component\HttpFoundation\Request $request
-     * @param \Tavro\Entity\Node $node
+     * @param \App\Entity\Node $node
      * @param $_format
      *
      * @return \Symfony\Component\HttpFoundation\Response
@@ -67,7 +67,7 @@ class NodeController extends AccountEntityApiController
 
     /**
      * @param \Symfony\Component\HttpFoundation\Request $request
-     * @param \Tavro\Entity\Node $node
+     * @param \App\Entity\Node $node
      * @param $_format
      *
      * @return \Symfony\Component\HttpFoundation\Response
@@ -112,7 +112,7 @@ class NodeController extends AccountEntityApiController
      * Display all Tags for this Node.
      *
      * @param \Symfony\Component\HttpFoundation\Request $request
-     * @param \Tavro\Entity\Node $node
+     * @param \App\Entity\Node $node
      * @param $_format
      *
      * @return \Symfony\Component\HttpFoundation\Response
@@ -145,7 +145,7 @@ class NodeController extends AccountEntityApiController
 
     /**
      * @param \Symfony\Component\HttpFoundation\Request $request
-     * @param \Tavro\Entity\Node $node
+     * @param \App\Entity\Node $node
      * @param $_format
      *
      * @return \Symfony\Component\HttpFoundation\Response
@@ -190,7 +190,7 @@ class NodeController extends AccountEntityApiController
      * Delete a Tag from a Node, but not physically itself.
      *
      * @param \Symfony\Component\HttpFoundation\Request $request
-     * @param \Tavro\Entity\Node $node
+     * @param \App\Entity\Node $node
      * @param $_format
      *
      * @return \Symfony\Component\HttpFoundation\Response
@@ -224,7 +224,7 @@ class NodeController extends AccountEntityApiController
 
     /**
      * @param \Symfony\Component\HttpFoundation\Request $request
-     * @param \Tavro\Entity\User $user
+     * @param \App\Entity\User $user
      * @param $_format
      *
      * @return \Symfony\Component\HttpFoundation\Response

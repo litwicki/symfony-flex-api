@@ -1,13 +1,11 @@
-<?php
-
-namespace Tavro\Services;
+<?php namespace App\Aws\S3;
 
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
-use Tavro\Model\EntityInterface;
-use Tavro\Model\S3EntityInterface;
+use App\Model\EntityInterface;
+use App\Model\EntityInterface\S3EntityInterface;
 
 use Doctrine\ORM\EntityManager;
 
@@ -116,7 +114,7 @@ class FileManager implements ContainerAwareInterface
     /**
      * Physically delete a file.
      *
-     * @param \Tavro\Model\S3EntityInterface $entity
+     * @param \App\Model\EntityInterface\S3EntityInterface $entity
      *
      * @return \Aws\Result
      * @throws \Exception

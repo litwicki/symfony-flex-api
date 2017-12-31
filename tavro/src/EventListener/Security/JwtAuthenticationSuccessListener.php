@@ -1,9 +1,9 @@
 <?php
 
-namespace Tavro\EventListener\Security;
+namespace App\EventListener\Security;
 
 use Lexik\Bundle\JWTAuthenticationBundle\Event\AuthenticationSuccessEvent;
-use Tavro\Model\EntityInterface\UserInterface;
+use App\Model\EntityInterface\UserInterface;
 
 class JwtAuthenticationSuccessListener
 {

@@ -1,4 +1,4 @@
-<?php namespace Tavro\Command\Tavro;
+<?php namespace App\Command\Tavro;
 
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;

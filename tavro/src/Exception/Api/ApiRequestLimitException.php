@@ -1,6 +1,6 @@
 <?php
 
-namespace Tavro\Exception\Api;
+namespace App\Exception\Api;
 
 use Symfony\Component\HttpKernel\Exception\HttpException;
 

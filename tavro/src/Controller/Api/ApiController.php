@@ -1,20 +1,20 @@
-<?php namespace Tavro\Controller\Api;
+<?php namespace App\Controller\Api;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-use Tavro\Entity\Account;
+use App\Entity\Account;
 
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
-use Tavro\Exception\ApiNotFoundException;
-use Tavro\Model\EntityInterface\EntityInterface;
-use Tavro\Model\HandlerInterface\AccountEntityHandlerInterface;
+use App\Exception\ApiNotFoundException;
+use App\Model\EntityInterface\EntityInterface;
+use App\Model\HandlerInterface\AccountEntityHandlerInterface;
 
 use Doctrine\Common\Inflector\Inflector;
 
 use Litwicki\Common\Common;
-use Tavro\Controller\DefaultController;
+use App\Controller\DefaultController;
 
 class ApiController extends DefaultController
 {
@@ -213,7 +213,7 @@ class ApiController extends DefaultController
 
     /**
      * @param \Symfony\Component\HttpFoundation\Request $request
-     * @param \Tavro\Entity\Account $account
+     * @param \App\Entity\Account $account
      * @param $entity
      * @param string $_format
      *

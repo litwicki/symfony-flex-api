@@ -1,6 +1,6 @@
 <?php
 
-namespace Tavro\Entity;
+namespace App\Entity;
 
 use Doctrine\ORM\Mapping AS ORM;
 
@@ -13,8 +13,8 @@ use JMS\Serializer\Annotation\Groups;
 use JMS\Serializer\Annotation\MaxDepth;
 use Doctrine\ORM\Mapping\Table;
 
-use Tavro\Model\Entity\Entity;
-use Tavro\Model\EntityInterface\ForecastEntityInterface;
+use App\Model\Entity\Entity;
+use App\Model\EntityInterface\ForecastEntityInterface;
 
 /**
  * @ORM\Entity
@@ -46,7 +46,7 @@ class ForecastComment extends Entity implements ForecastEntityInterface
     /**
      * Set comment
      *
-     * @param \Tavro\Entity\Comment $comment
+     * @param \App\Entity\Comment $comment
      * @return ForecastComment
      */
     public function setComment(\Tavro\Entity\Comment $comment)
@@ -69,7 +69,7 @@ class ForecastComment extends Entity implements ForecastEntityInterface
     /**
      * Set Forecast
      *
-     * @param \Tavro\Entity\Forecast $forecast
+     * @param \App\Entity\Forecast $forecast
      * @return ForecastComment
      */
     public function setForecast(\Tavro\Entity\Forecast $forecast)

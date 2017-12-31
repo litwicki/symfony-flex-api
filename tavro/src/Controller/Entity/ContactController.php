@@ -1,27 +1,27 @@
 <?php
 
-namespace Tavro\Controller\Entity;
+namespace App\Controller\Entity;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-use Tavro\Exception\Api\ApiException;
-use Tavro\Exception\Api\ApiNotFoundException;
-use Tavro\Exception\Api\ApiRequestLimitException;
-use Tavro\Exception\Api\ApiAccessDeniedException;
-use Tavro\Exception\Form\InvalidFormException;
+use App\Exception\Api\ApiException;
+use App\Exception\Api\ApiNotFoundException;
+use App\Exception\Api\ApiRequestLimitException;
+use App\Exception\Api\ApiAccessDeniedException;
+use App\Exception\Form\InvalidFormException;
 
 use Doctrine\Common\Inflector\Inflector;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 
-use Tavro\Entity\Expense;
-use Tavro\Entity\ExpenseComment;
+use App\Entity\Expense;
+use App\Entity\ExpenseComment;
 use Symfony\Component\HttpFoundation\Cookie;
 
-use Tavro\Entity\Contact;
+use App\Entity\Contact;
 
 use Litwicki\Common\Common;
-use Tavro\Controller\Api\EntityApiController;
+use App\Controller\Api\EntityApiController;
 
 class ContactController extends EntityApiController
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Tavro\Form;
+namespace App\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -10,7 +10,7 @@ use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 
-class FundingCommentType extends AbstractType
+class FundingRoundCommentType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder

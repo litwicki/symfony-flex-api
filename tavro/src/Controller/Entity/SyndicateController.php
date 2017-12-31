@@ -1,27 +1,27 @@
 <?php
 
-namespace Tavro\Controller\Entity;
+namespace App\Controller\Entity;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-use Tavro\Exception\Api\ApiException;
-use Tavro\Exception\Api\ApiNotFoundException;
-use Tavro\Exception\Api\ApiRequestLimitException;
-use Tavro\Exception\Api\ApiAccessDeniedException;
-use Tavro\Exception\Form\InvalidFormException;
+use App\Exception\Api\ApiException;
+use App\Exception\Api\ApiNotFoundException;
+use App\Exception\Api\ApiRequestLimitException;
+use App\Exception\Api\ApiAccessDeniedException;
+use App\Exception\Form\InvalidFormException;
 
 use Doctrine\Common\Inflector\Inflector;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 
-use Tavro\Entity\Node;
-use Tavro\Entity\Tag;
-use Tavro\Entity\NodeTag;
-use Tavro\Entity\NodeComment;
+use App\Entity\Node;
+use App\Entity\Tag;
+use App\Entity\NodeTag;
+use App\Entity\NodeComment;
 use Symfony\Component\HttpFoundation\Cookie;
 
 use Litwicki\Common\Common;
-use Tavro\Controller\Api\EntityApiController;
+use App\Controller\Api\EntityApiController;
 
 class SyndicateController extends EntityApiController
 {

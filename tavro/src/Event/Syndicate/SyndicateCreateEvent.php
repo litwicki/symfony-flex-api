@@ -1,8 +1,8 @@
-<?php namespace Tavro\Event\Syndicate;
+<?php namespace App\Event\Syndicate;
 
 use Symfony\Component\EventDispatcher\Event;
-use Tavro\Entity\Syndicate;
-use Tavro\Entity\User;
+use App\Entity\Syndicate;
+use App\Entity\User;
 
 class SyndicateCreateEvent extends Event
 {

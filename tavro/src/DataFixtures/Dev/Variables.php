@@ -1,6 +1,6 @@
 <?php
 
-namespace Tavro\DataFixtures\Dev;
+namespace App\DataFixtures\Dev;
 
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
@@ -9,33 +9,33 @@ use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
-use Tavro\Entity\Comment;
-use Tavro\Entity\User;
-use Tavro\Entity\Role;
-use Tavro\Entity\Variable;
-use Tavro\Entity\Organization;
-use Tavro\Entity\Shareholder;
-use Tavro\Entity\Product;
-use Tavro\Entity\Service;
-use Tavro\Entity\Expense;
-use Tavro\Entity\Node;
-use Tavro\Entity\Revenue;
-use Tavro\Entity\Tag;
-use Tavro\Entity\AccountUser;
-use Tavro\Entity\ExpenseCategory;
-use Tavro\Entity\ExpenseComment;
-use Tavro\Entity\ExpenseTag;
-use Tavro\Entity\FundingRound;
-use Tavro\Entity\FundingRoundComment;
-use Tavro\Entity\NodeComment;
-use Tavro\Entity\ProductCategory;
-use Tavro\Entity\RevenueCategory;
-use Tavro\Entity\ServiceCategory;
-use Tavro\Entity\Contact;
-use Tavro\Entity\OrganizationComment;
-use Tavro\Entity\FundingRoundShareholder;
-use Tavro\Entity\RevenueService;
-use Tavro\Entity\RevenueProduct;
+use App\Entity\Comment;
+use App\Entity\User;
+use App\Entity\Role;
+use App\Entity\Variable;
+use App\Entity\Organization;
+use App\Entity\Shareholder;
+use App\Entity\Product;
+use App\Entity\Service;
+use App\Entity\Expense;
+use App\Entity\Node;
+use App\Entity\Revenue;
+use App\Entity\Tag;
+use App\Entity\AccountUser;
+use App\Entity\ExpenseCategory;
+use App\Entity\ExpenseComment;
+use App\Entity\ExpenseTag;
+use App\Entity\FundingRound;
+use App\Entity\FundingRoundComment;
+use App\Entity\NodeComment;
+use App\Entity\ProductCategory;
+use App\Entity\RevenueCategory;
+use App\Entity\ServiceCategory;
+use App\Entity\Contact;
+use App\Entity\OrganizationComment;
+use App\Entity\FundingRoundShareholder;
+use App\Entity\RevenueService;
+use App\Entity\RevenueProduct;
 
 use Cocur\Slugify\Slugify;
 

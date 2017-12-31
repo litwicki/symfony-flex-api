@@ -1,6 +1,6 @@
 <?php
 
-namespace Tavro\Handler;
+namespace App\Handler;
 
 use Doctrine\Common\Persistence\ObjectManager;
 
@@ -13,10 +13,10 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
-use Tavro\Model\EntityInterface\EntityInterface;
-use Tavro\Exception\Api\ApiException;
-use Tavro\Exception\Api\ApiAccessDeniedException;
-use Tavro\Model\HandlerInterface\S3EntityHandlerInterface;
+use App\Model\EntityInterface\EntityInterface;
+use App\Exception\Api\ApiException;
+use App\Exception\Api\ApiAccessDeniedException;
+use App\Model\HandlerInterface\S3EntityHandlerInterface;
 
 class S3EntityHandler extends EntityHandler implements S3EntityHandlerInterface
 {
@@ -204,7 +204,7 @@ class S3EntityHandler extends EntityHandler implements S3EntityHandlerInterface
 
     /**
      * @param \Symfony\Component\HttpFoundation\Request $request
-     * @param \Tavro\Model\EntityInterface\EntityInterface $entity
+     * @param \App\Model\EntityInterface\EntityInterface $entity
      *
      * @return void
      */

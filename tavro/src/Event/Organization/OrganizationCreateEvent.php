@@ -1,8 +1,8 @@
-<?php namespace Tavro\Event;
+<?php namespace App\Event\Organization;
 
 use Symfony\Component\EventDispatcher\Event;
-use Tavro\Entity\Organization;
-use Tavro\Entity\User;
+use App\Entity\Organization;
+use App\Entity\User;
 
 class OrganizationCreateEvent extends Event
 {

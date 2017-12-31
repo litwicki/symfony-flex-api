@@ -1,4 +1,4 @@
-<?php namespace Tavro\Calculator;
+<?php namespace App\Calculator;
 
 /**
  * Class Churn

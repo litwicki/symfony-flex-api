@@ -1,33 +1,33 @@
 <?php
 
-namespace Tavro\Handler\Entity;
+namespace App\Handler\Entity;
 
 use Rhumsaa\Uuid\Uuid;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
-use Tavro\Event\User\UserForgotPasswordEvent;
-use Tavro\Event\User\UserSignupEvent;
-use Tavro\Event\User\UserPasswordChangeEvent;
-use Tavro\EventSubscriber\User\UserSubscriber;
-use Tavro\Exception\Password\PasswordLengthException;
+use App\Event\User\UserForgotPasswordEvent;
+use App\Event\User\UserSignupEvent;
+use App\Event\User\UserPasswordChangeEvent;
+use App\EventSubscriber\User\UserSubscriber;
+use App\Exception\Password\PasswordLengthException;
 use Symfony\Component\PropertyAccess\Exception\InvalidPropertyPathException;
 use Symfony\Component\Form\Exception\TransformationFailedException;
 use Symfony\Component\Form\Exception\UnexpectedTypeException;
 use Symfony\Component\Debug\Exception\ContextErrorException;
 use Symfony\Component\HttpFoundation\Request;
 
-use Tavro\Exception\InvalidUsernameException;
-use Tavro\Exception\Api\ApiException;
-use Tavro\Handler\EntityHandler;
-use Tavro\Exception\Form\InvalidFormException;
-use Tavro\Model\EntityInterface\EntityInterface;
-use Tavro\Exception\Api\ApiAccessDeniedException;
-use Tavro\Exception\UsernameNotUniqueException;
-use Tavro\Exception\EmailNotUniqueException;
-use Tavro\Entity\User;
-use Tavro\Entity\Role;
-use Tavro\Component\Form\FormErrors;
-use Tavro\Exception\Entity\TavroUser\UserNotActivatedException;
+use App\Exception\InvalidUsernameException;
+use App\Exception\Api\ApiException;
+use App\Handler\EntityHandler;
+use App\Exception\Form\InvalidFormException;
+use App\Model\EntityInterface\EntityInterface;
+use App\Exception\Api\ApiAccessDeniedException;
+use App\Exception\UsernameNotUniqueException;
+use App\Exception\EmailNotUniqueException;
+use App\Entity\User;
+use App\Entity\Role;
+use App\Component\Form\FormErrors;
+use App\Exception\Entity\TavroUser\UserNotActivatedException;
 
 /**
  * Class UserHandler
@@ -92,7 +92,7 @@ class UserHandler extends EntityHandler
    * Fully update a User
    *
    * @param \Symfony\Component\HttpFoundation\Request $request
-   * @param \Tavro\Model\EntityInterface\EntityInterface $entity
+   * @param \App\Model\EntityInterface\EntityInterface $entity
    * @param array $parameters
    *
    * @return \Tavro\Model\EntityInterface\EntityInterface
@@ -153,7 +153,7 @@ class UserHandler extends EntityHandler
 
     /**
      * @param \Symfony\Component\HttpFoundation\Request $request
-     * @param \Tavro\Model\EntityInterface\EntityInterface $entity
+     * @param \App\Model\EntityInterface\EntityInterface $entity
      * @param array $parameters
      * @param string $method
      *
@@ -263,7 +263,7 @@ class UserHandler extends EntityHandler
     /**
      * Get a list of *all* Roles with a flag for ones the current User has actively.
      *
-     * @param \Tavro\Entity\User $user
+     * @param \App\Entity\User $user
      *
      * @return array $items
      * @throws \Exception
@@ -354,7 +354,7 @@ class UserHandler extends EntityHandler
     }
 
     /**
-     * @param \Tavro\Entity\User $user
+     * @param \App\Entity\User $user
      * @param array $roles
      *
      * @throws \Exception
@@ -418,7 +418,7 @@ class UserHandler extends EntityHandler
     }
 
     /**
-     * @param \Tavro\Entity\User $user
+     * @param \App\Entity\User $user
      * @param array $roles
      *
      * @throws \Exception
@@ -452,7 +452,7 @@ class UserHandler extends EntityHandler
     }
 
     /**
-     * @param \Tavro\Entity\User $user
+     * @param \App\Entity\User $user
      * @param array $roles
      *
      * @return \Tavro\Entity\User
@@ -504,7 +504,7 @@ class UserHandler extends EntityHandler
     }
 
     /**
-     * @param \Tavro\Model\EntityInterface\EntityInterface $user
+     * @param \App\Model\EntityInterface\EntityInterface $user
      *
      * @return \Tavro\Model\EntityInterface\EntityInterface
      * @throws \Exception
@@ -525,7 +525,7 @@ class UserHandler extends EntityHandler
     }
 
     /**
-     * @param \Tavro\Model\EntityInterface\EntityInterface $user
+     * @param \App\Model\EntityInterface\EntityInterface $user
      *
      * @return \Tavro\Model\EntityInterface\EntityInterface
      * @throws \Exception
@@ -586,7 +586,7 @@ class UserHandler extends EntityHandler
     }
 
     /**
-     * @param \Tavro\Entity\User $user
+     * @param \App\Entity\User $user
      *
      * @throws \Exception
      */
@@ -610,7 +610,7 @@ class UserHandler extends EntityHandler
 
     /**
      * @param \Symfony\Component\HttpFoundation\Request $request
-     * @param \Tavro\Entity\User $user
+     * @param \App\Entity\User $user
      * @param $parameters
      *
      * @return \Tavro\Model\EntityInterface\EntityInterface
@@ -640,7 +640,7 @@ class UserHandler extends EntityHandler
 
     /**
      * @param \Symfony\Component\HttpFoundation\Request $request
-     * @param \Tavro\Entity\User $user
+     * @param \App\Entity\User $user
      * @param array $parameters
      *
      * @return \Tavro\Entity\User
@@ -686,7 +686,7 @@ class UserHandler extends EntityHandler
 
     /**
      * @param \Symfony\Component\HttpFoundation\Request $request
-     * @param \Tavro\Model\EntityInterface\EntityInterface $entity
+     * @param \App\Model\EntityInterface\EntityInterface $entity
      * @param array $parameters
      *
      * @return \Tavro\Model\EntityInterface\EntityInterface
@@ -732,7 +732,7 @@ class UserHandler extends EntityHandler
     }
 
     /**
-     * @param \Tavro\Model\EntityInterface\EntityInterface $user
+     * @param \App\Model\EntityInterface\EntityInterface $user
      * @param array $parameters
      *
      * @throws \Exception
@@ -770,7 +770,7 @@ class UserHandler extends EntityHandler
     }
 
     /**
-     * @param \Tavro\Entity\User $user
+     * @param \App\Entity\User $user
      * @param $username
      * @param $repository
      *
@@ -803,7 +803,7 @@ class UserHandler extends EntityHandler
     }
 
     /**
-     * @param \Tavro\Entity\User $user
+     * @param \App\Entity\User $user
      * @param $username
      * @param $repository
      *
@@ -823,7 +823,7 @@ class UserHandler extends EntityHandler
     }
 
     /**
-     * @param \Tavro\Entity\User $user
+     * @param \App\Entity\User $user
      * @param $email
      * @param $repository
      *
@@ -858,8 +858,8 @@ class UserHandler extends EntityHandler
     }
 
     /**
-     * @param \Tavro\Entity\User $user
-     * @param \Tavro\Entity\Role $thisRole
+     * @param \App\Entity\User $user
+     * @param \App\Entity\Role $thisRole
      *
      * @throws \Exception
      * @return bool
@@ -884,7 +884,7 @@ class UserHandler extends EntityHandler
     }
 
     /**
-     * @param \Tavro\Entity\User $user
+     * @param \App\Entity\User $user
      * @param $roleName
      *
      * @return bool
@@ -907,7 +907,7 @@ class UserHandler extends EntityHandler
      * their password.
      *
      * @param \Symfony\Component\HttpFoundation\Request $request
-     * @param \Tavro\Entity\User $user
+     * @param \App\Entity\User $user
      *
      * @return array
      * @throws \Exception
@@ -943,7 +943,7 @@ class UserHandler extends EntityHandler
     /**
      * Set (encode) the User's password.
      *
-     * @param \Tavro\Entity\User $user
+     * @param \App\Entity\User $user
      * @param $password
      *
      * @return string

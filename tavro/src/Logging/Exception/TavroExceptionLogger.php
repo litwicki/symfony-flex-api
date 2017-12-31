@@ -1,13 +1,13 @@
-<?php namespace Tavro\Logging\Exception;
+<?php namespace App\Logging\Exception;
 
-use Monolog\Logger as Monolog;
+use Psr\Log\LoggerInterface;
 use Symfony\Component\HttpKernel\Event\GetResponseForExceptionEvent;
 
 class TavroExceptionLogger
 {
     protected $logger;
 
-    public function __construct(Monolog $logger)
+    public function __construct(LoggerInterface $logger)
     {
         $this->logger = $logger;
     }

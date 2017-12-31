@@ -1,6 +1,6 @@
 <?php
 
-namespace Tavro\Exception\Password;
+namespace App\Exception\Password;
 
 use Symfony\Component\HttpKernel\Exception\HttpException;
 

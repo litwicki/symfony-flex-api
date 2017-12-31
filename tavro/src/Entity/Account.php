@@ -1,6 +1,6 @@
 <?php
 
-namespace Tavro\Entity;
+namespace App\Entity;
 
 use Doctrine\ORM\Mapping AS ORM;
 use Rhumsaa\Uuid\Uuid;
@@ -14,11 +14,11 @@ use JMS\Serializer\Annotation\Groups;
 use Doctrine\ORM\Mapping\Table;
 use JMS\Serializer\Annotation\MaxDepth;
 
-use Tavro\Model\Entity\Entity;
-use Tavro\Model\EntityInterface\EntityInterface;
-use Tavro\Model\EventInterface\TavroCreateEventInterface;
-use Tavro\Model\EventInterface\TavroDeleteEventInterface;
-use Tavro\Model\EventInterface\TavroUpdateEventInterface;
+use App\Model\Entity\Entity;
+use App\Model\EntityInterface\EntityInterface;
+use App\Model\EventInterface\TavroCreateEventInterface;
+use App\Model\EventInterface\TavroDeleteEventInterface;
+use App\Model\EventInterface\TavroUpdateEventInterface;
 
 /**
  * @ORM\Entity
@@ -352,7 +352,7 @@ class Account extends Entity implements EntityInterface, TavroCreateEventInterfa
     /**
      * Add accountUser
      *
-     * @param \Tavro\Entity\AccountUser $accountUser
+     * @param \App\Entity\AccountUser $accountUser
      *
      * @return Account
      */
@@ -366,7 +366,7 @@ class Account extends Entity implements EntityInterface, TavroCreateEventInterfa
     /**
      * Remove accountUser
      *
-     * @param \Tavro\Entity\AccountUser $accountUser
+     * @param \App\Entity\AccountUser $accountUser
      */
     public function removeAccountUser(\Tavro\Entity\AccountUser $accountUser)
     {
@@ -449,7 +449,7 @@ class Account extends Entity implements EntityInterface, TavroCreateEventInterfa
     /**
      * Set user
      *
-     * @param \Tavro\Entity\User $user
+     * @param \App\Entity\User $user
      *
      * @return Account
      */
@@ -488,7 +488,7 @@ class Account extends Entity implements EntityInterface, TavroCreateEventInterfa
     /**
      * Add organization
      *
-     * @param \Tavro\Entity\Organization $organization
+     * @param \App\Entity\Organization $organization
      *
      * @return Account
      */
@@ -502,7 +502,7 @@ class Account extends Entity implements EntityInterface, TavroCreateEventInterfa
     /**
      * Remove organization
      *
-     * @param \Tavro\Entity\Organization $organization
+     * @param \App\Entity\Organization $organization
      */
     public function removeOrganization(\Tavro\Entity\Organization $organization)
     {
@@ -522,7 +522,7 @@ class Account extends Entity implements EntityInterface, TavroCreateEventInterfa
     /**
      * Add serviceCategory
      *
-     * @param \Tavro\Entity\ServiceCategory $serviceCategory
+     * @param \App\Entity\ServiceCategory $serviceCategory
      *
      * @return Account
      */
@@ -536,7 +536,7 @@ class Account extends Entity implements EntityInterface, TavroCreateEventInterfa
     /**
      * Remove serviceCategory
      *
-     * @param \Tavro\Entity\ServiceCategory $serviceCategory
+     * @param \App\Entity\ServiceCategory $serviceCategory
      */
     public function removeServiceCategory(\Tavro\Entity\ServiceCategory $serviceCategory)
     {
@@ -556,7 +556,7 @@ class Account extends Entity implements EntityInterface, TavroCreateEventInterfa
     /**
      * Add expenseCategory
      *
-     * @param \Tavro\Entity\ExpenseCategory $expenseCategory
+     * @param \App\Entity\ExpenseCategory $expenseCategory
      *
      * @return Account
      */
@@ -570,7 +570,7 @@ class Account extends Entity implements EntityInterface, TavroCreateEventInterfa
     /**
      * Remove expenseCategory
      *
-     * @param \Tavro\Entity\ExpenseCategory $expenseCategory
+     * @param \App\Entity\ExpenseCategory $expenseCategory
      */
     public function removeExpenseCategory(\Tavro\Entity\ExpenseCategory $expenseCategory)
     {
@@ -590,7 +590,7 @@ class Account extends Entity implements EntityInterface, TavroCreateEventInterfa
     /**
      * Add productCategory
      *
-     * @param \Tavro\Entity\ProductCategory $productCategory
+     * @param \App\Entity\ProductCategory $productCategory
      *
      * @return Account
      */
@@ -604,7 +604,7 @@ class Account extends Entity implements EntityInterface, TavroCreateEventInterfa
     /**
      * Remove productCategory
      *
-     * @param \Tavro\Entity\ProductCategory $productCategory
+     * @param \App\Entity\ProductCategory $productCategory
      */
     public function removeProductCategory(\Tavro\Entity\ProductCategory $productCategory)
     {
@@ -624,7 +624,7 @@ class Account extends Entity implements EntityInterface, TavroCreateEventInterfa
     /**
      * Add revenueCategory
      *
-     * @param \Tavro\Entity\RevenueCategory $revenueCategory
+     * @param \App\Entity\RevenueCategory $revenueCategory
      *
      * @return Account
      */
@@ -638,7 +638,7 @@ class Account extends Entity implements EntityInterface, TavroCreateEventInterfa
     /**
      * Remove revenueCategory
      *
-     * @param \Tavro\Entity\RevenueCategory $revenueCategory
+     * @param \App\Entity\RevenueCategory $revenueCategory
      */
     public function removeRevenueCategory(\Tavro\Entity\RevenueCategory $revenueCategory)
     {
@@ -658,7 +658,7 @@ class Account extends Entity implements EntityInterface, TavroCreateEventInterfa
     /**
      * Add service
      *
-     * @param \Tavro\Entity\Service $service
+     * @param \App\Entity\Service $service
      *
      * @return Account
      */
@@ -672,7 +672,7 @@ class Account extends Entity implements EntityInterface, TavroCreateEventInterfa
     /**
      * Remove service
      *
-     * @param \Tavro\Entity\Service $service
+     * @param \App\Entity\Service $service
      */
     public function removeService(\Tavro\Entity\Service $service)
     {
@@ -692,7 +692,7 @@ class Account extends Entity implements EntityInterface, TavroCreateEventInterfa
     /**
      * Add revenue
      *
-     * @param \Tavro\Entity\Revenue $revenue
+     * @param \App\Entity\Revenue $revenue
      *
      * @return Account
      */
@@ -706,7 +706,7 @@ class Account extends Entity implements EntityInterface, TavroCreateEventInterfa
     /**
      * Remove revenue
      *
-     * @param \Tavro\Entity\Revenue $revenue
+     * @param \App\Entity\Revenue $revenue
      */
     public function removeRevenue(\Tavro\Entity\Revenue $revenue)
     {
@@ -726,7 +726,7 @@ class Account extends Entity implements EntityInterface, TavroCreateEventInterfa
     /**
      * Add product
      *
-     * @param \Tavro\Entity\Product $product
+     * @param \App\Entity\Product $product
      *
      * @return Account
      */
@@ -740,7 +740,7 @@ class Account extends Entity implements EntityInterface, TavroCreateEventInterfa
     /**
      * Remove product
      *
-     * @param \Tavro\Entity\Product $product
+     * @param \App\Entity\Product $product
      */
     public function removeProduct(\Tavro\Entity\Product $product)
     {
@@ -760,7 +760,7 @@ class Account extends Entity implements EntityInterface, TavroCreateEventInterfa
     /**
      * Add expense
      *
-     * @param \Tavro\Entity\Expense $expense
+     * @param \App\Entity\Expense $expense
      *
      * @return Account
      */
@@ -774,7 +774,7 @@ class Account extends Entity implements EntityInterface, TavroCreateEventInterfa
     /**
      * Remove expense
      *
-     * @param \Tavro\Entity\Expense $expense
+     * @param \App\Entity\Expense $expense
      */
     public function removeExpense(\Tavro\Entity\Expense $expense)
     {
@@ -794,7 +794,7 @@ class Account extends Entity implements EntityInterface, TavroCreateEventInterfa
     /**
      * Add accountGroup
      *
-     * @param \Tavro\Entity\AccountGroup $accountGroup
+     * @param \App\Entity\AccountGroup $accountGroup
      *
      * @return Account
      */
@@ -808,7 +808,7 @@ class Account extends Entity implements EntityInterface, TavroCreateEventInterfa
     /**
      * Remove accountGroup
      *
-     * @param \Tavro\Entity\AccountGroup $accountGroup
+     * @param \App\Entity\AccountGroup $accountGroup
      */
     public function removeAccountGroup(\Tavro\Entity\AccountGroup $accountGroup)
     {
@@ -828,7 +828,7 @@ class Account extends Entity implements EntityInterface, TavroCreateEventInterfa
     /**
      * Add fundingRound
      *
-     * @param \Tavro\Entity\FundingRound $fundingRound
+     * @param \App\Entity\FundingRound $fundingRound
      *
      * @return Account
      */
@@ -842,7 +842,7 @@ class Account extends Entity implements EntityInterface, TavroCreateEventInterfa
     /**
      * Remove fundingRound
      *
-     * @param \Tavro\Entity\FundingRound $fundingRound
+     * @param \App\Entity\FundingRound $fundingRound
      */
     public function removeFundingRound(\Tavro\Entity\FundingRound $fundingRound)
     {
@@ -878,7 +878,7 @@ class Account extends Entity implements EntityInterface, TavroCreateEventInterfa
     /**
      * Add document
      *
-     * @param \Tavro\Entity\Document $document
+     * @param \App\Entity\Document $document
      *
      * @return Account
      */
@@ -892,7 +892,7 @@ class Account extends Entity implements EntityInterface, TavroCreateEventInterfa
     /**
      * Remove document
      *
-     * @param \Tavro\Entity\Document $document
+     * @param \App\Entity\Document $document
      */
     public function removeDocument(\Tavro\Entity\Document $document)
     {
@@ -912,7 +912,7 @@ class Account extends Entity implements EntityInterface, TavroCreateEventInterfa
     /**
      * Add image
      *
-     * @param \Tavro\Entity\Image $image
+     * @param \App\Entity\Image $image
      *
      * @return Account
      */
@@ -926,7 +926,7 @@ class Account extends Entity implements EntityInterface, TavroCreateEventInterfa
     /**
      * Remove image
      *
-     * @param \Tavro\Entity\Image $image
+     * @param \App\Entity\Image $image
      */
     public function removeImage(\Tavro\Entity\Image $image)
     {
@@ -946,7 +946,7 @@ class Account extends Entity implements EntityInterface, TavroCreateEventInterfa
     /**
      * Add node
      *
-     * @param \Tavro\Entity\Node $node
+     * @param \App\Entity\Node $node
      *
      * @return Account
      */
@@ -960,7 +960,7 @@ class Account extends Entity implements EntityInterface, TavroCreateEventInterfa
     /**
      * Remove node
      *
-     * @param \Tavro\Entity\Node $node
+     * @param \App\Entity\Node $node
      */
     public function removeNode(\Tavro\Entity\Node $node)
     {
@@ -980,7 +980,7 @@ class Account extends Entity implements EntityInterface, TavroCreateEventInterfa
     /**
      * Add contact
      *
-     * @param \Tavro\Entity\Contact $contact
+     * @param \App\Entity\Contact $contact
      *
      * @return Account
      */
@@ -994,7 +994,7 @@ class Account extends Entity implements EntityInterface, TavroCreateEventInterfa
     /**
      * Remove contact
      *
-     * @param \Tavro\Entity\Contact $contact
+     * @param \App\Entity\Contact $contact
      */
     public function removeContact(\Tavro\Entity\Contact $contact)
     {
@@ -1026,7 +1026,7 @@ class Account extends Entity implements EntityInterface, TavroCreateEventInterfa
     /**
      * Add variable
      *
-     * @param \Tavro\Entity\Variable $variable
+     * @param \App\Entity\Variable $variable
      *
      * @return Account
      */
@@ -1040,7 +1040,7 @@ class Account extends Entity implements EntityInterface, TavroCreateEventInterfa
     /**
      * Remove variable
      *
-     * @param \Tavro\Entity\Variable $variable
+     * @param \App\Entity\Variable $variable
      */
     public function removeVariable(\Tavro\Entity\Variable $variable)
     {
@@ -1060,7 +1060,7 @@ class Account extends Entity implements EntityInterface, TavroCreateEventInterfa
     /**
      * Add forecast
      *
-     * @param \Tavro\Entity\Forecast $forecast
+     * @param \App\Entity\Forecast $forecast
      *
      * @return Account
      */
@@ -1074,7 +1074,7 @@ class Account extends Entity implements EntityInterface, TavroCreateEventInterfa
     /**
      * Remove forecast
      *
-     * @param \Tavro\Entity\Forecast $forecast
+     * @param \App\Entity\Forecast $forecast
      */
     public function removeForecast(\Tavro\Entity\Forecast $forecast)
     {
@@ -1094,7 +1094,7 @@ class Account extends Entity implements EntityInterface, TavroCreateEventInterfa
     /**
      * Set accountChargify
      *
-     * @param \Tavro\Entity\AccountChargify $accountChargify
+     * @param \App\Entity\AccountChargify $accountChargify
      *
      * @return Account
      */
@@ -1118,7 +1118,7 @@ class Account extends Entity implements EntityInterface, TavroCreateEventInterfa
     /**
      * Set accountFreshbooks
      *
-     * @param \Tavro\Entity\AccountChargify $accountFreshbooks
+     * @param \App\Entity\AccountChargify $accountFreshbooks
      *
      * @return Account
      */
@@ -1142,7 +1142,7 @@ class Account extends Entity implements EntityInterface, TavroCreateEventInterfa
     /**
      * Set accountHarvest
      *
-     * @param \Tavro\Entity\AccountChargify $accountHarvest
+     * @param \App\Entity\AccountChargify $accountHarvest
      *
      * @return Account
      */
@@ -1166,7 +1166,7 @@ class Account extends Entity implements EntityInterface, TavroCreateEventInterfa
     /**
      * Set accountHubspot
      *
-     * @param \Tavro\Entity\AccountChargify $accountHubspot
+     * @param \App\Entity\AccountChargify $accountHubspot
      *
      * @return Account
      */
@@ -1190,7 +1190,7 @@ class Account extends Entity implements EntityInterface, TavroCreateEventInterfa
     /**
      * Set accountQbo
      *
-     * @param \Tavro\Entity\AccountChargify $accountQbo
+     * @param \App\Entity\AccountChargify $accountQbo
      *
      * @return Account
      */
@@ -1214,7 +1214,7 @@ class Account extends Entity implements EntityInterface, TavroCreateEventInterfa
     /**
      * Set accountRecurly
      *
-     * @param \Tavro\Entity\AccountChargify $accountRecurly
+     * @param \App\Entity\AccountChargify $accountRecurly
      *
      * @return Account
      */
@@ -1238,7 +1238,7 @@ class Account extends Entity implements EntityInterface, TavroCreateEventInterfa
     /**
      * Set accountStripe
      *
-     * @param \Tavro\Entity\AccountChargify $accountStripe
+     * @param \App\Entity\AccountChargify $accountStripe
      *
      * @return Account
      */
@@ -1285,7 +1285,7 @@ class Account extends Entity implements EntityInterface, TavroCreateEventInterfa
     /**
      * Add staffPerson
      *
-     * @param \Tavro\Entity\StaffPerson $staffPerson
+     * @param \App\Entity\StaffPerson $staffPerson
      *
      * @return Account
      */
@@ -1299,7 +1299,7 @@ class Account extends Entity implements EntityInterface, TavroCreateEventInterfa
     /**
      * Remove staffPerson
      *
-     * @param \Tavro\Entity\StaffPerson $staffPerson
+     * @param \App\Entity\StaffPerson $staffPerson
      */
     public function removeStaffPerson(\Tavro\Entity\StaffPerson $staffPerson)
     {
@@ -1512,7 +1512,7 @@ class Account extends Entity implements EntityInterface, TavroCreateEventInterfa
     /**
      * Set type
      *
-     * @param \Tavro\Entity\AccountType $type
+     * @param \App\Entity\AccountType $type
      *
      * @return Account
      */

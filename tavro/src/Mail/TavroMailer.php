@@ -1,6 +1,6 @@
-<?php namespace Tavro\Mail;
+<?php namespace App\Mail;
 
-use Monolog\Logger;
+use Psr\Log\LoggerInterface;
 use Symfony\Bridge\Twig\TwigEngine;
 use Symfony\Component\DependencyInjection\ContainerAwareTrait;
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -30,12 +30,20 @@ class TavroMailer
      */
     const EMAIL_BUNDLE = 'TavroCoreBundle:Email';
 
-    public function __construct(\Swift_Mailer $mailer, Logger $logger, TwigEngine $twig)
+    public function __construct(LoggerInterface $logger)
     {
-        $this->mailer = $mailer;
+        //$this->mailer = $mailer;
         $this->logger = $logger;
-        $this->twig = $twig;
+        //$this->twig = $twig;
     }
+
+//    public function __construct(\Swift_Mailer $mailer, LoggerInterface $logger, TwigEngine $twig)
+//    {
+//        $this->mailer = $mailer;
+//        $this->logger = $logger;
+//        $this->twig = $twig;
+//    }
+
     /**
      * Sets the container.
      *

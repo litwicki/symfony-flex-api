@@ -1,6 +1,6 @@
 <?php
 
-namespace Tavro\Command;
+namespace App\Command;
 use PDO;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -13,7 +13,7 @@ use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\DriverManager;
 
-use Tavro\Entity\User;
+use App\Entity\User;
 
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 

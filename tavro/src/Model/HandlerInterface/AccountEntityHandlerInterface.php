@@ -1,7 +1,7 @@
-<?php namespace Tavro\Model\HandlerInterface;
+<?php namespace App\Model\HandlerInterface;
 
-use Tavro\Model\EntityInterface\EntityInterface;
-use Tavro\Entity\Account;
+use App\Model\EntityInterface\EntityInterface;
+use App\Entity\Account;
 
 interface AccountEntityHandlerInterface
 {
@@ -9,7 +9,7 @@ interface AccountEntityHandlerInterface
     /**
      * Fetch all Entities for a specified Account.
      *
-     * @param \Tavro\Entity\Account $account
+     * @param \App\Entity\Account $account
      *
      * @return array
      */

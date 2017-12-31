@@ -1,6 +1,6 @@
 <?php
 
-namespace Tavro\DependencyInjection;
+namespace App\DependencyInjection;
 
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\Config\FileLocator;

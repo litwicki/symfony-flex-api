@@ -1,16 +1,16 @@
 <?php
 
-namespace Tavro\Handler\Entity;
+namespace App\Handler\Entity;
 
-use Tavro\Model\EntityInterface\EntityInterface;
-use Tavro\Exception\Api\ApiAccessDeniedException;
-use Tavro\Exception\Api\ApiException;
+use App\Model\EntityInterface\EntityInterface;
+use App\Exception\Api\ApiAccessDeniedException;
+use App\Exception\Api\ApiException;
 
-use Tavro\Entity\User;
-use Tavro\Entity\Comment;
-use Tavro\Entity\NodeComment;
-use Tavro\Entity\Node;
-use Tavro\Handler\EntityHandler;
+use App\Entity\User;
+use App\Entity\Comment;
+use App\Entity\NodeComment;
+use App\Entity\Node;
+use App\Handler\EntityHandler;
 
 use Symfony\Component\HttpFoundation\Request;
 
@@ -23,7 +23,7 @@ class CommentHandler extends EntityHandler
 {
     /**
      * @param \Symfony\Component\HttpFoundation\Request $request
-     * @param \Tavro\Model\EntityInterface $entity
+     * @param \App\Model\EntityInterface $entity
      * @param array $parameters
      *
      * @return \Tavro\Model\EntityInterface|void

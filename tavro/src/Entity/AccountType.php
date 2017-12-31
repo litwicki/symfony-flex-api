@@ -1,6 +1,6 @@
 <?php
 
-namespace Tavro\Entity;
+namespace App\Entity;
 
 use Doctrine\ORM\Mapping AS ORM;
 
@@ -13,8 +13,8 @@ use JMS\Serializer\Annotation\Groups;
 use JMS\Serializer\Annotation\MaxDepth;
 use Doctrine\ORM\Mapping\Table;
 
-use Tavro\Model\Entity\Entity;
-use Tavro\Model\EntityInterface\EntityInterface;
+use App\Model\Entity\Entity;
+use App\Model\EntityInterface\EntityInterface;
 
 /**
  * @ORM\Entity
@@ -65,7 +65,7 @@ class AccountType extends Entity implements EntityInterface
     /**
      * Add account
      *
-     * @param \Tavro\Entity\Account $account
+     * @param \App\Entity\Account $account
      *
      * @return AccountType
      */
@@ -79,7 +79,7 @@ class AccountType extends Entity implements EntityInterface
     /**
      * Remove account
      *
-     * @param \Tavro\Entity\Account $account
+     * @param \App\Entity\Account $account
      */
     public function removeAccount(\Tavro\Entity\Account $account)
     {

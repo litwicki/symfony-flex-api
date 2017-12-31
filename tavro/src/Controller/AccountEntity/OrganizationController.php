@@ -1,32 +1,32 @@
 <?php
 
-namespace Tavro\Controller\AccountEntity;
+namespace App\Controller\AccountEntity;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-use Tavro\Exception\Api\ApiException;
-use Tavro\Exception\Api\ApiNotFoundException;
-use Tavro\Exception\Api\ApiRequestLimitException;
-use Tavro\Exception\Api\ApiAccessDeniedException;
-use Tavro\Exception\Form\InvalidFormException;
+use App\Exception\Api\ApiException;
+use App\Exception\Api\ApiNotFoundException;
+use App\Exception\Api\ApiRequestLimitException;
+use App\Exception\Api\ApiAccessDeniedException;
+use App\Exception\Form\InvalidFormException;
 
 use Doctrine\Common\Inflector\Inflector;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 
-use Tavro\Entity\Account;
-use Tavro\Entity\Organization;
+use App\Entity\Account;
+use App\Entity\Organization;
 use Symfony\Component\HttpFoundation\Cookie;
 
 use Litwicki\Common\Common;
-use Tavro\Controller\Api\AccountEntityApiController;
+use App\Controller\Api\AccountEntityApiController;
 
 class OrganizationController extends AccountEntityApiController
 {
 
     /**
      * @param \Symfony\Component\HttpFoundation\Request $request
-     * @param \Tavro\Entity\Organization $organization
+     * @param \App\Entity\Organization $organization
      * @param $_format
      *
      * @return \Symfony\Component\HttpFoundation\Response
@@ -62,7 +62,7 @@ class OrganizationController extends AccountEntityApiController
      * Display all Comments for this Organization.
      *
      * @param \Symfony\Component\HttpFoundation\Request $request
-     * @param \Tavro\Entity\Organization $organization
+     * @param \App\Entity\Organization $organization
      * @param $_format
      *
      * @return \Symfony\Component\HttpFoundation\Response
@@ -97,7 +97,7 @@ class OrganizationController extends AccountEntityApiController
 
     /**
      * @param \Symfony\Component\HttpFoundation\Request $request
-     * @param \Tavro\Entity\Organization $organization
+     * @param \App\Entity\Organization $organization
      * @param $_format
      *
      * @return \Symfony\Component\HttpFoundation\Response
@@ -143,7 +143,7 @@ class OrganizationController extends AccountEntityApiController
 
     /**
      * @param \Symfony\Component\HttpFoundation\Request $request
-     * @param \Tavro\Entity\Account $account
+     * @param \App\Entity\Account $account
      * @param $_format
      *
      * @return \Symfony\Component\HttpFoundation\Response

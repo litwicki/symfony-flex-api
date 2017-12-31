@@ -1,6 +1,6 @@
 <?php
 
-namespace Tavro\Entity;
+namespace App\Entity;
 
 use Doctrine\ORM\Mapping AS ORM;
 use Rhumsaa\Uuid\Uuid;
@@ -18,9 +18,9 @@ use Doctrine\ORM\Mapping\Table;
 
 use Symfony\Component\Validator\Constraints as Assert;
 
-use Tavro\Model\EntityInterface\UserInterface;
-use Tavro\Model\Entity\Entity;
-use Tavro\Model\EntityInterface\EntityInterface;
+use App\Model\EntityInterface\UserInterface;
+use App\Model\Entity\Entity;
+use App\Model\EntityInterface\EntityInterface;
 use JMS\Serializer\Annotation\MaxDepth;
 
 /**
@@ -138,7 +138,7 @@ class Contact extends Entity implements EntityInterface
     /**
      * Set user
      *
-     * @param \Tavro\Entity\User $user
+     * @param \App\Entity\User $user
      *
      * @return Contact
      */
@@ -162,7 +162,7 @@ class Contact extends Entity implements EntityInterface
     /**
      * Set person
      *
-     * @param \Tavro\Entity\Person $person
+     * @param \App\Entity\Person $person
      *
      * @return Contact
      */
@@ -234,7 +234,7 @@ class Contact extends Entity implements EntityInterface
     /**
      * Set organization
      *
-     * @param \Tavro\Entity\Organization $organization
+     * @param \App\Entity\Organization $organization
      *
      * @return Contact
      */

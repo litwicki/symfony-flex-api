@@ -1,6 +1,6 @@
 <?php
 
-namespace Tavro\Entity;
+namespace App\Entity;
 
 use Doctrine\ORM\Mapping AS ORM;
 
@@ -13,8 +13,8 @@ use JMS\Serializer\Annotation\Groups;
 use JMS\Serializer\Annotation\MaxDepth;
 use Doctrine\ORM\Mapping\Table;
 
-use Tavro\Model\Entity\Entity;
-use Tavro\Model\EntityInterface\EntityInterface;
+use App\Model\Entity\Entity;
+use App\Model\EntityInterface\EntityInterface;
 
 /**
  * @ORM\Entity
@@ -40,7 +40,7 @@ class ExpenseComment extends Entity implements EntityInterface
     /**
      * Set comment
      *
-     * @param \Tavro\Entity\Comment $comment
+     * @param \App\Entity\Comment $comment
      * @return ExpenseComment
      */
     public function setComment(\Tavro\Entity\Comment $comment)
@@ -63,7 +63,7 @@ class ExpenseComment extends Entity implements EntityInterface
     /**
      * Set Expense
      *
-     * @param \Tavro\Entity\Expense $expense
+     * @param \App\Entity\Expense $expense
      * @return ExpenseComment
      */
     public function setExpense(\Tavro\Entity\Expense $expense)

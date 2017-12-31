@@ -1,4 +1,4 @@
-<?php namespace Tavro\Services;
+<?php namespace App\Services;
 
 use Doctrine\ORM\EntityManager;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;

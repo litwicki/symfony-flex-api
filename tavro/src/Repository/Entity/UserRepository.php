@@ -1,9 +1,9 @@
-<?php namespace Tavro\Repository\Entity;
+<?php namespace App\Repository\Entity;
 
-use Tavro\Entity\User;
-use Tavro\Entity\Account;
+use App\Entity\User;
+use App\Entity\Account;
 
-use Tavro\Repository\TavroRepository;
+use App\Repository\TavroRepository;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 use Doctrine\ORM\Query;
 
@@ -78,7 +78,7 @@ class UserRepository extends TavroRepository
     }
 
     /**
-     * @param \Tavro\Entity\Account $account
+     * @param \App\Entity\Account $account
      * @param string $role
      *
      * @return array

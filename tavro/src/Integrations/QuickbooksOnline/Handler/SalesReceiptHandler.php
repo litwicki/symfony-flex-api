@@ -1,15 +1,15 @@
-<?php namespace Tavro\QuickbooksOnline\Handler;
+<?php namespace App\Integrations\QuickbooksOnline\Handler;
 
 use Doctrine\ORM\EntityManager;
 use \OAuth;
 
-use Tavro\Entity\Account;
-use Tavro\Entity\Service;
-use Tavro\Entity\Product;
+use App\Entity\Account;
+use App\Entity\Service;
+use App\Entity\Product;
 
-use Tavro\QuickbooksOnline\Handler\ItemHandler;
+use App\QuickbooksOnline\Handler\ItemHandler;
 
-use Tavro\QuickbooksOnline\QboApiService;
+use App\Integrations\QuickbooksOnline\QboApiService;
 
 /**
  * Class SalesReceiptHandler

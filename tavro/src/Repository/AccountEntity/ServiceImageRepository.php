@@ -1,6 +1,6 @@
-<?php namespace Tavro\Repository\AccountEntity;
+<?php namespace App\Repository\AccountEntity;
 
-use Tavro\Repository\TavroAccountEntityRepository;
+use App\Repository\TavroAccountEntityRepository;
 
 class ServiceImageRepository extends TavroAccountEntityRepository
 {

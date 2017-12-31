@@ -1,12 +1,12 @@
 <?php
 
-namespace Tavro\Entity;
+namespace App\Entity;
 
 use Doctrine\ORM\Mapping AS ORM;
 
 use Symfony\Component\Security\Core\Role\RoleInterface;
-use Tavro\Model\EntityInterface\EntityInterface;
-use Tavro\Model\Entity\Entity;
+use App\Model\EntityInterface\EntityInterface;
+use App\Model\Entity\Entity;
 
 use JMS\Serializer\Annotation\Accessor;
 use JMS\Serializer\Annotation\ExclusionPolicy;
@@ -108,7 +108,7 @@ class Role extends Entity implements RoleInterface, EntityInterface, \Serializab
     /**
      * Add user
      *
-     * @param \Tavro\Entity\User $user
+     * @param \App\Entity\User $user
      * @return Role
      */
     public function addUser(\Tavro\Entity\User $user)
@@ -121,7 +121,7 @@ class Role extends Entity implements RoleInterface, EntityInterface, \Serializab
     /**
      * Remove user
      *
-     * @param \Tavro\Entity\User $user
+     * @param \App\Entity\User $user
      */
     public function removeUser(\Tavro\Entity\User $user)
     {

@@ -1,6 +1,6 @@
-<?php namespace Tavro\Model\EventInterface;
+<?php namespace App\Model\EventInterface;
 
-use Tavro\Model\EntityInterface\EntityInterface;
+use App\Model\EntityInterface\EntityInterface;
 
 /**
  * Interface EntityInterface

@@ -1,6 +1,6 @@
 <?php
 
-namespace Tavro\Exception\Form;
+namespace App\Exception\Form;
 
 /**
  * Class InvalidFormException

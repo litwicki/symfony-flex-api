@@ -1,6 +1,6 @@
 <?php
 
-namespace Tavro\Form;
+namespace App\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -12,7 +12,7 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
-class NodeType extends AbstractType
+class SyndicateType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder

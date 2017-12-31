@@ -1,6 +1,6 @@
 <?php
 
-namespace Tavro\Entity;
+namespace App\Entity;
 
 use Doctrine\ORM\Mapping AS ORM;
 use Rhumsaa\Uuid\Uuid;
@@ -18,11 +18,11 @@ use Doctrine\ORM\Mapping\Table;
 
 use Symfony\Component\Validator\Constraints as Assert;
 
-use Tavro\Model\Entity\Entity;
-use Tavro\Model\EntityInterface\EntityInterface;
-use Tavro\Model\EventInterface\TavroCreateEventInterface;
-use Tavro\Model\EventInterface\TavroDeleteEventInterface;
-use Tavro\Model\EventInterface\TavroUpdateEventInterface;
+use App\Model\Entity\Entity;
+use App\Model\EntityInterface\EntityInterface;
+use App\Model\EventInterface\TavroCreateEventInterface;
+use App\Model\EventInterface\TavroDeleteEventInterface;
+use App\Model\EventInterface\TavroUpdateEventInterface;
 use JMS\Serializer\Annotation\MaxDepth;
 
 /**
@@ -122,7 +122,7 @@ class Syndicate extends Entity implements EntityInterface, TavroCreateEventInter
     /**
      * Set user
      *
-     * @param \Tavro\Entity\User $user
+     * @param \App\Entity\User $user
      *
      * @return Syndicate
      */
@@ -146,7 +146,7 @@ class Syndicate extends Entity implements EntityInterface, TavroCreateEventInter
     /**
      * Add investor
      *
-     * @param \Tavro\Entity\User $investor
+     * @param \App\Entity\User $investor
      *
      * @return Syndicate
      */
@@ -160,7 +160,7 @@ class Syndicate extends Entity implements EntityInterface, TavroCreateEventInter
     /**
      * Remove investor
      *
-     * @param \Tavro\Entity\User $investor
+     * @param \App\Entity\User $investor
      */
     public function removeInvestor(\Tavro\Entity\User $investor)
     {

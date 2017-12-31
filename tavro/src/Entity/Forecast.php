@@ -1,5 +1,5 @@
 <?php
-namespace Tavro\Entity;
+namespace App\Entity;
 
 use Doctrine\ORM\Mapping AS ORM;
 
@@ -14,8 +14,8 @@ use JMS\Serializer\Annotation\SerializedName;
 use Doctrine\ORM\Mapping\Table;
 use Symfony\Component\Validator\Constraints as Assert;
 
-use Tavro\Model\Entity\Entity;
-use Tavro\Model\EntityInterface\AccountEntityInterface;
+use App\Model\Entity\Entity;
+use App\Model\EntityInterface\AccountEntityInterface;
 
 /**
  * @ORM\Entity
@@ -125,7 +125,7 @@ class Forecast extends Entity implements AccountEntityInterface
     /**
      * Set account
      *
-     * @param \Tavro\Entity\Account $account
+     * @param \App\Entity\Account $account
      *
      * @return Forecast
      */
@@ -149,7 +149,7 @@ class Forecast extends Entity implements AccountEntityInterface
     /**
      * Add forecastComment
      *
-     * @param \Tavro\Entity\ForecastComment $forecastComment
+     * @param \App\Entity\ForecastComment $forecastComment
      *
      * @return Forecast
      */
@@ -163,7 +163,7 @@ class Forecast extends Entity implements AccountEntityInterface
     /**
      * Remove forecastComment
      *
-     * @param \Tavro\Entity\ForecastComment $forecastComment
+     * @param \App\Entity\ForecastComment $forecastComment
      */
     public function removeForecastComment(\Tavro\Entity\ForecastComment $forecastComment)
     {
@@ -183,7 +183,7 @@ class Forecast extends Entity implements AccountEntityInterface
     /**
      * Set user
      *
-     * @param \Tavro\Entity\User $user
+     * @param \App\Entity\User $user
      *
      * @return Forecast
      */
@@ -207,7 +207,7 @@ class Forecast extends Entity implements AccountEntityInterface
     /**
      * Add forecastExpense
      *
-     * @param \Tavro\Entity\ForecastExpense $forecastExpense
+     * @param \App\Entity\ForecastExpense $forecastExpense
      *
      * @return Forecast
      */
@@ -221,7 +221,7 @@ class Forecast extends Entity implements AccountEntityInterface
     /**
      * Remove forecastExpense
      *
-     * @param \Tavro\Entity\ForecastExpense $forecastExpense
+     * @param \App\Entity\ForecastExpense $forecastExpense
      */
     public function removeForecastExpense(\Tavro\Entity\ForecastExpense $forecastExpense)
     {
@@ -241,7 +241,7 @@ class Forecast extends Entity implements AccountEntityInterface
     /**
      * Add forecastRevenue
      *
-     * @param \Tavro\Entity\ForecastRevenue $forecastRevenue
+     * @param \App\Entity\ForecastRevenue $forecastRevenue
      *
      * @return Forecast
      */
@@ -255,7 +255,7 @@ class Forecast extends Entity implements AccountEntityInterface
     /**
      * Remove forecastRevenue
      *
-     * @param \Tavro\Entity\ForecastRevenue $forecastRevenue
+     * @param \App\Entity\ForecastRevenue $forecastRevenue
      */
     public function removeForecastRevenue(\Tavro\Entity\ForecastRevenue $forecastRevenue)
     {
@@ -275,7 +275,7 @@ class Forecast extends Entity implements AccountEntityInterface
     /**
      * Add forecastStaffPerson
      *
-     * @param \Tavro\Entity\ForecastStaffPerson $forecastStaffPerson
+     * @param \App\Entity\ForecastStaffPerson $forecastStaffPerson
      *
      * @return Forecast
      */
@@ -289,7 +289,7 @@ class Forecast extends Entity implements AccountEntityInterface
     /**
      * Remove forecastStaffPerson
      *
-     * @param \Tavro\Entity\ForecastStaffPerson $forecastStaffPerson
+     * @param \App\Entity\ForecastStaffPerson $forecastStaffPerson
      */
     public function removeForecastStaffPerson(\Tavro\Entity\ForecastStaffPerson $forecastStaffPerson)
     {

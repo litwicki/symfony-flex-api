@@ -1,6 +1,6 @@
 <?php
 
-namespace Tavro\Command;
+namespace App\Command;
 use PDO;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;

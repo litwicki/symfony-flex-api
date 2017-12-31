@@ -1,6 +1,6 @@
 <?php
 
-namespace Tavro\Controller\Dev;
+namespace App\Controller\Dev;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -8,17 +8,17 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
-use Tavro\Exception\ApiInvalidPayloadException;
-use Tavro\Exception\Api\ApiException;
-use Tavro\Exception\Api\ApiNotFoundException;
-use Tavro\Exception\Api\ApiRequestLimitException;
-use Tavro\Exception\Api\ApiAccessDeniedException;
-use Tavro\Exception\Form\InvalidFormException;
+use App\Exception\ApiInvalidPayloadException;
+use App\Exception\Api\ApiException;
+use App\Exception\Api\ApiNotFoundException;
+use App\Exception\Api\ApiRequestLimitException;
+use App\Exception\Api\ApiAccessDeniedException;
+use App\Exception\Form\InvalidFormException;
 
 use Doctrine\Common\Inflector\Inflector;
 
 use Litwicki\Common\Common;
-use Tavro\Model\HandlerInterface\EntityHandlerInterface;
+use App\Model\HandlerInterface\EntityHandlerInterface;
 
 class DefaultController extends Controller
 {

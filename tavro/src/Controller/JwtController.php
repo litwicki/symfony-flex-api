@@ -1,32 +1,32 @@
 <?php
 
-namespace Tavro\Controller;
+namespace App\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
-use Tavro\Exception\ApiNotAuthorizedException;
-use Tavro\Exception\JWT\JWTMaximumLoginAttemptsException;
-use Tavro\Exception\Security\InvalidCredentialsException;
-use Tavro\Exception\Security\UsernameNotFoundException;
-use Tavro\Exception\Api\ApiException;
-use Tavro\Exception\Api\ApiNotFoundException;
-use Tavro\Exception\Api\ApiRequestLimitException;
-use Tavro\Exception\Api\ApiAccessDeniedException;
-use Tavro\Exception\Form\InvalidFormException;
+use App\Exception\ApiNotAuthorizedException;
+use App\Exception\JWT\JWTMaximumLoginAttemptsException;
+use App\Exception\Security\InvalidCredentialsException;
+use App\Exception\Security\UsernameNotFoundException;
+use App\Exception\Api\ApiException;
+use App\Exception\Api\ApiNotFoundException;
+use App\Exception\Api\ApiRequestLimitException;
+use App\Exception\Api\ApiAccessDeniedException;
+use App\Exception\Form\InvalidFormException;
 
-use Tavro\Entity\Person;
+use App\Entity\Person;
 
 use Doctrine\Common\Inflector\Inflector;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 
-use Tavro\Entity\User;
+use App\Entity\User;
 use Symfony\Component\HttpFoundation\Cookie;
 
 use Litwicki\Common\Common;
-use Tavro\Controller\DefaultController;
+use App\Controller\DefaultController;
 
 class JwtController extends DefaultController
 {

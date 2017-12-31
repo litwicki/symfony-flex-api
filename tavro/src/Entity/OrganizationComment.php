@@ -1,6 +1,6 @@
 <?php
 
-namespace Tavro\Entity;
+namespace App\Entity;
 
 use Doctrine\ORM\Mapping AS ORM;
 
@@ -14,8 +14,8 @@ use JMS\Serializer\Annotation\MaxDepth;
 use Doctrine\ORM\Mapping\Table;
 use JMS\Serializer\Annotation\SerializedName;
 
-use Tavro\Model\Entity\Entity;
-use Tavro\Model\EntityInterface\EntityInterface;
+use App\Model\Entity\Entity;
+use App\Model\EntityInterface\EntityInterface;
 
 /**
  * @ORM\Entity
@@ -41,7 +41,7 @@ class OrganizationComment extends Entity implements EntityInterface
     /**
      * Set comment
      *
-     * @param \Tavro\Entity\Comment $comment
+     * @param \App\Entity\Comment $comment
      * @return OrganizationComment
      */
     public function setComment(\Tavro\Entity\Comment $comment)
@@ -64,7 +64,7 @@ class OrganizationComment extends Entity implements EntityInterface
     /**
      * Set Organization
      *
-     * @param \Tavro\Entity\Organization $organization
+     * @param \App\Entity\Organization $organization
      * @return OrganizationComment
      */
     public function setOrganization(\Tavro\Entity\Organization $organization)

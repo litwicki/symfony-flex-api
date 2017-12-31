@@ -1,4 +1,4 @@
-<?php namespace Tavro\EventListener;
+<?php namespace App\EventListener;
 
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Event\FilterResponseEvent;

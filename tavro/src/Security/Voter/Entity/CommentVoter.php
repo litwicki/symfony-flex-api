@@ -1,15 +1,15 @@
 <?php
 
-namespace Tavro\Security\Voter\Entity;
+namespace App\Security\Voter\Entity;
 
 use Symfony\Component\CssSelector\Parser\Token;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
-use Tavro\Entity\User;
-use Tavro\Entity\Comment;
+use App\Entity\User;
+use App\Entity\Comment;
 use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 use Symfony\Component\Security\Core\Authorization\AccessDecisionManagerInterface;
-use Tavro\Security\Voter\TavroVoter;
-use Tavro\Model\EntityInterface\EntityInterface;
+use App\Security\Voter\TavroVoter;
+use App\Model\EntityInterface\EntityInterface;
 
 class CommentVoter extends TavroVoter
 {
@@ -75,7 +75,7 @@ class CommentVoter extends TavroVoter
      * parent object for this Comment to ensure they have access to create
      * the Comment in the first place.
      *
-     * @param \Tavro\Model\EntityInterface\EntityInterface $comment
+     * @param \App\Model\EntityInterface\EntityInterface $comment
      * @param \Symfony\Component\Security\Core\Authentication\Token\TokenInterface $token
      *
      * @return bool
@@ -99,7 +99,7 @@ class CommentVoter extends TavroVoter
     }
 
     /**
-     * @param \Tavro\Model\EntityInterface\EntityInterface $comment
+     * @param \App\Model\EntityInterface\EntityInterface $comment
      * @param \Symfony\Component\Security\Core\Authentication\Token\TokenInterface $token
      *
      * @return bool
@@ -118,7 +118,7 @@ class CommentVoter extends TavroVoter
     }
 
     /**
-     * @param \Tavro\Model\EntityInterface\EntityInterface $comment
+     * @param \App\Model\EntityInterface\EntityInterface $comment
      * @param \Symfony\Component\Security\Core\Authentication\Token\TokenInterface $token
      * @return bool
      */

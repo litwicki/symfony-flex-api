@@ -1,35 +1,35 @@
 <?php
 
-namespace Tavro\Handler\AccountEntity;
+namespace App\Handler\AccountEntity;
 
-use Tavro\Exception\Api\ApiException;
-use Tavro\Handler\EntityHandler;
-use Tavro\Exception\Form\InvalidFormException;
-use Tavro\Model\EntityInterface\EntityInterface;
-use Tavro\Exception\Api\ApiAccessDeniedException;
-use Tavro\Exception\Api\ApiNotFoundException;
-use Tavro\Exception\UsernameNotUniqueException;
-use Tavro\Exception\EmailNotUniqueException;
+use App\Exception\Api\ApiException;
+use App\Handler\EntityHandler;
+use App\Exception\Form\InvalidFormException;
+use App\Model\EntityInterface\EntityInterface;
+use App\Exception\Api\ApiAccessDeniedException;
+use App\Exception\Api\ApiNotFoundException;
+use App\Exception\UsernameNotUniqueException;
+use App\Exception\EmailNotUniqueException;
 
 use Rhumsaa\Uuid\Uuid;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 use Symfony\Component\PropertyAccess\Exception\InvalidPropertyPathException;
 use Symfony\Component\Form\Exception\TransformationFailedException;
 use Symfony\Component\Form\Exception\UnexpectedTypeException;
-use Tavro\Exception\InvalidUsernameException;
+use App\Exception\InvalidUsernameException;
 use Symfony\Component\Debug\Exception\ContextErrorException;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 
-use Tavro\Entity\Node;
-use Tavro\Entity\NodeTag;
-use Tavro\Entity\NodeRead;
-use Tavro\Entity\User;
+use App\Entity\Node;
+use App\Entity\NodeTag;
+use App\Entity\NodeRead;
+use App\Entity\User;
 
-use Tavro\Handler\AccountEntityHandler;
-use Tavro\Model\HandlerInterface\AccountEntityHandlerInterface;
-use Tavro\Model\HandlerInterface\CommentEntityHandlerInterface;
-use Tavro\Model\HandlerInterface\TagEntityHandlerInterface;
+use App\Handler\AccountEntityHandler;
+use App\Model\HandlerInterface\AccountEntityHandlerInterface;
+use App\Model\HandlerInterface\CommentEntityHandlerInterface;
+use App\Model\HandlerInterface\TagEntityHandlerInterface;
 
 /**
  * Class NodeHandler
@@ -89,8 +89,8 @@ class NodeHandler extends AccountEntityHandler implements CommentEntityHandlerIn
     }
 
     /**
-     * @param \Tavro\Entity\Node $node
-     * @param \Tavro\Entity\User $user
+     * @param \App\Entity\Node $node
+     * @param \App\Entity\User $user
      *
      * @return bool
      * @throws \Exception
@@ -119,8 +119,8 @@ class NodeHandler extends AccountEntityHandler implements CommentEntityHandlerIn
     }
 
     /**
-     * @param \Tavro\Entity\Node $node
-     * @param \Tavro\Entity\User $user
+     * @param \App\Entity\Node $node
+     * @param \App\Entity\User $user
      *
      * @throws \Exception
      */
@@ -142,7 +142,7 @@ class NodeHandler extends AccountEntityHandler implements CommentEntityHandlerIn
 
     /**
      * @param \Symfony\Component\HttpFoundation\Request $request
-     * @param \Tavro\Model\EntityInterface\EntityInterface $entity
+     * @param \App\Model\EntityInterface\EntityInterface $entity
      * @param array $parameters
      *
      * @return \Tavro\Model\EntityInterface\EntityInterface
@@ -187,7 +187,7 @@ class NodeHandler extends AccountEntityHandler implements CommentEntityHandlerIn
     }
 
     /**
-     * @param \Tavro\Model\EntityInterface\EntityInterface $entity
+     * @param \App\Model\EntityInterface\EntityInterface $entity
      * @param array $parameters
      *
      * @throws \Exception
@@ -219,7 +219,7 @@ class NodeHandler extends AccountEntityHandler implements CommentEntityHandlerIn
 
     /**
      * @param $slug
-     * @param \Tavro\Model\EntityInterface\EntityInterface $entity
+     * @param \App\Model\EntityInterface\EntityInterface $entity
      *
      * @throws \Exception
      */
@@ -248,7 +248,7 @@ class NodeHandler extends AccountEntityHandler implements CommentEntityHandlerIn
     }
 
     /**
-     * @param \Tavro\Entity\User $user
+     * @param \App\Entity\User $user
      *
      * @return mixed
      * @throws \Tavro\Exception\Api\ApiException
@@ -328,7 +328,7 @@ class NodeHandler extends AccountEntityHandler implements CommentEntityHandlerIn
 
     /**
      * @param \Symfony\Component\HttpFoundation\Request $request
-     * @param \Tavro\Model\EntityInterface\EntityInterface $entity
+     * @param \App\Model\EntityInterface\EntityInterface $entity
      * @param array $parameters
      *
      * @return \Tavro\Model\EntityInterface\EntityInterface|void
@@ -349,7 +349,7 @@ class NodeHandler extends AccountEntityHandler implements CommentEntityHandlerIn
     }
 
     /**
-     * @param \Tavro\Model\EntityInterface\EntityInterface $node
+     * @param \App\Model\EntityInterface\EntityInterface $node
      *
      * @return array
      * @throws \Exception
@@ -378,7 +378,7 @@ class NodeHandler extends AccountEntityHandler implements CommentEntityHandlerIn
     /**
      * Get All Tags.
      * 
-     * @param \Tavro\Model\EntityInterface\EntityInterface $node
+     * @param \App\Model\EntityInterface\EntityInterface $node
      *
      * @return array
      * @throws \Exception

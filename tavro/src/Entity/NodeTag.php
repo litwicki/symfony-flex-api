@@ -1,6 +1,6 @@
 <?php
 
-namespace Tavro\Entity;
+namespace App\Entity;
 
 use Doctrine\ORM\Mapping AS ORM;
 
@@ -13,8 +13,8 @@ use JMS\Serializer\Annotation\Groups;
 use JMS\Serializer\Annotation\MaxDepth;
 use Doctrine\ORM\Mapping\Table;
 
-use Tavro\Model\Entity\Entity;
-use Tavro\Model\EntityInterface\EntityInterface;
+use App\Model\Entity\Entity;
+use App\Model\EntityInterface\EntityInterface;
 
 /**
  * @ORM\Entity
@@ -40,7 +40,7 @@ class NodeTag extends Entity implements EntityInterface
     /**
      * Set tag
      *
-     * @param \Tavro\Entity\Tag $tag
+     * @param \App\Entity\Tag $tag
      * @return NodeTag
      */
     public function setTag(\Tavro\Entity\Tag $tag)
@@ -63,7 +63,7 @@ class NodeTag extends Entity implements EntityInterface
     /**
      * Set Node
      *
-     * @param \Tavro\Entity\Node $node
+     * @param \App\Entity\Node $node
      * @return NodeTag
      */
     public function setNode(\Tavro\Entity\Node $node)

@@ -1,29 +1,29 @@
 <?php
 
-namespace Tavro\Controller\Entity;
+namespace App\Controller\Entity;
 
 use Symfony\Component\Finder\Exception\AccessDeniedException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-use Tavro\Exception\Api\ApiException;
-use Tavro\Exception\Api\ApiNotFoundException;
-use Tavro\Exception\Api\ApiRequestLimitException;
-use Tavro\Exception\Api\ApiAccessDeniedException;
-use Tavro\Exception\Form\InvalidFieldException;
-use Tavro\Exception\Form\InvalidFormException;
+use App\Exception\Api\ApiException;
+use App\Exception\Api\ApiNotFoundException;
+use App\Exception\Api\ApiRequestLimitException;
+use App\Exception\Api\ApiAccessDeniedException;
+use App\Exception\Form\InvalidFieldException;
+use App\Exception\Form\InvalidFormException;
 
 use Doctrine\Common\Inflector\Inflector;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 
-use Tavro\Entity\Forecast;
-use Tavro\Entity\Tag;
-use Tavro\Entity\ForecastTag;
-use Tavro\Entity\ForecastComment;
+use App\Entity\Forecast;
+use App\Entity\Tag;
+use App\Entity\ForecastTag;
+use App\Entity\ForecastComment;
 use Symfony\Component\HttpFoundation\Cookie;
 
 use Litwicki\Common\Common;
-use Tavro\Controller\Api\EntityApiController;
+use App\Controller\Api\EntityApiController;
 
 class ForecastRevenueController extends EntityApiController
 {
@@ -32,7 +32,7 @@ class ForecastRevenueController extends EntityApiController
      * Display all Revenues for this Forecast.
      *
      * @param \Symfony\Component\HttpFoundation\Request $request
-     * @param \Tavro\Entity\Forecast $forecast
+     * @param \App\Entity\Forecast $forecast
      * @param $_format
      *
      * @return \Symfony\Component\HttpFoundation\Response

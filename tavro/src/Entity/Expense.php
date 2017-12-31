@@ -1,5 +1,5 @@
 <?php
-namespace Tavro\Entity;
+namespace App\Entity;
 
 use Doctrine\ORM\Mapping AS ORM;
 
@@ -14,8 +14,8 @@ use JMS\Serializer\Annotation\SerializedName;
 use Doctrine\ORM\Mapping\Table;
 use Symfony\Component\Validator\Constraints as Assert;
 
-use Tavro\Model\Entity\Entity;
-use Tavro\Model\EntityInterface\AccountEntityInterface;
+use App\Model\Entity\Entity;
+use App\Model\EntityInterface\AccountEntityInterface;
 
 /**
  * @ORM\Entity
@@ -168,7 +168,7 @@ class Expense extends Entity implements AccountEntityInterface
     /**
      * Set category
      *
-     * @param \Tavro\Entity\ExpenseCategory $category
+     * @param \App\Entity\ExpenseCategory $category
      *
      * @return Expense
      */
@@ -192,7 +192,7 @@ class Expense extends Entity implements AccountEntityInterface
     /**
      * Set user
      *
-     * @param \Tavro\Entity\User $user
+     * @param \App\Entity\User $user
      *
      * @return Expense
      */
@@ -216,7 +216,7 @@ class Expense extends Entity implements AccountEntityInterface
     /**
      * Add expenseComment
      *
-     * @param \Tavro\Entity\ExpenseComment $expenseComment
+     * @param \App\Entity\ExpenseComment $expenseComment
      *
      * @return Expense
      */
@@ -230,7 +230,7 @@ class Expense extends Entity implements AccountEntityInterface
     /**
      * Remove expenseComment
      *
-     * @param \Tavro\Entity\ExpenseComment $expenseComment
+     * @param \App\Entity\ExpenseComment $expenseComment
      */
     public function removeExpenseComment(\Tavro\Entity\ExpenseComment $expenseComment)
     {
@@ -250,7 +250,7 @@ class Expense extends Entity implements AccountEntityInterface
     /**
      * Add expenseTag
      *
-     * @param \Tavro\Entity\ExpenseTag $expenseTag
+     * @param \App\Entity\ExpenseTag $expenseTag
      *
      * @return Expense
      */
@@ -264,7 +264,7 @@ class Expense extends Entity implements AccountEntityInterface
     /**
      * Remove expenseTag
      *
-     * @param \Tavro\Entity\ExpenseTag $expenseTag
+     * @param \App\Entity\ExpenseTag $expenseTag
      */
     public function removeExpenseTag(\Tavro\Entity\ExpenseTag $expenseTag)
     {
@@ -284,7 +284,7 @@ class Expense extends Entity implements AccountEntityInterface
     /**
      * Set account
      *
-     * @param \Tavro\Entity\Account $account
+     * @param \App\Entity\Account $account
      *
      * @return Expense
      */

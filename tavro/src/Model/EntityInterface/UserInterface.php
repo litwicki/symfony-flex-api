@@ -1,8 +1,8 @@
 <?php
 
-namespace Tavro\Model\EntityInterface;
+namespace App\Model\EntityInterface;
 
-use Tavro\Model\EntityInterface\EntityInterface;
+use App\Model\EntityInterface\EntityInterface;
 
 /**
  * Interface UserInterface

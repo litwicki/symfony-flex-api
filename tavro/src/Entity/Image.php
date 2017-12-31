@@ -1,6 +1,6 @@
 <?php
 
-namespace Tavro\Entity;
+namespace App\Entity;
 
 use Doctrine\ORM\Mapping AS ORM;
 
@@ -13,10 +13,10 @@ use JMS\Serializer\Annotation\MaxDepth;
 use JMS\Serializer\Annotation\Groups;
 use Doctrine\ORM\Mapping\Table;
 
-use Tavro\Entity\File;
-use Tavro\Model\Entity\Entity;
-use Tavro\Model\EntityInterface\AccountEntityInterface;
-use Tavro\Model\EntityInterface\S3EntityInterface;
+use App\Entity\File;
+use App\Model\Entity\Entity;
+use App\Model\EntityInterface\AccountEntityInterface;
+use App\Model\EntityInterface\S3EntityInterface;
 
 /**
  * @ORM\Entity
@@ -337,7 +337,7 @@ class Image extends Entity implements S3EntityInterface, AccountEntityInterface
     /**
      * Set account
      *
-     * @param \Tavro\Entity\Account $account
+     * @param \App\Entity\Account $account
      *
      * @return Image
      */
@@ -361,7 +361,7 @@ class Image extends Entity implements S3EntityInterface, AccountEntityInterface
     /**
      * Add productImage
      *
-     * @param \Tavro\Entity\ProductImage $productImage
+     * @param \App\Entity\ProductImage $productImage
      *
      * @return Image
      */
@@ -375,7 +375,7 @@ class Image extends Entity implements S3EntityInterface, AccountEntityInterface
     /**
      * Remove productImage
      *
-     * @param \Tavro\Entity\ProductImage $productImage
+     * @param \App\Entity\ProductImage $productImage
      */
     public function removeProductImage(\Tavro\Entity\ProductImage $productImage)
     {
@@ -395,7 +395,7 @@ class Image extends Entity implements S3EntityInterface, AccountEntityInterface
     /**
      * Add serviceImage
      *
-     * @param \Tavro\Entity\ServiceImage $serviceImage
+     * @param \App\Entity\ServiceImage $serviceImage
      *
      * @return Image
      */
@@ -409,7 +409,7 @@ class Image extends Entity implements S3EntityInterface, AccountEntityInterface
     /**
      * Remove serviceImage
      *
-     * @param \Tavro\Entity\ServiceImage $serviceImage
+     * @param \App\Entity\ServiceImage $serviceImage
      */
     public function removeServiceImage(\Tavro\Entity\ServiceImage $serviceImage)
     {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Tavro\Repository\Entity;
+namespace App\Repository\Entity;
 
 /**
  * ProductImageRepository

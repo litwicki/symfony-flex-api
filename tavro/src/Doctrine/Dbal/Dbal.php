@@ -1,6 +1,6 @@
 <?php
 
-namespace Tavro\Services;
+namespace App\Doctrine\Dbal;
 
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;

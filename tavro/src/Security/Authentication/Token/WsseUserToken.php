@@ -1,4 +1,4 @@
-<?php namespace Tavro\Security\Authentication\Token;
+<?php namespace App\Security\Authentication\Token;
 
 use Symfony\Component\Security\Core\Authentication\Token\AbstractToken;
 

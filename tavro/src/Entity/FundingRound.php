@@ -1,5 +1,5 @@
 <?php
-namespace Tavro\Entity;
+namespace App\Entity;
 
 use Doctrine\ORM\Mapping AS ORM;
 
@@ -14,8 +14,8 @@ use JMS\Serializer\Annotation\SerializedName;
 use Doctrine\ORM\Mapping\Table;
 use Symfony\Component\Validator\Constraints as Assert;
 
-use Tavro\Model\Entity\Entity;
-use Tavro\Model\EntityInterface\AccountEntityInterface;
+use App\Model\Entity\Entity;
+use App\Model\EntityInterface\AccountEntityInterface;
 
 /**
  * @ORM\Entity
@@ -220,7 +220,7 @@ class FundingRound extends Entity implements AccountEntityInterface
     /**
      * Add fundingRoundShareholder
      *
-     * @param \Tavro\Entity\FundingRoundShareholder $fundingRoundShareholder
+     * @param \App\Entity\FundingRoundShareholder $fundingRoundShareholder
      *
      * @return FundingRound
      */
@@ -234,7 +234,7 @@ class FundingRound extends Entity implements AccountEntityInterface
     /**
      * Remove fundingRoundShareholder
      *
-     * @param \Tavro\Entity\FundingRoundShareholder $fundingRoundShareholder
+     * @param \App\Entity\FundingRoundShareholder $fundingRoundShareholder
      */
     public function removeFundingRoundShareholder(\Tavro\Entity\FundingRoundShareholder $fundingRoundShareholder)
     {
@@ -254,7 +254,7 @@ class FundingRound extends Entity implements AccountEntityInterface
     /**
      * Add fundingRoundComment
      *
-     * @param \Tavro\Entity\FundingRoundComment $fundingRoundComment
+     * @param \App\Entity\FundingRoundComment $fundingRoundComment
      *
      * @return FundingRound
      */
@@ -268,7 +268,7 @@ class FundingRound extends Entity implements AccountEntityInterface
     /**
      * Remove fundingRoundComment
      *
-     * @param \Tavro\Entity\FundingRoundComment $fundingRoundComment
+     * @param \App\Entity\FundingRoundComment $fundingRoundComment
      */
     public function removeFundingRoundComment(\Tavro\Entity\FundingRoundComment $fundingRoundComment)
     {
@@ -306,7 +306,7 @@ class FundingRound extends Entity implements AccountEntityInterface
     /**
      * Set account
      *
-     * @param \Tavro\Entity\Account $account
+     * @param \App\Entity\Account $account
      *
      * @return FundingRound
      */

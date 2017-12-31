@@ -1,13 +1,13 @@
 <?php
 
-namespace Tavro\Security\Voter\Entity;
+namespace App\Security\Voter\Entity;
 
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
-use Tavro\Entity\User;
+use App\Entity\User;
 use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 use Symfony\Component\Security\Core\Authorization\AccessDecisionManagerInterface;
-use Tavro\Security\Voter\TavroVoter;
-use Tavro\Model\EntityInterface\EntityInterface;
+use App\Security\Voter\TavroVoter;
+use App\Model\EntityInterface\EntityInterface;
 
 class UserVoter extends TavroVoter
 {
@@ -72,7 +72,7 @@ class UserVoter extends TavroVoter
 
 
     /**
-     * @param \Tavro\Model\EntityInterface\EntityInterface $newUser
+     * @param \App\Model\EntityInterface\EntityInterface $newUser
      * @param \Symfony\Component\Security\Core\Authentication\Token\TokenInterface $token
      *
      * @return bool
@@ -83,7 +83,7 @@ class UserVoter extends TavroVoter
     }
 
     /**
-     * @param \Tavro\Model\EntityInterface\EntityInterface $newUser
+     * @param \App\Model\EntityInterface\EntityInterface $newUser
      * @param \Symfony\Component\Security\Core\Authentication\Token\TokenInterface $token
      *
      * @return bool
@@ -94,7 +94,7 @@ class UserVoter extends TavroVoter
     }
 
     /**
-     * @param \Tavro\Model\EntityInterface\EntityInterface $newUser
+     * @param \App\Model\EntityInterface\EntityInterface $newUser
      * @param \Symfony\Component\Security\Core\Authentication\Token\TokenInterface $token
      *
      * @return bool

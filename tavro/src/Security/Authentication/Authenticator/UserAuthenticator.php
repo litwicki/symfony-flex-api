@@ -1,6 +1,6 @@
 <?php
 
-namespace Tavro\Security\Authentication\Authenticator;
+namespace App\Security\Authentication\Authenticator;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Http\Authentication\SimpleFormAuthenticatorInterface;
@@ -9,7 +9,7 @@ use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
 use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
-use Tavro\Security\Authentication\Provider\UserProvider;
+use App\Security\Authentication\Provider\UserProvider;
 
 class UserAuthenticator implements SimpleFormAuthenticatorInterface
 {
@@ -20,7 +20,7 @@ class UserAuthenticator implements SimpleFormAuthenticatorInterface
      * UserAuthenticator constructor.
      *
      * @param $encoder
-     * @param \Tavro\Security\Authentication\Provider\UserProvider $provider
+     * @param \App\Security\Authentication\Provider\UserProvider $provider
      */
     public function __construct($encoder, UserProvider $provider)
     {

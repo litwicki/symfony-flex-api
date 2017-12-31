@@ -1,5 +1,5 @@
 <?php
-namespace Tavro\Component\Validator\Constraints;
+namespace App\Component\Validator\Constraints;
 
 use Symfony\Component\Validator\Constraint;
 

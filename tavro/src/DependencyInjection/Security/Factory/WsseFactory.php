@@ -1,4 +1,4 @@
-<?php namespace Tavro\DependencyInjection\Security\Factory;
+<?php namespace App\DependencyInjection\Security\Factory;
 
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Reference;

@@ -1,5 +1,5 @@
 <?php
-namespace Tavro\Entity;
+namespace App\Entity;
 
 use Doctrine\ORM\Mapping AS ORM;
 
@@ -14,8 +14,8 @@ use JMS\Serializer\Annotation\SerializedName;
 use Doctrine\ORM\Mapping\Table;
 use Symfony\Component\Validator\Constraints as Assert;
 
-use Tavro\Model\Entity\Entity;
-use Tavro\Model\EntityInterface\EntityInterface;
+use App\Model\Entity\Entity;
+use App\Model\EntityInterface\EntityInterface;
 
 /**
  * @ORM\Entity
@@ -99,7 +99,7 @@ class Tag extends Entity implements EntityInterface
     /**
      * Add nodeTag
      *
-     * @param \Tavro\Entity\NodeTag $nodeTag
+     * @param \App\Entity\NodeTag $nodeTag
      *
      * @return Tag
      */
@@ -113,7 +113,7 @@ class Tag extends Entity implements EntityInterface
     /**
      * Remove nodeTag
      *
-     * @param \Tavro\Entity\NodeTag $nodeTag
+     * @param \App\Entity\NodeTag $nodeTag
      */
     public function removeNodeTag(\Tavro\Entity\NodeTag $nodeTag)
     {
@@ -133,7 +133,7 @@ class Tag extends Entity implements EntityInterface
     /**
      * Add expenseTag
      *
-     * @param \Tavro\Entity\ExpenseTag $expenseTag
+     * @param \App\Entity\ExpenseTag $expenseTag
      *
      * @return Tag
      */
@@ -147,7 +147,7 @@ class Tag extends Entity implements EntityInterface
     /**
      * Remove expenseTag
      *
-     * @param \Tavro\Entity\ExpenseTag $expenseTag
+     * @param \App\Entity\ExpenseTag $expenseTag
      */
     public function removeExpenseTag(\Tavro\Entity\ExpenseTag $expenseTag)
     {
@@ -168,7 +168,7 @@ class Tag extends Entity implements EntityInterface
     /**
      * Add revenueTag
      *
-     * @param \Tavro\Entity\RevenueTag $revenueTag
+     * @param \App\Entity\RevenueTag $revenueTag
      *
      * @return Tag
      */
@@ -182,7 +182,7 @@ class Tag extends Entity implements EntityInterface
     /**
      * Remove revenueTag
      *
-     * @param \Tavro\Entity\RevenueTag $revenueTag
+     * @param \App\Entity\RevenueTag $revenueTag
      */
     public function removeRevenueTag(\Tavro\Entity\RevenueTag $revenueTag)
     {

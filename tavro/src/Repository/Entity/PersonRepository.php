@@ -1,8 +1,8 @@
 <?php
 
-namespace Tavro\Repository\Entity;
+namespace App\Repository\Entity;
 
-use Tavro\Repository\TavroRepository;
+use App\Repository\TavroRepository;
 
 /**
  * PersonRepository

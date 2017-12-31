@@ -1,6 +1,6 @@
 <?php
 
-namespace Tavro\Entity;
+namespace App\Entity;
 
 use Doctrine\ORM\Mapping AS ORM;
 
@@ -14,8 +14,8 @@ use JMS\Serializer\Annotation\MaxDepth;
 use Doctrine\ORM\Mapping\Table;
 use Symfony\Component\Validator\Constraints as Assert;
 
-use Tavro\Model\Entity\Entity;
-use Tavro\Model\EntityInterface\EntityInterface;
+use App\Model\Entity\Entity;
+use App\Model\EntityInterface\EntityInterface;
 
 /**
  * @ORM\Entity
@@ -57,7 +57,7 @@ class RevenueService extends Entity implements EntityInterface
     /**
      * Set service
      *
-     * @param \Tavro\Entity\Service $service
+     * @param \App\Entity\Service $service
      * @return RevenueService
      */
     public function setService(\Tavro\Entity\Service $service)
@@ -80,7 +80,7 @@ class RevenueService extends Entity implements EntityInterface
     /**
      * Set Revenue
      *
-     * @param \Tavro\Entity\Revenue $revenue
+     * @param \App\Entity\Revenue $revenue
      * @return RevenueService
      */
     public function setRevenue(\Tavro\Entity\Revenue $revenue)

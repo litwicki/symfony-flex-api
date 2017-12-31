@@ -1,4 +1,4 @@
-<?php namespace Tavro\Exception\Entity\Account;
+<?php namespace App\Exception\Entity\Account;
 
 use Symfony\Component\HttpKernel\Exception\HttpException;
 

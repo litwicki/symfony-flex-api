@@ -1,20 +1,20 @@
 <?php
 
-namespace Tavro\Security\Voter\Entity;
+namespace App\Security\Voter\Entity;
 
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
-use Tavro\Model\EntityInterface\EntityInterface;
-use Tavro\Entity\User;
-use Tavro\Entity\Account;
+use App\Model\EntityInterface\EntityInterface;
+use App\Entity\User;
+use App\Entity\Account;
 
-use Tavro\Exception\Entity\Account\AccountStatusDisabledException;
-use Tavro\Exception\Entity\Account\AccountStatusPendingException;
-use Tavro\Exception\Entity\Account\AccountStatusOtherException;
-use Tavro\Exception\Entity\Account\AccountStatusInvalidException;
+use App\Exception\Entity\Account\AccountStatusDisabledException;
+use App\Exception\Entity\Account\AccountStatusPendingException;
+use App\Exception\Entity\Account\AccountStatusOtherException;
+use App\Exception\Entity\Account\AccountStatusInvalidException;
 
 use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 use Symfony\Component\Security\Core\Authorization\AccessDecisionManagerInterface;
-use Tavro\Security\Voter\TavroVoter;
+use App\Security\Voter\TavroVoter;
 
 class AccountVoter extends TavroVoter
 {

@@ -1,4 +1,4 @@
-<?php namespace Tavro\QuickbooksOnline;
+<?php namespace App\Integrations\QuickbooksOnline;
 
 use Doctrine\ORM\EntityManager;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
@@ -7,7 +7,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 
 use \OAuth;
 
-use Tavro\Entity\Account;
+use App\Entity\Account;
 
 class QboApiService implements ContainerAwareInterface
 {
@@ -47,7 +47,7 @@ class QboApiService implements ContainerAwareInterface
     }
 
     /**
-     * @param \Tavro\Entity\Account $account
+     * @param \App\Entity\Account $account
      *
      * @return \OAuth
      * @throws \Exception

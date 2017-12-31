@@ -1,5 +1,5 @@
 <?php
-namespace Tavro\Entity;
+namespace App\Entity;
 
 use Doctrine\ORM\Mapping AS ORM;
 
@@ -14,8 +14,8 @@ use JMS\Serializer\Annotation\SerializedName;
 use Doctrine\ORM\Mapping\Table;
 use Symfony\Component\Validator\Constraints as Assert;
 
-use Tavro\Model\Entity\Entity;
-use Tavro\Model\EntityInterface\EntityInterface;
+use App\Model\Entity\Entity;
+use App\Model\EntityInterface\EntityInterface;
 
 /**
  * @ORM\Entity
@@ -127,7 +127,7 @@ class Revenue extends Entity implements EntityInterface
     /**
      * Set user
      *
-     * @param \Tavro\Entity\User $user
+     * @param \App\Entity\User $user
      * @return Revenue
      */
     public function setUser(\Tavro\Entity\User $user)
@@ -150,7 +150,7 @@ class Revenue extends Entity implements EntityInterface
     /**
      * Add revenue_comments
      *
-     * @param \Tavro\Entity\RevenueComment $revenueComments
+     * @param \App\Entity\RevenueComment $revenueComments
      * @return Revenue
      */
     public function addRevenueComment(\Tavro\Entity\RevenueComment $revenueComments)
@@ -163,7 +163,7 @@ class Revenue extends Entity implements EntityInterface
     /**
      * Remove revenue_comments
      *
-     * @param \Tavro\Entity\RevenueComment $revenueComments
+     * @param \App\Entity\RevenueComment $revenueComments
      */
     public function removeRevenueComment(\Tavro\Entity\RevenueComment $revenueComments)
     {
@@ -223,7 +223,7 @@ class Revenue extends Entity implements EntityInterface
     /**
      * Add revenue_tags
      *
-     * @param \Tavro\Entity\RevenueTag $revenueTags
+     * @param \App\Entity\RevenueTag $revenueTags
      * @return Revenue
      */
     public function addRevenueTag(\Tavro\Entity\RevenueTag $revenueTags)
@@ -236,7 +236,7 @@ class Revenue extends Entity implements EntityInterface
     /**
      * Remove revenue_tags
      *
-     * @param \Tavro\Entity\RevenueTag $revenueTags
+     * @param \App\Entity\RevenueTag $revenueTags
      */
     public function removeRevenueTag(\Tavro\Entity\RevenueTag $revenueTags)
     {
@@ -257,7 +257,7 @@ class Revenue extends Entity implements EntityInterface
     /**
      * Set category
      *
-     * @param \Tavro\Entity\RevenueCategory $category
+     * @param \App\Entity\RevenueCategory $category
      *
      * @return Revenue
      */
@@ -281,7 +281,7 @@ class Revenue extends Entity implements EntityInterface
     /**
      * Add revenueService
      *
-     * @param \Tavro\Entity\RevenueService $revenueService
+     * @param \App\Entity\RevenueService $revenueService
      *
      * @return Revenue
      */
@@ -295,7 +295,7 @@ class Revenue extends Entity implements EntityInterface
     /**
      * Remove revenueService
      *
-     * @param \Tavro\Entity\RevenueService $revenueService
+     * @param \App\Entity\RevenueService $revenueService
      */
     public function removeRevenueService(\Tavro\Entity\RevenueService $revenueService)
     {
@@ -315,7 +315,7 @@ class Revenue extends Entity implements EntityInterface
     /**
      * Add revenueProduct
      *
-     * @param \Tavro\Entity\RevenueProduct $revenueProduct
+     * @param \App\Entity\RevenueProduct $revenueProduct
      *
      * @return Revenue
      */
@@ -329,7 +329,7 @@ class Revenue extends Entity implements EntityInterface
     /**
      * Remove revenueProduct
      *
-     * @param \Tavro\Entity\RevenueProduct $revenueProduct
+     * @param \App\Entity\RevenueProduct $revenueProduct
      */
     public function removeRevenueProduct(\Tavro\Entity\RevenueProduct $revenueProduct)
     {
@@ -379,7 +379,7 @@ class Revenue extends Entity implements EntityInterface
     /**
      * Set organization
      *
-     * @param \Tavro\Entity\Organization $organization
+     * @param \App\Entity\Organization $organization
      *
      * @return Revenue
      */
@@ -433,7 +433,7 @@ class Revenue extends Entity implements EntityInterface
     /**
      * Set account
      *
-     * @param \Tavro\Entity\Account $account
+     * @param \App\Entity\Account $account
      *
      * @return Revenue
      */

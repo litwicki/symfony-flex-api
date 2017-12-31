@@ -1,6 +1,6 @@
 <?php
 
-namespace Tavro\Exception\JWT;
+namespace App\Exception\JWT;
 
 use Symfony\Component\HttpKernel\Exception\HttpException;
 

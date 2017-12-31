@@ -1,7 +1,7 @@
-<?php namespace Tavro\Repository\Entity;
+<?php namespace App\Repository\Entity;
 
-use Tavro\Repository\TavroRepository;
-use Tavro\Entity\Account;
+use App\Repository\TavroRepository;
+use App\Entity\Account;
 
 class ShareholderRepository extends TavroRepository
 {

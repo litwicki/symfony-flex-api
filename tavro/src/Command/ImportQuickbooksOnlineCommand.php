@@ -1,6 +1,6 @@
 <?php
 
-namespace Tavro\Command;
+namespace App\Command;
 
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputArgument;
@@ -9,7 +9,7 @@ use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Litwicki\Common\cURL;
 
-use Tavro\Entity\Variable;
+use App\Entity\Variable;
 
 class ImportQuickbooksOnlineCommand extends ContainerAwareCommand
 {

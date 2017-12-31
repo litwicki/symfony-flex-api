@@ -1,6 +1,6 @@
 <?php
 
-namespace Tavro\Exception\Security;
+namespace App\Exception\Security;
 
 use Symfony\Component\HttpKernel\Exception\HttpException;
 

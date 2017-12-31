@@ -1,15 +1,15 @@
 <?php
 
-namespace Tavro\Security\Voter\Entity;
+namespace App\Security\Voter\Entity;
 
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
-use Tavro\Entity\User;
-use Tavro\Entity\OrganizationComment;
+use App\Entity\User;
+use App\Entity\OrganizationComment;
 
-use Tavro\Entity\Comment;
+use App\Entity\Comment;
 use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 use Symfony\Component\Security\Core\Authorization\AccessDecisionManagerInterface;
-use Tavro\Security\Voter\TavroVoter;
+use App\Security\Voter\TavroVoter;
 
 class ProductVoter extends TavroVoter
 {

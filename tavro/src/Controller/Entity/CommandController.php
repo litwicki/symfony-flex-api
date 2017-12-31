@@ -1,40 +1,40 @@
-<?php namespace Tavro\Controller\Entity;
+<?php namespace App\Controller\Entity;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
-use Tavro\Entity\Contact;
-use Tavro\Exception\Api\ApiException;
-use Tavro\Exception\Api\ApiNotFoundException;
-use Tavro\Exception\Api\ApiRequestLimitException;
-use Tavro\Exception\Api\ApiAccessDeniedException;
-use Tavro\Exception\Form\InvalidFormException;
+use App\Entity\Contact;
+use App\Exception\Api\ApiException;
+use App\Exception\Api\ApiNotFoundException;
+use App\Exception\Api\ApiRequestLimitException;
+use App\Exception\Api\ApiAccessDeniedException;
+use App\Exception\Form\InvalidFormException;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 
 use Doctrine\Common\Inflector\Inflector;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 
-use Tavro\Entity\User;
-use Tavro\Entity\Account;
+use App\Entity\User;
+use App\Entity\Account;
 
 use Symfony\Component\HttpFoundation\Cookie;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
-use Tavro\Entity\Organization;
+use App\Entity\Organization;
 
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Output\BufferedOutput;
 
-use Tavro\Controller\Api\EntityApiController;
+use App\Controller\Api\EntityApiController;
 
 class CommandController extends EntityApiController
 {
 
     /**
      * @param \Symfony\Component\HttpFoundation\Request $request
-     * @param \Tavro\Entity\Account $account
+     * @param \App\Entity\Account $account
      * @param $_format
      *
      * @return \Symfony\Component\HttpFoundation\Response
@@ -76,7 +76,7 @@ class CommandController extends EntityApiController
 
     /**
      * @param \Symfony\Component\HttpFoundation\Request $request
-     * @param \Tavro\Entity\Account $account
+     * @param \App\Entity\Account $account
      * @param $_format
      *
      * @return \Symfony\Component\HttpFoundation\Response

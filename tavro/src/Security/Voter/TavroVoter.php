@@ -1,14 +1,14 @@
 <?php
 
-namespace Tavro\Security\Voter;
+namespace App\Security\Voter;
 
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 use Symfony\Component\Security\Core\Authorization\AccessDecisionManagerInterface;
 
-use Tavro\Entity\Account;
-use Tavro\Entity\User;
-use Tavro\Model\EntityInterface\EntityInterface;
+use App\Entity\Account;
+use App\Entity\User;
+use App\Model\EntityInterface\EntityInterface;
 
 class TavroVoter extends Voter
 {
@@ -101,7 +101,7 @@ class TavroVoter extends Voter
      * Validate that the entity being manipulated is within the ecosystem
      * of Organizations this User belongs to.
      *
-     * @param \Tavro\Entity\Account $account
+     * @param \App\Entity\Account $account
      * @param \Symfony\Component\Security\Core\Authentication\Token\TokenInterface $token
      *
      * @return bool
@@ -140,7 +140,7 @@ class TavroVoter extends Voter
     }
 
     /**
-     * @param \Tavro\Entity\User $newUser
+     * @param \App\Entity\User $newUser
      * @param \Symfony\Component\Security\Core\Authentication\Token\TokenInterface $token
      * @return bool
      */

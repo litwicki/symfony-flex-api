@@ -1,4 +1,4 @@
-<?php namespace Tavro\Repository;
+<?php namespace App\Repository;
 
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Tools\Pagination\Paginator;

@@ -1,17 +1,17 @@
 <?php
 
-namespace Tavro\EventSubscriber\User;
+namespace App\EventSubscriber\User;
 
 use Psr\Log\LoggerInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\Event\FilterResponseEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
-use Tavro\Event\User\UserActivatedEvent;
-use Tavro\Event\User\UserForgotPasswordEvent;
-use Tavro\Event\User\UserPasswordChangeEvent;
-use Tavro\Event\User\UserResetPasswordEvent;
-use Tavro\Event\User\UserSignupEvent;
-use Tavro\Mail\TavroMailer;
+use App\Event\User\UserActivatedEvent;
+use App\Event\User\UserForgotPasswordEvent;
+use App\Event\User\UserPasswordChangeEvent;
+use App\Event\User\UserResetPasswordEvent;
+use App\Event\User\UserSignupEvent;
+use App\Mail\TavroMailer;
 
 class UserSubscriber implements EventSubscriberInterface
 {
@@ -52,7 +52,7 @@ class UserSubscriber implements EventSubscriberInterface
      * Send an Email Notification to the User to activate their email
      * And Log this event to our logging services.
      *
-     * @param \Tavro\Event\User\UserSignupEvent $event
+     * @param \App\Event\User\UserSignupEvent $event
      */
     public function onUserSignup(UserSignupEvent $event)
     {
@@ -75,7 +75,7 @@ class UserSubscriber implements EventSubscriberInterface
      * Send an Email Notification to the User to activate their email
      * And Log this event to our logging services.
      *
-     * @param \Tavro\Event\User\UserSignupEvent $event
+     * @param \App\Event\User\UserSignupEvent $event
      */
     public function onPasswordChange(UserSignupEvent $event)
     {
@@ -98,7 +98,7 @@ class UserSubscriber implements EventSubscriberInterface
      * When a User has forgotten their password, send a link via email for them
      * to properly reset their password after clicking said link..
      *
-     * @param \Tavro\Event\User\UserForgotPasswordEvent $event
+     * @param \App\Event\User\UserForgotPasswordEvent $event
      */
     public function onForgotPassword(UserForgotPasswordEvent $event)
     {
@@ -120,7 +120,7 @@ class UserSubscriber implements EventSubscriberInterface
     /**
      * User has activated, send an email with an update and confirmation.
      *
-     * @param \Tavro\Event\User\UserActivatedEvent $event
+     * @param \App\Event\User\UserActivatedEvent $event
      */
     public function onUserActivation(UserActivatedEvent $event)
     {

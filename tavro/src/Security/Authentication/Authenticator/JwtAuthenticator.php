@@ -1,6 +1,6 @@
 <?php
 
-namespace Tavro\Security\Authentication\Authenticator;
+namespace App\Security\Authentication\Authenticator;
 
 use Doctrine\ORM\EntityManager;
 
@@ -17,14 +17,14 @@ use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
 use Symfony\Component\Security\Guard\AbstractGuardAuthenticator;
 
-use Tavro\Security\Jwt\JwtHandler;
-use Tavro\Entity\User;
+use App\Security\Jwt\JwtHandler;
+use App\Entity\User;
 
-use Tavro\Exception\JWT\JWTExpiredTokenException;
-use Tavro\Exception\JWT\JWTInvalidTokenException;
-use Tavro\Exception\JWT\JWTUnverfiedTokenException;
+use App\Exception\JWT\JWTExpiredTokenException;
+use App\Exception\JWT\JWTInvalidTokenException;
+use App\Exception\JWT\JWTUnverfiedTokenException;
 
-class JwtAuthenticator extends AbstractGuardAuthenticator
+abstract class JwtAuthenticator extends AbstractGuardAuthenticator
 {
     private $em;
     private $jwtEncoder;

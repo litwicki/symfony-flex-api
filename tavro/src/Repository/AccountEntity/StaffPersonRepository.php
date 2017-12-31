@@ -1,7 +1,7 @@
-<?php namespace Tavro\Repository\AccountEntity;
+<?php namespace App\Repository\AccountEntity;
 
-use Tavro\Repository\TavroAccountEntityRepository;
-use Tavro\Repository\TavroRepository;
+use App\Repository\TavroAccountEntityRepository;
+use App\Repository\TavroRepository;
 
 class StaffPersonRepository extends TavroAccountEntityRepository
 {

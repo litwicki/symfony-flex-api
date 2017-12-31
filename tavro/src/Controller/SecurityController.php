@@ -1,31 +1,31 @@
 <?php
 
-namespace Tavro\Controller;
+namespace App\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
-use Tavro\Exception\ApiNotAuthorizedException;
-use Tavro\Exception\Security\UserPasswordTokenMissingException;
-use Tavro\Exception\Security\UserPasswordTokenInvalidException;
-use Tavro\Exception\Api\ApiException;
-use Tavro\Exception\Api\ApiNotFoundException;
-use Tavro\Exception\Api\ApiRequestLimitException;
-use Tavro\Exception\Api\ApiAccessDeniedException;
-use Tavro\Exception\Form\InvalidFormException;
+use App\Exception\ApiNotAuthorizedException;
+use App\Exception\Security\UserPasswordTokenMissingException;
+use App\Exception\Security\UserPasswordTokenInvalidException;
+use App\Exception\Api\ApiException;
+use App\Exception\Api\ApiNotFoundException;
+use App\Exception\Api\ApiRequestLimitException;
+use App\Exception\Api\ApiAccessDeniedException;
+use App\Exception\Form\InvalidFormException;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 
 use Doctrine\Common\Inflector\Inflector;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 
-use Tavro\Entity\Person;
-use Tavro\Entity\User;
+use App\Entity\Person;
+use App\Entity\User;
 use Symfony\Component\HttpFoundation\Cookie;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
 use Litwicki\Common\Common;
-use Tavro\Controller\Api\ApiController;
+use App\Controller\Api\ApiController;
 
 class SecurityController extends ApiController
 {

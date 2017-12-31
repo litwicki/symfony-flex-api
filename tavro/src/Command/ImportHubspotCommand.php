@@ -1,6 +1,6 @@
 <?php
 
-namespace Tavro\Command;
+namespace App\Command;
 
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputArgument;
@@ -8,10 +8,10 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Litwicki\Common\cURL;
-use Tavro\Entity\Variable;
-use Tavro\Entity\Organization;
-use Tavro\Entity\Contact;
-use Tavro\Entity\Person;
+use App\Entity\Variable;
+use App\Entity\Organization;
+use App\Entity\Contact;
+use App\Entity\Person;
 
 class ImportHubspotCommand extends ContainerAwareCommand
 {

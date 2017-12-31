@@ -1,6 +1,6 @@
 <?php
 
-namespace Tavro\Model\Entity;
+namespace App\Model\Entity;
 
 use Doctrine\ORM\Mapping AS ORM;
 
@@ -12,8 +12,8 @@ use JMS\Serializer\Annotation\VirtualProperty;
 use JMS\Serializer\Annotation\Groups;
 use JMS\Serializer\Annotation\MaxDepth;
 
-use Tavro\Entity\User;
-use Tavro\Model\EntityInterface\EntityInterface;
+use App\Entity\User;
+use App\Model\EntityInterface\EntityInterface;
 
 /**
  * @ORM\Entity

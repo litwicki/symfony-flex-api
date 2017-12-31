@@ -1,6 +1,6 @@
 <?php
 
-namespace Tavro\Security\Authentication\Provider;
+namespace App\Security\Authentication\Provider;
 
 use Doctrine\ORM\NoResultException;
 use Doctrine\ORM\EntityManager;
@@ -11,7 +11,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
 
-use Tavro\Entity\User;
+use App\Entity\User;
 
 class UserProvider implements UserProviderInterface
 {

@@ -1,11 +1,11 @@
 <?php
 
-namespace Tavro\Model\HandlerInterface;
+namespace App\Model\HandlerInterface;
 
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 
-use Tavro\Model\EntityInterface\EntityInterface;
+use App\Model\EntityInterface\EntityInterface;
 
 /**
  * Interface S3EntityHandlerInterface
@@ -16,7 +16,7 @@ interface S3EntityHandlerInterface
 {
     /**
      * @param \Symfony\Component\HttpFoundation\Request $request
-     * @param \Tavro\Model\EntityInterface\EntityInterface $entity
+     * @param \App\Model\EntityInterface\EntityInterface $entity
      *
      * @return mixed
      */

@@ -1,29 +1,29 @@
 <?php
 
-namespace Tavro\Handler\AccountEntity;
+namespace App\Handler\AccountEntity;
 
-use Tavro\Exception\Api\ApiException;
-use Tavro\Exception\Form\InvalidFieldException;
-use Tavro\Handler\EntityHandler;
-use Tavro\Exception\Form\InvalidFormException;
-use Tavro\Model\EntityInterface\EntityInterface;
-use Tavro\Exception\Api\ApiAccessDeniedException;
-use Tavro\Exception\UsernameNotUniqueException;
-use Tavro\Exception\EmailNotUniqueException;
+use App\Exception\Api\ApiException;
+use App\Exception\Form\InvalidFieldException;
+use App\Handler\EntityHandler;
+use App\Exception\Form\InvalidFormException;
+use App\Model\EntityInterface\EntityInterface;
+use App\Exception\Api\ApiAccessDeniedException;
+use App\Exception\UsernameNotUniqueException;
+use App\Exception\EmailNotUniqueException;
 
 use Rhumsaa\Uuid\Uuid;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 use Symfony\Component\PropertyAccess\Exception\InvalidPropertyPathException;
 use Symfony\Component\Form\Exception\TransformationFailedException;
 use Symfony\Component\Form\Exception\UnexpectedTypeException;
-use Tavro\Exception\InvalidUsernameException;
+use App\Exception\InvalidUsernameException;
 use Symfony\Component\Debug\Exception\ContextErrorException;
 use Symfony\Component\HttpFoundation\Request;
 
-use Tavro\Entity\Organization;
-use Tavro\Handler\AccountEntityHandler;
-use Tavro\Model\HandlerInterface\AccountEntityHandlerInterface;
-use Tavro\Model\HandlerInterface\CommentEntityHandlerInterface;
+use App\Entity\Organization;
+use App\Handler\AccountEntityHandler;
+use App\Model\HandlerInterface\AccountEntityHandlerInterface;
+use App\Model\HandlerInterface\CommentEntityHandlerInterface;
 
 /**
  * Class OrganizationHandler
@@ -38,7 +38,7 @@ class OrganizationHandler extends AccountEntityHandler implements CommentEntityH
     /**
      * Additional validation for the Entity.
      *
-     * @param \Tavro\Model\EntityInterface\EntityInterface $entity
+     * @param \App\Model\EntityInterface\EntityInterface $entity
      * @param array $parameters
      */
     public function validate(EntityInterface $entity, array $parameters = array())
@@ -55,7 +55,7 @@ class OrganizationHandler extends AccountEntityHandler implements CommentEntityH
     }
 
     /**
-     * @param \Tavro\Model\EntityInterface\EntityInterface $organization
+     * @param \App\Model\EntityInterface\EntityInterface $organization
      *
      * @return array
      * @throws \Exception
