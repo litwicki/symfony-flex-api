@@ -1,2 +1,3 @@
 _index:
-    resource: "@TavroApiBundle/Resources/config/routing_dev.yml"
+    path: "/"
+    controller: App\Controller\Dev\DefaultController::indexAction

@@ -1,5 +1,4 @@
+# See https://symfony.com/doc/current/email/dev_environment.html
 swiftmailer:
-    delivery_addresses: ['%debug_email%']
-    delivery_whitelist:
-       - '/[^dev]@zoadilack\.com$/'
-       - '/^@tavro\.io/'
+    #  send all emails to a specific address
+    #delivery_addresses: ['me@example.com']

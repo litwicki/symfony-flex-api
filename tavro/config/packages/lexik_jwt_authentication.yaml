@@ -1,5 +1,5 @@
 lexik_jwt_authentication:
-    pass_phrase: "%jwt_token_passphrase%"
-    token_ttl: "%jwt_token_ttl%"
-    public_key_path: "%kernel.root_dir%/keys/public.pem"
-    private_key_path: "%kernel.root_dir%/keys/private.pem"
+    pass_phrase: '%env(JWT_TOKEN_PASSPHRASE)%'
+    token_ttl: '%env(JWT_TOKEN_TTL)%'
+    public_key_path: "%kernel.root_dir%/var/keys/public.pem"
+    private_key_path: "%kernel.root_dir%/var/keys/private.pem"

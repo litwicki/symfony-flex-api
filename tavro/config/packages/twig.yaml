@@ -4,10 +4,4 @@ twig:
     strict_variables: "%kernel.debug%"
     cache:  false
     globals:
-        app_name: "%app_name%"
-        app_version: "%app_version%"
-        app_email: "%app_email%"
-        app_email_name: "%app_email_name%"
-        app_debug: "%kernel.debug%"
-        amazon_s3_url: "%amazon_s3_url%"
-        asset_bucket: "%asset_bucket%"
+        database_url: "%env(DATABASE_URL)%"
