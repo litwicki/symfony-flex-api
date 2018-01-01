@@ -35,7 +35,8 @@
     "symfony/web-server-bundle": "^4.0",
     "symfony/yaml": "^4.0",
     "twig/extensions": "^1.5",
-    "twig/twig": "^2.4"
+    "twig/twig": "^2.4",
+    "swiftmailer/swiftmailer": "^6.0"
   },
   "require-dev": {
     "symfony/dotenv": "^4.0"
@@ -74,7 +75,7 @@
   "extra": {
     "symfony": {
       "id": "01BZK0MSEVFH05QYS25GBAC664",
-      "allow-contrib": false
+      "allow-contrib": true
     }
   }
 }
