@@ -1,7 +1,0 @@
-api_forecast_expenses:
-    path: /forecasts/{forecast}/expenses.{_format}
-    defaults: { _controller: TavroApiBundle:Entity\ForecastExpense:byForecast, _format: json}
-    methods: [GET|OPTIONS]
-    requirements:
-        organization: \d+
-        _format: json|xml
