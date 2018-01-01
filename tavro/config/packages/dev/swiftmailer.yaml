@@ -1,0 +1,5 @@
+swiftmailer:
+    delivery_addresses: ['%debug_email%']
+    delivery_whitelist:
+       - '/[^dev]@zoadilack\.com$/'
+       - '/^@tavro\.io/'

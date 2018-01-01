@@ -1,0 +1,2 @@
+_index:
+    resource: "@TavroApiBundle/Resources/config/routing_dev.yml"
