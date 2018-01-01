@@ -15,23 +15,23 @@ api/app/cache
 # if you remove the above rule, at least ignore the following:
 
 # User-specific stuff:
-# .idea/workspace.xml
-# .idea/tasks.xml
-# .idea/dictionaries
+/workspace.xml
+/tasks.xml
+/dictionaries
 
 # Sensitive or high-churn files:
-# .idea/dataSources.ids
-# .idea/dataSources.xml
-# .idea/sqlDataSources.xml
-# .idea/dynamic.xml
-# .idea/uiDesigner.xml
+/dataSources.ids
+/dataSources.xml
+/sqlDataSources.xml
+/dynamic.xml
+/uiDesigner.xml
 
 # Gradle:
-# .idea/gradle.xml
-# .idea/libraries
+/gradle.xml
+/libraries
 
 # Mongo Explorer plugin:
-# .idea/mongoSettings.xml
+/mongoSettings.xml
 
 ## File-based project format:
 *.ipr
@@ -72,37 +72,37 @@ sftp-config.json
 
 .vagrant
 *.log
-/api/app/keys/*
-/api/web/bundles
-/api/web/css
-/api/web/js
-/api/web/assets
-/api/web/uploads
-/api/web/uploads/*
-/api/var/cache
-/api/var/cache/*
-/api/var/logs
-/api/var/bootstrap.php.cache
-/api/app/config/parameters.yml
-/api/vendor
-/api/npm-debug.log
-/api/aws.json
-/api/ansible/vars/env.yml
-/api/node_modules
-/api/bower_components
-/api/web/assets/*
-/api/var/sessions/*
+/tavro/app/keys/*
+/tavro/web/bundles
+/tavro/web/css
+/tavro/web/js
+/tavro/web/assets
+/tavro/web/uploads
+/tavro/web/uploads/*
+/tavro/var/cache
+/tavro/var/cache/*
+/tavro/var/logs
+/tavro/var/bootstrap.php.cache
+/tavro/app/config/parameters.yml
+/tavro/vendor
+/tavro/npm-debug.log
+/tavro/aws.json
+/tavro/ansible/vars/env.yml
+/tavro/node_modules
+/tavro/bower_components
+/tavro/web/assets/*
+/tavro/var/sessions/*
 
 /angular2-sample-app-master/web/assets/*
 /app/aws.json
 /app/node_modules
 /app/bower_components
-/docs/build/*
-/docs/cache/*
-/docs/sami.phar
-/docs/apib.html
+/sami/build/*
+/sami/cache/*
+/sami/sami.phar
+/sami/apib.html
 
-/api/var/cache/
-/api/var/logs/
+/tavro/var/cache/
+/tavro/var/logs/
 /phpunit
 /*.log
