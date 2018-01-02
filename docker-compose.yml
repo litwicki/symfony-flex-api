@@ -2,12 +2,27 @@ version: '2'
 
 services:
 
+  tavro_api_db:
+    image: mysql
+    container_name: "tavro_api_db"
+    restart: always
+    ports:
+      - ${MYSQL_PORT}
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+
   tavro_api_solo:
     container_name: "tavro_api_solo"
-    build: .
+    build:
+      context: .
+      dockerfile: Dockerfile
     volumes:
       - ./tavro:/var/www/html
+      - ./docker/init.sh:/var/www/html/bin/init.sh
     ports:
       - 80
     links:
-      - tavro_api_solo
+      - tavro_api_db

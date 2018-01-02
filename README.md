@@ -1,10 +1,12 @@
 # Tavro Local Development
 
-This aggregate repository builds a local virtual machine using Virtualbox, Vagrant and Ansible to provision a comprehensive environment with `admin`, `api`, `phpunit`, `docs` and `app` hosts.
+Build and deploy the API environment.
 
 ## Getting Started
 
-    git clone git@github.com:zoadilack/tavro-api.git && cd tavro-api && bash init.sh
+    git clone git@github.com:zoadilack/tavro-api.git && cd tavro-api
+    docker-compose up -d
+    docker exec -it tavro_api /bin/sh /var/www/html/bin/init.sh
     
 ## Wiki
 

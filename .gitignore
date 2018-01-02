@@ -4,10 +4,7 @@
 
 *.iml
 *.box
-composer.lock
 *~
-api/app/cache
-
 
 ## Directory-based project format:
 .idea/
@@ -72,6 +69,7 @@ sftp-config.json
 
 .vagrant
 *.log
+/tavro/composer.lock
 /tavro/app/keys/*
 /tavro/web/bundles
 /tavro/web/css
@@ -93,16 +91,13 @@ sftp-config.json
 /tavro/web/assets/*
 /tavro/var/sessions/*
 
-/angular2-sample-app-master/web/assets/*
-/app/aws.json
-/app/node_modules
-/app/bower_components
-/sami/build/*
-/sami/cache/*
-/sami/sami.phar
-/sami/apib.html
+/docs/sami/build/*
+/docs/sami/cache/*
+/docs/sami/sami.phar
+/docs/sami/apib.html
 
 /tavro/var/cache/
 /tavro/var/logs/
-/phpunit
+/tavro/phpunit
 /*.log
+.env
