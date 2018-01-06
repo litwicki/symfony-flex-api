@@ -17,99 +17,99 @@ tavro_user_security_api:
 #  Routes that require an Entity
 # --------------------------------------
 tavro_account_api:
-    resource: "routes/api/entity/account.yml"
+    resource: "routes/entity/account.yml"
 
 tavro_account_type_api:
-    resource: "routes/api/entity/account_type.yml"
+    resource: "routes/entity/account_type.yml"
 
 tavro_comment_api:
-    resource: "routes/api/entity/comment.yml"
+    resource: "routes/entity/comment.yml"
 
 tavro_contact_api:
-    resource: "routes/api/entity/contact.yml"
+    resource: "routes/entity/contact.yml"
 
 tavro_person_api:
-    resource: "routes/api/entity/person.yml"
+    resource: "routes/entity/person.yml"
 
 tavro_shareholder_api:
-    resource: "routes/api/entity/shareholder.yml"
+    resource: "routes/entity/shareholder.yml"
 
 tavro_tag_api:
-    resource: "routes/api/entity/tag.yml"
+    resource: "routes/entity/tag.yml"
 
 tavro_user_api:
-    resource: "routes/api/entity/user.yml"
+    resource: "routes/entity/user.yml"
 
 tavro_user_quickbooks_api:
-    resource: "routes/api/entity/user_quickbooks.yml"
+    resource: "routes/entity/user_quickbooks.yml"
 
 tavro_user_freshbooks_api:
-    resource: "routes/api/entity/user_freshbooks.yml"
+    resource: "routes/entity/user_freshbooks.yml"
 
 tavro_forecast_revenue_api:
-    resource: "routes/api/entity/forecast_revenue.yml"
+    resource: "routes/entity/forecast_revenue.yml"
 
 tavro_forecast_expense_api:
-    resource: "routes/api/entity/forecast_expense.yml"
+    resource: "routes/entity/forecast_expense.yml"
 
 tavro_forecast_staff_api:
-    resource: "routes/api/entity/forecast_staff.yml"
+    resource: "routes/entity/forecast_staff.yml"
 
 # --------------------------------------
 #  Routes that require an AccountEntity
 # --------------------------------------
 tavro_account_group_api:
-    resource: "routes/api/account-entity/account_group.yml"
+    resource: "routes/account-entity/account_group.yml"
     prefix: "/accounts/{account}"
 
 tavro_account_user_api:
-    resource: "routes/api/account-entity/account_user.yml"
+    resource: "routes/account-entity/account_user.yml"
     prefix: "/accounts/{account}"
 
 tavro_expense_api:
-    resource: "routes/api/account-entity/expense.yml"
+    resource: "routes/account-entity/expense.yml"
     prefix: "/accounts/{account}"
 
 tavro_expense_category_api:
-    resource: "routes/api/account-entity/expense_category.yml"
+    resource: "routes/account-entity/expense_category.yml"
     prefix: "/accounts/{account}"
 
 tavro_forecast_api:
-    resource: "routes/api/account-entity/forecast.yml"
+    resource: "routes/account-entity/forecast.yml"
     prefix: "/accounts/{account}"
 
 tavro_funding_api:
-    resource: "routes/api/account-entity/funding.yml"
+    resource: "routes/account-entity/funding.yml"
     prefix: "/accounts/{account}"
 
 tavro_node_api:
-    resource: "routes/api/account-entity/node.yml"
+    resource: "routes/account-entity/node.yml"
     prefix: "/accounts/{account}"
 
 tavro_organization_api:
-    resource: "routes/api/account-entity/organization.yml"
+    resource: "routes/account-entity/organization.yml"
     prefix: "/accounts/{account}"
 
 tavro_product_api:
-    resource: "routes/api/account-entity/product.yml"
+    resource: "routes/account-entity/product.yml"
     prefix: "/accounts/{account}"
 
 tavro_product_category_api:
-    resource: "routes/api/account-entity/product_category.yml"
+    resource: "routes/account-entity/product_category.yml"
     prefix: "/accounts/{account}"
 
 tavro_revenue_api:
-    resource: "routes/api/account-entity/revenue.yml"
+    resource: "routes/account-entity/revenue.yml"
     prefix: "/accounts/{account}"
 
 tavro_revenue_category_api:
-    resource: "routes/api/account-entity/revenue_category.yml"
+    resource: "routes/account-entity/revenue_category.yml"
     prefix: "/accounts/{account}"
 
 tavro_service_api:
-    resource: "routes/api/account-entity/service.yml"
+    resource: "routes/account-entity/service.yml"
     prefix: "/accounts/{account}"
 
 tavro_service_category_api:
-    resource: "routes/api/account-entity/service_category.yml"
+    resource: "routes/account-entity/service_category.yml"
     prefix: "/accounts/{account}"

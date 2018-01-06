@@ -14,7 +14,7 @@ services:
       MYSQL_USER: ${MYSQL_USER}
       MYSQL_PASSWORD: ${MYSQL_PASSWORD}
 
-  tavro_api_solo:
+  tavro_api:
     container_name: "tavro_api_solo"
     build:
       context: .
