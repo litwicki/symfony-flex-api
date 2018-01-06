@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Services\LoginAttemptHandler;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -36,7 +37,7 @@ class JwtController extends DefaultController
      */
     public function tokenAuthenticateAction(Request $request)
     {
-        $loginAttemptHandler = $this->container->get('tavro.auth.login_attempts');
+        $loginAttemptHandler = $this->get(LoginAttemptHandler::class);
 
         $username = $request->request->get('username');
         $password = $request->request->get('password');
@@ -86,7 +87,7 @@ class JwtController extends DefaultController
 
         $loginAttemptHandler->clear($request);
 
-        $jwtHandler = $this->get('tavro_api.jwt_token_handler');
+        $jwtHandler = $this->get(JwtHandler::class);
 
         /**
          * If the User is not properly activated, do not even respond with a Token.

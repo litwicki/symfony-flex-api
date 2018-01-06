@@ -1,36 +1,29 @@
 <?php namespace App\Services;
 
-use Doctrine\ORM\EntityManager;
-use Symfony\Component\DependencyInjection\ContainerAwareInterface;
-use Symfony\Component\DependencyInjection\ContainerInterface;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 
-class LoginAttemptHandler implements ContainerAwareInterface
+class LoginAttemptHandler
 {
     protected $container;
 
     protected $em;
     protected $login_attempt_minutes;
     protected $max_login_attempts;
+    protected $timezone;
 
     /**
-     * QboApiService constructor.
-     *
-     * @param \Doctrine\ORM\EntityManager $em
+     * LoginAttemptHandler constructor.
+     * @param EntityManagerInterface $em
+     * @param $login_attempt_minutes
+     * @param $max_login_attempts
+     * @param $timezone
      */
-    public function __construct(EntityManager $em, $login_attempt_minutes, $max_login_attempts)
+    public function __construct(EntityManagerInterface $em, $login_attempt_minutes, $max_login_attempts, $timezone)
     {
         $this->em = $em;
         $this->max_login_attempts = $max_login_attempts;
         $this->login_attempt_minutes = $login_attempt_minutes;
-    }
-
-    /**
-     * @param ContainerInterface $container
-     */
-    public function setContainer(ContainerInterface $container = null)
-    {
-        $this->container = $container;
     }
 
     /**
@@ -43,7 +36,7 @@ class LoginAttemptHandler implements ContainerAwareInterface
         try {
 
             $now = new \DateTime();
-            $now->setTimezone(new \DateTimeZone($this->container->getParameter('timezone')));
+            $now->setTimezone(new \DateTimeZone($this->timezone));
 
             $conn = $this->em->getConnection();
             $conn->insert('login_attempts', [
@@ -117,7 +110,7 @@ class LoginAttemptHandler implements ContainerAwareInterface
         try {
 
             $now = new \DateTime();
-            $now ->setTimezone(new \DateTimeZone($this->container->getParameter('timezone')));
+            $now ->setTimezone(new \DateTimeZone($this->timezone));
             $minutes = 0;
 
             foreach($attempts as $attempt) {

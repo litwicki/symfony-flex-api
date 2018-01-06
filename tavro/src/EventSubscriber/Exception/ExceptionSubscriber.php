@@ -12,11 +12,13 @@ class ExceptionSubscriber implements EventSubscriberInterface
 {
     protected $serializer;
     protected $logger;
+    private $debug;
 
-    public function __construct(Serializer $serializer, TavroExceptionLogger $logger)
+    public function __construct(Serializer $serializer, TavroExceptionLogger $logger, $debug)
     {
         $this->serializer = $serializer;
         $this->logger = $logger;
+        $this->debug = $debug;
     }
 
     public static function getSubscribedEvents()
@@ -35,6 +37,7 @@ class ExceptionSubscriber implements EventSubscriberInterface
      * Process an Exception message.
      *
      * @param \Symfony\Component\HttpKernel\Event\GetResponseForExceptionEvent $event
+     * @throws \Exception
      */
     public function processException(GetResponseForExceptionEvent $event)
     {
@@ -70,7 +73,7 @@ class ExceptionSubscriber implements EventSubscriberInterface
             $message = 'There was an error completing your request.';
         }
 
-        $data = $this->formatExceptionResponse($code, $message, $exception);
+        $data = $this->formatExceptionResponse($code, $message, $exception, $this->debug);
 
         $content = $this->serializer->serialize($data, $format);
 
@@ -119,11 +122,20 @@ class ExceptionSubscriber implements EventSubscriberInterface
      *
      * @return array
      */
-    public function formatExceptionResponse($code, $message, $exception)
+    public function formatExceptionResponse($code, $message, $exception, $debug = false)
     {
-        return [
+        $message = [
             'code' => $code,
             'message' => $message
         ];
+
+        if($debug) {
+            array_merge($message, [
+                'error' => sprintf('%s:%s', $exception->getFile(), $exception->getLine()),
+                'debug' => $exception->getTraceAsString()
+            ]);
+        }
+
+        return $message;
     }
 }

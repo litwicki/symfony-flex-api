@@ -16,7 +16,7 @@ services:
     # this creates a service per class whose id is the fully-qualified class name
     App\:
         resource: '../src/*'
-        exclude: '../src/{Entity,Migrations,Tests}'
+        exclude: '../src/{DataFixtures,Entity,Migrations,Tests}'
 
     # controllers are imported separately to make sure services can be injected
     # as action arguments even if you don't extend any base controller class
@@ -55,6 +55,18 @@ services:
         class: Symfony\Component\Serializer\Normalizer\GetSetMethodNormalizer
         tags:
             - { name: serializer.normalizer }
+
+    App\EventSubscriber\Exception\ExceptionSubscriber:
+        public: true
+        arguments:
+            $debug: '%kernel.debug%'
+
+    App\Services\LoginAttemptHandler:
+        public: true
+        arguments:
+            $max_login_attempts: '%env(MAX_LOGIN_ATTEMPTS)%'
+            $login_attempt_minutes: '%env(LOGIN_ATTEMPTS_MINUTES)%'
+            $timezone: '%env(TIMEZONE)%'
 
 #    aws:
 #        version: latest

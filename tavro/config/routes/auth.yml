@@ -1,9 +1,9 @@
 api_jwt_authenticate:
     path: /auth
     methods: [POST|OPTIONS]
-    defaults: { _controller: Jwt:tokenAuthenticate }
+    defaults: { _controller: App\Controller\JwtController:tokenAuthenticateAction }
 
 api_jwt_logout:
     path: /auth/logout
-    defaults: { _controller: Jwt:tokenLogout }
+    defaults: { _controller: App\Controller\JwtController:tokenLogoutAction }
     methods: [POST|OPTIONS]
