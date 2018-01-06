@@ -5,6 +5,7 @@ namespace App\Serializer;
 use JMS\Serializer\SerializationContext;
 use JMS\Serializer\Serializer as JMS_Serializer;
 use JMS\Serializer\SerializerBuilder;
+use JMS\Serializer\SerializerInterface;
 
 /**
  * Class Serializer
@@ -16,7 +17,7 @@ class Serializer
 
     private $jms;
     
-    public function __construct(JMS_Serializer $jms)
+    public function __construct(SerializerInterface $jms)
     {
         $this->jms = $jms;
     }
