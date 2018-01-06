@@ -1,0 +1,38 @@
+api_get_comment:
+    path: /{entity}/{id}.{_format}
+    defaults: { _controller: TavroApiBundle:Entity\Comment:get, _format: json }
+    methods: [GET|OPTIONS]
+    requirements:
+        id: \d+
+        _format:  json|xml
+
+api_patch_comment:
+    path:  /{entity}/{id}.{_format}
+    defaults: { _controller: TavroApiBundle:Entity\Comment:patch, _format: json }
+    methods: [PATCH|OPTIONS]
+    requirements:
+        id: \d+
+        _format:  json|xml
+
+api_put_comment:
+    path:  /{entity}/{id}.{_format}
+    defaults: { _controller: TavroApiBundle:Entity\Comment:put, _format: json }
+    methods: [PUT|OPTIONS]
+    requirements:
+        id: \d+
+        _format:  json|xml
+
+api_delete_comment:
+    path:  /{entity}/{id}.{_format}
+    defaults: { _controller: TavroApiBundle:Entity\Comment:delete, _format: json }
+    methods: [DELETE|OPTIONS]
+    requirements:
+        id: \d+
+        _format:  json|xml
+
+api_typeahead_comments:
+    path:  /typeahead/{entity}.{_format}
+    defaults: { _controller: TavroApiBundle:Entity\Comment:typeahead, _format: json }
+    methods: [GET|OPTIONS]
+    requirements:
+        _format:  json|xml

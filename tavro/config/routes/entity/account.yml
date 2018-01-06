@@ -1,0 +1,45 @@
+api_get_account:
+    path: /accounts/{id}.{_format}
+    defaults: { _controller: TavroApiBundle:Entity\Account:get, _format: json, entity: "accounts" }
+    methods: [GET|OPTIONS]
+    requirements:
+        id: \d+
+        _format:  json|xml
+
+api_get_all_accounts:
+    path:  /accounts.{_format}
+    defaults: { _controller: TavroApiBundle:Entity\Account:getAll, _format: json, entity: "accounts" }
+    methods: [GET|OPTIONS]
+    requirements:
+        _format:  json|xml
+
+api_post_account:
+    path:  /accounts.{_format}
+    defaults: { _controller: TavroApiBundle:Entity\Account:post, _format: json, entity: "accounts" }
+    methods: [POST|OPTIONS]
+    requirements:
+        _format:  json|xml
+
+api_patch_account:
+    path:  /accounts/{id}.{_format}
+    defaults: { _controller: TavroApiBundle:Entity\Account:patch, _format: json, entity: "accounts" }
+    methods: [PATCH|OPTIONS]
+    requirements:
+        id: \d+
+        _format:  json|xml
+
+api_put_account:
+    path:  /accounts/{id}.{_format}
+    defaults: { _controller: TavroApiBundle:Entity\Account:put, _format: json, entity: "accounts" }
+    methods: [PUT|OPTIONS]
+    requirements:
+        id: \d+
+        _format:  json|xml
+
+api_delete_account:
+    path:  /accounts/{id}.{_format}
+    defaults: { _controller: TavroApiBundle:Entity\Account:delete, _format: json, entity: "accounts" }
+    methods: [DELETE|OPTIONS]
+    requirements:
+        id: \d+
+        _format:  json|xml

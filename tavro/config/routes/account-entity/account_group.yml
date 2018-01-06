@@ -1,0 +1,31 @@
+api_account_groups:
+    path: /groups.{_format}
+    defaults: { _controller: TavroApiBundle:AccountEntity\AccountGroup:getAllByAccount, _format: json, entity: "account_groups" }
+    methods: [GET|OPTIONS]
+    requirements:
+        account: \d+
+        _format: json|xml
+
+api_get_account_group:
+    path: /groups/{id}.{_format}
+    defaults: { _controller: TavroApiBundle:AccountEntity\AccountGroup:get, _format: json, entity: "account_groups" }
+    methods: [GET|OPTIONS]
+    requirements:
+        account: \d+
+        _format: json|xml
+
+api_post_account_group:
+    path: /groups.{_format}
+    defaults: { _controller: TavroApiBundle:AccountEntity\AccountGroup:post, _format: json, entity: "account_groups" }
+    methods: [POST|OPTIONS]
+    requirements:
+        account: \d+
+        _format: json|xml
+
+api_delete_account_group:
+    path:  /groups/{id}.{_format}
+    defaults: { _controller: TavroApiBundle:AccountEntity\AccountGroup:delete, _format: json, entity: "account_groups" }
+    methods: [DELETE|OPTIONS]
+    requirements:
+        id: \d+
+        _format:  json|xml

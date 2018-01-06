@@ -37,7 +37,7 @@ class DefaultController extends Controller
         phpinfo();
         $phpinfo = ob_get_clean();
 
-        return $this->render('index.html.twig', [
+        return $this->render('dev/index.html.twig', [
             'phpinfo' => $phpinfo
         ]);
     }
