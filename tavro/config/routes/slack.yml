@@ -1,7 +1,0 @@
-api_submit_to_slack:
-    path: /slack.{_format}
-    defaults: { _controller: Slack:submit, _format: json }
-    methods: [POST|OPTIONS]
-    requirements:
-        id: \d+
-        _format:  json|xml

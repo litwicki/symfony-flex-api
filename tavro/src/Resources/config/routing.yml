@@ -2,7 +2,7 @@ tavro_api_commands:
     resource: "@TavroApiBundle/Resources/config/routing/commands.yml"
 
 tavro_jwt_api:
-    resource: "@TavroApiBundle/Resources/config/routing/jwt.yml"
+    resource: "@TavroApiBundle/Resources/config/routing/auth.yml"
 
 tavro_log_api:
     resource: "@TavroApiBundle/Resources/config/routing/log.yml"

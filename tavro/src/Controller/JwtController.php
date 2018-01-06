@@ -9,8 +9,6 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use App\Exception\ApiNotAuthorizedException;
 use App\Exception\JWT\JWTMaximumLoginAttemptsException;
-use App\Exception\Security\InvalidCredentialsException;
-use App\Exception\Security\UsernameNotFoundException;
 use App\Exception\Api\ApiException;
 use App\Exception\Api\ApiNotFoundException;
 use App\Exception\Api\ApiRequestLimitException;
@@ -25,7 +23,6 @@ use Doctrine\ORM\Tools\Pagination\Paginator;
 use App\Entity\User;
 use Symfony\Component\HttpFoundation\Cookie;
 
-use Litwicki\Common\Common;
 use App\Controller\DefaultController;
 
 class JwtController extends DefaultController
