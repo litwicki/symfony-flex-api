@@ -1,9 +1,9 @@
 api_jwt_authenticate:
     path: /auth
     methods: [POST|OPTIONS]
-    defaults: { _controller: TavroApiBundle:Jwt:tokenAuthenticate }
+    defaults: { _controller: Jwt:tokenAuthenticate }
 
 api_jwt_logout:
     path: /auth/logout
-    defaults: { _controller: TavroApiBundle:Jwt:tokenLogout }
+    defaults: { _controller: Jwt:tokenLogout }
     methods: [POST|OPTIONS]

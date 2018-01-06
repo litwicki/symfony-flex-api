@@ -1,17 +1,17 @@
 tavro_api_commands:
-    resource: "routes/api/commands.yml"
+    resource: "routes/commands.yml"
 
 tavro_jwt_api:
-    resource: "routes/api/jwt.yml"
+    resource: "routes/jwt.yml"
 
 tavro_log_api:
-    resource: "routes/api/log.yml"
+    resource: "routes/log.yml"
 
 tavro_slack_api:
-    resource: "routes/api/slack.yml"
+    resource: "routes/slack.yml"
 
 tavro_user_security_api:
-    resource: "routes/api/security.yml"
+    resource: "routes/security.yml"
 
 # --------------------------------------
 #  Routes that require an Entity

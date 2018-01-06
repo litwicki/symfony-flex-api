@@ -1,6 +1,6 @@
 api_get_shareholder:
     path: /shareholders/{id}.{_format}
-    defaults: { _controller: TavroApiBundle:Entity\Shareholder:get, _format: json, entity: 'shareholders'  }
+    defaults: { _controller: Entity\Shareholder:get, _format: json, entity: 'shareholders'  }
     methods: [GET|OPTIONS]
     requirements:
         id: \d+
@@ -8,21 +8,21 @@ api_get_shareholder:
 
 api_get_all_shareholders:
     path:  /shareholders.{_format}
-    defaults: { _controller: TavroApiBundle:Entity\Shareholder:getAll, _format: json, entity: 'shareholders'  }
+    defaults: { _controller: Entity\Shareholder:getAll, _format: json, entity: 'shareholders'  }
     methods: [GET|OPTIONS]
     requirements:
         _format:  json|xml
 
 api_post_shareholder:
     path:  /shareholders.{_format}
-    defaults: { _controller: TavroApiBundle:Entity\Shareholder:post, _format: json, entity: 'shareholders'  }
+    defaults: { _controller: Entity\Shareholder:post, _format: json, entity: 'shareholders'  }
     methods: [POST|OPTIONS]
     requirements:
         _format:  json|xml
 
 api_patch_shareholder:
     path:  /shareholders/{id}.{_format}
-    defaults: { _controller: TavroApiBundle:Entity\Shareholder:patch, _format: json, entity: 'shareholders'  }
+    defaults: { _controller: Entity\Shareholder:patch, _format: json, entity: 'shareholders'  }
     methods: [PATCH|OPTIONS]
     requirements:
         id: \d+
@@ -30,7 +30,7 @@ api_patch_shareholder:
 
 api_put_shareholder:
     path:  /shareholders/{id}.{_format}
-    defaults: { _controller: TavroApiBundle:Entity\Shareholder:put, _format: json, entity: 'shareholders'  }
+    defaults: { _controller: Entity\Shareholder:put, _format: json, entity: 'shareholders'  }
     methods: [PUT|OPTIONS]
     requirements:
         id: \d+
@@ -38,7 +38,7 @@ api_put_shareholder:
 
 api_delete_shareholder:
     path:  /shareholders/{id}.{_format}
-    defaults: { _controller: TavroApiBundle:Entity\Shareholder:delete, _format: json, entity: 'shareholders'  }
+    defaults: { _controller: Entity\Shareholder:delete, _format: json, entity: 'shareholders'  }
     methods: [DELETE|OPTIONS]
     requirements:
         id: \d+
@@ -46,14 +46,14 @@ api_delete_shareholder:
 
 api_typeahead_shareholders:
     path:  /typeahead/shareholders.{_format}
-    defaults: { _controller: TavroApiBundle:Entity\Shareholder:typeahead, _format: json, entity: 'shareholders'  }
+    defaults: { _controller: Entity\Shareholder:typeahead, _format: json, entity: 'shareholders'  }
     methods: [GET|OPTIONS]
     requirements:
         _format:  json|xml
 
 api_shareholders_by_account:
     path: /accounts/{account}/shareholders.{_format}
-    defaults: { _controller: TavroApiBundle:Entity\Shareholder:byAccount, _format: json}
+    defaults: { _controller: Entity\Shareholder:byAccount, _format: json}
     methods: [GET|OPTIONS]
     requirements:
         account: \d+
