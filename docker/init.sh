@@ -65,11 +65,11 @@ php $APP_WEBROOT/bin/console doctrine:migrations:migrate --no-interaction
 
 # Execute fixtures for the environment
 # ** MAKE SURE TO INCLUDE --append OR YOU WILL LOSE EVERYTHING! **
-php $APP_WEBROOT/bin/console doctrine:fixtures:load --fixtures=$APP_WEBROOT/DataFixtures/Core --append
+php $APP_WEBROOT/bin/console doctrine:fixtures:load --fixtures=$APP_WEBROOT/src/DataFixtures/Core --append
 
 # If we're in DEV, then also run the dev fixtures
 if [ "$APP_ENVIRONMENT" == "dev" ]; then
-    php $APP_WEBROOT/bin/console doctrine:fixtures:load --fixtures=$APP_WEBROOT/DataFixtures/Dev --append
+    php $APP_WEBROOT/bin/console doctrine:fixtures:load --fixtures=$APP_WEBROOT/src/DataFixtures/Dev --append
 fi
 
 # Remove keys dir if it exists

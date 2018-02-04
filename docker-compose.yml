@@ -15,7 +15,7 @@ services:
       MYSQL_PASSWORD: ${MYSQL_PASSWORD}
 
   tavro_api:
-    container_name: "tavro_api_solo"
+    container_name: "tavro_api"
     build:
       context: .
       dockerfile: Dockerfile
