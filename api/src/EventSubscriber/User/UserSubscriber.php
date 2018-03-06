@@ -11,14 +11,14 @@ use App\Event\User\UserForgotPasswordEvent;
 use App\Event\User\UserPasswordChangeEvent;
 use App\Event\User\UserResetPasswordEvent;
 use App\Event\User\UserSignupEvent;
-use App\Mail\TavroMailer;
+use App\Mail\AppMailer;
 
 class UserSubscriber implements EventSubscriberInterface
 {
     protected $mailer;
     protected $logger;
 
-    public function __construct(TavroMailer $mailer, LoggerInterface $logger)
+    public function __construct(AppMailer $mailer, LoggerInterface $logger)
     {
         $this->mailer = $mailer;
         $this->logger = $logger;

@@ -6,13 +6,11 @@ use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 use Symfony\Component\Security\Core\Authorization\AccessDecisionManagerInterface;
 
-use App\Entity\Account;
 use App\Entity\User;
 use App\Model\EntityInterface\EntityInterface;
 
-class TavroVoter extends Voter
+class ApiVoter extends Voter
 {
-
     // these strings are just invented: you can use anything
     const VIEW = 'view';
     const EDIT = 'edit';
@@ -95,48 +93,6 @@ class TavroVoter extends Voter
     protected function canDelete(EntityInterface $entity, TokenInterface $token)
     {
         return TRUE;
-    }
-
-    /**
-     * Validate that the entity being manipulated is within the ecosystem
-     * of Organizations this User belongs to.
-     *
-     * @param \App\Entity\Account $account
-     * @param \Symfony\Component\Security\Core\Authentication\Token\TokenInterface $token
-     *
-     * @return bool
-     * @throws \Exception
-     */
-    public function checkAccount(Account $account, TokenInterface $token)
-    {
-        try {
-
-            $user = $token->getUser();
-
-            if(!$user instanceof User) {
-                return false;
-            }
-
-            $items = $user->getAccountUsers();
-            $accounts = array();
-
-            foreach($items as $item) {
-                $acc = $item->getAccount();
-                $accounts[$acc->getId()] = $acc;
-            }
-
-            $id = $account->getId();
-
-            if(in_array($id, array_keys($accounts))) {
-                return true;
-            }
-
-            return false;
-        }
-        catch(\Exception $e) {
-            throw $e;
-        }
-
     }
 
     /**

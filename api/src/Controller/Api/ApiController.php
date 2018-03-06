@@ -212,45 +212,6 @@ class ApiController extends DefaultController
     }
 
     /**
-     * @param \Symfony\Component\HttpFoundation\Request $request
-     * @param \App\Entity\Account $account
-     * @param $entity
-     * @param string $_format
-     *
-     * @return \Symfony\Component\HttpFoundation\Response
-     */
-    public function _getAllByAccount(Request $request, Account $account, $entity, $_format = 'json')
-    {
-        $data = null;
-
-        try {
-
-            $params = $request->query->all();
-            $handler = $this->getHandler($entity);
-
-            if(false === ($handler instanceof AccountEntityHandlerInterface)) {
-
-            }
-
-            $response = $handler->getAllByAccount($account, $params);
-
-            $data = $response['data'];
-            $message = $response['message'];
-
-            $options = [
-                'format' => $_format,
-                'message' => $message,
-            ];
-
-        }
-        catch(\Exception $e) {
-            $options = $this->getExceptionOptions($e, $_format);
-        }
-
-        return $this->apiResponse($data, $options);
-    }
-
-    /**
      * Get (find) an entity by Id.
      *
      * @param $entity

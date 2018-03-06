@@ -5,7 +5,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Event\GetResponseForExceptionEvent;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Symfony\Component\Security\Core\Exception\AuthenticationCredentialsNotFoundException;
-use App\Logging\Exception\TavroExceptionLogger;
+use App\Logging\Exception\ExceptionLogger;
 use App\Serializer\Serializer;
 
 class ExceptionSubscriber implements EventSubscriberInterface
@@ -14,7 +14,7 @@ class ExceptionSubscriber implements EventSubscriberInterface
     protected $logger;
     private $debug;
 
-    public function __construct(Serializer $serializer, TavroExceptionLogger $logger, $debug)
+    public function __construct(Serializer $serializer, ExceptionLogger $logger, $debug)
     {
         $this->serializer = $serializer;
         $this->logger = $logger;

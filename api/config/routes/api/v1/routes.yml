@@ -1,5 +1,8 @@
 api_user_mgmt_api:
     resource: "user.yml"
 
+api_user_api:
+    resource: "entity/user.yml"
+
 api_role_api:
-    resource: "role.yml"
+    resource: "entity/role.yml"

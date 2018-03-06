@@ -4,7 +4,7 @@ use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 use Doctrine\ORM\Query;
 
-interface EntityRepositoryInterface
+interface ApiRepositoryInterface
 {
     /**
      * Our new getAllPosts() method
