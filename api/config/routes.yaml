@@ -1,9 +1,9 @@
-tavro_auth_api:
+auth_api:
     resource: "routes/auth.yml"
 
-tavro_api_v1:
+api_v1:
     resource: "routes/api/v1/routes.yml"
     prefix: "/api/v1"
 
-tavro_annotations:
+annotations:
     resource: "routes/annotations.yaml"

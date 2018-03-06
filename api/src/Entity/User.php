@@ -21,26 +21,26 @@ use Symfony\Component\Validator\Constraints as Assert;
 use App\Model\EntityInterface\UserInterface;
 use App\Model\Entity\Entity;
 use App\Model\EntityInterface\EntityInterface;
-use App\Model\EventInterface\TavroCreateEventInterface;
-use App\Model\EventInterface\TavroDeleteEventInterface;
-use App\Model\EventInterface\TavroUpdateEventInterface;
+use App\Model\EventInterface\ApiCreateEventInterface;
+use App\Model\EventInterface\ApiDeleteEventInterface;
+use App\Model\EventInterface\ApiUpdateEventInterface;
 
-use App\Component\Validator\Constraints as TavroAssert;
+use App\Component\Validator\Constraints as ApiAssert;
 use JMS\Serializer\Annotation\MaxDepth;
 
 /**
  * @ORM\Entity
- * @ORM\Entity(repositoryClass="Tavro\Repository\Entity\UserRepository")
- * @Table(name="tavro_user")
+ * @ORM\Entity(repositoryClass="Api\Repository\Entity\UserRepository")
+ * @Table(name="Api_user")
  *
  * @XmlRoot("user")
  * @ExclusionPolicy("all")
  */
-class User extends Entity implements TavroCreateEventInterface, TavroDeleteEventInterface, TavroUpdateEventInterface, UserInterface, \Serializable
+class User extends Entity implements ApiCreateEventInterface, ApiDeleteEventInterface, ApiUpdateEventInterface, UserInterface, \Serializable
 {
-    const CREATE_EVENT_CLASS    = 'Tavro\Event\User\UserSignupEvent';
-    const DELETE_EVENT_CLASS    = 'Tavro\Event\User\UserDeleteEvent';
-    const UPDATE_EVENT_CLASS    = 'Tavro\Event\User\UserUpdateEvent';
+    const CREATE_EVENT_CLASS    = 'Api\Event\User\UserSignupEvent';
+    const DELETE_EVENT_CLASS    = 'Api\Event\User\UserDeleteEvent';
+    const UPDATE_EVENT_CLASS    = 'Api\Event\User\UserUpdateEvent';
 
     /**
      * @ORM\Column(type="string", length=255, unique=TRUE, nullable=FALSE)
@@ -50,7 +50,7 @@ class User extends Entity implements TavroCreateEventInterface, TavroDeleteEvent
     protected $username;
 
     /**
-     * @TavroAssert\PasswordComplexity
+     * @ApiAssert\PasswordComplexity
      * @ORM\Column(type="string", length=255, nullable=FALSE)
      */
     protected $password;
@@ -138,69 +138,9 @@ class User extends Entity implements TavroCreateEventInterface, TavroDeleteEvent
     protected $user_agent;
 
     /**
-     * @ORM\OneToMany(targetEntity="Tavro\Entity\Expense", mappedBy="user")
-     * @ORM\OrderBy({"id" = "DESC"})
-     */
-    protected $expenses;
-
-    /**
-     * @ORM\OneToMany(targetEntity="Tavro\Entity\Forecast", mappedBy="user")
-     * @ORM\OrderBy({"id" = "DESC"})
-     */
-    protected $forecasts;
-
-    /**
-     * @ORM\OneToMany(targetEntity="Tavro\Entity\Revenue", mappedBy="user")
-     * @ORM\OrderBy({"id" = "DESC"})
-     */
-    protected $revenues;
-
-    /**
-     * @ORM\OneToMany(targetEntity="Tavro\Entity\Node", mappedBy="user")
-     * @ORM\OrderBy({"id" = "DESC"})
-     */
-    protected $nodes;
-
-    /**
-     * @ORM\OneToMany(targetEntity="Tavro\Entity\Syndicate", mappedBy="user")
-     * @ORM\OrderBy({"id" = "DESC"})
-     */
-    protected $syndicates;
-
-    /**
-     * @ORM\ManyToMany(targetEntity="Tavro\Entity\Syndicate", mappedBy="investors")
-     * @ORM\OrderBy({"id" = "DESC"})
-     */
-    protected $syndicate_memberships;
-
-    /**
-     * @ORM\OneToMany(targetEntity="Tavro\Entity\Account", mappedBy="user")
-     * @ORM\OrderBy({"body" = "ASC"})
-     */
-    protected $accounts;
-
-    /**
-     * @ORM\OneToMany(targetEntity="Tavro\Entity\AccountGroup", mappedBy="user")
-     * @ORM\OrderBy({"id" = "DESC"})
-     */
-    protected $account_groups;
-
-    /**
-     * @ORM\OneToMany(targetEntity="Tavro\Entity\AccountGroupUser", mappedBy="user")
-     * @ORM\OrderBy({"id" = "DESC"})
-     */
-    protected $account_group_users;
-
-    /**
-     * @ORM\OneToMany(targetEntity="Tavro\Entity\Comment", mappedBy="user")
-     * @ORM\OrderBy({"id" = "DESC"})
-     */
-    protected $comments;
-
-    /**
-     * @ORM\ManyToMany(targetEntity="Tavro\Entity\Role", inversedBy="users")
+     * @ORM\ManyToMany(targetEntity="Api\Entity\Role", inversedBy="users")
      * @ORM\JoinTable(
-     *     name="tavro_user_role",
+     *     name="Api_user_role",
      *     joinColumns={@ORM\JoinColumn(name="user_id", referencedColumnName="id", nullable=FALSE)},
      *     inverseJoinColumns={@ORM\JoinColumn(name="role_id", referencedColumnName="id", nullable=FALSE)}
      * )
@@ -212,17 +152,12 @@ class User extends Entity implements TavroCreateEventInterface, TavroDeleteEvent
     protected $roles;
 
     /**
-     * @ORM\OneToMany(targetEntity="Tavro\Entity\NodeRead", mappedBy="user")
+     * @ORM\OneToMany(targetEntity="Api\Entity\NodeRead", mappedBy="user")
      */
     protected $nodes_read;
 
     /**
-     * @ORM\OneToMany(targetEntity="Tavro\Entity\AccountUser", mappedBy="user")
-     */
-    protected $account_users;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="Tavro\Entity\Image")
+     * @ORM\ManyToOne(targetEntity="Api\Entity\Image")
      * @ORM\JoinColumn(name="avatar_image_id", referencedColumnName="id", nullable=TRUE)
      * @Groups({"api", "detail", "simple"})
      * @MaxDepth(1)
@@ -231,7 +166,7 @@ class User extends Entity implements TavroCreateEventInterface, TavroDeleteEvent
     protected $avatar;
 
     /**
-     * @ORM\OneToOne(targetEntity="Tavro\Entity\Person", inversedBy="user")
+     * @ORM\OneToOne(targetEntity="Api\Entity\Person", inversedBy="user")
      * @ORM\JoinColumn(name="person_id", referencedColumnName="id", nullable=FALSE)
      * @Groups({"api", "detail", "simple"})
      * @MaxDepth(3)
@@ -248,17 +183,7 @@ class User extends Entity implements TavroCreateEventInterface, TavroDeleteEvent
 
         $this->create_date = new \DateTime();
         $this->update_date = new \DateTime();
-        $this->nodes = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->account_users = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->account_groups = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->accounts = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->revenues = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->expenses = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->forecasts = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->syndicates = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->syndicate_memberships = new \Doctrine\Common\Collections\ArrayCollection();
         $this->roles = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->nodes_read = new \Doctrine\Common\Collections\ArrayCollection();
 
         $this->guid = Uuid::uuid4();
         $this->salt = md5($this->guid);
@@ -652,7 +577,7 @@ class User extends Entity implements TavroCreateEventInterface, TavroDeleteEvent
      * @param \App\Entity\Node $node
      * @return User
      */
-    public function addNode(\Tavro\Entity\Node $node)
+    public function addNode(\Api\Entity\Node $node)
     {
         $this->nodes[] = $node;
 
@@ -664,7 +589,7 @@ class User extends Entity implements TavroCreateEventInterface, TavroDeleteEvent
      *
      * @param \App\Entity\Node $node
      */
-    public function removeNode(\Tavro\Entity\Node $node)
+    public function removeNode(\Api\Entity\Node $node)
     {
         $this->nodes->removeElement($node);
     }
@@ -680,48 +605,12 @@ class User extends Entity implements TavroCreateEventInterface, TavroDeleteEvent
     }
 
     /**
-     * Add comment
-     *
-     * @param \App\Entity\Comment $comment
-     * @return User
-     */
-    public function addComment(\Tavro\Entity\Comment $comment)
-    {
-        $this->comments[] = $comment;
-
-        return $this;
-    }
-
-    /**
-     * Remove comment
-     *
-     * @param \App\Entity\Comment $comment
-     */
-    public function removeComment(\Tavro\Entity\Comment $comment)
-    {
-        $this->comments->removeElement($comment);
-    }
-
-    /**
-     * Get comments
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getComment() {
-        if (!empty($this->comments)) {
-            return $this->comments->toArray();
-        }
-        return $this->comments;
-
-    }
-
-    /**
      * Add role
      *
      * @param \App\Entity\Role $role
      * @return User
      */
-    public function addRole(\Tavro\Entity\Role $role)
+    public function addRole(\Api\Entity\Role $role)
     {
         $this->roles[] = $role;
 
@@ -733,7 +622,7 @@ class User extends Entity implements TavroCreateEventInterface, TavroDeleteEvent
      *
      * @param \App\Entity\Role $role
      */
-    public function removeRole(\Tavro\Entity\Role $role)
+    public function removeRole(\Api\Entity\Role $role)
     {
         $this->roles->removeElement($role);
     }
@@ -756,39 +645,6 @@ class User extends Entity implements TavroCreateEventInterface, TavroDeleteEvent
             $roles[] = $role->getRole();
         }
         return $roles;
-    }
-
-    /**
-     * Add nodes_read
-     *
-     * @param \App\Entity\NodeRead $nodesRead
-     * @return User
-     */
-    public function addNodesRead(\Tavro\Entity\NodeRead $nodesRead)
-    {
-        $this->nodes_read[] = $nodesRead;
-
-        return $this;
-    }
-
-    /**
-     * Remove nodes_read
-     *
-     * @param \App\Entity\NodeRead $nodesRead
-     */
-    public function removeNodesRead(\Tavro\Entity\NodeRead $nodesRead)
-    {
-        $this->nodes_read->removeElement($nodesRead);
-    }
-
-    /**
-     * Get nodes_read
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getNodesRead()
-    {
-        return $this->nodes_read;
     }
 
     /**
@@ -829,16 +685,6 @@ class User extends Entity implements TavroCreateEventInterface, TavroDeleteEvent
     }
 
     /**
-     * Get comments
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getComments()
-    {
-        return $this->comments;
-    }
-
-    /**
      * @return array
      */
     public function getSerializedRoles()
@@ -848,69 +694,6 @@ class User extends Entity implements TavroCreateEventInterface, TavroDeleteEvent
             $roles[] = $role->getRole();
         }
         return $roles;
-    }
-
-    /**
-     * @VirtualProperty
-     * @SerializedName("is_admin")
-     * @Groups({"api", "detail"})
-     *
-     */
-    public function getIsAdmin()
-    {
-        foreach($this->roles as $role) {
-            if($role->getRole() === 'ROLE_ADMIN') {
-                return TRUE;
-            }
-        }
-        return FALSE;
-    }
-
-    public function isAdmin()
-    {
-        return $this->getIsAdmin();
-    }
-
-    public function isDeveloper()
-    {
-        return $this->getIsDeveloper();
-    }
-
-    /**
-     * @VirtualProperty
-     * @SerializedName("user_accounts")
-     * @Groups({"api", "simple", "detail"})
-     * @MaxDepth(2)
-     */
-    public function getUserAccounts()
-    {
-        $items = new \Doctrine\Common\Collections\ArrayCollection();
-
-        foreach($this->account_users as $entity) {
-            $items->add($entity->getAccount());
-        }
-
-        foreach($this->accounts as $entity) {
-            $items->add($entity);
-        }
-
-        return $items;
-    }
-
-    /**
-     * @VirtualProperty
-     * @SerializedName("is_developer")
-     * @Groups({"api", "detail"})
-     *
-     */
-    public function getIsDeveloper()
-    {
-        foreach($this->roles as $role) {
-            if($role->getRole() === 'ROLE_DEVELOPER') {
-                return TRUE;
-            }
-        }
-        return FALSE;
     }
 
     /**
@@ -925,35 +708,12 @@ class User extends Entity implements TavroCreateEventInterface, TavroDeleteEvent
     }
 
     /**
-     * Set enable_private_messages
-     *
-     * @param boolean $enableProtectedMessages
-     * @return User
-     */
-    public function setEnableProtectedMessages($enableProtectedMessages)
-    {
-        $this->enable_private_messages = $enableProtectedMessages;
-
-        return $this;
-    }
-
-    /**
-     * Get enable_private_messages
-     *
-     * @return boolean 
-     */
-    public function getEnableProtectedMessages()
-    {
-        return $this->enable_private_messages;
-    }
-
-    /**
      * Set avatar
      *
      * @param \App\Entity\Image $avatar
      * @return User
      */
-    public function setAvatar(\Tavro\Entity\Image $avatar)
+    public function setAvatar(\Api\Entity\Image $avatar)
     {
         $this->avatar = $avatar;
 
@@ -963,7 +723,7 @@ class User extends Entity implements TavroCreateEventInterface, TavroDeleteEvent
     /**
      * Get avatar
      *
-     * @return \Tavro\Entity\Image
+     * @return \Api\Entity\Image
      */
     public function getAvatar()
     {
@@ -992,336 +752,6 @@ class User extends Entity implements TavroCreateEventInterface, TavroDeleteEvent
     public function getBody()
     {
         return $this->body;
-    }
-
-    /**
-     * Set person
-     *
-     * @param \App\Entity\Person $person
-     *
-     * @return User
-     */
-    public function setPerson(\Tavro\Entity\Person $person = null)
-    {
-        $this->person = $person;
-
-        return $this;
-    }
-
-    /**
-     * Get person
-     *
-     * @return \Tavro\Entity\Person
-     */
-    public function getPerson()
-    {
-        return $this->person;
-    }
-
-    /**
-     * Add accountUser
-     *
-     * @param \App\Entity\AccountUser $accountUser
-     *
-     * @return User
-     */
-    public function addAccountUser(\Tavro\Entity\AccountUser $accountUser)
-    {
-        $this->account_users[] = $accountUser;
-
-        return $this;
-    }
-
-    /**
-     * Remove accountUser
-     *
-     * @param \App\Entity\AccountUser $accountUser
-     */
-    public function removeAccountUser(\Tavro\Entity\AccountUser $accountUser)
-    {
-        $this->account_users->removeElement($accountUser);
-    }
-
-    /**
-     * Get accountUsers
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getAccountUsers()
-    {
-        return $this->account_users;
-    }
-
-    /**
-     * Add expense
-     *
-     * @param \App\Entity\Expense $expense
-     *
-     * @return User
-     */
-    public function addExpense(\Tavro\Entity\Expense $expense)
-    {
-        $this->expenses[] = $expense;
-
-        return $this;
-    }
-
-    /**
-     * Remove expense
-     *
-     * @param \App\Entity\Expense $expense
-     */
-    public function removeExpense(\Tavro\Entity\Expense $expense)
-    {
-        $this->expenses->removeElement($expense);
-    }
-
-    /**
-     * Get expenses
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getExpenses()
-    {
-        return $this->expenses;
-    }
-
-    /**
-     * Add revenue
-     *
-     * @param \App\Entity\Revenue $revenue
-     *
-     * @return User
-     */
-    public function addRevenue(\Tavro\Entity\Revenue $revenue)
-    {
-        $this->revenues[] = $revenue;
-
-        return $this;
-    }
-
-    /**
-     * Remove revenue
-     *
-     * @param \App\Entity\Revenue $revenue
-     */
-    public function removeRevenue(\Tavro\Entity\Revenue $revenue)
-    {
-        $this->revenues->removeElement($revenue);
-    }
-
-    /**
-     * Get revenues
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getRevenues()
-    {
-        return $this->revenues;
-    }
-
-    /**
-     * Add account
-     *
-     * @param \App\Entity\Account $account
-     *
-     * @return User
-     */
-    public function addAccount(\Tavro\Entity\Account $account)
-    {
-        $this->accounts[] = $account;
-
-        return $this;
-    }
-
-    /**
-     * Remove account
-     *
-     * @param \App\Entity\Account $account
-     */
-    public function removeAccount(\Tavro\Entity\Account $account)
-    {
-        $this->accounts->removeElement($account);
-    }
-
-    /**
-     * Get accounts
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getAccounts()
-    {
-        return $this->accounts;
-    }
-
-    /**
-     * Add accountGroup
-     *
-     * @param \App\Entity\AccountGroup $accountGroup
-     *
-     * @return User
-     */
-    public function addAccountGroup(\Tavro\Entity\AccountGroup $accountGroup)
-    {
-        $this->account_groups[] = $accountGroup;
-
-        return $this;
-    }
-
-    /**
-     * Remove accountGroup
-     *
-     * @param \App\Entity\AccountGroup $accountGroup
-     */
-    public function removeAccountGroup(\Tavro\Entity\AccountGroup $accountGroup)
-    {
-        $this->account_groups->removeElement($accountGroup);
-    }
-
-    /**
-     * Get accountGroups
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getAccountGroups()
-    {
-        return $this->account_groups;
-    }
-
-    /**
-     * Add accountGroupUser
-     *
-     * @param \App\Entity\AccountGroupUser $accountGroupUser
-     *
-     * @return User
-     */
-    public function addAccountGroupUser(\Tavro\Entity\AccountGroupUser $accountGroupUser)
-    {
-        $this->account_group_users[] = $accountGroupUser;
-
-        return $this;
-    }
-
-    /**
-     * Remove accountGroupUser
-     *
-     * @param \App\Entity\AccountGroupUser $accountGroupUser
-     */
-    public function removeAccountGroupUser(\Tavro\Entity\AccountGroupUser $accountGroupUser)
-    {
-        $this->account_group_users->removeElement($accountGroupUser);
-    }
-
-    /**
-     * Get accountGroupUsers
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getAccountGroupUsers()
-    {
-        return $this->account_group_users;
-    }
-
-    /**
-     * Add syndicate
-     *
-     * @param \App\Entity\Syndicate $syndicate
-     *
-     * @return User
-     */
-    public function addSyndicate(\Tavro\Entity\Syndicate $syndicate)
-    {
-        $this->syndicates[] = $syndicate;
-
-        return $this;
-    }
-
-    /**
-     * Remove syndicate
-     *
-     * @param \App\Entity\Syndicate $syndicate
-     */
-    public function removeSyndicate(\Tavro\Entity\Syndicate $syndicate)
-    {
-        $this->syndicates->removeElement($syndicate);
-    }
-
-    /**
-     * Get syndicates
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getSyndicates()
-    {
-        return $this->syndicates;
-    }
-
-    /**
-     * Add forecast
-     *
-     * @param \App\Entity\Forecast $forecast
-     *
-     * @return User
-     */
-    public function addForecast(\Tavro\Entity\Forecast $forecast)
-    {
-        $this->forecasts[] = $forecast;
-
-        return $this;
-    }
-
-    /**
-     * Remove forecast
-     *
-     * @param \App\Entity\Forecast $forecast
-     */
-    public function removeForecast(\Tavro\Entity\Forecast $forecast)
-    {
-        $this->forecasts->removeElement($forecast);
-    }
-
-    /**
-     * Get forecasts
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getForecasts()
-    {
-        return $this->forecasts;
-    }
-
-    /**
-     * Add syndicateMembership
-     *
-     * @param \App\Entity\Syndicate $syndicateMembership
-     *
-     * @return User
-     */
-    public function addSyndicateMembership(\Tavro\Entity\Syndicate $syndicateMembership)
-    {
-        $this->syndicate_memberships[] = $syndicateMembership;
-
-        return $this;
-    }
-
-    /**
-     * Remove syndicateMembership
-     *
-     * @param \App\Entity\Syndicate $syndicateMembership
-     */
-    public function removeSyndicateMembership(\Tavro\Entity\Syndicate $syndicateMembership)
-    {
-        $this->syndicate_memberships->removeElement($syndicateMembership);
-    }
-
-    /**
-     * Get syndicateMemberships
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getSyndicateMemberships()
-    {
-        return $this->syndicate_memberships;
     }
 
     /**

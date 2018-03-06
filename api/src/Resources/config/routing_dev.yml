@@ -1,4 +1,0 @@
-api_index:
-    path: /
-    defaults: { _controller: ApiBundle:Dev\Default:index}
-    methods: [GET]

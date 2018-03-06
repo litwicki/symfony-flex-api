@@ -1,5 +1,0 @@
-api_commands:
-    resource: "@ApiBundle/Resources/config/routing/commands.yml"
-
-user_api:
-    resource: "@ApiBundle/Resources/config/routing/entity/user.yml"

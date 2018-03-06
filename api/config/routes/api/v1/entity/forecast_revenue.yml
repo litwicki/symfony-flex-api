@@ -1,7 +1,0 @@
-api_forecast_revenues:
-    path: /forecasts/{forecast}/revenues.{_format}
-    defaults: { _controller: Entity\ForecastRevenue:byForecast, _format: json}
-    methods: [GET|OPTIONS]
-    requirements:
-        organization: \d+
-        _format: json|xml

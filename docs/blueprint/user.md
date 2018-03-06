@@ -5,7 +5,7 @@
 + Request (application/json)
 
         {
-            "email": "jake@zoadilack.com"
+            "email": "jake.litwicki@gmail.com"
         }
         
 + Response 200 (application/json)
@@ -43,7 +43,7 @@
             "roles": ["ROLE_ADMIN"],
             "first_name": "Jake",
             "last_name": "Litwicki",
-            "email": "jake@zoadilack.com",
+            "email": "jake.litwicki@gmail.com",
         }
 
 + Response 200 (application/json)

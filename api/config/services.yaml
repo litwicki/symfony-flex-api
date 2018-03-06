@@ -27,11 +27,11 @@ services:
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
 
-#    tavro.aws_credentials:
+#    api.aws_credentials:
 #            class: Aws\Credentials\Credentials
 #        arguments: ["%aws_access_key_id%", "%aws_secret_access_key%"]
 #
-#    tavro.aws_s3:
+#    api.aws_s3:
 #        class: Aws\S3\S3Client
 #        arguments:
 #            -
@@ -39,9 +39,9 @@ services:
 #                #secret: "%aws_secret_access_key%"
 #                region: "%aws_s3_region%"
 #                version: "%aws_sdk_version%"
-#                credentials: "@tavro.aws_credentials"
+#                credentials: "@api.aws_credentials"
 #
-#    tavro.aws_sns:
+#    api.aws_sns:
 #        class: Aws\S3\SnsClient
 #        arguments:
 #            -
@@ -49,7 +49,7 @@ services:
 #                #secret: "%aws_secret_access_key%"
 #                region: "%aws_s3_region%"
 #                version: "%aws_sdk_version%"
-#                credentials: "@tavro.aws_credentials"
+#                credentials: "@api.aws_credentials"
 
     get_set_method_normalizer:
         class: Symfony\Component\Serializer\Normalizer\GetSetMethodNormalizer
@@ -76,23 +76,11 @@ services:
 #            secret: "%secret%"
 #        DynamoDb:
 #            region: us-west-2
-#            credentials: "@tavro.aws_credentials"
+#            credentials: "@api.aws_credentials"
 #        S3:
 #            version: '2006-03-01'
-#            credentials: "@tavro.aws_credentials"
+#            credentials: "@api.aws_credentials"
 #        Sqs:
-#            credentials: "@tavro.aws_credentials"
+#            credentials: "@api.aws_credentials"
 #        Sns:
-#            credentials: "@tavro.aws_credentials"
-#
-#    litwicki_chargify:
-#        test_mode: "%kernel.debug%"
-#        data_format: "json"
-#        route_prefix: "/billing"
-#        domain: "%chargify_domain%"
-#        api_key: "%chargify_api_key%"
-#        shared_key: "%chargify_shared_key%"
-#        direct:
-#            api_id: "%chargify_api_id%"
-#            api_secret: "%chargify_api_secret%"
-#            api_password: "%chargify_api_password%"
+#            credentials: "@api.aws_credentials"
