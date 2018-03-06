@@ -2,9 +2,9 @@ version: 0.0
 os: linux
 files:
   - source: api/api
-    destination: /var/www/tavro
+    destination: /var/www
 permissions:
-  - object: /var/www/tavro/api
+  - object: /var/www/api
     owner: www-data
     group: www-data
     mode: 755

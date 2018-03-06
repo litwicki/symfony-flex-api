@@ -27,7 +27,7 @@ case $i in
     *)
     printf "\n=============================================================================\n\n"
     printf "ERROR:\tOnly [-e|--environment] and [-w|--webdir] are valid arguments!"
-    printf "\n\n\texample: ./init.sh --env=dev --webdir=/var/www/tavro"
+    printf "\n\n\texample: ./init.sh --env=dev --webdir=/var/www/api"
     printf "\n\n=============================================================================\n\n"
     exit;
     ;;
@@ -37,7 +37,7 @@ done
 # Assign default values
 APP_WEBROOT=${WEBROOT:=/var/www/html}
 APP_ENVIRONMENT=${ENV:=dev}
-JWT_TOKEN_PASSPHRASE=${TOKEN_PASSWORD:=tavro}
+JWT_TOKEN_PASSPHRASE=${TOKEN_PASSWORD:=tokenpassword}
 APP_KEYS_DIR=$APP_WEBROOT/var/keys
 
 echo APP_WEBROOT = ${APP_WEBROOT}
