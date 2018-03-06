@@ -1,8 +1,8 @@
 {
-  "name": "zoadilack/tavro-api",
+  "name": "litwicki/symfony-flex-api",
   "type": "project",
   "license": "proprietary",
-  "description": "TAVRO API",
+  "description": "Symfony Flex API Scaffolding",
   "minimum-stability": "alpha",
   "require": {
     "php": "^7.1",
